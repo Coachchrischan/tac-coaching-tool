@@ -16,6 +16,7 @@ import TimedBlockCard from './TimedBlockCard';
 import SessionBlurb from './SessionBlurb';
 import { MonthView, ProgressionGrid } from './ProgressionViews';
 import type { GridColumn } from './ProgressionViews';
+import { downloadProgramCsv } from '../../lib/exportCsv';
 
 type ProgramView = 'week' | 'month' | 'block' | 'phase';
 
@@ -277,11 +278,11 @@ export default function ProgrammingTab() {
           </button>
           <button
             type="button"
-            disabled
-            title="Google Drive auto-save comes in phase 2"
-            className="cursor-not-allowed rounded-md border border-ink-300 px-3 py-1.5 text-sm font-medium text-ink-300"
+            title="Download the whole 12-week program as a CSV that imports straight into Google Sheets"
+            onClick={() => downloadProgramCsv(doc)}
+            className="rounded-md border border-ink-300 bg-white px-3 py-1.5 text-sm font-medium text-ink-700 hover:bg-ink-100"
           >
-            Save to Drive
+            Export for Sheets
           </button>
         </div>
       </div>
