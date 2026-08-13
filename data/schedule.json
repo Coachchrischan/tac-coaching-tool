@@ -1,0 +1,318 @@
+{
+  "data": {
+    "classTypes": [
+      {
+        "id": "esd",
+        "name": "ESD",
+        "colour": "#1C4A42"
+      },
+      {
+        "id": "lbs",
+        "name": "Lower Body Strength",
+        "colour": "#4B5563"
+      },
+      {
+        "id": "ubs",
+        "name": "Upper Body Strength",
+        "colour": "#64748B"
+      },
+      {
+        "id": "run",
+        "name": "Run Club",
+        "colour": "#78716C"
+      },
+      {
+        "id": "hyrox",
+        "name": "Hyrox Training",
+        "colour": "#C64545"
+      },
+      {
+        "id": "flow",
+        "name": "Flow Yoga",
+        "colour": "#7C6FA0"
+      },
+      {
+        "id": "yin",
+        "name": "Yin Yoga",
+        "colour": "#5B5480"
+      },
+      {
+        "id": "stretch",
+        "name": "StretchFit",
+        "colour": "#2F6FBF"
+      },
+      {
+        "id": "gameday",
+        "name": "Game Day",
+        "colour": "#1F2937"
+      }
+    ],
+    "coaches": [
+      {
+        "id": "ji",
+        "name": "Ji Wallace"
+      },
+      {
+        "id": "katie",
+        "name": "Katie Dall"
+      },
+      {
+        "id": "madi",
+        "name": "Madi Pearson"
+      },
+      {
+        "id": "lynn",
+        "name": "Lynn Fitzgerald"
+      },
+      {
+        "id": "stephanie",
+        "name": "Stephanie Chung"
+      },
+      {
+        "id": "anthony",
+        "name": "Anthony Lett"
+      }
+    ],
+    "rooms": [
+      {
+        "id": "gfr",
+        "name": "Group Fitness Room"
+      },
+      {
+        "id": "gym-floor",
+        "name": "Gym Floor"
+      },
+      {
+        "id": "run-club",
+        "name": "Run Club"
+      }
+    ],
+    "scenarios": [
+      {
+        "id": "current",
+        "name": "Current timetable",
+        "blocks": [
+          {
+            "id": "blk-1",
+            "day": 0,
+            "startMin": 300,
+            "durationMin": 60,
+            "classTypeId": "esd",
+            "coachId": "ji",
+            "roomId": "gfr"
+          },
+          {
+            "id": "blk-2",
+            "day": 0,
+            "startMin": 360,
+            "durationMin": 60,
+            "classTypeId": "esd",
+            "coachId": "ji",
+            "roomId": "gfr"
+          },
+          {
+            "id": "blk-3",
+            "day": 0,
+            "startMin": 420,
+            "durationMin": 60,
+            "classTypeId": "esd",
+            "coachId": "ji",
+            "roomId": "gfr"
+          },
+          {
+            "id": "blk-4",
+            "day": 0,
+            "startMin": 720,
+            "durationMin": 60,
+            "classTypeId": "esd",
+            "coachId": "madi",
+            "roomId": "gfr"
+          },
+          {
+            "id": "blk-5",
+            "day": 0,
+            "startMin": 1035,
+            "durationMin": 60,
+            "classTypeId": "hyrox",
+            "coachId": "ji",
+            "roomId": "gfr"
+          },
+          {
+            "id": "blk-6",
+            "day": 0,
+            "startMin": 1095,
+            "durationMin": 60,
+            "classTypeId": "hyrox",
+            "coachId": "ji",
+            "roomId": "gfr"
+          },
+          {
+            "id": "blk-7",
+            "day": 1,
+            "startMin": 300,
+            "durationMin": 60,
+            "classTypeId": "lbs",
+            "coachId": "ji",
+            "roomId": "gym-floor"
+          },
+          {
+            "id": "blk-8",
+            "day": 1,
+            "startMin": 300,
+            "durationMin": 60,
+            "classTypeId": "run",
+            "coachId": "katie",
+            "roomId": "run-club"
+          },
+          {
+            "id": "blk-9",
+            "day": 1,
+            "startMin": 360,
+            "durationMin": 60,
+            "classTypeId": "lbs",
+            "coachId": "ji",
+            "roomId": "gym-floor"
+          },
+          {
+            "id": "blk-10",
+            "day": 1,
+            "startMin": 720,
+            "durationMin": 60,
+            "classTypeId": "lbs",
+            "coachId": "ji",
+            "roomId": "gym-floor"
+          },
+          {
+            "id": "blk-11",
+            "day": 1,
+            "startMin": 1020,
+            "durationMin": 45,
+            "classTypeId": "flow",
+            "coachId": "stephanie",
+            "roomId": "gfr"
+          },
+          {
+            "id": "blk-12",
+            "day": 1,
+            "startMin": 1080,
+            "durationMin": 60,
+            "classTypeId": "yin",
+            "coachId": "stephanie",
+            "roomId": "gfr"
+          },
+          {
+            "id": "blk-13",
+            "day": 2,
+            "startMin": 300,
+            "durationMin": 60,
+            "classTypeId": "run",
+            "coachId": "katie",
+            "roomId": "run-club"
+          },
+          {
+            "id": "blk-14",
+            "day": 3,
+            "startMin": 300,
+            "durationMin": 60,
+            "classTypeId": "ubs",
+            "coachId": "ji",
+            "roomId": "gym-floor"
+          },
+          {
+            "id": "blk-15",
+            "day": 3,
+            "startMin": 360,
+            "durationMin": 60,
+            "classTypeId": "ubs",
+            "coachId": "ji",
+            "roomId": "gym-floor"
+          },
+          {
+            "id": "blk-16",
+            "day": 3,
+            "startMin": 720,
+            "durationMin": 60,
+            "classTypeId": "ubs",
+            "coachId": "ji",
+            "roomId": "gym-floor"
+          },
+          {
+            "id": "blk-17",
+            "day": 3,
+            "startMin": 1020,
+            "durationMin": 55,
+            "classTypeId": "stretch",
+            "coachId": "anthony",
+            "roomId": "gfr"
+          },
+          {
+            "id": "blk-18",
+            "day": 3,
+            "startMin": 1080,
+            "durationMin": 55,
+            "classTypeId": "stretch",
+            "coachId": "anthony",
+            "roomId": "gfr"
+          },
+          {
+            "id": "blk-19",
+            "day": 4,
+            "startMin": 300,
+            "durationMin": 60,
+            "classTypeId": "esd",
+            "coachId": "ji",
+            "roomId": "gfr"
+          },
+          {
+            "id": "blk-20",
+            "day": 4,
+            "startMin": 360,
+            "durationMin": 60,
+            "classTypeId": "esd",
+            "coachId": "ji",
+            "roomId": "gfr"
+          },
+          {
+            "id": "blk-21",
+            "day": 4,
+            "startMin": 420,
+            "durationMin": 60,
+            "classTypeId": "esd",
+            "coachId": "ji",
+            "roomId": "gfr"
+          },
+          {
+            "id": "blk-22",
+            "day": 4,
+            "startMin": 720,
+            "durationMin": 60,
+            "classTypeId": "esd",
+            "coachId": "lynn",
+            "roomId": "gfr"
+          },
+          {
+            "id": "blk-23",
+            "day": 4,
+            "startMin": 1035,
+            "durationMin": 60,
+            "classTypeId": "hyrox",
+            "coachId": "ji",
+            "roomId": "gfr"
+          },
+          {
+            "id": "blk-24",
+            "day": 5,
+            "startMin": 450,
+            "durationMin": 60,
+            "classTypeId": "gameday",
+            "coachId": "ji",
+            "roomId": "gfr"
+          }
+        ]
+      }
+    ],
+    "activeScenarioId": "current"
+  },
+  "rev": 7,
+  "updatedAt": "2026-08-13T07:14:44.657Z"
+}
