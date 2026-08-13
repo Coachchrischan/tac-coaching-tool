@@ -5,38 +5,27 @@ import SaveBadge from '../../components/SaveBadge';
 const field =
   'rounded-md border border-ink-300 bg-white px-2.5 py-1.5 text-sm text-ink-950 focus:border-accent-600 focus:outline-none';
 
-/** Local yyyy-mm-dd (never toISOString, which shifts AEST dates to UTC). */
-function localIso(d: Date): string {
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+/** Current month as 'yyyy-mm' in local time (never toISOString: UTC shifts AEST). */
+function thisMonth(): string {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
 }
 
-/** Snap any date to its week's Monday (ISO). */
-export function mondayOf(iso: string): string {
-  const d = new Date(`${iso}T00:00:00`);
-  const day = (d.getDay() + 6) % 7; // Mon=0
-  d.setDate(d.getDate() - day);
-  return localIso(d);
-}
-
-function thisMonday(): string {
-  return mondayOf(localIso(new Date()));
-}
-
-export function fmtWeek(iso: string): string {
-  return new Date(`${iso}T00:00:00`).toLocaleDateString('en-AU', {
-    day: 'numeric',
+export function fmtMonth(month: string): string {
+  return new Date(`${month}-01T00:00:00`).toLocaleDateString('en-AU', {
     month: 'short',
+    year: '2-digit',
   });
 }
 
 export default function AttendanceTab() {
   const attendance = useDoc('attendance');
   const schedule = useDoc('schedule');
-  const [week, setWeek] = useState(thisMonday());
+  const [month, setMonth] = useState(thisMonth());
 
-  const weeks = useMemo(() => {
+  const months = useMemo(() => {
     if (!attendance.data) return [];
-    return [...new Set(attendance.data.entries.map((e) => e.weekStart))].sort().reverse();
+    return [...new Set(attendance.data.entries.map((e) => e.month))].sort().reverse();
   }, [attendance.data]);
 
   if (!attendance.data || !schedule.data) {
@@ -46,28 +35,26 @@ export default function AttendanceTab() {
   const classTypes = schedule.data.classTypes;
   const entries = attendance.data.entries;
 
-  function countFor(weekStart: string, classTypeId: string): number | '' {
-    const e = entries.find((x) => x.weekStart === weekStart && x.classTypeId === classTypeId);
+  function countFor(m: string, classTypeId: string): number | '' {
+    const e = entries.find((x) => x.month === m && x.classTypeId === classTypeId);
     return e ? e.count : '';
   }
 
   function setCount(classTypeId: string, raw: string) {
-    const weekStart = week;
+    const m = month;
     attendance.update((d) => {
-      const rest = d.entries.filter(
-        (x) => !(x.weekStart === weekStart && x.classTypeId === classTypeId),
-      );
+      const rest = d.entries.filter((x) => !(x.month === m && x.classTypeId === classTypeId));
       if (raw === '') return { ...d, entries: rest };
       const count = Math.max(0, Number(raw) || 0);
       return {
         ...d,
-        entries: [...rest, { id: `${weekStart}:${classTypeId}`, weekStart, classTypeId, count }],
+        entries: [...rest, { id: `${m}:${classTypeId}`, month: m, classTypeId, count }],
       };
     });
   }
 
-  const weekTotal = classTypes.reduce((sum, ct) => {
-    const c = countFor(week, ct.id);
+  const monthTotal = classTypes.reduce((sum, ct) => {
+    const c = countFor(month, ct.id);
     return sum + (c === '' ? 0 : c);
   }, 0);
 
@@ -77,7 +64,7 @@ export default function AttendanceTab() {
         <div>
           <h2 className="text-lg font-semibold text-ink-950">Class numbers</h2>
           <p className="text-[13px] text-ink-500">
-            Total attendances per class type for the week. The Home dashboard reads these.
+            Total attendances per class type for the month. The Home dashboard reads these.
           </p>
         </div>
         <SaveBadge
@@ -91,16 +78,16 @@ export default function AttendanceTab() {
       <div className="rounded-xl border border-ink-200 bg-white p-4 shadow-sm">
         <div className="flex flex-wrap items-center gap-3">
           <label className="flex items-center gap-2 text-sm font-medium text-ink-700">
-            Week starting
+            Month
             <input
-              type="date"
+              type="month"
               className={field}
-              value={week}
-              onChange={(e) => e.target.value && setWeek(mondayOf(e.target.value))}
+              value={month}
+              onChange={(e) => e.target.value && setMonth(e.target.value)}
             />
           </label>
           <span className="text-sm text-ink-500">
-            Week total: <span className="font-bold text-ink-950">{weekTotal}</span>
+            Month total: <span className="font-bold text-ink-950">{monthTotal}</span>
           </span>
         </div>
 
@@ -118,7 +105,7 @@ export default function AttendanceTab() {
                 type="number"
                 min={0}
                 className={`${field} w-20 text-center`}
-                value={countFor(week, ct.id)}
+                value={countFor(month, ct.id)}
                 placeholder="0"
                 onChange={(e) => setCount(ct.id, e.target.value)}
               />
@@ -127,13 +114,13 @@ export default function AttendanceTab() {
         </div>
       </div>
 
-      {weeks.length > 0 && (
+      {months.length > 0 && (
         <div className="mt-5 overflow-x-auto rounded-xl border border-ink-200 bg-white shadow-sm">
           <table className="w-full border-separate border-spacing-0">
             <thead>
               <tr>
                 <th className="border-b border-ink-200 px-3 py-2 text-left text-[11px] font-semibold tracking-wide text-ink-500 uppercase">
-                  Week
+                  Month
                 </th>
                 {classTypes.map((ct) => (
                   <th
@@ -150,21 +137,21 @@ export default function AttendanceTab() {
               </tr>
             </thead>
             <tbody>
-              {weeks.map((w) => {
+              {months.map((m) => {
                 const total = classTypes.reduce((sum, ct) => {
-                  const c = countFor(w, ct.id);
+                  const c = countFor(m, ct.id);
                   return sum + (c === '' ? 0 : c);
                 }, 0);
                 return (
-                  <tr key={w} className={w === week ? 'bg-accent-100/50' : ''}>
+                  <tr key={m} className={m === month ? 'bg-accent-100/50' : ''}>
                     <td className="border-b border-ink-100 px-3 py-1.5 text-sm font-medium text-ink-950">
                       <button
                         type="button"
                         className="hover:text-accent-600"
-                        title="Edit this week"
-                        onClick={() => setWeek(w)}
+                        title="Edit this month"
+                        onClick={() => setMonth(m)}
                       >
-                        {fmtWeek(w)}
+                        {fmtMonth(m)}
                       </button>
                     </td>
                     {classTypes.map((ct) => (
@@ -172,7 +159,7 @@ export default function AttendanceTab() {
                         key={ct.id}
                         className="border-b border-ink-100 px-2 py-1.5 text-center text-sm text-ink-700"
                       >
-                        {countFor(w, ct.id) === '' ? '-' : countFor(w, ct.id)}
+                        {countFor(m, ct.id) === '' ? '-' : countFor(m, ct.id)}
                       </td>
                     ))}
                     <td className="border-b border-ink-100 px-2 py-1.5 text-center text-sm font-bold text-ink-950">
@@ -181,11 +168,11 @@ export default function AttendanceTab() {
                     <td className="border-b border-ink-100 px-2 py-1.5 text-center">
                       <button
                         type="button"
-                        title="Delete this week's numbers"
+                        title="Delete this month's numbers"
                         onClick={() =>
                           attendance.update((d) => ({
                             ...d,
-                            entries: d.entries.filter((e) => e.weekStart !== w),
+                            entries: d.entries.filter((e) => e.month !== m),
                           }))
                         }
                         className="rounded px-1 text-sm text-ink-300 hover:text-red-600"

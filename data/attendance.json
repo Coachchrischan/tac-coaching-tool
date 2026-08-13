@@ -2,169 +2,61 @@
   "data": {
     "entries": [
       {
-        "classTypeId": "gameday",
-        "id": "2026-07-27:gameday",
-        "count": 18,
-        "weekStart": "2026-07-27"
-      },
-      {
-        "classTypeId": "flow",
-        "id": "2026-07-27:flow",
-        "count": 12,
-        "weekStart": "2026-07-27"
-      },
-      {
-        "classTypeId": "lbs",
-        "id": "2026-07-27:lbs",
-        "count": 35,
-        "weekStart": "2026-07-27"
-      },
-      {
-        "classTypeId": "stretch",
-        "id": "2026-07-27:stretch",
-        "count": 21,
-        "weekStart": "2026-07-27"
-      },
-      {
-        "classTypeId": "hyrox",
-        "id": "2026-07-27:hyrox",
-        "count": 42,
-        "weekStart": "2026-07-27"
-      },
-      {
-        "classTypeId": "ubs",
-        "id": "2026-07-27:ubs",
-        "count": 31,
-        "weekStart": "2026-07-27"
-      },
-      {
-        "classTypeId": "yin",
-        "id": "2026-07-27:yin",
-        "count": 9,
-        "weekStart": "2026-07-27"
-      },
-      {
+        "id": "2026-07:esd",
+        "month": "2026-07",
         "classTypeId": "esd",
-        "id": "2026-07-27:esd",
-        "count": 68,
-        "weekStart": "2026-07-27"
+        "count": 290
       },
       {
-        "classTypeId": "run",
-        "id": "2026-07-27:run",
-        "count": 14,
-        "weekStart": "2026-07-27"
-      },
-      {
-        "classTypeId": "gameday",
-        "id": "2026-08-03:gameday",
-        "count": 17,
-        "weekStart": "2026-08-03"
-      },
-      {
-        "classTypeId": "flow",
-        "id": "2026-08-03:flow",
-        "count": 13,
-        "weekStart": "2026-08-03"
-      },
-      {
-        "classTypeId": "lbs",
-        "id": "2026-08-03:lbs",
-        "count": 36,
-        "weekStart": "2026-08-03"
-      },
-      {
-        "classTypeId": "stretch",
-        "id": "2026-08-03:stretch",
-        "count": 21,
-        "weekStart": "2026-08-03"
-      },
-      {
+        "id": "2026-07:hyrox",
+        "month": "2026-07",
         "classTypeId": "hyrox",
-        "id": "2026-08-03:hyrox",
-        "count": 42,
-        "weekStart": "2026-08-03"
+        "count": 180
       },
       {
-        "classTypeId": "ubs",
-        "id": "2026-08-03:ubs",
-        "count": 29,
-        "weekStart": "2026-08-03"
-      },
-      {
-        "classTypeId": "yin",
-        "id": "2026-08-03:yin",
-        "count": 7,
-        "weekStart": "2026-08-03"
-      },
-      {
-        "classTypeId": "esd",
-        "id": "2026-08-03:esd",
-        "count": 66,
-        "weekStart": "2026-08-03"
-      },
-      {
-        "classTypeId": "run",
-        "id": "2026-08-03:run",
-        "count": 16,
-        "weekStart": "2026-08-03"
-      },
-      {
-        "classTypeId": "gameday",
-        "id": "2026-08-10:gameday",
-        "count": 20,
-        "weekStart": "2026-08-10"
-      },
-      {
-        "classTypeId": "flow",
-        "id": "2026-08-10:flow",
-        "count": 12,
-        "weekStart": "2026-08-10"
-      },
-      {
+        "id": "2026-07:lbs",
+        "month": "2026-07",
         "classTypeId": "lbs",
-        "id": "2026-08-10:lbs",
-        "count": 39,
-        "weekStart": "2026-08-10"
+        "count": 150
       },
       {
-        "classTypeId": "stretch",
-        "id": "2026-08-10:stretch",
-        "count": 27,
-        "weekStart": "2026-08-10"
-      },
-      {
-        "classTypeId": "hyrox",
-        "id": "2026-08-10:hyrox",
-        "count": 38,
-        "weekStart": "2026-08-10"
-      },
-      {
+        "id": "2026-07:ubs",
+        "month": "2026-07",
         "classTypeId": "ubs",
-        "id": "2026-08-10:ubs",
-        "count": 31,
-        "weekStart": "2026-08-10"
+        "count": 132
       },
       {
-        "classTypeId": "yin",
-        "id": "2026-08-10:yin",
-        "count": 11,
-        "weekStart": "2026-08-10"
+        "id": "2026-07:stretch",
+        "month": "2026-07",
+        "classTypeId": "stretch",
+        "count": 92
       },
       {
+        "id": "2026-07:gameday",
+        "month": "2026-07",
+        "classTypeId": "gameday",
+        "count": 76
+      },
+      {
+        "id": "2026-07:run",
+        "month": "2026-07",
         "classTypeId": "run",
-        "id": "2026-08-10:run",
-        "count": 16,
-        "weekStart": "2026-08-10"
+        "count": 60
       },
       {
-        "id": "2026-08-10:esd",
-        "weekStart": "2026-08-10",
-        "classTypeId": "esd",
-        "count": 71
+        "id": "2026-07:flow",
+        "month": "2026-07",
+        "classTypeId": "flow",
+        "count": 52
+      },
+      {
+        "id": "2026-07:yin",
+        "month": "2026-07",
+        "classTypeId": "yin",
+        "count": 38
       }
     ]
   },
-  "rev": 5,
-  "updatedAt": "2026-08-13T23:08:50.101Z"
+  "rev": 3,
+  "updatedAt": "2026-08-13T23:19:54.534Z"
 }

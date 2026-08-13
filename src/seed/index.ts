@@ -189,8 +189,28 @@ export function seedAnnualPlan(): AnnualPlanDoc {
 
 // ---------- Attendance + home ----------
 
+// July 2026 mock numbers so the dashboard demonstrates itself; overwrite or
+// delete them as real months are recorded.
 export function seedAttendance(): AttendanceDoc {
-  return { entries: [] };
+  const july: Record<string, number> = {
+    esd: 290,
+    hyrox: 180,
+    lbs: 150,
+    ubs: 132,
+    stretch: 92,
+    gameday: 76,
+    run: 60,
+    flow: 52,
+    yin: 38,
+  };
+  return {
+    entries: Object.entries(july).map(([classTypeId, count]) => ({
+      id: `2026-07:${classTypeId}`,
+      month: '2026-07',
+      classTypeId,
+      count,
+    })),
+  };
 }
 
 // A starting draft in Chris's voice; every word editable in-app.

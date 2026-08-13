@@ -180,9 +180,9 @@ export interface AnnualPlanDoc {
 
 export interface AttendanceEntry {
   id: string;
-  weekStart: string; // ISO Monday
+  month: string; // 'yyyy-mm'
   classTypeId: string; // references ScheduleDoc.classTypes
-  count: number;
+  count: number; // total attendances for that class type in the month
 }
 
 export interface AttendanceDoc {

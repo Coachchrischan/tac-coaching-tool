@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { mostUrgent, useDoc } from '../../lib/useDoc';
 import SaveBadge from '../../components/SaveBadge';
-import { fmtWeek } from '../attendance/AttendanceTab';
+import { fmtMonth } from '../attendance/AttendanceTab';
 
 export default function HomeTab() {
   const home = useDoc('home');
@@ -10,26 +10,26 @@ export default function HomeTab() {
   const schedule = useDoc('schedule');
   const [editing, setEditing] = useState(false);
   const [selectedTypeId, setSelectedTypeId] = useState<string | null>(null);
-  const [period, setPeriod] = useState<4 | 12 | 0>(12); // weeks shown; 0 = all
+  const [period, setPeriod] = useState<6 | 12 | 0>(12); // months shown; 0 = all
 
   const stats = useMemo(() => {
     if (!attendance.data || !schedule.data) return null;
     const entries = attendance.data.entries;
-    const weeks = [...new Set(entries.map((e) => e.weekStart))].sort();
+    const months = [...new Set(entries.map((e) => e.month))].sort();
     const byType = schedule.data.classTypes
       .map((ct) => {
         const counts = entries.filter((e) => e.classTypeId === ct.id);
         const total = counts.reduce((s, e) => s + e.count, 0);
         const avg = counts.length ? total / counts.length : 0;
-        return { ct, total, avg, weeksRecorded: counts.length };
+        return { ct, total, avg, monthsRecorded: counts.length };
       })
-      .filter((t) => t.weeksRecorded > 0)
+      .filter((t) => t.monthsRecorded > 0)
       .sort((a, b) => b.avg - a.avg);
-    const weekTotals = weeks.map((w) => ({
-      week: w,
-      total: entries.filter((e) => e.weekStart === w).reduce((s, e) => s + e.count, 0),
+    const monthTotals = months.map((m) => ({
+      month: m,
+      total: entries.filter((e) => e.month === m).reduce((s, e) => s + e.count, 0),
     }));
-    return { byType, weekTotals, weeks };
+    return { byType, monthTotals, months };
   }, [attendance.data, schedule.data]);
 
   if (!home.data || !attendance.data || !schedule.data) {
@@ -45,17 +45,17 @@ export default function HomeTab() {
     : null;
   const entries = attendance.data.entries;
   const trendAll = stats
-    ? stats.weeks.map((w) => ({
-        week: w,
+    ? stats.months.map((m) => ({
+        month: m,
         total: selectedTypeId
-          ? (entries.find((e) => e.weekStart === w && e.classTypeId === selectedTypeId)?.count ?? 0)
-          : (stats.weekTotals.find((t) => t.week === w)?.total ?? 0),
+          ? (entries.find((e) => e.month === m && e.classTypeId === selectedTypeId)?.count ?? 0)
+          : (stats.monthTotals.find((t) => t.month === m)?.total ?? 0),
       }))
     : [];
-  const recentWeeks = period === 0 ? trendAll : trendAll.slice(-period);
-  const maxWeekTotal = recentWeeks.length ? Math.max(...recentWeeks.map((w) => w.total), 1) : 1;
-  const trendAvg = recentWeeks.length
-    ? recentWeeks.reduce((s, w) => s + w.total, 0) / recentWeeks.length
+  const recentMonths = period === 0 ? trendAll : trendAll.slice(-period);
+  const maxMonthTotal = recentMonths.length ? Math.max(...recentMonths.map((m) => m.total), 1) : 1;
+  const trendAvg = recentMonths.length
+    ? recentMonths.reduce((s, m) => s + m.total, 0) / recentMonths.length
     : 0;
 
   return (
@@ -81,7 +81,7 @@ export default function HomeTab() {
           <section className="rounded-xl border border-ink-200 bg-white p-5 shadow-sm">
             <div className="flex items-baseline justify-between">
               <h3 className="text-sm font-semibold text-ink-950">Class popularity</h3>
-              <span className="text-[11px] text-ink-400">average attendance per recorded week</span>
+              <span className="text-[11px] text-ink-400">average attendances per recorded month</span>
             </div>
             {!stats || stats.byType.length === 0 ? (
               <p className="mt-4 text-sm text-ink-400">
@@ -119,7 +119,7 @@ export default function HomeTab() {
                           </span>
                         )}
                       </span>
-                      <span className="font-bold text-ink-950">{t.avg.toFixed(1)}</span>
+                      <span className="font-bold text-ink-950">{t.avg.toFixed(0)}</span>
                     </div>
                     <div className="h-2.5 overflow-hidden rounded-full bg-ink-100">
                       <div
@@ -142,7 +142,7 @@ export default function HomeTab() {
             )}
           </section>
 
-          {recentWeeks.length > 0 && (
+          {recentMonths.length > 0 && (
             <section className="rounded-xl border border-ink-200 bg-white p-5 shadow-sm">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h3 className="flex items-center gap-2 text-sm font-semibold text-ink-950">
@@ -152,7 +152,7 @@ export default function HomeTab() {
                       style={{ backgroundColor: selectedType.colour }}
                     />
                   )}
-                  {selectedType ? `${selectedType.name}, week to week` : 'Weekly attendances'}
+                  {selectedType ? `${selectedType.name}, month to month` : 'Monthly attendances'}
                   {selectedType && (
                     <button
                       type="button"
@@ -165,10 +165,10 @@ export default function HomeTab() {
                 </h3>
                 <div className="flex items-center gap-2">
                   <span className="text-[11px] text-ink-400">
-                    avg {trendAvg.toFixed(1)}/wk
+                    avg {trendAvg.toFixed(0)}/mo
                   </span>
                   <div className="flex overflow-hidden rounded border border-ink-300">
-                    {([4, 12, 0] as const).map((p) => (
+                    {([6, 12, 0] as const).map((p) => (
                       <button
                         key={p}
                         type="button"
@@ -177,34 +177,33 @@ export default function HomeTab() {
                           period === p ? 'bg-ink-950 text-white' : 'bg-white text-ink-500'
                         }`}
                       >
-                        {p === 0 ? 'All' : `${p} wk`}
+                        {p === 0 ? 'All' : `${p} mo`}
                       </button>
                     ))}
                   </div>
                 </div>
               </div>
               <div className="mt-4 flex items-end gap-1.5">
-                {recentWeeks.map((w) => (
-                  <div key={w.week} className="flex min-w-0 flex-1 flex-col items-center gap-1">
-                    <span className="text-[11px] font-semibold text-ink-700">{w.total}</span>
+                {recentMonths.map((m) => (
+                  <div key={m.month} className="flex min-w-0 flex-1 flex-col items-center gap-1">
+                    <span className="text-[11px] font-semibold text-ink-700">{m.total}</span>
                     <div className="relative flex h-24 w-full items-end">
                       <div
                         className="w-full rounded-t"
                         style={{
-                          height: `${Math.max((w.total / maxWeekTotal) * 100, 4)}%`,
+                          height: `${Math.max((m.total / maxMonthTotal) * 100, 4)}%`,
                           backgroundColor: selectedType?.colour ?? '#003030',
                         }}
                       />
                     </div>
-                    <span className="truncate text-[10px] text-ink-400">{fmtWeek(w.week)}</span>
+                    <span className="truncate text-[10px] text-ink-400">{fmtMonth(m.month)}</span>
                   </div>
                 ))}
               </div>
-              {/* average reference line note */}
               <p className="mt-2 text-[11px] text-ink-400">
                 {selectedType
-                  ? 'Weekly attendances for this class across the selected period.'
-                  : 'Total attendances across all classes each week.'}
+                  ? 'Monthly attendances for this class across the selected period.'
+                  : 'Total attendances across all classes each month.'}
               </p>
             </section>
           )}
