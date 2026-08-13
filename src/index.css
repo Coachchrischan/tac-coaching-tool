@@ -1,0 +1,33 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans:
+    'Inter', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Neutral premium palette: warm graphite + one deep teal accent (echoes TAC ESD green). */
+  --color-ink-950: #16181d;
+  --color-ink-900: #1e2126;
+  --color-ink-800: #2a2e35;
+  --color-ink-700: #3a3f48;
+  --color-ink-500: #6b7280;
+  --color-ink-400: #9ca3af;
+  --color-ink-300: #d1d5db;
+  --color-ink-200: #e5e7eb;
+  --color-ink-100: #f1f2f4;
+  --color-ink-50: #f8f9fa;
+
+  --color-accent-700: #143832;
+  --color-accent-600: #1c4a42;
+  --color-accent-500: #2a6a5e;
+  --color-accent-100: #e3efec;
+}
+
+html {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--color-ink-50);
+  color: var(--color-ink-950);
+}

@@ -1,0 +1,208 @@
+// All persisted document shapes. One document per tab (plus library-overrides)
+// so concurrent edits on different tabs never collide.
+
+export type DocId =
+  | 'schedule'
+  | 'program'
+  | 'library-overrides'
+  | 'community'
+  | 'planning'
+  | 'layouts'
+  | 'equipment';
+
+export interface DocEnvelope<T> {
+  data: T;
+  rev: number;
+  updatedAt: string;
+}
+
+// ---------- Schedule ----------
+
+export interface ClassType {
+  id: string;
+  name: string;
+  colour: string; // hex, block background
+}
+
+export interface Coach {
+  id: string;
+  name: string;
+}
+
+export interface Room {
+  id: string;
+  name: string;
+}
+
+export interface ClassBlock {
+  id: string;
+  day: 0 | 1 | 2 | 3 | 4 | 5 | 6; // Mon..Sun
+  startMin: number; // minutes from midnight, snapped to 15
+  durationMin: number; // 5-min steps
+  classTypeId: string;
+  coachId: string | null;
+  roomId: string | null;
+}
+
+export interface WeekScenario {
+  id: string;
+  name: string;
+  note?: string;
+  blocks: ClassBlock[];
+}
+
+export interface ScheduleDoc {
+  classTypes: ClassType[];
+  coaches: Coach[];
+  rooms: Room[];
+  scenarios: WeekScenario[];
+  activeScenarioId: string;
+}
+
+// ---------- Programming ----------
+
+export type SessionFocus = 'lower' | 'upper' | 'full';
+
+export interface ExerciseSlot {
+  id: string;
+  exerciseId: number | null; // TrainHeroic library id; null = free text
+  name: string;
+  sets?: string;
+  reps?: string;
+  load?: string;
+  intensity?: string;
+  rpe?: string;
+  tempo?: string;
+  showScales?: boolean;
+}
+
+export interface TimedBlock {
+  id: string;
+  label: string; // "A", "B", ...
+  minutes: number;
+  slots: ExerciseSlot[];
+}
+
+export interface Session {
+  id: string;
+  focus: SessionFocus;
+  timedBlocks: TimedBlock[];
+  blurbOverride?: string; // coach-edited blurb wins over generated
+}
+
+export interface ProgramWeek {
+  id: string;
+  sessions: [Session, Session, Session]; // Lower, Upper, Full Body
+}
+
+export interface ProgramBlock {
+  id: string;
+  theme?: string;
+  weeks: [ProgramWeek, ProgramWeek, ProgramWeek, ProgramWeek];
+}
+
+export interface ProgramDoc {
+  name: string;
+  blocks: [ProgramBlock, ProgramBlock, ProgramBlock];
+}
+
+// ---------- Library overrides (coach layer over the generated library) ----------
+
+export const PATTERNS = [
+  'squat',
+  'hinge',
+  'lunge',
+  'h-push',
+  'v-push',
+  'h-pull',
+  'v-pull',
+  'carry',
+  'core-rotation',
+] as const;
+
+export type Pattern = (typeof PATTERNS)[number];
+
+export const PATTERN_LABELS: Record<Pattern, string> = {
+  squat: 'Squat',
+  hinge: 'Hinge',
+  lunge: 'Lunge / single leg',
+  'h-push': 'Horizontal push',
+  'v-push': 'Vertical push',
+  'h-pull': 'Horizontal pull',
+  'v-pull': 'Vertical pull',
+  carry: 'Carry',
+  'core-rotation': 'Core / rotation',
+};
+
+export interface CustomExercise {
+  id: number; // negative ids, never collide with TrainHeroic ids
+  title: string;
+  patterns: Pattern[];
+}
+
+export interface LibraryOverridesDoc {
+  patterns: Record<number, Pattern[]>; // exerciseId -> coach-tagged patterns (wins over guess)
+  scales: Record<number, string[]>; // exerciseId -> up to 2 scaled options
+  cues: Record<number, string>; // key cue per exercise, feeds the session blurb
+  customExercises: CustomExercise[];
+}
+
+// ---------- Light tabs ----------
+
+export interface CommunityEvent {
+  id: string;
+  date: string; // ISO yyyy-mm-dd
+  name: string;
+  notes?: string;
+}
+
+export interface CommunityDoc {
+  events: CommunityEvent[];
+}
+
+export interface PlanningDoc {
+  notes: string;
+  blockThemes: Record<string, string>; // ProgramBlock.id -> theme
+}
+
+export interface LayoutItem {
+  id: string;
+  label: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  colour?: string;
+}
+
+export interface LayoutRoom {
+  id: 'esd-hyrox' | 'strength';
+  name: string;
+  items: LayoutItem[];
+}
+
+export interface LayoutsDoc {
+  rooms: LayoutRoom[];
+}
+
+export interface EquipmentItem {
+  id: string;
+  name: string;
+  count: number; // real number, cross-check ready
+  notes?: string;
+}
+
+export interface EquipmentDoc {
+  items: EquipmentItem[];
+}
+
+// Maps DocId to its document type, used by the store for typing.
+export interface DocTypes {
+  schedule: ScheduleDoc;
+  program: ProgramDoc;
+  'library-overrides': LibraryOverridesDoc;
+  community: CommunityDoc;
+  planning: PlanningDoc;
+  layouts: LayoutsDoc;
+  equipment: EquipmentDoc;
+}
