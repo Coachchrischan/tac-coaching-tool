@@ -98,7 +98,7 @@ export default function MovementCheckTab() {
           ))}
           <span className="ml-2 text-sm text-ink-500 italic">{program.data.blocks[bi].theme}</span>
         </div>
-        <SaveBadge state={lib.saveState} onReloadTheirs={lib.reloadTheirs} onKeepMine={lib.keepMine} />
+        <SaveBadge state={lib.saveState} onReloadTheirs={lib.reloadTheirs} onKeepMine={lib.keepMine} onRetry={lib.retry} />
       </div>
 
       {/* Pattern coverage */}

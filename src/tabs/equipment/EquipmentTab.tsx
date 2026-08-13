@@ -7,7 +7,7 @@ const field =
   'rounded-md border border-ink-300 bg-white px-2.5 py-1.5 text-sm text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none';
 
 export default function EquipmentTab() {
-  const { data, saveState, update, reloadTheirs, keepMine } = useDoc('equipment');
+  const { data, saveState, update, reloadTheirs, keepMine, retry } = useDoc('equipment');
   const [draft, setDraft] = useState({ name: '', count: '' });
 
   if (!data) return <p className="py-20 text-center text-sm text-ink-400">Loading…</p>;
@@ -37,7 +37,7 @@ export default function EquipmentTab() {
             Counts are real numbers, ready for a future programming-vs-availability check.
           </p>
         </div>
-        <SaveBadge state={saveState} onReloadTheirs={reloadTheirs} onKeepMine={keepMine} />
+        <SaveBadge state={saveState} onReloadTheirs={reloadTheirs} onKeepMine={keepMine} onRetry={retry} />
       </div>
 
       <div className="flex items-end gap-2 rounded-xl border border-ink-200 bg-white p-4 shadow-sm">
@@ -104,7 +104,7 @@ export default function EquipmentTab() {
               <td className="px-2 py-1.5">
                 <input
                   className="w-full rounded-md border border-transparent bg-transparent px-1.5 py-1 text-sm text-ink-500 hover:border-ink-300 focus:border-accent-600 focus:text-ink-950 focus:outline-none"
-                  placeholder="—"
+                  placeholder="-"
                   value={item.notes ?? ''}
                   onChange={(e) => patch(item.id, { notes: e.target.value || undefined })}
                 />

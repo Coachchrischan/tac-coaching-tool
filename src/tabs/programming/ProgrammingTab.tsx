@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDoc } from '../../lib/useDoc';
+import { mostUrgent, useDoc } from '../../lib/useDoc';
 import { useLibrary } from '../../lib/useLibrary';
 import { mergedLibrary, searchLibrary } from '../../lib/library';
 import type { LibraryExercise } from '../../lib/library';
@@ -18,6 +18,8 @@ const FOCUS_LABEL: Record<Session['focus'], string> = {
   lower: 'Lower',
   upper: 'Upper',
   full: 'Full Body',
+  esd: 'ESD',
+  hyrox: 'Hyrox',
 };
 
 const pill = (active: boolean) =>
@@ -57,9 +59,11 @@ export default function ProgrammingTab() {
   }
 
   const doc = program.data;
-  const session = doc.blocks[bi].weeks[wi].sessions[si];
+  const sessions = doc.blocks[bi].weeks[wi].sessions;
+  const sIdx = Math.min(si, Math.max(sessions.length - 1, 0));
+  const session = sessions[sIdx];
 
-  function patchSession(fn: (s: Session) => Session) {
+  function patchWeekSessions(fn: (sessions: Session[]) => Session[]) {
     program.update((d: ProgramDoc) => {
       const blocks = d.blocks.map((b, bIdx) =>
         bIdx !== bi
@@ -67,21 +71,33 @@ export default function ProgrammingTab() {
           : {
               ...b,
               weeks: b.weeks.map((w, wIdx) =>
-                wIdx !== wi
-                  ? w
-                  : {
-                      ...w,
-                      sessions: w.sessions.map((s, sIdx) => (sIdx !== si ? s : fn(s))) as [
-                        Session,
-                        Session,
-                        Session,
-                      ],
-                    },
+                wIdx !== wi ? w : { ...w, sessions: fn(w.sessions) },
               ) as (typeof b)['weeks'],
             },
       ) as ProgramDoc['blocks'];
       return { ...d, blocks };
     });
+  }
+
+  function patchSession(fn: (s: Session) => Session) {
+    patchWeekSessions((list) => list.map((s, i) => (i !== sIdx ? s : fn(s))));
+  }
+
+  function addSession() {
+    const fresh: Session = {
+      id: crypto.randomUUID(),
+      focus: 'esd',
+      timedBlocks: [{ id: crypto.randomUUID(), label: 'A', minutes: 15, slots: [] }],
+    };
+    patchWeekSessions((list) => [...list, fresh]);
+    setSi(sessions.length);
+  }
+
+  function removeSession() {
+    if (sessions.length <= 1) return;
+    if (!window.confirm(`Remove this session and its programming? This cannot be undone.`)) return;
+    patchWeekSessions((list) => list.filter((_, i) => i !== sIdx));
+    setSi(0);
   }
 
   function patchTimedBlock(blockId: string, fn: (b: TimedBlock) => TimedBlock | null) {
@@ -122,10 +138,17 @@ export default function ProgrammingTab() {
     name: string,
     exercise: LibraryExercise | null,
   ) {
+    // A free-text commit that exactly matches a library title keeps the link,
+    // so an edit-then-retype never silently detaches scales, cues and patterns.
+    let resolved = exercise;
+    if (!resolved && merged) {
+      const needle = name.trim().toLowerCase();
+      resolved = merged.find((e) => e.title.toLowerCase() === needle) ?? null;
+    }
     patchTimedBlock(blockId, (b) => ({
       ...b,
       slots: b.slots.map((sl) =>
-        sl.id === slotId ? { ...sl, name, exerciseId: exercise ? exercise.id : null } : sl,
+        sl.id === slotId ? { ...sl, name, exerciseId: resolved ? resolved.id : null } : sl,
       ),
     }));
   }
@@ -165,11 +188,17 @@ export default function ProgrammingTab() {
           onChange={(e) => program.update((d) => ({ ...d, name: e.target.value }))}
         />
         <div className="flex items-center gap-3">
-          <SaveBadge
-            state={program.saveState !== 'idle' ? program.saveState : lib.saveState}
-            onReloadTheirs={program.saveState === 'conflict' ? program.reloadTheirs : lib.reloadTheirs}
-            onKeepMine={program.saveState === 'conflict' ? program.keepMine : lib.keepMine}
-          />
+          {(() => {
+            const urgent = mostUrgent([program, lib]);
+            return (
+              <SaveBadge
+                state={urgent.saveState}
+                onReloadTheirs={urgent.reloadTheirs}
+                onKeepMine={urgent.keepMine}
+                onRetry={urgent.retry}
+              />
+            );
+          })()}
           <label className="flex items-center gap-1.5 text-sm text-ink-500">
             <input
               type="checkbox"
@@ -233,12 +262,57 @@ export default function ProgrammingTab() {
           ))}
         </div>
         <div className="flex items-center gap-1.5">
-          {doc.blocks[bi].weeks[wi].sessions.map((s, i) => (
-            <button key={s.id} type="button" className={pill(i === si)} onClick={() => setSi(i)}>
-              {FOCUS_LABEL[s.focus]}
+          {sessions.map((s, i) => (
+            <button key={s.id} type="button" className={pill(i === sIdx)} onClick={() => setSi(i)}>
+              {s.name || FOCUS_LABEL[s.focus]}
             </button>
           ))}
+          <button
+            type="button"
+            title="Add a session to this week (e.g. an ESD or Hyrox day)"
+            onClick={addSession}
+            className="rounded-md border border-dashed border-ink-300 px-2.5 py-1.5 text-sm font-medium text-ink-400 hover:border-accent-600 hover:text-accent-600"
+          >
+            +
+          </button>
         </div>
+      </div>
+
+      {/* Session settings */}
+      <div className="mb-3 flex flex-wrap items-center gap-2 text-sm">
+        <span className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">Session</span>
+        <select
+          className="rounded-md border border-ink-300 bg-white px-2 py-1 text-sm text-ink-950 focus:border-accent-600 focus:outline-none"
+          value={session.focus}
+          onChange={(e) => patchSession((s) => ({ ...s, focus: e.target.value as Session['focus'] }))}
+        >
+          {(Object.keys(FOCUS_LABEL) as Session['focus'][]).map((f) => (
+            <option key={f} value={f}>
+              {FOCUS_LABEL[f]}
+            </option>
+          ))}
+        </select>
+        <input
+          className="w-48 rounded-md border border-ink-300 bg-white px-2 py-1 text-sm text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none"
+          placeholder="Custom name (optional)"
+          value={session.name ?? ''}
+          onChange={(e) =>
+            patchSession((s) => {
+              const next = { ...s };
+              if (e.target.value) next.name = e.target.value;
+              else delete next.name;
+              return next;
+            })
+          }
+        />
+        <button
+          type="button"
+          disabled={sessions.length <= 1}
+          onClick={removeSession}
+          className="rounded-md border border-ink-300 px-2 py-1 text-sm font-medium text-ink-500 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          Remove session
+        </button>
       </div>
 
       {/* Session */}

@@ -115,7 +115,7 @@ export function seedProgram(): ProgramDoc {
           focus,
           timedBlocks: [{ id: `b${b}w${w}s${s + 1}-A`, label: 'A', minutes: 15, slots: [] }],
         }),
-      ) as [Session, Session, Session];
+      );
       return { id: `b${b}w${w}`, sessions };
     }) as ProgramBlock['weeks'];
     return { id: `block-${b}`, weeks };

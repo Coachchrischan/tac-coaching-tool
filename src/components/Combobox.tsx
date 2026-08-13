@@ -23,6 +23,9 @@ export default function Combobox({
   const [open, setOpen] = useState(false);
   const [highlight, setHighlight] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
+  // Only commit a dropdown match if the user actually TYPED since focusing;
+  // tabbing straight through a filled field must never rewrite it.
+  const typedRef = useRef(false);
 
   useEffect(() => setText(value), [value]);
 
@@ -30,6 +33,7 @@ export default function Combobox({
   const clamped = Math.min(highlight, Math.max(results.length - 1, 0));
 
   function commitExercise(r: RankedExercise) {
+    typedRef.current = false;
     setText(r.exercise.title);
     setOpen(false);
     onCommit(r.exercise.title, r.exercise);
@@ -37,7 +41,10 @@ export default function Combobox({
 
   function commitFreeText() {
     setOpen(false);
-    if (text !== value) onCommit(text, null);
+    if (typedRef.current && text !== value) {
+      typedRef.current = false;
+      onCommit(text, null);
+    }
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -48,22 +55,26 @@ export default function Combobox({
       e.preventDefault();
       setHighlight((h) => Math.max(h - 1, 0));
     } else if (e.key === 'Enter' && !e.ctrlKey) {
-      if (open && results[clamped]) {
+      if (open && typedRef.current && results[clamped]) {
         e.preventDefault();
         commitExercise(results[clamped]);
       } else {
         commitFreeText();
       }
     } else if (e.key === 'Tab') {
-      // Select the highlighted match and let focus move on to Sets.
-      if (open && results[clamped]) {
+      // Select the highlighted match and let focus move on to Sets, but only
+      // when the user typed this visit; Shift+Tab never selects.
+      if (open && !e.shiftKey && typedRef.current && results[clamped]) {
         commitExercise(results[clamped]);
       } else {
         commitFreeText();
       }
     } else if (e.key === 'Escape') {
+      // Cancel: revert to the stored value, commit nothing.
       e.preventDefault();
-      commitFreeText();
+      typedRef.current = false;
+      setText(value);
+      setOpen(false);
     }
   }
 
@@ -75,11 +86,14 @@ export default function Combobox({
         placeholder={placeholder ?? 'Exercise…'}
         autoFocus={autoFocus}
         onChange={(e) => {
+          typedRef.current = true;
           setText(e.target.value);
           setOpen(true);
           setHighlight(0);
         }}
-        onFocus={() => text && setOpen(true)}
+        onFocus={() => {
+          typedRef.current = false; // list stays closed until the first keystroke
+        }}
         onBlur={() => {
           // Delay so option mousedown can fire first.
           window.setTimeout(() => {

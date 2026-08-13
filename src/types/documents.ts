@@ -61,7 +61,7 @@ export interface ScheduleDoc {
 
 // ---------- Programming ----------
 
-export type SessionFocus = 'lower' | 'upper' | 'full';
+export type SessionFocus = 'lower' | 'upper' | 'full' | 'esd' | 'hyrox';
 
 export interface ExerciseSlot {
   id: string;
@@ -86,13 +86,14 @@ export interface TimedBlock {
 export interface Session {
   id: string;
   focus: SessionFocus;
+  name?: string; // optional display name overriding the focus label
   timedBlocks: TimedBlock[];
   blurbOverride?: string; // coach-edited blurb wins over generated
 }
 
 export interface ProgramWeek {
   id: string;
-  sessions: [Session, Session, Session]; // Lower, Upper, Full Body
+  sessions: Session[]; // any mix of strength/ESD/Hyrox sessions, coach-defined
 }
 
 export interface ProgramBlock {

@@ -13,10 +13,12 @@ export default function SaveBadge({
   state,
   onReloadTheirs,
   onKeepMine,
+  onRetry,
 }: {
   state: SaveState;
   onReloadTheirs?: () => void;
   onKeepMine?: () => void;
+  onRetry?: () => void;
 }) {
   if (state === 'conflict') {
     return (
@@ -40,7 +42,20 @@ export default function SaveBadge({
     );
   }
   if (state === 'error') {
-    return <span className="text-xs font-medium text-red-600">{LABELS[state]}</span>;
+    return (
+      <span className="flex items-center gap-2 text-xs">
+        <span className="font-medium text-red-600">{LABELS[state]} (retrying…)</span>
+        {onRetry && (
+          <button
+            type="button"
+            onClick={onRetry}
+            className="rounded border border-ink-300 px-2 py-0.5 font-medium text-ink-700 hover:bg-ink-100"
+          >
+            Retry now
+          </button>
+        )}
+      </span>
+    );
   }
   return <span className="text-xs text-ink-400">{LABELS[state]}</span>;
 }

@@ -15,7 +15,13 @@ const FOCUS_TITLE: Record<Session['focus'], string> = {
   lower: 'LOWER BODY',
   upper: 'UPPER BODY',
   full: 'FULL BODY',
+  esd: 'ESD',
+  hyrox: 'HYROX',
 };
+
+function slideTitle(session: Session): string {
+  return (session.name ?? FOCUS_TITLE[session.focus]).toUpperCase();
+}
 
 function findSession(doc: ProgramDoc, sessionId: string) {
   for (let b = 0; b < doc.blocks.length; b++) {
@@ -165,7 +171,7 @@ export default function TvPage() {
                 TENERIFFE ATHLETIC CLUB
               </p>
               <h1 className="font-display mt-2 text-[80px] leading-none font-semibold tracking-tight text-[#F5F3EB]">
-                {FOCUS_TITLE[session.focus]}
+                {slideTitle(session)}
               </h1>
             </div>
             <div className="text-right">

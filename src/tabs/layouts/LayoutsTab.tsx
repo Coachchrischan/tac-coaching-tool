@@ -209,7 +209,7 @@ function RoomCanvas({
 }
 
 export default function LayoutsTab() {
-  const { data, saveState, update, reloadTheirs, keepMine } = useDoc('layouts');
+  const { data, saveState, update, reloadTheirs, keepMine, retry } = useDoc('layouts');
 
   if (!data) return <p className="py-20 text-center text-sm text-ink-400">Loading…</p>;
 
@@ -222,7 +222,7 @@ export default function LayoutsTab() {
             Drag equipment and zone labels to plan resources per class. One grid square ≈ 1 m.
           </p>
         </div>
-        <SaveBadge state={saveState} onReloadTheirs={reloadTheirs} onKeepMine={keepMine} />
+        <SaveBadge state={saveState} onReloadTheirs={reloadTheirs} onKeepMine={keepMine} onRetry={retry} />
       </div>
       <div className="grid gap-5 xl:grid-cols-2">
         {data.rooms.map((room) => (

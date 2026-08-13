@@ -35,17 +35,44 @@ function docPath(root: string, docId: string) {
   return join(root, 'data', `${docId}.json`);
 }
 
+class DocReadError extends Error {}
+
+// Seed ONLY when the file does not exist. Any other failure (unreadable file,
+// corrupt JSON) must never be overwritten with the seed: quarantine the file
+// and fail the request so the coach's data survives for manual recovery.
 function loadDoc(root: string, docId: DocId): Envelope {
+  const target = docPath(root, docId);
+  let raw: string;
   try {
-    return JSON.parse(readFileSync(docPath(root, docId), 'utf8')) as Envelope;
-  } catch {
-    const env: Envelope = {
-      data: seeds[docId](),
-      rev: 1,
-      updatedAt: new Date().toISOString(),
-    };
-    writeDoc(root, docId, env);
+    raw = readFileSync(target, 'utf8');
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
+      const env: Envelope = {
+        data: seeds[docId](),
+        rev: 1,
+        updatedAt: new Date().toISOString(),
+      };
+      writeDoc(root, docId, env);
+      return env;
+    }
+    throw new DocReadError(`cannot read ${docId}: ${String(err)}`);
+  }
+  try {
+    const env = JSON.parse(raw) as Envelope;
+    if (typeof env.rev !== 'number' || env.data === undefined) {
+      throw new Error('missing rev/data');
+    }
     return env;
+  } catch (err) {
+    const quarantine = `${target}.corrupt-${Date.now()}`;
+    try {
+      renameSync(target, quarantine);
+    } catch {
+      /* keep the original in place if even the rename fails */
+    }
+    throw new DocReadError(
+      `document '${docId}' is corrupt (${String(err)}); moved to ${quarantine}. Not reseeded.`,
+    );
   }
 }
 
@@ -63,11 +90,17 @@ function send(res: ServerResponse, status: number, body: unknown) {
   res.end(JSON.stringify(body));
 }
 
+const MAX_BODY_BYTES = 4 * 1024 * 1024;
+
 function readBody(req: IncomingMessage): Promise<string> {
   return new Promise((resolve, reject) => {
     let body = '';
     req.on('data', (chunk) => {
       body += chunk;
+      if (body.length > MAX_BODY_BYTES) {
+        reject(new Error('body too large'));
+        req.destroy();
+      }
     });
     req.on('end', () => resolve(body));
     req.on('error', reject);
@@ -104,8 +137,13 @@ export function storagePlugin(): Plugin {
               send(res, 400, { error: 'invalid JSON body' });
               return;
             }
-            if (parsed.data === undefined || typeof parsed.baseRev !== 'number') {
-              send(res, 400, { error: 'body must be { data, baseRev }' });
+            if (
+              parsed.data === undefined ||
+              parsed.data === null ||
+              typeof parsed.data !== 'object' ||
+              typeof parsed.baseRev !== 'number'
+            ) {
+              send(res, 400, { error: 'body must be { data: object, baseRev: number }' });
               return;
             }
             const current = loadDoc(root, id);

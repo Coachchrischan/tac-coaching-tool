@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDoc } from '../../lib/useDoc';
+import { mostUrgent, useDoc } from '../../lib/useDoc';
 import SaveBadge from '../../components/SaveBadge';
 import type { ProgramDoc } from '../../types/documents';
 
@@ -26,11 +26,17 @@ export default function PlanningTab() {
     <div className="max-w-3xl">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-lg font-semibold text-ink-950">Planning</h2>
-        <SaveBadge
-          state={planning.saveState !== 'idle' ? planning.saveState : program.saveState}
-          onReloadTheirs={planning.saveState === 'conflict' ? planning.reloadTheirs : program.reloadTheirs}
-          onKeepMine={planning.saveState === 'conflict' ? planning.keepMine : program.keepMine}
-        />
+        {(() => {
+          const urgent = mostUrgent([planning, program]);
+          return (
+            <SaveBadge
+              state={urgent.saveState}
+              onReloadTheirs={urgent.reloadTheirs}
+              onKeepMine={urgent.keepMine}
+              onRetry={urgent.retry}
+            />
+          );
+        })()}
       </div>
 
       {/* Block themes (edits ProgramDoc directly; same field the Programming tab shows) */}

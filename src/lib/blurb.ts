@@ -33,6 +33,8 @@ const FOCUS_TITLE: Record<Session['focus'], string> = {
   lower: 'Lower body day',
   upper: 'Upper body day',
   full: 'Full body day',
+  esd: 'ESD day',
+  hyrox: 'Hyrox day',
 };
 
 export function generateBlurb(

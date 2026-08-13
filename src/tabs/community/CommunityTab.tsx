@@ -13,7 +13,7 @@ function fmtDate(iso: string): string {
 }
 
 export default function CommunityTab() {
-  const { data, saveState, update, reloadTheirs, keepMine } = useDoc('community');
+  const { data, saveState, update, reloadTheirs, keepMine, retry } = useDoc('community');
   const [draft, setDraft] = useState({ date: '', name: '', notes: '' });
 
   if (!data) return <p className="py-20 text-center text-sm text-ink-400">Loading…</p>;
@@ -63,7 +63,7 @@ export default function CommunityTab() {
     <div className="max-w-3xl">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-lg font-semibold text-ink-950">Community events</h2>
-        <SaveBadge state={saveState} onReloadTheirs={reloadTheirs} onKeepMine={keepMine} />
+        <SaveBadge state={saveState} onReloadTheirs={reloadTheirs} onKeepMine={keepMine} onRetry={retry} />
       </div>
 
       <div className="flex flex-wrap items-end gap-2 rounded-xl border border-ink-200 bg-white p-4 shadow-sm">

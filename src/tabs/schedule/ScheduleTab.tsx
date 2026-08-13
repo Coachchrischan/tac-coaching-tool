@@ -8,7 +8,7 @@ import SettingsDrawer from './SettingsDrawer';
 import WeekGrid from './WeekGrid';
 
 export default function ScheduleTab() {
-  const { data: doc, saveState, update, reloadTheirs, keepMine } = useDoc('schedule');
+  const { data: doc, saveState, update, reloadTheirs, keepMine, retry } = useDoc('schedule');
   const [selectedBlockId, setSelectedBlockId] = useState<string | null>(null);
   const [showSettings, setShowSettings] = useState(false);
 
@@ -64,7 +64,7 @@ export default function ScheduleTab() {
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <ScenarioBar doc={doc} onUpdate={update} />
         <div className="flex items-center gap-3">
-          <SaveBadge state={saveState} onReloadTheirs={reloadTheirs} onKeepMine={keepMine} />
+          <SaveBadge state={saveState} onReloadTheirs={reloadTheirs} onKeepMine={keepMine} onRetry={retry} />
           <button
             type="button"
             onClick={() => setShowSettings((v) => !v)}
