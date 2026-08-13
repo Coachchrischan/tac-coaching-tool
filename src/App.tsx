@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import TabNav from './components/TabNav';
 import ScheduleTab from './tabs/schedule/ScheduleTab';
+import AnnualPlanTab from './tabs/annual/AnnualPlanTab';
 import ProgrammingTab from './tabs/programming/ProgrammingTab';
 import MovementCheckTab from './tabs/movement/MovementCheckTab';
 import CommunityTab from './tabs/community/CommunityTab';
@@ -23,6 +24,7 @@ export default function App() {
                 <Route path="/" element={<Navigate to="/schedule" replace />} />
                 <Route path="/schedule" element={<ScheduleTab />} />
                 <Route path="/programming" element={<ProgrammingTab />} />
+                <Route path="/annual" element={<AnnualPlanTab />} />
                 <Route path="/movement" element={<MovementCheckTab />} />
                 <Route path="/community" element={<CommunityTab />} />
                 <Route path="/planning" element={<PlanningTab />} />

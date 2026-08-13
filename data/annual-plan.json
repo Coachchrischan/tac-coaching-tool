@@ -1,0 +1,162 @@
+{
+  "data": {
+    "startDate": "2026-08-31",
+    "streams": [
+      {
+        "id": "strength",
+        "name": "Strength",
+        "colour": "#003030",
+        "phases": [
+          {
+            "id": "ap-1",
+            "name": "Foundation",
+            "focus": "Technique, work capacity, base hypertrophy",
+            "weeks": 12
+          },
+          {
+            "id": "ap-2",
+            "name": "Deload + retest",
+            "focus": "Light week, movement checks, baseline lifts",
+            "weeks": 1
+          },
+          {
+            "id": "ap-3",
+            "name": "Build",
+            "focus": "Progressive overload on the main lifts, 5s and 6s",
+            "weeks": 12
+          },
+          {
+            "id": "ap-4",
+            "name": "Deload + retest",
+            "focus": "Light week, retest key lifts",
+            "weeks": 1
+          },
+          {
+            "id": "ap-5",
+            "name": "Strength peak",
+            "focus": "Heavy triples and doubles, intensity up, volume down",
+            "weeks": 12
+          },
+          {
+            "id": "ap-6",
+            "name": "Deload + retest",
+            "focus": "Light week, PB attempts window",
+            "weeks": 1
+          },
+          {
+            "id": "ap-7",
+            "name": "Consolidate",
+            "focus": "Hold new strength, expand movement library",
+            "weeks": 12
+          },
+          {
+            "id": "ap-8",
+            "name": "Transition",
+            "focus": "Fun week, variety, no barbell targets",
+            "weeks": 1
+          }
+        ]
+      },
+      {
+        "id": "esd",
+        "name": "ESD",
+        "colour": "#3E6B8C",
+        "phases": [
+          {
+            "id": "ap-9",
+            "name": "Aerobic base",
+            "focus": "Zone 2 volume, machine efficiency, long intervals",
+            "weeks": 10
+          },
+          {
+            "id": "ap-10",
+            "name": "Threshold",
+            "focus": "Sustained pace work, cruise intervals",
+            "weeks": 8
+          },
+          {
+            "id": "ap-11",
+            "name": "Max aerobic power",
+            "focus": "Shorter, harder repeats, VO2 focus",
+            "weeks": 6
+          },
+          {
+            "id": "ap-12",
+            "name": "Mixed modal",
+            "focus": "Combinations, race-pace pieces, transitions",
+            "weeks": 8
+          },
+          {
+            "id": "ap-13",
+            "name": "Aerobic maintenance",
+            "focus": "Hold the engine, deload the intensity",
+            "weeks": 10
+          },
+          {
+            "id": "ap-14",
+            "name": "Re-base",
+            "focus": "Back to zone 2 volume before the next build",
+            "weeks": 10
+          }
+        ]
+      },
+      {
+        "id": "hyrox",
+        "name": "Hyrox",
+        "colour": "#C64545",
+        "phases": [
+          {
+            "id": "ap-15",
+            "name": "Off-season GPP",
+            "focus": "General strength and engine, technique on the eight stations",
+            "weeks": 10
+          },
+          {
+            "id": "ap-16",
+            "name": "Strength-endurance build",
+            "focus": "Compromised running, station volume",
+            "weeks": 10
+          },
+          {
+            "id": "ap-17",
+            "name": "Race prep",
+            "focus": "Race simulations, pacing, transitions",
+            "weeks": 8
+          },
+          {
+            "id": "ap-18",
+            "name": "Comp + taper",
+            "focus": "Sharpen, taper, race window",
+            "weeks": 4
+          },
+          {
+            "id": "ap-19",
+            "name": "Recover",
+            "focus": "Down week, review the race",
+            "weeks": 2
+          },
+          {
+            "id": "ap-20",
+            "name": "Build 2",
+            "focus": "Second build off the race learnings",
+            "weeks": 10
+          },
+          {
+            "id": "ap-21",
+            "name": "Race prep 2",
+            "focus": "Simulations for the second race window",
+            "weeks": 6
+          },
+          {
+            "id": "ap-22",
+            "name": "Comp 2",
+            "focus": "Race window two",
+            "weeks": 2
+          }
+        ]
+      }
+    ]
+  },
+  "rev": 1,
+  "updatedAt": "2026-08-13T23:03:27.587Z"
+}
