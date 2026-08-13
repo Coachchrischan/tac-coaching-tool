@@ -133,7 +133,7 @@ export function seedCommunity(): CommunityDoc {
 }
 
 export function seedPlanning(): PlanningDoc {
-  return { notes: '', blockThemes: {} };
+  return { notes: '', todos: [] };
 }
 
 export function seedLayouts(): LayoutsDoc {

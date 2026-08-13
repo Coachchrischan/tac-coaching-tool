@@ -13,51 +13,10 @@
                 "focus": "lower",
                 "timedBlocks": [
                   {
+                    "id": "b1w1s1-A",
                     "label": "A",
-                    "slots": [
-                      {
-                        "reps": "6",
-                        "id": "tv1",
-                        "name": "Back Squat",
-                        "sets": "4",
-                        "exerciseId": 1,
-                        "tempo": "31X1",
-                        "rpe": "8",
-                        "load": "70%"
-                      },
-                      {
-                        "id": "tv2",
-                        "name": "Spider Curls",
-                        "load": "12kg",
-                        "sets": "3",
-                        "reps": "10",
-                        "exerciseId": 1778429
-                      }
-                    ],
                     "minutes": 15,
-                    "id": "tvA"
-                  },
-                  {
-                    "label": "B",
-                    "slots": [
-                      {
-                        "sets": "3",
-                        "reps": "20m",
-                        "exerciseId": null,
-                        "name": "Walking Lunge",
-                        "id": "tv3"
-                      },
-                      {
-                        "id": "tv4",
-                        "name": "Seated Row",
-                        "rpe": "7",
-                        "sets": "3",
-                        "reps": "12",
-                        "exerciseId": null
-                      }
-                    ],
-                    "minutes": 12,
-                    "id": "tvB"
+                    "slots": []
                   }
                 ]
               },
@@ -552,6 +511,6 @@
       }
     ]
   },
-  "rev": 2,
-  "updatedAt": "2026-08-13T07:23:21.601Z"
+  "rev": 1,
+  "updatedAt": "2026-08-13T07:33:12.460Z"
 }

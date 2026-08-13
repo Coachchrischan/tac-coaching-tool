@@ -160,9 +160,11 @@ export interface CommunityDoc {
   events: CommunityEvent[];
 }
 
+// Block themes live on ProgramDoc.blocks[].theme (single source of truth);
+// the Planning tab edits them there. This doc holds the free-form workspace.
 export interface PlanningDoc {
   notes: string;
-  blockThemes: Record<string, string>; // ProgramBlock.id -> theme
+  todos: { id: string; text: string; done: boolean }[];
 }
 
 export interface LayoutItem {

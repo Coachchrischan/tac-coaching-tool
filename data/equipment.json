@@ -1,0 +1,58 @@
+{
+  "data": {
+    "items": [
+      {
+        "id": "eq-1",
+        "name": "Barbells",
+        "count": 10
+      },
+      {
+        "id": "eq-2",
+        "name": "Plates 20kg (pairs)",
+        "count": 10
+      },
+      {
+        "id": "eq-3",
+        "name": "Dumbbell pairs",
+        "count": 12
+      },
+      {
+        "id": "eq-4",
+        "name": "Kettlebells",
+        "count": 12
+      },
+      {
+        "id": "eq-5",
+        "name": "Rowers",
+        "count": 8
+      },
+      {
+        "id": "eq-6",
+        "name": "Ski ergs",
+        "count": 4
+      },
+      {
+        "id": "eq-7",
+        "name": "Assault bikes",
+        "count": 6
+      },
+      {
+        "id": "eq-8",
+        "name": "Sleds",
+        "count": 4
+      },
+      {
+        "id": "eq-9",
+        "name": "Wall balls",
+        "count": 12
+      },
+      {
+        "id": "eq-10",
+        "name": "Boxes",
+        "count": 8
+      }
+    ]
+  },
+  "rev": 1,
+  "updatedAt": "2026-08-13T07:33:12.873Z"
+}
