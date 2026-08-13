@@ -6,6 +6,7 @@ import BlockEditor from './BlockEditor';
 import ScenarioBar from './ScenarioBar';
 import SettingsDrawer from './SettingsDrawer';
 import WeekGrid from './WeekGrid';
+import { DAY_END_MIN } from './scheduleLayout';
 
 export default function ScheduleTab() {
   const { data: doc, saveState, update, reloadTheirs, keepMine, retry } = useDoc('schedule');
@@ -49,6 +50,23 @@ export default function ScheduleTab() {
     setSelectedBlockId(block.id);
   }
 
+  function duplicateBlock(source: ClassBlock) {
+    // Copy lands directly after the original (clamped to the day), selected
+    // and ready to drag or edit.
+    const copy: ClassBlock = {
+      ...source,
+      id: crypto.randomUUID(),
+      startMin: Math.min(source.startMin + source.durationMin, DAY_END_MIN - source.durationMin),
+    };
+    update((d) => ({
+      ...d,
+      scenarios: d.scenarios.map((s) =>
+        s.id !== scenario.id ? s : { ...s, blocks: [...s.blocks, copy] },
+      ),
+    }));
+    setSelectedBlockId(copy.id);
+  }
+
   function deleteBlock(id: string) {
     update((d) => ({
       ...d,
@@ -67,6 +85,13 @@ export default function ScheduleTab() {
           <SaveBadge state={saveState} onReloadTheirs={reloadTheirs} onKeepMine={keepMine} onRetry={retry} />
           <button
             type="button"
+            onClick={() => createBlock(0, 9 * 60)}
+            className="rounded-md bg-accent-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-accent-700"
+          >
+            + Add class
+          </button>
+          <button
+            type="button"
             onClick={() => setShowSettings((v) => !v)}
             className="rounded-md border border-ink-300 bg-white px-3 py-1.5 text-sm font-medium text-ink-700 hover:bg-ink-100"
           >
@@ -76,7 +101,8 @@ export default function ScheduleTab() {
       </div>
 
       <p className="mb-3 text-[13px] text-ink-500">
-        Drag classes to move them. Click an empty slot to add a class, or click a class to edit it.
+        Drag classes to move them. Add a class with the button or by clicking an empty slot; click a
+        class to edit or duplicate it.
       </p>
 
       <div className="flex items-start gap-4">
@@ -95,6 +121,7 @@ export default function ScheduleTab() {
             doc={doc}
             block={selectedBlock}
             onChange={(patch) => patchBlock(selectedBlock.id, patch)}
+            onDuplicate={() => duplicateBlock(selectedBlock)}
             onDelete={() => deleteBlock(selectedBlock.id)}
             onClose={() => setSelectedBlockId(null)}
           />

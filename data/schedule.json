@@ -309,10 +309,232 @@
             "roomId": "gfr"
           }
         ]
+      },
+      {
+        "id": "e50da7f1-8ead-4deb-b7f4-dcb054a3eb56",
+        "name": "Suggested Format",
+        "blocks": [
+          {
+            "id": "d81d5001-d805-491f-8138-14d8c1898c1b",
+            "day": 0,
+            "startMin": 300,
+            "durationMin": 60,
+            "classTypeId": "esd",
+            "coachId": "ji",
+            "roomId": "gfr"
+          },
+          {
+            "id": "84366f33-2c8c-4e3e-8016-1bb48000c89b",
+            "day": 0,
+            "startMin": 360,
+            "durationMin": 60,
+            "classTypeId": "esd",
+            "coachId": "ji",
+            "roomId": "gfr"
+          },
+          {
+            "id": "38e08bca-7d9b-49ec-bac6-c0c8a511a9c9",
+            "day": 0,
+            "startMin": 420,
+            "durationMin": 60,
+            "classTypeId": "esd",
+            "coachId": "ji",
+            "roomId": "gfr"
+          },
+          {
+            "id": "3213f3e4-3963-4425-bfcc-0fa2badb749a",
+            "day": 0,
+            "startMin": 720,
+            "durationMin": 60,
+            "classTypeId": "esd",
+            "coachId": "madi",
+            "roomId": "gfr"
+          },
+          {
+            "id": "ea69c94d-85ba-48cc-a5ec-a83fe9d960f7",
+            "day": 0,
+            "startMin": 1035,
+            "durationMin": 60,
+            "classTypeId": "hyrox",
+            "coachId": "ji",
+            "roomId": "gfr"
+          },
+          {
+            "id": "65fc50b7-755b-4ef6-aeb0-9548eb9f04ed",
+            "day": 0,
+            "startMin": 1095,
+            "durationMin": 60,
+            "classTypeId": "hyrox",
+            "coachId": "ji",
+            "roomId": "gfr"
+          },
+          {
+            "id": "3279d7d0-cee3-44db-9f4c-b9ad142ddda5",
+            "day": 1,
+            "startMin": 300,
+            "durationMin": 60,
+            "classTypeId": "lbs",
+            "coachId": "ji",
+            "roomId": "gym-floor"
+          },
+          {
+            "id": "5a09e6e4-c985-489b-b28b-07d9bd913b06",
+            "day": 1,
+            "startMin": 300,
+            "durationMin": 60,
+            "classTypeId": "run",
+            "coachId": "katie",
+            "roomId": "run-club"
+          },
+          {
+            "id": "0d7fc1fa-59b2-4fb9-abaf-e37f0f2fad81",
+            "day": 1,
+            "startMin": 360,
+            "durationMin": 60,
+            "classTypeId": "lbs",
+            "coachId": "ji",
+            "roomId": "gym-floor"
+          },
+          {
+            "id": "046d7318-c96a-4e02-b1d4-69dc54a8f701",
+            "day": 1,
+            "startMin": 720,
+            "durationMin": 60,
+            "classTypeId": "lbs",
+            "coachId": "ji",
+            "roomId": "gym-floor"
+          },
+          {
+            "id": "d389bae5-650a-489b-aef0-0b36060fe519",
+            "day": 1,
+            "startMin": 1020,
+            "durationMin": 45,
+            "classTypeId": "flow",
+            "coachId": "stephanie",
+            "roomId": "gfr"
+          },
+          {
+            "id": "327a73f2-1508-46cb-81ef-5e33c3d48b22",
+            "day": 1,
+            "startMin": 1080,
+            "durationMin": 60,
+            "classTypeId": "yin",
+            "coachId": "stephanie",
+            "roomId": "gfr"
+          },
+          {
+            "id": "37e7a2a4-2c6d-4700-af3b-d05abf5855e0",
+            "day": 2,
+            "startMin": 300,
+            "durationMin": 60,
+            "classTypeId": "run",
+            "coachId": "katie",
+            "roomId": "run-club"
+          },
+          {
+            "id": "5d58dd71-fc22-4689-b74c-806a8f2f84e1",
+            "day": 3,
+            "startMin": 300,
+            "durationMin": 60,
+            "classTypeId": "ubs",
+            "coachId": "ji",
+            "roomId": "gym-floor"
+          },
+          {
+            "id": "d74b783c-7c6f-44c1-b150-9a6418437690",
+            "day": 3,
+            "startMin": 360,
+            "durationMin": 60,
+            "classTypeId": "ubs",
+            "coachId": "ji",
+            "roomId": "gym-floor"
+          },
+          {
+            "id": "227f1b93-7890-4a90-be0e-b2fcd865c9ae",
+            "day": 3,
+            "startMin": 720,
+            "durationMin": 60,
+            "classTypeId": "ubs",
+            "coachId": "ji",
+            "roomId": "gym-floor"
+          },
+          {
+            "id": "c942da94-82a1-42a2-a7a3-d2eb5a58b268",
+            "day": 3,
+            "startMin": 1020,
+            "durationMin": 55,
+            "classTypeId": "stretch",
+            "coachId": "anthony",
+            "roomId": "gfr"
+          },
+          {
+            "id": "99cb4f1e-e50d-4827-ab15-005091b4362c",
+            "day": 3,
+            "startMin": 1080,
+            "durationMin": 55,
+            "classTypeId": "stretch",
+            "coachId": "anthony",
+            "roomId": "gfr"
+          },
+          {
+            "id": "d3ebd020-2b9c-4619-8280-bebc545fb4aa",
+            "day": 4,
+            "startMin": 300,
+            "durationMin": 60,
+            "classTypeId": "esd",
+            "coachId": "ji",
+            "roomId": "gfr"
+          },
+          {
+            "id": "7084f58c-29d9-4b9b-8e43-a6bdacfbcb79",
+            "day": 4,
+            "startMin": 360,
+            "durationMin": 60,
+            "classTypeId": "esd",
+            "coachId": "ji",
+            "roomId": "gfr"
+          },
+          {
+            "id": "73644118-a606-4f96-a23c-a8f5b154fabd",
+            "day": 4,
+            "startMin": 420,
+            "durationMin": 60,
+            "classTypeId": "esd",
+            "coachId": "ji",
+            "roomId": "gfr"
+          },
+          {
+            "id": "d9156609-5bf5-46d7-b27f-85c0e4bd5313",
+            "day": 4,
+            "startMin": 720,
+            "durationMin": 60,
+            "classTypeId": "esd",
+            "coachId": "lynn",
+            "roomId": "gfr"
+          },
+          {
+            "id": "7545b80e-341c-4bb4-98db-7be68a2957d7",
+            "day": 4,
+            "startMin": 1035,
+            "durationMin": 60,
+            "classTypeId": "hyrox",
+            "coachId": "ji",
+            "roomId": "gfr"
+          },
+          {
+            "id": "565356ba-681a-4e07-9b35-c75f2de18af9",
+            "day": 5,
+            "startMin": 450,
+            "durationMin": 60,
+            "classTypeId": "gameday",
+            "coachId": "ji",
+            "roomId": "gfr"
+          }
+        ]
       }
     ],
     "activeScenarioId": "current"
   },
-  "rev": 8,
-  "updatedAt": "2026-08-13T07:42:26.245Z"
+  "rev": 20,
+  "updatedAt": "2026-08-13T22:46:17.475Z"
 }

@@ -23,7 +23,8 @@
                         "exerciseId": 1,
                         "tempo": "31X1",
                         "rpe": "8",
-                        "load": "70%"
+                        "load": "70%",
+                        "showScales": false
                       },
                       {
                         "id": "tv2",
@@ -54,6 +55,11 @@
                         "sets": "3",
                         "reps": "12",
                         "exerciseId": null
+                      },
+                      {
+                        "id": "2ac04ada-397d-4209-8967-a5d0241bf6f9",
+                        "exerciseId": null,
+                        "name": ""
                       }
                     ],
                     "minutes": 12,
@@ -552,6 +558,6 @@
       }
     ]
   },
-  "rev": 4,
-  "updatedAt": "2026-08-13T11:55:16.955Z"
+  "rev": 16,
+  "updatedAt": "2026-08-13T22:40:28.723Z"
 }

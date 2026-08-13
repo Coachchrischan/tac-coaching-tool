@@ -9,12 +9,14 @@ export default function BlockEditor({
   doc,
   block,
   onChange,
+  onDuplicate,
   onDelete,
   onClose,
 }: {
   doc: ScheduleDoc;
   block: ClassBlock;
   onChange: (patch: Partial<ClassBlock>) => void;
+  onDuplicate: () => void;
   onDelete: () => void;
   onClose: () => void;
 }) {
@@ -140,8 +142,16 @@ export default function BlockEditor({
 
       <button
         type="button"
+        title="Copy this class, including its coach and room; the copy lands right after it"
+        onClick={onDuplicate}
+        className="mt-5 w-full rounded-md border border-ink-300 px-3 py-1.5 text-sm font-medium text-ink-700 hover:bg-ink-100"
+      >
+        Duplicate class
+      </button>
+      <button
+        type="button"
         onClick={onDelete}
-        className="mt-5 w-full rounded-md border border-red-200 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-50"
+        className="mt-2 w-full rounded-md border border-red-200 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-50"
       >
         Delete class
       </button>
