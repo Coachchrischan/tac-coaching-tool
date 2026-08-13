@@ -8,11 +8,23 @@ import SaveBadge from '../../components/SaveBadge';
 import type {
   ExerciseSlot,
   ProgramDoc,
+  ProgramWeek,
   Session,
   TimedBlock,
 } from '../../types/documents';
 import TimedBlockCard from './TimedBlockCard';
 import SessionBlurb from './SessionBlurb';
+import { MonthView, ProgressionGrid } from './ProgressionViews';
+import type { GridColumn } from './ProgressionViews';
+
+type ProgramView = 'week' | 'month' | 'block' | 'phase';
+
+const VIEW_LABEL: Record<ProgramView, string> = {
+  week: 'Week',
+  month: 'Month',
+  block: 'Block',
+  phase: 'Phase',
+};
 
 const FOCUS_LABEL: Record<Session['focus'], string> = {
   lower: 'Lower',
@@ -44,6 +56,7 @@ export default function ProgrammingTab() {
   const [bi, setBi] = useState(0);
   const [wi, setWi] = useState(0);
   const [si, setSi] = useState(0);
+  const [view, setView] = useState<ProgramView>('week');
   const [expandScales, setExpandScales] = useState(false);
 
   const overrides = lib.data;
@@ -167,6 +180,38 @@ export default function ProgrammingTab() {
     });
   }
 
+  // Find the equivalent session in another week: same custom name first, then
+  // same focus, so Lower lines up with Lower across the whole phase.
+  function matchSession(week: ProgramWeek): Session | undefined {
+    if (session.name) {
+      const byName = week.sessions.find((s) => s.name === session.name);
+      if (byName) return byName;
+    }
+    return week.sessions.find((s) => s.focus === session.focus);
+  }
+
+  const blockColumns: GridColumn[] = doc.blocks[bi].weeks.map((w, wIdx) => ({
+    label: `W${wIdx + 1}`,
+    session: matchSession(w),
+    weekIndex: wIdx,
+    blockIndex: bi,
+  }));
+
+  const phaseColumns: GridColumn[] = doc.blocks.flatMap((b, bIdx) =>
+    b.weeks.map((w, wIdx) => ({
+      label: `B${bIdx + 1} W${wIdx + 1}`,
+      session: matchSession(w),
+      weekIndex: wIdx,
+      blockIndex: bIdx,
+    })),
+  );
+
+  function openColumn(col: GridColumn) {
+    setBi(col.blockIndex);
+    setWi(col.weekIndex);
+    setView('week');
+  }
+
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.ctrlKey && e.key === 'Enter') {
       e.preventDefault();
@@ -188,6 +233,21 @@ export default function ProgrammingTab() {
           onChange={(e) => program.update((d) => ({ ...d, name: e.target.value }))}
         />
         <div className="flex items-center gap-3">
+          {/* View switcher: Week edits, Month/Block/Phase read side by side */}
+          <div className="flex overflow-hidden rounded-md border border-ink-300">
+            {(Object.keys(VIEW_LABEL) as ProgramView[]).map((v) => (
+              <button
+                key={v}
+                type="button"
+                onClick={() => setView(v)}
+                className={`px-3 py-1.5 text-sm font-medium transition-colors ${
+                  view === v ? 'bg-ink-950 text-white' : 'bg-white text-ink-500 hover:text-ink-950'
+                }`}
+              >
+                {VIEW_LABEL[v]}
+              </button>
+            ))}
+          </div>
           {(() => {
             const urgent = mostUrgent([program, lib]);
             return (
@@ -234,6 +294,7 @@ export default function ProgrammingTab() {
 
       {/* Navigation */}
       <div className="mb-4 flex flex-wrap items-center gap-x-6 gap-y-2">
+        {view !== 'phase' && (
         <div className="flex items-center gap-1.5">
           {doc.blocks.map((b, i) => (
             <button key={b.id} type="button" className={pill(i === bi)} onClick={() => setBi(i)}>
@@ -254,30 +315,54 @@ export default function ProgrammingTab() {
             }
           />
         </div>
-        <div className="flex items-center gap-1.5">
-          {doc.blocks[bi].weeks.map((w, i) => (
-            <button key={w.id} type="button" className={pill(i === wi)} onClick={() => setWi(i)}>
-              W{i + 1}
-            </button>
-          ))}
-        </div>
-        <div className="flex items-center gap-1.5">
-          {sessions.map((s, i) => (
-            <button key={s.id} type="button" className={pill(i === sIdx)} onClick={() => setSi(i)}>
-              {s.name || FOCUS_LABEL[s.focus]}
-            </button>
-          ))}
-          <button
-            type="button"
-            title="Add a session to this week (e.g. an ESD or Hyrox day)"
-            onClick={addSession}
-            className="rounded-md border border-dashed border-ink-300 px-2.5 py-1.5 text-sm font-medium text-ink-400 hover:border-accent-600 hover:text-accent-600"
-          >
-            +
-          </button>
-        </div>
+        )}
+        {view === 'week' && (
+          <div className="flex items-center gap-1.5">
+            {doc.blocks[bi].weeks.map((w, i) => (
+              <button key={w.id} type="button" className={pill(i === wi)} onClick={() => setWi(i)}>
+                W{i + 1}
+              </button>
+            ))}
+          </div>
+        )}
+        {view !== 'month' && (
+          <div className="flex items-center gap-1.5">
+            {sessions.map((s, i) => (
+              <button key={s.id} type="button" className={pill(i === sIdx)} onClick={() => setSi(i)}>
+                {s.name || FOCUS_LABEL[s.focus]}
+              </button>
+            ))}
+            {view === 'week' && (
+              <button
+                type="button"
+                title="Add a session to this week (e.g. an ESD or Hyrox day)"
+                onClick={addSession}
+                className="rounded-md border border-dashed border-ink-300 px-2.5 py-1.5 text-sm font-medium text-ink-400 hover:border-accent-600 hover:text-accent-600"
+              >
+                +
+              </button>
+            )}
+          </div>
+        )}
       </div>
 
+      {view === 'month' && (
+        <MonthView
+          block={doc.blocks[bi]}
+          onOpenWeek={(wIdx, sIdx2) => {
+            setWi(wIdx);
+            setSi(sIdx2);
+            setView('week');
+          }}
+        />
+      )}
+
+      {view === 'block' && <ProgressionGrid columns={blockColumns} onOpenColumn={openColumn} />}
+
+      {view === 'phase' && <ProgressionGrid columns={phaseColumns} onOpenColumn={openColumn} />}
+
+      {view === 'week' && (
+      <>
       {/* Session settings */}
       <div className="mb-3 flex flex-wrap items-center gap-2 text-sm">
         <span className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">Session</span>
@@ -376,6 +461,8 @@ export default function ProgrammingTab() {
           />
         )}
       </div>
+      </>
+      )}
     </div>
   );
 }

@@ -101,10 +101,43 @@
                 "focus": "lower",
                 "timedBlocks": [
                   {
-                    "id": "b1w2s1-A",
                     "label": "A",
+                    "slots": [
+                      {
+                        "reps": "5",
+                        "id": "p-b1w1s1",
+                        "name": "Back Squat",
+                        "sets": "4",
+                        "exerciseId": 1,
+                        "tempo": "31X1",
+                        "rpe": "8",
+                        "load": "75%"
+                      },
+                      {
+                        "id": "p-b1w1s2",
+                        "name": "Spider Curls",
+                        "load": "13kg",
+                        "sets": "3",
+                        "reps": "10",
+                        "exerciseId": 1778429
+                      }
+                    ],
                     "minutes": 15,
-                    "slots": []
+                    "id": "p-b1w1A"
+                  },
+                  {
+                    "label": "B",
+                    "slots": [
+                      {
+                        "sets": "3",
+                        "reps": "25m",
+                        "exerciseId": null,
+                        "name": "Walking Lunge",
+                        "id": "p-b1w1s3"
+                      }
+                    ],
+                    "minutes": 12,
+                    "id": "p-b1w1B"
                   }
                 ]
               },
@@ -142,10 +175,43 @@
                 "focus": "lower",
                 "timedBlocks": [
                   {
-                    "id": "b1w3s1-A",
                     "label": "A",
+                    "slots": [
+                      {
+                        "reps": "4",
+                        "id": "p-b1w2s1",
+                        "name": "Back Squat",
+                        "sets": "5",
+                        "exerciseId": 1,
+                        "tempo": "31X1",
+                        "rpe": "9",
+                        "load": "80%"
+                      },
+                      {
+                        "id": "p-b1w2s2",
+                        "name": "Spider Curls",
+                        "load": "14kg",
+                        "sets": "3",
+                        "reps": "10",
+                        "exerciseId": 1778429
+                      }
+                    ],
                     "minutes": 15,
-                    "slots": []
+                    "id": "p-b1w2A"
+                  },
+                  {
+                    "label": "B",
+                    "slots": [
+                      {
+                        "sets": "3",
+                        "reps": "30m",
+                        "exerciseId": null,
+                        "name": "Walking Lunge",
+                        "id": "p-b1w2s3"
+                      }
+                    ],
+                    "minutes": 12,
+                    "id": "p-b1w2B"
                   }
                 ]
               },
@@ -183,10 +249,43 @@
                 "focus": "lower",
                 "timedBlocks": [
                   {
-                    "id": "b1w4s1-A",
                     "label": "A",
+                    "slots": [
+                      {
+                        "reps": "3",
+                        "id": "p-b1w3s1",
+                        "name": "Back Squat",
+                        "sets": "5",
+                        "exerciseId": 1,
+                        "tempo": "31X1",
+                        "rpe": "9",
+                        "load": "82.5%"
+                      },
+                      {
+                        "id": "p-b1w3s2",
+                        "name": "Spider Curls",
+                        "load": "15kg",
+                        "sets": "3",
+                        "reps": "10",
+                        "exerciseId": 1778429
+                      }
+                    ],
                     "minutes": 15,
-                    "slots": []
+                    "id": "p-b1w3A"
+                  },
+                  {
+                    "label": "B",
+                    "slots": [
+                      {
+                        "sets": "3",
+                        "reps": "35m",
+                        "exerciseId": null,
+                        "name": "Walking Lunge",
+                        "id": "p-b1w3s3"
+                      }
+                    ],
+                    "minutes": 12,
+                    "id": "p-b1w3B"
                   }
                 ]
               },
@@ -558,6 +657,6 @@
       }
     ]
   },
-  "rev": 16,
-  "updatedAt": "2026-08-13T22:40:28.723Z"
+  "rev": 17,
+  "updatedAt": "2026-08-13T23:01:48.856Z"
 }

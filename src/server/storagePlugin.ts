@@ -19,6 +19,7 @@ const DOC_IDS = new Set<string>([
   'schedule',
   'program',
   'library-overrides',
+  'annual-plan',
   'community',
   'planning',
   'layouts',

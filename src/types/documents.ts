@@ -5,6 +5,7 @@ export type DocId =
   | 'schedule'
   | 'program'
   | 'library-overrides'
+  | 'annual-plan'
   | 'community'
   | 'planning'
   | 'layouts'
@@ -148,6 +149,31 @@ export interface LibraryOverridesDoc {
   customExercises: CustomExercise[];
 }
 
+// ---------- Annual plan ----------
+// One lane per training stream (Strength classes, ESD, Hyrox), each a sequence
+// of phases against a 52-week year anchored at startDate. Phase start dates are
+// computed from cumulative weeks, never stored.
+
+export interface AnnualPhase {
+  id: string;
+  name: string; // e.g. "Foundation", "Race prep", "Deload + retest"
+  focus: string; // the training intent of the phase
+  weeks: number;
+  notes?: string;
+}
+
+export interface AnnualStream {
+  id: 'strength' | 'esd' | 'hyrox';
+  name: string;
+  colour: string;
+  phases: AnnualPhase[];
+}
+
+export interface AnnualPlanDoc {
+  startDate: string; // ISO yyyy-mm-dd, a Monday; anchors every computed date
+  streams: AnnualStream[];
+}
+
 // ---------- Light tabs ----------
 
 export interface CommunityEvent {
@@ -204,6 +230,7 @@ export interface DocTypes {
   schedule: ScheduleDoc;
   program: ProgramDoc;
   'library-overrides': LibraryOverridesDoc;
+  'annual-plan': AnnualPlanDoc;
   community: CommunityDoc;
   planning: PlanningDoc;
   layouts: LayoutsDoc;

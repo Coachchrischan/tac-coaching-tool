@@ -1,4 +1,5 @@
 import type {
+  AnnualPlanDoc,
   ClassBlock,
   CommunityDoc,
   DocId,
@@ -124,6 +125,66 @@ export function seedProgram(): ProgramDoc {
   return { name: 'TAC Strength Cycle 1', blocks };
 }
 
+// ---------- Annual plan: a sensible starting year, fully editable ----------
+
+let ap = 0;
+function phase(name: string, focus: string, weeks: number) {
+  ap += 1;
+  return { id: `ap-${ap}`, name, focus, weeks };
+}
+
+export function seedAnnualPlan(): AnnualPlanDoc {
+  ap = 0;
+  return {
+    startDate: '2026-08-31', // a Monday; edit to the real plan anchor
+    streams: [
+      {
+        id: 'strength',
+        name: 'Strength',
+        colour: '#003030',
+        phases: [
+          phase('Foundation', 'Technique, work capacity, base hypertrophy', 12),
+          phase('Deload + retest', 'Light week, movement checks, baseline lifts', 1),
+          phase('Build', 'Progressive overload on the main lifts, 5s and 6s', 12),
+          phase('Deload + retest', 'Light week, retest key lifts', 1),
+          phase('Strength peak', 'Heavy triples and doubles, intensity up, volume down', 12),
+          phase('Deload + retest', 'Light week, PB attempts window', 1),
+          phase('Consolidate', 'Hold new strength, expand movement library', 12),
+          phase('Transition', 'Fun week, variety, no barbell targets', 1),
+        ],
+      },
+      {
+        id: 'esd',
+        name: 'ESD',
+        colour: '#3E6B8C',
+        phases: [
+          phase('Aerobic base', 'Zone 2 volume, machine efficiency, long intervals', 10),
+          phase('Threshold', 'Sustained pace work, cruise intervals', 8),
+          phase('Max aerobic power', 'Shorter, harder repeats, VO2 focus', 6),
+          phase('Mixed modal', 'Combinations, race-pace pieces, transitions', 8),
+          phase('Aerobic maintenance', 'Hold the engine, deload the intensity', 10),
+          phase('Re-base', 'Back to zone 2 volume before the next build', 10),
+        ],
+      },
+      {
+        id: 'hyrox',
+        name: 'Hyrox',
+        colour: '#C64545',
+        phases: [
+          phase('Off-season GPP', 'General strength and engine, technique on the eight stations', 10),
+          phase('Strength-endurance build', 'Compromised running, station volume', 10),
+          phase('Race prep', 'Race simulations, pacing, transitions', 8),
+          phase('Comp + taper', 'Sharpen, taper, race window', 4),
+          phase('Recover', 'Down week, review the race', 2),
+          phase('Build 2', 'Second build off the race learnings', 10),
+          phase('Race prep 2', 'Simulations for the second race window', 6),
+          phase('Comp 2', 'Race window two', 2),
+        ],
+      },
+    ],
+  };
+}
+
 // ---------- The rest ----------
 
 export function seedLibraryOverrides(): LibraryOverridesDoc {
@@ -168,6 +229,7 @@ export const seeds: Record<DocId, () => unknown> = {
   schedule: seedSchedule,
   program: seedProgram,
   'library-overrides': seedLibraryOverrides,
+  'annual-plan': seedAnnualPlan,
   community: seedCommunity,
   planning: seedPlanning,
   layouts: seedLayouts,
