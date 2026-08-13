@@ -6,6 +6,50 @@ import type { CommunityEvent } from '../../types/documents';
 const field =
   'rounded-md border border-ink-300 bg-white px-2.5 py-1.5 text-sm text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none';
 
+// Ready-made event ideas for TAC. Click one to prefill the form above.
+const EVENT_IDEAS: { name: string; notes: string }[] = [
+  {
+    name: 'Hyrox simulation day',
+    notes: 'Full 8-station race in pairs, race-day timing, pacing debrief after. Feeds the comp-prep phase.',
+  },
+  {
+    name: 'Members vs coaches Game Day',
+    notes: 'Saturday special: teams, leaderboard, forfeit for the losing coaches. Big social pull.',
+  },
+  {
+    name: 'Teneriffe river run + coffee',
+    notes: 'Run Club social along the Brisbane River, all paces, finish at a local cafe. Zero barrier to entry.',
+  },
+  {
+    name: 'Bring-a-mate week',
+    notes: 'Members bring a friend free to any class all week. The single best membership driver we control.',
+  },
+  {
+    name: 'In-house lifting comp',
+    notes: 'Squat, bench, deadlift total. Novice-friendly divisions, PB bell, judges from the coaching team.',
+  },
+  {
+    name: 'Charity workout',
+    notes: 'One big team workout with entry by donation (RUOK Day, Movember). Community story for socials.',
+  },
+  {
+    name: 'PB night',
+    notes: 'Deload-week testing party at the end of a strength block: music, spotters, someone on the camera.',
+  },
+  {
+    name: 'Recovery + sauna social',
+    notes: 'Guided mobility session then saunas and smoothies. Shows off the 24-hour facility to partners.',
+  },
+  {
+    name: 'Fuel for training workshop',
+    notes: 'Guest dietitian or physio evening talk with Q&A. Education is part of the product.',
+  },
+  {
+    name: 'Quarterly awards BBQ',
+    notes: 'Most consistent, most improved, community spirit. Cheap to run, remembered for months.',
+  },
+];
+
 function fmtDate(iso: string): string {
   const d = new Date(`${iso}T00:00:00`);
   if (Number.isNaN(d.getTime())) return iso;
@@ -96,6 +140,29 @@ export default function CommunityTab() {
           Add
         </button>
       </div>
+
+      <section className="mt-4 rounded-xl border border-dashed border-ink-300 bg-white p-4">
+        <h3 className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
+          Ideas for TAC · click one to start planning it
+        </h3>
+        <div className="mt-2.5 grid gap-1.5 sm:grid-cols-2">
+          {EVENT_IDEAS.map((idea) => (
+            <button
+              key={idea.name}
+              type="button"
+              title={idea.notes}
+              onClick={() => {
+                setDraft((d) => ({ ...d, name: idea.name, notes: idea.notes }));
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="rounded-md border border-ink-200 px-2.5 py-1.5 text-left text-[13px] hover:border-accent-600 hover:bg-accent-100/40"
+            >
+              <span className="font-medium text-ink-950">{idea.name}</span>
+              <span className="block truncate text-[11px] text-ink-500">{idea.notes}</span>
+            </button>
+          ))}
+        </div>
+      </section>
 
       <section className="mt-5 rounded-xl border border-ink-200 bg-white p-4 shadow-sm">
         <h3 className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">Upcoming</h3>

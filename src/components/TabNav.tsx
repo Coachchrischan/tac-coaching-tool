@@ -6,6 +6,7 @@ const TABS = [
   { to: '/programming', label: 'Programming' },
   { to: '/annual', label: 'Annual Plan' },
   { to: '/attendance', label: 'Attendance' },
+  { to: '/ethos', label: 'Ethos' },
   { to: '/movement', label: 'Movement Check' },
   { to: '/community', label: 'Community' },
   { to: '/planning', label: 'Planning' },

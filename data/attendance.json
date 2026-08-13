@@ -3,60 +3,60 @@
     "entries": [
       {
         "id": "2026-07:esd",
-        "month": "2026-07",
+        "period": "2026-07",
         "classTypeId": "esd",
         "count": 290
       },
       {
         "id": "2026-07:hyrox",
-        "month": "2026-07",
+        "period": "2026-07",
         "classTypeId": "hyrox",
         "count": 180
       },
       {
         "id": "2026-07:lbs",
-        "month": "2026-07",
+        "period": "2026-07",
         "classTypeId": "lbs",
         "count": 150
       },
       {
         "id": "2026-07:ubs",
-        "month": "2026-07",
+        "period": "2026-07",
         "classTypeId": "ubs",
         "count": 132
       },
       {
         "id": "2026-07:stretch",
-        "month": "2026-07",
+        "period": "2026-07",
         "classTypeId": "stretch",
         "count": 92
       },
       {
         "id": "2026-07:gameday",
-        "month": "2026-07",
+        "period": "2026-07",
         "classTypeId": "gameday",
         "count": 76
       },
       {
         "id": "2026-07:run",
-        "month": "2026-07",
+        "period": "2026-07",
         "classTypeId": "run",
         "count": 60
       },
       {
         "id": "2026-07:flow",
-        "month": "2026-07",
+        "period": "2026-07",
         "classTypeId": "flow",
         "count": 52
       },
       {
         "id": "2026-07:yin",
-        "month": "2026-07",
+        "period": "2026-07",
         "classTypeId": "yin",
         "count": 38
       }
     ]
   },
   "rev": 3,
-  "updatedAt": "2026-08-13T23:19:54.534Z"
+  "updatedAt": "2026-08-13T23:30:30.056Z"
 }

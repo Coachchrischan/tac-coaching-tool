@@ -206,7 +206,7 @@ export function seedAttendance(): AttendanceDoc {
   return {
     entries: Object.entries(july).map(([classTypeId, count]) => ({
       id: `2026-07:${classTypeId}`,
-      month: '2026-07',
+      period: '2026-07',
       classTypeId,
       count,
     })),

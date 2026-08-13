@@ -178,11 +178,13 @@ export interface AnnualPlanDoc {
 
 // ---------- Attendance + home dashboard ----------
 
+// period is either a month ('yyyy-mm') or a week starting Monday ('yyyy-mm-dd').
+// Weekly entries roll up into their month for monthly views.
 export interface AttendanceEntry {
   id: string;
-  month: string; // 'yyyy-mm'
+  period: string;
   classTypeId: string; // references ScheduleDoc.classTypes
-  count: number; // total attendances for that class type in the month
+  count: number; // total attendances for that class type in the period
 }
 
 export interface AttendanceDoc {
