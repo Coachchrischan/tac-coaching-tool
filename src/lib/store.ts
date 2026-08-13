@@ -17,9 +17,19 @@ export class ConflictError extends Error {
   }
 }
 
+export interface SaveOptions {
+  /** Keep the request alive through page unload (final flush on close). */
+  keepalive?: boolean;
+}
+
 export interface Store {
   load<K extends DocId>(id: K): Promise<DocEnvelope<DocTypes[K]>>;
-  save<K extends DocId>(id: K, data: DocTypes[K], baseRev: number): Promise<DocEnvelope<DocTypes[K]>>;
+  save<K extends DocId>(
+    id: K,
+    data: DocTypes[K],
+    baseRev: number,
+    opts?: SaveOptions,
+  ): Promise<DocEnvelope<DocTypes[K]>>;
 }
 
 const BASE = '/api/store';
@@ -40,11 +50,12 @@ export const store: Store = {
     return body as DocEnvelope<never>;
   },
 
-  async save(id, data, baseRev) {
+  async save(id, data, baseRev, opts) {
     const res = await fetch(`${BASE}/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ data, baseRev }),
+      keepalive: opts?.keepalive ?? false,
     });
     const body = await parseJson(res);
     if (res.status === 409) {

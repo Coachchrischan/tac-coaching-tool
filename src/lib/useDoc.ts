@@ -25,6 +25,7 @@ export function useDoc<K extends DocId>(id: K): UseDoc<DocTypes[K]> {
 
   const revRef = useRef(0);
   const dataRef = useRef<T | null>(null);
+  const dirtyRef = useRef(false);
   const timerRef = useRef<number | null>(null);
   const conflictRef = useRef<DocEnvelope<unknown> | null>(null);
 
@@ -42,15 +43,36 @@ export function useDoc<K extends DocId>(id: K): UseDoc<DocTypes[K]> {
       .catch(() => {
         if (!cancelled) setSaveState('error');
       });
+
+    // Never drop a pending debounced save: flush it if the page is closed or
+    // the component unmounts (e.g. switching tabs right after typing).
+    const flushPending = (keepalive: boolean) => {
+      if (!dirtyRef.current || dataRef.current === null) return;
+      dirtyRef.current = false;
+      void store
+        .save(id, dataRef.current, revRef.current, { keepalive })
+        .then((env) => {
+          revRef.current = env.rev;
+        })
+        .catch(() => {
+          /* final-chance flush; conflicts surface on next load */
+        });
+    };
+    const onBeforeUnload = () => flushPending(true);
+    window.addEventListener('beforeunload', onBeforeUnload);
+
     return () => {
       cancelled = true;
+      window.removeEventListener('beforeunload', onBeforeUnload);
       if (timerRef.current !== null) window.clearTimeout(timerRef.current);
+      flushPending(false);
     };
   }, [id]);
 
   const flush = useCallback(() => {
     const current = dataRef.current;
     if (current === null) return;
+    dirtyRef.current = false;
     setSaveState('saving');
     store
       .save(id, current, revRef.current)
@@ -79,6 +101,7 @@ export function useDoc<K extends DocId>(id: K): UseDoc<DocTypes[K]> {
       if (current === null) return;
       const next = fn(current);
       dataRef.current = next;
+      dirtyRef.current = true;
       setData(next);
       setSaveState('dirty');
       scheduleSave();

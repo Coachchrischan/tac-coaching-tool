@@ -71,7 +71,13 @@ export default function BlockEditor({
             <select
               className={field}
               value={block.startMin}
-              onChange={(e) => onChange({ startMin: Number(e.target.value) })}
+              onChange={(e) => {
+                const startMin = Number(e.target.value);
+                onChange({
+                  startMin,
+                  durationMin: Math.min(block.durationMin, DAY_END_MIN - startMin),
+                });
+              }}
             >
               {startOptions.map((m) => (
                 <option key={m} value={m}>
