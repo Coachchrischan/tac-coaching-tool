@@ -1,0 +1,557 @@
+{
+  "data": {
+    "name": "TAC Strength Cycle 1",
+    "blocks": [
+      {
+        "id": "block-1",
+        "weeks": [
+          {
+            "id": "b1w1",
+            "sessions": [
+              {
+                "id": "b1w1s1",
+                "focus": "lower",
+                "timedBlocks": [
+                  {
+                    "label": "A",
+                    "slots": [
+                      {
+                        "reps": "6",
+                        "id": "tv1",
+                        "name": "Back Squat",
+                        "sets": "4",
+                        "exerciseId": 1,
+                        "tempo": "31X1",
+                        "rpe": "8",
+                        "load": "70%"
+                      },
+                      {
+                        "id": "tv2",
+                        "name": "Spider Curls",
+                        "load": "12kg",
+                        "sets": "3",
+                        "reps": "10",
+                        "exerciseId": 1778429
+                      }
+                    ],
+                    "minutes": 15,
+                    "id": "tvA"
+                  },
+                  {
+                    "label": "B",
+                    "slots": [
+                      {
+                        "sets": "3",
+                        "reps": "20m",
+                        "exerciseId": null,
+                        "name": "Walking Lunge",
+                        "id": "tv3"
+                      },
+                      {
+                        "id": "tv4",
+                        "name": "Seated Row",
+                        "rpe": "7",
+                        "sets": "3",
+                        "reps": "12",
+                        "exerciseId": null
+                      }
+                    ],
+                    "minutes": 12,
+                    "id": "tvB"
+                  }
+                ]
+              },
+              {
+                "id": "b1w1s2",
+                "focus": "upper",
+                "timedBlocks": [
+                  {
+                    "id": "b1w1s2-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b1w1s3",
+                "focus": "full",
+                "timedBlocks": [
+                  {
+                    "id": "b1w1s3-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b1w2",
+            "sessions": [
+              {
+                "id": "b1w2s1",
+                "focus": "lower",
+                "timedBlocks": [
+                  {
+                    "id": "b1w2s1-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b1w2s2",
+                "focus": "upper",
+                "timedBlocks": [
+                  {
+                    "id": "b1w2s2-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b1w2s3",
+                "focus": "full",
+                "timedBlocks": [
+                  {
+                    "id": "b1w2s3-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b1w3",
+            "sessions": [
+              {
+                "id": "b1w3s1",
+                "focus": "lower",
+                "timedBlocks": [
+                  {
+                    "id": "b1w3s1-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b1w3s2",
+                "focus": "upper",
+                "timedBlocks": [
+                  {
+                    "id": "b1w3s2-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b1w3s3",
+                "focus": "full",
+                "timedBlocks": [
+                  {
+                    "id": "b1w3s3-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b1w4",
+            "sessions": [
+              {
+                "id": "b1w4s1",
+                "focus": "lower",
+                "timedBlocks": [
+                  {
+                    "id": "b1w4s1-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b1w4s2",
+                "focus": "upper",
+                "timedBlocks": [
+                  {
+                    "id": "b1w4s2-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b1w4s3",
+                "focus": "full",
+                "timedBlocks": [
+                  {
+                    "id": "b1w4s3-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "block-2",
+        "weeks": [
+          {
+            "id": "b2w1",
+            "sessions": [
+              {
+                "id": "b2w1s1",
+                "focus": "lower",
+                "timedBlocks": [
+                  {
+                    "id": "b2w1s1-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b2w1s2",
+                "focus": "upper",
+                "timedBlocks": [
+                  {
+                    "id": "b2w1s2-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b2w1s3",
+                "focus": "full",
+                "timedBlocks": [
+                  {
+                    "id": "b2w1s3-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b2w2",
+            "sessions": [
+              {
+                "id": "b2w2s1",
+                "focus": "lower",
+                "timedBlocks": [
+                  {
+                    "id": "b2w2s1-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b2w2s2",
+                "focus": "upper",
+                "timedBlocks": [
+                  {
+                    "id": "b2w2s2-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b2w2s3",
+                "focus": "full",
+                "timedBlocks": [
+                  {
+                    "id": "b2w2s3-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b2w3",
+            "sessions": [
+              {
+                "id": "b2w3s1",
+                "focus": "lower",
+                "timedBlocks": [
+                  {
+                    "id": "b2w3s1-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b2w3s2",
+                "focus": "upper",
+                "timedBlocks": [
+                  {
+                    "id": "b2w3s2-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b2w3s3",
+                "focus": "full",
+                "timedBlocks": [
+                  {
+                    "id": "b2w3s3-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b2w4",
+            "sessions": [
+              {
+                "id": "b2w4s1",
+                "focus": "lower",
+                "timedBlocks": [
+                  {
+                    "id": "b2w4s1-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b2w4s2",
+                "focus": "upper",
+                "timedBlocks": [
+                  {
+                    "id": "b2w4s2-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b2w4s3",
+                "focus": "full",
+                "timedBlocks": [
+                  {
+                    "id": "b2w4s3-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "block-3",
+        "weeks": [
+          {
+            "id": "b3w1",
+            "sessions": [
+              {
+                "id": "b3w1s1",
+                "focus": "lower",
+                "timedBlocks": [
+                  {
+                    "id": "b3w1s1-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b3w1s2",
+                "focus": "upper",
+                "timedBlocks": [
+                  {
+                    "id": "b3w1s2-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b3w1s3",
+                "focus": "full",
+                "timedBlocks": [
+                  {
+                    "id": "b3w1s3-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b3w2",
+            "sessions": [
+              {
+                "id": "b3w2s1",
+                "focus": "lower",
+                "timedBlocks": [
+                  {
+                    "id": "b3w2s1-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b3w2s2",
+                "focus": "upper",
+                "timedBlocks": [
+                  {
+                    "id": "b3w2s2-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b3w2s3",
+                "focus": "full",
+                "timedBlocks": [
+                  {
+                    "id": "b3w2s3-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b3w3",
+            "sessions": [
+              {
+                "id": "b3w3s1",
+                "focus": "lower",
+                "timedBlocks": [
+                  {
+                    "id": "b3w3s1-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b3w3s2",
+                "focus": "upper",
+                "timedBlocks": [
+                  {
+                    "id": "b3w3s2-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b3w3s3",
+                "focus": "full",
+                "timedBlocks": [
+                  {
+                    "id": "b3w3s3-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b3w4",
+            "sessions": [
+              {
+                "id": "b3w4s1",
+                "focus": "lower",
+                "timedBlocks": [
+                  {
+                    "id": "b3w4s1-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b3w4s2",
+                "focus": "upper",
+                "timedBlocks": [
+                  {
+                    "id": "b3w4s2-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              },
+              {
+                "id": "b3w4s3",
+                "focus": "full",
+                "timedBlocks": [
+                  {
+                    "id": "b3w4s3-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "rev": 2,
+  "updatedAt": "2026-08-13T07:23:21.601Z"
+}
