@@ -2,6 +2,8 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import TabNav from './components/TabNav';
 import ScheduleTab from './tabs/schedule/ScheduleTab';
 import AnnualPlanTab from './tabs/annual/AnnualPlanTab';
+import HomeTab from './tabs/home/HomeTab';
+import AttendanceTab from './tabs/attendance/AttendanceTab';
 import ProgrammingTab from './tabs/programming/ProgrammingTab';
 import MovementCheckTab from './tabs/movement/MovementCheckTab';
 import CommunityTab from './tabs/community/CommunityTab';
@@ -21,7 +23,8 @@ export default function App() {
             <TabNav />
             <main className="mx-auto max-w-[1440px] px-6 py-6">
               <Routes>
-                <Route path="/" element={<Navigate to="/schedule" replace />} />
+                <Route path="/" element={<HomeTab />} />
+                <Route path="/attendance" element={<AttendanceTab />} />
                 <Route path="/schedule" element={<ScheduleTab />} />
                 <Route path="/programming" element={<ProgrammingTab />} />
                 <Route path="/annual" element={<AnnualPlanTab />} />
@@ -30,7 +33,7 @@ export default function App() {
                 <Route path="/planning" element={<PlanningTab />} />
                 <Route path="/layouts" element={<LayoutsTab />} />
                 <Route path="/equipment" element={<EquipmentTab />} />
-                <Route path="*" element={<Navigate to="/schedule" replace />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </main>
           </div>

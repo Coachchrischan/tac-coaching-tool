@@ -1,9 +1,11 @@
 import { NavLink } from 'react-router-dom';
 
 const TABS = [
+  { to: '/', label: 'Home' },
   { to: '/schedule', label: 'Schedule' },
   { to: '/programming', label: 'Programming' },
   { to: '/annual', label: 'Annual Plan' },
+  { to: '/attendance', label: 'Attendance' },
   { to: '/movement', label: 'Movement Check' },
   { to: '/community', label: 'Community' },
   { to: '/planning', label: 'Planning' },
@@ -28,6 +30,7 @@ export default function TabNav() {
             <NavLink
               key={tab.to}
               to={tab.to}
+              end={tab.to === '/'}
               className={({ isActive }) =>
                 `whitespace-nowrap border-b-2 px-3 py-4 text-sm font-medium transition-colors ${
                   isActive

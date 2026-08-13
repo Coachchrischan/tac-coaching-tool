@@ -1,8 +1,10 @@
 import type {
   AnnualPlanDoc,
+  AttendanceDoc,
   ClassBlock,
   CommunityDoc,
   DocId,
+  HomeDoc,
   EquipmentDoc,
   LayoutsDoc,
   LibraryOverridesDoc,
@@ -185,6 +187,33 @@ export function seedAnnualPlan(): AnnualPlanDoc {
   };
 }
 
+// ---------- Attendance + home ----------
+
+export function seedAttendance(): AttendanceDoc {
+  return { entries: [] };
+}
+
+// A starting draft in Chris's voice; every word editable in-app.
+export function seedHome(): HomeDoc {
+  return {
+    ethos:
+      'Group training at TAC is coached, not supervised. Every class runs off one plan: strength that builds block on block, engines developed with intent, and standards we can actually measure. Train better, live better.',
+    focusPoints: [
+      'Progressive overload you can see: every block builds on the last',
+      'Movement quality before load, every time',
+      'Every pattern, every week: squat, hinge, push, pull, carry',
+      'The engine is trained, not trashed: ESD with a plan',
+      'Scale the exercise, never the standard',
+    ],
+    different: [
+      'A 12-week plan behind every class, not a random daily workout',
+      'Timed series, so sessions run to the clock in every room',
+      'One movement library, one standard, the same cues from every coach',
+      'The TV cards show the why, not just the what',
+    ],
+  };
+}
+
 // ---------- The rest ----------
 
 export function seedLibraryOverrides(): LibraryOverridesDoc {
@@ -230,6 +259,8 @@ export const seeds: Record<DocId, () => unknown> = {
   program: seedProgram,
   'library-overrides': seedLibraryOverrides,
   'annual-plan': seedAnnualPlan,
+  attendance: seedAttendance,
+  home: seedHome,
   community: seedCommunity,
   planning: seedPlanning,
   layouts: seedLayouts,

@@ -28,6 +28,18 @@ function phaseStarts(stream: AnnualStream): number[] {
   return starts;
 }
 
+/** Shade a stream colour for phase i of n: later phases mix progressively
+ *  toward cream, so one lane reads as ordered shades of the same colour. */
+function phaseShade(hex: string, i: number, n: number): string {
+  const t = n <= 1 ? 0 : (i / (n - 1)) * 0.42;
+  const mix = (a: number, b: number) => Math.round(a + (b - a) * t);
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  // cream #F5F3EB
+  return `rgb(${mix(r, 245)}, ${mix(g, 243)}, ${mix(b, 235)})`;
+}
+
 function MonthRuler({ startDate }: { startDate: string }) {
   const start = new Date(`${startDate}T00:00:00`);
   const end = addWeeks(startDate, YEAR_WEEKS);
@@ -181,8 +193,7 @@ export default function AnnualPlanTab() {
                           }`}
                           style={{
                             width: `${(p.weeks / Math.max(total, YEAR_WEEKS)) * 100}%`,
-                            backgroundColor: stream.colour,
-                            opacity: i % 2 === 0 ? 1 : 0.82,
+                            backgroundColor: phaseShade(stream.colour, i, stream.phases.length),
                           }}
                           title={`${p.name}: ${p.focus || 'no focus set'}`}
                         >

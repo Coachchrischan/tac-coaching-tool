@@ -6,6 +6,8 @@ export type DocId =
   | 'program'
   | 'library-overrides'
   | 'annual-plan'
+  | 'attendance'
+  | 'home'
   | 'community'
   | 'planning'
   | 'layouts'
@@ -174,6 +176,26 @@ export interface AnnualPlanDoc {
   streams: AnnualStream[];
 }
 
+// ---------- Attendance + home dashboard ----------
+
+export interface AttendanceEntry {
+  id: string;
+  weekStart: string; // ISO Monday
+  classTypeId: string; // references ScheduleDoc.classTypes
+  count: number;
+}
+
+export interface AttendanceDoc {
+  entries: AttendanceEntry[];
+}
+
+// The coach's ethos panel on the home page. All editable in-app.
+export interface HomeDoc {
+  ethos: string;
+  focusPoints: string[];
+  different: string[];
+}
+
 // ---------- Light tabs ----------
 
 export interface CommunityEvent {
@@ -231,6 +253,8 @@ export interface DocTypes {
   program: ProgramDoc;
   'library-overrides': LibraryOverridesDoc;
   'annual-plan': AnnualPlanDoc;
+  attendance: AttendanceDoc;
+  home: HomeDoc;
   community: CommunityDoc;
   planning: PlanningDoc;
   layouts: LayoutsDoc;
