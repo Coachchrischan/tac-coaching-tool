@@ -13,7 +13,7 @@ import type { LayoutItem, LayoutRoom } from '../../types/documents';
 
 const CANVAS_H = 480;
 
-const ITEM_COLOURS = ['#1C4A42', '#4B5563', '#2F6FBF', '#C64545', '#7C6FA0', '#B0813C'];
+const ITEM_COLOURS = ['#003030', '#5A5A52', '#3E6B8C', '#C64545', '#7C6FA0', '#C5A683'];
 
 function DraggableItem({
   item,

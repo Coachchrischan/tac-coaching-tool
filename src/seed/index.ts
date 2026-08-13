@@ -16,16 +16,18 @@ import type {
 
 // ---------- Schedule: the real TAC timetable (week of 10 Aug 2026) ----------
 
+// Colours follow TAC/brand.md: pine for ESD, charcoal for Game Day, muted
+// supporting hues; red reserved for Hyrox as on the club timetable.
 const CT = {
-  esd: { id: 'esd', name: 'ESD', colour: '#1C4A42' },
-  lbs: { id: 'lbs', name: 'Lower Body Strength', colour: '#4B5563' },
-  ubs: { id: 'ubs', name: 'Upper Body Strength', colour: '#64748B' },
-  run: { id: 'run', name: 'Run Club', colour: '#78716C' },
+  esd: { id: 'esd', name: 'ESD', colour: '#003030' },
+  lbs: { id: 'lbs', name: 'Lower Body Strength', colour: '#5A5A52' },
+  ubs: { id: 'ubs', name: 'Upper Body Strength', colour: '#6E7B74' },
+  run: { id: 'run', name: 'Run Club', colour: '#8A7B66' },
   hyrox: { id: 'hyrox', name: 'Hyrox Training', colour: '#C64545' },
   flow: { id: 'flow', name: 'Flow Yoga', colour: '#7C6FA0' },
   yin: { id: 'yin', name: 'Yin Yoga', colour: '#5B5480' },
-  stretch: { id: 'stretch', name: 'StretchFit', colour: '#2F6FBF' },
-  gameday: { id: 'gameday', name: 'Game Day', colour: '#1F2937' },
+  stretch: { id: 'stretch', name: 'StretchFit', colour: '#3E6B8C' },
+  gameday: { id: 'gameday', name: 'Game Day', colour: '#292626' },
 };
 
 const COACHES = [

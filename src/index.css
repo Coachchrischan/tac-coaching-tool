@@ -1,25 +1,36 @@
 @import 'tailwindcss';
 
+/* TAC brand tokens, derived from teneriffeathletic.club. See ../brand.md.
+   Fonts: Fraunces stands in for Albra (display serif), Mulish for Avenir (body). */
 @theme {
-  --font-sans:
-    'Inter', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-sans: 'Mulish', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
 
-  /* Neutral premium palette: warm graphite + one deep teal accent (echoes TAC ESD green). */
-  --color-ink-950: #16181d;
-  --color-ink-900: #1e2126;
-  --color-ink-800: #2a2e35;
-  --color-ink-700: #3a3f48;
-  --color-ink-500: #6b7280;
-  --color-ink-400: #9ca3af;
-  --color-ink-300: #d1d5db;
-  --color-ink-200: #e5e7eb;
-  --color-ink-100: #f1f2f4;
-  --color-ink-50: #f8f9fa;
+  /* Warm charcoal ink scale on cream, from the site's charcoal/stone/cream */
+  --color-ink-950: #292626;
+  --color-ink-900: #2f2c2c;
+  --color-ink-800: #3a3636;
+  --color-ink-700: #4a4545;
+  --color-ink-500: #5a5a52;
+  --color-ink-400: #8a867c;
+  --color-ink-300: #bbb8ac;
+  --color-ink-200: #d8d5c9;
+  --color-ink-100: #eae7dc;
+  --color-ink-50: #f5f3eb;
 
-  --color-accent-700: #143832;
-  --color-accent-600: #1c4a42;
-  --color-accent-500: #2a6a5e;
-  --color-accent-100: #e3efec;
+  /* Deep pine, the club's primary accent */
+  --color-accent-700: #002424;
+  --color-accent-600: #003030;
+  --color-accent-500: #1c4a42;
+  --color-accent-100: #e5ebe7;
+
+  /* Warm sand, the club's secondary accent */
+  --color-sand-600: #c5a683;
+  --color-sand-500: #dec5ae;
+  --color-sand-100: #f2e9de;
+
+  /* Cards sit warm-white on the cream ground */
+  --color-white: #fdfcf9;
 }
 
 html {

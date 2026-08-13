@@ -154,17 +154,17 @@ export default function TvPage() {
           width: W,
           height: H,
           transform: `scale(${scale})`,
-          background: 'linear-gradient(160deg, #101418 0%, #16181d 55%, #14251f 100%)',
+          background: 'linear-gradient(160deg, #201d1d 0%, #292626 55%, #0d2724 100%)',
         }}
       >
         <div className="flex h-full flex-col px-20 py-14">
           {/* header */}
           <header className="flex items-end justify-between border-b-2 border-white/15 pb-8">
             <div>
-              <p className="text-[26px] font-semibold tracking-[0.35em] text-[#7fb5a5]">
+              <p className="text-[26px] font-semibold tracking-[0.35em] text-[#DEC5AE]">
                 TENERIFFE ATHLETIC CLUB
               </p>
-              <h1 className="mt-2 text-[76px] leading-none font-extrabold tracking-tight text-white">
+              <h1 className="font-display mt-2 text-[80px] leading-none font-semibold tracking-tight text-[#F5F3EB]">
                 {FOCUS_TITLE[session.focus]}
               </h1>
             </div>
@@ -181,7 +181,7 @@ export default function TvPage() {
             {session.timedBlocks.map((block) => (
               <section key={block.id} className="flex min-w-0 flex-1 flex-col">
                 <div className="flex items-baseline gap-4">
-                  <span className="rounded-lg bg-[#1C4A42] px-4 py-1 text-[34px] font-extrabold text-white">
+                  <span className="rounded-lg bg-[#003030] px-4 py-1 text-[34px] font-extrabold text-[#F5F3EB]">
                     {block.label}
                   </span>
                   <span className="text-[26px] font-semibold text-white/60">{block.minutes} min</span>
@@ -205,9 +205,9 @@ export default function TvPage() {
                         .join('  ·  ');
                       return (
                         <li key={slot.id}>
-                          <p className="text-[40px] leading-tight font-bold text-white">{slot.name}</p>
+                          <p className="text-[40px] leading-tight font-bold text-[#F5F3EB]">{slot.name}</p>
                           {detail && (
-                            <p className="mt-1 text-[28px] font-medium text-[#8fc4b4]">{detail}</p>
+                            <p className="mt-1 text-[28px] font-medium text-[#DEC5AE]">{detail}</p>
                           )}
                           {scales.map((s, i) => (
                             <p key={i} className="mt-0.5 text-[22px] text-white/50">

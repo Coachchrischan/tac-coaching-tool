@@ -4,22 +4,22 @@
       {
         "id": "esd",
         "name": "ESD",
-        "colour": "#1C4A42"
+        "colour": "#003030"
       },
       {
         "id": "lbs",
         "name": "Lower Body Strength",
-        "colour": "#4B5563"
+        "colour": "#5A5A52"
       },
       {
         "id": "ubs",
         "name": "Upper Body Strength",
-        "colour": "#64748B"
+        "colour": "#6E7B74"
       },
       {
         "id": "run",
         "name": "Run Club",
-        "colour": "#78716C"
+        "colour": "#8A7B66"
       },
       {
         "id": "hyrox",
@@ -39,12 +39,12 @@
       {
         "id": "stretch",
         "name": "StretchFit",
-        "colour": "#2F6FBF"
+        "colour": "#3E6B8C"
       },
       {
         "id": "gameday",
         "name": "Game Day",
-        "colour": "#1F2937"
+        "colour": "#292626"
       }
     ],
     "coaches": [
@@ -313,6 +313,6 @@
     ],
     "activeScenarioId": "current"
   },
-  "rev": 7,
-  "updatedAt": "2026-08-13T07:14:44.657Z"
+  "rev": 8,
+  "updatedAt": "2026-08-13T07:42:26.245Z"
 }

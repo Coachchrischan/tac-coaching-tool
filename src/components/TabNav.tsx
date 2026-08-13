@@ -15,10 +15,10 @@ export default function TabNav() {
     <header className="border-b border-ink-200 bg-white">
       <div className="mx-auto flex max-w-[1440px] items-center gap-8 px-6">
         <div className="py-4">
-          <span className="text-[15px] font-semibold tracking-tight text-ink-950">
+          <span className="font-display text-[17px] tracking-tight text-ink-950">
             Teneriffe Athletic Club
           </span>
-          <span className="ml-2 text-[13px] font-medium tracking-wide text-ink-400 uppercase">
+          <span className="ml-2 text-[12px] font-semibold tracking-[0.18em] text-accent-600 uppercase">
             Coaching
           </span>
         </div>
