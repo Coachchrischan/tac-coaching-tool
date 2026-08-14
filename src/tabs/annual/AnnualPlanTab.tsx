@@ -40,32 +40,89 @@ function phaseShade(hex: string, i: number, n: number): string {
   return `rgb(${mix(r, 245)}, ${mix(g, 243)}, ${mix(b, 235)})`;
 }
 
-function MonthRuler({ startDate }: { startDate: string }) {
-  const start = new Date(`${startDate}T00:00:00`);
-  const end = addWeeks(startDate, YEAR_WEEKS);
-  const marks: { left: number; label: string }[] = [];
-  const cursor = new Date(start.getFullYear(), start.getMonth(), 1);
-  while (cursor <= end) {
-    if (cursor >= start) {
-      const left = ((cursor.getTime() - start.getTime()) / (end.getTime() - start.getTime())) * 100;
-      marks.push({
-        left,
-        label: cursor.toLocaleDateString('en-AU', { month: 'short', year: '2-digit' }),
-      });
-    }
-    cursor.setMonth(cursor.getMonth() + 1);
+/**
+ * Week-resolution ruler matching Chris's planning sheet: a months row, a
+ * week-number row (1..52) and the date of each week's Monday. A week belongs
+ * to the month its Monday falls in. The current week is highlighted.
+ */
+function WeekRuler({ startDate }: { startDate: string }) {
+  const mondays = Array.from({ length: YEAR_WEEKS }, (_, i) => addWeeks(startDate, i));
+  const spans: { label: string; count: number }[] = [];
+  for (const d of mondays) {
+    const label = d.toLocaleDateString('en-AU', { month: 'short', year: '2-digit' });
+    const last = spans[spans.length - 1];
+    if (last?.label === label) last.count += 1;
+    else spans.push({ label, count: 1 });
   }
+  const now = Date.now();
+  const isCurrent = (i: number) =>
+    now >= mondays[i].getTime() && now < mondays[i].getTime() + MS_WEEK;
+  const grid = {
+    display: 'grid',
+    gridTemplateColumns: `repeat(${YEAR_WEEKS}, minmax(0, 1fr))`,
+  } as const;
+  const rowLabel =
+    'block h-5 text-right text-[9px] leading-5 font-medium tracking-wide text-ink-400 uppercase';
+
   return (
-    <div className="relative ml-28 h-6 border-b border-ink-300">
-      {marks.map((m) => (
-        <span
-          key={m.label}
-          className="absolute bottom-0 border-l border-ink-300 pl-1 text-[10px] font-medium text-ink-500"
-          style={{ left: `${m.left}%` }}
-        >
-          {m.label}
-        </span>
-      ))}
+    <div className="flex items-stretch">
+      <div className="w-28 shrink-0 pr-3">
+        <span className={rowLabel}>Month</span>
+        <span className={rowLabel}>Week</span>
+        <span className={rowLabel}>Monday</span>
+      </div>
+      <div className="min-w-0 flex-1">
+        <div style={grid}>
+          {spans.map((s, i) => (
+            <div
+              key={i}
+              style={{ gridColumn: `span ${s.count} / span ${s.count}` }}
+              className="h-5 overflow-hidden border-l border-ink-300 pl-1 text-[10px] leading-5 font-medium whitespace-nowrap text-ink-500"
+            >
+              {s.count >= 2 ? s.label : ''}
+            </div>
+          ))}
+        </div>
+        <div style={grid}>
+          {mondays.map((_, i) => (
+            <div
+              key={i}
+              className={`h-5 border-t border-l border-ink-200 text-center text-[9px] leading-5 tabular-nums ${
+                isCurrent(i) ? 'bg-sand-500/50 font-bold text-ink-950' : 'text-ink-500'
+              }`}
+            >
+              {i + 1}
+            </div>
+          ))}
+        </div>
+        <div style={grid}>
+          {mondays.map((d, i) => (
+            <div
+              key={i}
+              title={d.toLocaleDateString('en-AU', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+              })}
+              className={`h-5 border-y border-l border-ink-200 text-center text-[9px] leading-5 tabular-nums ${
+                isCurrent(i) ? 'bg-sand-500/50 font-bold text-ink-950' : 'text-ink-700'
+              }`}
+            >
+              {d.getDate()}
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* Invisible twin of the lanes' add-phase button so columns line up. */}
+      <button
+        type="button"
+        tabIndex={-1}
+        aria-hidden
+        className="invisible ml-2 shrink-0 self-center rounded-md border border-dashed border-ink-300 px-2 py-1 text-sm font-medium"
+      >
+        +
+      </button>
     </div>
   );
 }
@@ -160,7 +217,7 @@ export default function AnnualPlanTab() {
       </p>
 
       <div className="rounded-xl border border-ink-200 bg-white p-4 shadow-sm">
-        <MonthRuler startDate={data.startDate} />
+        <WeekRuler startDate={data.startDate} />
 
         <div className="mt-3 space-y-6">
           {streams.map((stream) => {

@@ -45,6 +45,11 @@
         "id": "gameday",
         "name": "Game Day",
         "colour": "#292626"
+      },
+      {
+        "id": "fbs",
+        "name": "Full Body Strength",
+        "colour": "#4E6353"
       }
     ],
     "coaches": [
@@ -529,12 +534,39 @@
             "classTypeId": "gameday",
             "coachId": "ji",
             "roomId": "gfr"
+          },
+          {
+            "id": "blk-f65f96a9",
+            "day": 4,
+            "startMin": 300,
+            "durationMin": 60,
+            "classTypeId": "fbs",
+            "coachId": null,
+            "roomId": "gym-floor"
+          },
+          {
+            "id": "blk-5d64d239",
+            "day": 4,
+            "startMin": 360,
+            "durationMin": 60,
+            "classTypeId": "fbs",
+            "coachId": null,
+            "roomId": "gym-floor"
+          },
+          {
+            "id": "blk-8bb1c092",
+            "day": 4,
+            "startMin": 720,
+            "durationMin": 60,
+            "classTypeId": "fbs",
+            "coachId": null,
+            "roomId": "gym-floor"
           }
         ]
       }
     ],
     "activeScenarioId": "e50da7f1-8ead-4deb-b7f4-dcb054a3eb56"
   },
-  "rev": 21,
-  "updatedAt": "2026-08-13T23:23:06.600Z"
+  "rev": 28,
+  "updatedAt": "2026-08-14T05:40:50.002Z"
 }
