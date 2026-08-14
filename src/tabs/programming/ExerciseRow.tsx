@@ -64,19 +64,31 @@ export default function ExerciseRow({
               S{hasScales ? scales.filter((s) => s.trim()).length : ''}
             </button>
             <Combobox value={slot.name} search={search} onCommit={onCommitExercise} />
-            {videoUrl && (
+            {/* The video slot always renders so every exercise field is the
+                same width; rows without a link get a muted crossed-out icon. */}
+            {videoUrl ? (
               <a
                 href={videoUrl}
                 target="_blank"
                 rel="noreferrer"
                 title="Watch the exercise video (TrainHeroic)"
-                className="shrink-0 rounded p-1 text-ink-400 hover:bg-accent-100 hover:text-accent-700"
+                className="shrink-0 rounded p-1 text-red-600 hover:bg-red-50 hover:text-red-700"
               >
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <rect x="2.5" y="5" width="19" height="14" rx="3" stroke="currentColor" strokeWidth="1.6" />
                   <path d="M10 9.2v5.6l4.5-2.8L10 9.2Z" fill="currentColor" />
                 </svg>
               </a>
+            ) : (
+              <span
+                title="No video linked"
+                className="shrink-0 cursor-default rounded p-1 text-ink-200"
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="2.5" y="5" width="19" height="14" rx="3" stroke="currentColor" strokeWidth="1.6" />
+                  <path d="M8.5 9.5l7 5M15.5 9.5l-7 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                </svg>
+              </span>
             )}
           </div>
         </td>

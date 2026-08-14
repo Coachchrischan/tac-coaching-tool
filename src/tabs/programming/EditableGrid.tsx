@@ -1,5 +1,4 @@
-import type { ReactNode } from 'react';
-import type {
+﻿import type {
   ExerciseSlot,
   ProgramBlock,
   ProgramWeek,
@@ -160,6 +159,7 @@ function SegChip({ series }: { series: string }) {
 /** The 4 editable cells for one row/week, or an add/dash placeholder. */
 function WeekCells({
   row,
+  cellIndex,
   weekIndex,
   session,
   blockIndex,
@@ -168,14 +168,15 @@ function WeekCells({
   onAdd,
 }: {
   row: EditableRow;
-  weekIndex: number;
+  cellIndex: number; // index into row.cells (may be a sliced window)
+  weekIndex: number; // absolute week index within the phase
   session: Session | undefined;
   blockIndex: number;
   topBorder: string;
   onEdit: (ref: SlotRef, patch: Partial<ExerciseSlot>) => void;
   onAdd: (t: AddTarget) => void;
 }) {
-  const ref = row.cells[weekIndex];
+  const ref = row.cells[cellIndex];
   if (!ref) {
     return (
       <td
@@ -201,7 +202,7 @@ function WeekCells({
             click to add exercise
           </button>
         ) : (
-          <span className="text-ink-200">–</span>
+          <span className="text-ink-200">â€“</span>
         )}
       </td>
     );
@@ -231,11 +232,13 @@ function WeekCells({
 
 export function MonthGrid({
   block,
+  weekOffset = 0,
   onEdit,
   onAdd,
   onOpenWeek,
 }: {
   block: BlockRows;
+  weekOffset?: number; // when block is a sliced window, the absolute index of its first week
   onEdit: (ref: SlotRef, patch: Partial<ExerciseSlot>) => void;
   onAdd: (t: AddTarget) => void;
   onOpenWeek: (weekIndex: number) => void;
@@ -262,10 +265,10 @@ export function MonthGrid({
                 <button
                   type="button"
                   title="Open this week in the editor"
-                  onClick={() => onOpenWeek(wi)}
+                  onClick={() => onOpenWeek(weekOffset + wi)}
                   className="rounded px-1 uppercase hover:text-sand-500"
                 >
-                  Week {wi + 1}
+                  Week {weekOffset + wi + 1}
                 </button>
               </th>
             ))}
@@ -306,7 +309,8 @@ export function MonthGrid({
                   <WeekCells
                     key={wi}
                     row={row}
-                    weekIndex={wi}
+                    cellIndex={wi}
+                    weekIndex={weekOffset + wi}
                     session={session}
                     blockIndex={block.blockIndex}
                     topBorder={topBorder}
@@ -361,140 +365,7 @@ function buildPhaseRows(blocks: BlockRows[], withSpareRow = false): PhaseRow[] {
   return out;
 }
 
-export function PhaseGrid({
-  blocks,
-  themes,
-  onEdit,
-  onAdd,
-  onOpenWeek,
-}: {
-  blocks: BlockRows[];
-  themes: (string | undefined)[];
-  onEdit: (ref: SlotRef, patch: Partial<ExerciseSlot>) => void;
-  onAdd: (t: AddTarget) => void;
-  onOpenWeek: (blockIndex: number, weekIndex: number) => void;
-}) {
-  const rows = buildPhaseRows(blocks);
-  if (rows.length === 0) return <EmptyState />;
-
-  const blockSpan = (b: BlockRows) => 1 + b.weekSessions.length * GRID_FIELDS.length;
-
-  let lastSeries = '';
-  return (
-    <div className="overflow-x-auto rounded-xl border border-ink-200 bg-white shadow-sm">
-      <table className="w-full border-separate border-spacing-0">
-        <thead>
-          <tr>
-            <th rowSpan={3} className={`sticky left-0 z-10 w-9 ${headCls}`}>
-              Seg
-            </th>
-            <th rowSpan={3} className={`sticky left-9 z-10 w-7 ${headCls}`}>
-              #
-            </th>
-            {blocks.map((b, bi) => (
-              <th key={bi} colSpan={blockSpan(b)} className={`${headCls} border-l-2 border-l-sand-500`}>
-                Phase {bi + 1}
-                {themes[bi] ? <span className="ml-2 font-normal normal-case text-ink-300">{themes[bi]}</span> : null}
-              </th>
-            ))}
-          </tr>
-          <tr>
-            {blocks.map((b, bi) => (
-              <FragmentRow key={bi}>
-                <th rowSpan={2} className={`min-w-44 text-left ${headCls} border-l-2 border-l-sand-500`}>
-                  Exercise
-                </th>
-                {b.weekSessions.map((_, wi) => (
-                  <th key={wi} colSpan={GRID_FIELDS.length} className={headCls}>
-                    <button
-                      type="button"
-                      title="Open this week in the editor"
-                      onClick={() => onOpenWeek(bi, wi)}
-                      className="rounded px-1 uppercase hover:text-sand-500"
-                    >
-                      W{wi + 1}
-                    </button>
-                  </th>
-                ))}
-              </FragmentRow>
-            ))}
-          </tr>
-          <tr>
-            {blocks.map((b, bi) =>
-              b.weekSessions.map((_, wi) =>
-                GRID_FIELDS.map(([key, label]) => (
-                  <th key={`${bi}-${wi}-${key}`} className={subHeadCls}>
-                    {label}
-                  </th>
-                )),
-              ),
-            )}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row) => {
-            const seriesStart = row.seriesKey !== lastSeries;
-            lastSeries = row.seriesKey;
-            const topBorder = seriesStart ? 'border-t-2 border-t-ink-200' : '';
-            return (
-              <tr key={`${row.seriesKey}-${row.n}`}>
-                <td className={`sticky left-0 z-10 w-9 border-b border-ink-100 bg-white px-1.5 py-1.5 text-center ${topBorder}`}>
-                  <SegChip series={row.series} />
-                </td>
-                <td className={`sticky left-9 z-10 w-7 border-b border-ink-100 bg-white px-1 py-1.5 text-center text-[11px] text-ink-400 ${topBorder}`}>
-                  {row.n}
-                </td>
-                {row.perBlock.map((blockRow, bi) => {
-                  const b = blocks[bi];
-                  if (!blockRow) {
-                    return (
-                      <td
-                        key={bi}
-                        colSpan={blockSpan(b)}
-                        className={`border-b border-ink-100 border-l-2 border-l-sand-500/60 px-2 py-1.5 text-center text-ink-200 ${topBorder}`}
-                      >
-                        –
-                      </td>
-                    );
-                  }
-                  return (
-                    <FragmentRow key={bi}>
-                      <td
-                        className={`min-w-44 border-b border-ink-100 border-l-2 border-l-sand-500/60 px-2 py-1.5 text-[13px] font-medium whitespace-nowrap text-ink-950 ${topBorder}`}
-                        title={blockRow.name}
-                      >
-                        {blockRow.name}
-                      </td>
-                      {b.weekSessions.map((session, wi) => (
-                        <WeekCells
-                          key={wi}
-                          row={blockRow}
-                          weekIndex={wi}
-                          session={session}
-                          blockIndex={b.blockIndex}
-                          topBorder={topBorder}
-                          onEdit={onEdit}
-                          onAdd={onAdd}
-                        />
-                      ))}
-                    </FragmentRow>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-// React fragments can't take className, but we need keyed groups of cells.
-function FragmentRow({ children }: { children: ReactNode }) {
-  return <>{children}</>;
-}
-
-// ---------- Phase exercise view: block-to-block exercise planning, no prescriptions ----------
+// ---------- Phase exercise view: phase-to-phase exercise planning, no prescriptions ----------
 //
 // One column per block, exercise names only, side by side. This is where the
 // coach plans which accessories rotate every four weeks while the compounds
@@ -574,7 +445,7 @@ export function PhaseExerciseGrid({
                       <Combobox
                         value={blockRow?.name ?? ''}
                         search={search}
-                        placeholder="Add exercise…"
+                        placeholder="Add exerciseâ€¦"
                         onCommit={(name, ex) =>
                           onCommitCell(blocks[bi].blockIndex, row.series, row.n, blockRow, name, ex)
                         }
@@ -586,7 +457,7 @@ export function PhaseExerciseGrid({
                           onClick={() => onRemoveCell(blocks[bi].blockIndex, blockRow)}
                           className="shrink-0 rounded px-1 py-0.5 text-sm text-ink-200 hover:text-red-600"
                         >
-                          ✕
+                          âœ•
                         </button>
                       )}
                     </div>

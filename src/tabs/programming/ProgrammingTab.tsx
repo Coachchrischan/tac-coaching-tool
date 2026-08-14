@@ -15,20 +15,34 @@ import type {
 import TimedBlockCard from './TimedBlockCard';
 import SessionBlurb from './SessionBlurb';
 import { defaultSeries } from '../../seed';
-import { MonthGrid, PhaseGrid, PhaseExerciseGrid, buildBlockRows } from './EditableGrid';
+import { MonthGrid, PhaseExerciseGrid, buildBlockRows } from './EditableGrid';
+import type { BlockRows } from './EditableGrid';
 import type { AddTarget, EditableRow, SlotRef } from './EditableGrid';
 import { downloadProgramCsv } from '../../lib/exportCsv';
 
-type ProgramView = 'week' | 'month' | 'phase';
+type ProgramView = 'week' | 'block' | 'month';
 
 // Chris's terminology: blocks[] in the data model are PHASES (10/1/6 weeks);
-// the 3-4 week training blocks live inside a phase. UI says Phase throughout.
-// "Phase" = one phase's weeks side by side; "Macro" = every phase in a row.
+// the 3-4 week training blocks live inside a phase. Views: Week (edit one
+// week), Block (one 4-week block within the phase), Phase (the whole phase's
+// weeks, plus the phase-to-phase Exercise rotation planner as a mode).
 const VIEW_LABEL: Record<ProgramView, string> = {
   week: 'Week',
+  block: 'Block',
   month: 'Phase',
-  phase: 'Macro',
 };
+
+const BLOCK_LEN = 4;
+
+// The Block view is a 4-week window into the phase; SlotRefs inside cells
+// keep their absolute week indices, so edits land on the right week.
+function sliceBlockRows(rows: BlockRows, start: number, end: number): BlockRows {
+  return {
+    blockIndex: rows.blockIndex,
+    weekSessions: rows.weekSessions.slice(start, end),
+    rows: rows.rows.map((r) => ({ ...r, cells: r.cells.slice(start, end) })),
+  };
+}
 
 const FOCUS_LABEL: Record<Session['focus'], string> = {
   lower: 'Lower',
@@ -62,9 +76,11 @@ export default function ProgrammingTab() {
   const [si, setSi] = useState(0);
   const [view, setView] = useState<ProgramView>('week');
   const [pushState, setPushState] = useState<'idle' | 'pushing'>('idle');
-  // Phase has two modes: plan the block-to-block exercise rotation (names
-  // only), or work the prescriptions across every week of the program.
-  const [phaseMode, setPhaseMode] = useState<'exercises' | 'prescriptions'>('exercises');
+  // Phase view has two modes: this phase's weeks, or the phase-to-phase
+  // exercise rotation planner (names only, across all phases).
+  const [phaseMode, setPhaseMode] = useState<'weeks' | 'exercises'>('weeks');
+  // Which 4-week block within the phase the Block view shows.
+  const [blockPageRaw, setBlockPage] = useState(0);
   const [expandScales, setExpandScales] = useState(false);
 
   const overrides = lib.data;
@@ -91,6 +107,8 @@ export default function ProgrammingTab() {
   // on a week that exists.
   const bi = Math.min(biRaw, doc.blocks.length - 1);
   const wi = Math.min(wiRaw, doc.blocks[bi].weeks.length - 1);
+  const blockPages = Math.max(1, Math.ceil(doc.blocks[bi].weeks.length / BLOCK_LEN));
+  const blockPage = Math.min(blockPageRaw, blockPages - 1);
   const sessions = doc.blocks[bi].weeks[wi].sessions;
   const sIdx = Math.min(si, Math.max(sessions.length - 1, 0));
   const session = sessions[sIdx];
@@ -651,7 +669,7 @@ export default function ProgrammingTab() {
 
       {/* Navigation */}
       <div className="mb-4 flex flex-wrap items-center gap-x-6 gap-y-2">
-        {view !== 'phase' && (
+        {!(view === 'month' && phaseMode === 'exercises') && (
         <div className="flex items-center gap-1.5">
           {doc.blocks.map((b, i) => (
             <button key={b.id} type="button" className={pill(i === bi)} onClick={() => setBi(i)}>
@@ -721,6 +739,27 @@ export default function ProgrammingTab() {
             ))}
           </div>
         )}
+        {view === 'block' && (
+          <div className="flex items-center gap-1.5">
+            {Array.from({ length: blockPages }, (_, i) => {
+              const first = i * BLOCK_LEN + 1;
+              const last = Math.min((i + 1) * BLOCK_LEN, doc.blocks[bi].weeks.length);
+              return (
+                <button
+                  key={i}
+                  type="button"
+                  className={pill(i === blockPage)}
+                  onClick={() => setBlockPage(i)}
+                >
+                  Block {i + 1}
+                  <span className="ml-1 text-[11px] opacity-60">
+                    {first === last ? `W${first}` : `W${first}–${last}`}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        )}
         <div className="flex items-center gap-1.5">
           {sessions.map((s, i) => (
             <button key={s.id} type="button" className={pill(i === sIdx)} onClick={() => setSi(i)}>
@@ -738,29 +777,46 @@ export default function ProgrammingTab() {
             </button>
           )}
         </div>
-        {view === 'phase' && (
+        {view === 'month' && (
           <div className="flex items-center gap-1.5">
             <button
               type="button"
-              title="Plan which exercises rotate block to block, names only"
-              className={pill(phaseMode === 'exercises')}
-              onClick={() => setPhaseMode('exercises')}
+              title="This phase's weeks side by side"
+              className={pill(phaseMode === 'weeks')}
+              onClick={() => setPhaseMode('weeks')}
             >
-              Exercises
+              Weeks
             </button>
             <button
               type="button"
-              title="Every week's sets/reps/%/RPE side by side"
-              className={pill(phaseMode === 'prescriptions')}
-              onClick={() => setPhaseMode('prescriptions')}
+              title="Plan which exercises rotate phase to phase, names only"
+              className={pill(phaseMode === 'exercises')}
+              onClick={() => setPhaseMode('exercises')}
             >
-              Sets &amp; reps
+              Exercise rotation
             </button>
           </div>
         )}
       </div>
 
-      {view === 'month' && (
+      {view === 'block' && (
+        <MonthGrid
+          block={sliceBlockRows(
+            buildBlockRows(doc.blocks[bi], bi, matchSession),
+            blockPage * BLOCK_LEN,
+            (blockPage + 1) * BLOCK_LEN,
+          )}
+          weekOffset={blockPage * BLOCK_LEN}
+          onEdit={patchSlotByRef}
+          onAdd={addSlotFromTarget}
+          onOpenWeek={(wIdx) => {
+            setWi(wIdx);
+            setView('week');
+          }}
+        />
+      )}
+
+      {view === 'month' && phaseMode === 'weeks' && (
         <MonthGrid
           block={buildBlockRows(doc.blocks[bi], bi, matchSession)}
           onEdit={patchSlotByRef}
@@ -772,7 +828,7 @@ export default function ProgrammingTab() {
         />
       )}
 
-      {view === 'phase' && phaseMode === 'exercises' && (
+      {view === 'month' && phaseMode === 'exercises' && (
         <PhaseExerciseGrid
           blocks={doc.blocks.map((b, bIdx) => buildBlockRows(b, bIdx, matchSession))}
           themes={doc.blocks.map((b) => b.theme)}
@@ -782,24 +838,10 @@ export default function ProgrammingTab() {
         />
       )}
 
-      {view === 'phase' && phaseMode === 'prescriptions' && (
-        <PhaseGrid
-          blocks={doc.blocks.map((b, bIdx) => buildBlockRows(b, bIdx, matchSession))}
-          themes={doc.blocks.map((b) => b.theme)}
-          onEdit={patchSlotByRef}
-          onAdd={addSlotFromTarget}
-          onOpenWeek={(bIdx, wIdx) => {
-            setBi(bIdx);
-            setWi(wIdx);
-            setView('week');
-          }}
-        />
-      )}
-
       {view === 'week' && (
       // Editing wants focus, not sprawl: the whole week editor caps at a
-      // readable width so exercise fields stay compact on wide screens.
-      <div className="max-w-4xl">
+      // readable width, centred on the screen.
+      <div className="mx-auto max-w-4xl">
       {/* Session settings */}
       <div className="mb-3 flex flex-wrap items-center gap-2 text-sm">
         <span className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">Session</span>
