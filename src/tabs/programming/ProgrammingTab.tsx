@@ -15,18 +15,15 @@ import type {
 import TimedBlockCard from './TimedBlockCard';
 import SessionBlurb from './SessionBlurb';
 import { defaultSeries } from '../../seed';
-import { ProgressionGrid } from './ProgressionViews';
-import type { GridColumn } from './ProgressionViews';
 import { MonthGrid, PhaseGrid, buildBlockRows } from './EditableGrid';
 import type { AddTarget, SlotRef } from './EditableGrid';
 import { downloadProgramCsv } from '../../lib/exportCsv';
 
-type ProgramView = 'week' | 'month' | 'block' | 'phase';
+type ProgramView = 'week' | 'month' | 'phase';
 
 const VIEW_LABEL: Record<ProgramView, string> = {
   week: 'Week',
-  month: 'Month',
-  block: 'Block',
+  month: 'Month/Block',
   phase: 'Phase',
 };
 
@@ -198,19 +195,6 @@ export default function ProgrammingTab() {
       if (byName) return byName;
     }
     return week.sessions.find((s) => s.focus === session.focus);
-  }
-
-  const blockColumns: GridColumn[] = doc.blocks[bi].weeks.map((w, wIdx) => ({
-    label: `W${wIdx + 1}`,
-    session: matchSession(w),
-    weekIndex: wIdx,
-    blockIndex: bi,
-  }));
-
-  function openColumn(col: GridColumn) {
-    setBi(col.blockIndex);
-    setWi(col.weekIndex);
-    setView('week');
   }
 
   // Patch a single slot anywhere in the program, addressed by ids (the
@@ -447,8 +431,6 @@ export default function ProgrammingTab() {
           }}
         />
       )}
-
-      {view === 'block' && <ProgressionGrid columns={blockColumns} onOpenColumn={openColumn} />}
 
       {view === 'phase' && (
         <PhaseGrid

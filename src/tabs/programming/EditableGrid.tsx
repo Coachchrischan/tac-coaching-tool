@@ -194,9 +194,9 @@ function WeekCells({
                 exerciseId: row.exerciseId,
               })
             }
-            className="rounded px-2 text-[11px] font-medium text-ink-300 hover:text-accent-600"
+            className="w-full rounded px-2 text-[11px] text-ink-200 italic hover:text-accent-600"
           >
-            + add
+            click to add exercise
           </button>
         ) : (
           <span className="text-ink-200">–</span>
