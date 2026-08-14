@@ -8,52 +8,22 @@
         "colour": "#003030",
         "phases": [
           {
-            "id": "ap-1",
-            "name": "Foundation",
-            "focus": "Technique, work capacity, base hypertrophy",
+            "id": "24376506-5f44-4544-9a02-d684666b862a",
+            "name": "Strength-Hypertrophy",
+            "focus": "Combined block: main lifts loaded for strength, accessories carry the hypertrophy volume",
             "weeks": 12
           },
           {
-            "id": "ap-2",
-            "name": "Deload + retest",
-            "focus": "Light week, movement checks, baseline lifts",
-            "weeks": 1
-          },
-          {
-            "id": "ap-3",
-            "name": "Build",
-            "focus": "Progressive overload on the main lifts, 5s and 6s",
+            "id": "155c47be-c807-44a3-96dc-e520051112af",
+            "name": "Strength",
+            "focus": "Pure strength: progressive overload on the main lifts, intensity up, volume down",
             "weeks": 12
           },
           {
-            "id": "ap-4",
-            "name": "Deload + retest",
-            "focus": "Light week, retest key lifts",
-            "weeks": 1
-          },
-          {
-            "id": "ap-5",
-            "name": "Strength peak",
-            "focus": "Heavy triples and doubles, intensity up, volume down",
+            "id": "5fd37034-b445-43b8-8d1e-1634b7657522",
+            "name": "Hypertrophy",
+            "focus": "Hypertrophy: higher rep volume and time under tension to build muscle",
             "weeks": 12
-          },
-          {
-            "id": "ap-6",
-            "name": "Deload + retest",
-            "focus": "Light week, PB attempts window",
-            "weeks": 1
-          },
-          {
-            "id": "ap-7",
-            "name": "Consolidate",
-            "focus": "Hold new strength, expand movement library",
-            "weeks": 12
-          },
-          {
-            "id": "ap-8",
-            "name": "Transition",
-            "focus": "Fun week, variety, no barbell targets",
-            "weeks": 1
           }
         ]
       },
@@ -157,6 +127,6 @@
       }
     ]
   },
-  "rev": 1,
-  "updatedAt": "2026-08-13T23:03:27.587Z"
+  "rev": 2,
+  "updatedAt": "2026-08-14T02:04:05.587Z"
 }
