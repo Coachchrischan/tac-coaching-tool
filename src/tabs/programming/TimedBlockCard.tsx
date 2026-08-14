@@ -56,8 +56,11 @@ export default function TimedBlockCard({
           title="Series label"
           onChange={(e) => onPatchBlock({ label: e.target.value })}
         />
-        <span className="text-sm font-semibold text-ink-950">
-          {isWarmup ? 'warm-up' : 'series'}
+        {/* Uppercase to match the app's other labels (SESSION INTENT, the
+            column headers). For title case instead: drop `uppercase` and
+            write 'Warm-up' / 'Series'. */}
+        <span className="text-[12px] font-semibold tracking-wide text-ink-950 uppercase">
+          {isWarmup ? 'Warm-up' : 'Series'}
         </span>
         <div className="ml-3 flex items-center gap-1.5">
           <input
