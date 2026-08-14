@@ -5,6 +5,8 @@ import type {
   ProgramWeek,
   Session,
 } from '../../types/documents';
+import type { LibraryExercise, RankedExercise } from '../../lib/library';
+import Combobox from '../../components/Combobox';
 
 // Editable progression grids: Month (one block, four weeks side by side) and
 // Phase (all three blocks, exercise column repeated per block). Both mirror
@@ -330,7 +332,7 @@ interface PhaseRow {
   perBlock: (EditableRow | null)[];
 }
 
-function buildPhaseRows(blocks: BlockRows[]): PhaseRow[] {
+function buildPhaseRows(blocks: BlockRows[], withSpareRow = false): PhaseRow[] {
   const seriesOrder: string[] = [];
   const display = new Map<string, string>();
   for (const b of blocks)
@@ -344,7 +346,10 @@ function buildPhaseRows(blocks: BlockRows[]): PhaseRow[] {
   for (const seriesKey of seriesOrder) {
     const perBlockLists = blocks.map((b) => b.rows.filter((r) => r.seriesKey === seriesKey));
     const max = Math.max(...perBlockLists.map((l) => l.length));
-    for (let i = 0; i < max; i++) {
+    // The spare row (exercise planning view only) lets the coach start a new
+    // position in any block without a trip to the Week view.
+    const upTo = withSpareRow ? max + 1 : max;
+    for (let i = 0; i < upTo; i++) {
       out.push({
         series: display.get(seriesKey) ?? seriesKey,
         seriesKey,
@@ -487,4 +492,111 @@ export function PhaseGrid({
 // React fragments can't take className, but we need keyed groups of cells.
 function FragmentRow({ children }: { children: ReactNode }) {
   return <>{children}</>;
+}
+
+// ---------- Phase exercise view: block-to-block exercise planning, no prescriptions ----------
+//
+// One column per block, exercise names only, side by side. This is where the
+// coach plans which accessories rotate every four weeks while the compounds
+// hold. Committing an exercise into an empty cell creates it in every week of
+// that block (same series); committing over an existing one renames it across
+// the block, keeping each week's prescription.
+
+export function PhaseExerciseGrid({
+  blocks,
+  themes,
+  search,
+  onCommitCell,
+  onRemoveCell,
+}: {
+  blocks: BlockRows[];
+  themes: (string | undefined)[];
+  search: (query: string) => RankedExercise[];
+  onCommitCell: (
+    blockIndex: number,
+    series: string,
+    n: number,
+    row: EditableRow | null,
+    name: string,
+    exercise: LibraryExercise | null,
+  ) => void;
+  onRemoveCell: (blockIndex: number, row: EditableRow) => void;
+}) {
+  const rows = buildPhaseRows(blocks, true);
+  if (rows.length === 0) return <EmptyState />;
+
+  let lastSeries = '';
+  // No overflow container: the grid is narrow and the exercise dropdowns
+  // must be free to extend past the table edge.
+  return (
+    <div className="rounded-xl border border-ink-200 bg-white shadow-sm">
+      <table className="w-full border-separate border-spacing-0">
+        <thead>
+          <tr>
+            <th className={`w-9 rounded-tl-xl ${headCls}`}>Seg</th>
+            <th className={`w-7 ${headCls}`}>#</th>
+            {blocks.map((b, bi) => (
+              <th
+                key={bi}
+                className={`${headCls} border-l-2 border-l-sand-500 text-left ${
+                  bi === blocks.length - 1 ? 'rounded-tr-xl' : ''
+                }`}
+              >
+                Block {bi + 1}
+                {themes[bi] ? (
+                  <span className="ml-2 font-normal normal-case text-ink-300">{themes[bi]}</span>
+                ) : null}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => {
+            const seriesStart = row.seriesKey !== lastSeries;
+            lastSeries = row.seriesKey;
+            const topBorder = seriesStart ? 'border-t-2 border-t-ink-200' : '';
+            return (
+              <tr key={`${row.seriesKey}-${row.n}`} className="group">
+                <td className={`w-9 border-b border-ink-100 px-1.5 py-1.5 text-center ${topBorder}`}>
+                  <SegChip series={row.series} />
+                </td>
+                <td
+                  className={`w-7 border-b border-ink-100 px-1 py-1.5 text-center text-[11px] text-ink-400 ${topBorder}`}
+                >
+                  {row.n}
+                </td>
+                {row.perBlock.map((blockRow, bi) => (
+                  <td
+                    key={bi}
+                    className={`border-b border-ink-100 border-l-2 border-l-sand-500/60 px-1.5 py-1 ${topBorder}`}
+                  >
+                    <div className="flex items-center gap-1">
+                      <Combobox
+                        value={blockRow?.name ?? ''}
+                        search={search}
+                        placeholder="Add exercise…"
+                        onCommit={(name, ex) =>
+                          onCommitCell(blocks[bi].blockIndex, row.series, row.n, blockRow, name, ex)
+                        }
+                      />
+                      {blockRow && (
+                        <button
+                          type="button"
+                          title={`Remove ${blockRow.name} from every week of Block ${blocks[bi].blockIndex + 1}`}
+                          onClick={() => onRemoveCell(blocks[bi].blockIndex, blockRow)}
+                          className="shrink-0 rounded px-1 py-0.5 text-sm text-ink-200 hover:text-red-600"
+                        >
+                          ✕
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
 }

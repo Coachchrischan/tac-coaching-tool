@@ -15,8 +15,8 @@ import type {
 import TimedBlockCard from './TimedBlockCard';
 import SessionBlurb from './SessionBlurb';
 import { defaultSeries } from '../../seed';
-import { MonthGrid, PhaseGrid, buildBlockRows } from './EditableGrid';
-import type { AddTarget, SlotRef } from './EditableGrid';
+import { MonthGrid, PhaseGrid, PhaseExerciseGrid, buildBlockRows } from './EditableGrid';
+import type { AddTarget, EditableRow, SlotRef } from './EditableGrid';
 import { downloadProgramCsv } from '../../lib/exportCsv';
 
 type ProgramView = 'week' | 'month' | 'phase';
@@ -58,6 +58,9 @@ export default function ProgrammingTab() {
   const [wi, setWi] = useState(0);
   const [si, setSi] = useState(0);
   const [view, setView] = useState<ProgramView>('week');
+  // Phase has two modes: plan the block-to-block exercise rotation (names
+  // only), or work the prescriptions across all 12 weeks.
+  const [phaseMode, setPhaseMode] = useState<'exercises' | 'prescriptions'>('exercises');
   const [expandScales, setExpandScales] = useState(false);
 
   const overrides = lib.data;
@@ -195,6 +198,127 @@ export default function ProgrammingTab() {
       if (byName) return byName;
     }
     return week.sessions.find((s) => s.focus === session.focus);
+  }
+
+  // Phase exercise view: committing a cell makes that exercise this block's
+  // occupant of the series position. Existing slots rename in place (keeping
+  // each week's prescription); weeks without the slot get it created, so a
+  // freshly planned block fills all four weeks at once.
+  function commitPhaseExercise(
+    blockIndex: number,
+    series: string,
+    n: number,
+    row: EditableRow | null,
+    name: string,
+    exercise: LibraryExercise | null,
+  ) {
+    const trimmed = name.trim();
+    if (!trimmed) return;
+    let resolved = exercise;
+    if (!resolved && merged) {
+      const needle = trimmed.toLowerCase();
+      resolved = merged.find((e) => e.title.toLowerCase() === needle) ?? null;
+    }
+    const exerciseId = resolved ? resolved.id : null;
+    const seriesKey = series.trim().toUpperCase();
+    program.update((d: ProgramDoc) => ({
+      ...d,
+      blocks: d.blocks.map((b, bIdx) => {
+        if (bIdx !== blockIndex) return b;
+        const sibling = b.weeks
+          .flatMap((w) => w.sessions)
+          .flatMap((s) => s.timedBlocks)
+          .find((tb) => tb.label.trim().toUpperCase() === seriesKey);
+        return {
+          ...b,
+          weeks: b.weeks.map((w, wIdx) => {
+            const target = matchSession(w);
+            if (!target) return w;
+            const ref = row?.cells[wIdx] ?? null;
+            return {
+              ...w,
+              sessions: w.sessions.map((s) => {
+                if (s.id !== target.id) return s;
+                if (ref) {
+                  return {
+                    ...s,
+                    timedBlocks: s.timedBlocks.map((tb) =>
+                      tb.id !== ref.timedBlockId
+                        ? tb
+                        : {
+                            ...tb,
+                            slots: tb.slots.map((sl) =>
+                              sl.id !== ref.slotId ? sl : { ...sl, name: trimmed, exerciseId },
+                            ),
+                          },
+                    ),
+                  };
+                }
+                const slot: ExerciseSlot = { id: crypto.randomUUID(), exerciseId, name: trimmed };
+                const existing = s.timedBlocks.find(
+                  (tb) => tb.label.trim().toUpperCase() === seriesKey,
+                );
+                if (existing) {
+                  // Insert at the row's position so out-of-order planning still
+                  // lines the blocks up once the earlier positions are filled.
+                  const at = Math.min(n - 1, existing.slots.length);
+                  const slots = [...existing.slots];
+                  slots.splice(at, 0, slot);
+                  return {
+                    ...s,
+                    timedBlocks: s.timedBlocks.map((tb) =>
+                      tb.id !== existing.id ? tb : { ...tb, slots },
+                    ),
+                  };
+                }
+                return {
+                  ...s,
+                  timedBlocks: [
+                    ...s.timedBlocks,
+                    {
+                      id: crypto.randomUUID(),
+                      label: series,
+                      minutes: sibling?.minutes ?? 10,
+                      slots: [slot],
+                    },
+                  ],
+                };
+              }),
+            };
+          }) as (typeof b)['weeks'],
+        };
+      }) as ProgramDoc['blocks'],
+    }));
+  }
+
+  function removePhaseExercise(blockIndex: number, row: EditableRow) {
+    if (
+      !window.confirm(
+        `Remove ${row.name} (and its sets/reps) from every week of Block ${blockIndex + 1}?`,
+      )
+    )
+      return;
+    const ids = new Set(row.cells.filter(Boolean).map((ref) => ref!.slotId));
+    program.update((d: ProgramDoc) => ({
+      ...d,
+      blocks: d.blocks.map((b, bIdx) =>
+        bIdx !== blockIndex
+          ? b
+          : {
+              ...b,
+              weeks: b.weeks.map((w) => ({
+                ...w,
+                sessions: w.sessions.map((s) => ({
+                  ...s,
+                  timedBlocks: s.timedBlocks.map((tb) => ({
+                    ...tb,
+                    slots: tb.slots.filter((sl) => !ids.has(sl.id)),
+                  })),
+                })),
+              })) as (typeof b)['weeks'],
+            },
+      ) as ProgramDoc['blocks'],
+    }));
   }
 
   // Patch a single slot anywhere in the program, addressed by ids (the
@@ -418,6 +542,26 @@ export default function ProgrammingTab() {
             </button>
           )}
         </div>
+        {view === 'phase' && (
+          <div className="flex items-center gap-1.5">
+            <button
+              type="button"
+              title="Plan which exercises rotate block to block, names only"
+              className={pill(phaseMode === 'exercises')}
+              onClick={() => setPhaseMode('exercises')}
+            >
+              Exercises
+            </button>
+            <button
+              type="button"
+              title="All 12 weeks of sets/reps/%/RPE side by side"
+              className={pill(phaseMode === 'prescriptions')}
+              onClick={() => setPhaseMode('prescriptions')}
+            >
+              Sets &amp; reps
+            </button>
+          </div>
+        )}
       </div>
 
       {view === 'month' && (
@@ -432,7 +576,17 @@ export default function ProgrammingTab() {
         />
       )}
 
-      {view === 'phase' && (
+      {view === 'phase' && phaseMode === 'exercises' && (
+        <PhaseExerciseGrid
+          blocks={doc.blocks.map((b, bIdx) => buildBlockRows(b, bIdx, matchSession))}
+          themes={doc.blocks.map((b) => b.theme)}
+          search={search}
+          onCommitCell={commitPhaseExercise}
+          onRemoveCell={removePhaseExercise}
+        />
+      )}
+
+      {view === 'phase' && phaseMode === 'prescriptions' && (
         <PhaseGrid
           blocks={doc.blocks.map((b, bIdx) => buildBlockRows(b, bIdx, matchSession))}
           themes={doc.blocks.map((b) => b.theme)}
