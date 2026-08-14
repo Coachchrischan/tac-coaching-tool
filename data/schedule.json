@@ -493,7 +493,7 @@
           {
             "id": "7084f58c-29d9-4b9b-8e43-a6bdacfbcb79",
             "day": 4,
-            "startMin": 360,
+            "startMin": 420,
             "durationMin": 60,
             "classTypeId": "esd",
             "coachId": "ji",
@@ -502,7 +502,7 @@
           {
             "id": "73644118-a606-4f96-a23c-a8f5b154fabd",
             "day": 4,
-            "startMin": 420,
+            "startMin": 480,
             "durationMin": 60,
             "classTypeId": "esd",
             "coachId": "ji",
@@ -561,12 +561,21 @@
             "classTypeId": "fbs",
             "coachId": null,
             "roomId": "gym-floor"
+          },
+          {
+            "id": "6b598281-0a42-437a-ac66-5e4f148b3472",
+            "day": 1,
+            "startMin": 420,
+            "durationMin": 60,
+            "classTypeId": "esd",
+            "coachId": null,
+            "roomId": null
           }
         ]
       }
     ],
     "activeScenarioId": "e50da7f1-8ead-4deb-b7f4-dcb054a3eb56"
   },
-  "rev": 28,
-  "updatedAt": "2026-08-14T05:40:50.002Z"
+  "rev": 59,
+  "updatedAt": "2026-08-14T06:28:16.479Z"
 }

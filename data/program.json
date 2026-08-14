@@ -34,7 +34,7 @@
                   {
                     "id": "b1w1s1-A",
                     "label": "A",
-                    "minutes": 15,
+                    "minutes": 20,
                     "slots": [
                       {
                         "id": "ab879edd-35a2-46fd-9fbb-3b2d14061c23",
@@ -43,7 +43,7 @@
                         "sets": "3",
                         "reps": "9",
                         "intensity": "70%",
-                        "showScales": false
+                        "showScales": true
                       },
                       {
                         "id": "aae3fb4f-e2ed-4bf0-a493-18451cef6429",
@@ -65,7 +65,7 @@
                   {
                     "id": "b1w1s1-B",
                     "label": "B",
-                    "minutes": 12,
+                    "minutes": 15,
                     "slots": [
                       {
                         "id": "cb8bf1a3-b72c-4857-aa91-3e2825aa7f0b",
@@ -347,7 +347,11 @@
                       {
                         "id": "e7a60243-d9a6-41fe-9173-ca50e9a2b664",
                         "exerciseId": 688272,
-                        "name": "Barbell Back Squats (E3OM)"
+                        "name": "Barbell Back Squats (E3OM)",
+                        "sets": "3",
+                        "reps": "7",
+                        "intensity": "75",
+                        "rpe": "8"
                       },
                       {
                         "id": "736f60d6-fce1-4a60-99b7-20949027d2e0",
@@ -841,7 +845,8 @@
                       {
                         "id": "75e82498-4c5d-4f8e-9454-42ee903e612d",
                         "exerciseId": 688272,
-                        "name": "Barbell Back Squats (E3OM)"
+                        "name": "Barbell Back Squats (E3OM)",
+                        "rpe": "6"
                       },
                       {
                         "id": "de562a89-136e-466c-a5ea-68751e8b60f6",
@@ -3220,6 +3225,6 @@
       }
     ]
   },
-  "rev": 22,
-  "updatedAt": "2026-08-14T05:37:22.203Z"
+  "rev": 30,
+  "updatedAt": "2026-08-14T06:39:07.659Z"
 }
