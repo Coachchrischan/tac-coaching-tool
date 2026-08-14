@@ -100,15 +100,18 @@ export interface ProgramWeek {
   sessions: Session[]; // any mix of strength/ESD/Hyrox sessions, coach-defined
 }
 
+// Blocks are variable length (the 2026/27 plan runs 10/1/6 weeks) and the
+// block list itself grows as the macrocycle does. Grids and exports iterate;
+// nothing may assume 3 blocks or 4 weeks.
 export interface ProgramBlock {
   id: string;
   theme?: string;
-  weeks: [ProgramWeek, ProgramWeek, ProgramWeek, ProgramWeek];
+  weeks: ProgramWeek[];
 }
 
 export interface ProgramDoc {
   name: string;
-  blocks: [ProgramBlock, ProgramBlock, ProgramBlock];
+  blocks: ProgramBlock[];
 }
 
 // ---------- Library overrides (coach layer over the generated library) ----------

@@ -54,13 +54,13 @@ export default function ProgrammingTab() {
   const { library, error: libraryError } = useLibrary();
   const navigate = useNavigate();
 
-  const [bi, setBi] = useState(0);
-  const [wi, setWi] = useState(0);
+  const [biRaw, setBi] = useState(0);
+  const [wiRaw, setWi] = useState(0);
   const [si, setSi] = useState(0);
   const [view, setView] = useState<ProgramView>('week');
   const [pushState, setPushState] = useState<'idle' | 'pushing'>('idle');
   // Phase has two modes: plan the block-to-block exercise rotation (names
-  // only), or work the prescriptions across all 12 weeks.
+  // only), or work the prescriptions across every week of the program.
   const [phaseMode, setPhaseMode] = useState<'exercises' | 'prescriptions'>('exercises');
   const [expandScales, setExpandScales] = useState(false);
 
@@ -83,6 +83,11 @@ export default function ProgrammingTab() {
   }
 
   const doc = program.data;
+  // Blocks vary in length (10/1/6...), so stale indices are clamped rather
+  // than trusted: switching from a 10-week block to a 1-week one must land
+  // on a week that exists.
+  const bi = Math.min(biRaw, doc.blocks.length - 1);
+  const wi = Math.min(wiRaw, doc.blocks[bi].weeks.length - 1);
   const sessions = doc.blocks[bi].weeks[wi].sessions;
   const sIdx = Math.min(si, Math.max(sessions.length - 1, 0));
   const session = sessions[sIdx];
@@ -96,15 +101,110 @@ export default function ProgrammingTab() {
               ...b,
               weeks: b.weeks.map((w, wIdx) =>
                 wIdx !== wi ? w : { ...w, sessions: fn(w.sessions) },
-              ) as (typeof b)['weeks'],
+              ),
             },
-      ) as ProgramDoc['blocks'];
+      );
       return { ...d, blocks };
     });
   }
 
   function patchSession(fn: (s: Session) => Session) {
     patchWeekSessions((list) => list.map((s, i) => (i !== sIdx ? s : fn(s))));
+  }
+
+  // Grow a block by cloning the last week's structure: same sessions, series
+  // and exercise names, blank prescriptions (the block mental model: same
+  // exercises all block, prescriptions progress week to week).
+  function cloneWeekStructure(week: ProgramWeek): ProgramWeek {
+    return {
+      id: crypto.randomUUID(),
+      sessions: week.sessions.map((s) => {
+        const cloned: Session = {
+          id: crypto.randomUUID(),
+          focus: s.focus,
+          timedBlocks: s.timedBlocks.map((tb) => ({
+            id: crypto.randomUUID(),
+            label: tb.label,
+            minutes: tb.minutes,
+            slots: tb.slots
+              .filter((sl) => sl.name)
+              .map((sl) => ({ id: crypto.randomUUID(), exerciseId: sl.exerciseId, name: sl.name })),
+          })),
+        };
+        if (s.name) cloned.name = s.name;
+        return cloned;
+      }),
+    };
+  }
+
+  function blockHasContent(block: ProgramDoc['blocks'][number], fromWeek = 0) {
+    return block.weeks
+      .slice(fromWeek)
+      .some((w) => w.sessions.some((s) => s.timedBlocks.some((tb) => tb.slots.some((sl) => sl.name))));
+  }
+
+  function setBlockLength(target: number) {
+    const block = doc.blocks[bi];
+    const next = Math.max(1, Math.min(20, target));
+    if (next === block.weeks.length) return;
+    if (
+      next < block.weeks.length &&
+      blockHasContent(block, next) &&
+      !window.confirm(
+        `Shorten Block ${bi + 1} to ${next} week${next === 1 ? '' : 's'}? The dropped weeks contain programming that will be deleted.`,
+      )
+    )
+      return;
+    program.update((d: ProgramDoc) => ({
+      ...d,
+      blocks: d.blocks.map((b, i) => {
+        if (i !== bi) return b;
+        if (next < b.weeks.length) return { ...b, weeks: b.weeks.slice(0, next) };
+        const weeks = [...b.weeks];
+        while (weeks.length < next) weeks.push(cloneWeekStructure(weeks[weeks.length - 1]));
+        return { ...b, weeks };
+      }),
+    }));
+    if (wi >= next) setWi(next - 1);
+  }
+
+  function addBlock() {
+    const focuses: Session['focus'][] = ['lower', 'upper', 'full'];
+    program.update((d: ProgramDoc) => ({
+      ...d,
+      blocks: [
+        ...d.blocks,
+        {
+          id: crypto.randomUUID(),
+          weeks: Array.from({ length: 4 }, (): ProgramWeek => ({
+            id: crypto.randomUUID(),
+            sessions: focuses.map((focus) => ({
+              id: crypto.randomUUID(),
+              focus,
+              timedBlocks: defaultSeries(crypto.randomUUID()),
+            })),
+          })),
+        },
+      ],
+    }));
+    setBi(doc.blocks.length);
+    setWi(0);
+  }
+
+  function removeBlock() {
+    if (doc.blocks.length <= 1) return;
+    const block = doc.blocks[bi];
+    if (
+      !window.confirm(
+        `Remove Block ${bi + 1}${block.theme ? ` (${block.theme})` : ''}${
+          blockHasContent(block) ? ' and ALL its programming' : ''
+        }? This cannot be undone.`,
+      )
+    )
+      return;
+    program.update((d: ProgramDoc) => ({ ...d, blocks: d.blocks.filter((_, i) => i !== bi) }));
+    setBi(Math.max(0, bi - 1));
+    setWi(0);
   }
 
   function addSession() {
@@ -210,7 +310,10 @@ export default function ProgrammingTab() {
     try {
       const annual = await (await fetch('/api/store/annual-plan')).json();
       const start = new Date(annual.data.startDate + 'T00:00:00Z');
-      start.setUTCDate(start.getUTCDate() + (bi * 4 + wi) * 7);
+      // Program weeks run consecutively from the year start; blocks vary in
+      // length, so the offset is the sum of the earlier blocks' weeks.
+      const weeksBefore = doc.blocks.slice(0, bi).reduce((n, b) => n + b.weeks.length, 0);
+      start.setUTCDate(start.getUTCDate() + (weeksBefore + wi) * 7);
       const monday = start.toISOString().slice(0, 10);
       if (
         !window.confirm(
@@ -327,9 +430,9 @@ export default function ProgrammingTab() {
                 };
               }),
             };
-          }) as (typeof b)['weeks'],
+          }),
         };
-      }) as ProgramDoc['blocks'],
+      }),
     }));
   }
 
@@ -357,9 +460,9 @@ export default function ProgrammingTab() {
                     slots: tb.slots.filter((sl) => !ids.has(sl.id)),
                   })),
                 })),
-              })) as (typeof b)['weeks'],
+              })),
             },
-      ) as ProgramDoc['blocks'],
+      ),
     }));
   }
 
@@ -396,9 +499,9 @@ export default function ProgrammingTab() {
                             },
                       ),
                     },
-              ) as (typeof b)['weeks'],
+              ),
             },
-      ) as ProgramDoc['blocks'],
+      ),
     }));
   }
 
@@ -448,9 +551,9 @@ export default function ProgrammingTab() {
                 };
               }),
             };
-          }) as (typeof b)['weeks'],
+          }),
         };
-      }) as ProgramDoc['blocks'],
+      }),
     }));
   }
 
@@ -519,7 +622,7 @@ export default function ProgrammingTab() {
           </button>
           <button
             type="button"
-            title="Download the whole 12-week program as a CSV that imports straight into Google Sheets"
+            title="Download the whole program as a CSV that imports straight into Google Sheets"
             onClick={() => downloadProgramCsv(doc)}
             className="rounded-md border border-ink-300 bg-white px-3 py-1.5 text-sm font-medium text-ink-700 hover:bg-ink-100"
           >
@@ -552,6 +655,14 @@ export default function ProgrammingTab() {
               Block {i + 1}
             </button>
           ))}
+          <button
+            type="button"
+            title="Add a block (4 weeks by default, then set its length)"
+            onClick={addBlock}
+            className="rounded-md border border-dashed border-ink-300 px-2.5 py-1.5 text-sm font-medium text-ink-400 hover:border-accent-600 hover:text-accent-600"
+          >
+            +
+          </button>
           <input
             className="ml-1 w-44 rounded-md border border-transparent bg-transparent px-2 py-1 text-sm text-ink-500 italic hover:border-ink-300 focus:border-accent-600 focus:text-ink-950 focus:outline-none"
             placeholder="Block theme…"
@@ -561,10 +672,41 @@ export default function ProgrammingTab() {
                 ...d,
                 blocks: d.blocks.map((b, i) =>
                   i === bi ? { ...b, theme: e.target.value } : b,
-                ) as ProgramDoc['blocks'],
+                ),
               }))
             }
           />
+          <div className="flex items-center gap-1 rounded-md border border-ink-300 bg-white px-1.5 py-1">
+            <button
+              type="button"
+              title="One week shorter"
+              onClick={() => setBlockLength(doc.blocks[bi].weeks.length - 1)}
+              className="rounded px-1.5 text-sm font-bold text-ink-500 hover:text-ink-950 disabled:opacity-30"
+              disabled={doc.blocks[bi].weeks.length <= 1}
+            >
+              −
+            </button>
+            <span className="min-w-10 text-center text-sm text-ink-700">
+              {doc.blocks[bi].weeks.length} wk
+            </span>
+            <button
+              type="button"
+              title="One week longer (clones the last week's exercises, blank prescriptions)"
+              onClick={() => setBlockLength(doc.blocks[bi].weeks.length + 1)}
+              className="rounded px-1.5 text-sm font-bold text-ink-500 hover:text-ink-950"
+            >
+              +
+            </button>
+          </div>
+          <button
+            type="button"
+            title="Remove this block and its programming"
+            disabled={doc.blocks.length <= 1}
+            onClick={removeBlock}
+            className="rounded px-1.5 py-1 text-sm text-ink-300 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-30"
+          >
+            ✕
+          </button>
         </div>
         )}
         {view === 'week' && (
@@ -605,7 +747,7 @@ export default function ProgrammingTab() {
             </button>
             <button
               type="button"
-              title="All 12 weeks of sets/reps/%/RPE side by side"
+              title="Every week's sets/reps/%/RPE side by side"
               className={pill(phaseMode === 'prescriptions')}
               onClick={() => setPhaseMode('prescriptions')}
             >

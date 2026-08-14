@@ -1,4 +1,4 @@
-// Exports the whole 12-week program as a CSV that opens cleanly in Google
+// Exports the whole program (any block/week shape) as a CSV that opens cleanly in Google
 // Sheets (File > Import, or drag onto a Sheet). One row per exercise per
 // session type, one column per week, cells are the compact prescription.
 

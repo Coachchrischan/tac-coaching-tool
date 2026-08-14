@@ -105,7 +105,7 @@ export function seedSchedule(): ScheduleDoc {
   };
 }
 
-// ---------- Program: empty 3 blocks x 4 weeks x 3 sessions ----------
+// ---------- Program: the 2026/27 pre-Christmas macrocycle shape ----------
 
 const FOCUSES: SessionFocus[] = ['lower', 'upper', 'full'];
 
@@ -119,20 +119,32 @@ export function defaultSeries(prefix: string): Session['timedBlocks'] {
   ];
 }
 
+// Block lengths follow PROGRAMMING-PLAN.md (10/1/6); all editable in-app.
+const SEED_BLOCKS: { theme: string; weeks: number }[] = [
+  { theme: 'Strength-Hypertrophy', weeks: 10 },
+  { theme: 'Deload / skills', weeks: 1 },
+  { theme: 'Strength', weeks: 6 },
+];
+
 export function seedProgram(): ProgramDoc {
-  const blocks = [1, 2, 3].map((b): ProgramBlock => {
-    const weeks = [1, 2, 3, 4].map((w): ProgramWeek => {
-      const sessions = FOCUSES.map(
-        (focus, s): Session => ({
-          id: `b${b}w${w}s${s + 1}`,
-          focus,
-          timedBlocks: defaultSeries(`b${b}w${w}s${s + 1}`),
-        }),
-      );
-      return { id: `b${b}w${w}`, sessions };
-    }) as ProgramBlock['weeks'];
-    return { id: `block-${b}`, weeks };
-  }) as ProgramDoc['blocks'];
+  const blocks = SEED_BLOCKS.map(({ theme, weeks }, bIdx): ProgramBlock => {
+    const b = bIdx + 1;
+    return {
+      id: `block-${b}`,
+      theme,
+      weeks: Array.from({ length: weeks }, (_, wIdx): ProgramWeek => {
+        const w = wIdx + 1;
+        const sessions = FOCUSES.map(
+          (focus, s): Session => ({
+            id: `b${b}w${w}s${s + 1}`,
+            focus,
+            timedBlocks: defaultSeries(`b${b}w${w}s${s + 1}`),
+          }),
+        );
+        return { id: `b${b}w${w}`, sessions };
+      }),
+    };
+  });
 
   return { name: 'TAC Strength Cycle 1', blocks };
 }
@@ -148,21 +160,23 @@ function phase(name: string, focus: string, weeks: number) {
 export function seedAnnualPlan(): AnnualPlanDoc {
   ap = 0;
   return {
-    startDate: '2026-08-31', // a Monday; edit to the real plan anchor
+    startDate: '2026-08-24', // a Monday; the ratified 2026/27 plan anchor
     streams: [
       {
         id: 'strength',
         name: 'Strength',
         colour: '#003030',
+        // Mirrors PROGRAMMING-PLAN.md (the 2026-08-14 handover).
         phases: [
-          phase('Foundation', 'Technique, work capacity, base hypertrophy', 12),
-          phase('Deload + retest', 'Light week, movement checks, baseline lifts', 1),
-          phase('Build', 'Progressive overload on the main lifts, 5s and 6s', 12),
-          phase('Deload + retest', 'Light week, retest key lifts', 1),
-          phase('Strength peak', 'Heavy triples and doubles, intensity up, volume down', 12),
-          phase('Deload + retest', 'Light week, PB attempts window', 1),
-          phase('Consolidate', 'Hold new strength, expand movement library', 12),
-          phase('Transition', 'Fun week, variety, no barbell targets', 1),
+          phase('Strength-Hypertrophy', 'Wave loading 9/7/5, W1 3RM top-set testing, W7 deload', 10),
+          phase('Deload / skills week', 'Deload + workshops prepping the strength block', 1),
+          phase('Strength', 'Mini waves 7-5-3 then 5-3-1, Christmas-week retest', 6),
+          phase('Christmas break', 'No classes; plan the January re-entry ramp', 2),
+          phase('Unilateral muscle-endurance', 'W1 testing; single-limb, tempo, TUT, asymmetric holds', 4),
+          phase('Hypertrophy', 'Aesthetic focus, anchor strength lifts retained', 12),
+          phase('Strength-Hypertrophy (cycle 2)', 'Back into the wave-loading cycle', 10),
+          phase('Deload / skills week (cycle 2)', 'Deload + skills workshops', 1),
+          phase('Strength (cycle 2)', 'Mini waves 7-5-3 then 5-3-1, retest to close', 6),
         ],
       },
       {
@@ -236,7 +250,7 @@ export function seedHome(): HomeDoc {
       'Scale the exercise, never the standard',
     ],
     different: [
-      'A 12-week plan behind every class, not a random daily workout',
+      'A periodised block plan behind every class, not a random daily workout',
       'Timed series, so sessions run to the clock in every room',
       'One movement library, one standard, the same cues from every coach',
       'The TV cards show the why, not just the what',

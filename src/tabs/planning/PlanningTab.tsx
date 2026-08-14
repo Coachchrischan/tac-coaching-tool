@@ -45,11 +45,16 @@ export default function PlanningTab() {
           Block themes ({program.data.name})
         </h3>
         <div className="mt-3 space-y-2">
-          {program.data.blocks.map((b, i) => (
+          {program.data.blocks.map((b, i, all) => {
+            const first = all.slice(0, i).reduce((n, x) => n + x.weeks.length, 0) + 1;
+            const last = first + b.weeks.length - 1;
+            return (
             <div key={b.id} className="flex items-center gap-3">
               <span className="w-24 text-sm font-semibold text-ink-950">
                 Block {i + 1}
-                <span className="block text-[11px] font-normal text-ink-400">Weeks {i * 4 + 1}–{i * 4 + 4}</span>
+                <span className="block text-[11px] font-normal text-ink-400">
+                  {first === last ? `Week ${first}` : `Weeks ${first}–${last}`}
+                </span>
               </span>
               <input
                 className="flex-1 rounded-md border border-ink-300 bg-white px-2.5 py-1.5 text-sm text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none"
@@ -60,12 +65,13 @@ export default function PlanningTab() {
                     ...d,
                     blocks: d.blocks.map((x, xi) =>
                       xi === i ? { ...x, theme: e.target.value } : x,
-                    ) as ProgramDoc['blocks'],
+                    ),
                   }))
                 }
               />
             </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
