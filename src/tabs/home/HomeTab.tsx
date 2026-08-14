@@ -252,7 +252,13 @@ export default function HomeTab() {
               );
             })()
             ) : (
-              <div className="mt-4 flex items-end justify-around gap-4">
+              <>
+              {/* Same-height caption as the drill-down view so the chart
+                  doesn't jump when a class is selected. */}
+              <p className="mt-3 text-[12px] font-medium text-ink-500">
+                All classes side by side — click one to see it against itself.
+              </p>
+              <div className="mt-3 flex items-end justify-around gap-4">
                 {chart.groups.map((g) => (
                   <div key={g.period} className="flex min-w-0 flex-1 flex-col items-center gap-1">
                     <div className="flex h-44 w-full items-end justify-center gap-[3px]">
@@ -278,6 +284,7 @@ export default function HomeTab() {
                   </div>
                 ))}
               </div>
+              </>
             )}
               <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 border-t border-ink-100 pt-2.5">
                 {schedule.data.classTypes.map((ct) => (

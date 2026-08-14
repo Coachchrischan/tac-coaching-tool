@@ -60,7 +60,7 @@ export default function AttendanceTab() {
     <div className="max-w-3xl">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-lg font-semibold text-ink-950">Class numbers</h2>
+          <h2 className="font-display text-2xl text-ink-950">Class numbers</h2>
           <p className="text-[13px] text-ink-500">
             Record totals per class type, monthly or weekly. Weekly numbers roll up into their month
             on the Home dashboard.

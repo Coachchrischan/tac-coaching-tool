@@ -202,7 +202,7 @@ function WeekCells({
             click to add exercise
           </button>
         ) : (
-          <span className="text-ink-200">â€“</span>
+          <span className="text-ink-200">–</span>
         )}
       </td>
     );
@@ -445,7 +445,7 @@ export function PhaseExerciseGrid({
                       <Combobox
                         value={blockRow?.name ?? ''}
                         search={search}
-                        placeholder="Add exerciseâ€¦"
+                        placeholder="Add exercise…"
                         onCommit={(name, ex) =>
                           onCommitCell(blocks[bi].blockIndex, row.series, row.n, blockRow, name, ex)
                         }
@@ -457,7 +457,7 @@ export function PhaseExerciseGrid({
                           onClick={() => onRemoveCell(blocks[bi].blockIndex, blockRow)}
                           className="shrink-0 rounded px-1 py-0.5 text-sm text-ink-200 hover:text-red-600"
                         >
-                          âœ•
+                          ✕
                         </button>
                       )}
                     </div>

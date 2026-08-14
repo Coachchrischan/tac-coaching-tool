@@ -90,13 +90,16 @@ export default function MovementCheckTab() {
   return (
     <div>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-1.5">
-          {program.data.blocks.map((b, i) => (
-            <button key={b.id} type="button" className={pill(i === bi)} onClick={() => setBi(i)}>
-              Block {i + 1}
-            </button>
-          ))}
-          <span className="ml-2 text-sm text-ink-500 italic">{program.data.blocks[bi].theme}</span>
+        <div className="flex flex-wrap items-center gap-3">
+          <h2 className="font-display text-2xl text-ink-950">Movement check</h2>
+          <div className="flex items-center gap-1.5">
+            {program.data.blocks.map((b, i) => (
+              <button key={b.id} type="button" className={pill(i === bi)} onClick={() => setBi(i)}>
+                Phase {i + 1}
+              </button>
+            ))}
+            <span className="ml-2 text-sm text-ink-500 italic">{program.data.blocks[bi].theme}</span>
+          </div>
         </div>
         <SaveBadge state={lib.saveState} onReloadTheirs={lib.reloadTheirs} onKeepMine={lib.keepMine} onRetry={lib.retry} />
       </div>
@@ -105,7 +108,7 @@ export default function MovementCheckTab() {
       <section className="rounded-xl border border-ink-200 bg-white p-5 shadow-sm">
         <h3 className="text-sm font-semibold text-ink-950">Movement pattern coverage</h3>
         <p className="mt-1 text-[13px] text-ink-500">
-          Times each pattern appears across the 4 weeks of this block (every session, every slot).
+          Times each pattern appears across every week of this phase (every session, every slot).
         </p>
         <div className="mt-4 grid grid-cols-3 gap-3">
           {PATTERNS.map((p) => {

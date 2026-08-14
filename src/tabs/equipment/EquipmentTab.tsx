@@ -32,7 +32,7 @@ export default function EquipmentTab() {
     <div className="max-w-2xl">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-ink-950">Equipment inventory</h2>
+          <h2 className="font-display text-2xl text-ink-950">Equipment inventory</h2>
           <p className="text-[13px] text-ink-500">
             Counts are real numbers, ready for a future programming-vs-availability check.
           </p>

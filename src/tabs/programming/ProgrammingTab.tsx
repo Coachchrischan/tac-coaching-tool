@@ -594,7 +594,7 @@ export default function ProgrammingTab() {
       {/* Header row */}
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <input
-          className="rounded-md border border-transparent bg-transparent px-2 py-1 text-lg font-semibold text-ink-950 hover:border-ink-300 focus:border-accent-600 focus:outline-none"
+          className="font-display rounded-md border border-transparent bg-transparent px-2 py-1 text-2xl text-ink-950 hover:border-ink-300 focus:border-accent-600 focus:outline-none"
           value={doc.name}
           onChange={(e) => program.update((d) => ({ ...d, name: e.target.value }))}
         />
@@ -781,11 +781,15 @@ export default function ProgrammingTab() {
             </div>
           )}
           {view === 'month' && (
-            <div className="flex items-center gap-1.5">
+            /* Mode toggle: segmented control, matching the view switcher
+               (segmented = pick a mode, pills = pick an item). */
+            <div className="flex overflow-hidden rounded-md border border-ink-300">
               <button
                 type="button"
                 title="This phase's weeks side by side"
-                className={pill(phaseMode === 'weeks')}
+                className={`px-3 py-1.5 text-sm font-medium transition-colors ${
+                  phaseMode === 'weeks' ? 'bg-ink-950 text-white' : 'bg-white text-ink-500 hover:text-ink-950'
+                }`}
                 onClick={() => setPhaseMode('weeks')}
               >
                 Weeks
@@ -793,7 +797,9 @@ export default function ProgrammingTab() {
               <button
                 type="button"
                 title="Plan which exercises rotate phase to phase, names only"
-                className={pill(phaseMode === 'exercises')}
+                className={`px-3 py-1.5 text-sm font-medium transition-colors ${
+                  phaseMode === 'exercises' ? 'bg-ink-950 text-white' : 'bg-white text-ink-500 hover:text-ink-950'
+                }`}
                 onClick={() => setPhaseMode('exercises')}
               >
                 Exercise rotation

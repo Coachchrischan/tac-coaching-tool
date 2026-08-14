@@ -25,7 +25,7 @@ export default function PlanningTab() {
   return (
     <div className="max-w-3xl">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-ink-950">Planning</h2>
+        <h2 className="font-display text-2xl text-ink-950">Planning</h2>
         {(() => {
           const urgent = mostUrgent([planning, program]);
           return (

@@ -106,7 +106,7 @@ export default function CommunityTab() {
   return (
     <div className="max-w-3xl">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-ink-950">Community events</h2>
+        <h2 className="font-display text-2xl text-ink-950">Community events</h2>
         <SaveBadge state={saveState} onReloadTheirs={reloadTheirs} onKeepMine={keepMine} onRetry={retry} />
       </div>
 

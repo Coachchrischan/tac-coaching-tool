@@ -217,7 +217,7 @@ export default function LayoutsTab() {
     <div>
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-ink-950">Floor layouts</h2>
+          <h2 className="font-display text-2xl text-ink-950">Floor layouts</h2>
           <p className="text-[13px] text-ink-500">
             Drag equipment and zone labels to plan resources per class. One grid square ≈ 1 m.
           </p>
