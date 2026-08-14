@@ -1,0 +1,182 @@
+// Dev middleware: POST /api/team-push { block, week, monday } pushes one week
+// of the program doc onto the TrainHeroic "TAC Strength Class" team calendar
+// (program 5071078) as DRAFTS. Publishing is impossible from here by design —
+// Chris publishes in the coach app. Refuses (409) if any target day already
+// has a session, so a double-click can't duplicate a week.
+//
+// TrainHeroic access reuses trainheroic-mcp's client + token (session-token in
+// its gitignored config.json). See trainheroic-mcp/API_BLUEPRINT.md, Teams.
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import type { IncomingMessage, ServerResponse } from 'node:http';
+import type { Plugin } from 'vite';
+
+const PROGRAM = 5071078;
+const MCP_DIR = 'C:/Users/User/Cowork/trainheroic-mcp';
+
+// Custom exercises created 2026-08-14 for sheet rows with no library match.
+const CUSTOM_IDS: Record<string, number> = {
+  'hip 90/90s': 8380174,
+  'calf stretch in rack w/toe lift': 8380176,
+  'db or plate drag through': 8380177,
+  'weighted db single leg calf raises': 8380179,
+  'hanging scap retracts': 8380180,
+  'prone angels': 8380181,
+  'db rear delt fly': 8380182,
+  'db step back / cossack squat / curtsey lunge / step up etc': 8380183,
+  'glute stretch': 8380184,
+  'glute bridge w/rotation': 8380185,
+};
+
+const PLAN = [
+  { focus: 'lower', title: 'Day 1 - Lower', offset: 0 },
+  { focus: 'upper', title: 'Day 2 - Upper', offset: 2 },
+  { focus: 'full', title: 'Day 3 - Full Body', offset: 4 },
+] as const;
+
+function addDays(iso: string, n: number) {
+  const d = new Date(iso + 'T00:00:00Z');
+  d.setUTCDate(d.getUTCDate() + n);
+  return { y: d.getUTCFullYear(), m: d.getUTCMonth() + 1, d: d.getUTCDate() };
+}
+
+// Chris's ratified rules: rep column numbers only; "each side" / "10+" / RIR /
+// holds go in the note. %1RM and RPE also go in the note (no TH percent param).
+function mapReps(raw: unknown): { reps: number | string; repUnit?: string; note: string | null } {
+  const s = String(raw ?? '').trim();
+  if (s === '') return { reps: '', note: null };
+  let m;
+  if ((m = s.match(/^(\d+)\s*ea$/i))) return { reps: Number(m[1]), note: 'each side' };
+  if ((m = s.match(/^(\d+)\s*sec\s*ea$/i))) return { reps: Number(m[1]), repUnit: 'seconds', note: 'each side' };
+  if ((m = s.match(/^(\d+)\s*sec$/i))) return { reps: Number(m[1]), repUnit: 'seconds', note: null };
+  if ((m = s.match(/^(\d+)\+$/))) return { reps: Number(m[1]), note: `aim ${s}` };
+  if ((m = s.match(/^(\d+)\s*RIR$/i))) return { reps: 'MAX', note: `leave ${m[1]} in reserve` };
+  if (/^\d+$/.test(s)) return { reps: Number(s), note: null };
+  return { reps: '', note: s };
+}
+
+function readBody(req: IncomingMessage): Promise<string> {
+  return new Promise((resolve, reject) => {
+    let body = '';
+    req.on('data', (c) => (body += c));
+    req.on('end', () => resolve(body));
+    req.on('error', reject);
+  });
+}
+
+function send(res: ServerResponse, status: number, payload: unknown) {
+  res.statusCode = status;
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify(payload));
+}
+
+export function teamPushPlugin(): Plugin {
+  let root = process.cwd();
+  return {
+    name: 'tac-team-push',
+    configResolved(config) {
+      root = config.root;
+    },
+    configureServer(server) {
+      server.middlewares.use('/api/team-push', (req, res) => {
+        void (async () => {
+          if (req.method !== 'POST') {
+            send(res, 405, { error: 'method not allowed' });
+            return;
+          }
+          const { block, week, monday } = JSON.parse(await readBody(req)) as {
+            block: number; week: number; monday: string;
+          };
+          if (!/^\d{4}-\d{2}-\d{2}$/.test(monday ?? '')) {
+            send(res, 400, { error: 'monday must be YYYY-MM-DD' });
+            return;
+          }
+
+          const { ThClient } = await import(/* @vite-ignore */ `file:///${MCP_DIR}/src/thClient.js`);
+          const token = JSON.parse(readFileSync(join(MCP_DIR, 'config.json'), 'utf8')).sessionToken;
+          const th = new ThClient(token);
+
+          const doc = JSON.parse(readFileSync(join(root, 'data', 'program.json'), 'utf8')).data;
+          const target = doc.blocks[block - 1]?.weeks[week - 1];
+          if (!target) {
+            send(res, 400, { error: `no block ${block} week ${week}` });
+            return;
+          }
+
+          // Refuse if any target day already holds a session (no duplicates).
+          const months = new Map<string, unknown[]>();
+          for (const p of PLAN) {
+            const { y, m } = addDays(monday, p.offset);
+            const key = `${y}/${m}`;
+            if (!months.has(key)) {
+              const read = await th.req('GET', `/1.0/coach/programs/edit/${PROGRAM}/${y}/${m}/4`);
+              months.set(key, read.programWorkouts ?? []);
+            }
+          }
+          const existing: string[] = [];
+          for (const p of PLAN) {
+            const { y, m, d } = addDays(monday, p.offset);
+            const date = `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+            const hit = (months.get(`${y}/${m}`) as { date: string; title: string }[]).find(
+              (w) => w.date === date,
+            );
+            if (hit) existing.push(`${date} already has "${hit.title}"`);
+          }
+          if (existing.length) {
+            send(res, 409, { error: 'those days already have sessions', existing });
+            return;
+          }
+
+          const pushed: string[] = [];
+          const skipped: string[] = [];
+          for (const p of PLAN) {
+            const session = target.sessions.find((s: { focus: string }) => s.focus === p.focus);
+            if (!session) continue;
+            const { y, m, d } = addDays(monday, p.offset);
+            const created = await th.createWorkoutForDay({ programId: PROGRAM, year: y, month: m, day: d, session: 0 });
+            const date = `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+            await th.setWorkoutTitle({
+              id: created.id, workoutId: created.workout_id, programId: PROGRAM, date, title: p.title,
+            });
+            let blockOrder = 0;
+            let exCount = 0;
+            for (const tb of session.timedBlocks) {
+              const slots = tb.slots.filter((sl: { name: string }) => sl.name);
+              if (!slots.length) continue;
+              blockOrder++;
+              const thBlock = await th.createBlock({ workoutId: created.workout_id, order: blockOrder, title: tb.label });
+              let exOrder = 0;
+              for (const sl of slots) {
+                const exerciseId = sl.exerciseId ?? CUSTOM_IDS[sl.name.trim().toLowerCase()];
+                if (!exerciseId) {
+                  skipped.push(`${p.title}: ${sl.name}`);
+                  continue;
+                }
+                exOrder++;
+                const { reps, repUnit, note } = mapReps(sl.reps);
+                const cue = [sl.intensity ? `@ ${sl.intensity}` : null, sl.rpe ? `RPE ${sl.rpe}` : null, note]
+                  .filter(Boolean)
+                  .join(' · ');
+                await th.addExercise({
+                  workoutSetId: thBlock.id,
+                  order: exOrder,
+                  exercise: {
+                    exerciseId, title: sl.name, cue,
+                    sets: Number(sl.sets) || 1, reps, repUnit,
+                    loadKg: sl.load && /^\d+(\.\d+)?$/.test(String(sl.load).trim()) ? Number(sl.load) : null,
+                  },
+                });
+                exCount++;
+              }
+            }
+            pushed.push(`${p.title} (${date}): ${exCount} exercises`);
+          }
+          send(res, 200, { ok: true, pushed, skipped, note: 'All drafts. Publish stays manual in the coach app.' });
+        })().catch((err: unknown) => {
+          const e = err as { message?: string; body?: string };
+          send(res, 500, { error: e.message ?? String(err), detail: e.body });
+        });
+      });
+    },
+  };
+}

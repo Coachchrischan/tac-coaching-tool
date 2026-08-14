@@ -58,6 +58,7 @@ export default function ProgrammingTab() {
   const [wi, setWi] = useState(0);
   const [si, setSi] = useState(0);
   const [view, setView] = useState<ProgramView>('week');
+  const [pushState, setPushState] = useState<'idle' | 'pushing'>('idle');
   // Phase has two modes: plan the block-to-block exercise rotation (names
   // only), or work the prescriptions across all 12 weeks.
   const [phaseMode, setPhaseMode] = useState<'exercises' | 'prescriptions'>('exercises');
@@ -198,6 +199,47 @@ export default function ProgrammingTab() {
       if (byName) return byName;
     }
     return week.sessions.find((s) => s.focus === session.focus);
+  }
+
+  // Push the selected week to the TrainHeroic team calendar as DRAFTS
+  // (lower=Mon, upper=Wed, full=Fri, dated off the annual plan's year start).
+  // The server refuses if the target days already hold sessions; publishing
+  // stays manual in the coach app.
+  async function pushWeekToTrainHeroic() {
+    setPushState('pushing');
+    try {
+      const annual = await (await fetch('/api/store/annual-plan')).json();
+      const start = new Date(annual.data.startDate + 'T00:00:00Z');
+      start.setUTCDate(start.getUTCDate() + (bi * 4 + wi) * 7);
+      const monday = start.toISOString().slice(0, 10);
+      if (
+        !window.confirm(
+          `Push Block ${bi + 1} Week ${wi + 1} to the TAC Strength Class team calendar as DRAFTS?\n\nLower → Mon ${monday}, Upper → Wed, Full Body → Fri.\nNothing is published; you publish in the coach app.`,
+        )
+      )
+        return;
+      const res = await fetch('/api/team-push', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ block: bi + 1, week: wi + 1, monday }),
+      });
+      const out = await res.json();
+      if (!res.ok) {
+        window.alert(
+          `Push refused: ${out.error}\n${(out.existing ?? []).join('\n')}${out.detail ? '\n' + out.detail : ''}`,
+        );
+        return;
+      }
+      window.alert(
+        `Pushed as drafts:\n${out.pushed.join('\n')}${
+          out.skipped?.length ? '\n\nSkipped (no TrainHeroic id):\n' + out.skipped.join('\n') : ''
+        }`,
+      );
+    } catch (err) {
+      window.alert(`Push failed: ${String(err)}`);
+    } finally {
+      setPushState('idle');
+    }
   }
 
   // Phase exercise view: committing a cell makes that exercise this block's
@@ -482,6 +524,15 @@ export default function ProgrammingTab() {
             className="rounded-md border border-ink-300 bg-white px-3 py-1.5 text-sm font-medium text-ink-700 hover:bg-ink-100"
           >
             Export for Sheets
+          </button>
+          <button
+            type="button"
+            disabled={pushState === 'pushing'}
+            title="Create this week's sessions on the TAC Strength Class team calendar as drafts (never publishes)"
+            onClick={pushWeekToTrainHeroic}
+            className="rounded-md border border-accent-600 bg-white px-3 py-1.5 text-sm font-medium text-accent-700 hover:bg-accent-100 disabled:cursor-wait disabled:opacity-50"
+          >
+            {pushState === 'pushing' ? 'Pushing…' : `Push W${wi + 1} to TrainHeroic`}
           </button>
         </div>
       </div>
