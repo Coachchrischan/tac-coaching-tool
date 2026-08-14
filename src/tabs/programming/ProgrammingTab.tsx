@@ -15,8 +15,10 @@ import type {
 import TimedBlockCard from './TimedBlockCard';
 import SessionBlurb from './SessionBlurb';
 import { defaultSeries } from '../../seed';
-import { MonthView, ProgressionGrid } from './ProgressionViews';
+import { ProgressionGrid } from './ProgressionViews';
 import type { GridColumn } from './ProgressionViews';
+import { MonthGrid, PhaseGrid, buildBlockRows } from './EditableGrid';
+import type { AddTarget, SlotRef } from './EditableGrid';
 import { downloadProgramCsv } from '../../lib/exportCsv';
 
 type ProgramView = 'week' | 'month' | 'block' | 'phase';
@@ -205,19 +207,101 @@ export default function ProgrammingTab() {
     blockIndex: bi,
   }));
 
-  const phaseColumns: GridColumn[] = doc.blocks.flatMap((b, bIdx) =>
-    b.weeks.map((w, wIdx) => ({
-      label: `B${bIdx + 1} W${wIdx + 1}`,
-      session: matchSession(w),
-      weekIndex: wIdx,
-      blockIndex: bIdx,
-    })),
-  );
-
   function openColumn(col: GridColumn) {
     setBi(col.blockIndex);
     setWi(col.weekIndex);
     setView('week');
+  }
+
+  // Patch a single slot anywhere in the program, addressed by ids (the
+  // Month/Phase grids edit slots outside the currently selected week).
+  function patchSlotByRef(ref: SlotRef, patch: Partial<ExerciseSlot>) {
+    program.update((d: ProgramDoc) => ({
+      ...d,
+      blocks: d.blocks.map((b, bIdx) =>
+        bIdx !== ref.blockIndex
+          ? b
+          : {
+              ...b,
+              weeks: b.weeks.map((w, wIdx) =>
+                wIdx !== ref.weekIndex
+                  ? w
+                  : {
+                      ...w,
+                      sessions: w.sessions.map((s) =>
+                        s.id !== ref.sessionId
+                          ? s
+                          : {
+                              ...s,
+                              timedBlocks: s.timedBlocks.map((tb) =>
+                                tb.id !== ref.timedBlockId
+                                  ? tb
+                                  : {
+                                      ...tb,
+                                      slots: tb.slots.map((sl) =>
+                                        sl.id !== ref.slotId ? sl : { ...sl, ...patch },
+                                      ),
+                                    },
+                              ),
+                            },
+                      ),
+                    },
+              ) as (typeof b)['weeks'],
+            },
+      ) as ProgramDoc['blocks'],
+    }));
+  }
+
+  // Create a slot in a week that doesn't have this exercise yet, keeping the
+  // series label (and minutes, copied from a sibling week) consistent.
+  function addSlotFromTarget(t: AddTarget) {
+    const slot: ExerciseSlot = { id: crypto.randomUUID(), exerciseId: t.exerciseId, name: t.name };
+    const seriesKey = t.series.trim().toUpperCase();
+    program.update((d: ProgramDoc) => ({
+      ...d,
+      blocks: d.blocks.map((b, bIdx) => {
+        if (bIdx !== t.blockIndex) return b;
+        const sibling = b.weeks
+          .flatMap((w) => w.sessions)
+          .flatMap((s) => s.timedBlocks)
+          .find((tb) => tb.label.trim().toUpperCase() === seriesKey);
+        return {
+          ...b,
+          weeks: b.weeks.map((w, wIdx) => {
+            if (wIdx !== t.weekIndex) return w;
+            return {
+              ...w,
+              sessions: w.sessions.map((s) => {
+                if (s.id !== t.sessionId) return s;
+                const existing = s.timedBlocks.find(
+                  (tb) => tb.label.trim().toUpperCase() === seriesKey,
+                );
+                if (existing) {
+                  return {
+                    ...s,
+                    timedBlocks: s.timedBlocks.map((tb) =>
+                      tb.id !== existing.id ? tb : { ...tb, slots: [...tb.slots, slot] },
+                    ),
+                  };
+                }
+                return {
+                  ...s,
+                  timedBlocks: [
+                    ...s.timedBlocks,
+                    {
+                      id: crypto.randomUUID(),
+                      label: t.series,
+                      minutes: sibling?.minutes ?? 10,
+                      slots: [slot],
+                    },
+                  ],
+                };
+              }),
+            };
+          }) as (typeof b)['weeks'],
+        };
+      }) as ProgramDoc['blocks'],
+    }));
   }
 
   function handleKeyDown(e: React.KeyboardEvent) {
@@ -333,33 +417,32 @@ export default function ProgrammingTab() {
             ))}
           </div>
         )}
-        {view !== 'month' && (
-          <div className="flex items-center gap-1.5">
-            {sessions.map((s, i) => (
-              <button key={s.id} type="button" className={pill(i === sIdx)} onClick={() => setSi(i)}>
-                {s.name || FOCUS_LABEL[s.focus]}
-              </button>
-            ))}
-            {view === 'week' && (
-              <button
-                type="button"
-                title="Add a session to this week (e.g. an ESD or Hyrox day)"
-                onClick={addSession}
-                className="rounded-md border border-dashed border-ink-300 px-2.5 py-1.5 text-sm font-medium text-ink-400 hover:border-accent-600 hover:text-accent-600"
-              >
-                +
-              </button>
-            )}
-          </div>
-        )}
+        <div className="flex items-center gap-1.5">
+          {sessions.map((s, i) => (
+            <button key={s.id} type="button" className={pill(i === sIdx)} onClick={() => setSi(i)}>
+              {s.name || FOCUS_LABEL[s.focus]}
+            </button>
+          ))}
+          {view === 'week' && (
+            <button
+              type="button"
+              title="Add a session to this week (e.g. an ESD or Hyrox day)"
+              onClick={addSession}
+              className="rounded-md border border-dashed border-ink-300 px-2.5 py-1.5 text-sm font-medium text-ink-400 hover:border-accent-600 hover:text-accent-600"
+            >
+              +
+            </button>
+          )}
+        </div>
       </div>
 
       {view === 'month' && (
-        <MonthView
-          block={doc.blocks[bi]}
-          onOpenWeek={(wIdx, sIdx2) => {
+        <MonthGrid
+          block={buildBlockRows(doc.blocks[bi], bi, matchSession)}
+          onEdit={patchSlotByRef}
+          onAdd={addSlotFromTarget}
+          onOpenWeek={(wIdx) => {
             setWi(wIdx);
-            setSi(sIdx2);
             setView('week');
           }}
         />
@@ -367,7 +450,19 @@ export default function ProgrammingTab() {
 
       {view === 'block' && <ProgressionGrid columns={blockColumns} onOpenColumn={openColumn} />}
 
-      {view === 'phase' && <ProgressionGrid columns={phaseColumns} onOpenColumn={openColumn} />}
+      {view === 'phase' && (
+        <PhaseGrid
+          blocks={doc.blocks.map((b, bIdx) => buildBlockRows(b, bIdx, matchSession))}
+          themes={doc.blocks.map((b) => b.theme)}
+          onEdit={patchSlotByRef}
+          onAdd={addSlotFromTarget}
+          onOpenWeek={(bIdx, wIdx) => {
+            setBi(bIdx);
+            setWi(wIdx);
+            setView('week');
+          }}
+        />
+      )}
 
       {view === 'week' && (
       <>

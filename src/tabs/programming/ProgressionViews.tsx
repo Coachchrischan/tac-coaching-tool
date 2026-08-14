@@ -1,4 +1,4 @@
-import type { ExerciseSlot, ProgramBlock, Session } from '../../types/documents';
+import type { ExerciseSlot, Session } from '../../types/documents';
 
 /** Compact prescription string: "4×6 · 70% · RPE 8 · 31X1" */
 export function slotSummary(slot: ExerciseSlot): string {
@@ -23,59 +23,6 @@ const FOCUS_LABEL: Record<Session['focus'], string> = {
 
 export function sessionLabel(s: Session): string {
   return s.name || FOCUS_LABEL[s.focus];
-}
-
-// ---------- Month view: the whole block, four weeks side by side ----------
-
-export function MonthView({
-  block,
-  onOpenWeek,
-}: {
-  block: ProgramBlock;
-  onOpenWeek: (weekIndex: number, sessionIndex: number) => void;
-}) {
-  return (
-    <div className="grid grid-cols-4 gap-3">
-      {block.weeks.map((week, wi) => (
-        <div key={week.id} className="min-w-0">
-          <h4 className="mb-2 text-center text-[11px] font-semibold tracking-wide text-ink-500 uppercase">
-            Week {wi + 1}
-          </h4>
-          <div className="space-y-3">
-            {week.sessions.map((session, si) => (
-              <button
-                key={session.id}
-                type="button"
-                onClick={() => onOpenWeek(wi, si)}
-                className="block w-full rounded-lg border border-ink-200 bg-white p-3 text-left shadow-sm transition-shadow hover:shadow-md"
-              >
-                <span className="text-[12px] font-bold text-accent-600">{sessionLabel(session)}</span>
-                {session.timedBlocks.map((tb) => (
-                  <div key={tb.id} className="mt-1.5">
-                    <span className="text-[10px] font-semibold tracking-wide text-ink-400 uppercase">
-                      {tb.label} · {tb.minutes} min
-                    </span>
-                    <ul>
-                      {tb.slots
-                        .filter((sl) => sl.name)
-                        .map((sl) => (
-                          <li key={sl.id} className="truncate text-[12px] leading-snug">
-                            <span className="font-medium text-ink-950">{sl.name}</span>
-                            {slotSummary(sl) && (
-                              <span className="text-ink-500"> {slotSummary(sl)}</span>
-                            )}
-                          </li>
-                        ))}
-                    </ul>
-                  </div>
-                ))}
-              </button>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
 }
 
 // ---------- Progression grid: one session type, weeks side by side ----------
