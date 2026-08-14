@@ -57,9 +57,12 @@ export default function WeekGrid({
   const laneMaps = useMemo(
     () =>
       Array.from({ length: 7 }, (_, day) =>
-        layoutDay(scenario.blocks.filter((b) => b.day === day)),
+        layoutDay(
+          scenario.blocks.filter((b) => b.day === day),
+          doc.rooms.map((r) => r.id),
+        ),
       ),
-    [scenario.blocks],
+    [scenario.blocks, doc.rooms],
   );
 
   const draggingBlock = scenario.blocks.find((b) => b.id === draggingId) ?? null;

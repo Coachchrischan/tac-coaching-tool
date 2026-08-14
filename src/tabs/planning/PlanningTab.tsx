@@ -42,7 +42,7 @@ export default function PlanningTab() {
       {/* Block themes (edits ProgramDoc directly; same field the Programming tab shows) */}
       <section className="rounded-xl border border-ink-200 bg-white p-4 shadow-sm">
         <h3 className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
-          Block themes ({program.data.name})
+          Phase themes ({program.data.name})
         </h3>
         <div className="mt-3 space-y-2">
           {program.data.blocks.map((b, i, all) => {
@@ -51,7 +51,7 @@ export default function PlanningTab() {
             return (
             <div key={b.id} className="flex items-center gap-3">
               <span className="w-24 text-sm font-semibold text-ink-950">
-                Block {i + 1}
+                Phase {i + 1}
                 <span className="block text-[11px] font-normal text-ink-400">
                   {first === last ? `Week ${first}` : `Weeks ${first}–${last}`}
                 </span>

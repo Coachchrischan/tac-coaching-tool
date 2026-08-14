@@ -117,7 +117,7 @@ export default function HomeTab() {
                 <li key={t.ct.id}>
                   <button
                     type="button"
-                    title="Highlight this class in the chart"
+                    title="See this class against itself, week by week or month by month"
                     onClick={() => setSelectedTypeId((cur) => (cur === t.ct.id ? null : t.ct.id))}
                     className={`block w-full rounded-md px-1.5 py-1 text-left transition-colors ${
                       selectedTypeId === t.ct.id ? 'bg-accent-100' : 'hover:bg-ink-100/60'
@@ -199,34 +199,78 @@ export default function HomeTab() {
             </p>
           ) : (
             <>
+            {selectedTypeId !== null ? (
+            /* Drill-down: one class against itself, period by period */
+            (() => {
+              const ct = schedule.data!.classTypes.find((c) => c.id === selectedTypeId);
+              const single = chart.groups.map((g) => ({
+                period: g.period,
+                count: g.bars.find((b) => b.ct.id === selectedTypeId)?.count ?? null,
+              }));
+              const counts = single.map((s) => s.count).filter((c): c is number => c !== null);
+              const singleMax = Math.max(1, ...counts);
+              return (
+                <>
+                  <p className="mt-3 text-[12px] font-medium text-ink-500">
+                    <span className="font-bold text-ink-950">{ct?.name}</span>{' '}
+                    {grain === 'weekly' ? 'week by week' : 'month by month'} — click another class
+                    below to switch, or Show all for the comparison.
+                  </p>
+                  <div className="mt-3 flex items-end justify-around gap-2">
+                    {single.map((s) => (
+                      <div key={s.period} className="flex min-w-0 flex-1 flex-col items-center gap-1">
+                        <div className="relative flex h-44 w-full max-w-16 items-end">
+                          {s.count !== null && (
+                            <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[11px] font-bold text-ink-950">
+                              {s.count}
+                            </span>
+                          )}
+                          {s.count === null ? (
+                            <div
+                              className="w-full rounded-t border border-dashed border-ink-200"
+                              style={{ height: '8%' }}
+                              title="Not recorded"
+                            />
+                          ) : (
+                            <div
+                              className="w-full rounded-t"
+                              style={{
+                                height: `${Math.max((s.count / singleMax) * 100, 2)}%`,
+                                backgroundColor: ct?.colour,
+                              }}
+                              title={`${fmtPeriod(s.period)}: ${s.count}`}
+                            />
+                          )}
+                        </div>
+                        <span className="truncate text-[10px] font-medium text-ink-500">
+                          {fmtPeriod(s.period)}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              );
+            })()
+            ) : (
               <div className="mt-4 flex items-end justify-around gap-4">
                 {chart.groups.map((g) => (
                   <div key={g.period} className="flex min-w-0 flex-1 flex-col items-center gap-1">
                     <div className="flex h-44 w-full items-end justify-center gap-[3px]">
-                      {g.bars.map((b) => {
-                        const dimmed = selectedTypeId !== null && b.ct.id !== selectedTypeId;
-                        return (
+                      {g.bars.map((b) => (
+                        <div
+                          key={b.ct.id}
+                          className="relative flex h-full max-w-7 min-w-1.5 flex-1 items-end"
+                          title={`${b.ct.name}: ${b.count}`}
+                        >
                           <div
-                            key={b.ct.id}
-                            className="relative flex h-full max-w-7 min-w-1.5 flex-1 items-end"
-                            title={`${b.ct.name}: ${b.count}`}
-                          >
-                            {selectedTypeId === b.ct.id && (
-                              <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[10px] font-bold text-ink-950">
-                                {b.count}
-                              </span>
-                            )}
-                            <div
-                              className="w-full rounded-t transition-opacity"
-                              style={{
-                                height: `${Math.max((b.count / chart.max) * 100, 2)}%`,
-                                backgroundColor: b.ct.colour,
-                                opacity: dimmed ? 0.18 : 1,
-                              }}
-                            />
-                          </div>
-                        );
-                      })}
+                            className="w-full rounded-t"
+                            style={{
+                              height: `${Math.max((b.count / chart.max) * 100, 2)}%`,
+                              backgroundColor: b.ct.colour,
+                            }}
+                          />
+                        </div>
+                      ))}
                     </div>
                     <span className="truncate text-[10px] font-medium text-ink-500">
                       {fmtPeriod(g.period)}
@@ -234,6 +278,7 @@ export default function HomeTab() {
                   </div>
                 ))}
               </div>
+            )}
               <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 border-t border-ink-100 pt-2.5">
                 {schedule.data.classTypes.map((ct) => (
                   <button

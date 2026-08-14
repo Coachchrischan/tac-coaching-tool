@@ -393,7 +393,7 @@ export function PhaseGrid({
             </th>
             {blocks.map((b, bi) => (
               <th key={bi} colSpan={blockSpan(b)} className={`${headCls} border-l-2 border-l-sand-500`}>
-                Block {bi + 1}
+                Phase {bi + 1}
                 {themes[bi] ? <span className="ml-2 font-normal normal-case text-ink-300">{themes[bi]}</span> : null}
               </th>
             ))}
@@ -542,7 +542,7 @@ export function PhaseExerciseGrid({
                   bi === blocks.length - 1 ? 'rounded-tr-xl' : ''
                 }`}
               >
-                Block {bi + 1}
+                Phase {bi + 1}
                 {themes[bi] ? (
                   <span className="ml-2 font-normal normal-case text-ink-300">{themes[bi]}</span>
                 ) : null}
@@ -582,7 +582,7 @@ export function PhaseExerciseGrid({
                       {blockRow && (
                         <button
                           type="button"
-                          title={`Remove ${blockRow.name} from every week of Block ${blocks[bi].blockIndex + 1}`}
+                          title={`Remove ${blockRow.name} from every week of Phase ${blocks[bi].blockIndex + 1}`}
                           onClick={() => onRemoveCell(blocks[bi].blockIndex, blockRow)}
                           className="shrink-0 rounded px-1 py-0.5 text-sm text-ink-200 hover:text-red-600"
                         >

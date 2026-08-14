@@ -351,7 +351,8 @@
                         "sets": "3",
                         "reps": "7",
                         "intensity": "75",
-                        "rpe": "8"
+                        "rpe": "8",
+                        "showScales": false
                       },
                       {
                         "id": "736f60d6-fce1-4a60-99b7-20949027d2e0",
@@ -361,7 +362,8 @@
                       {
                         "id": "3d2c68a0-663b-4e04-a818-058699bb48a9",
                         "exerciseId": 440,
-                        "name": "Depth Jump"
+                        "name": "Depth Jump",
+                        "showScales": false
                       }
                     ]
                   },
@@ -3225,6 +3227,6 @@
       }
     ]
   },
-  "rev": 30,
-  "updatedAt": "2026-08-14T06:39:07.659Z"
+  "rev": 32,
+  "updatedAt": "2026-08-14T19:21:00.047Z"
 }

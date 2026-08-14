@@ -81,7 +81,7 @@ export default function Combobox({
   return (
     <div ref={rootRef} className="relative min-w-0 flex-1">
       <input
-        className="w-full rounded-md border border-ink-300 bg-white px-2.5 py-1.5 text-sm text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none"
+        className="w-full rounded-md border border-ink-300 bg-white px-2.5 py-1 text-[13px] text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none"
         value={text}
         placeholder={placeholder ?? 'Exercise…'}
         autoFocus={autoFocus}

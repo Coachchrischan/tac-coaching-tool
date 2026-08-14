@@ -32,10 +32,22 @@ export interface LanePlacement {
 /**
  * Assign side-by-side lanes to overlapping blocks within one day
  * (concurrent classes in different rooms render beside each other).
+ *
+ * Lane priority for concurrent classes is the ROOM ORDER from the settings
+ * drawer: the room listed first always takes the left lane, so e.g. the
+ * Group Fitness Room class sits on the same side every day. Roomless blocks
+ * go last; ids only break exact ties, keeping the layout deterministic.
  */
-export function layoutDay(blocks: ClassBlock[]): Map<string, LanePlacement> {
+export function layoutDay(
+  blocks: ClassBlock[],
+  roomOrder: string[] = [],
+): Map<string, LanePlacement> {
+  const roomRank = (b: ClassBlock) => {
+    const i = b.roomId ? roomOrder.indexOf(b.roomId) : -1;
+    return i === -1 ? roomOrder.length : i;
+  };
   const sorted = [...blocks].sort(
-    (a, b) => a.startMin - b.startMin || a.id.localeCompare(b.id),
+    (a, b) => a.startMin - b.startMin || roomRank(a) - roomRank(b) || a.id.localeCompare(b.id),
   );
   const result = new Map<string, LanePlacement>();
 

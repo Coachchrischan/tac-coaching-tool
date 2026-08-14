@@ -238,7 +238,7 @@ export default function TvPage() {
                 </p>
               )}
               <p className="mt-1 text-[21px] font-semibold text-white/55">
-                Block {blockIndex + 1} · Week {weekIndex + 1} of {blockWeeks}
+                Phase {blockIndex + 1} · Week {weekIndex + 1} of {blockWeeks}
               </p>
               <p className="font-display mt-2 text-[20px] italic" style={{ color: SAND }}>
                 Train better, live better.

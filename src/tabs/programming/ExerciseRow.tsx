@@ -3,7 +3,7 @@ import type { LibraryExercise, RankedExercise } from '../../lib/library';
 import Combobox from '../../components/Combobox';
 
 const cell =
-  'w-full rounded-md border border-ink-300 bg-white px-2 py-1.5 text-center text-sm text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none';
+  'w-full rounded-md border border-ink-300 bg-white px-1.5 py-1 text-center text-[13px] text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none';
 
 export const SLOT_FIELDS = [
   ['sets', 'Sets'],

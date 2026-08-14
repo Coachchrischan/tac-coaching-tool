@@ -493,7 +493,7 @@
           {
             "id": "7084f58c-29d9-4b9b-8e43-a6bdacfbcb79",
             "day": 4,
-            "startMin": 420,
+            "startMin": 360,
             "durationMin": 60,
             "classTypeId": "esd",
             "coachId": "ji",
@@ -565,7 +565,7 @@
           {
             "id": "6b598281-0a42-437a-ac66-5e4f148b3472",
             "day": 1,
-            "startMin": 420,
+            "startMin": 435,
             "durationMin": 60,
             "classTypeId": "esd",
             "coachId": null,
@@ -576,6 +576,6 @@
     ],
     "activeScenarioId": "e50da7f1-8ead-4deb-b7f4-dcb054a3eb56"
   },
-  "rev": 59,
-  "updatedAt": "2026-08-14T06:28:16.479Z"
+  "rev": 84,
+  "updatedAt": "2026-08-14T19:17:58.727Z"
 }

@@ -21,10 +21,13 @@ import { downloadProgramCsv } from '../../lib/exportCsv';
 
 type ProgramView = 'week' | 'month' | 'phase';
 
+// Chris's terminology: blocks[] in the data model are PHASES (10/1/6 weeks);
+// the 3-4 week training blocks live inside a phase. UI says Phase throughout.
+// "Phase" = one phase's weeks side by side; "Macro" = every phase in a row.
 const VIEW_LABEL: Record<ProgramView, string> = {
   week: 'Week',
-  month: 'Month/Block',
-  phase: 'Phase',
+  month: 'Phase',
+  phase: 'Macro',
 };
 
 const FOCUS_LABEL: Record<Session['focus'], string> = {
@@ -151,7 +154,7 @@ export default function ProgrammingTab() {
       next < block.weeks.length &&
       blockHasContent(block, next) &&
       !window.confirm(
-        `Shorten Block ${bi + 1} to ${next} week${next === 1 ? '' : 's'}? The dropped weeks contain programming that will be deleted.`,
+        `Shorten Phase ${bi + 1} to ${next} week${next === 1 ? '' : 's'}? The dropped weeks contain programming that will be deleted.`,
       )
     )
       return;
@@ -196,7 +199,7 @@ export default function ProgrammingTab() {
     const block = doc.blocks[bi];
     if (
       !window.confirm(
-        `Remove Block ${bi + 1}${block.theme ? ` (${block.theme})` : ''}${
+        `Remove Phase ${bi + 1}${block.theme ? ` (${block.theme})` : ''}${
           blockHasContent(block) ? ' and ALL its programming' : ''
         }? This cannot be undone.`,
       )
@@ -317,7 +320,7 @@ export default function ProgrammingTab() {
       const monday = start.toISOString().slice(0, 10);
       if (
         !window.confirm(
-          `Push Block ${bi + 1} Week ${wi + 1} to the TAC Strength Class team calendar as DRAFTS?\n\nLower → Mon ${monday}, Upper → Wed, Full Body → Fri.\nNothing is published; you publish in the coach app.`,
+          `Push Phase ${bi + 1} Week ${wi + 1} to the TAC Strength Class team calendar as DRAFTS?\n\nLower → Mon ${monday}, Upper → Wed, Full Body → Fri.\nNothing is published; you publish in the coach app.`,
         )
       )
         return;
@@ -439,7 +442,7 @@ export default function ProgrammingTab() {
   function removePhaseExercise(blockIndex: number, row: EditableRow) {
     if (
       !window.confirm(
-        `Remove ${row.name} (and its sets/reps) from every week of Block ${blockIndex + 1}?`,
+        `Remove ${row.name} (and its sets/reps) from every week of Phase ${blockIndex + 1}?`,
       )
     )
       return;
@@ -652,12 +655,12 @@ export default function ProgrammingTab() {
         <div className="flex items-center gap-1.5">
           {doc.blocks.map((b, i) => (
             <button key={b.id} type="button" className={pill(i === bi)} onClick={() => setBi(i)}>
-              Block {i + 1}
+              Phase {i + 1}
             </button>
           ))}
           <button
             type="button"
-            title="Add a block (4 weeks by default, then set its length)"
+            title="Add a phase (4 weeks by default, then set its length)"
             onClick={addBlock}
             className="rounded-md border border-dashed border-ink-300 px-2.5 py-1.5 text-sm font-medium text-ink-400 hover:border-accent-600 hover:text-accent-600"
           >
@@ -665,7 +668,7 @@ export default function ProgrammingTab() {
           </button>
           <input
             className="ml-1 w-44 rounded-md border border-transparent bg-transparent px-2 py-1 text-sm text-ink-500 italic hover:border-ink-300 focus:border-accent-600 focus:text-ink-950 focus:outline-none"
-            placeholder="Block theme…"
+            placeholder="Phase theme…"
             value={doc.blocks[bi].theme ?? ''}
             onChange={(e) =>
               program.update((d) => ({
@@ -700,7 +703,7 @@ export default function ProgrammingTab() {
           </div>
           <button
             type="button"
-            title="Remove this block and its programming"
+            title="Remove this phase and its programming"
             disabled={doc.blocks.length <= 1}
             onClick={removeBlock}
             className="rounded px-1.5 py-1 text-sm text-ink-300 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-30"
@@ -794,7 +797,9 @@ export default function ProgrammingTab() {
       )}
 
       {view === 'week' && (
-      <>
+      // Editing wants focus, not sprawl: the whole week editor caps at a
+      // readable width so exercise fields stay compact on wide screens.
+      <div className="max-w-4xl">
       {/* Session settings */}
       <div className="mb-3 flex flex-wrap items-center gap-2 text-sm">
         <span className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">Session</span>
@@ -833,13 +838,13 @@ export default function ProgrammingTab() {
       </div>
 
       {/* Session intent: coach-facing note at the very top of the day */}
-      <div className="mb-4 rounded-xl border border-accent-500/40 bg-accent-100/50 p-3">
-        <label className="text-[11px] font-semibold tracking-wide text-accent-700 uppercase">
+      <div className="mb-3 border-l-4 border-sand-500 pl-3">
+        <label className="text-[11px] font-semibold tracking-wide text-ink-500 uppercase">
           Session intent
         </label>
         <textarea
-          className="mt-1 w-full resize-none rounded-md border border-ink-200 bg-white px-3 py-2 text-sm leading-relaxed text-ink-950 placeholder:text-ink-400 focus:border-accent-600 focus:outline-none"
-          rows={2}
+          className="mt-0.5 w-full resize-none rounded-md border border-transparent bg-transparent px-2 py-1 text-sm leading-relaxed text-ink-950 italic placeholder:not-italic placeholder:text-ink-300 hover:border-ink-200 focus:border-accent-600 focus:bg-white focus:outline-none"
+          rows={1}
           placeholder="What is today for? The intent a coach reading this should carry onto the floor."
           value={session.intent ?? ''}
           onChange={(e) =>
@@ -854,7 +859,7 @@ export default function ProgrammingTab() {
       </div>
 
       {/* Session */}
-      <div className="space-y-4">
+      <div className="space-y-3">
         {session.timedBlocks.map((block) => (
           <TimedBlockCard
             key={block.id}
@@ -915,7 +920,7 @@ export default function ProgrammingTab() {
           />
         )}
       </div>
-      </>
+      </div>
       )}
     </div>
   );

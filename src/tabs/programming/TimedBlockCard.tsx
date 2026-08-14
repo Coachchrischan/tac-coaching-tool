@@ -47,7 +47,7 @@ export default function TimedBlockCard({
   return (
     <section
       data-block-id={block.id}
-      className={`rounded-xl border p-4 shadow-sm ${style.card}`}
+      className={`rounded-lg border px-4 py-2.5 ${style.card}`}
     >
       <div className="flex items-center gap-2">
         <input
@@ -80,7 +80,7 @@ export default function TimedBlockCard({
         </button>
       </div>
 
-      <table className="mt-3 w-full table-fixed border-separate border-spacing-0">
+      <table className="mt-2 w-full table-fixed border-separate border-spacing-0">
         <thead>
           <tr>
             <th className={`pb-1 text-left text-[11px] font-medium tracking-wide uppercase ${style.head}`}>
@@ -119,7 +119,7 @@ export default function TimedBlockCard({
       <button
         type="button"
         onClick={onAddSlot}
-        className="mt-2 text-sm font-medium text-accent-600 hover:text-accent-700"
+        className="mt-1 text-[13px] font-medium text-accent-600 hover:text-accent-700"
       >
         + {isWarmup ? 'Warm-up exercise' : 'Exercise'} <span className="text-ink-400">(Ctrl+Enter)</span>
       </button>
