@@ -16,7 +16,20 @@
                     "id": "b1w1s1-WU",
                     "label": "WU",
                     "minutes": 5,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "82c8d6cc-4e4c-40d3-b89f-9757a6f6cdcd",
+                        "exerciseId": null,
+                        "name": "Hip 90/90s",
+                        "sets": "1"
+                      },
+                      {
+                        "id": "6353016a-347a-434f-a378-6a347dcde75a",
+                        "exerciseId": null,
+                        "name": "Calf Stretch in Rack w/Toe Lift",
+                        "sets": "1"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w1s1-A",
@@ -24,9 +37,26 @@
                     "minutes": 15,
                     "slots": [
                       {
-                        "id": "5c92714e-6b4e-41d2-8c5e-e38d9009169d",
+                        "id": "ab879edd-35a2-46fd-9fbb-3b2d14061c23",
+                        "exerciseId": 688272,
+                        "name": "Barbell Back Squats (E3OM)",
+                        "sets": "3",
+                        "reps": "9",
+                        "intensity": "70%"
+                      },
+                      {
+                        "id": "aae3fb4f-e2ed-4bf0-a493-18451cef6429",
                         "exerciseId": null,
-                        "name": ""
+                        "name": "DB or Plate Drag Through",
+                        "sets": "3",
+                        "reps": "10ea"
+                      },
+                      {
+                        "id": "c911e4ca-e7ba-4ccc-b152-1fec7be2bf3c",
+                        "exerciseId": 440,
+                        "name": "Depth Jump",
+                        "sets": "3",
+                        "reps": "5"
                       }
                     ]
                   },
@@ -34,13 +64,51 @@
                     "id": "b1w1s1-B",
                     "label": "B",
                     "minutes": 12,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "cb8bf1a3-b72c-4857-aa91-3e2825aa7f0b",
+                        "exerciseId": 8137642,
+                        "name": "Barbell Jefferson Split Squat (FFE)",
+                        "sets": "3",
+                        "reps": "8ea",
+                        "rpe": "7"
+                      },
+                      {
+                        "id": "6182b637-e62e-4c0e-8489-8d160afdd4c4",
+                        "exerciseId": 2263920,
+                        "name": "Single Leg Hamstring Bridge",
+                        "sets": "3",
+                        "reps": "10ea"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w1s1-C",
                     "label": "C",
                     "minutes": 10,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "5ac8297b-280e-41c3-98a3-11ae1b83cade",
+                        "exerciseId": 7784461,
+                        "name": "Cyclist Squat Finisher (1 &1/4)",
+                        "sets": "3",
+                        "reps": "10+"
+                      },
+                      {
+                        "id": "a4220193-be96-4933-babf-ba930191168d",
+                        "exerciseId": null,
+                        "name": "Weighted DB Single Leg Calf Raises",
+                        "sets": "3",
+                        "reps": "12ea"
+                      },
+                      {
+                        "id": "3ec4c5ff-a67c-4e28-b9f5-73dc59cf4861",
+                        "exerciseId": 7648107,
+                        "name": "Lateral Hip Thrust",
+                        "sets": "3",
+                        "reps": "10ea"
+                      }
+                    ]
                   }
                 ]
               },
@@ -52,25 +120,94 @@
                     "id": "b1w1s2-WU",
                     "label": "WU",
                     "minutes": 5,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "768a03a5-791e-402e-b210-a3e1819091a8",
+                        "exerciseId": 4440,
+                        "name": "DB Pullover",
+                        "sets": "1",
+                        "reps": "10"
+                      },
+                      {
+                        "id": "b9487fc8-ee05-40f3-9c44-ee8c3e1bec8a",
+                        "exerciseId": null,
+                        "name": "Hanging Scap Retracts",
+                        "sets": "1",
+                        "reps": "10"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w1s2-A",
                     "label": "A",
                     "minutes": 15,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "9748631d-c15d-4a45-954e-0b556c7389a5",
+                        "exerciseId": 240,
+                        "name": "Weighted Chin Up (E3OM)",
+                        "sets": "3",
+                        "reps": "5",
+                        "rpe": "7"
+                      },
+                      {
+                        "id": "6468bcfb-1198-4541-aa80-196f0d35a984",
+                        "exerciseId": null,
+                        "name": "Prone Angels",
+                        "sets": "3",
+                        "reps": "12"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w1s2-B",
                     "label": "B",
                     "minutes": 12,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "b6832ca9-b27f-4e14-8553-103d0277b6e2",
+                        "exerciseId": 686395,
+                        "name": "Barbell Bench Press",
+                        "sets": "3",
+                        "reps": "7",
+                        "intensity": "75%"
+                      },
+                      {
+                        "id": "29cac7c6-5047-4b86-873f-0900a78e504d",
+                        "exerciseId": 8211110,
+                        "name": "KB Gorilla Row / Single Arm DB Row",
+                        "sets": "3",
+                        "reps": "10ea"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w1s2-C",
                     "label": "C",
                     "minutes": 10,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "57a591ae-b7e8-4c66-be22-76abf7dd6be0",
+                        "exerciseId": 8211164,
+                        "name": "Push Ups",
+                        "sets": "3",
+                        "reps": "1RIR"
+                      },
+                      {
+                        "id": "488ba4c0-f714-4f45-9d25-b5a4fe8d4cd6",
+                        "exerciseId": null,
+                        "name": "DB Rear Delt Fly",
+                        "sets": "3",
+                        "reps": "15"
+                      },
+                      {
+                        "id": "dc0e4a35-824a-4c8b-99a9-d41749bf821e",
+                        "exerciseId": 5947834,
+                        "name": "Oblique Crunch",
+                        "sets": "3",
+                        "reps": "10ea"
+                      }
+                    ]
                   }
                 ]
               },
@@ -82,25 +219,94 @@
                     "id": "b1w1s3-WU",
                     "label": "WU",
                     "minutes": 5,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "5fd1c074-9523-4cda-ac0b-9a68d4ea654a",
+                        "exerciseId": null,
+                        "name": "Glute Stretch",
+                        "sets": "1",
+                        "reps": "30sec ea"
+                      },
+                      {
+                        "id": "ac2d9658-4c4e-46e0-8e63-b25d09fdb40e",
+                        "exerciseId": null,
+                        "name": "Glute Bridge w/Rotation",
+                        "sets": "1",
+                        "reps": "10ea"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w1s3-A",
                     "label": "A",
                     "minutes": 15,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "e742863d-a498-46c1-907a-c16d0dfb40a6",
+                        "exerciseId": 597556,
+                        "name": "Barbell RDL (E3OM)",
+                        "sets": "3",
+                        "reps": "5",
+                        "intensity": "80%"
+                      },
+                      {
+                        "id": "502bbdf3-aa4a-4d99-9b13-e2b8aa2e37dd",
+                        "exerciseId": null,
+                        "name": "DB Step Back / Cossack Squat / Curtsey Lunge / Step Up Etc",
+                        "sets": "3",
+                        "reps": "10ea"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w1s3-B",
                     "label": "B",
                     "minutes": 12,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "95795551-68e9-4908-8401-6e791e1f19dd",
+                        "exerciseId": 54656,
+                        "name": "Barbell Z-Press",
+                        "sets": "3",
+                        "reps": "8",
+                        "rpe": "7"
+                      },
+                      {
+                        "id": "57ab7414-0d03-46ba-94ad-38655eb2125f",
+                        "exerciseId": 187,
+                        "name": "Inverted Rows",
+                        "sets": "3",
+                        "reps": "10"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w1s3-C",
                     "label": "C",
                     "minutes": 10,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "2384bd14-abb8-450b-b306-4ecdb13b3118",
+                        "exerciseId": 5947692,
+                        "name": "Banded Bicep Curls",
+                        "sets": "3",
+                        "reps": "20"
+                      },
+                      {
+                        "id": "951825c6-d910-41be-9eb5-3f847ab9bfc9",
+                        "exerciseId": 2529795,
+                        "name": "DB Skullcrushers",
+                        "sets": "3",
+                        "reps": "15"
+                      },
+                      {
+                        "id": "a3e2c487-76dd-4644-acdf-ac32a52dc428",
+                        "exerciseId": 8043375,
+                        "name": "Double Leg Lowers",
+                        "sets": "3",
+                        "reps": "10"
+                      }
+                    ]
                   }
                 ]
               }
@@ -117,25 +323,79 @@
                     "id": "b1w2s1-WU",
                     "label": "WU",
                     "minutes": 5,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "f0cb43a7-1502-4b83-8648-149721622107",
+                        "exerciseId": null,
+                        "name": "Hip 90/90s"
+                      },
+                      {
+                        "id": "a7be1bda-e264-4138-a446-180b312f2de5",
+                        "exerciseId": null,
+                        "name": "Calf Stretch in Rack w/Toe Lift"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w2s1-A",
                     "label": "A",
                     "minutes": 15,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "e7a60243-d9a6-41fe-9173-ca50e9a2b664",
+                        "exerciseId": 688272,
+                        "name": "Barbell Back Squats (E3OM)"
+                      },
+                      {
+                        "id": "736f60d6-fce1-4a60-99b7-20949027d2e0",
+                        "exerciseId": null,
+                        "name": "DB or Plate Drag Through"
+                      },
+                      {
+                        "id": "3d2c68a0-663b-4e04-a818-058699bb48a9",
+                        "exerciseId": 440,
+                        "name": "Depth Jump"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w2s1-B",
                     "label": "B",
                     "minutes": 12,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "b8e6195d-2041-4d31-8a4f-9c5a2714b6e1",
+                        "exerciseId": 8137642,
+                        "name": "Barbell Jefferson Split Squat (FFE)"
+                      },
+                      {
+                        "id": "2af2014a-6717-48d4-8fde-07020428a993",
+                        "exerciseId": 2263920,
+                        "name": "Single Leg Hamstring Bridge"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w2s1-C",
                     "label": "C",
                     "minutes": 10,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "372cc49a-b644-4edc-b3e9-75627b45bdf1",
+                        "exerciseId": 7784461,
+                        "name": "Cyclist Squat Finisher (1 &1/4)"
+                      },
+                      {
+                        "id": "3a1f89aa-c5ff-4e7b-bf6f-8827ca9c98ca",
+                        "exerciseId": null,
+                        "name": "Weighted DB Single Leg Calf Raises"
+                      },
+                      {
+                        "id": "8707e209-f4bf-4112-82fb-ee28b52540c6",
+                        "exerciseId": 7648107,
+                        "name": "Lateral Hip Thrust"
+                      }
+                    ]
                   }
                 ]
               },
@@ -147,25 +407,74 @@
                     "id": "b1w2s2-WU",
                     "label": "WU",
                     "minutes": 5,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "79e1e7ee-2c95-4c2d-b6e9-3dc8768db86b",
+                        "exerciseId": 4440,
+                        "name": "DB Pullover"
+                      },
+                      {
+                        "id": "b281da28-6a7a-4a7c-bd25-aa249d9b1719",
+                        "exerciseId": null,
+                        "name": "Hanging Scap Retracts"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w2s2-A",
                     "label": "A",
                     "minutes": 15,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "909ce3db-dc0b-4d84-be1a-428b969916fb",
+                        "exerciseId": 240,
+                        "name": "Weighted Chin Up (E3OM)"
+                      },
+                      {
+                        "id": "751e1111-25a6-408e-9df3-daa0b21227c1",
+                        "exerciseId": null,
+                        "name": "Prone Angels"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w2s2-B",
                     "label": "B",
                     "minutes": 12,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "049a8354-73fa-4870-96be-4ad7dd9ee8cb",
+                        "exerciseId": 686395,
+                        "name": "Barbell Bench Press"
+                      },
+                      {
+                        "id": "25974429-b233-4b8b-b0b3-b010d48528d4",
+                        "exerciseId": 8211110,
+                        "name": "KB Gorilla Row / Single Arm DB Row"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w2s2-C",
                     "label": "C",
                     "minutes": 10,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "0b509513-0a6a-4497-b50b-0d60d33ab17f",
+                        "exerciseId": 8211164,
+                        "name": "Push Ups"
+                      },
+                      {
+                        "id": "74fee0f0-7137-445d-9c5a-83883e60240d",
+                        "exerciseId": null,
+                        "name": "DB Rear Delt Fly"
+                      },
+                      {
+                        "id": "f1fee93c-f3c4-4e2c-a952-11acdaf00e42",
+                        "exerciseId": 5947834,
+                        "name": "Oblique Crunch"
+                      }
+                    ]
                   }
                 ]
               },
@@ -177,25 +486,74 @@
                     "id": "b1w2s3-WU",
                     "label": "WU",
                     "minutes": 5,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "0c2b8ba6-abd0-4973-b530-ec703353bdf3",
+                        "exerciseId": null,
+                        "name": "Glute Stretch"
+                      },
+                      {
+                        "id": "2db80a6d-b791-4192-8d38-147d0ed276bf",
+                        "exerciseId": null,
+                        "name": "Glute Bridge w/Rotation"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w2s3-A",
                     "label": "A",
                     "minutes": 15,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "9f98eb9a-f48d-42d1-84f5-2c2e6e8c54a7",
+                        "exerciseId": 597556,
+                        "name": "Barbell RDL (E3OM)"
+                      },
+                      {
+                        "id": "5779ef59-681f-4d9e-9cd1-ce5d3e153390",
+                        "exerciseId": null,
+                        "name": "DB Step Back / Cossack Squat / Curtsey Lunge / Step Up Etc"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w2s3-B",
                     "label": "B",
                     "minutes": 12,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "eb26d592-69db-4513-a3a2-e1889e822f72",
+                        "exerciseId": 54656,
+                        "name": "Barbell Z-Press"
+                      },
+                      {
+                        "id": "93ddf405-11a5-493a-90fb-3518db50623b",
+                        "exerciseId": 187,
+                        "name": "Inverted Rows"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w2s3-C",
                     "label": "C",
                     "minutes": 10,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "0a0f600b-00d5-4faa-a1ab-c09b4bf96d19",
+                        "exerciseId": 5947692,
+                        "name": "Banded Bicep Curls"
+                      },
+                      {
+                        "id": "b084cd14-221b-4cc3-8229-eb4393b194f6",
+                        "exerciseId": 2529795,
+                        "name": "DB Skullcrushers"
+                      },
+                      {
+                        "id": "64245759-634e-4abe-8462-10e2894e5449",
+                        "exerciseId": 8043375,
+                        "name": "Double Leg Lowers"
+                      }
+                    ]
                   }
                 ]
               }
@@ -212,25 +570,79 @@
                     "id": "b1w3s1-WU",
                     "label": "WU",
                     "minutes": 5,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "f3b8d437-100d-4f77-ac5e-8364bdd0a678",
+                        "exerciseId": null,
+                        "name": "Hip 90/90s"
+                      },
+                      {
+                        "id": "b6263848-cbb9-4081-b988-5eb348591c80",
+                        "exerciseId": null,
+                        "name": "Calf Stretch in Rack w/Toe Lift"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w3s1-A",
                     "label": "A",
                     "minutes": 15,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "e463fbc1-8633-47f4-abd1-414df7e6f70b",
+                        "exerciseId": 688272,
+                        "name": "Barbell Back Squats (E3OM)"
+                      },
+                      {
+                        "id": "81585aad-4105-444e-9f69-057e5421a02f",
+                        "exerciseId": null,
+                        "name": "DB or Plate Drag Through"
+                      },
+                      {
+                        "id": "3d90e44e-3b06-4b0f-a370-69eacbea97d9",
+                        "exerciseId": 440,
+                        "name": "Depth Jump"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w3s1-B",
                     "label": "B",
                     "minutes": 12,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "9a51c678-3dca-4550-b3b5-5ef79eda4a57",
+                        "exerciseId": 8137642,
+                        "name": "Barbell Jefferson Split Squat (FFE)"
+                      },
+                      {
+                        "id": "7acda173-5fa0-495a-a33a-7405db290fc9",
+                        "exerciseId": 2263920,
+                        "name": "Single Leg Hamstring Bridge"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w3s1-C",
                     "label": "C",
                     "minutes": 10,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "8ccece90-eb21-4b0d-b02e-8600e839d981",
+                        "exerciseId": 7784461,
+                        "name": "Cyclist Squat Finisher (1 &1/4)"
+                      },
+                      {
+                        "id": "78589f64-1ae0-4b0c-9705-33a6ca63330d",
+                        "exerciseId": null,
+                        "name": "Weighted DB Single Leg Calf Raises"
+                      },
+                      {
+                        "id": "f2a5bf0a-0bd8-46c5-998b-b82070d5e6d9",
+                        "exerciseId": 7648107,
+                        "name": "Lateral Hip Thrust"
+                      }
+                    ]
                   }
                 ]
               },
@@ -242,25 +654,74 @@
                     "id": "b1w3s2-WU",
                     "label": "WU",
                     "minutes": 5,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "e2a2af87-b48a-4ace-9b6c-0fbcc3c16fed",
+                        "exerciseId": 4440,
+                        "name": "DB Pullover"
+                      },
+                      {
+                        "id": "94a9b068-68d1-462e-9488-fa2db9419d09",
+                        "exerciseId": null,
+                        "name": "Hanging Scap Retracts"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w3s2-A",
                     "label": "A",
                     "minutes": 15,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "9938afbf-12e2-41cc-99d1-f68d8354235c",
+                        "exerciseId": 240,
+                        "name": "Weighted Chin Up (E3OM)"
+                      },
+                      {
+                        "id": "4c30aa73-36c6-4243-8e65-2b77c67e9dab",
+                        "exerciseId": null,
+                        "name": "Prone Angels"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w3s2-B",
                     "label": "B",
                     "minutes": 12,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "5508efe0-d59e-45fb-b6ac-08a7ee7f518d",
+                        "exerciseId": 686395,
+                        "name": "Barbell Bench Press"
+                      },
+                      {
+                        "id": "f2447eda-170c-421e-8f46-dc4738735cad",
+                        "exerciseId": 8211110,
+                        "name": "KB Gorilla Row / Single Arm DB Row"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w3s2-C",
                     "label": "C",
                     "minutes": 10,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "bbfa3348-0444-468e-b132-1edf6fd9e060",
+                        "exerciseId": 8211164,
+                        "name": "Push Ups"
+                      },
+                      {
+                        "id": "3730d01d-ac97-4408-91d8-95d9ddd52a88",
+                        "exerciseId": null,
+                        "name": "DB Rear Delt Fly"
+                      },
+                      {
+                        "id": "b557fe54-98c4-4c81-b686-92bec40a4b64",
+                        "exerciseId": 5947834,
+                        "name": "Oblique Crunch"
+                      }
+                    ]
                   }
                 ]
               },
@@ -272,25 +733,74 @@
                     "id": "b1w3s3-WU",
                     "label": "WU",
                     "minutes": 5,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "a5a8eafe-129d-4e66-92f7-76023484f9cc",
+                        "exerciseId": null,
+                        "name": "Glute Stretch"
+                      },
+                      {
+                        "id": "7c1882b1-8b2b-4551-b4fb-cb518f1f1059",
+                        "exerciseId": null,
+                        "name": "Glute Bridge w/Rotation"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w3s3-A",
                     "label": "A",
                     "minutes": 15,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "0f1ecb2d-991d-46a4-9463-5ae10ea4d0a0",
+                        "exerciseId": 597556,
+                        "name": "Barbell RDL (E3OM)"
+                      },
+                      {
+                        "id": "eaa0b1d6-42a6-4e54-a4ff-38bc77a9622a",
+                        "exerciseId": null,
+                        "name": "DB Step Back / Cossack Squat / Curtsey Lunge / Step Up Etc"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w3s3-B",
                     "label": "B",
                     "minutes": 12,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "00c6cf5b-d980-43bc-abed-9d3710bf30ae",
+                        "exerciseId": 54656,
+                        "name": "Barbell Z-Press"
+                      },
+                      {
+                        "id": "b491c0ee-6513-4d6d-97f0-5611f35c26fc",
+                        "exerciseId": 187,
+                        "name": "Inverted Rows"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w3s3-C",
                     "label": "C",
                     "minutes": 10,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "9a29a859-0722-403a-bb1f-64c5272d6744",
+                        "exerciseId": 5947692,
+                        "name": "Banded Bicep Curls"
+                      },
+                      {
+                        "id": "77175303-6f0c-49d4-a0b2-e9171aed78d6",
+                        "exerciseId": 2529795,
+                        "name": "DB Skullcrushers"
+                      },
+                      {
+                        "id": "c40ec6b1-7a58-4393-948d-2f03ebad4741",
+                        "exerciseId": 8043375,
+                        "name": "Double Leg Lowers"
+                      }
+                    ]
                   }
                 ]
               }
@@ -307,25 +817,79 @@
                     "id": "b1w4s1-WU",
                     "label": "WU",
                     "minutes": 5,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "5fa83360-1a2a-4963-8fe4-32772fb27d46",
+                        "exerciseId": null,
+                        "name": "Hip 90/90s"
+                      },
+                      {
+                        "id": "33b2acbc-523d-4a1e-8456-ba123b2447d0",
+                        "exerciseId": null,
+                        "name": "Calf Stretch in Rack w/Toe Lift"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w4s1-A",
                     "label": "A",
                     "minutes": 15,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "75e82498-4c5d-4f8e-9454-42ee903e612d",
+                        "exerciseId": 688272,
+                        "name": "Barbell Back Squats (E3OM)"
+                      },
+                      {
+                        "id": "de562a89-136e-466c-a5ea-68751e8b60f6",
+                        "exerciseId": null,
+                        "name": "DB or Plate Drag Through"
+                      },
+                      {
+                        "id": "b2187a72-b176-47b5-9370-7932e2d24f72",
+                        "exerciseId": 440,
+                        "name": "Depth Jump"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w4s1-B",
                     "label": "B",
                     "minutes": 12,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "95949f11-5f25-4427-9d59-b3471b92bae5",
+                        "exerciseId": 8137642,
+                        "name": "Barbell Jefferson Split Squat (FFE)"
+                      },
+                      {
+                        "id": "6dbac15f-a9b8-4eed-8ac7-77044f1626e7",
+                        "exerciseId": 2263920,
+                        "name": "Single Leg Hamstring Bridge"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w4s1-C",
                     "label": "C",
                     "minutes": 10,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "c42dc66f-8ee5-49a8-966e-782cd11bc243",
+                        "exerciseId": 7784461,
+                        "name": "Cyclist Squat Finisher (1 &1/4)"
+                      },
+                      {
+                        "id": "39b4f9b4-66fc-450a-90fe-af44727898d7",
+                        "exerciseId": null,
+                        "name": "Weighted DB Single Leg Calf Raises"
+                      },
+                      {
+                        "id": "c9729c74-eeef-4461-b2d4-24ee43fec5aa",
+                        "exerciseId": 7648107,
+                        "name": "Lateral Hip Thrust"
+                      }
+                    ]
                   }
                 ]
               },
@@ -337,25 +901,74 @@
                     "id": "b1w4s2-WU",
                     "label": "WU",
                     "minutes": 5,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "ba5fac16-2f1d-49a4-b158-cb7e413b4b14",
+                        "exerciseId": 4440,
+                        "name": "DB Pullover"
+                      },
+                      {
+                        "id": "43bc2d33-898d-49c1-863d-a66a20f98b58",
+                        "exerciseId": null,
+                        "name": "Hanging Scap Retracts"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w4s2-A",
                     "label": "A",
                     "minutes": 15,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "f7de0a9e-02b6-443f-ae47-b0043db6e75f",
+                        "exerciseId": 240,
+                        "name": "Weighted Chin Up (E3OM)"
+                      },
+                      {
+                        "id": "d76f0258-f0a4-4346-8a7a-a62e3be3aac9",
+                        "exerciseId": null,
+                        "name": "Prone Angels"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w4s2-B",
                     "label": "B",
                     "minutes": 12,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "53e90f69-3306-486c-ae43-de168a0539ff",
+                        "exerciseId": 686395,
+                        "name": "Barbell Bench Press"
+                      },
+                      {
+                        "id": "f1dc809a-4c29-4247-9e4b-f0ebd1e459c3",
+                        "exerciseId": 8211110,
+                        "name": "KB Gorilla Row / Single Arm DB Row"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w4s2-C",
                     "label": "C",
                     "minutes": 10,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "bafb8da6-2171-4b96-ac5b-68264d843dce",
+                        "exerciseId": 8211164,
+                        "name": "Push Ups"
+                      },
+                      {
+                        "id": "dc1fd4a9-9924-4856-946c-47dfa9d42826",
+                        "exerciseId": null,
+                        "name": "DB Rear Delt Fly"
+                      },
+                      {
+                        "id": "8b6a66df-a964-4d8d-9400-0e9d119f7b2e",
+                        "exerciseId": 5947834,
+                        "name": "Oblique Crunch"
+                      }
+                    ]
                   }
                 ]
               },
@@ -367,25 +980,74 @@
                     "id": "b1w4s3-WU",
                     "label": "WU",
                     "minutes": 5,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "73ee6759-c282-49b5-b859-a468ecacb272",
+                        "exerciseId": null,
+                        "name": "Glute Stretch"
+                      },
+                      {
+                        "id": "d22784db-e704-43b8-86fb-f7102146ac69",
+                        "exerciseId": null,
+                        "name": "Glute Bridge w/Rotation"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w4s3-A",
                     "label": "A",
                     "minutes": 15,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "56261b9a-d285-4601-bb5e-053c1286cb74",
+                        "exerciseId": 597556,
+                        "name": "Barbell RDL (E3OM)"
+                      },
+                      {
+                        "id": "2fd983d1-73da-45e9-b198-f71e1ed69c24",
+                        "exerciseId": null,
+                        "name": "DB Step Back / Cossack Squat / Curtsey Lunge / Step Up Etc"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w4s3-B",
                     "label": "B",
                     "minutes": 12,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "a1cfec73-187a-4dcd-b8a6-0840249af930",
+                        "exerciseId": 54656,
+                        "name": "Barbell Z-Press"
+                      },
+                      {
+                        "id": "22feb49e-9c2c-4126-8213-b345479f8c86",
+                        "exerciseId": 187,
+                        "name": "Inverted Rows"
+                      }
+                    ]
                   },
                   {
                     "id": "b1w4s3-C",
                     "label": "C",
                     "minutes": 10,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "33a46e17-5f4a-4cf4-bde1-54841367e4f4",
+                        "exerciseId": 5947692,
+                        "name": "Banded Bicep Curls"
+                      },
+                      {
+                        "id": "25ebe2bd-27c1-4ccd-9ea1-90d7f0fc2f25",
+                        "exerciseId": 2529795,
+                        "name": "DB Skullcrushers"
+                      },
+                      {
+                        "id": "a3401824-ee3d-423a-a019-969823c0b73c",
+                        "exerciseId": 8043375,
+                        "name": "Double Leg Lowers"
+                      }
+                    ]
                   }
                 ]
               }
@@ -1165,6 +1827,6 @@
       }
     ]
   },
-  "rev": 15,
-  "updatedAt": "2026-08-14T02:22:55.126Z"
+  "rev": 17,
+  "updatedAt": "2026-08-14T02:27:55.438Z"
 }
