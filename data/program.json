@@ -22,7 +22,13 @@
                     "id": "b1w1s1-A",
                     "label": "A",
                     "minutes": 15,
-                    "slots": []
+                    "slots": [
+                      {
+                        "id": "5c92714e-6b4e-41d2-8c5e-e38d9009169d",
+                        "exerciseId": null,
+                        "name": ""
+                      }
+                    ]
                   },
                   {
                     "id": "b1w1s1-B",
@@ -1159,6 +1165,6 @@
       }
     ]
   },
-  "rev": 1,
-  "updatedAt": "2026-08-14T01:26:44.527Z"
+  "rev": 5,
+  "updatedAt": "2026-08-14T01:29:27.122Z"
 }

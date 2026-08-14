@@ -64,21 +64,55 @@ export interface RankedExercise {
   score: number;
 }
 
-/** Rank the library against a query. Custom exercises get a small boost so
- *  Chris's own variants surface first on near-ties. */
+const norm = (s: string) =>
+  (s || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9 ]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+const singular = (w: string) =>
+  w.length > 3 && w.endsWith('s') && !w.endsWith('ss') ? w.replace(/s$/, '') : w;
+const tokens = (s: string) => norm(s).split(' ').filter(Boolean).map(singular);
+
+/** Fraction of query words present as whole words in the title. This is what
+ *  lets "barbell squat" rank "Barbell Back Squat" (both words) above "Air Squat"
+ *  (one word), instead of every squat exercise tying and sorting alphabetically. */
+function coverage(query: string, title: string): number {
+  const q = tokens(query);
+  if (q.length === 0) return 0;
+  const t = new Set(tokens(title));
+  let hit = 0;
+  for (const w of q) if (t.has(w)) hit += 1;
+  return hit / q.length;
+}
+
+/** Rank the library against a query. Ties on the fuzzy score are broken by how
+ *  many query words the title actually contains, then by shorter title (the base
+ *  exercise beats an obscure variation), then alphabetically. Custom exercises
+ *  get a small boost so Chris's own variants surface first on near-ties. */
 export function searchLibrary(
   library: LibraryExercise[],
   query: string,
-  limit = 8,
+  limit = 12,
 ): RankedExercise[] {
   if (!query.trim()) return [];
-  const ranked: RankedExercise[] = [];
+  const ranked: (RankedExercise & { cover: number })[] = [];
   for (const exercise of library) {
     const s = score(query, exercise.title);
     if (s > MATCH_THRESHOLD) {
-      ranked.push({ exercise, score: s + (exercise.custom ? 0.05 : 0) });
+      ranked.push({
+        exercise,
+        score: s + (exercise.custom ? 0.05 : 0),
+        cover: coverage(query, exercise.title),
+      });
     }
   }
-  ranked.sort((a, b) => b.score - a.score || a.exercise.title.localeCompare(b.exercise.title));
-  return ranked.slice(0, limit);
+  ranked.sort(
+    (a, b) =>
+      b.score - a.score ||
+      b.cover - a.cover ||
+      a.exercise.title.length - b.exercise.title.length ||
+      a.exercise.title.localeCompare(b.exercise.title),
+  );
+  return ranked.slice(0, limit).map(({ exercise, score: sc }) => ({ exercise, score: sc }));
 }
