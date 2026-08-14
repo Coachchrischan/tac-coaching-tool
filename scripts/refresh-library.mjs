@@ -51,6 +51,8 @@ const exercises = raw
       custom: e.orgName === 'Coach Chris Chan',
       tags,
       patternGuess: guessPatterns(tags),
+      // Same demo/coaching video TrainHeroic shows for this exercise.
+      videoUrl: e.video_url || '',
     };
   })
   .sort((a, b) => a.title.localeCompare(b.title));

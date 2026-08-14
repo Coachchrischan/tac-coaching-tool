@@ -90,6 +90,7 @@ export interface Session {
   id: string;
   focus: SessionFocus;
   name?: string; // optional display name overriding the focus label
+  intent?: string; // coach-facing note at the top: the day's intent
   timedBlocks: TimedBlock[];
   blurbOverride?: string; // coach-edited blurb wins over generated
 }

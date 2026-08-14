@@ -21,8 +21,8 @@ export default function SessionBlurb({
   return (
     <section className="rounded-xl border border-ink-200 bg-ink-950 p-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-[11px] font-medium tracking-wide text-ink-400 uppercase">
-          Session blurb {session.blurbOverride ? '(edited)' : '(generated)'}
+        <h3 className="text-[11px] font-semibold tracking-wide text-sand-500 uppercase">
+          Coaching cues {session.blurbOverride ? '(edited)' : '(generated)'}
         </h3>
         <div className="flex gap-2">
           {session.blurbOverride !== undefined && (
@@ -54,7 +54,7 @@ export default function SessionBlurb({
           onChange={(e) => onSetOverride(e.target.value)}
         />
       ) : (
-        <p className="mt-2 text-sm leading-relaxed text-ink-200">{text}</p>
+        <p className="mt-2 text-[15px] leading-relaxed font-medium text-[#F5F3EB]">{text}</p>
       )}
     </section>
   );

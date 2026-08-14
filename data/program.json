@@ -13,57 +13,28 @@
                 "focus": "lower",
                 "timedBlocks": [
                   {
-                    "label": "A",
-                    "slots": [
-                      {
-                        "reps": "6",
-                        "id": "tv1",
-                        "name": "Back Squat",
-                        "sets": "4",
-                        "exerciseId": 1,
-                        "tempo": "31X1",
-                        "rpe": "8",
-                        "load": "70%",
-                        "showScales": false
-                      },
-                      {
-                        "id": "tv2",
-                        "name": "Spider Curls",
-                        "load": "12kg",
-                        "sets": "3",
-                        "reps": "10",
-                        "exerciseId": 1778429
-                      }
-                    ],
-                    "minutes": 15,
-                    "id": "tvA"
+                    "id": "b1w1s1-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
                   },
                   {
+                    "id": "b1w1s1-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w1s1-B",
                     "label": "B",
-                    "slots": [
-                      {
-                        "sets": "3",
-                        "reps": "20m",
-                        "exerciseId": null,
-                        "name": "Walking Lunge",
-                        "id": "tv3"
-                      },
-                      {
-                        "id": "tv4",
-                        "name": "Seated Row",
-                        "rpe": "7",
-                        "sets": "3",
-                        "reps": "12",
-                        "exerciseId": null
-                      },
-                      {
-                        "id": "2ac04ada-397d-4209-8967-a5d0241bf6f9",
-                        "exerciseId": null,
-                        "name": ""
-                      }
-                    ],
                     "minutes": 12,
-                    "id": "tvB"
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w1s1-C",
+                    "label": "C",
+                    "minutes": 10,
+                    "slots": []
                   }
                 ]
               },
@@ -72,9 +43,27 @@
                 "focus": "upper",
                 "timedBlocks": [
                   {
+                    "id": "b1w1s2-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b1w1s2-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w1s2-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w1s2-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -84,9 +73,27 @@
                 "focus": "full",
                 "timedBlocks": [
                   {
+                    "id": "b1w1s3-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b1w1s3-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w1s3-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w1s3-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -101,43 +108,28 @@
                 "focus": "lower",
                 "timedBlocks": [
                   {
-                    "label": "A",
-                    "slots": [
-                      {
-                        "reps": "5",
-                        "id": "p-b1w1s1",
-                        "name": "Back Squat",
-                        "sets": "4",
-                        "exerciseId": 1,
-                        "tempo": "31X1",
-                        "rpe": "8",
-                        "load": "75%"
-                      },
-                      {
-                        "id": "p-b1w1s2",
-                        "name": "Spider Curls",
-                        "load": "13kg",
-                        "sets": "3",
-                        "reps": "10",
-                        "exerciseId": 1778429
-                      }
-                    ],
-                    "minutes": 15,
-                    "id": "p-b1w1A"
+                    "id": "b1w2s1-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
                   },
                   {
+                    "id": "b1w2s1-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w2s1-B",
                     "label": "B",
-                    "slots": [
-                      {
-                        "sets": "3",
-                        "reps": "25m",
-                        "exerciseId": null,
-                        "name": "Walking Lunge",
-                        "id": "p-b1w1s3"
-                      }
-                    ],
                     "minutes": 12,
-                    "id": "p-b1w1B"
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w2s1-C",
+                    "label": "C",
+                    "minutes": 10,
+                    "slots": []
                   }
                 ]
               },
@@ -146,9 +138,27 @@
                 "focus": "upper",
                 "timedBlocks": [
                   {
+                    "id": "b1w2s2-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b1w2s2-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w2s2-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w2s2-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -158,9 +168,27 @@
                 "focus": "full",
                 "timedBlocks": [
                   {
+                    "id": "b1w2s3-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b1w2s3-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w2s3-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w2s3-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -175,43 +203,28 @@
                 "focus": "lower",
                 "timedBlocks": [
                   {
-                    "label": "A",
-                    "slots": [
-                      {
-                        "reps": "4",
-                        "id": "p-b1w2s1",
-                        "name": "Back Squat",
-                        "sets": "5",
-                        "exerciseId": 1,
-                        "tempo": "31X1",
-                        "rpe": "9",
-                        "load": "80%"
-                      },
-                      {
-                        "id": "p-b1w2s2",
-                        "name": "Spider Curls",
-                        "load": "14kg",
-                        "sets": "3",
-                        "reps": "10",
-                        "exerciseId": 1778429
-                      }
-                    ],
-                    "minutes": 15,
-                    "id": "p-b1w2A"
+                    "id": "b1w3s1-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
                   },
                   {
+                    "id": "b1w3s1-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w3s1-B",
                     "label": "B",
-                    "slots": [
-                      {
-                        "sets": "3",
-                        "reps": "30m",
-                        "exerciseId": null,
-                        "name": "Walking Lunge",
-                        "id": "p-b1w2s3"
-                      }
-                    ],
                     "minutes": 12,
-                    "id": "p-b1w2B"
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w3s1-C",
+                    "label": "C",
+                    "minutes": 10,
+                    "slots": []
                   }
                 ]
               },
@@ -220,9 +233,27 @@
                 "focus": "upper",
                 "timedBlocks": [
                   {
+                    "id": "b1w3s2-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b1w3s2-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w3s2-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w3s2-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -232,9 +263,27 @@
                 "focus": "full",
                 "timedBlocks": [
                   {
+                    "id": "b1w3s3-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b1w3s3-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w3s3-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w3s3-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -249,43 +298,28 @@
                 "focus": "lower",
                 "timedBlocks": [
                   {
-                    "label": "A",
-                    "slots": [
-                      {
-                        "reps": "3",
-                        "id": "p-b1w3s1",
-                        "name": "Back Squat",
-                        "sets": "5",
-                        "exerciseId": 1,
-                        "tempo": "31X1",
-                        "rpe": "9",
-                        "load": "82.5%"
-                      },
-                      {
-                        "id": "p-b1w3s2",
-                        "name": "Spider Curls",
-                        "load": "15kg",
-                        "sets": "3",
-                        "reps": "10",
-                        "exerciseId": 1778429
-                      }
-                    ],
-                    "minutes": 15,
-                    "id": "p-b1w3A"
+                    "id": "b1w4s1-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
                   },
                   {
+                    "id": "b1w4s1-A",
+                    "label": "A",
+                    "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w4s1-B",
                     "label": "B",
-                    "slots": [
-                      {
-                        "sets": "3",
-                        "reps": "35m",
-                        "exerciseId": null,
-                        "name": "Walking Lunge",
-                        "id": "p-b1w3s3"
-                      }
-                    ],
                     "minutes": 12,
-                    "id": "p-b1w3B"
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w4s1-C",
+                    "label": "C",
+                    "minutes": 10,
+                    "slots": []
                   }
                 ]
               },
@@ -294,9 +328,27 @@
                 "focus": "upper",
                 "timedBlocks": [
                   {
+                    "id": "b1w4s2-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b1w4s2-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w4s2-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w4s2-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -306,9 +358,27 @@
                 "focus": "full",
                 "timedBlocks": [
                   {
+                    "id": "b1w4s3-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b1w4s3-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w4s3-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b1w4s3-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -328,9 +398,27 @@
                 "focus": "lower",
                 "timedBlocks": [
                   {
+                    "id": "b2w1s1-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b2w1s1-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w1s1-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w1s1-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -340,9 +428,27 @@
                 "focus": "upper",
                 "timedBlocks": [
                   {
+                    "id": "b2w1s2-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b2w1s2-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w1s2-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w1s2-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -352,9 +458,27 @@
                 "focus": "full",
                 "timedBlocks": [
                   {
+                    "id": "b2w1s3-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b2w1s3-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w1s3-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w1s3-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -369,9 +493,27 @@
                 "focus": "lower",
                 "timedBlocks": [
                   {
+                    "id": "b2w2s1-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b2w2s1-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w2s1-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w2s1-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -381,9 +523,27 @@
                 "focus": "upper",
                 "timedBlocks": [
                   {
+                    "id": "b2w2s2-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b2w2s2-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w2s2-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w2s2-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -393,9 +553,27 @@
                 "focus": "full",
                 "timedBlocks": [
                   {
+                    "id": "b2w2s3-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b2w2s3-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w2s3-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w2s3-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -410,9 +588,27 @@
                 "focus": "lower",
                 "timedBlocks": [
                   {
+                    "id": "b2w3s1-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b2w3s1-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w3s1-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w3s1-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -422,9 +618,27 @@
                 "focus": "upper",
                 "timedBlocks": [
                   {
+                    "id": "b2w3s2-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b2w3s2-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w3s2-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w3s2-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -434,9 +648,27 @@
                 "focus": "full",
                 "timedBlocks": [
                   {
+                    "id": "b2w3s3-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b2w3s3-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w3s3-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w3s3-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -451,9 +683,27 @@
                 "focus": "lower",
                 "timedBlocks": [
                   {
+                    "id": "b2w4s1-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b2w4s1-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w4s1-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w4s1-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -463,9 +713,27 @@
                 "focus": "upper",
                 "timedBlocks": [
                   {
+                    "id": "b2w4s2-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b2w4s2-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w4s2-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w4s2-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -475,9 +743,27 @@
                 "focus": "full",
                 "timedBlocks": [
                   {
+                    "id": "b2w4s3-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b2w4s3-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w4s3-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b2w4s3-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -497,9 +783,27 @@
                 "focus": "lower",
                 "timedBlocks": [
                   {
+                    "id": "b3w1s1-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b3w1s1-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w1s1-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w1s1-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -509,9 +813,27 @@
                 "focus": "upper",
                 "timedBlocks": [
                   {
+                    "id": "b3w1s2-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b3w1s2-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w1s2-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w1s2-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -521,9 +843,27 @@
                 "focus": "full",
                 "timedBlocks": [
                   {
+                    "id": "b3w1s3-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b3w1s3-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w1s3-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w1s3-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -538,9 +878,27 @@
                 "focus": "lower",
                 "timedBlocks": [
                   {
+                    "id": "b3w2s1-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b3w2s1-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w2s1-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w2s1-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -550,9 +908,27 @@
                 "focus": "upper",
                 "timedBlocks": [
                   {
+                    "id": "b3w2s2-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b3w2s2-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w2s2-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w2s2-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -562,9 +938,27 @@
                 "focus": "full",
                 "timedBlocks": [
                   {
+                    "id": "b3w2s3-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b3w2s3-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w2s3-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w2s3-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -579,9 +973,27 @@
                 "focus": "lower",
                 "timedBlocks": [
                   {
+                    "id": "b3w3s1-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b3w3s1-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w3s1-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w3s1-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -591,9 +1003,27 @@
                 "focus": "upper",
                 "timedBlocks": [
                   {
+                    "id": "b3w3s2-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b3w3s2-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w3s2-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w3s2-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -603,9 +1033,27 @@
                 "focus": "full",
                 "timedBlocks": [
                   {
+                    "id": "b3w3s3-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b3w3s3-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w3s3-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w3s3-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -620,9 +1068,27 @@
                 "focus": "lower",
                 "timedBlocks": [
                   {
+                    "id": "b3w4s1-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b3w4s1-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w4s1-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w4s1-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -632,9 +1098,27 @@
                 "focus": "upper",
                 "timedBlocks": [
                   {
+                    "id": "b3w4s2-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b3w4s2-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w4s2-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w4s2-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -644,9 +1128,27 @@
                 "focus": "full",
                 "timedBlocks": [
                   {
+                    "id": "b3w4s3-WU",
+                    "label": "WU",
+                    "minutes": 5,
+                    "slots": []
+                  },
+                  {
                     "id": "b3w4s3-A",
                     "label": "A",
                     "minutes": 15,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w4s3-B",
+                    "label": "B",
+                    "minutes": 12,
+                    "slots": []
+                  },
+                  {
+                    "id": "b3w4s3-C",
+                    "label": "C",
+                    "minutes": 10,
                     "slots": []
                   }
                 ]
@@ -657,6 +1159,6 @@
       }
     ]
   },
-  "rev": 17,
-  "updatedAt": "2026-08-13T23:01:48.856Z"
+  "rev": 1,
+  "updatedAt": "2026-08-14T01:26:44.527Z"
 }

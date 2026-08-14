@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { mostUrgent, useDoc } from '../../lib/useDoc';
 import { useLibrary } from '../../lib/useLibrary';
@@ -14,6 +14,7 @@ import type {
 } from '../../types/documents';
 import TimedBlockCard from './TimedBlockCard';
 import SessionBlurb from './SessionBlurb';
+import { defaultSeries } from '../../seed';
 import { MonthView, ProgressionGrid } from './ProgressionViews';
 import type { GridColumn } from './ProgressionViews';
 import { downloadProgramCsv } from '../../lib/exportCsv';
@@ -68,6 +69,12 @@ export default function ProgrammingTab() {
     [merged],
   );
 
+  const videoById = useMemo(() => {
+    const m = new Map<number, string>();
+    for (const e of merged ?? []) if (e.videoUrl) m.set(e.id, e.videoUrl);
+    return m;
+  }, [merged]);
+
   if (!program.data || !overrides) {
     return <p className="py-20 text-center text-sm text-ink-400">Loading program…</p>;
   }
@@ -101,7 +108,7 @@ export default function ProgrammingTab() {
     const fresh: Session = {
       id: crypto.randomUUID(),
       focus: 'esd',
-      timedBlocks: [{ id: crypto.randomUUID(), label: 'A', minutes: 15, slots: [] }],
+      timedBlocks: defaultSeries(crypto.randomUUID()),
     };
     patchWeekSessions((list) => [...list, fresh]);
     setSi(sessions.length);
@@ -401,6 +408,27 @@ export default function ProgrammingTab() {
         </button>
       </div>
 
+      {/* Session intent: coach-facing note at the very top of the day */}
+      <div className="mb-4 rounded-xl border border-accent-500/40 bg-accent-100/50 p-3">
+        <label className="text-[11px] font-semibold tracking-wide text-accent-700 uppercase">
+          Session intent
+        </label>
+        <textarea
+          className="mt-1 w-full resize-none rounded-md border border-ink-200 bg-white px-3 py-2 text-sm leading-relaxed text-ink-950 placeholder:text-ink-400 focus:border-accent-600 focus:outline-none"
+          rows={2}
+          placeholder="What is today for? The intent a coach reading this should carry onto the floor."
+          value={session.intent ?? ''}
+          onChange={(e) =>
+            patchSession((s) => {
+              const next = { ...s };
+              if (e.target.value) next.intent = e.target.value;
+              else delete next.intent;
+              return next;
+            })
+          }
+        />
+      </div>
+
       {/* Session */}
       <div className="space-y-4">
         {session.timedBlocks.map((block) => (
@@ -409,6 +437,7 @@ export default function ProgrammingTab() {
             block={block}
             overrides={overrides}
             search={search}
+            videoUrlFor={(id) => videoById.get(id)}
             expandScales={expandScales}
             onPatchBlock={(patch) => patchTimedBlock(block.id, (b) => ({ ...b, ...patch }))}
             onDeleteBlock={() => patchTimedBlock(block.id, () => null)}

@@ -18,6 +18,7 @@ export default function ExerciseRow({
   slot,
   overrides,
   search,
+  videoUrl,
   expandScales,
   onPatch,
   onCommitExercise,
@@ -28,6 +29,7 @@ export default function ExerciseRow({
   slot: ExerciseSlot;
   overrides: LibraryOverridesDoc;
   search: (query: string) => RankedExercise[];
+  videoUrl?: string;
   expandScales: boolean;
   onPatch: (patch: Partial<ExerciseSlot>) => void;
   onCommitExercise: (name: string, exercise: LibraryExercise | null) => void;
@@ -62,6 +64,20 @@ export default function ExerciseRow({
               S{hasScales ? scales.filter((s) => s.trim()).length : ''}
             </button>
             <Combobox value={slot.name} search={search} onCommit={onCommitExercise} />
+            {videoUrl && (
+              <a
+                href={videoUrl}
+                target="_blank"
+                rel="noreferrer"
+                title="Watch the exercise video (TrainHeroic)"
+                className="shrink-0 rounded p-1 text-ink-400 hover:bg-accent-100 hover:text-accent-700"
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="2.5" y="5" width="19" height="14" rx="3" stroke="currentColor" strokeWidth="1.6" />
+                  <path d="M10 9.2v5.6l4.5-2.8L10 9.2Z" fill="currentColor" />
+                </svg>
+              </a>
+            )}
           </div>
         </td>
         {SLOT_FIELDS.map(([key]) => (

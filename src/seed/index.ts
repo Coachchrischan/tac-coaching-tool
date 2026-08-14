@@ -109,6 +109,16 @@ export function seedSchedule(): ScheduleDoc {
 
 const FOCUSES: SessionFocus[] = ['lower', 'upper', 'full'];
 
+// Every session starts with a Warm Up (WU) series plus A, B, C series.
+export function defaultSeries(prefix: string): Session['timedBlocks'] {
+  return [
+    { id: `${prefix}-WU`, label: 'WU', minutes: 5, slots: [] },
+    { id: `${prefix}-A`, label: 'A', minutes: 15, slots: [] },
+    { id: `${prefix}-B`, label: 'B', minutes: 12, slots: [] },
+    { id: `${prefix}-C`, label: 'C', minutes: 10, slots: [] },
+  ];
+}
+
 export function seedProgram(): ProgramDoc {
   const blocks = [1, 2, 3].map((b): ProgramBlock => {
     const weeks = [1, 2, 3, 4].map((w): ProgramWeek => {
@@ -116,7 +126,7 @@ export function seedProgram(): ProgramDoc {
         (focus, s): Session => ({
           id: `b${b}w${w}s${s + 1}`,
           focus,
-          timedBlocks: [{ id: `b${b}w${w}s${s + 1}-A`, label: 'A', minutes: 15, slots: [] }],
+          timedBlocks: defaultSeries(`b${b}w${w}s${s + 1}`),
         }),
       );
       return { id: `b${b}w${w}`, sessions };

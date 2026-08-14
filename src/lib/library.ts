@@ -7,6 +7,7 @@ export interface LibraryExercise {
   custom: boolean; // Chris's own TrainHeroic exercises, or app-added (negative id)
   tags: string[];
   patternGuess: Pattern[];
+  videoUrl?: string; // same demo video as TrainHeroic, where available
 }
 
 let cached: LibraryExercise[] | null = null;
