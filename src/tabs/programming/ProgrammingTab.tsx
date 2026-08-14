@@ -667,10 +667,12 @@ export default function ProgrammingTab() {
         </p>
       )}
 
-      {/* Navigation */}
-      <div className="mb-4 flex flex-wrap items-center gap-x-6 gap-y-2">
-        {!(view === 'month' && phaseMode === 'exercises') && (
-        <div className="flex items-center gap-1.5">
+      {/* Navigation: a stable two-row structure so nothing jumps when the
+          view changes. Row 1 is always the phase controls; row 2 always
+          starts with the session pills, then the one view-specific group
+          (week pills, block pills, or the phase mode toggle). */}
+      <div className="mb-4 space-y-2">
+        <div className="flex flex-wrap items-center gap-1.5">
           {doc.blocks.map((b, i) => (
             <button key={b.id} type="button" className={pill(i === bi)} onClick={() => setBi(i)}>
               Phase {i + 1}
@@ -729,74 +731,76 @@ export default function ProgrammingTab() {
             ✕
           </button>
         </div>
-        )}
-        {view === 'week' && (
+
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
           <div className="flex items-center gap-1.5">
-            {doc.blocks[bi].weeks.map((w, i) => (
-              <button key={w.id} type="button" className={pill(i === wi)} onClick={() => setWi(i)}>
-                W{i + 1}
+            {sessions.map((s, i) => (
+              <button key={s.id} type="button" className={pill(i === sIdx)} onClick={() => setSi(i)}>
+                {s.name || FOCUS_LABEL[s.focus]}
               </button>
             ))}
+            {view === 'week' && (
+              <button
+                type="button"
+                title="Add a session to this week (e.g. an ESD or Hyrox day)"
+                onClick={addSession}
+                className="rounded-md border border-dashed border-ink-300 px-2.5 py-1.5 text-sm font-medium text-ink-400 hover:border-accent-600 hover:text-accent-600"
+              >
+                +
+              </button>
+            )}
           </div>
-        )}
-        {view === 'block' && (
-          <div className="flex items-center gap-1.5">
-            {Array.from({ length: blockPages }, (_, i) => {
-              const first = i * BLOCK_LEN + 1;
-              const last = Math.min((i + 1) * BLOCK_LEN, doc.blocks[bi].weeks.length);
-              return (
-                <button
-                  key={i}
-                  type="button"
-                  className={pill(i === blockPage)}
-                  onClick={() => setBlockPage(i)}
-                >
-                  Block {i + 1}
-                  <span className="ml-1 text-[11px] opacity-60">
-                    {first === last ? `W${first}` : `W${first}–${last}`}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        )}
-        <div className="flex items-center gap-1.5">
-          {sessions.map((s, i) => (
-            <button key={s.id} type="button" className={pill(i === sIdx)} onClick={() => setSi(i)}>
-              {s.name || FOCUS_LABEL[s.focus]}
-            </button>
-          ))}
           {view === 'week' && (
-            <button
-              type="button"
-              title="Add a session to this week (e.g. an ESD or Hyrox day)"
-              onClick={addSession}
-              className="rounded-md border border-dashed border-ink-300 px-2.5 py-1.5 text-sm font-medium text-ink-400 hover:border-accent-600 hover:text-accent-600"
-            >
-              +
-            </button>
+            <div className="flex flex-wrap items-center gap-1.5">
+              {doc.blocks[bi].weeks.map((w, i) => (
+                <button key={w.id} type="button" className={pill(i === wi)} onClick={() => setWi(i)}>
+                  W{i + 1}
+                </button>
+              ))}
+            </div>
+          )}
+          {view === 'block' && (
+            <div className="flex items-center gap-1.5">
+              {Array.from({ length: blockPages }, (_, i) => {
+                const first = i * BLOCK_LEN + 1;
+                const last = Math.min((i + 1) * BLOCK_LEN, doc.blocks[bi].weeks.length);
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    className={pill(i === blockPage)}
+                    onClick={() => setBlockPage(i)}
+                  >
+                    Block {i + 1}
+                    <span className="ml-1 text-[11px] opacity-60">
+                      {first === last ? `W${first}` : `W${first}–${last}`}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+          {view === 'month' && (
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                title="This phase's weeks side by side"
+                className={pill(phaseMode === 'weeks')}
+                onClick={() => setPhaseMode('weeks')}
+              >
+                Weeks
+              </button>
+              <button
+                type="button"
+                title="Plan which exercises rotate phase to phase, names only"
+                className={pill(phaseMode === 'exercises')}
+                onClick={() => setPhaseMode('exercises')}
+              >
+                Exercise rotation
+              </button>
+            </div>
           )}
         </div>
-        {view === 'month' && (
-          <div className="flex items-center gap-1.5">
-            <button
-              type="button"
-              title="This phase's weeks side by side"
-              className={pill(phaseMode === 'weeks')}
-              onClick={() => setPhaseMode('weeks')}
-            >
-              Weeks
-            </button>
-            <button
-              type="button"
-              title="Plan which exercises rotate phase to phase, names only"
-              className={pill(phaseMode === 'exercises')}
-              onClick={() => setPhaseMode('exercises')}
-            >
-              Exercise rotation
-            </button>
-          </div>
-        )}
       </div>
 
       {view === 'block' && (
