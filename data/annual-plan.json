@@ -1,6 +1,6 @@
 {
   "data": {
-    "startDate": "2026-08-31",
+    "startDate": "2026-08-24",
     "streams": [
       {
         "id": "strength",
@@ -8,22 +8,60 @@
         "colour": "#003030",
         "phases": [
           {
-            "id": "24376506-5f44-4544-9a02-d684666b862a",
+            "id": "208695d4-f069-4662-9c16-09c7cfee5ab9",
             "name": "Strength-Hypertrophy",
-            "focus": "Combined block: main lifts loaded for strength, accessories carry the hypertrophy volume",
-            "weeks": 12
+            "focus": "Wave loading on the main lifts: 9s, 7s, 5s across three cycles. W1 top-set 3RM triple + 2x7 back-offs (doubles as testing). W7 mid-block deload, W8-10 final push.",
+            "weeks": 10,
+            "notes": "Accessories: ascending volume within each three-week wave. Anchor lifts stay stable across blocks."
           },
           {
-            "id": "155c47be-c807-44a3-96dc-e520051112af",
+            "id": "ddd735c6-d893-430f-8b9a-a034b696e9af",
+            "name": "Deload / skills week",
+            "focus": "Deload doubling as a skills/workshop week to teach technique for the coming strength block (e.g. deadlift workshop).",
+            "weeks": 1
+          },
+          {
+            "id": "6248618c-2d78-431d-b7ee-a15d585f48f0",
             "name": "Strength",
-            "focus": "Pure strength: progressive overload on the main lifts, intensity up, volume down",
+            "focus": "Two mini waves: 7-5-3 then 5-3-1. Accessories: descending volume, increasing intensity, strength-accessory emphasis.",
+            "weeks": 6,
+            "notes": "End-of-block retest: one Christmas-week class testing all compounds trained through the block."
+          },
+          {
+            "id": "426a756e-60ad-4f2b-b986-e2e5361f510c",
+            "name": "Christmas break",
+            "focus": "No classes for two weeks. Detraining window: consider a maintenance option or a January return-to-training ramp.",
+            "weeks": 2
+          },
+          {
+            "id": "2aed6a9c-77ce-4471-9e5c-35075b6ebc50",
+            "name": "Unilateral muscle-endurance",
+            "focus": "W1 unilateral testing (newcomer influx). Single-limb work, tempo, time under tension, asymmetric holds. Higher-rep muscle endurance, addressing imbalances.",
+            "weeks": 4
+          },
+          {
+            "id": "16f693f4-5f62-4860-ac99-c968a899edac",
+            "name": "Hypertrophy",
+            "focus": "Aesthetic-based goals focus. Main strength movements retained as anchors.",
             "weeks": 12
           },
           {
-            "id": "5fd37034-b445-43b8-8d1e-1634b7657522",
-            "name": "Hypertrophy",
-            "focus": "Hypertrophy: higher rep volume and time under tension to build muscle",
-            "weeks": 12
+            "id": "81553116-2160-459e-b2e9-b43def25aa61",
+            "name": "Strength-Hypertrophy (cycle 2)",
+            "focus": "Back into the strength-hypertrophy cycle: wave loading 9-7-5, mid-block deload.",
+            "weeks": 10
+          },
+          {
+            "id": "a5eaa5d1-e30b-4d90-8b44-e81f6dc5b7f4",
+            "name": "Deload / skills week (cycle 2)",
+            "focus": "Deload + skills workshops prepping the strength block.",
+            "weeks": 1
+          },
+          {
+            "id": "7e54f3e3-b9fa-45a6-8978-1e6f2a9b663a",
+            "name": "Strength (cycle 2)",
+            "focus": "Mini waves 7-5-3 then 5-3-1, retest to close.",
+            "weeks": 6
           }
         ]
       },
@@ -127,6 +165,6 @@
       }
     ]
   },
-  "rev": 2,
-  "updatedAt": "2026-08-14T02:04:05.587Z"
+  "rev": 3,
+  "updatedAt": "2026-08-14T05:20:43.791Z"
 }

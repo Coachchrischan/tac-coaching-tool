@@ -1,8 +1,44 @@
 {
   "data": {
     "notes": "",
-    "todos": []
+    "todos": [
+      {
+        "id": "8821de8e-1607-4863-b17f-149ac26c4bc6",
+        "text": "Discuss accessory variety management with Dave",
+        "done": false
+      },
+      {
+        "id": "9d3bd966-628a-4bb2-954f-841becec4c9e",
+        "text": "Confirm where conditioning/aerobic work lives for the CrossFit crowd (ESD lane?)",
+        "done": false
+      },
+      {
+        "id": "82fad2d4-72e5-458b-ba11-b2b46ae90291",
+        "text": "Plan the January return-to-training ramp / Christmas maintenance option",
+        "done": false
+      },
+      {
+        "id": "ef7e7a3d-30fc-4e76-a04b-867b2b122bfe",
+        "text": "Thread some single-limb work through non-unilateral blocks (physio note)",
+        "done": false
+      },
+      {
+        "id": "3016a53e-5866-4eb1-9062-2e55b5f12470",
+        "text": "Build the coverage matrix into the tool: patterns + muscle groups + trunk categories, rolling two-phase rule",
+        "done": false
+      },
+      {
+        "id": "8119a445-2728-42db-b563-00febcda5e4d",
+        "text": "Program the Christmas-week compound retest session",
+        "done": false
+      },
+      {
+        "id": "8fb12a4a-016d-42e0-b4b4-597acf96a72d",
+        "text": "Decide: restructure Programming tab to variable-length blocks (plan is 10/1/6, tool is fixed 3x4)",
+        "done": false
+      }
+    ]
   },
-  "rev": 3,
-  "updatedAt": "2026-08-13T07:37:38.300Z"
+  "rev": 4,
+  "updatedAt": "2026-08-14T05:20:59.816Z"
 }
