@@ -17,6 +17,8 @@ const HEADING = [
   /^\s*in\s+\d+\s*(min|minutes|mins)\b/i,
   /^\s*\d+\s*(min|minutes|mins)\b/i,
   /^\s*\d{1,2}:\d{2}\s*[-–—]\s*\d{1,2}:\d{2}\s*$/, // 0:00-10:00
+  // Duration first, the way Chris writes an EMOM: "8:00 EMOM", "20:00 AMRAP"
+  /^\s*\d{1,2}:\d{2}\s+\S/,
   /^\s*\d+\s*(x|rounds?)\b/i,
   /:\s*$/, // anything ending in a colon
 ];
@@ -26,8 +28,12 @@ const NOTE = /^\s*[*†]/;
 
 export const isHeading = (line: string) => HEADING.some((re) => re.test(line));
 
-/** Parse pasted text into circuit blocks plus a session footnote. */
-export function parseCircuit(text: string): { blocks: CircuitBlock[]; note?: string } {
+/** Parse pasted text into circuit blocks, a session footnote and an intent. */
+export function parseCircuit(text: string): {
+  blocks: CircuitBlock[];
+  note?: string;
+  intent?: string;
+} {
   const blocks: CircuitBlock[] = [];
   const notes: string[] = [];
   let current: CircuitBlock | null = null;
@@ -61,7 +67,20 @@ export function parseCircuit(text: string): { blocks: CircuitBlock[]; note?: str
   }
   push();
 
-  return { blocks, note: notes.length ? notes.join('\n') : undefined };
+  // A lead-in like "In pairs," sits above the first piece and is an
+  // instruction for the whole session, not a movement. Promote it.
+  let intent: string | undefined;
+  if (
+    blocks.length > 1 &&
+    !blocks[0].heading &&
+    blocks[0].lines.length === 1 &&
+    !/\d/.test(blocks[0].lines[0])
+  ) {
+    intent = blocks[0].lines[0].replace(/[,:]\s*$/, '');
+    blocks.shift();
+  }
+
+  return { blocks, note: notes.length ? notes.join('\n') : undefined, intent };
 }
 
 /** Render circuit blocks back to the plain text Chris writes. */

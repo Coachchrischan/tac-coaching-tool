@@ -42,11 +42,12 @@ export default function CircuitEditor({
   }
 
   function importPaste() {
-    const { blocks: parsed, note } = parseCircuit(paste);
+    const { blocks: parsed, note, intent } = parseCircuit(paste);
     if (parsed.length === 0) return;
     onPatch((s) => {
       const next: Session = { ...s, circuit: parsed };
       if (note) next.note = note;
+      if (intent) next.intent = intent;
       return next;
     });
     setPaste('');

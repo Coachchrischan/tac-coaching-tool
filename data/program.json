@@ -3940,13 +3940,6 @@
                     "timedBlocks": [],
                     "circuit": [
                       {
-                        "id": "4ce38084-1a89-4f42-a54a-4081abcf34b7",
-                        "heading": "",
-                        "lines": [
-                          "In pairs,"
-                        ]
-                      },
-                      {
                         "id": "0c571deb-277d-4b50-b440-bfe8ffcde6a5",
                         "heading": "0:00-10:00",
                         "lines": [
@@ -5183,6 +5176,6 @@
       }
     ]
   },
-  "rev": 35,
-  "updatedAt": "2026-08-19T20:53:32.878Z"
+  "rev": 37,
+  "updatedAt": "2026-08-19T21:26:14.191Z"
 }

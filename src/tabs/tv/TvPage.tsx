@@ -106,6 +106,26 @@ export default function TvPage() {
   const warmups = session.timedBlocks.filter((b) => isWarmup(b) && filled(b).length > 0);
   const series = session.timedBlocks.filter((b) => !isWarmup(b) && filled(b).length > 0);
 
+  // ESD, Hyrox and Game Day are written as circuits, so the board shows the
+  // pieces rather than a sets-and-reps table.
+  const circuit = (session.circuit ?? []).filter(
+    (c) => c.heading.trim() || c.lines.some((l) => l.trim()),
+  );
+  const isCircuit = circuit.length > 0;
+  // Each class gets its own backdrop: the room for strength, the members for
+  // the group classes.
+  const BACKDROP: Record<string, string> = {
+    esd: '/tv/bg-esd.jpg',
+    hyrox: '/tv/bg-hyrox.jpg',
+    gameday: '/tv/bg-gameday.jpg',
+  };
+  const backdrop = BACKDROP[session.focus] ?? '/tv/bg-gym-dark.jpg';
+  // The member photos are portrait, so they sit in a narrower panel and are
+  // framed on the group rather than cropped through it.
+  const backdropStyle = BACKDROP[session.focus]
+    ? { width: '42%', objectPosition: '50% 32%', filter: 'brightness(1.05)' }
+    : { width: '66%', objectPosition: '50% 62%', filter: 'brightness(1.3)' };
+
   const cueFor = (slot: ExerciseSlot) =>
     slot.exerciseId !== null ? overrides.cues[slot.exerciseId] : undefined;
   const scalesFor = (slot: ExerciseSlot) =>
@@ -203,15 +223,21 @@ export default function TvPage() {
       >
         {/* club photo anchored right, fading under the content like the wall boards */}
         <img
-          src="/tv/bg-gym-dark.jpg"
+          src={backdrop}
           alt=""
-          className="absolute inset-y-0 right-0 h-full w-[66%] object-cover"
-          style={{ objectPosition: '50% 62%', filter: 'brightness(1.3)' }}
+          className="absolute inset-y-0 right-0 h-full object-cover"
+          style={backdropStyle}
         />
         <div
           className="absolute inset-0"
           style={{
-            background: `linear-gradient(90deg, ${CHARCOAL} 0%, ${CHARCOAL} 38%, rgba(32,29,29,0.82) 60%, rgba(13,39,36,0.30) 100%)`,
+            // A four-piece board runs the full width, so the photo has to sit
+            // back further and read as texture behind the last card.
+            background: isCircuit
+              ? circuit.length >= 4
+                ? `linear-gradient(90deg, ${CHARCOAL} 0%, ${CHARCOAL} 62%, rgba(32,29,29,0.93) 78%, rgba(32,29,29,0.80) 100%)`
+                : `linear-gradient(90deg, ${CHARCOAL} 0%, ${CHARCOAL} 56%, rgba(32,29,29,0.86) 68%, rgba(13,39,36,0.28) 100%)`
+              : `linear-gradient(90deg, ${CHARCOAL} 0%, ${CHARCOAL} 38%, rgba(32,29,29,0.82) 60%, rgba(13,39,36,0.30) 100%)`,
           }}
         />
         <div
@@ -232,15 +258,33 @@ export default function TvPage() {
                   className="font-display mt-1 text-[64px] leading-none font-semibold tracking-tight"
                   style={{ color: CREAM }}
                 >
-                  Week {weekIndex + 1} <span style={{ color: SAND }}>·</span> {slideTitle(session)}
+                  {isCircuit ? (
+                    <>
+                      {FOCUS_TITLE[session.focus]} <span style={{ color: SAND }}>·</span>{' '}
+                      {session.name ?? `Week ${weekIndex + 1}`}
+                    </>
+                  ) : (
+                    <>
+                      Week {weekIndex + 1} <span style={{ color: SAND }}>·</span>{' '}
+                      {slideTitle(session)}
+                    </>
+                  )}
                 </h1>
               </div>
             </div>
             <div className="pt-2 text-right">
-              {theme && (
+              {/* Circuits are named by class in the headline, so the phase
+                  theme would only repeat noise: show the week instead. */}
+              {isCircuit ? (
                 <p className="text-[26px] font-extrabold tracking-[0.14em] text-white/90 uppercase">
-                  {theme}
+                  Week {weekIndex + 1}
                 </p>
+              ) : (
+                theme && (
+                  <p className="text-[26px] font-extrabold tracking-[0.14em] text-white/90 uppercase">
+                    {theme}
+                  </p>
+                )
               )}
               <p className="mt-1 text-[21px] font-semibold text-white/55">
                 Phase {blockIndex + 1} · Week {weekIndex + 1} of {blockWeeks}
@@ -261,8 +305,83 @@ export default function TvPage() {
             </p>
           )}
 
+          {/* circuit board: the pieces of an ESD / Hyrox / Game Day session */}
+          {isCircuit && (
+            <>
+              {/* Kept clear of the right-hand photo panel so the members show */}
+              <main
+                className="mt-6 grid min-h-0 flex-1 gap-6"
+                style={{
+                  gridTemplateColumns: `repeat(${Math.min(circuit.length, 4)}, minmax(0, 1fr))`,
+                  width: circuit.length >= 4 ? '100%' : '74%',
+                }}
+              >
+                {circuit.map((piece, i) => (
+                  <section
+                    key={piece.id}
+                    className="flex min-w-0 flex-col overflow-hidden rounded-lg border border-white/12"
+                    style={{ backgroundColor: 'rgba(32,29,29,0.72)' }}
+                  >
+                    <div
+                      className="border-b-[3px] px-6 py-4"
+                      style={{ borderColor: SAND }}
+                    >
+                      <span
+                        className="text-[15px] font-bold tracking-[0.22em] uppercase"
+                        style={{ color: 'rgba(222,197,174,0.65)' }}
+                      >
+                        Piece {i + 1}
+                      </span>
+                      <p
+                        className="text-[30px] leading-tight font-extrabold"
+                        style={{ color: SAND }}
+                      >
+                        {piece.heading || '—'}
+                      </p>
+                    </div>
+                    <ul className="flex-1 space-y-3 px-6 py-5">
+                      {piece.lines
+                        .filter((l) => l.trim())
+                        .map((line, li) => (
+                          <li
+                            key={li}
+                            className="text-[34px] leading-tight font-bold"
+                            style={{ color: CREAM }}
+                          >
+                            {line}
+                          </li>
+                        ))}
+                    </ul>
+                    {piece.restAfter && (
+                      <div
+                        className="border-t border-white/10 px-6 py-3 text-[22px] font-semibold tracking-wide"
+                        style={{ color: 'rgba(245,243,235,0.55)' }}
+                      >
+                        {piece.restAfter}
+                      </div>
+                    )}
+                  </section>
+                ))}
+              </main>
+
+              {/* the coach note belongs on the wall, not just in the app */}
+              {session.note && (
+                <p
+                  className="mt-5 rounded-lg border-l-4 px-5 py-3 text-[24px] leading-snug font-semibold"
+                  style={{
+                    borderColor: SAND,
+                    color: CREAM,
+                    backgroundColor: 'rgba(222,197,174,0.14)',
+                  }}
+                >
+                  {session.note}
+                </p>
+              )}
+            </>
+          )}
+
           {/* warm-up strip */}
-          {warmups.map((wu) => (
+          {!isCircuit && warmups.map((wu) => (
             <section
               key={wu.id}
               className="mt-6 rounded-lg border-2"
@@ -295,6 +414,7 @@ export default function TvPage() {
           ))}
 
           {/* series columns */}
+          {!isCircuit && (
           <main className="mt-7 grid min-h-0 flex-1 grid-flow-col auto-cols-fr gap-8">
             {series.map((block) => (
               <section
@@ -347,10 +467,13 @@ export default function TvPage() {
               </section>
             ))}
           </main>
+          )}
 
           {/* footer: coaching blurb + address */}
           <footer className="mt-6 flex items-end justify-between gap-10 border-t border-white/15 pt-4">
-            <p className="max-w-[1300px] text-[19px] leading-relaxed text-white/55">{blurb}</p>
+            <p className="max-w-[1300px] text-[19px] leading-relaxed text-white/55">
+              {isCircuit ? '' : blurb}
+            </p>
             <p className="shrink-0 text-[17px] font-semibold tracking-[0.28em] text-white/35 uppercase">
               76 Commercial Road, Teneriffe
             </p>
