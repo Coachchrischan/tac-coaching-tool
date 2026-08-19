@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { useDoc } from '../../lib/useDoc';
 import { useLibrary } from '../../lib/useLibrary';
 import { mergedLibrary, patternsFor } from '../../lib/library';
+import { streamsOf } from '../../lib/programStreams';
 import SaveBadge from '../../components/SaveBadge';
 import { PATTERN_LABELS, PATTERNS } from '../../types/documents';
 import type { Pattern } from '../../types/documents';
@@ -29,14 +30,20 @@ export default function MovementCheckTab() {
   const [bi, setBi] = useState(0);
 
   const overrides = lib.data;
+  // Coverage is judged on the Strength stream: it is where patterns are
+  // programmed deliberately. Other streams have their own metrics.
+  const phases = program.data ? (streamsOf(program.data)[0]?.blocks ?? []) : [];
+  const phaseIndex = Math.min(bi, Math.max(phases.length - 1, 0));
 
   const analysis = useMemo(() => {
     if (!program.data || !overrides || !library) return null;
     const merged = mergedLibrary(library, overrides);
     const byId = new Map(merged.map((e) => [e.id, e]));
+    const target = streamsOf(program.data)[0]?.blocks[phaseIndex];
+    if (!target) return null;
 
     const used = new Map<number | string, UsedExercise>();
-    for (const week of program.data.blocks[bi].weeks) {
+    for (const week of target.weeks) {
       for (const session of week.sessions) {
         for (const block of session.timedBlocks) {
           for (const slot of block.slots) {
@@ -70,7 +77,7 @@ export default function MovementCheckTab() {
 
     const exercises = [...used.values()].sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
     return { exercises, patternCounts, regionCounts };
-  }, [program.data, overrides, library, bi]);
+  }, [program.data, overrides, library, phaseIndex]);
 
   if (!program.data || !overrides || !library) {
     return <p className="py-20 text-center text-sm text-ink-400">Loading…</p>;
@@ -93,12 +100,12 @@ export default function MovementCheckTab() {
         <div className="flex flex-wrap items-center gap-3">
           <h2 className="font-display text-2xl text-ink-950">Movement check</h2>
           <div className="flex items-center gap-1.5">
-            {program.data.blocks.map((b, i) => (
+            {phases.map((b, i) => (
               <button key={b.id} type="button" className={pill(i === bi)} onClick={() => setBi(i)}>
                 Phase {i + 1}
               </button>
             ))}
-            <span className="ml-2 text-sm text-ink-500 italic">{program.data.blocks[bi].theme}</span>
+            <span className="ml-2 text-sm text-ink-500 italic">{phases[phaseIndex]?.theme}</span>
           </div>
         </div>
         <SaveBadge state={lib.saveState} onReloadTheirs={lib.reloadTheirs} onKeepMine={lib.keepMine} onRetry={lib.retry} />

@@ -7,6 +7,7 @@ import { useLibrary } from '../../lib/useLibrary';
 import { generateBlurb } from '../../lib/blurb';
 import { mergedLibrary } from '../../lib/library';
 import type { ExerciseSlot, ProgramDoc, Session, TimedBlock } from '../../types/documents';
+import { streamsOf } from '../../lib/programStreams';
 
 const W = 1920;
 const H = 1080;
@@ -22,6 +23,7 @@ const FOCUS_TITLE: Record<Session['focus'], string> = {
   full: 'FULL BODY',
   esd: 'ESD',
   hyrox: 'HYROX',
+  gameday: 'GAME DAY',
 };
 
 function slideTitle(session: Session): string {
@@ -29,17 +31,20 @@ function slideTitle(session: Session): string {
 }
 
 function findSession(doc: ProgramDoc, sessionId: string) {
-  for (let b = 0; b < doc.blocks.length; b++) {
-    for (let w = 0; w < doc.blocks[b].weeks.length; w++) {
-      for (const session of doc.blocks[b].weeks[w].sessions) {
-        if (session.id === sessionId) {
-          return {
-            session,
-            blockIndex: b,
-            weekIndex: w,
-            blockWeeks: doc.blocks[b].weeks.length,
-            theme: doc.blocks[b].theme,
-          };
+  for (const stream of streamsOf(doc)) {
+    for (let b = 0; b < stream.blocks.length; b++) {
+      const phase = stream.blocks[b];
+      for (let w = 0; w < phase.weeks.length; w++) {
+        for (const session of phase.weeks[w].sessions) {
+          if (session.id === sessionId) {
+            return {
+              session,
+              blockIndex: b,
+              weekIndex: w,
+              blockWeeks: phase.weeks.length,
+              theme: phase.theme,
+            };
+          }
         }
       }
     }

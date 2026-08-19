@@ -421,7 +421,7 @@ export function PhaseExerciseGrid({
           <tr>
             <th className={`w-9 rounded-tl-xl ${headCls}`}>Seg</th>
             <th className={`w-7 ${headCls}`}>#</th>
-            {blocks.map((b, bi) => (
+            {blocks.map((_b, bi) => (
               <th
                 key={bi}
                 className={`${headCls} border-l-2 border-l-sand-500 text-left ${

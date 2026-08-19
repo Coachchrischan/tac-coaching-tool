@@ -7,6 +7,7 @@ import type { LibraryExercise } from '../../lib/library';
 import SaveBadge from '../../components/SaveBadge';
 import type {
   ExerciseSlot,
+  ProgramBlock,
   ProgramDoc,
   ProgramWeek,
   Session,
@@ -19,6 +20,7 @@ import { MonthGrid, PhaseExerciseGrid, buildBlockRows } from './EditableGrid';
 import type { BlockRows } from './EditableGrid';
 import type { AddTarget, EditableRow, SlotRef } from './EditableGrid';
 import { downloadProgramCsv } from '../../lib/exportCsv';
+import { FOCUS_LABEL, streamsOf, withStreamBlocks } from '../../lib/programStreams';
 
 type ProgramView = 'week' | 'block' | 'month';
 
@@ -44,13 +46,8 @@ function sliceBlockRows(rows: BlockRows, start: number, end: number): BlockRows 
   };
 }
 
-const FOCUS_LABEL: Record<Session['focus'], string> = {
-  lower: 'Lower',
-  upper: 'Upper',
-  full: 'Full Body',
-  esd: 'ESD',
-  hyrox: 'Hyrox',
-};
+const selectCls =
+  'rounded-md border border-ink-300 bg-white px-2.5 py-1.5 text-sm font-medium text-ink-950 focus:border-accent-600 focus:outline-none';
 
 const pill = (active: boolean) =>
   `rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
@@ -71,8 +68,10 @@ export default function ProgrammingTab() {
   const { library, error: libraryError } = useLibrary();
   const navigate = useNavigate();
 
+  const [siRaw, setStreamIndex] = useState(0);
   const [biRaw, setBi] = useState(0);
   const [wiRaw, setWi] = useState(0);
+  const [editOpen, setEditOpen] = useState(false);
   const [si, setSi] = useState(0);
   const [view, setView] = useState<ProgramView>('week');
   const [pushState, setPushState] = useState<'idle' | 'pushing'>('idle');
@@ -102,20 +101,32 @@ export default function ProgrammingTab() {
   }
 
   const doc = program.data;
-  // Blocks vary in length (10/1/6...), so stale indices are clamped rather
-  // than trusted: switching from a 10-week block to a 1-week one must land
-  // on a week that exists.
-  const bi = Math.min(biRaw, doc.blocks.length - 1);
-  const wi = Math.min(wiRaw, doc.blocks[bi].weeks.length - 1);
-  const blockPages = Math.max(1, Math.ceil(doc.blocks[bi].weeks.length / BLOCK_LEN));
+  // Streams (Strength / ESD / Hyrox / Game Day) each hold their own phases,
+  // which vary in length (10/1/6...), so every index is clamped rather than
+  // trusted: switching stream or phase must land somewhere that exists.
+  const streams = streamsOf(doc);
+  const streamIndex = Math.min(siRaw, streams.length - 1);
+  const stream = streams[streamIndex];
+  const blocks = stream.blocks;
+  const bi = Math.min(biRaw, blocks.length - 1);
+  const wi = Math.min(wiRaw, blocks[bi].weeks.length - 1);
+  const blockPages = Math.max(1, Math.ceil(blocks[bi].weeks.length / BLOCK_LEN));
   const blockPage = Math.min(blockPageRaw, blockPages - 1);
-  const sessions = doc.blocks[bi].weeks[wi].sessions;
+  const sessions = blocks[bi].weeks[wi].sessions;
+
+  /** Every phase edit goes through here so it lands on the active stream. */
+  function updateBlocks(fn: (blocks: ProgramBlock[]) => ProgramBlock[]) {
+    program.update((d: ProgramDoc) => {
+      const current = streamsOf(d)[streamIndex];
+      return withStreamBlocks(d, streamIndex, fn(current.blocks));
+    });
+  }
   const sIdx = Math.min(si, Math.max(sessions.length - 1, 0));
   const session = sessions[sIdx];
 
   function patchWeekSessions(fn: (sessions: Session[]) => Session[]) {
-    program.update((d: ProgramDoc) => {
-      const blocks = d.blocks.map((b, bIdx) =>
+    updateBlocks((all) =>
+      all.map((b, bIdx) =>
         bIdx !== bi
           ? b
           : {
@@ -124,9 +135,8 @@ export default function ProgrammingTab() {
                 wIdx !== wi ? w : { ...w, sessions: fn(w.sessions) },
               ),
             },
-      );
-      return { ...d, blocks };
-    });
+      ),
+    );
   }
 
   function patchSession(fn: (s: Session) => Session) {
@@ -158,14 +168,14 @@ export default function ProgrammingTab() {
     };
   }
 
-  function blockHasContent(block: ProgramDoc['blocks'][number], fromWeek = 0) {
+  function blockHasContent(block: ProgramBlock, fromWeek = 0) {
     return block.weeks
       .slice(fromWeek)
       .some((w) => w.sessions.some((s) => s.timedBlocks.some((tb) => tb.slots.some((sl) => sl.name))));
   }
 
   function setBlockLength(target: number) {
-    const block = doc.blocks[bi];
+    const block = blocks[bi];
     const next = Math.max(1, Math.min(20, target));
     if (next === block.weeks.length) return;
     if (
@@ -176,45 +186,42 @@ export default function ProgrammingTab() {
       )
     )
       return;
-    program.update((d: ProgramDoc) => ({
-      ...d,
-      blocks: d.blocks.map((b, i) => {
+    updateBlocks((all) =>
+      all.map((b, i) => {
         if (i !== bi) return b;
         if (next < b.weeks.length) return { ...b, weeks: b.weeks.slice(0, next) };
         const weeks = [...b.weeks];
         while (weeks.length < next) weeks.push(cloneWeekStructure(weeks[weeks.length - 1]));
         return { ...b, weeks };
       }),
-    }));
+    );
     if (wi >= next) setWi(next - 1);
   }
 
   function addBlock() {
-    const focuses: Session['focus'][] = ['lower', 'upper', 'full'];
-    program.update((d: ProgramDoc) => ({
-      ...d,
-      blocks: [
-        ...d.blocks,
-        {
+    // A new phase mirrors the sessions this stream already runs.
+    const focuses = sessions.map((s) => s.focus);
+    updateBlocks((all) => [
+      ...all,
+      {
+        id: crypto.randomUUID(),
+        weeks: Array.from({ length: 4 }, (): ProgramWeek => ({
           id: crypto.randomUUID(),
-          weeks: Array.from({ length: 4 }, (): ProgramWeek => ({
+          sessions: focuses.map((focus) => ({
             id: crypto.randomUUID(),
-            sessions: focuses.map((focus) => ({
-              id: crypto.randomUUID(),
-              focus,
-              timedBlocks: defaultSeries(crypto.randomUUID()),
-            })),
+            focus,
+            timedBlocks: defaultSeries(crypto.randomUUID()),
           })),
-        },
-      ],
-    }));
-    setBi(doc.blocks.length);
+        })),
+      },
+    ]);
+    setBi(blocks.length);
     setWi(0);
   }
 
   function removeBlock() {
-    if (doc.blocks.length <= 1) return;
-    const block = doc.blocks[bi];
+    if (blocks.length <= 1) return;
+    const block = blocks[bi];
     if (
       !window.confirm(
         `Remove Phase ${bi + 1}${block.theme ? ` (${block.theme})` : ''}${
@@ -223,7 +230,7 @@ export default function ProgrammingTab() {
       )
     )
       return;
-    program.update((d: ProgramDoc) => ({ ...d, blocks: d.blocks.filter((_, i) => i !== bi) }));
+    updateBlocks((all) => all.filter((_, i) => i !== bi));
     setBi(Math.max(0, bi - 1));
     setWi(0);
   }
@@ -333,7 +340,7 @@ export default function ProgrammingTab() {
       const start = new Date(annual.data.startDate + 'T00:00:00Z');
       // Program weeks run consecutively from the year start; blocks vary in
       // length, so the offset is the sum of the earlier blocks' weeks.
-      const weeksBefore = doc.blocks.slice(0, bi).reduce((n, b) => n + b.weeks.length, 0);
+      const weeksBefore = blocks.slice(0, bi).reduce((n, b) => n + b.weeks.length, 0);
       start.setUTCDate(start.getUTCDate() + (weeksBefore + wi) * 7);
       const monday = start.toISOString().slice(0, 10);
       if (
@@ -387,9 +394,8 @@ export default function ProgrammingTab() {
     }
     const exerciseId = resolved ? resolved.id : null;
     const seriesKey = series.trim().toUpperCase();
-    program.update((d: ProgramDoc) => ({
-      ...d,
-      blocks: d.blocks.map((b, bIdx) => {
+    updateBlocks((all) =>
+      all.map((b, bIdx) => {
         if (bIdx !== blockIndex) return b;
         const sibling = b.weeks
           .flatMap((w) => w.sessions)
@@ -454,7 +460,7 @@ export default function ProgrammingTab() {
           }),
         };
       }),
-    }));
+    );
   }
 
   function removePhaseExercise(blockIndex: number, row: EditableRow) {
@@ -465,9 +471,8 @@ export default function ProgrammingTab() {
     )
       return;
     const ids = new Set(row.cells.filter(Boolean).map((ref) => ref!.slotId));
-    program.update((d: ProgramDoc) => ({
-      ...d,
-      blocks: d.blocks.map((b, bIdx) =>
+    updateBlocks((all) =>
+      all.map((b, bIdx) =>
         bIdx !== blockIndex
           ? b
           : {
@@ -484,15 +489,14 @@ export default function ProgrammingTab() {
               })),
             },
       ),
-    }));
+    );
   }
 
   // Patch a single slot anywhere in the program, addressed by ids (the
   // Month/Phase grids edit slots outside the currently selected week).
   function patchSlotByRef(ref: SlotRef, patch: Partial<ExerciseSlot>) {
-    program.update((d: ProgramDoc) => ({
-      ...d,
-      blocks: d.blocks.map((b, bIdx) =>
+    updateBlocks((all) =>
+      all.map((b, bIdx) =>
         bIdx !== ref.blockIndex
           ? b
           : {
@@ -523,7 +527,7 @@ export default function ProgrammingTab() {
               ),
             },
       ),
-    }));
+    );
   }
 
   // Create a slot in a week that doesn't have this exercise yet, keeping the
@@ -531,9 +535,8 @@ export default function ProgrammingTab() {
   function addSlotFromTarget(t: AddTarget) {
     const slot: ExerciseSlot = { id: crypto.randomUUID(), exerciseId: t.exerciseId, name: t.name };
     const seriesKey = t.series.trim().toUpperCase();
-    program.update((d: ProgramDoc) => ({
-      ...d,
-      blocks: d.blocks.map((b, bIdx) => {
+    updateBlocks((all) =>
+      all.map((b, bIdx) => {
         if (bIdx !== t.blockIndex) return b;
         const sibling = b.weeks
           .flatMap((w) => w.sessions)
@@ -575,7 +578,7 @@ export default function ProgrammingTab() {
           }),
         };
       }),
-    }));
+    );
   }
 
   function handleKeyDown(e: React.KeyboardEvent) {
@@ -592,7 +595,20 @@ export default function ProgrammingTab() {
   return (
     <div onKeyDown={handleKeyDown}>
       {/* Program banner: full width across the very top */}
-      <div className="mb-4 rounded-xl bg-ink-950 px-6 py-3 text-center shadow-sm">
+      <div className="relative mb-4 rounded-xl bg-ink-950 px-6 py-3 text-center shadow-sm">
+        <div className="absolute top-3 right-4">
+          {(() => {
+            const urgent = mostUrgent([program, lib]);
+            return (
+              <SaveBadge
+                state={urgent.saveState}
+                onReloadTheirs={urgent.reloadTheirs}
+                onKeepMine={urgent.keepMine}
+                onRetry={urgent.retry}
+              />
+            );
+          })()}
+        </div>
         <input
           className="font-display block w-full rounded-md border border-transparent bg-transparent px-2 py-0.5 text-center text-[26px] leading-tight text-ink-50 hover:border-white/25 focus:border-sand-500 focus:outline-none"
           value={doc.name}
@@ -600,8 +616,8 @@ export default function ProgrammingTab() {
         />
         <p className="text-[11px] font-semibold tracking-[0.28em] text-sand-500 uppercase">
           Phase {bi + 1}
-          {doc.blocks[bi].theme ? ` · ${doc.blocks[bi].theme}` : ''} · Week {wi + 1} of{' '}
-          {doc.blocks[bi].weeks.length}
+          {blocks[bi].theme ? ` · ${blocks[bi].theme}` : ''} · Week {wi + 1} of{' '}
+          {blocks[bi].weeks.length}
         </p>
       </div>
 
@@ -625,47 +641,6 @@ export default function ProgrammingTab() {
       </aside>
 
       <div className="min-w-0 flex-1">
-      {/* Controls row */}
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        {/* View switcher: Week edits, Block/Phase read side by side */}
-        <div className="flex overflow-hidden rounded-md border border-ink-300">
-          {(Object.keys(VIEW_LABEL) as ProgramView[]).map((v) => (
-            <button
-              key={v}
-              type="button"
-              onClick={() => setView(v)}
-              className={`px-3 py-1.5 text-sm font-medium transition-colors ${
-                view === v ? 'bg-ink-950 text-white' : 'bg-white text-ink-500 hover:text-ink-950'
-              }`}
-            >
-              {VIEW_LABEL[v]}
-            </button>
-          ))}
-        </div>
-        <div className="flex items-center gap-3">
-          <label className="flex items-center gap-1.5 text-sm text-ink-500">
-            <input
-              type="checkbox"
-              checked={expandScales}
-              onChange={(e) => setExpandScales(e.target.checked)}
-              className="accent-accent-600"
-            />
-            Show scales
-          </label>
-          {(() => {
-            const urgent = mostUrgent([program, lib]);
-            return (
-              <SaveBadge
-                state={urgent.saveState}
-                onReloadTheirs={urgent.reloadTheirs}
-                onKeepMine={urgent.keepMine}
-                onRetry={urgent.retry}
-              />
-            );
-          })()}
-        </div>
-      </div>
-
       {libraryError && (
         <p className="mb-3 rounded-md border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-800">
           Exercise library failed to load. Run <code>npm run refresh-library</code> and reload.
@@ -677,67 +652,47 @@ export default function ProgrammingTab() {
           starts with the session pills, then the one view-specific group
           (week pills, block pills, or the phase mode toggle). */}
       <div className="mb-4 space-y-2">
-        <div className="flex flex-wrap items-center gap-1.5">
-          {doc.blocks.map((b, i) => (
-            <button key={b.id} type="button" className={pill(i === bi)} onClick={() => setBi(i)}>
-              Phase {i + 1}
-            </button>
-          ))}
-          <button
-            type="button"
-            title="Add a phase (4 weeks by default, then set its length)"
-            onClick={addBlock}
-            className="rounded-md border border-dashed border-ink-300 px-2.5 py-1.5 text-sm font-medium text-ink-400 hover:border-accent-600 hover:text-accent-600"
-          >
-            +
-          </button>
-          <input
-            className="ml-1 w-44 rounded-md border border-transparent bg-transparent px-2 py-1 text-sm text-ink-500 italic hover:border-ink-300 focus:border-accent-600 focus:text-ink-950 focus:outline-none"
-            placeholder="Phase theme…"
-            value={doc.blocks[bi].theme ?? ''}
-            onChange={(e) =>
-              program.update((d) => ({
-                ...d,
-                blocks: d.blocks.map((b, i) =>
-                  i === bi ? { ...b, theme: e.target.value } : b,
-                ),
-              }))
-            }
-          />
-          <div className="flex items-center gap-1 rounded-md border border-ink-300 bg-white px-1.5 py-1">
-            <button
-              type="button"
-              title="One week shorter"
-              onClick={() => setBlockLength(doc.blocks[bi].weeks.length - 1)}
-              className="rounded px-1.5 text-sm font-bold text-ink-500 hover:text-ink-950 disabled:opacity-30"
-              disabled={doc.blocks[bi].weeks.length <= 1}
-            >
-              −
-            </button>
-            <span className="min-w-10 text-center text-sm text-ink-700">
-              {doc.blocks[bi].weeks.length} wk
-            </span>
-            <button
-              type="button"
-              title="One week longer (clones the last week's exercises, blank prescriptions)"
-              onClick={() => setBlockLength(doc.blocks[bi].weeks.length + 1)}
-              className="rounded px-1.5 text-sm font-bold text-ink-500 hover:text-ink-950"
-            >
-              +
-            </button>
-          </div>
-          <button
-            type="button"
-            title="Remove this phase and its programming"
-            disabled={doc.blocks.length <= 1}
-            onClick={removeBlock}
-            className="rounded px-1.5 py-1 text-sm text-ink-300 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-30"
-          >
-            ✕
-          </button>
-        </div>
-
+        {/* One bar: what you're programming (stream), which phase, which
+            session; then the view controls on the right. Length editing
+            lives behind Edit so it isn't underfoot. */}
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+          <div className="flex items-center gap-2">
+            <select
+              className={selectCls}
+              value={streamIndex}
+              onChange={(e) => {
+                setStreamIndex(Number(e.target.value));
+                setBi(0);
+                setWi(0);
+                setSi(0);
+              }}
+              title="Which class you're programming"
+            >
+              {streams.map((s, i) => (
+                <option key={s.id} value={i}>
+                  {s.name}
+                </option>
+              ))}
+            </select>
+            <select
+              className={selectCls}
+              value={bi}
+              onChange={(e) => {
+                setBi(Number(e.target.value));
+                setWi(0);
+                setBlockPage(0);
+              }}
+              title="Which phase of this stream"
+            >
+              {blocks.map((b, i) => (
+                <option key={b.id} value={i}>
+                  Phase {i + 1}
+                  {b.theme ? ` · ${b.theme}` : ''} ({b.weeks.length} wk)
+                </option>
+              ))}
+            </select>
+          </div>
+
           <div className="flex items-center gap-1.5">
             {sessions.map((s, i) => (
               <button key={s.id} type="button" className={pill(i === sIdx)} onClick={() => setSi(i)}>
@@ -747,7 +702,7 @@ export default function ProgrammingTab() {
             {view === 'week' && (
               <button
                 type="button"
-                title="Add a session to this week (e.g. an ESD or Hyrox day)"
+                title="Add a session to this week"
                 onClick={addSession}
                 className="rounded-md border border-dashed border-ink-300 px-2.5 py-1.5 text-sm font-medium text-ink-400 hover:border-accent-600 hover:text-accent-600"
               >
@@ -757,7 +712,7 @@ export default function ProgrammingTab() {
           </div>
           {view === 'week' && (
             <div className="flex flex-wrap items-center gap-1.5">
-              {doc.blocks[bi].weeks.map((w, i) => (
+              {blocks[bi].weeks.map((w, i) => (
                 <button key={w.id} type="button" className={pill(i === wi)} onClick={() => setWi(i)}>
                   W{i + 1}
                 </button>
@@ -768,7 +723,7 @@ export default function ProgrammingTab() {
             <div className="flex items-center gap-1.5">
               {Array.from({ length: blockPages }, (_, i) => {
                 const first = i * BLOCK_LEN + 1;
-                const last = Math.min((i + 1) * BLOCK_LEN, doc.blocks[bi].weeks.length);
+                const last = Math.min((i + 1) * BLOCK_LEN, blocks[bi].weeks.length);
                 return (
                   <button
                     key={i}
@@ -811,13 +766,115 @@ export default function ProgrammingTab() {
               </button>
             </div>
           )}
+
+          {/* Right-hand controls: how you're looking at it */}
+          <div className="ml-auto flex items-center gap-3">
+            <div className="flex overflow-hidden rounded-md border border-ink-300">
+              {(Object.keys(VIEW_LABEL) as ProgramView[]).map((v) => (
+                <button
+                  key={v}
+                  type="button"
+                  onClick={() => setView(v)}
+                  className={`px-3 py-1.5 text-sm font-medium transition-colors ${
+                    view === v ? 'bg-ink-950 text-white' : 'bg-white text-ink-500 hover:text-ink-950'
+                  }`}
+                >
+                  {VIEW_LABEL[v]}
+                </button>
+              ))}
+            </div>
+            <label className="flex items-center gap-1.5 text-sm text-ink-500">
+              <input
+                type="checkbox"
+                checked={expandScales}
+                onChange={(e) => setExpandScales(e.target.checked)}
+                className="accent-accent-600"
+              />
+              Scales
+            </label>
+            <button
+              type="button"
+              title="Phase name, length and structure"
+              onClick={() => setEditOpen((v) => !v)}
+              className={`rounded-md border px-3 py-1.5 text-sm font-medium transition-colors ${
+                editOpen
+                  ? 'border-ink-950 bg-ink-950 text-white'
+                  : 'border-ink-300 bg-white text-ink-700 hover:bg-ink-100'
+              }`}
+            >
+              Edit
+            </button>
+          </div>
         </div>
+
+        {/* Edit panel: phase structure, out of the way until wanted */}
+        {editOpen && (
+          <div className="flex flex-wrap items-end gap-4 rounded-lg border border-ink-200 bg-ink-50 px-4 py-3">
+            <label className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
+              Phase {bi + 1} theme
+              <input
+                className="mt-0.5 block w-56 rounded-md border border-ink-300 bg-white px-2.5 py-1.5 text-sm text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none"
+                placeholder="e.g. Strength-Hypertrophy"
+                value={blocks[bi].theme ?? ''}
+                onChange={(e) =>
+                  updateBlocks((all) =>
+                    all.map((b, i) => (i === bi ? { ...b, theme: e.target.value } : b)),
+                  )
+                }
+              />
+            </label>
+            <div className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
+              Phase length
+              <div className="mt-0.5 flex items-center gap-1 rounded-md border border-ink-300 bg-white px-1.5 py-1">
+                <button
+                  type="button"
+                  title="One week shorter"
+                  onClick={() => setBlockLength(blocks[bi].weeks.length - 1)}
+                  className="rounded px-1.5 text-sm font-bold text-ink-500 hover:text-ink-950 disabled:opacity-30"
+                  disabled={blocks[bi].weeks.length <= 1}
+                >
+                  −
+                </button>
+                <span className="min-w-12 text-center text-sm text-ink-700">
+                  {blocks[bi].weeks.length} wk
+                </span>
+                <button
+                  type="button"
+                  title="One week longer (clones the last week's exercises, blank prescriptions)"
+                  onClick={() => setBlockLength(blocks[bi].weeks.length + 1)}
+                  className="rounded px-1.5 text-sm font-bold text-ink-500 hover:text-ink-950"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={addBlock}
+              className="rounded-md border border-dashed border-ink-300 bg-white px-3 py-1.5 text-sm font-medium text-ink-500 hover:border-accent-600 hover:text-accent-600"
+            >
+              + Add phase
+            </button>
+            <button
+              type="button"
+              disabled={blocks.length <= 1}
+              onClick={removeBlock}
+              className="rounded-md border border-red-200 bg-white px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Delete phase {bi + 1}
+            </button>
+            <p className="w-full text-[11px] text-ink-400">
+              {stream.name} · {blocks.length} phase{blocks.length === 1 ? '' : 's'} ·{' '}
+              {blocks.reduce((n, b) => n + b.weeks.length, 0)} weeks total
+            </p>
+          </div>
+        )}
       </div>
 
       {view === 'block' && (
         <MonthGrid
           block={sliceBlockRows(
-            buildBlockRows(doc.blocks[bi], bi, matchSession),
+            buildBlockRows(blocks[bi], bi, matchSession),
             blockPage * BLOCK_LEN,
             (blockPage + 1) * BLOCK_LEN,
           )}
@@ -833,7 +890,7 @@ export default function ProgrammingTab() {
 
       {view === 'month' && phaseMode === 'weeks' && (
         <MonthGrid
-          block={buildBlockRows(doc.blocks[bi], bi, matchSession)}
+          block={buildBlockRows(blocks[bi], bi, matchSession)}
           onEdit={patchSlotByRef}
           onAdd={addSlotFromTarget}
           onOpenWeek={(wIdx) => {
@@ -845,8 +902,8 @@ export default function ProgrammingTab() {
 
       {view === 'month' && phaseMode === 'exercises' && (
         <PhaseExerciseGrid
-          blocks={doc.blocks.map((b, bIdx) => buildBlockRows(b, bIdx, matchSession))}
-          themes={doc.blocks.map((b) => b.theme)}
+          blocks={blocks.map((b, bIdx) => buildBlockRows(b, bIdx, matchSession))}
+          themes={blocks.map((b) => b.theme)}
           search={search}
           onCommitCell={commitPhaseExercise}
           onRemoveCell={removePhaseExercise}

@@ -3,20 +3,21 @@
 // session type, one column per week, cells are the compact prescription.
 
 import type { ProgramDoc, Session } from '../types/documents';
-import { sessionLabel, slotSummary } from '../tabs/programming/ProgressionViews';
+import { slotSummary } from '../tabs/programming/ProgressionViews';
+import { sessionLabel, streamsOf } from './programStreams';
 
 function esc(value: string): string {
   return /[",\n]/.test(value) ? `"${value.replace(/"/g, '""')}"` : value;
 }
 
 export function programToCsv(doc: ProgramDoc): string {
-  const weekLabels = doc.blocks.flatMap((_, b) =>
-    doc.blocks[b].weeks.map((_, w) => `B${b + 1} W${w + 1}`),
-  );
+  // Exports the active shape: every stream's phases, week by week.
+  const blocks = streamsOf(doc).flatMap((s) => s.blocks);
+  const weekLabels = blocks.flatMap((b, i) => b.weeks.map((_, w) => `P${i + 1} W${w + 1}`));
 
   // Distinct session identities (custom name first, then focus) in first-seen order.
   const identities: { key: string; label: string; match: (s: Session) => boolean }[] = [];
-  for (const block of doc.blocks) {
+  for (const block of blocks) {
     for (const week of block.weeks) {
       for (const session of week.sessions) {
         const key = session.name || session.focus;
@@ -35,9 +36,7 @@ export function programToCsv(doc: ProgramDoc): string {
   lines.push([esc(doc.name), ...weekLabels.map(esc)].join(','));
 
   for (const identity of identities) {
-    const sessions = doc.blocks.flatMap((b) =>
-      b.weeks.map((w) => w.sessions.find(identity.match)),
-    );
+    const sessions = blocks.flatMap((b) => b.weeks.map((w) => w.sessions.find(identity.match)));
     // Union of (series, exercise) rows in first-seen order.
     const rows = new Map<string, { series: string; name: string; cells: (string | null)[] }>();
     sessions.forEach((session, ci) => {

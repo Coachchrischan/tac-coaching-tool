@@ -64,7 +64,7 @@ export interface ScheduleDoc {
 
 // ---------- Programming ----------
 
-export type SessionFocus = 'lower' | 'upper' | 'full' | 'esd' | 'hyrox';
+export type SessionFocus = 'lower' | 'upper' | 'full' | 'esd' | 'hyrox' | 'gameday';
 
 export interface ExerciseSlot {
   id: string;
@@ -109,9 +109,19 @@ export interface ProgramBlock {
   weeks: ProgramWeek[];
 }
 
+// Each class type Chris programs is its own stream, with its own phases.
+// Stream ids match the annual-plan lanes where they overlap.
+export interface ProgramStream {
+  id: string; // 'strength' | 'esd' | 'hyrox' | 'gameday', extensible
+  name: string;
+  blocks: ProgramBlock[]; // phases (variable length: 10/1/6...)
+}
+
 export interface ProgramDoc {
   name: string;
-  blocks: ProgramBlock[];
+  streams: ProgramStream[];
+  /** @deprecated pre-streams shape; migrated to streams[0] on read. */
+  blocks?: ProgramBlock[];
 }
 
 // ---------- Library overrides (coach layer over the generated library) ----------

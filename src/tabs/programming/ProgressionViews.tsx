@@ -22,6 +22,7 @@ const FOCUS_LABEL: Record<Session['focus'], string> = {
   full: 'Full Body',
   esd: 'ESD',
   hyrox: 'Hyrox',
+  gameday: 'Game Day',
 };
 
 export function sessionLabel(s: Session): string {

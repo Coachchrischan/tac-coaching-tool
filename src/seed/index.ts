@@ -119,34 +119,46 @@ export function defaultSeries(prefix: string): Session['timedBlocks'] {
   ];
 }
 
-// Block lengths follow PROGRAMMING-PLAN.md (10/1/6); all editable in-app.
+// Phase lengths follow PROGRAMMING-PLAN.md (10/1/6); all editable in-app.
 const SEED_BLOCKS: { theme: string; weeks: number }[] = [
   { theme: 'Strength-Hypertrophy', weeks: 10 },
   { theme: 'Deload / skills', weeks: 1 },
   { theme: 'Strength', weeks: 6 },
 ];
 
-export function seedProgram(): ProgramDoc {
-  const blocks = SEED_BLOCKS.map(({ theme, weeks }, bIdx): ProgramBlock => {
-    const b = bIdx + 1;
-    return {
-      id: `block-${b}`,
-      theme,
-      weeks: Array.from({ length: weeks }, (_, wIdx): ProgramWeek => {
-        const w = wIdx + 1;
-        const sessions = FOCUSES.map(
-          (focus, s): Session => ({
-            id: `b${b}w${w}s${s + 1}`,
-            focus,
-            timedBlocks: defaultSeries(`b${b}w${w}s${s + 1}`),
-          }),
-        );
-        return { id: `b${b}w${w}`, sessions };
-      }),
-    };
-  });
+// One programming stream per class type; each starts on the same phase shape.
+const SEED_STREAMS: { id: string; name: string; focuses: SessionFocus[] }[] = [
+  { id: 'strength', name: 'Strength', focuses: FOCUSES },
+  { id: 'esd', name: 'ESD', focuses: ['esd'] },
+  { id: 'hyrox', name: 'Hyrox', focuses: ['hyrox'] },
+  { id: 'gameday', name: 'Game Day', focuses: ['gameday'] },
+];
 
-  return { name: 'TAC Strength Phase 1', blocks };
+export function seedProgram(): ProgramDoc {
+  const streams = SEED_STREAMS.map(({ id, name, focuses }) => ({
+    id,
+    name,
+    blocks: SEED_BLOCKS.map(({ theme, weeks }, bIdx): ProgramBlock => {
+      const b = bIdx + 1;
+      return {
+        id: `${id}-block-${b}`,
+        theme,
+        weeks: Array.from({ length: weeks }, (_, wIdx): ProgramWeek => {
+          const w = wIdx + 1;
+          const sessions = focuses.map(
+            (focus, s): Session => ({
+              id: `${id}-b${b}w${w}s${s + 1}`,
+              focus,
+              timedBlocks: defaultSeries(`${id}-b${b}w${w}s${s + 1}`),
+            }),
+          );
+          return { id: `${id}-b${b}w${w}`, sessions };
+        }),
+      };
+    }),
+  }));
+
+  return { name: 'TAC Programming 2026/27', streams };
 }
 
 // ---------- Annual plan: a sensible starting year, fully editable ----------

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { mostUrgent, useDoc } from '../../lib/useDoc';
 import SaveBadge from '../../components/SaveBadge';
-import type { ProgramDoc } from '../../types/documents';
+import { streamsOf, withStreamBlocks } from '../../lib/programStreams';
 
 export default function PlanningTab() {
   const planning = useDoc('planning');
@@ -42,10 +42,10 @@ export default function PlanningTab() {
       {/* Block themes (edits ProgramDoc directly; same field the Programming tab shows) */}
       <section className="rounded-xl border border-ink-200 bg-white p-4 shadow-sm">
         <h3 className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
-          Phase themes ({program.data.name})
+          Strength phase themes ({program.data.name})
         </h3>
         <div className="mt-3 space-y-2">
-          {program.data.blocks.map((b, i, all) => {
+          {streamsOf(program.data)[0].blocks.map((b, i, all) => {
             const first = all.slice(0, i).reduce((n, x) => n + x.weeks.length, 0) + 1;
             const last = first + b.weeks.length - 1;
             return (
@@ -61,12 +61,15 @@ export default function PlanningTab() {
                 placeholder="Theme (e.g. Foundations, Build, Peak)"
                 value={b.theme ?? ''}
                 onChange={(e) =>
-                  program.update((d) => ({
-                    ...d,
-                    blocks: d.blocks.map((x, xi) =>
-                      xi === i ? { ...x, theme: e.target.value } : x,
+                  program.update((d) =>
+                    withStreamBlocks(
+                      d,
+                      0,
+                      streamsOf(d)[0].blocks.map((x, xi) =>
+                        xi === i ? { ...x, theme: e.target.value } : x,
+                      ),
                     ),
-                  }))
+                  )
                 }
               />
             </div>
