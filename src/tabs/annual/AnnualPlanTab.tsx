@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useDoc } from '../../lib/useDoc';
 import SaveBadge from '../../components/SaveBadge';
-import type { AnnualPhase, AnnualStream, RaceEvent } from '../../types/documents';
+import type { AnnualPhase, AnnualStream, BreakWindow, RaceEvent } from '../../types/documents';
+import { shutdownOffsets, trainingWeekOffset } from '../../lib/trainingWeeks';
 
 const YEAR_WEEKS = 52;
 const MS_WEEK = 7 * 24 * 60 * 60 * 1000;
@@ -17,15 +18,30 @@ function fmtShort(d: Date): string {
   return d.toLocaleDateString('en-AU', { day: 'numeric', month: 'short' });
 }
 
-/** Cumulative start week of each phase in a stream. */
-function phaseStarts(stream: AnnualStream): number[] {
+/**
+ * Calendar start week of each phase in a stream. Phase lengths are training
+ * weeks, so a phase that sits after a club shutdown starts that many weeks
+ * later on the ruler than its training-week count alone would suggest.
+ */
+function phaseStarts(stream: AnnualStream, blocked: Set<number>): number[] {
   const starts: number[] = [];
-  let acc = 0;
+  let trained = 0;
   for (const p of stream.phases) {
-    starts.push(acc);
-    acc += p.weeks;
+    starts.push(trainingWeekOffset(trained, blocked));
+    trained += p.weeks;
   }
   return starts;
+}
+
+/** Calendar span a phase covers, training weeks plus any shutdown inside it. */
+function phaseSpan(start: number, weeks: number, blocked: Set<number>): number {
+  let span = 0;
+  let counted = 0;
+  while (counted < weeks) {
+    if (!blocked.has(start + span)) counted++;
+    span++;
+  }
+  return span;
 }
 
 /** Shade a stream colour for phase i of n: later phases mix progressively
@@ -185,6 +201,41 @@ export default function AnnualPlanTab() {
 
   const streams = data.streams.filter((s) => filter === 'all' || s.id === filter);
 
+  // Club-wide shutdown weeks. Every lane steps over these, and so does the
+  // Programming tab's week dating, so the two cannot drift apart.
+  const breaks = data.breaks ?? [];
+  const blocked = shutdownOffsets(data.startDate, breaks);
+  const breakAt = (offset: number): BreakWindow | undefined =>
+    breaks.find((b) => {
+      const first = Math.round(
+        (new Date(`${b.start}T00:00:00`).getTime() -
+          new Date(`${data.startDate}T00:00:00`).getTime()) /
+          MS_WEEK,
+      );
+      return offset >= first && offset < first + b.weeks;
+    });
+
+  function addBreak() {
+    const fresh: BreakWindow = {
+      id: crypto.randomUUID(),
+      name: 'Club break',
+      start: data!.startDate,
+      weeks: 2,
+    };
+    update((d) => ({ ...d, breaks: [...(d.breaks ?? []), fresh] }));
+  }
+
+  function patchBreak(id: string, patch: Partial<BreakWindow>) {
+    update((d) => ({
+      ...d,
+      breaks: (d.breaks ?? []).map((b) => (b.id === id ? { ...b, ...patch } : b)),
+    }));
+  }
+
+  function deleteBreak(id: string) {
+    update((d) => ({ ...d, breaks: (d.breaks ?? []).filter((b) => b.id !== id) }));
+  }
+
   function patchStream(streamId: string, fn: (s: AnnualStream) => AnnualStream) {
     update((d) => ({
       ...d,
@@ -292,8 +343,17 @@ export default function AnnualPlanTab() {
 
         <div className="mt-3 space-y-6">
           {streams.map((stream) => {
-            const starts = phaseStarts(stream);
-            const total = stream.phases.reduce((sum, p) => sum + p.weeks, 0);
+            const starts = phaseStarts(stream, blocked);
+            const spans = stream.phases.map((p, i) => phaseSpan(starts[i], p.weeks, blocked));
+            // The lane is laid out in CALENDAR weeks: a shutdown between two
+            // phases is a real gap on the ruler, drawn as a greyed spacer so
+            // the phases either side sit under their true dates.
+            const total = stream.phases.length
+              ? starts[starts.length - 1] + spans[spans.length - 1]
+              : 0;
+            const laneWeeks = Math.max(total, YEAR_WEEKS);
+            const gapBefore = (i: number) =>
+              i === 0 ? starts[0] : starts[i] - (starts[i - 1] + spans[i - 1]);
             return (
               <div key={stream.id}>
                 <div className="flex items-stretch">
@@ -313,9 +373,26 @@ export default function AnnualPlanTab() {
                         // Short phases (a deload or transition week) can't fit
                         // horizontal text, so their label runs bottom-to-top.
                         const vertical = p.weeks <= 2;
+                        const gap = gapBefore(i);
                         return (
+                          <Fragment key={p.id}>
+                          {gap > 0 && (
+                            <div
+                              className="flex items-center justify-center bg-ink-100"
+                              style={{ width: `${(gap / laneWeeks) * 100}%` }}
+                              title={
+                                breakAt(starts[i] - gap)?.name ?? 'No classes'
+                              }
+                            >
+                              <span
+                                className="truncate text-[10px] font-semibold tracking-wide text-ink-400 uppercase"
+                                style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+                              >
+                                {breakAt(starts[i] - gap)?.name ?? 'No classes'}
+                              </span>
+                            </div>
+                          )}
                           <button
-                            key={p.id}
                             type="button"
                             onClick={() =>
                               setSelected(isSel ? null : { streamId: stream.id, phaseId: p.id })
@@ -326,7 +403,7 @@ export default function AnnualPlanTab() {
                                 : 'flex-col justify-center px-2 py-1.5 text-left'
                             } ${isSel ? 'ring-2 ring-ink-950 ring-inset' : 'hover:opacity-90'}`}
                             style={{
-                              width: `${(p.weeks / Math.max(total, YEAR_WEEKS)) * 100}%`,
+                              width: `${(spans[i] / laneWeeks) * 100}%`,
                               backgroundColor: phaseShade(stream.colour, i, stream.phases.length),
                             }}
                             title={`${p.name} · ${fmtShort(addWeeks(data.startDate, starts[i]))} · ${p.weeks} wk${
@@ -354,6 +431,7 @@ export default function AnnualPlanTab() {
                               </>
                             )}
                           </button>
+                          </Fragment>
                         );
                       })}
                     </div>
@@ -447,6 +525,73 @@ export default function AnnualPlanTab() {
           })}
         </div>
       </div>
+
+      {/* Club breaks: weeks with no classes at all. Every lane and every
+          Programming week date steps over these. */}
+      <section className="mt-5 rounded-xl border border-ink-200 bg-white p-4 shadow-sm">
+        <div className="flex items-baseline justify-between">
+          <h3 className="text-sm font-semibold text-ink-950">Club breaks</h3>
+          <button
+            type="button"
+            onClick={addBreak}
+            className="text-[12px] font-medium text-accent-600 hover:underline"
+          >
+            + Add break
+          </button>
+        </div>
+        <p className="mt-1 text-[12px] text-ink-500">
+          Weeks the club runs no classes. Phase lengths are training weeks, so every stream's dates
+          step over a break instead of running through it.
+        </p>
+        {breaks.length === 0 ? (
+          <p className="mt-2 text-sm text-ink-400">
+            No breaks yet. Add the Christmas shutdown and every date after it corrects itself.
+          </p>
+        ) : (
+          <ul className="mt-3 space-y-2">
+            {[...breaks]
+              .sort((a, b) => a.start.localeCompare(b.start))
+              .map((b) => (
+                <li key={b.id} className="flex flex-wrap items-center gap-2">
+                  <input
+                    className={`${field} w-48`}
+                    value={b.name}
+                    aria-label="Break name"
+                    onChange={(e) => patchBreak(b.id, { name: e.target.value })}
+                  />
+                  <input
+                    type="date"
+                    className={`${field} w-40`}
+                    value={b.start}
+                    aria-label="First Monday with no classes"
+                    onChange={(e) => e.target.value && patchBreak(b.id, { start: e.target.value })}
+                  />
+                  <input
+                    type="number"
+                    min={1}
+                    max={12}
+                    className={`${field} w-20`}
+                    value={b.weeks}
+                    aria-label="Weeks"
+                    onChange={(e) =>
+                      patchBreak(b.id, { weeks: Math.max(1, Number(e.target.value) || 1) })
+                    }
+                  />
+                  <span className="text-[12px] text-ink-500">
+                    wk, to {fmtShort(addWeeks(b.start, b.weeks))}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => deleteBreak(b.id)}
+                    className="text-[12px] font-medium text-ink-400 hover:text-red-600"
+                  >
+                    Remove
+                  </button>
+                </li>
+              ))}
+          </ul>
+        )}
+      </section>
 
       {/* Race dates: drawn as pins on their stream's lane */}
       <section className="mt-5 rounded-xl border border-ink-200 bg-white p-4 shadow-sm">

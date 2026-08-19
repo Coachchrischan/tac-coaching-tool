@@ -183,6 +183,11 @@ export function seedAnnualPlan(): AnnualPlanDoc {
     startDate: '2026-08-24', // a Monday; the ratified 2026/27 plan anchor
     // AU/NZ HYROX calendar for the 2026/27 season, checked against the
     // published race listings 2026-08-20. Editable in-app as dates firm up.
+    // Weeks the club runs no classes. Phase lengths are TRAINING weeks, so
+    // every lane and every Programming week date steps over these.
+    breaks: [
+      { id: 'break-christmas-2026', name: 'Christmas break', start: '2026-12-21', weeks: 2 },
+    ],
     races: [
       { id: 'hx-perth-2026', name: 'HYROX Perth', date: '2026-08-21', endDate: '2026-08-23', streamId: 'hyrox' },
       { id: 'hx-melbourne-2026', name: 'HYROX Melbourne', date: '2026-12-09', endDate: '2026-12-13', streamId: 'hyrox' },
@@ -199,7 +204,8 @@ export function seedAnnualPlan(): AnnualPlanDoc {
           phase('Strength-Hypertrophy', 'Wave loading 9/7/5, W1 3RM top-set testing, W7 deload', 10),
           phase('Deload / skills week', 'Deload + workshops prepping the strength block', 1),
           phase('Strength', 'Mini waves 7-5-3 then 5-3-1, Christmas-week retest', 6),
-          phase('Christmas break', 'No classes; plan the January re-entry ramp', 2),
+          // The Christmas shutdown is not a phase: it is a club-wide break
+          // (see `breaks` below), so every stream's dates step over it.
           phase('Unilateral muscle-endurance', 'W1 testing; single-limb, tempo, TUT, asymmetric holds', 4),
           phase('Hypertrophy', 'Aesthetic focus, anchor strength lifts retained', 12),
           phase('Strength-Hypertrophy (cycle 2)', 'Back into the wave-loading cycle', 10),

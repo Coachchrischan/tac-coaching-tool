@@ -228,10 +228,23 @@ export interface RaceEvent {
   streamId: AnnualStream['id'];
 }
 
+// A week the club runs no classes at all: the Christmas shutdown, a public
+// holiday week. It belongs to the club, not to one stream, so every stream's
+// week dating steps over it. Without this, every date after the shutdown runs
+// as many weeks early as the shutdown is long.
+export interface BreakWindow {
+  id: string;
+  name: string; // "Christmas break"
+  start: string; // ISO yyyy-mm-dd, the Monday of the first week off
+  weeks: number;
+}
+
 export interface AnnualPlanDoc {
   startDate: string; // ISO yyyy-mm-dd, a Monday; anchors every computed date
   streams: AnnualStream[];
   races?: RaceEvent[];
+  /** Club-wide shutdowns. Phase lengths are TRAINING weeks; these sit between. */
+  breaks?: BreakWindow[];
 }
 
 // ---------- Attendance + home dashboard ----------

@@ -32,6 +32,7 @@ import {
   withStreamBlocks,
 } from '../../lib/programStreams';
 import { resolveWeekDays } from '../../lib/classDays';
+import { shutdownBefore, trainingWeekMonday } from '../../lib/trainingWeeks';
 import CircuitEditor from './CircuitEditor';
 import { circuitToText, equipmentFor } from '../../lib/circuit';
 
@@ -185,15 +186,21 @@ export default function ProgrammingTab() {
   const blockPage = Math.min(blockPageRaw, blockPages - 1);
   const sessions = blocks[bi].weeks[wi].sessions;
 
-  // Week 1 of phase 1 starts on the annual plan's year start; every later
-  // week is a Monday seven days on, so a week always shows its real date.
+  // Week 1 of phase 1 starts on the annual plan's year start. Weeks are
+  // TRAINING weeks, so the dates step over the club's shutdowns rather than
+  // running through them: without that, everything after Christmas is two
+  // weeks early.
   const weeksBefore = blocks.slice(0, bi).reduce((n, b) => n + b.weeks.length, 0);
   const yearStart = annual.data?.startDate;
+  const breaks = annual.data?.breaks ?? [];
   function mondayOfWeek(weekInPhase: number): Date | null {
     if (!yearStart) return null;
-    const d = new Date(`${yearStart}T00:00:00`);
-    d.setDate(d.getDate() + (weeksBefore + weekInPhase) * 7);
-    return d;
+    return trainingWeekMonday(yearStart, weeksBefore + weekInPhase, breaks);
+  }
+  /** The shutdown sitting just before this week, if the dates jump over one. */
+  function breakBefore(weekInPhase: number) {
+    if (!yearStart) return undefined;
+    return shutdownBefore(yearStart, weeksBefore + weekInPhase, breaks);
   }
   const fmtDay = (d: Date | null, opts?: Intl.DateTimeFormatOptions) =>
     d ? d.toLocaleDateString('en-AU', opts ?? { day: 'numeric', month: 'short' }) : '';
@@ -881,26 +888,40 @@ export default function ProgrammingTab() {
           </div>
           {view === 'week' && (
             <div className="flex flex-wrap items-center gap-1.5">
-              {blocks[bi].weeks.map((w, i) => (
-                <button
-                  key={w.id}
-                  type="button"
-                  className={`${pill(i === wi)} flex flex-col items-center leading-tight`}
-                  onClick={() => setWi(i)}
-                  title={
-                    mondayOfWeek(i)
-                      ? `Week starting ${fmtDay(mondayOfWeek(i), { weekday: 'long', day: 'numeric', month: 'long' })}`
-                      : undefined
-                  }
-                >
-                  W{i + 1}
-                  {mondayOfWeek(i) && (
-                    <span className="text-[10px] font-normal opacity-70">
-                      {fmtDay(mondayOfWeek(i))}
-                    </span>
-                  )}
-                </button>
-              ))}
+              {blocks[bi].weeks.map((w, i) => {
+                // A club shutdown between two weeks is drawn as a greyed strip
+                // so the jump in dates is visible, not just implied.
+                const gap = breakBefore(i);
+                return (
+                  <span key={w.id} className="flex items-center gap-1.5">
+                    {gap && (
+                      <span
+                        title={`${gap.name}: ${gap.weeks} week${gap.weeks === 1 ? '' : 's'} with no classes`}
+                        className="rounded-md border border-dashed border-ink-300 bg-ink-50 px-2 py-1 text-[10px] font-medium tracking-wide text-ink-400 uppercase"
+                      >
+                        {gap.name}
+                      </span>
+                    )}
+                    <button
+                      type="button"
+                      className={`${pill(i === wi)} flex flex-col items-center leading-tight`}
+                      onClick={() => setWi(i)}
+                      title={
+                        mondayOfWeek(i)
+                          ? `Week starting ${fmtDay(mondayOfWeek(i), { weekday: 'long', day: 'numeric', month: 'long' })}`
+                          : undefined
+                      }
+                    >
+                      W{i + 1}
+                      {mondayOfWeek(i) && (
+                        <span className="text-[10px] font-normal opacity-70">
+                          {fmtDay(mondayOfWeek(i))}
+                        </span>
+                      )}
+                    </button>
+                  </span>
+                );
+              })}
             </div>
           )}
           {view === 'block' && (

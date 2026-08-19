@@ -6,7 +6,9 @@
 // scenario, and the confirm dialogue shows what was resolved before anything
 // is created.
 
-import type { ScheduleDoc, SessionFocus } from '../types/documents';
+// The .js extension keeps this importable from the Vite plugin, which is
+// compiled under nodenext resolution as well as from the app.
+import type { ScheduleDoc, SessionFocus } from '../types/documents.js';
 
 /** Day index 0 is Monday, matching ClassBlock.day. */
 export const DAY_NAMES = [
