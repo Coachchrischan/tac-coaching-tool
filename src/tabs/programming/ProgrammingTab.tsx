@@ -182,15 +182,34 @@ export default function ProgrammingTab() {
           })),
         };
         if (s.name) cloned.name = s.name;
+        // Circuit sessions carry their whole workout here, so a cloned week
+        // must bring it across or growing a phase silently empties the week.
+        if (s.circuit) {
+          cloned.circuit = s.circuit.map((b) => ({
+            id: crypto.randomUUID(),
+            heading: b.heading,
+            lines: [...b.lines],
+            ...(b.restAfter ? { restAfter: b.restAfter } : {}),
+          }));
+        }
+        if (s.note) cloned.note = s.note;
+        if (s.intent) cloned.intent = s.intent;
         return cloned;
       }),
     };
   }
 
+  /** Does this phase hold real programming, in either format? */
   function blockHasContent(block: ProgramBlock, fromWeek = 0) {
     return block.weeks
       .slice(fromWeek)
-      .some((w) => w.sessions.some((s) => s.timedBlocks.some((tb) => tb.slots.some((sl) => sl.name))));
+      .some((w) =>
+        w.sessions.some(
+          (s) =>
+            s.timedBlocks.some((tb) => tb.slots.some((sl) => sl.name)) ||
+            (s.circuit ?? []).some((c) => c.heading || c.lines.some((l) => l.trim())),
+        ),
+      );
   }
 
   function setBlockLength(target: number) {
@@ -371,7 +390,7 @@ export default function ProgrammingTab() {
       const res = await fetch('/api/team-push', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ block: bi + 1, week: wi + 1, monday }),
+        body: JSON.stringify({ block: bi + 1, week: wi + 1, monday, streamId: stream.id }),
       });
       const out = await res.json();
       if (!res.ok) {
@@ -1079,7 +1098,7 @@ export default function ProgrammingTab() {
 
       {/* Session: circuits for ESD / Hyrox / Game Day, series for Strength */}
       {isCircuit ? (
-        <CircuitEditor session={session} onPatch={patchSession} />
+        <CircuitEditor key={session.id} session={session} onPatch={patchSession} />
       ) : (
       <div className="space-y-3">
         {session.timedBlocks.map((block) => (

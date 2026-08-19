@@ -84,11 +84,47 @@ export function teamPushPlugin(): Plugin {
             send(res, 405, { error: 'method not allowed' });
             return;
           }
-          const { block, week, monday } = JSON.parse(await readBody(req)) as {
-            block: number; week: number; monday: string;
+          const { block, week, monday, streamId } = JSON.parse(await readBody(req)) as {
+            block: number; week: number; monday: string; streamId?: string;
           };
           if (!/^\d{4}-\d{2}-\d{2}$/.test(monday ?? '')) {
             send(res, 400, { error: 'monday must be YYYY-MM-DD' });
+            return;
+          }
+
+          const doc = JSON.parse(readFileSync(join(root, 'data', 'program.json'), 'utf8')).data;
+          // The document holds one stream per class type; older documents kept
+          // a single phase list, so fall back to that as the Strength stream.
+          type PushSession = {
+            focus: string;
+            name?: string;
+            timedBlocks: {
+              label: string;
+              minutes: number;
+              slots: {
+                name: string;
+                exerciseId: number | null;
+                sets?: string;
+                reps?: string;
+                load?: string;
+                intensity?: string;
+                rpe?: string;
+              }[];
+            }[];
+          };
+          const streams: { id: string; name: string; blocks: { weeks: { sessions: PushSession[] }[] }[] }[] = doc.streams?.length
+            ? doc.streams
+            : [{ id: 'strength', name: 'Strength', blocks: doc.blocks ?? [] }];
+          const stream = streams.find((s) => s.id === (streamId ?? 'strength'));
+          if (!stream) {
+            send(res, 400, { error: `unknown stream '${streamId}'` });
+            return;
+          }
+          // Only Strength maps to a TrainHeroic team so far.
+          if (stream.id !== 'strength') {
+            send(res, 400, {
+              error: `${stream.name} has no TrainHeroic team mapped yet. Only Strength pushes to "TAC Strength Class".`,
+            });
             return;
           }
 
@@ -96,10 +132,9 @@ export function teamPushPlugin(): Plugin {
           const token = JSON.parse(readFileSync(join(MCP_DIR, 'config.json'), 'utf8')).sessionToken;
           const th = new ThClient(token);
 
-          const doc = JSON.parse(readFileSync(join(root, 'data', 'program.json'), 'utf8')).data;
-          const target = doc.blocks[block - 1]?.weeks[week - 1];
+          const target = stream.blocks[block - 1]?.weeks[week - 1];
           if (!target) {
-            send(res, 400, { error: `no block ${block} week ${week}` });
+            send(res, 400, { error: `no phase ${block} week ${week} in ${stream.name}` });
             return;
           }
 
