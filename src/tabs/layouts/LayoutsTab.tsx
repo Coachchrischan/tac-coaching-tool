@@ -12,6 +12,12 @@ import {
   equipDef,
 } from './roomModel';
 import type { Fixture } from './roomModel';
+import {
+  buildFormation,
+  stockByKind,
+  suggestFormations,
+  typicalClassSize,
+} from '../../lib/layoutFormations';
 
 // ---------- Fixed room furniture ----------
 
@@ -362,15 +368,146 @@ function RoomCanvas({
   );
 }
 
+/**
+ * Suggest a format for the room rather than only where each item sits. Reads
+ * the gear already on the floor as the stations, the class's real average size
+ * from Attendance, and what the club owns from Equipment, then ranks the
+ * formations with the reason each one is being put forward. Nothing is applied
+ * until the coach picks one.
+ */
+function SuggestPanel({
+  room,
+  heads,
+  onApply,
+  onClose,
+}: {
+  room: LayoutRoom;
+  heads: number | null;
+  onApply: (items: LayoutItem[], name: string) => void;
+  onClose: () => void;
+}) {
+  const equipment = useDoc('equipment');
+  const [size, setSize] = useState(heads ?? 12);
+  const [pairs, setPairs] = useState(room.id === 'hyrox');
+  const [strength, setStrength] = useState(room.id === 'strength');
+
+  // The gear on the floor is the station list. Markers (no kind) are not gear.
+  const stations = room.items
+    .filter((i) => i.kind && i.kind !== 'zone')
+    .map((i) => ({ kind: i.kind as string, label: i.label }));
+
+  const stock = stockByKind(equipment.data);
+  const input = { stations, heads: size, pairs, strength, stock };
+  const suggestions = stations.length ? suggestFormations(input) : [];
+
+  return (
+    <section className="mb-4 rounded-xl border border-accent-500/40 bg-accent-100/20 p-4">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h3 className="font-display text-lg text-ink-950">Suggest a format for the room</h3>
+        <button
+          type="button"
+          onClick={onClose}
+          className="text-[12px] font-medium text-ink-500 hover:text-ink-950"
+        >
+          Close
+        </button>
+      </div>
+
+      {stations.length === 0 ? (
+        <p className="mt-2 text-sm text-ink-500">
+          There is no gear on this floor yet, so there are no stations to arrange. Add equipment from
+          the palette below, or use "Build the floor layout from this week" on the Programming tab.
+        </p>
+      ) : (
+        <>
+          <div className="mt-3 flex flex-wrap items-center gap-4 text-sm">
+            <label className="flex items-center gap-2">
+              <span className="text-[11px] font-semibold tracking-wide text-ink-500 uppercase">
+                Class size
+              </span>
+              <input
+                type="number"
+                min={1}
+                max={60}
+                value={size}
+                onChange={(e) => setSize(Math.max(1, Number(e.target.value) || 1))}
+                className="w-20 rounded-md border border-ink-300 bg-white px-2 py-1 text-sm text-ink-950 focus:border-accent-600"
+              />
+              {heads !== null && (
+                <span className="text-[11px] text-ink-500">
+                  {size === heads ? 'the recent average for this class' : `recent average is ${heads}`}
+                </span>
+              )}
+            </label>
+            <label className="flex items-center gap-1.5">
+              <input type="checkbox" checked={pairs} onChange={(e) => setPairs(e.target.checked)} />
+              <span className="text-[13px] text-ink-700">Written as pairs</span>
+            </label>
+            <label className="flex items-center gap-1.5">
+              <input
+                type="checkbox"
+                checked={strength}
+                onChange={(e) => setStrength(e.target.checked)}
+              />
+              <span className="text-[13px] text-ink-700">Strength session</span>
+            </label>
+          </div>
+
+          <p className="mt-2 text-[12px] text-ink-500">
+            {stations.length} station{stations.length === 1 ? '' : 's'} on the floor:{' '}
+            {stations.map((s) => s.label).join(', ')}. Around{' '}
+            {Math.max(1, Math.ceil(size / stations.length))} per station.
+          </p>
+
+          <ul className="mt-3 space-y-2">
+            {suggestions.map((s, i) => (
+              <li
+                key={s.id}
+                className={`rounded-lg border bg-white p-3 ${
+                  i === 0 ? 'border-accent-600' : 'border-ink-200'
+                }`}
+              >
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <span className="text-sm font-semibold text-ink-950">
+                    {s.name}
+                    {i === 0 && (
+                      <span className="ml-2 rounded bg-accent-600 px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-white uppercase">
+                        Suggested
+                      </span>
+                    )}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => onApply(buildFormation(s.id, input), s.name)}
+                    className="rounded-md bg-ink-950 px-2.5 py-1 text-[12px] font-medium text-white hover:bg-ink-800"
+                  >
+                    Lay the room out this way
+                  </button>
+                </div>
+                <p className="mt-1 text-[13px] text-ink-700">{s.what}</p>
+                <p className="mt-0.5 text-[12px] text-ink-500 italic">{s.why}</p>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </section>
+  );
+}
+
 export default function LayoutsTab() {
   const { data, saveState, update, reloadTheirs, keepMine, retry } = useDoc('layouts');
+  const attendance = useDoc('attendance');
+  const schedule = useDoc('schedule');
   const [roomIndexRaw, setRoomIndex] = useState(0);
+  const [suggesting, setSuggesting] = useState(false);
 
   if (!data) return <p className="py-20 text-center text-sm text-ink-400">Loading…</p>;
 
   // One layout per class type; the dropdown picks which one you're planning.
   const roomIndex = Math.min(roomIndexRaw, data.rooms.length - 1);
   const room = data.rooms[roomIndex];
+  const heads = room ? typicalClassSize(attendance.data, schedule.data, room.id) : null;
 
   return (
     <div>
@@ -390,9 +527,38 @@ export default function LayoutsTab() {
               </option>
             ))}
           </select>
+          <button
+            type="button"
+            onClick={() => setSuggesting((v) => !v)}
+            className="rounded-md border border-accent-600 px-2.5 py-1.5 text-sm font-medium text-accent-600 hover:bg-accent-100/40"
+            title="Propose a way to run the room for this class, not just where each item sits"
+          >
+            Suggest a format
+          </button>
         </div>
         <SaveBadge state={saveState} onReloadTheirs={reloadTheirs} onKeepMine={keepMine} onRetry={retry} />
       </div>
+      {room && suggesting && (
+        <SuggestPanel
+          key={room.id}
+          room={room}
+          heads={heads}
+          onClose={() => setSuggesting(false)}
+          onApply={(items, name) => {
+            if (
+              !window.confirm(
+                `Lay the ${room.name} floor out as "${name}"?\n\nThis replaces what is on the floor now.`,
+              )
+            )
+              return;
+            update((d) => ({
+              ...d,
+              rooms: d.rooms.map((r) => (r.id === room.id ? { ...r, items } : r)),
+            }));
+            setSuggesting(false);
+          }}
+        />
+      )}
       {room && (
         <RoomCanvas
           key={room.id}
