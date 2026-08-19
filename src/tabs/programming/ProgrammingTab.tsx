@@ -27,9 +27,11 @@ import {
   FOCUS_LABEL,
   STREAM_DEFS,
   formatOf,
+  sessionLabel,
   streamsOf,
   withStreamBlocks,
 } from '../../lib/programStreams';
+import { resolveWeekDays } from '../../lib/classDays';
 import CircuitEditor from './CircuitEditor';
 import { circuitToText, equipmentFor } from '../../lib/circuit';
 
@@ -133,6 +135,7 @@ export default function ProgrammingTab() {
   const lib = useDoc('library-overrides');
   const annual = useDoc('annual-plan');
   const layouts = useDoc('layouts');
+  const schedule = useDoc('schedule');
   const { library, error: libraryError } = useLibrary();
   const navigate = useNavigate();
 
@@ -393,30 +396,56 @@ export default function ProgrammingTab() {
     return week.sessions.find((s) => s.focus === session.focus);
   }
 
-  // Push the selected week to the TrainHeroic team calendar as DRAFTS
-  // (lower=Mon, upper=Wed, full=Fri, dated off the annual plan's year start).
-  // The server refuses if the target days already hold sessions; publishing
-  // stays manual in the coach app.
+  // Push the selected week to the TrainHeroic team calendar as DRAFTS. Each
+  // session's day comes from the active Schedule scenario, so Lower lands on
+  // the day Lower actually runs. The server re-derives the same days and
+  // refuses if any already holds a session; publishing stays manual.
   async function pushWeekToTrainHeroic() {
+    const startDate = annual.data?.startDate;
+    if (!startDate || !schedule.data) {
+      window.alert('The annual plan or the timetable has not loaded yet. Try again in a moment.');
+      return;
+    }
+    const monday = mondayOfWeek(wi);
+    if (!monday) return;
+    const mondayIso = monday.toISOString().slice(0, 10);
+
+    const resolved = resolveWeekDays(
+      schedule.data,
+      mondayIso,
+      sessions.map((s) => s.focus),
+    );
+    const lines = resolved.days.map((d, i) => {
+      const label = sessionLabel(sessions[i]);
+      return d.date
+        ? `  ${label} → ${d.dayName} ${d.date}`
+        : `  ${label} → no class in this timetable, will be skipped`;
+    });
+    if (resolved.days.every((d) => !d.date)) {
+      window.alert(
+        `Nothing to push: the "${resolved.scenarioName}" timetable has no class for this week's sessions.`,
+      );
+      return;
+    }
+    if (
+      !window.confirm(
+        `Push Phase ${bi + 1} Week ${wi + 1} to the TAC Strength Class team calendar as DRAFTS?\n\n` +
+          `Days come from the "${resolved.scenarioName}" timetable:\n${lines.join('\n')}\n\n` +
+          `Nothing is published; you publish in the coach app.`,
+      )
+    )
+      return;
     setPushState('pushing');
     try {
-      const annual = await (await fetch('/api/store/annual-plan')).json();
-      const start = new Date(annual.data.startDate + 'T00:00:00Z');
-      // Program weeks run consecutively from the year start; blocks vary in
-      // length, so the offset is the sum of the earlier blocks' weeks.
-      const weeksBefore = blocks.slice(0, bi).reduce((n, b) => n + b.weeks.length, 0);
-      start.setUTCDate(start.getUTCDate() + (weeksBefore + wi) * 7);
-      const monday = start.toISOString().slice(0, 10);
-      if (
-        !window.confirm(
-          `Push Phase ${bi + 1} Week ${wi + 1} to the TAC Strength Class team calendar as DRAFTS?\n\nLower → Mon ${monday}, Upper → Wed, Full Body → Fri.\nNothing is published; you publish in the coach app.`,
-        )
-      )
-        return;
       const res = await fetch('/api/team-push', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ block: bi + 1, week: wi + 1, monday, streamId: stream.id }),
+        body: JSON.stringify({
+          block: bi + 1,
+          week: wi + 1,
+          monday: mondayIso,
+          streamId: stream.id,
+        }),
       });
       const out = await res.json();
       if (!res.ok) {
@@ -426,9 +455,9 @@ export default function ProgrammingTab() {
         return;
       }
       window.alert(
-        `Pushed as drafts:\n${out.pushed.join('\n')}${
-          out.skipped?.length ? '\n\nSkipped (no TrainHeroic id):\n' + out.skipped.join('\n') : ''
-        }`,
+        `Pushed as drafts, dated off the "${out.scenario}" timetable:\n${out.pushed.join('\n')}${
+          out.missing?.length ? '\n\nNo class runs these, so they were not pushed:\n' + out.missing.join(', ') : ''
+        }${out.skipped?.length ? '\n\nSkipped (no TrainHeroic id):\n' + out.skipped.join('\n') : ''}`,
       );
     } catch (err) {
       window.alert(`Push failed: ${String(err)}`);

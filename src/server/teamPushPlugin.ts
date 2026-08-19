@@ -1,8 +1,11 @@
 // Dev middleware: POST /api/team-push { block, week, monday } pushes one week
 // of the program doc onto the TrainHeroic "TAC Strength Class" team calendar
-// (program 5071078) as DRAFTS. Publishing is impossible from here by design —
+// (program 5071078) as DRAFTS. Publishing is impossible from here by design.
 // Chris publishes in the coach app. Refuses (409) if any target day already
 // has a session, so a double-click can't duplicate a week.
+//
+// Session dates come from the active Schedule scenario, not from a fixed
+// Mon/Wed/Fri assumption: the club runs Lower on Tuesday and Upper on Thursday.
 //
 // TrainHeroic access reuses trainheroic-mcp's client + token (session-token in
 // its gitignored config.json). See trainheroic-mcp/API_BLUEPRINT.md, Teams.
@@ -10,6 +13,8 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { Plugin } from 'vite';
+import type { ScheduleDoc, SessionFocus } from '../types/documents.js';
+import { resolveWeekDays } from '../lib/classDays.js';
 
 const PROGRAM = 5071078;
 const MCP_DIR = 'C:/Users/User/Cowork/trainheroic-mcp';
@@ -28,15 +33,16 @@ const CUSTOM_IDS: Record<string, number> = {
   'glute bridge w/rotation': 8380185,
 };
 
-const PLAN = [
-  { focus: 'lower', title: 'Day 1 - Lower', offset: 0 },
-  { focus: 'upper', title: 'Day 2 - Upper', offset: 2 },
-  { focus: 'full', title: 'Day 3 - Full Body', offset: 4 },
-] as const;
+// The Strength stream's three sessions, in the order they are titled. Which
+// day each lands on comes from the timetable, not from this list.
+const STRENGTH_PLAN: { focus: SessionFocus; title: string }[] = [
+  { focus: 'lower', title: 'Day 1 - Lower' },
+  { focus: 'upper', title: 'Day 2 - Upper' },
+  { focus: 'full', title: 'Day 3 - Full Body' },
+];
 
-function addDays(iso: string, n: number) {
-  const d = new Date(iso + 'T00:00:00Z');
-  d.setUTCDate(d.getUTCDate() + n);
+function partsOf(iso: string) {
+  const d = new Date(`${iso}T00:00:00Z`);
   return { y: d.getUTCFullYear(), m: d.getUTCMonth() + 1, d: d.getUTCDate() };
 }
 
@@ -98,7 +104,10 @@ export function teamPushPlugin(): Plugin {
           type PushSession = {
             focus: string;
             name?: string;
-            timedBlocks: {
+            // Circuit sessions have no series to push; only Strength maps to a
+            // TrainHeroic team, so they are skipped rather than mapped.
+            kind?: 'series' | 'circuit';
+            timedBlocks?: {
               label: string;
               minutes: number;
               slots: {
@@ -138,10 +147,29 @@ export function teamPushPlugin(): Plugin {
             return;
           }
 
+          // Which day each session runs on comes from the active timetable.
+          const schedule: ScheduleDoc = JSON.parse(
+            readFileSync(join(root, 'data', 'schedule.json'), 'utf8'),
+          ).data;
+          const resolved = resolveWeekDays(
+            schedule,
+            monday,
+            STRENGTH_PLAN.map((p) => p.focus),
+          );
+          const plan = STRENGTH_PLAN.map((p, i) => ({ ...p, day: resolved.days[i] })).filter(
+            (p) => p.day.date !== null,
+          );
+          if (plan.length === 0) {
+            send(res, 400, {
+              error: `no class in the "${resolved.scenarioName}" timetable runs any of these sessions, so there is no day to push them to`,
+            });
+            return;
+          }
+
           // Refuse if any target day already holds a session (no duplicates).
           const months = new Map<string, unknown[]>();
-          for (const p of PLAN) {
-            const { y, m } = addDays(monday, p.offset);
+          for (const p of plan) {
+            const { y, m } = partsOf(p.day.date!);
             const key = `${y}/${m}`;
             if (!months.has(key)) {
               const read = await th.req('GET', `/1.0/coach/programs/edit/${PROGRAM}/${y}/${m}/4`);
@@ -149,13 +177,12 @@ export function teamPushPlugin(): Plugin {
             }
           }
           const existing: string[] = [];
-          for (const p of PLAN) {
-            const { y, m, d } = addDays(monday, p.offset);
-            const date = `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+          for (const p of plan) {
+            const { y, m } = partsOf(p.day.date!);
             const hit = (months.get(`${y}/${m}`) as { date: string; title: string }[]).find(
-              (w) => w.date === date,
+              (w) => w.date === p.day.date,
             );
-            if (hit) existing.push(`${date} already has "${hit.title}"`);
+            if (hit) existing.push(`${p.day.date} already has "${hit.title}"`);
           }
           if (existing.length) {
             send(res, 409, { error: 'those days already have sessions', existing });
@@ -164,12 +191,12 @@ export function teamPushPlugin(): Plugin {
 
           const pushed: string[] = [];
           const skipped: string[] = [];
-          for (const p of PLAN) {
+          for (const p of plan) {
             const session = target.sessions.find((s: { focus: string }) => s.focus === p.focus);
-            if (!session) continue;
-            const { y, m, d } = addDays(monday, p.offset);
+            if (!session?.timedBlocks || session.kind === 'circuit') continue;
+            const date = p.day.date!;
+            const { y, m, d } = partsOf(date);
             const created = await th.createWorkoutForDay({ programId: PROGRAM, year: y, month: m, day: d, session: 0 });
-            const date = `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
             await th.setWorkoutTitle({
               id: created.id, workoutId: created.workout_id, programId: PROGRAM, date, title: p.title,
             });
@@ -204,9 +231,16 @@ export function teamPushPlugin(): Plugin {
                 exCount++;
               }
             }
-            pushed.push(`${p.title} (${date}): ${exCount} exercises`);
+            pushed.push(`${p.title} (${p.day.dayName} ${date}): ${exCount} exercises`);
           }
-          send(res, 200, { ok: true, pushed, skipped, note: 'All drafts. Publish stays manual in the coach app.' });
+          send(res, 200, {
+            ok: true,
+            pushed,
+            skipped,
+            scenario: resolved.scenarioName,
+            missing: resolved.missing,
+            note: 'All drafts. Publish stays manual in the coach app.',
+          });
         })().catch((err: unknown) => {
           const e = err as { message?: string; body?: string };
           send(res, 500, { error: e.message ?? String(err), detail: e.body });
