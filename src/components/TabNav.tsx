@@ -1,17 +1,20 @@
 import { NavLink } from 'react-router-dom';
 
+// Ordered by the coaching workflow, widest scope to narrowest, then the
+// reference tabs: dashboard → plan the year → plan the training → check it
+// → run the floor → the club layer.
 const TABS = [
   { to: '/', label: 'Home' },
-  { to: '/schedule', label: 'Schedule' },
-  { to: '/programming', label: 'Programming' },
   { to: '/annual', label: 'Annual Plan' },
-  { to: '/attendance', label: 'Attendance' },
-  { to: '/ethos', label: 'Ethos' },
+  { to: '/programming', label: 'Programming' },
   { to: '/movement', label: 'Movement Check' },
-  { to: '/community', label: 'Community' },
-  { to: '/planning', label: 'Planning' },
+  { to: '/schedule', label: 'Schedule' },
+  { to: '/attendance', label: 'Attendance' },
   { to: '/layouts', label: 'Layouts' },
   { to: '/equipment', label: 'Equipment' },
+  { to: '/community', label: 'Community' },
+  { to: '/planning', label: 'Planning' },
+  { to: '/ethos', label: 'Ethos' },
 ];
 
 export default function TabNav() {

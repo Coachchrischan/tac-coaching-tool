@@ -15,14 +15,28 @@ import {
   SNAP_MIN,
 } from './scheduleLayout';
 
-function DropCell({ day, min, onCreate }: { day: number; min: number; onCreate: (day: number, min: number) => void }) {
+// Empty slots take a RIGHT-click (context menu) to add a class; a left-click
+// would fire every time the coach mis-clicks while dragging or deselecting.
+function DropCell({
+  day,
+  min,
+  onContextMenu,
+}: {
+  day: number;
+  min: number;
+  onContextMenu: (day: number, min: number, x: number, y: number) => void;
+}) {
   const { setNodeRef, isOver } = useDroppable({ id: `${day}:${min}` });
   const onHour = min % 60 === 0;
   return (
     <div
       ref={setNodeRef}
-      onClick={() => onCreate(day, min)}
-      className={`w-full cursor-cell border-t ${
+      onContextMenu={(e) => {
+        e.preventDefault();
+        onContextMenu(day, min, e.clientX, e.clientY);
+      }}
+      title="Right-click to add a class here"
+      className={`w-full border-t ${
         onHour ? 'border-ink-200' : 'border-ink-100'
       } ${isOver ? 'bg-accent-100' : 'hover:bg-ink-100/60'}`}
       style={{ height: SNAP_MIN * PX_PER_MIN }}
@@ -46,6 +60,8 @@ export default function WeekGrid({
   onCreateBlock: (day: ClassBlock['day'], startMin: number) => void;
 }) {
   const [draggingId, setDraggingId] = useState<string | null>(null);
+  // Right-click target for the "Add class here" menu.
+  const [menu, setMenu] = useState<{ day: number; min: number; x: number; y: number } | null>(null);
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
 
   const slots = useMemo(() => {
@@ -131,7 +147,7 @@ export default function WeekGrid({
                   key={min}
                   day={day}
                   min={min}
-                  onCreate={(d, m) => onCreateBlock(d as ClassBlock['day'], m)}
+                  onContextMenu={(d, m, x, y) => setMenu({ day: d, min: m, x, y })}
                 />
               ))}
               {scenario.blocks
@@ -150,6 +166,36 @@ export default function WeekGrid({
           ))}
         </div>
       </div>
+
+      {/* Right-click menu: click anywhere else (or Esc) dismisses it. */}
+      {menu && (
+        <>
+          <div
+            className="fixed inset-0 z-40"
+            onClick={() => setMenu(null)}
+            onContextMenu={(e) => {
+              e.preventDefault();
+              setMenu(null);
+            }}
+          />
+          <div
+            className="fixed z-50 overflow-hidden rounded-md border border-ink-200 bg-white py-1 shadow-lg"
+            style={{ left: menu.x, top: menu.y }}
+          >
+            <button
+              type="button"
+              onClick={() => {
+                onCreateBlock(menu.day as ClassBlock['day'], menu.min);
+                setMenu(null);
+              }}
+              className="block w-full px-3 py-1.5 text-left text-sm text-ink-950 hover:bg-ink-100"
+            >
+              Add class at {formatTime(menu.min)}
+              <span className="ml-1.5 text-ink-400">{DAY_NAMES[menu.day]}</span>
+            </button>
+          </div>
+        </>
+      )}
 
       <DragOverlay>
         {draggingBlock ? (

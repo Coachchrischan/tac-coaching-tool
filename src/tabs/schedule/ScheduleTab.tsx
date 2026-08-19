@@ -101,8 +101,8 @@ export default function ScheduleTab() {
       </div>
 
       <p className="mb-3 text-[13px] text-ink-500">
-        Drag classes to move them. Add a class with the button or by clicking an empty slot; click a
-        class to edit or duplicate it.
+        Drag classes to move them. Add a class with the button or by right-clicking an empty slot;
+        click a class to edit or duplicate it.
       </p>
 
       <div className="flex items-start gap-4">
