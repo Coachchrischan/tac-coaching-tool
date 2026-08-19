@@ -38,8 +38,8 @@ function FixtureShape({ f }: { f: Fixture }) {
           />
         ))}
         <span
-          className="absolute text-[10px] font-bold tracking-[0.2em] text-ink-400 uppercase"
-          style={{ left: f.x, top: f.y + f.h + 4 }}
+          className="absolute rounded bg-white/85 px-1.5 py-0.5 text-[12px] font-bold tracking-[0.12em] text-ink-700 uppercase"
+          style={{ left: f.x, top: f.y + f.h + 5 }}
         >
           {f.label}
         </span>
@@ -72,7 +72,7 @@ function FixtureShape({ f }: { f: Fixture }) {
             />
           ))
         : null}
-      <span className="pointer-events-none absolute right-2 bottom-1 text-[10px] font-bold tracking-[0.2em] text-ink-400 uppercase">
+      <span className="pointer-events-none absolute right-2 bottom-1 rounded bg-white/85 px-1.5 py-0.5 text-[12px] font-bold tracking-[0.12em] text-ink-700 uppercase">
         {f.label}
       </span>
     </div>
@@ -92,7 +92,7 @@ function ItemShape({ item, i = 0 }: { item: LayoutItem; i?: number }) {
   const step = (item.gap ?? 12) + (item.dir === 'col' ? h : w);
   return (
     <div
-      className="absolute flex items-center justify-center text-center text-[11px] leading-tight font-semibold text-white shadow-sm"
+      className="absolute flex items-center justify-center px-1 text-center text-[13px] leading-tight font-bold text-white shadow-sm"
       style={{
         left: item.dir === 'col' ? 0 : i * step,
         top: item.dir === 'col' ? i * step : 0,
@@ -149,12 +149,12 @@ function DraggableItem({
         <ItemShape key={i} item={item} i={i} />
       ))}
       {item.station !== undefined && (
-        <span className="absolute -top-3 -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-ink-950 text-[11px] font-bold text-white shadow">
+        <span className="absolute -top-3 -left-3 flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-ink-950 text-[13px] font-bold text-white shadow-md">
           {item.station}
         </span>
       )}
       {item.kind && item.kind !== 'zone' && (
-        <span className="pointer-events-none absolute -bottom-4 left-0 text-[10px] font-medium whitespace-nowrap text-ink-500">
+        <span className="pointer-events-none absolute -bottom-5 left-0 rounded bg-white/90 px-1.5 py-0.5 text-[12px] font-semibold whitespace-nowrap text-ink-950 shadow-sm">
           {item.label}
           {count > 1 ? ` ×${count}` : ''}
         </span>
@@ -330,12 +330,12 @@ function RoomCanvas({
       <div className="mt-3 overflow-x-auto">
         <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
           <div
-            className="relative shrink-0 rounded-lg border-2 border-ink-300 bg-ink-50"
+            className="relative shrink-0 rounded-lg border-2 border-ink-300 bg-white"
             style={{
               width: CANVAS_W,
               height: CANVAS_H,
               backgroundImage:
-                'linear-gradient(to right, rgba(32,29,29,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(32,29,29,0.05) 1px, transparent 1px)',
+                'linear-gradient(to right, rgba(32,29,29,0.035) 1px, transparent 1px), linear-gradient(to bottom, rgba(32,29,29,0.035) 1px, transparent 1px)',
               backgroundSize: '40px 40px',
             }}
             onClick={() => setSelectedId(null)}
