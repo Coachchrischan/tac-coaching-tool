@@ -13,38 +13,56 @@
         "room": "Group Fitness Room",
         "items": [
           {
-            "id": "1d93c604-fa28-432e-9610-3b2c30a5af04",
-            "kind": "bike",
-            "label": "C2 Bike",
-            "x": 26,
-            "y": 26,
+            "id": "010565be-0cd6-47cf-8aa6-2817d8925f9e",
+            "kind": "rower",
+            "label": "Rower",
+            "x": 60,
+            "y": 300,
             "w": 0,
             "h": 0,
-            "count": 1,
-            "gap": 12
+            "count": 3,
+            "gap": 16,
+            "dir": "row",
+            "station": 1
           },
           {
-            "id": "90a959ff-cf66-4388-ac0f-0e661672dbe8",
+            "id": "f103e56a-e711-4330-9522-fe5b316a3093",
             "kind": "bike",
             "label": "C2 Bike",
-            "x": 1050,
-            "y": 26,
+            "x": 60,
+            "y": 346,
             "w": 0,
             "h": 0,
-            "count": 1,
-            "gap": 12
+            "count": 3,
+            "gap": 16,
+            "dir": "row",
+            "station": 2
           },
           {
-            "id": "21389a8e-55ea-470f-a510-96154f9a85fb",
-            "kind": "bench",
-            "label": "Bench",
-            "x": 50,
-            "y": 330,
+            "id": "a742bc45-45e5-4ad2-b23d-2e386076bf68",
+            "kind": "dumbbell",
+            "label": "Dumbbells",
+            "x": 60,
+            "y": 392,
             "w": 0,
             "h": 0,
-            "count": 10,
-            "gap": 32,
-            "dir": "row"
+            "count": 3,
+            "gap": 16,
+            "dir": "row",
+            "station": 3
+          },
+          {
+            "id": "f42c39f0-f9d4-4bda-95d2-3b02e62c93c1",
+            "kind": "zone",
+            "label": "Skipping ropes",
+            "x": 60,
+            "y": 438,
+            "w": 0,
+            "h": 0,
+            "count": 3,
+            "gap": 16,
+            "dir": "row",
+            "station": 4
           }
         ]
       },
@@ -54,77 +72,55 @@
         "room": "Group Fitness Room",
         "items": [
           {
-            "id": "4b450c06-1eca-46cb-bb22-4333f7f09881",
-            "kind": "ski",
-            "label": "Ski erg",
-            "x": 26,
-            "y": 120,
-            "w": 0,
-            "h": 0,
-            "count": 3,
-            "gap": 24,
-            "station": 1,
-            "dir": "col"
-          },
-          {
-            "id": "7fe305a1-a0eb-4723-99a5-bab3322722f5",
+            "id": "fa53b071-c529-41b1-b057-99c84ea41978",
             "kind": "rower",
             "label": "Rower",
-            "x": 1040,
-            "y": 120,
-            "w": 0,
-            "h": 0,
-            "count": 3,
-            "gap": 24,
-            "station": 5,
-            "dir": "col"
-          },
-          {
-            "id": "8e023433-6aaa-43be-9740-c36c863c6517",
-            "kind": "wallball",
-            "label": "Wall ball",
-            "x": 150,
-            "y": 320,
-            "w": 0,
-            "h": 0,
-            "count": 3,
-            "gap": 40,
-            "station": 8
-          },
-          {
-            "id": "5d38f582-4f92-4817-9bca-73d36f7b8d4a",
-            "kind": "dumbbell",
-            "label": "Dumbbells",
-            "x": 790,
-            "y": 120,
-            "w": 0,
-            "h": 0,
-            "count": 3,
-            "gap": 40,
-            "station": 6
-          },
-          {
-            "id": "3d1f4642-5c2e-4d42-833a-459d0c984bf2",
-            "kind": "barbell",
-            "label": "Barbell",
-            "x": 520,
+            "x": 60,
             "y": 300,
             "w": 0,
             "h": 0,
             "count": 3,
-            "gap": 60,
+            "gap": 16,
+            "dir": "row",
+            "station": 1
+          },
+          {
+            "id": "1f35104d-8224-48ab-9b34-ab947a3e2c0a",
+            "kind": "ski",
+            "label": "Ski erg",
+            "x": 60,
+            "y": 346,
+            "w": 0,
+            "h": 0,
+            "count": 3,
+            "gap": 16,
+            "dir": "row",
+            "station": 2
+          },
+          {
+            "id": "3b31eabf-3819-4091-ac88-709765cc179b",
+            "kind": "wallball",
+            "label": "Wall ball",
+            "x": 60,
+            "y": 392,
+            "w": 0,
+            "h": 0,
+            "count": 3,
+            "gap": 16,
+            "dir": "row",
             "station": 3
           },
           {
-            "id": "cbe1c0f4-1ea3-42b4-83f5-08fd6b549d8d",
-            "kind": "box",
-            "label": "Box",
+            "id": "52a97127-8f73-47e7-bec2-4c2c7c5e2dee",
+            "kind": "zone",
+            "label": "Sandbags",
             "x": 60,
-            "y": 380,
+            "y": 438,
             "w": 0,
             "h": 0,
-            "count": 1,
-            "gap": 12,
+            "count": 3,
+            "gap": 16,
+            "dir": "row",
             "station": 4
           }
         ]
@@ -137,6 +133,6 @@
       }
     ]
   },
-  "rev": 4,
-  "updatedAt": "2026-08-19T20:31:00.656Z"
+  "rev": 7,
+  "updatedAt": "2026-08-19T20:54:42.112Z"
 }

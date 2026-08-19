@@ -86,12 +86,24 @@ export interface TimedBlock {
   slots: ExerciseSlot[];
 }
 
+// ESD, Hyrox and Game Day are written as circuits, not sets and reps: a
+// heading ("AMRAP in 10 minutes:", "0:00-10:00"), the movements under it,
+// and an optional rest before the next piece.
+export interface CircuitBlock {
+  id: string;
+  heading: string;
+  lines: string[];
+  restAfter?: string;
+}
+
 export interface Session {
   id: string;
   focus: SessionFocus;
   name?: string; // optional display name overriding the focus label
   intent?: string; // coach-facing note at the top: the day's intent
-  timedBlocks: TimedBlock[];
+  timedBlocks: TimedBlock[]; // strength format: series of exercise slots
+  circuit?: CircuitBlock[]; // circuit format: ESD / Hyrox / Game Day
+  note?: string; // footnote, e.g. how a pairs workout is shared
   blurbOverride?: string; // coach-edited blurb wins over generated
 }
 
@@ -114,6 +126,7 @@ export interface ProgramBlock {
 export interface ProgramStream {
   id: string; // 'strength' | 'esd' | 'hyrox' | 'gameday', extensible
   name: string;
+  format?: 'strength' | 'circuit'; // how its sessions are written; default strength
   blocks: ProgramBlock[]; // phases (variable length: 10/1/6...)
 }
 

@@ -3229,7 +3229,8 @@
             ],
             "theme": "Strength"
           }
-        ]
+        ],
+        "format": "strength"
       },
       {
         "id": "esd",
@@ -3243,32 +3244,59 @@
                 "id": "esd-b1w1",
                 "sessions": [
                   {
-                    "id": "esd-b1w1s1",
+                    "id": "esd-b1w1-monday",
                     "focus": "esd",
-                    "timedBlocks": [
+                    "name": "Monday",
+                    "timedBlocks": [],
+                    "circuit": [
                       {
-                        "id": "esd-b1w1s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
+                        "id": "0281f851-c93a-467b-afb6-d61bfb2a20f4",
+                        "heading": "AMRAP in 10 minutes",
+                        "lines": [
+                          "200m Run",
+                          "10 DB Push ups",
+                          "10 DB Power cleans",
+                          "10 Renegade Rows"
+                        ],
+                        "restAfter": "Rest 2 minutes"
                       },
                       {
-                        "id": "esd-b1w1s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
+                        "id": "3a8d8f85-9d77-488a-997e-d8ba8e5324fc",
+                        "heading": "AMRAP in 10 minutes",
+                        "lines": [
+                          "20 Calorie Row",
+                          "10 DB Push ups",
+                          "10 DB Power cleans",
+                          "10 Renegade Rows"
+                        ],
+                        "restAfter": "Rest 2 minutes"
                       },
                       {
-                        "id": "esd-b1w1s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
+                        "id": "b54d56ec-1d3e-4331-8a0b-a5673d04b95e",
+                        "heading": "AMRAP in 10 minutes",
+                        "lines": [
+                          "20 Calorie Bike",
+                          "10 DB Push ups",
+                          "10 DB Power cleans",
+                          "10 Renegade Rows"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "esd-b1w1-friday",
+                    "focus": "esd",
+                    "name": "Friday",
+                    "timedBlocks": [],
+                    "circuit": [
                       {
-                        "id": "esd-b1w1s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
+                        "id": "be9e46cc-1e68-4607-9055-f4f3b51fa779",
+                        "heading": "AMRAP in 20 minutes",
+                        "lines": [
+                          "500m Row or 400m Run (1K Bike)",
+                          "15 DB Thrusters",
+                          "50 skips"
+                        ]
                       }
                     ]
                   }
@@ -3848,7 +3876,8 @@
               }
             ]
           }
-        ]
+        ],
+        "format": "circuit"
       },
       {
         "id": "hyrox",
@@ -3862,34 +3891,96 @@
                 "id": "hyrox-b1w1",
                 "sessions": [
                   {
-                    "id": "hyrox-b1w1s1",
+                    "id": "hyrox-b1w1-monday",
                     "focus": "hyrox",
-                    "timedBlocks": [
+                    "name": "Monday",
+                    "timedBlocks": [],
+                    "circuit": [
                       {
-                        "id": "hyrox-b1w1s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
+                        "id": "c4247952-7a99-4fef-a9b5-9f01aa37dbc8",
+                        "heading": "In 8 minutes",
+                        "lines": [
+                          "Ski 1K",
+                          "Max Sled push"
+                        ],
+                        "restAfter": "Rest 2 minutes"
                       },
                       {
-                        "id": "hyrox-b1w1s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
+                        "id": "a261505f-ecfe-45ed-997e-301ee99a1dbf",
+                        "heading": "In 8 minutes",
+                        "lines": [
+                          "Run 1000m",
+                          "Max distance Burpee broad jumps"
+                        ],
+                        "restAfter": "Rest 2 minutes"
                       },
                       {
-                        "id": "hyrox-b1w1s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
+                        "id": "b25ddb9d-5df3-4b5a-b502-fc53d9b33ef0",
+                        "heading": "In 8 minutes",
+                        "lines": [
+                          "Row 1000m",
+                          "Max distance Farmers carry"
+                        ],
+                        "restAfter": "Rest 2 minutes"
                       },
                       {
-                        "id": "hyrox-b1w1s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
+                        "id": "6e311e0d-18bc-4c72-963a-38c3622a1f64",
+                        "heading": "In 8 minutes",
+                        "lines": [
+                          "Run 1K",
+                          "Max Wallballs"
+                        ]
                       }
                     ]
+                  },
+                  {
+                    "id": "hyrox-b1w1-friday",
+                    "focus": "hyrox",
+                    "name": "Friday",
+                    "timedBlocks": [],
+                    "circuit": [
+                      {
+                        "id": "4ce38084-1a89-4f42-a54a-4081abcf34b7",
+                        "heading": "",
+                        "lines": [
+                          "In pairs,"
+                        ]
+                      },
+                      {
+                        "id": "0c571deb-277d-4b50-b440-bfe8ffcde6a5",
+                        "heading": "0:00-10:00",
+                        "lines": [
+                          "Run 800m",
+                          "50m Sandbag lunge"
+                        ]
+                      },
+                      {
+                        "id": "ccf1d9e6-554f-4d3c-b8b6-73ceed642909",
+                        "heading": "10:00-20:00",
+                        "lines": [
+                          "Run 1K",
+                          "50m Sled pull"
+                        ]
+                      },
+                      {
+                        "id": "9aef251c-ec5a-4116-b6d7-5857d4ac94b0",
+                        "heading": "20:00-30:00",
+                        "lines": [
+                          "Run 800m",
+                          "50m Sandbag lunge"
+                        ]
+                      },
+                      {
+                        "id": "c191e5c4-b8df-46a9-81b6-f9244caa04b0",
+                        "heading": "30:00-40:00",
+                        "lines": [
+                          "Run 1K",
+                          "50m Sled pull"
+                        ]
+                      }
+                    ],
+                    "note": "Both team mates run 800m at the same time. Lunge and Sled shared between them in any fashion.",
+                    "intent": "In pairs"
                   }
                 ]
               },
@@ -4467,7 +4558,8 @@
               }
             ]
           }
-        ]
+        ],
+        "format": "circuit"
       },
       {
         "id": "gameday",
@@ -5086,10 +5178,11 @@
               }
             ]
           }
-        ]
+        ],
+        "format": "circuit"
       }
     ]
   },
-  "rev": 34,
-  "updatedAt": "2026-08-19T20:18:44.924Z"
+  "rev": 35,
+  "updatedAt": "2026-08-19T20:53:32.878Z"
 }

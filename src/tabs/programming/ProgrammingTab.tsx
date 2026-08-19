@@ -21,6 +21,8 @@ import type { BlockRows } from './EditableGrid';
 import type { AddTarget, EditableRow, SlotRef } from './EditableGrid';
 import { downloadProgramCsv } from '../../lib/exportCsv';
 import { FOCUS_LABEL, streamsOf, withStreamBlocks } from '../../lib/programStreams';
+import CircuitEditor from './CircuitEditor';
+import { circuitToText, equipmentFor } from '../../lib/circuit';
 
 type ProgramView = 'week' | 'block' | 'month';
 
@@ -65,6 +67,8 @@ function nextLabel(blocks: TimedBlock[]): string {
 export default function ProgrammingTab() {
   const program = useDoc('program');
   const lib = useDoc('library-overrides');
+  const annual = useDoc('annual-plan');
+  const layouts = useDoc('layouts');
   const { library, error: libraryError } = useLibrary();
   const navigate = useNavigate();
 
@@ -113,6 +117,21 @@ export default function ProgrammingTab() {
   const blockPages = Math.max(1, Math.ceil(blocks[bi].weeks.length / BLOCK_LEN));
   const blockPage = Math.min(blockPageRaw, blockPages - 1);
   const sessions = blocks[bi].weeks[wi].sessions;
+
+  // Week 1 of phase 1 starts on the annual plan's year start; every later
+  // week is a Monday seven days on, so a week always shows its real date.
+  const weeksBefore = blocks.slice(0, bi).reduce((n, b) => n + b.weeks.length, 0);
+  const yearStart = annual.data?.startDate;
+  function mondayOfWeek(weekInPhase: number): Date | null {
+    if (!yearStart) return null;
+    const d = new Date(`${yearStart}T00:00:00`);
+    d.setDate(d.getDate() + (weeksBefore + weekInPhase) * 7);
+    return d;
+  }
+  const fmtDay = (d: Date | null, opts?: Intl.DateTimeFormatOptions) =>
+    d ? d.toLocaleDateString('en-AU', opts ?? { day: 'numeric', month: 'short' }) : '';
+
+  const isCircuit = (stream.format ?? (stream.id === 'strength' ? 'strength' : 'circuit')) === 'circuit';
 
   /** Every phase edit goes through here so it lands on the active stream. */
   function updateBlocks(fn: (blocks: ProgramBlock[]) => ProgramBlock[]) {
@@ -581,6 +600,65 @@ export default function ProgrammingTab() {
     );
   }
 
+  /**
+   * Read the week's sessions and lay the room out for them: everything the
+   * workout calls for gets placed, in a tidy row down the free floor. The
+   * air runners, rig and sled track are fixtures, so a Run or a Sled push
+   * needs nothing added.
+   */
+  function buildLayoutForWeek() {
+    const text = sessions
+      .map((s) =>
+        s.circuit
+          ? circuitToText(s.circuit, s.note)
+          : s.timedBlocks.flatMap((tb) => tb.slots.map((sl) => sl.name)).join('\n'),
+      )
+      .join('\n');
+    const needed = equipmentFor(text);
+    if (needed.length === 0) {
+      window.alert('Nothing in this week needs equipment placing: it is all runners, rig and sled.');
+      return;
+    }
+    const target = (layouts.data?.rooms ?? []).find((r) => r.id === stream.id);
+    if (!target) {
+      window.alert(`No floor layout exists for ${stream.name} yet.`);
+      return;
+    }
+    if (
+      target.items.length > 0 &&
+      !window.confirm(
+        `Replace the ${stream.name} layout with the gear this week calls for?\n\n${needed
+          .map((n) => `• ${n.label}`)
+          .join('\n')}`,
+      )
+    )
+      return;
+
+    // Lay each kind out as a row across the open floor between rig and sled.
+    const items = needed.map((hint, i) => {
+      return {
+        id: crypto.randomUUID(),
+        kind: hint.kind,
+        label: hint.label,
+        x: 60,
+        y: 300 + i * 46,
+        w: 0,
+        h: 0,
+        count: 3,
+        gap: 16,
+        dir: 'row' as const,
+        station: i + 1,
+      };
+    });
+    layouts.update((d) => ({
+      ...d,
+      rooms: d.rooms.map((r) => (r.id === stream.id ? { ...r, items } : r)),
+    }));
+    window.alert(
+      `${stream.name} layout built from Week ${wi + 1}: ${needed.map((n) => n.label).join(', ')}.\nOpen the Layouts tab to arrange it.`,
+    );
+  }
+
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.ctrlKey && e.key === 'Enter') {
       e.preventDefault();
@@ -615,9 +693,15 @@ export default function ProgrammingTab() {
           onChange={(e) => program.update((d) => ({ ...d, name: e.target.value }))}
         />
         <p className="text-[11px] font-semibold tracking-[0.28em] text-sand-500 uppercase">
-          Phase {bi + 1}
+          {stream.name} · Phase {bi + 1}
           {blocks[bi].theme ? ` · ${blocks[bi].theme}` : ''} · Week {wi + 1} of{' '}
           {blocks[bi].weeks.length}
+          {mondayOfWeek(wi) && (
+            <span className="ml-2 text-white/70">
+              week of{' '}
+              {fmtDay(mondayOfWeek(wi), { weekday: 'short', day: 'numeric', month: 'short' })}
+            </span>
+          )}
         </p>
       </div>
 
@@ -637,6 +721,12 @@ export default function ProgrammingTab() {
           disabled={pushState === 'pushing'}
         >
           <TrainHeroicIcon />
+        </RailButton>
+        <RailButton
+          label={`Build the ${stream.name} floor layout from this week`}
+          onClick={buildLayoutForWeek}
+        >
+          <LayoutIcon />
         </RailButton>
       </aside>
 
@@ -713,8 +803,23 @@ export default function ProgrammingTab() {
           {view === 'week' && (
             <div className="flex flex-wrap items-center gap-1.5">
               {blocks[bi].weeks.map((w, i) => (
-                <button key={w.id} type="button" className={pill(i === wi)} onClick={() => setWi(i)}>
+                <button
+                  key={w.id}
+                  type="button"
+                  className={`${pill(i === wi)} flex flex-col items-center leading-tight`}
+                  onClick={() => setWi(i)}
+                  title={
+                    mondayOfWeek(i)
+                      ? `Week starting ${fmtDay(mondayOfWeek(i), { weekday: 'long', day: 'numeric', month: 'long' })}`
+                      : undefined
+                  }
+                >
                   W{i + 1}
+                  {mondayOfWeek(i) && (
+                    <span className="text-[10px] font-normal opacity-70">
+                      {fmtDay(mondayOfWeek(i))}
+                    </span>
+                  )}
                 </button>
               ))}
             </div>
@@ -972,7 +1077,10 @@ export default function ProgrammingTab() {
         />
       </div>
 
-      {/* Session */}
+      {/* Session: circuits for ESD / Hyrox / Game Day, series for Strength */}
+      {isCircuit ? (
+        <CircuitEditor session={session} onPatch={patchSession} />
+      ) : (
       <div className="space-y-3">
         {session.timedBlocks.map((block) => (
           <TimedBlockCard
@@ -1034,6 +1142,7 @@ export default function ProgrammingTab() {
           />
         )}
       </div>
+      )}
       </div>
       )}
       </div>
@@ -1107,6 +1216,19 @@ function SheetsIcon() {
         strokeWidth="1.5"
         strokeLinecap="round"
       />
+    </svg>
+  );
+}
+
+/** Floor layout: a room plan on a dark tile. */
+function LayoutIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="1.5" y="1.5" width="21" height="21" rx="5.5" fill="#1B1B1B" />
+      <rect x="4.5" y="5" width="15" height="3" rx="1" fill="#DEC5AE" />
+      <rect x="4.5" y="10.5" width="6.5" height="3" rx="1" fill="#4E6353" />
+      <rect x="13" y="10.5" width="6.5" height="3" rx="1" fill="#4E6353" />
+      <rect x="4.5" y="16" width="15" height="3" rx="1" stroke="#8A8580" strokeWidth="1.2" fill="none" />
     </svg>
   );
 }
