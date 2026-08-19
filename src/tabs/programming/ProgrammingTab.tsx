@@ -590,10 +590,25 @@ export default function ProgrammingTab() {
   }
 
   return (
-    <div className="flex gap-4" onKeyDown={handleKeyDown}>
+    <div onKeyDown={handleKeyDown}>
+      {/* Program banner: full width across the very top */}
+      <div className="mb-4 rounded-xl bg-ink-950 px-6 py-3 text-center shadow-sm">
+        <input
+          className="font-display block w-full rounded-md border border-transparent bg-transparent px-2 py-0.5 text-center text-[26px] leading-tight text-ink-50 hover:border-white/25 focus:border-sand-500 focus:outline-none"
+          value={doc.name}
+          onChange={(e) => program.update((d) => ({ ...d, name: e.target.value }))}
+        />
+        <p className="text-[11px] font-semibold tracking-[0.28em] text-sand-500 uppercase">
+          Phase {bi + 1}
+          {doc.blocks[bi].theme ? ` · ${doc.blocks[bi].theme}` : ''} · Week {wi + 1} of{' '}
+          {doc.blocks[bi].weeks.length}
+        </p>
+      </div>
+
+      <div className="flex gap-4">
       {/* Output rail: the three "send this somewhere" actions, out of the
           way of the editing controls. Labels appear on hover. */}
-      <aside className="sticky top-0 flex h-[calc(100vh-4.25rem)] w-14 shrink-0 flex-col items-center gap-2 self-start rounded-xl border border-ink-200 bg-white py-3 shadow-sm">
+      <aside className="sticky top-4 flex h-[calc(100vh-10rem)] w-14 shrink-0 flex-col items-center gap-2 self-start rounded-xl border border-ink-200 bg-white py-3 shadow-sm">
         <RailButton label="TV output" onClick={() => navigate(`/tv/${session.id}`)}>
           <TvIcon />
         </RailButton>
@@ -610,20 +625,6 @@ export default function ProgrammingTab() {
       </aside>
 
       <div className="min-w-0 flex-1">
-      {/* Program banner: the page's heading, centred across the top */}
-      <div className="mb-4 rounded-xl bg-ink-950 px-6 py-3 text-center shadow-sm">
-        <input
-          className="font-display block w-full rounded-md border border-transparent bg-transparent px-2 py-0.5 text-center text-[26px] leading-tight text-ink-50 hover:border-white/25 focus:border-sand-500 focus:outline-none"
-          value={doc.name}
-          onChange={(e) => program.update((d) => ({ ...d, name: e.target.value }))}
-        />
-        <p className="text-[11px] font-semibold tracking-[0.28em] text-sand-500 uppercase">
-          Phase {bi + 1}
-          {doc.blocks[bi].theme ? ` · ${doc.blocks[bi].theme}` : ''} · Week {wi + 1} of{' '}
-          {doc.blocks[bi].weeks.length}
-        </p>
-      </div>
-
       {/* Controls row */}
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         {/* View switcher: Week edits, Block/Phase read side by side */}
@@ -978,6 +979,7 @@ export default function ProgrammingTab() {
       </div>
       </div>
       )}
+      </div>
       </div>
     </div>
   );
