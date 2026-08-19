@@ -96,6 +96,9 @@ export default function PlanningTab() {
   const pasteLines = toTodoLines(paste);
   const pasteKind = classifyPaste(paste);
   const pasteActions = pasteKind === 'note' ? actionLines(paste) : [];
+  // Newest note first; the dropdown opens on the most recent unless one is picked.
+  const notes = planning.data.noteEntries ?? [];
+  const currentNote = notes.find((n) => n.id === openNoteId) ?? notes[0];
 
   /** Keep the pasted text as a dated note; its first line becomes the title. */
   function saveAsNote() {
@@ -234,86 +237,75 @@ export default function PlanningTab() {
         </div>
       </section>
 
-      {/* Captured notes */}
-      {(planning.data.noteEntries ?? []).length > 0 && (
+      {/* Captured notes: pick one from the dropdown to read or edit it */}
+      {notes.length > 0 && (
         <section className="mt-4 rounded-xl border border-ink-200 bg-white p-4 shadow-sm">
-          <h3 className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
-            Notes ({(planning.data.noteEntries ?? []).length})
-          </h3>
-          <ul className="mt-3 divide-y divide-ink-100">
-            {(planning.data.noteEntries ?? []).map((n) => {
-              const open = openNoteId === n.id;
-              return (
-                <li key={n.id} className="py-2">
-                  <div className="flex items-baseline gap-3">
-                    <button
-                      type="button"
-                      onClick={() => setOpenNoteId(open ? null : n.id)}
-                      className="min-w-0 flex-1 text-left"
-                    >
-                      <span className="text-sm font-medium text-ink-950">{n.title}</span>
-                      <span className="ml-2 text-[11px] text-ink-400">{fmtDate(n.date)}</span>
-                      {!open && (
-                        <span className="block truncate text-[12px] text-ink-500">
-                          {n.text.split(/\r?\n/).slice(1).join(' ').trim() || ' '}
-                        </span>
-                      )}
-                    </button>
-                    <button
-                      type="button"
-                      title="Turn this note's lines into to-dos"
-                      onClick={() => {
-                        const lines = toTodoLines(n.text);
-                        if (lines.length === 0) return;
-                        planning.update((d) => ({
-                          ...d,
-                          todos: [
-                            ...d.todos,
-                            ...lines.map((text) => ({
-                              id: crypto.randomUUID(),
-                              text,
-                              done: false,
-                            })),
-                          ],
-                        }));
-                      }}
-                      className="shrink-0 rounded border border-ink-300 px-1.5 py-0.5 text-[11px] font-medium text-ink-500 hover:text-ink-950"
-                    >
-                      → to-dos
-                    </button>
-                    <button
-                      type="button"
-                      title="Delete this note"
-                      onClick={() =>
-                        planning.update((d) => ({
-                          ...d,
-                          noteEntries: (d.noteEntries ?? []).filter((x) => x.id !== n.id),
-                        }))
-                      }
-                      className="shrink-0 rounded px-1.5 py-0.5 text-sm text-ink-300 hover:text-red-600"
-                    >
-                      ✕
-                    </button>
-                  </div>
-                  {open && (
-                    <textarea
-                      className="mt-2 w-full resize-y rounded-md border border-ink-200 bg-ink-50 px-3 py-2 text-[13px] leading-relaxed text-ink-950 focus:border-accent-600 focus:bg-white focus:outline-none"
-                      rows={Math.min(20, Math.max(4, n.text.split(/\r?\n/).length))}
-                      value={n.text}
-                      onChange={(e) =>
-                        planning.update((d) => ({
-                          ...d,
-                          noteEntries: (d.noteEntries ?? []).map((x) =>
-                            x.id === n.id ? { ...x, text: e.target.value } : x,
-                          ),
-                        }))
-                      }
-                    />
-                  )}
-                </li>
-              );
-            })}
-          </ul>
+          <div className="flex flex-wrap items-center gap-2">
+            <h3 className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
+              Notes ({notes.length})
+            </h3>
+            <select
+              className="min-w-72 flex-1 rounded-md border border-ink-300 bg-white px-2.5 py-1.5 text-sm font-medium text-ink-950 focus:border-accent-600 focus:outline-none"
+              value={currentNote?.id ?? ''}
+              onChange={(e) => setOpenNoteId(e.target.value)}
+            >
+              {notes.map((n) => (
+                <option key={n.id} value={n.id}>
+                  {fmtDate(n.date)} · {n.title}
+                </option>
+              ))}
+            </select>
+            {currentNote && (
+              <>
+                <button
+                  type="button"
+                  title="Pull the action lines out of this note into to-dos"
+                  onClick={() => {
+                    const lines = actionLines(currentNote.text);
+                    addTodos(lines);
+                    setLastFiled(
+                      lines.length
+                        ? `Added ${lines.length} to-do${lines.length === 1 ? '' : 's'} from this note.`
+                        : 'No action lines found in this note.',
+                    );
+                  }}
+                  className="rounded-md border border-ink-300 bg-white px-2.5 py-1.5 text-[12px] font-medium text-ink-600 hover:bg-ink-100"
+                >
+                  Pull out to-dos
+                </button>
+                <button
+                  type="button"
+                  title="Delete this note"
+                  onClick={() => {
+                    if (!window.confirm(`Delete the note "${currentNote.title}"?`)) return;
+                    planning.update((d) => ({
+                      ...d,
+                      noteEntries: (d.noteEntries ?? []).filter((x) => x.id !== currentNote.id),
+                    }));
+                    setOpenNoteId(null);
+                  }}
+                  className="rounded px-1.5 py-1 text-sm text-ink-300 hover:text-red-600"
+                >
+                  ✕
+                </button>
+              </>
+            )}
+          </div>
+          {currentNote && (
+            <textarea
+              className="mt-3 w-full resize-y rounded-md border border-ink-200 bg-ink-50 px-3 py-2 text-[13px] leading-relaxed text-ink-950 focus:border-accent-600 focus:bg-white focus:outline-none"
+              rows={Math.min(24, Math.max(6, currentNote.text.split(/\r?\n/).length + 1))}
+              value={currentNote.text}
+              onChange={(e) =>
+                planning.update((d) => ({
+                  ...d,
+                  noteEntries: (d.noteEntries ?? []).map((x) =>
+                    x.id === currentNote.id ? { ...x, text: e.target.value } : x,
+                  ),
+                }))
+              }
+            />
+          )}
         </section>
       )}
 
