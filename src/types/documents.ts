@@ -236,10 +236,19 @@ export interface CommunityDoc {
   events: CommunityEvent[];
 }
 
-// Block themes live on ProgramDoc.blocks[].theme (single source of truth);
-// the Planning tab edits them there. This doc holds the free-form workspace.
+// A captured note: paste a meeting summary in and it lands here, dated.
+export interface PlanningNote {
+  id: string;
+  date: string; // ISO yyyy-mm-dd, when it was captured
+  title: string;
+  text: string;
+}
+
+// Phase themes live on ProgramDoc streams[].blocks[].theme (single source of
+// truth); the Planning tab edits them there. This doc holds the workspace.
 export interface PlanningDoc {
   notes: string;
+  noteEntries?: PlanningNote[];
   todos: { id: string; text: string; done: boolean }[];
 }
 
