@@ -251,6 +251,11 @@ export interface LayoutItem {
   w: number;
   h: number;
   colour?: string;
+  kind?: string; // equipment type from roomModel; absent = free zone label
+  count?: number; // draw a row of N of this item
+  gap?: number; // spacing between repeats
+  dir?: 'row' | 'col'; // repeat across the floor or down it (default row)
+  station?: number; // station number badge for circuit maps
 }
 
 // One layout per class type, since each runs a different floor plan even
