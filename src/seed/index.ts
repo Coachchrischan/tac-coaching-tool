@@ -295,8 +295,10 @@ export function seedPlanning(): PlanningDoc {
 export function seedLayouts(): LayoutsDoc {
   return {
     rooms: [
-      { id: 'esd-hyrox', name: 'Group Fitness Room (ESD / Hyrox)', items: [] },
-      { id: 'strength', name: 'Gym Floor (Strength)', items: [] },
+      { id: 'strength', name: 'Strength', room: 'Gym Floor', items: [] },
+      { id: 'esd', name: 'ESD', room: 'Group Fitness Room', items: [] },
+      { id: 'hyrox', name: 'Hyrox', room: 'Group Fitness Room', items: [] },
+      { id: 'gameday', name: 'Game Day', room: 'Group Fitness Room', items: [] },
     ],
   };
 }

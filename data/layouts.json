@@ -2,17 +2,31 @@
   "data": {
     "rooms": [
       {
-        "id": "esd-hyrox",
-        "name": "Group Fitness Room (ESD / Hyrox)",
+        "id": "strength",
+        "name": "Strength",
+        "room": "Gym Floor",
         "items": []
       },
       {
-        "id": "strength",
-        "name": "Gym Floor (Strength)",
+        "id": "esd",
+        "name": "ESD",
+        "room": "Group Fitness Room",
+        "items": []
+      },
+      {
+        "id": "hyrox",
+        "name": "Hyrox",
+        "room": "Group Fitness Room",
+        "items": []
+      },
+      {
+        "id": "gameday",
+        "name": "Game Day",
+        "room": "Group Fitness Room",
         "items": []
       }
     ]
   },
-  "rev": 1,
-  "updatedAt": "2026-08-13T22:35:50.395Z"
+  "rev": 2,
+  "updatedAt": "2026-08-19T20:23:58.128Z"
 }

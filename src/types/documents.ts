@@ -253,9 +253,12 @@ export interface LayoutItem {
   colour?: string;
 }
 
+// One layout per class type, since each runs a different floor plan even
+// when two share a room. Ids match the programming streams.
 export interface LayoutRoom {
-  id: 'esd-hyrox' | 'strength';
+  id: string; // 'strength' | 'esd' | 'hyrox' | 'gameday'
   name: string;
+  room?: string; // which physical room it runs in
   items: LayoutItem[];
 }
 

@@ -93,7 +93,13 @@ function RoomCanvas({
   return (
     <section className="rounded-xl border border-ink-200 bg-white p-4 shadow-sm">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-ink-950">{room.name}</h3>
+        <h3 className="text-sm font-semibold text-ink-950">
+          {room.name} layout
+          {room.room && <span className="ml-2 font-normal text-ink-500">{room.room}</span>}
+          <span className="ml-2 text-[12px] font-normal text-ink-400">
+            {room.items.length} item{room.items.length === 1 ? '' : 's'}
+          </span>
+        </h3>
         <button
           type="button"
           onClick={addItem}
@@ -210,34 +216,50 @@ function RoomCanvas({
 
 export default function LayoutsTab() {
   const { data, saveState, update, reloadTheirs, keepMine, retry } = useDoc('layouts');
+  const [roomIndexRaw, setRoomIndex] = useState(0);
 
   if (!data) return <p className="py-20 text-center text-sm text-ink-400">Loading…</p>;
 
+  // One layout per class type; the dropdown picks which one you're planning.
+  const roomIndex = Math.min(roomIndexRaw, data.rooms.length - 1);
+  const room = data.rooms[roomIndex];
+
   return (
     <div>
-      <div className="mb-4 flex items-center justify-between">
-        <div>
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <h2 className="font-display text-2xl text-ink-950">Floor layouts</h2>
-          <p className="text-[13px] text-ink-500">
-            Drag equipment and zone labels to plan resources per class. One grid square ≈ 1 m.
-          </p>
+          <select
+            className="rounded-md border border-ink-300 bg-white px-2.5 py-1.5 text-sm font-medium text-ink-950 focus:border-accent-600 focus:outline-none"
+            value={roomIndex}
+            onChange={(e) => setRoomIndex(Number(e.target.value))}
+            title="Which class you're planning the floor for"
+          >
+            {data.rooms.map((r, i) => (
+              <option key={r.id} value={i}>
+                {r.name}
+                {r.room ? ` · ${r.room}` : ''}
+              </option>
+            ))}
+          </select>
         </div>
         <SaveBadge state={saveState} onReloadTheirs={reloadTheirs} onKeepMine={keepMine} onRetry={retry} />
       </div>
-      <div className="grid gap-5 xl:grid-cols-2">
-        {data.rooms.map((room) => (
-          <RoomCanvas
-            key={room.id}
-            room={room}
-            onUpdateRoom={(fn) =>
-              update((d) => ({
-                ...d,
-                rooms: d.rooms.map((r) => (r.id === room.id ? fn(r) : r)),
-              }))
-            }
-          />
-        ))}
-      </div>
+      <p className="mb-3 text-[13px] text-ink-500">
+        Drag equipment and zone labels to plan resources per class. One grid square ≈ 1 m.
+      </p>
+      {room && (
+        <RoomCanvas
+          key={room.id}
+          room={room}
+          onUpdateRoom={(fn) =>
+            update((d) => ({
+              ...d,
+              rooms: d.rooms.map((r) => (r.id === room.id ? fn(r) : r)),
+            }))
+          }
+        />
+      )}
     </div>
   );
 }
