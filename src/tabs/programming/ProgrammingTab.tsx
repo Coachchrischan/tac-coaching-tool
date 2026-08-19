@@ -208,6 +208,14 @@ export default function ProgrammingTab() {
   // How this stream is written, and the focuses it is allowed to use.
   const streamKind = formatOf(stream);
   const streamFocuses = STREAM_DEFS.find((d) => d.id === stream.id)?.focuses ?? [];
+  // Strength runs the annual plan's phases. ESD, Hyrox and Game Day are
+  // programmed month to month, so the same control is called a Month there.
+  const byMonth = stream.cadence === 'months';
+  const UNIT = byMonth ? 'Month' : 'Phase';
+  const unit = byMonth ? 'month' : 'phase';
+  /** What a block is called in this stream: its month name, or "Phase 2". */
+  const blockLabel = (i: number) =>
+    byMonth ? (blocks[i].theme ?? `Month ${i + 1}`) : `Phase ${i + 1}`;
 
   /** Every phase edit goes through here so it lands on the active stream. */
   function updateBlocks(fn: (blocks: ProgramBlock[]) => ProgramBlock[]) {
@@ -256,7 +264,7 @@ export default function ProgrammingTab() {
       next < block.weeks.length &&
       blockHasContent(block, next) &&
       !window.confirm(
-        `Shorten Phase ${bi + 1} to ${next} week${next === 1 ? '' : 's'}? The dropped weeks contain programming that will be deleted.`,
+        `Shorten ${blockLabel(bi)} to ${next} week${next === 1 ? '' : 's'}? The dropped weeks contain programming that will be deleted.`,
       )
     )
       return;
@@ -294,7 +302,7 @@ export default function ProgrammingTab() {
     const block = blocks[bi];
     if (
       !window.confirm(
-        `Remove Phase ${bi + 1}${block.theme ? ` (${block.theme})` : ''}${
+        `Remove ${blockLabel(bi)}${!byMonth && block.theme ? ` (${block.theme})` : ''}${
           blockHasContent(block) ? ' and ALL its programming' : ''
         }? This cannot be undone.`,
       )
@@ -779,8 +787,8 @@ export default function ProgrammingTab() {
           onChange={(e) => program.update((d) => ({ ...d, name: e.target.value }))}
         />
         <p className="text-[11px] font-semibold tracking-[0.28em] text-sand-500 uppercase">
-          {stream.name} · Phase {bi + 1}
-          {blocks[bi].theme ? ` · ${blocks[bi].theme}` : ''} · Week {wi + 1} of{' '}
+          {stream.name} · {blockLabel(bi)}
+          {!byMonth && blocks[bi].theme ? ` · ${blocks[bi].theme}` : ''} · Week {wi + 1} of{' '}
           {blocks[bi].weeks.length}
           {mondayOfWeek(wi) && (
             <span className="ml-2 text-white/70">
@@ -858,12 +866,12 @@ export default function ProgrammingTab() {
                 setWi(0);
                 setBlockPage(0);
               }}
-              title="Which phase of this stream"
+              title={`Which ${unit} of this stream`}
             >
               {blocks.map((b, i) => (
                 <option key={b.id} value={i}>
-                  Phase {i + 1}
-                  {b.theme ? ` · ${b.theme}` : ''} ({b.weeks.length} wk)
+                  {blockLabel(i)}
+                  {!byMonth && b.theme ? ` · ${b.theme}` : ''} ({b.weeks.length} wk)
                 </option>
               ))}
             </select>
@@ -1016,10 +1024,10 @@ export default function ProgrammingTab() {
         {editOpen && (
           <div className="flex flex-wrap items-end gap-4 rounded-lg border border-ink-200 bg-ink-50 px-4 py-3">
             <label className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
-              Phase {bi + 1} theme
+              {byMonth ? 'Month name' : `Phase ${bi + 1} theme`}
               <input
                 className="mt-0.5 block w-56 rounded-md border border-ink-300 bg-white px-2.5 py-1.5 text-sm text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none"
-                placeholder="e.g. Strength-Hypertrophy"
+                placeholder={byMonth ? 'e.g. Sept 2026' : 'e.g. Strength-Hypertrophy'}
                 value={blocks[bi].theme ?? ''}
                 onChange={(e) =>
                   updateBlocks((all) =>
@@ -1029,7 +1037,7 @@ export default function ProgrammingTab() {
               />
             </label>
             <div className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
-              Phase length
+              {UNIT} length
               <div className="mt-0.5 flex items-center gap-1 rounded-md border border-ink-300 bg-white px-1.5 py-1">
                 <button
                   type="button"
@@ -1058,7 +1066,7 @@ export default function ProgrammingTab() {
               onClick={addBlock}
               className="rounded-md border border-dashed border-ink-300 bg-white px-3 py-1.5 text-sm font-medium text-ink-500 hover:border-accent-600 hover:text-accent-600"
             >
-              + Add phase
+              + Add {unit}
             </button>
             <button
               type="button"
@@ -1066,10 +1074,10 @@ export default function ProgrammingTab() {
               onClick={removeBlock}
               className="rounded-md border border-red-200 bg-white px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              Delete phase {bi + 1}
+              Delete {blockLabel(bi).toLowerCase()}
             </button>
             <p className="w-full text-[11px] text-ink-400">
-              {stream.name} · {blocks.length} phase{blocks.length === 1 ? '' : 's'} ·{' '}
+              {stream.name} · {blocks.length} {unit}{blocks.length === 1 ? '' : 's'} ·{' '}
               {blocks.reduce((n, b) => n + b.weeks.length, 0)} weeks total
             </p>
           </div>

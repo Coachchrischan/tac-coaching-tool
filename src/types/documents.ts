@@ -147,7 +147,13 @@ export interface ProgramStream {
   id: string; // 'strength' | 'esd' | 'hyrox' | 'gameday', extensible
   name: string;
   format?: 'strength' | 'circuit'; // how its sessions are written; default strength
-  blocks: ProgramBlock[]; // phases (variable length: 10/1/6...)
+  /**
+   * How the stream is organised in time. Strength runs the periodised phases of
+   * the annual plan. ESD, Hyrox and Game Day are programmed month to month, so
+   * their blocks[] are calendar months and the UI calls them months.
+   */
+  cadence?: 'phases' | 'months';
+  blocks: ProgramBlock[]; // phases or months (variable length)
 }
 
 export interface ProgramDoc {

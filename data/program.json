@@ -3230,15 +3230,16 @@
             "theme": "Strength"
           }
         ],
-        "format": "strength"
+        "format": "strength",
+        "cadence": "phases"
       },
       {
         "id": "esd",
         "name": "ESD",
         "blocks": [
           {
-            "id": "esd-block-1",
-            "theme": "Strength-Hypertrophy",
+            "id": "esd-aug-2026",
+            "theme": "Aug 2026",
             "weeks": [
               {
                 "id": "esd-b1w1",
@@ -3336,7 +3337,13 @@
                     ]
                   }
                 ]
-              },
+              }
+            ]
+          },
+          {
+            "id": "esd-sept-2026",
+            "theme": "Sept 2026",
+            "weeks": [
               {
                 "id": "esd-b1w3",
                 "sessions": [
@@ -3476,7 +3483,13 @@
                     ]
                   }
                 ]
-              },
+              }
+            ]
+          },
+          {
+            "id": "esd-oct-2026",
+            "theme": "Oct 2026",
+            "weeks": [
               {
                 "id": "esd-b1w7",
                 "sessions": [
@@ -3620,8 +3633,8 @@
             ]
           },
           {
-            "id": "esd-block-2",
-            "theme": "Deload / skills",
+            "id": "esd-nov-2026",
+            "theme": "Nov 2026",
             "weeks": [
               {
                 "id": "esd-b2w1",
@@ -3657,13 +3670,7 @@
                     ]
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "id": "esd-block-3",
-            "theme": "Strength",
-            "weeks": [
+              },
               {
                 "id": "esd-b3w1",
                 "sessions": [
@@ -3803,7 +3810,13 @@
                     ]
                   }
                 ]
-              },
+              }
+            ]
+          },
+          {
+            "id": "esd-dec-2026",
+            "theme": "Dec 2026",
+            "weeks": [
               {
                 "id": "esd-b3w5",
                 "sessions": [
@@ -3877,15 +3890,16 @@
             ]
           }
         ],
-        "format": "circuit"
+        "format": "circuit",
+        "cadence": "months"
       },
       {
         "id": "hyrox",
         "name": "Hyrox",
         "blocks": [
           {
-            "id": "hyrox-block-1",
-            "theme": "Strength-Hypertrophy",
+            "id": "hyrox-aug-2026",
+            "theme": "Aug 2026",
             "weeks": [
               {
                 "id": "hyrox-b1w1",
@@ -4011,7 +4025,13 @@
                     ]
                   }
                 ]
-              },
+              }
+            ]
+          },
+          {
+            "id": "hyrox-sept-2026",
+            "theme": "Sept 2026",
+            "weeks": [
               {
                 "id": "hyrox-b1w3",
                 "sessions": [
@@ -4151,7 +4171,13 @@
                     ]
                   }
                 ]
-              },
+              }
+            ]
+          },
+          {
+            "id": "hyrox-oct-2026",
+            "theme": "Oct 2026",
+            "weeks": [
               {
                 "id": "hyrox-b1w7",
                 "sessions": [
@@ -4295,8 +4321,8 @@
             ]
           },
           {
-            "id": "hyrox-block-2",
-            "theme": "Deload / skills",
+            "id": "hyrox-nov-2026",
+            "theme": "Nov 2026",
             "weeks": [
               {
                 "id": "hyrox-b2w1",
@@ -4332,13 +4358,7 @@
                     ]
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "id": "hyrox-block-3",
-            "theme": "Strength",
-            "weeks": [
+              },
               {
                 "id": "hyrox-b3w1",
                 "sessions": [
@@ -4478,7 +4498,13 @@
                     ]
                   }
                 ]
-              },
+              }
+            ]
+          },
+          {
+            "id": "hyrox-dec-2026",
+            "theme": "Dec 2026",
+            "weeks": [
               {
                 "id": "hyrox-b3w5",
                 "sessions": [
@@ -4552,15 +4578,16 @@
             ]
           }
         ],
-        "format": "circuit"
+        "format": "circuit",
+        "cadence": "months"
       },
       {
         "id": "gameday",
         "name": "Game Day",
         "blocks": [
           {
-            "id": "gameday-block-1",
-            "theme": "Strength-Hypertrophy",
+            "id": "gameday-aug-2026",
+            "theme": "Aug 2026",
             "weeks": [
               {
                 "id": "gameday-b1w1",
@@ -4631,7 +4658,13 @@
                     ]
                   }
                 ]
-              },
+              }
+            ]
+          },
+          {
+            "id": "gameday-sept-2026",
+            "theme": "Sept 2026",
+            "weeks": [
               {
                 "id": "gameday-b1w3",
                 "sessions": [
@@ -4771,7 +4804,13 @@
                     ]
                   }
                 ]
-              },
+              }
+            ]
+          },
+          {
+            "id": "gameday-oct-2026",
+            "theme": "Oct 2026",
+            "weeks": [
               {
                 "id": "gameday-b1w7",
                 "sessions": [
@@ -4915,8 +4954,8 @@
             ]
           },
           {
-            "id": "gameday-block-2",
-            "theme": "Deload / skills",
+            "id": "gameday-nov-2026",
+            "theme": "Nov 2026",
             "weeks": [
               {
                 "id": "gameday-b2w1",
@@ -4952,13 +4991,7 @@
                     ]
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "id": "gameday-block-3",
-            "theme": "Strength",
-            "weeks": [
+              },
               {
                 "id": "gameday-b3w1",
                 "sessions": [
@@ -5098,7 +5131,13 @@
                     ]
                   }
                 ]
-              },
+              }
+            ]
+          },
+          {
+            "id": "gameday-dec-2026",
+            "theme": "Dec 2026",
+            "weeks": [
               {
                 "id": "gameday-b3w5",
                 "sessions": [
@@ -5172,10 +5211,11 @@
             ]
           }
         ],
-        "format": "circuit"
+        "format": "circuit",
+        "cadence": "months"
       }
     ]
   },
-  "rev": 37,
-  "updatedAt": "2026-08-19T21:26:14.191Z"
+  "rev": 38,
+  "updatedAt": "2026-08-19T23:16:53.959Z"
 }

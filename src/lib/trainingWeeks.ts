@@ -59,6 +59,35 @@ export function trainingWeekMonday(
   return d;
 }
 
+/** A calendar month's worth of training weeks, for month-cadence streams. */
+export interface MonthGroup {
+  label: string; // "Sep 2026"
+  weeks: number;
+}
+
+/**
+ * Split a run of training weeks into calendar months. ESD and Hyrox are
+ * programmed month to month rather than in phases, so their blocks[] are
+ * months: a week belongs to the month its Monday falls in, and shutdown weeks
+ * are already stepped over by the training-week dating.
+ */
+export function monthPartition(
+  startDate: string,
+  weekCount: number,
+  breaks: BreakWindow[] = [],
+  from = 0,
+): MonthGroup[] {
+  const groups: MonthGroup[] = [];
+  for (let i = 0; i < weekCount; i++) {
+    const monday = trainingWeekMonday(startDate, from + i, breaks);
+    const label = monday.toLocaleDateString('en-AU', { month: 'short', year: 'numeric' });
+    const last = groups[groups.length - 1];
+    if (last && last.label === label) last.weeks++;
+    else groups.push({ label, weeks: 1 });
+  }
+  return groups;
+}
+
 /**
  * The shutdown, if any, sitting immediately before the nth training week. Used
  * to mark the gap in the week pills so a coach can see why the dates jump.
