@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDoc } from '../../lib/useDoc';
 import SaveBadge from '../../components/SaveBadge';
-import type { AnnualPhase, AnnualStream } from '../../types/documents';
+import type { AnnualPhase, AnnualStream, RaceEvent } from '../../types/documents';
 
 const YEAR_WEEKS = 52;
 const MS_WEEK = 7 * 24 * 60 * 60 * 1000;
@@ -127,6 +127,55 @@ function WeekRuler({ startDate }: { startDate: string }) {
   );
 }
 
+/** Week offset of a date from the plan's start Monday (may be out of range). */
+function weekOffset(startDate: string, iso: string): number {
+  const start = new Date(`${startDate}T00:00:00`).getTime();
+  const d = new Date(`${iso}T00:00:00`).getTime();
+  return (d - start) / MS_WEEK;
+}
+
+function fmtRange(race: RaceEvent): string {
+  const s = new Date(`${race.date}T00:00:00`);
+  if (!race.endDate) return fmtShort(s);
+  const e = new Date(`${race.endDate}T00:00:00`);
+  const sameMonth = s.getMonth() === e.getMonth();
+  return sameMonth
+    ? `${s.getDate()}-${e.getDate()} ${e.toLocaleDateString('en-AU', { month: 'short' })}`
+    : `${fmtShort(s)} - ${fmtShort(e)}`;
+}
+
+/** Race pins drawn over a stream's lane, positioned by week. */
+function RaceMarkers({ races, startDate }: { races: RaceEvent[]; startDate: string }) {
+  const shown = races
+    .map((r) => ({ race: r, off: weekOffset(startDate, r.date) }))
+    .filter((x) => x.off >= 0 && x.off < YEAR_WEEKS)
+    .sort((a, b) => a.off - b.off);
+  if (shown.length === 0) return null;
+  return (
+    <div className="pointer-events-none absolute inset-0">
+      {shown.map(({ race, off }) => {
+        const left = (off / YEAR_WEEKS) * 100;
+        // Flip the label to the left of the pin near the right edge so it
+        // never runs off the lane.
+        const flip = left > 82;
+        return (
+          <div key={race.id} className="absolute top-0 bottom-0" style={{ left: `${left}%` }}>
+            <div className="h-full w-0.5 bg-sand-500 shadow-[0_0_0_1px_rgba(32,29,29,0.35)]" />
+            <span
+              className={`absolute top-1 rounded bg-sand-500 px-1.5 py-0.5 text-[10px] leading-tight font-bold whitespace-nowrap text-ink-950 ${
+                flip ? 'right-1' : 'left-1'
+              }`}
+            >
+              {race.name.replace(/^HYROX\s+/i, '')}
+              <span className="ml-1 font-normal opacity-70">{fmtRange(race)}</span>
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function AnnualPlanTab() {
   const { data, saveState, update, reloadTheirs, keepMine, retry } = useDoc('annual-plan');
   const [filter, setFilter] = useState<'all' | AnnualStream['id']>('all');
@@ -164,6 +213,28 @@ export default function AnnualPlanTab() {
   function deletePhase(streamId: string, phaseId: string) {
     patchStream(streamId, (s) => ({ ...s, phases: s.phases.filter((p) => p.id !== phaseId) }));
     setSelected(null);
+  }
+
+  function addRace() {
+    const fresh: RaceEvent = {
+      id: crypto.randomUUID(),
+      name: 'New race',
+      date: data!.startDate,
+      streamId: 'hyrox',
+    };
+    update((d) => ({ ...d, races: [...(d.races ?? []), fresh] }));
+  }
+
+  function patchRace(raceId: string, patch: Partial<RaceEvent>) {
+    update((d) => ({
+      ...d,
+      races: (d.races ?? []).map((r) => {
+        if (r.id !== raceId) return r;
+        const next = { ...r, ...patch };
+        if (patch.endDate === undefined && 'endDate' in patch) delete next.endDate;
+        return next;
+      }),
+    }));
   }
 
   function movePhase(streamId: string, phaseId: string, dir: -1 | 1) {
@@ -234,33 +305,62 @@ export default function AnnualPlanTab() {
                       {total} wk{total === YEAR_WEEKS ? '' : ` of ${YEAR_WEEKS}`}
                     </span>
                   </div>
-                  <div className="flex min-h-16 flex-1 overflow-hidden rounded-md">
-                    {stream.phases.map((p, i) => {
-                      const isSel =
-                        selected?.streamId === stream.id && selected.phaseId === p.id;
-                      return (
-                        <button
-                          key={p.id}
-                          type="button"
-                          onClick={() =>
-                            setSelected(isSel ? null : { streamId: stream.id, phaseId: p.id })
-                          }
-                          className={`flex min-w-0 flex-col justify-center px-2 py-1.5 text-left leading-tight text-white transition-opacity ${
-                            isSel ? 'ring-2 ring-ink-950 ring-inset' : 'hover:opacity-90'
-                          }`}
-                          style={{
-                            width: `${(p.weeks / Math.max(total, YEAR_WEEKS)) * 100}%`,
-                            backgroundColor: phaseShade(stream.colour, i, stream.phases.length),
-                          }}
-                          title={`${p.name}: ${p.focus || 'no focus set'}`}
-                        >
-                          <span className="truncate text-[12px] font-bold">{p.name}</span>
-                          <span className="truncate text-[10px] text-white/75">
-                            {fmtShort(addWeeks(data.startDate, starts[i]))} · {p.weeks} wk
-                          </span>
-                        </button>
-                      );
-                    })}
+                  <div className="relative h-28 flex-1">
+                    <div className="flex h-full overflow-hidden rounded-md">
+                      {stream.phases.map((p, i) => {
+                        const isSel =
+                          selected?.streamId === stream.id && selected.phaseId === p.id;
+                        // Short phases (a deload or transition week) can't fit
+                        // horizontal text, so their label runs bottom-to-top.
+                        const vertical = p.weeks <= 2;
+                        return (
+                          <button
+                            key={p.id}
+                            type="button"
+                            onClick={() =>
+                              setSelected(isSel ? null : { streamId: stream.id, phaseId: p.id })
+                            }
+                            className={`flex min-w-0 leading-tight text-white transition-opacity ${
+                              vertical
+                                ? 'items-center justify-center px-0 py-2'
+                                : 'flex-col justify-center px-2 py-1.5 text-left'
+                            } ${isSel ? 'ring-2 ring-ink-950 ring-inset' : 'hover:opacity-90'}`}
+                            style={{
+                              width: `${(p.weeks / Math.max(total, YEAR_WEEKS)) * 100}%`,
+                              backgroundColor: phaseShade(stream.colour, i, stream.phases.length),
+                            }}
+                            title={`${p.name} · ${fmtShort(addWeeks(data.startDate, starts[i]))} · ${p.weeks} wk${
+                              p.focus ? `: ${p.focus}` : ''
+                            }`}
+                          >
+                            {vertical ? (
+                              <span
+                                className="truncate text-[11px] font-bold"
+                                style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+                              >
+                                {p.name}
+                              </span>
+                            ) : (
+                              <>
+                                <span className="truncate text-[13px] font-bold">{p.name}</span>
+                                <span className="truncate text-[11px] text-white/75">
+                                  {fmtShort(addWeeks(data.startDate, starts[i]))} · {p.weeks} wk
+                                </span>
+                                {p.focus && (
+                                  <span className="mt-0.5 line-clamp-3 overflow-hidden text-[10px] leading-snug text-white/60">
+                                    {p.focus}
+                                  </span>
+                                )}
+                              </>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <RaceMarkers
+                      races={(data.races ?? []).filter((r) => r.streamId === stream.id)}
+                      startDate={data.startDate}
+                    />
                   </div>
                   <button
                     type="button"
@@ -347,6 +447,82 @@ export default function AnnualPlanTab() {
           })}
         </div>
       </div>
+
+      {/* Race dates: drawn as pins on their stream's lane */}
+      <section className="mt-5 rounded-xl border border-ink-200 bg-white p-4 shadow-sm">
+        <div className="flex items-baseline justify-between">
+          <h3 className="text-sm font-semibold text-ink-950">Race dates</h3>
+          <button
+            type="button"
+            onClick={addRace}
+            className="text-[12px] font-medium text-accent-600 hover:underline"
+          >
+            + Add race
+          </button>
+        </div>
+        {(data.races ?? []).length === 0 ? (
+          <p className="mt-2 text-sm text-ink-400">
+            No races yet. Add one and it appears as a marker on its lane.
+          </p>
+        ) : (
+          <ul className="mt-3 space-y-2">
+            {[...(data.races ?? [])]
+              .sort((a, b) => a.date.localeCompare(b.date))
+              .map((r) => {
+                const off = weekOffset(data.startDate, r.date);
+                const inPlan = off >= 0 && off < YEAR_WEEKS;
+                return (
+                  <li key={r.id} className="flex flex-wrap items-center gap-2">
+                    <input
+                      className={`${field} w-52`}
+                      value={r.name}
+                      onChange={(e) => patchRace(r.id, { name: e.target.value })}
+                    />
+                    <input
+                      type="date"
+                      className={field}
+                      value={r.date}
+                      onChange={(e) => e.target.value && patchRace(r.id, { date: e.target.value })}
+                    />
+                    <span className="text-[12px] text-ink-400">to</span>
+                    <input
+                      type="date"
+                      className={field}
+                      value={r.endDate ?? ''}
+                      onChange={(e) => patchRace(r.id, { endDate: e.target.value || undefined })}
+                    />
+                    <select
+                      className={field}
+                      value={r.streamId}
+                      onChange={(e) =>
+                        patchRace(r.id, { streamId: e.target.value as AnnualStream['id'] })
+                      }
+                    >
+                      {data.streams.map((s) => (
+                        <option key={s.id} value={s.id}>
+                          {s.name}
+                        </option>
+                      ))}
+                    </select>
+                    <span className="text-[11px] text-ink-400">
+                      {inPlan ? `week ${Math.floor(off) + 1}` : 'outside this plan year'}
+                    </span>
+                    <button
+                      type="button"
+                      title="Remove this race"
+                      onClick={() =>
+                        update((d) => ({ ...d, races: (d.races ?? []).filter((x) => x.id !== r.id) }))
+                      }
+                      className="ml-auto rounded px-1.5 py-0.5 text-sm text-ink-300 hover:text-red-600"
+                    >
+                      ✕
+                    </button>
+                  </li>
+                );
+              })}
+          </ul>
+        )}
+      </section>
     </div>
   );
 }

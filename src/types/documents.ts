@@ -175,9 +175,20 @@ export interface AnnualStream {
   phases: AnnualPhase[];
 }
 
+// A dated race/competition marker drawn on its stream's lane. Multi-day
+// events carry an endDate; single-day ones omit it.
+export interface RaceEvent {
+  id: string;
+  name: string;
+  date: string; // ISO yyyy-mm-dd, first day
+  endDate?: string; // ISO yyyy-mm-dd, last day
+  streamId: AnnualStream['id'];
+}
+
 export interface AnnualPlanDoc {
   startDate: string; // ISO yyyy-mm-dd, a Monday; anchors every computed date
   streams: AnnualStream[];
+  races?: RaceEvent[];
 }
 
 // ---------- Attendance + home dashboard ----------

@@ -161,6 +161,14 @@ export function seedAnnualPlan(): AnnualPlanDoc {
   ap = 0;
   return {
     startDate: '2026-08-24', // a Monday; the ratified 2026/27 plan anchor
+    // AU/NZ HYROX calendar for the 2026/27 season, checked against the
+    // published race listings 2026-08-20. Editable in-app as dates firm up.
+    races: [
+      { id: 'hx-perth-2026', name: 'HYROX Perth', date: '2026-08-21', endDate: '2026-08-23', streamId: 'hyrox' },
+      { id: 'hx-melbourne-2026', name: 'HYROX Melbourne', date: '2026-12-09', endDate: '2026-12-13', streamId: 'hyrox' },
+      { id: 'hx-auckland-2027', name: 'HYROX Auckland', date: '2027-02-04', endDate: '2027-02-07', streamId: 'hyrox' },
+      { id: 'hx-brisbane-2027', name: 'HYROX Brisbane', date: '2027-03-31', endDate: '2027-04-04', streamId: 'hyrox' },
+    ],
     streams: [
       {
         id: 'strength',

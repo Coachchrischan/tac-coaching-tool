@@ -163,8 +163,38 @@
           }
         ]
       }
+    ],
+    "races": [
+      {
+        "id": "hx-perth-2026",
+        "name": "HYROX Perth",
+        "date": "2026-08-21",
+        "endDate": "2026-08-23",
+        "streamId": "hyrox"
+      },
+      {
+        "id": "hx-melbourne-2026",
+        "name": "HYROX Melbourne",
+        "date": "2026-12-09",
+        "endDate": "2026-12-13",
+        "streamId": "hyrox"
+      },
+      {
+        "id": "hx-auckland-2027",
+        "name": "HYROX Auckland",
+        "date": "2027-02-04",
+        "endDate": "2027-02-07",
+        "streamId": "hyrox"
+      },
+      {
+        "id": "hx-brisbane-2027",
+        "name": "HYROX Brisbane",
+        "date": "2027-03-31",
+        "endDate": "2027-04-04",
+        "streamId": "hyrox"
+      }
     ]
   },
-  "rev": 3,
-  "updatedAt": "2026-08-14T05:20:43.791Z"
+  "rev": 4,
+  "updatedAt": "2026-08-19T19:55:48.427Z"
 }
