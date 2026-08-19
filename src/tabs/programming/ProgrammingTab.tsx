@@ -593,38 +593,36 @@ export default function ProgrammingTab() {
     <div className="flex gap-4" onKeyDown={handleKeyDown}>
       {/* Output rail: the three "send this somewhere" actions, out of the
           way of the editing controls. Labels appear on hover. */}
-      <aside className="sticky top-4 flex w-12 shrink-0 flex-col items-center gap-1.5 self-start rounded-xl border border-ink-200 bg-white py-2 shadow-sm">
-        <RailButton
-          label="TV output"
-          onClick={() => navigate(`/tv/${session.id}`)}
-          className="text-ink-700 hover:bg-ink-950 hover:text-white"
-        >
+      <aside className="sticky top-0 flex h-[calc(100vh-4.25rem)] w-14 shrink-0 flex-col items-center gap-2 self-start rounded-xl border border-ink-200 bg-white py-3 shadow-sm">
+        <RailButton label="TV output" onClick={() => navigate(`/tv/${session.id}`)}>
           <TvIcon />
         </RailButton>
-        <RailButton
-          label="Export for Sheets"
-          onClick={() => downloadProgramCsv(doc)}
-          className="text-[#0F9D58] hover:bg-[#0F9D58]/10"
-        >
+        <RailButton label="Export for Sheets" onClick={() => downloadProgramCsv(doc)}>
           <SheetsIcon />
         </RailButton>
         <RailButton
           label={pushState === 'pushing' ? 'Pushing…' : `Push W${wi + 1} to TrainHeroic (drafts)`}
           onClick={pushWeekToTrainHeroic}
           disabled={pushState === 'pushing'}
-          className="text-accent-700 hover:bg-accent-100 disabled:cursor-wait disabled:opacity-40"
         >
           <TrainHeroicIcon />
         </RailButton>
       </aside>
 
       <div className="min-w-0 flex-1">
-      {/* Program name: the page's heading, always centred */}
-      <input
-        className="font-display mb-3 block w-full rounded-md border border-transparent bg-transparent px-2 py-1 text-center text-2xl text-ink-950 hover:border-ink-300 focus:border-accent-600 focus:outline-none"
-        value={doc.name}
-        onChange={(e) => program.update((d) => ({ ...d, name: e.target.value }))}
-      />
+      {/* Program banner: the page's heading, centred across the top */}
+      <div className="mb-4 rounded-xl bg-ink-950 px-6 py-3 text-center shadow-sm">
+        <input
+          className="font-display block w-full rounded-md border border-transparent bg-transparent px-2 py-0.5 text-center text-[26px] leading-tight text-ink-50 hover:border-white/25 focus:border-sand-500 focus:outline-none"
+          value={doc.name}
+          onChange={(e) => program.update((d) => ({ ...d, name: e.target.value }))}
+        />
+        <p className="text-[11px] font-semibold tracking-[0.28em] text-sand-500 uppercase">
+          Phase {bi + 1}
+          {doc.blocks[bi].theme ? ` · ${doc.blocks[bi].theme}` : ''} · Week {wi + 1} of{' '}
+          {doc.blocks[bi].weeks.length}
+        </p>
+      </div>
 
       {/* Controls row */}
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
@@ -992,13 +990,11 @@ function RailButton({
   label,
   onClick,
   disabled,
-  className,
   children,
 }: {
   label: string;
   onClick: () => void;
   disabled?: boolean;
-  className?: string;
   children: React.ReactNode;
 }) {
   return (
@@ -1008,7 +1004,7 @@ function RailButton({
         onClick={onClick}
         disabled={disabled}
         aria-label={label}
-        className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors ${className ?? ''}`}
+        className="flex h-9 w-9 items-center justify-center rounded-lg transition-transform hover:scale-110 focus-visible:ring-2 focus-visible:ring-accent-600 focus-visible:outline-none disabled:cursor-wait disabled:opacity-40"
       >
         {children}
       </button>
@@ -1022,43 +1018,52 @@ function RailButton({
   );
 }
 
+/** TV output: a screen on a dark tile, matching the other two rail marks. */
 function TvIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="2.5" y="4.5" width="19" height="13" rx="2.5" stroke="currentColor" strokeWidth="1.7" />
-      <path d="M8.5 21h7M12 17.5V21" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="1.5" y="1.5" width="21" height="21" rx="5.5" fill="#1B1B1B" />
+      <rect x="4.6" y="6.2" width="14.8" height="9.8" rx="1.8" fill="#F5F3EB" />
+      <path d="M9 19h6" stroke="#F5F3EB" strokeWidth="1.6" strokeLinecap="round" />
+      <path d="M12 16v3" stroke="#F5F3EB" strokeWidth="1.6" strokeLinecap="round" />
     </svg>
   );
 }
 
-/** Sheets-style page with the familiar folded corner and cell grid. */
+/** Google Sheets' app mark: green grid tile on a dark rounded tile. */
 function SheetsIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+      <defs>
+        <linearGradient id="tac-sheets-green" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#4ADE80" />
+          <stop offset="100%" stopColor="#12A150" />
+        </linearGradient>
+      </defs>
+      <rect x="1.5" y="1.5" width="21" height="21" rx="5.5" fill="#1B1B1B" />
+      <rect x="4.2" y="6.6" width="15.6" height="10.8" rx="2.4" fill="url(#tac-sheets-green)" />
       <path
-        d="M6 2.75h7L19 8.5v12.75H6z"
-        stroke="currentColor"
-        strokeWidth="1.7"
-        strokeLinejoin="round"
+        d="M13.6 6.6v10.8M4.2 12h15.6"
+        stroke="#FFFFFF"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
-      <path d="M13 2.75V8.5h6" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
-      <rect x="8.75" y="11.5" width="7.5" height="6.5" stroke="currentColor" strokeWidth="1.4" />
-      <path d="M8.75 14.75h7.5M12.5 11.5v6.5" stroke="currentColor" strokeWidth="1.4" />
     </svg>
   );
 }
 
-/** TrainHeroic: their bold H monogram, drawn rather than shipped as artwork. */
+/** TrainHeroic's app mark: lime slashed H on a dark rounded tile. Drawn to
+ *  match rather than shipped as artwork, and used only to label the link to
+ *  their product. */
 function TrainHeroicIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="2.5" y="2.5" width="19" height="19" rx="4" stroke="currentColor" strokeWidth="1.7" />
-      <path
-        d="M8.75 7v10M15.25 7v10M8.75 12h6.5"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="1.5" y="1.5" width="21" height="21" rx="5.5" fill="#1B1B1B" />
+      <g fill="#C9F31D">
+        <path d="M7.4 6.2h3.1v11.6H7.4z" />
+        <path d="M13.5 6.2h3.1v11.6h-3.1z" />
+        <path d="M10.5 12.9l3-3.2v3.4l-3 3.2z" />
+      </g>
     </svg>
   );
 }

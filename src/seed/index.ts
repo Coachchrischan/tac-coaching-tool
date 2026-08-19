@@ -146,7 +146,7 @@ export function seedProgram(): ProgramDoc {
     };
   });
 
-  return { name: 'TAC Strength Cycle 1', blocks };
+  return { name: 'TAC Strength Phase 1', blocks };
 }
 
 // ---------- Annual plan: a sensible starting year, fully editable ----------

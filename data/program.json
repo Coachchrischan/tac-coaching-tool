@@ -1,6 +1,6 @@
 {
   "data": {
-    "name": "TAC Strength Cycle 1",
+    "name": "TAC Strength Phase 1",
     "blocks": [
       {
         "id": "block-1",
@@ -3227,6 +3227,6 @@
       }
     ]
   },
-  "rev": 32,
-  "updatedAt": "2026-08-14T19:21:00.047Z"
+  "rev": 33,
+  "updatedAt": "2026-08-19T20:03:24.337Z"
 }
