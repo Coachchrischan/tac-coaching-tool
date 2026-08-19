@@ -590,30 +590,69 @@ export default function ProgrammingTab() {
   }
 
   return (
-    <div onKeyDown={handleKeyDown}>
-      {/* Header row */}
+    <div className="flex gap-4" onKeyDown={handleKeyDown}>
+      {/* Output rail: the three "send this somewhere" actions, out of the
+          way of the editing controls. Labels appear on hover. */}
+      <aside className="sticky top-4 flex w-12 shrink-0 flex-col items-center gap-1.5 self-start rounded-xl border border-ink-200 bg-white py-2 shadow-sm">
+        <RailButton
+          label="TV output"
+          onClick={() => navigate(`/tv/${session.id}`)}
+          className="text-ink-700 hover:bg-ink-950 hover:text-white"
+        >
+          <TvIcon />
+        </RailButton>
+        <RailButton
+          label="Export for Sheets"
+          onClick={() => downloadProgramCsv(doc)}
+          className="text-[#0F9D58] hover:bg-[#0F9D58]/10"
+        >
+          <SheetsIcon />
+        </RailButton>
+        <RailButton
+          label={pushState === 'pushing' ? 'Pushing…' : `Push W${wi + 1} to TrainHeroic (drafts)`}
+          onClick={pushWeekToTrainHeroic}
+          disabled={pushState === 'pushing'}
+          className="text-accent-700 hover:bg-accent-100 disabled:cursor-wait disabled:opacity-40"
+        >
+          <TrainHeroicIcon />
+        </RailButton>
+      </aside>
+
+      <div className="min-w-0 flex-1">
+      {/* Program name: the page's heading, always centred */}
+      <input
+        className="font-display mb-3 block w-full rounded-md border border-transparent bg-transparent px-2 py-1 text-center text-2xl text-ink-950 hover:border-ink-300 focus:border-accent-600 focus:outline-none"
+        value={doc.name}
+        onChange={(e) => program.update((d) => ({ ...d, name: e.target.value }))}
+      />
+
+      {/* Controls row */}
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <input
-          className="font-display rounded-md border border-transparent bg-transparent px-2 py-1 text-2xl text-ink-950 hover:border-ink-300 focus:border-accent-600 focus:outline-none"
-          value={doc.name}
-          onChange={(e) => program.update((d) => ({ ...d, name: e.target.value }))}
-        />
+        {/* View switcher: Week edits, Block/Phase read side by side */}
+        <div className="flex overflow-hidden rounded-md border border-ink-300">
+          {(Object.keys(VIEW_LABEL) as ProgramView[]).map((v) => (
+            <button
+              key={v}
+              type="button"
+              onClick={() => setView(v)}
+              className={`px-3 py-1.5 text-sm font-medium transition-colors ${
+                view === v ? 'bg-ink-950 text-white' : 'bg-white text-ink-500 hover:text-ink-950'
+              }`}
+            >
+              {VIEW_LABEL[v]}
+            </button>
+          ))}
+        </div>
         <div className="flex items-center gap-3">
-          {/* View switcher: Week edits, Month/Block/Phase read side by side */}
-          <div className="flex overflow-hidden rounded-md border border-ink-300">
-            {(Object.keys(VIEW_LABEL) as ProgramView[]).map((v) => (
-              <button
-                key={v}
-                type="button"
-                onClick={() => setView(v)}
-                className={`px-3 py-1.5 text-sm font-medium transition-colors ${
-                  view === v ? 'bg-ink-950 text-white' : 'bg-white text-ink-500 hover:text-ink-950'
-                }`}
-              >
-                {VIEW_LABEL[v]}
-              </button>
-            ))}
-          </div>
+          <label className="flex items-center gap-1.5 text-sm text-ink-500">
+            <input
+              type="checkbox"
+              checked={expandScales}
+              onChange={(e) => setExpandScales(e.target.checked)}
+              className="accent-accent-600"
+            />
+            Show scales
+          </label>
           {(() => {
             const urgent = mostUrgent([program, lib]);
             return (
@@ -625,39 +664,6 @@ export default function ProgrammingTab() {
               />
             );
           })()}
-          <label className="flex items-center gap-1.5 text-sm text-ink-500">
-            <input
-              type="checkbox"
-              checked={expandScales}
-              onChange={(e) => setExpandScales(e.target.checked)}
-              className="accent-accent-600"
-            />
-            Show scales
-          </label>
-          <button
-            type="button"
-            onClick={() => navigate(`/tv/${session.id}`)}
-            className="rounded-md bg-ink-950 px-3 py-1.5 text-sm font-medium text-white hover:bg-ink-800"
-          >
-            TV output
-          </button>
-          <button
-            type="button"
-            title="Download the whole program as a CSV that imports straight into Google Sheets"
-            onClick={() => downloadProgramCsv(doc)}
-            className="rounded-md border border-ink-300 bg-white px-3 py-1.5 text-sm font-medium text-ink-700 hover:bg-ink-100"
-          >
-            Export for Sheets
-          </button>
-          <button
-            type="button"
-            disabled={pushState === 'pushing'}
-            title="Create this week's sessions on the TAC Strength Class team calendar as drafts (never publishes)"
-            onClick={pushWeekToTrainHeroic}
-            className="rounded-md border border-accent-600 bg-white px-3 py-1.5 text-sm font-medium text-accent-700 hover:bg-accent-100 disabled:cursor-wait disabled:opacity-50"
-          >
-            {pushState === 'pushing' ? 'Pushing…' : `Push W${wi + 1} to TrainHeroic`}
-          </button>
         </div>
       </div>
 
@@ -974,6 +980,85 @@ export default function ProgrammingTab() {
       </div>
       </div>
       )}
+      </div>
     </div>
+  );
+}
+
+// ---------- Output rail ----------
+
+/** Icon button with a label that slides out on hover/focus. */
+function RailButton({
+  label,
+  onClick,
+  disabled,
+  className,
+  children,
+}: {
+  label: string;
+  onClick: () => void;
+  disabled?: boolean;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="group relative">
+      <button
+        type="button"
+        onClick={onClick}
+        disabled={disabled}
+        aria-label={label}
+        className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors ${className ?? ''}`}
+      >
+        {children}
+      </button>
+      <span
+        role="tooltip"
+        className="pointer-events-none absolute top-1/2 left-full z-30 ml-2 -translate-y-1/2 rounded-md bg-ink-950 px-2 py-1 text-[12px] font-medium whitespace-nowrap text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
+      >
+        {label}
+      </span>
+    </div>
+  );
+}
+
+function TvIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="2.5" y="4.5" width="19" height="13" rx="2.5" stroke="currentColor" strokeWidth="1.7" />
+      <path d="M8.5 21h7M12 17.5V21" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+/** Sheets-style page with the familiar folded corner and cell grid. */
+function SheetsIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M6 2.75h7L19 8.5v12.75H6z"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinejoin="round"
+      />
+      <path d="M13 2.75V8.5h6" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+      <rect x="8.75" y="11.5" width="7.5" height="6.5" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M8.75 14.75h7.5M12.5 11.5v6.5" stroke="currentColor" strokeWidth="1.4" />
+    </svg>
+  );
+}
+
+/** TrainHeroic: their bold H monogram, drawn rather than shipped as artwork. */
+function TrainHeroicIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="2.5" y="2.5" width="19" height="19" rx="4" stroke="currentColor" strokeWidth="1.7" />
+      <path
+        d="M8.75 7v10M15.25 7v10M8.75 12h6.5"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }

@@ -136,6 +136,14 @@ const headCls =
 const subHeadCls =
   'border-b border-ink-200 bg-ink-800 px-1 py-1 text-center text-[10px] font-semibold tracking-wide text-ink-300 uppercase';
 
+/** Spreadsheet banding: row tint, week-column tint, both together. */
+function cellShade(rowBand: boolean, colBand: boolean): string {
+  if (rowBand && colBand) return 'bg-ink-100/70';
+  if (rowBand) return 'bg-ink-50';
+  if (colBand) return 'bg-ink-50/60';
+  return 'bg-white';
+}
+
 function EmptyState() {
   return (
     <p className="rounded-xl border border-dashed border-ink-300 bg-white p-8 text-center text-sm text-ink-400">
@@ -164,6 +172,7 @@ function WeekCells({
   session,
   blockIndex,
   topBorder,
+  shade,
   onEdit,
   onAdd,
 }: {
@@ -173,6 +182,7 @@ function WeekCells({
   session: Session | undefined;
   blockIndex: number;
   topBorder: string;
+  shade: string; // alternating week-column tint
   onEdit: (ref: SlotRef, patch: Partial<ExerciseSlot>) => void;
   onAdd: (t: AddTarget) => void;
 }) {
@@ -181,7 +191,7 @@ function WeekCells({
     return (
       <td
         colSpan={GRID_FIELDS.length}
-        className={`border-b border-ink-100 border-l-2 border-l-ink-100 px-2 py-1.5 text-center ${topBorder}`}
+        className={`border-b border-ink-100 border-l-2 border-l-ink-100 px-2 py-1.5 text-center ${shade} ${topBorder}`}
       >
         {session ? (
           <button
@@ -214,7 +224,7 @@ function WeekCells({
           key={key}
           className={`border-b border-ink-100 px-0.5 py-0.5 text-center ${
             fi === 0 ? 'border-l-2 border-l-ink-100' : ''
-          } ${topBorder}`}
+          } ${shade} ${topBorder}`}
         >
           <input
             className={`${inputCls} ${width}`}
@@ -287,20 +297,24 @@ export function MonthGrid({
           </tr>
         </thead>
         <tbody>
-          {block.rows.map((row) => {
+          {block.rows.map((row, ri) => {
             const seriesStart = row.seriesKey !== lastSeries;
             lastSeries = row.seriesKey;
             const topBorder = seriesStart ? 'border-t-2 border-t-ink-200' : '';
+            // Spreadsheet banding: every second ROW tinted, and every second
+            // WEEK column tinted again, so a cell is easy to trace both ways.
+            const rowBand = ri % 2 === 1;
+            const stickyBg = rowBand ? 'bg-ink-50' : 'bg-white';
             return (
               <tr key={`${row.seriesKey}-${row.n}`}>
-                <td className={`sticky left-0 z-10 w-9 border-b border-ink-100 bg-white px-1.5 py-1.5 text-center ${topBorder}`}>
+                <td className={`sticky left-0 z-10 w-9 border-b border-ink-100 px-1.5 py-1.5 text-center ${stickyBg} ${topBorder}`}>
                   <SegChip series={row.series} />
                 </td>
-                <td className={`sticky left-9 z-10 w-7 border-b border-ink-100 bg-white px-1 py-1.5 text-center text-[11px] text-ink-400 ${topBorder}`}>
+                <td className={`sticky left-9 z-10 w-7 border-b border-ink-100 px-1 py-1.5 text-center text-[11px] text-ink-400 ${stickyBg} ${topBorder}`}>
                   {row.n}
                 </td>
                 <td
-                  className={`sticky left-16 z-10 min-w-48 border-b border-ink-100 bg-white px-2 py-1.5 text-[13px] font-medium whitespace-nowrap text-ink-950 ${topBorder}`}
+                  className={`sticky left-16 z-10 min-w-48 border-b border-ink-100 px-2 py-1.5 text-[13px] font-medium whitespace-nowrap text-ink-950 ${stickyBg} ${topBorder}`}
                   title={row.name}
                 >
                   {row.name}
@@ -314,6 +328,7 @@ export function MonthGrid({
                     session={session}
                     blockIndex={block.blockIndex}
                     topBorder={topBorder}
+                    shade={cellShade(rowBand, (weekOffset + wi) % 2 === 1)}
                     onEdit={onEdit}
                     onAdd={onAdd}
                   />
@@ -422,24 +437,34 @@ export function PhaseExerciseGrid({
           </tr>
         </thead>
         <tbody>
-          {rows.map((row) => {
+          {rows.map((row, ri) => {
             const seriesStart = row.seriesKey !== lastSeries;
             lastSeries = row.seriesKey;
             const topBorder = seriesStart ? 'border-t-2 border-t-ink-200' : '';
+            const rowBand = ri % 2 === 1;
             return (
               <tr key={`${row.seriesKey}-${row.n}`} className="group">
-                <td className={`w-9 border-b border-ink-100 px-1.5 py-1.5 text-center ${topBorder}`}>
+                <td
+                  className={`w-9 border-b border-ink-100 px-1.5 py-1.5 text-center ${
+                    rowBand ? 'bg-ink-50' : ''
+                  } ${topBorder}`}
+                >
                   <SegChip series={row.series} />
                 </td>
                 <td
-                  className={`w-7 border-b border-ink-100 px-1 py-1.5 text-center text-[11px] text-ink-400 ${topBorder}`}
+                  className={`w-7 border-b border-ink-100 px-1 py-1.5 text-center text-[11px] text-ink-400 ${
+                    rowBand ? 'bg-ink-50' : ''
+                  } ${topBorder}`}
                 >
                   {row.n}
                 </td>
                 {row.perBlock.map((blockRow, bi) => (
                   <td
                     key={bi}
-                    className={`border-b border-ink-100 border-l-2 border-l-sand-500/60 px-1.5 py-1 ${topBorder}`}
+                    className={`border-b border-ink-100 border-l-2 border-l-sand-500/60 px-1.5 py-1 ${cellShade(
+                      rowBand,
+                      bi % 2 === 1,
+                    )} ${topBorder}`}
                   >
                     <div className="flex items-center gap-1">
                       <Combobox
