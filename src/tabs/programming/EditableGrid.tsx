@@ -64,6 +64,9 @@ export function buildBlockRows(
 
   weekSessions.forEach((session, wi) => {
     if (!session) return;
+    // Circuits have no editable exercise cells; the grids summarise them
+    // read-only instead (see circuitSummaryRows).
+    if (session.kind !== 'series') return;
     session.timedBlocks.forEach((tb) => {
       const seriesKey = tb.label.trim().toUpperCase();
       tb.slots.forEach((slot) => {
@@ -142,6 +145,90 @@ function cellShade(rowBand: boolean, colBand: boolean): string {
   if (rowBand) return 'bg-ink-50';
   if (colBand) return 'bg-ink-50/60';
   return 'bg-white';
+}
+
+/**
+ * Circuits carry free text, not exercise cells, so they have no editable grid.
+ * Show the week's pieces read-only, aligned by position, so the Block and
+ * Phase views are not blank for ESD, Hyrox and Game Day. Editing stays in the
+ * Week view.
+ */
+export function CircuitSummaryGrid({
+  block,
+  weekOffset = 0,
+  onOpenWeek,
+}: {
+  block: BlockRows;
+  weekOffset?: number;
+  onOpenWeek: (weekIndex: number) => void;
+}) {
+  const weeks = block.weekSessions.map((s) => (s?.kind === 'circuit' ? s.circuit : []));
+  const most = weeks.reduce((n, pieces) => Math.max(n, pieces.length), 0);
+  if (most === 0) return <EmptyState />;
+
+  return (
+    <div className="overflow-x-auto rounded-xl border border-ink-200 bg-white shadow-sm">
+      <table className="w-full border-separate border-spacing-0">
+        <thead>
+          <tr>
+            <th className={`sticky left-0 z-10 w-20 text-left ${headCls}`}>Piece</th>
+            {weeks.map((_, wi) => (
+              <th key={wi} className={`${headCls} border-l-2 border-l-ink-700`}>
+                <button
+                  type="button"
+                  title="Open this week in the editor"
+                  onClick={() => onOpenWeek(weekOffset + wi)}
+                  className="rounded px-1 uppercase hover:text-sand-500"
+                >
+                  Week {weekOffset + wi + 1}
+                </button>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {Array.from({ length: most }, (_, pi) => (
+            <tr key={pi}>
+              <td
+                className={`sticky left-0 z-10 border-b border-ink-200 px-2 py-2 text-[11px] font-semibold tracking-wide text-ink-500 uppercase ${cellShade(pi % 2 === 1, false)}`}
+              >
+                {pi + 1}
+              </td>
+              {weeks.map((pieces, wi) => {
+                const piece = pieces[pi];
+                return (
+                  <td
+                    key={wi}
+                    className={`border-b border-l-2 border-ink-200 border-l-ink-200 px-2 py-2 align-top text-[12px] leading-relaxed text-ink-950 ${cellShade(pi % 2 === 1, wi % 2 === 1)}`}
+                  >
+                    {piece ? (
+                      <>
+                        <span className="block font-semibold">{piece.heading}</span>
+                        {piece.lines
+                          .filter((l) => l.trim())
+                          .map((l, li) => (
+                            <span key={li} className="block text-ink-500">
+                              {l}
+                            </span>
+                          ))}
+                        {piece.restAfter?.trim() && (
+                          <span className="mt-0.5 block text-[11px] text-ink-400 italic">
+                            rest {piece.restAfter}
+                          </span>
+                        )}
+                      </>
+                    ) : (
+                      <span className="text-ink-300">·</span>
+                    )}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
 function EmptyState() {
@@ -253,7 +340,14 @@ export function MonthGrid({
   onAdd: (t: AddTarget) => void;
   onOpenWeek: (weekIndex: number) => void;
 }) {
-  if (block.rows.length === 0) return <EmptyState />;
+  // ESD, Hyrox and Game Day never produce editable rows; summarise instead of
+  // showing an empty grid, which read as "nothing programmed" for a written week.
+  if (block.rows.length === 0) {
+    if (block.weekSessions.some((s) => s?.kind === 'circuit')) {
+      return <CircuitSummaryGrid block={block} weekOffset={weekOffset} onOpenWeek={onOpenWeek} />;
+    }
+    return <EmptyState />;
+  }
 
   let lastSeries = '';
   return (

@@ -103,15 +103,17 @@ export default function TvPage() {
   const fileBase = `tac-${session.focus}-block${blockIndex + 1}-week${weekIndex + 1}`;
 
   const filled = (b: TimedBlock) => b.slots.filter((s) => s.name);
-  const warmups = session.timedBlocks.filter((b) => isWarmup(b) && filled(b).length > 0);
-  const series = session.timedBlocks.filter((b) => !isWarmup(b) && filled(b).length > 0);
+  const timedBlocks = session.kind === 'series' ? session.timedBlocks : [];
+  const warmups = timedBlocks.filter((b) => isWarmup(b) && filled(b).length > 0);
+  const series = timedBlocks.filter((b) => !isWarmup(b) && filled(b).length > 0);
 
   // ESD, Hyrox and Game Day are written as circuits, so the board shows the
   // pieces rather than a sets-and-reps table.
-  const circuit = (session.circuit ?? []).filter(
-    (c) => c.heading.trim() || c.lines.some((l) => l.trim()),
-  );
-  const isCircuit = circuit.length > 0;
+  const circuit =
+    session.kind === 'circuit'
+      ? session.circuit.filter((c) => c.heading.trim() || c.lines.some((l) => l.trim()))
+      : [];
+  const isCircuit = session.kind === 'circuit';
   // Each class gets its own backdrop: the room for strength, the members for
   // the group classes.
   const BACKDROP: Record<string, string> = {

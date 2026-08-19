@@ -5,7 +5,17 @@
 // every read goes through `streamsOf`, which migrates the old shape in
 // memory. Writes always produce the new shape.
 
-import type { ProgramDoc, ProgramStream, Session, SessionFocus } from '../types/documents';
+import type {
+  CircuitBlock,
+  ProgramBlock,
+  ProgramDoc,
+  ProgramStream,
+  ProgramWeek,
+  Session,
+  SessionFocus,
+  SessionKind,
+  TimedBlock,
+} from '../types/documents';
 
 export const STREAM_DEFS: { id: string; name: string; focuses: SessionFocus[] }[] = [
   { id: 'strength', name: 'Strength', focuses: ['lower', 'upper', 'full'] },
@@ -27,13 +37,86 @@ export function sessionLabel(s: Session): string {
   return s.name || FOCUS_LABEL[s.focus];
 }
 
+/** How a stream's sessions are written. Strength is the only series stream. */
+export function formatOf(stream: Pick<ProgramStream, 'id' | 'format'>): SessionKind {
+  const format = stream.format ?? (stream.id === 'strength' ? 'strength' : 'circuit');
+  return format === 'circuit' ? 'circuit' : 'series';
+}
+
+/** A session as it may appear on disk: written before `kind` existed. */
+type StoredSession = Omit<Session, 'kind' | 'timedBlocks' | 'circuit'> & {
+  kind?: SessionKind;
+  timedBlocks?: TimedBlock[];
+  circuit?: CircuitBlock[];
+};
+
+/**
+ * Which way a stored session is written. Documents saved before the
+ * discriminator existed carry both fields, so infer from what actually holds
+ * content and fall back to the stream's own format for an empty shell.
+ */
+function inferKind(s: StoredSession, format: SessionKind): SessionKind {
+  if (s.kind === 'series' || s.kind === 'circuit') return s.kind;
+  const hasCircuit = (s.circuit ?? []).some(
+    (c) => c.heading?.trim() || (c.lines ?? []).some((l) => l.trim()),
+  );
+  if (hasCircuit) return 'circuit';
+  const hasSlots = (s.timedBlocks ?? []).some((tb) => (tb.slots ?? []).some((sl) => sl.name));
+  if (hasSlots) return 'series';
+  return format;
+}
+
+/**
+ * Give a stored session its `kind` and drop the payload it does not use, so a
+ * circuit can never ride along inside a session the compiler treats as series.
+ * Returns the input untouched when it is already in the right shape, keeping
+ * object identity stable for React.
+ */
+export function migrateSession(stored: Session, format: SessionKind): Session {
+  const s = stored as StoredSession;
+  const kind = inferKind(s, format);
+  if (s.kind === kind) {
+    if (kind === 'series' && Array.isArray(s.timedBlocks)) return stored;
+    if (kind === 'circuit' && Array.isArray(s.circuit)) return stored;
+  }
+  const { kind: _kind, timedBlocks, circuit, ...common } = s;
+  return kind === 'circuit'
+    ? { ...common, kind: 'circuit', circuit: circuit ?? [] }
+    : { ...common, kind: 'series', timedBlocks: timedBlocks ?? [] };
+}
+
+/** Migrate every session in a stream, preserving identity where nothing moved. */
+function migrateStream(stream: ProgramStream): ProgramStream {
+  const format = formatOf(stream);
+  let streamChanged = false;
+  const blocks = stream.blocks.map((block): ProgramBlock => {
+    let blockChanged = false;
+    const weeks = block.weeks.map((week): ProgramWeek => {
+      let weekChanged = false;
+      const sessions = week.sessions.map((s) => {
+        const next = migrateSession(s, format);
+        if (next !== s) weekChanged = true;
+        return next;
+      });
+      if (!weekChanged) return week;
+      blockChanged = true;
+      return { ...week, sessions };
+    });
+    if (!blockChanged) return block;
+    streamChanged = true;
+    return { ...block, weeks };
+  });
+  return streamChanged ? { ...stream, blocks } : stream;
+}
+
 /** Streams for a doc, migrating the pre-streams `blocks` shape in memory. */
 export function streamsOf(doc: ProgramDoc): ProgramStream[] {
-  if (doc.streams?.length) return doc.streams;
-  if (doc.blocks?.length) {
-    return [{ id: 'strength', name: 'Strength', blocks: doc.blocks }];
-  }
-  return [];
+  const raw: ProgramStream[] = doc.streams?.length
+    ? doc.streams
+    : doc.blocks?.length
+      ? [{ id: 'strength', name: 'Strength', blocks: doc.blocks }]
+      : [];
+  return raw.map(migrateStream);
 }
 
 /** The stream with this id, or the first one (never undefined for a real doc). */

@@ -45,6 +45,9 @@ export default function MovementCheckTab() {
     const used = new Map<number | string, UsedExercise>();
     for (const week of target.weeks) {
       for (const session of week.sessions) {
+        // Pattern coverage is judged on the Strength stream's series only:
+        // circuits carry free text with no library ids to classify.
+        if (session.kind !== 'series') continue;
         for (const block of session.timedBlocks) {
           for (const slot of block.slots) {
             if (!slot.name) continue;

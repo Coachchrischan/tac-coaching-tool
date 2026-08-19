@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { CircuitBlock, Session } from '../../types/documents';
+import type { CircuitBlock, CircuitSession } from '../../types/documents';
 import { circuitToText, parseCircuit } from '../../lib/circuit';
 
 // Circuit sessions carry far less structure than strength ones: a heading, the
@@ -13,12 +13,12 @@ export default function CircuitEditor({
   session,
   onPatch,
 }: {
-  session: Session;
-  onPatch: (fn: (s: Session) => Session) => void;
+  session: CircuitSession;
+  onPatch: (fn: (s: CircuitSession) => CircuitSession) => void;
 }) {
   const [paste, setPaste] = useState('');
   const [showPaste, setShowPaste] = useState(false);
-  const blocks = session.circuit ?? [];
+  const blocks = session.circuit;
 
   function setBlocks(next: CircuitBlock[]) {
     onPatch((s) => ({ ...s, circuit: next }));
@@ -45,7 +45,7 @@ export default function CircuitEditor({
     const { blocks: parsed, note, intent } = parseCircuit(paste);
     if (parsed.length === 0) return;
     onPatch((s) => {
-      const next: Session = { ...s, circuit: parsed };
+      const next: CircuitSession = { ...s, circuit: parsed };
       if (note) next.note = note;
       if (intent) next.intent = intent;
       return next;

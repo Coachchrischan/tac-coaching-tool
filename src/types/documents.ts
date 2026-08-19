@@ -96,16 +96,36 @@ export interface CircuitBlock {
   restAfter?: string;
 }
 
-export interface Session {
+/** How a session is written. Set on read by `programStreams.migrateSession`. */
+export type SessionKind = 'series' | 'circuit';
+
+/** The fields every session carries, whichever way it is written. */
+interface SessionCommon {
   id: string;
   focus: SessionFocus;
   name?: string; // optional display name overriding the focus label
   intent?: string; // coach-facing note at the top: the day's intent
-  timedBlocks: TimedBlock[]; // strength format: series of exercise slots
-  circuit?: CircuitBlock[]; // circuit format: ESD / Hyrox / Game Day
   note?: string; // footnote, e.g. how a pairs workout is shared
   blurbOverride?: string; // coach-edited blurb wins over generated
 }
+
+/** Strength: series (WU/A/B/C) of exercise slots with sets, reps and load. */
+export interface SeriesSession extends SessionCommon {
+  kind: 'series';
+  timedBlocks: TimedBlock[];
+}
+
+/** ESD, Hyrox and Game Day: pieces with a heading and movement lines. */
+export interface CircuitSession extends SessionCommon {
+  kind: 'circuit';
+  circuit: CircuitBlock[];
+}
+
+// A session carries one payload or the other, never both. The two used to sit
+// on one interface with `circuit` optional, which let any writer spread a
+// session and silently drop the circuit. The discriminator makes the compiler
+// catch that instead of the coach finding a blank board on the wall.
+export type Session = SeriesSession | CircuitSession;
 
 export interface ProgramWeek {
   id: string;

@@ -1,7 +1,7 @@
 // Deterministic session blurb: the day's focuses and key cues for the main
 // exercises, generated from the session's contents. No LLM involved.
 
-import type { LibraryOverridesDoc, Pattern, Session } from '../types/documents';
+import type { CircuitSession, LibraryOverridesDoc, Pattern, Session } from '../types/documents';
 import type { LibraryExercise } from './library';
 import { patternsFor } from './library';
 
@@ -38,11 +38,22 @@ const FOCUS_TITLE: Record<Session['focus'], string> = {
   gameday: 'Game Day',
 };
 
+// A circuit carries free-text movement lines and no library ids, so there are
+// no patterns to weigh and no cues to look up. Name the day and its pieces
+// rather than inventing coaching that is not in the session.
+function circuitBlurb(session: CircuitSession): string {
+  const headings = session.circuit.map((c) => c.heading.trim()).filter(Boolean);
+  if (headings.length === 0) return `${FOCUS_TITLE[session.focus]}.`;
+  return `${FOCUS_TITLE[session.focus]}: ${headings.join(' then ')}.`;
+}
+
 export function generateBlurb(
   session: Session,
   library: LibraryExercise[],
   overrides: LibraryOverridesDoc,
 ): string {
+  if (session.kind === 'circuit') return circuitBlurb(session);
+
   const byId = new Map(library.map((e) => [e.id, e]));
 
   // Weight patterns by position: A-block exercises define the day.

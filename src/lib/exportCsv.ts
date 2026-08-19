@@ -39,20 +39,37 @@ export function programToCsv(doc: ProgramDoc): string {
     const sessions = blocks.flatMap((b) => b.weeks.map((w) => w.sessions.find(identity.match)));
     // Union of (series, exercise) rows in first-seen order.
     const rows = new Map<string, { series: string; name: string; cells: (string | null)[] }>();
+    const rowFor = (key: string, series: string, name: string) => {
+      let row = rows.get(key);
+      if (!row) {
+        row = { series, name, cells: Array<string | null>(sessions.length).fill(null) };
+        rows.set(key, row);
+      }
+      return row;
+    };
+
     sessions.forEach((session, ci) => {
-      session?.timedBlocks.forEach((tb) => {
+      if (!session) return;
+      if (session.kind === 'circuit') {
+        // A circuit has no exercise rows: every week holds its own pieces.
+        // Align them by position so one piece reads across the weeks, with the
+        // heading and its movement lines together in the cell.
+        session.circuit.forEach((piece, pi) => {
+          const label = `Piece ${pi + 1}`;
+          const row = rowFor(`circuit::${pi}`, label, '');
+          const body = [piece.heading.trim(), ...piece.lines.map((l) => l.trim()).filter(Boolean)]
+            .filter(Boolean)
+            .join(' / ');
+          const rest = piece.restAfter?.trim();
+          row.cells[ci] = [body, rest ? `rest ${rest}` : null].filter(Boolean).join(' / ') || '·';
+        });
+        return;
+      }
+      session.timedBlocks.forEach((tb) => {
         tb.slots.forEach((slot) => {
           if (!slot.name) return;
           const key = `${tb.label}::${slot.exerciseId ?? slot.name.toLowerCase()}`;
-          let row = rows.get(key);
-          if (!row) {
-            row = {
-              series: tb.label,
-              name: slot.name,
-              cells: Array<string | null>(sessions.length).fill(null),
-            };
-            rows.set(key, row);
-          }
+          const row = rowFor(key, tb.label, slot.name);
           row.cells[ci] = slotSummary(slot) || '·';
         });
       });
@@ -62,9 +79,8 @@ export function programToCsv(doc: ProgramDoc): string {
     lines.push(''); // blank spacer row
     lines.push(esc(identity.label.toUpperCase()));
     for (const row of [...rows.values()].sort((a, b) => a.series.localeCompare(b.series))) {
-      lines.push(
-        [esc(`${row.series} ${row.name}`), ...row.cells.map((c) => esc(c ?? ''))].join(','),
-      );
+      const label = row.name ? `${row.series} ${row.name}` : row.series;
+      lines.push([esc(label), ...row.cells.map((c) => esc(c ?? ''))].join(','));
     }
   }
 

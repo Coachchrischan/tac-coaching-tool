@@ -10,7 +10,10 @@ import type {
   ProgramBlock,
   ProgramDoc,
   ProgramWeek,
+  SeriesSession,
   Session,
+  SessionFocus,
+  SessionKind,
   TimedBlock,
 } from '../../types/documents';
 import TimedBlockCard from './TimedBlockCard';
@@ -20,7 +23,13 @@ import { MonthGrid, PhaseExerciseGrid, buildBlockRows } from './EditableGrid';
 import type { BlockRows } from './EditableGrid';
 import type { AddTarget, EditableRow, SlotRef } from './EditableGrid';
 import { downloadProgramCsv } from '../../lib/exportCsv';
-import { FOCUS_LABEL, streamsOf, withStreamBlocks } from '../../lib/programStreams';
+import {
+  FOCUS_LABEL,
+  STREAM_DEFS,
+  formatOf,
+  streamsOf,
+  withStreamBlocks,
+} from '../../lib/programStreams';
 import CircuitEditor from './CircuitEditor';
 import { circuitToText, equipmentFor } from '../../lib/circuit';
 
@@ -62,6 +71,61 @@ function nextLabel(blocks: TimedBlock[]): string {
     return String.fromCharCode(last.charCodeAt(0) + 1);
   }
   return String.fromCharCode(65 + blocks.length);
+}
+
+/**
+ * Clone a session, carrying whichever payload it actually holds. Growing a
+ * phase used to drop circuits here, because the clone was written as if every
+ * session were a series. The discriminator now makes that unrepresentable.
+ */
+function cloneSession(s: Session): Session {
+  const common = {
+    id: crypto.randomUUID(),
+    focus: s.focus,
+    ...(s.name ? { name: s.name } : {}),
+    ...(s.note ? { note: s.note } : {}),
+    ...(s.intent ? { intent: s.intent } : {}),
+  };
+  if (s.kind === 'circuit') {
+    return {
+      ...common,
+      kind: 'circuit',
+      circuit: s.circuit.map((b) => ({
+        id: crypto.randomUUID(),
+        heading: b.heading,
+        lines: [...b.lines],
+        ...(b.restAfter ? { restAfter: b.restAfter } : {}),
+      })),
+    };
+  }
+  // Same exercises all phase, blank prescriptions: they progress week to week.
+  return {
+    ...common,
+    kind: 'series',
+    timedBlocks: s.timedBlocks.map((tb) => ({
+      id: crypto.randomUUID(),
+      label: tb.label,
+      minutes: tb.minutes,
+      slots: tb.slots
+        .filter((sl) => sl.name)
+        .map((sl) => ({ id: crypto.randomUUID(), exerciseId: sl.exerciseId, name: sl.name })),
+    })),
+  };
+}
+
+/** A fresh, empty session written the way its stream is written. */
+function newSession(focus: SessionFocus, kind: SessionKind): Session {
+  const id = crypto.randomUUID();
+  return kind === 'circuit'
+    ? { id, focus, kind: 'circuit', circuit: [] }
+    : { id, focus, kind: 'series', timedBlocks: defaultSeries(id) };
+}
+
+/** Does this session hold real programming, in whichever way it is written? */
+function sessionHasContent(s: Session): boolean {
+  return s.kind === 'circuit'
+    ? s.circuit.some((c) => c.heading.trim() || c.lines.some((l) => l.trim()))
+    : s.timedBlocks.some((tb) => tb.slots.some((sl) => sl.name));
 }
 
 export default function ProgrammingTab() {
@@ -131,7 +195,9 @@ export default function ProgrammingTab() {
   const fmtDay = (d: Date | null, opts?: Intl.DateTimeFormatOptions) =>
     d ? d.toLocaleDateString('en-AU', opts ?? { day: 'numeric', month: 'short' }) : '';
 
-  const isCircuit = (stream.format ?? (stream.id === 'strength' ? 'strength' : 'circuit')) === 'circuit';
+  // How this stream is written, and the focuses it is allowed to use.
+  const streamKind = formatOf(stream);
+  const streamFocuses = STREAM_DEFS.find((d) => d.id === stream.id)?.focuses ?? [];
 
   /** Every phase edit goes through here so it lands on the active stream. */
   function updateBlocks(fn: (blocks: ProgramBlock[]) => ProgramBlock[]) {
@@ -162,54 +228,14 @@ export default function ProgrammingTab() {
     patchWeekSessions((list) => list.map((s, i) => (i !== sIdx ? s : fn(s))));
   }
 
-  // Grow a block by cloning the last week's structure: same sessions, series
-  // and exercise names, blank prescriptions (the block mental model: same
-  // exercises all block, prescriptions progress week to week).
+  // Grow a phase by cloning the last week's structure.
   function cloneWeekStructure(week: ProgramWeek): ProgramWeek {
-    return {
-      id: crypto.randomUUID(),
-      sessions: week.sessions.map((s) => {
-        const cloned: Session = {
-          id: crypto.randomUUID(),
-          focus: s.focus,
-          timedBlocks: s.timedBlocks.map((tb) => ({
-            id: crypto.randomUUID(),
-            label: tb.label,
-            minutes: tb.minutes,
-            slots: tb.slots
-              .filter((sl) => sl.name)
-              .map((sl) => ({ id: crypto.randomUUID(), exerciseId: sl.exerciseId, name: sl.name })),
-          })),
-        };
-        if (s.name) cloned.name = s.name;
-        // Circuit sessions carry their whole workout here, so a cloned week
-        // must bring it across or growing a phase silently empties the week.
-        if (s.circuit) {
-          cloned.circuit = s.circuit.map((b) => ({
-            id: crypto.randomUUID(),
-            heading: b.heading,
-            lines: [...b.lines],
-            ...(b.restAfter ? { restAfter: b.restAfter } : {}),
-          }));
-        }
-        if (s.note) cloned.note = s.note;
-        if (s.intent) cloned.intent = s.intent;
-        return cloned;
-      }),
-    };
+    return { id: crypto.randomUUID(), sessions: week.sessions.map(cloneSession) };
   }
 
   /** Does this phase hold real programming, in either format? */
   function blockHasContent(block: ProgramBlock, fromWeek = 0) {
-    return block.weeks
-      .slice(fromWeek)
-      .some((w) =>
-        w.sessions.some(
-          (s) =>
-            s.timedBlocks.some((tb) => tb.slots.some((sl) => sl.name)) ||
-            (s.circuit ?? []).some((c) => c.heading || c.lines.some((l) => l.trim())),
-        ),
-      );
+    return block.weeks.slice(fromWeek).some((w) => w.sessions.some(sessionHasContent));
   }
 
   function setBlockLength(target: number) {
@@ -245,11 +271,7 @@ export default function ProgrammingTab() {
         id: crypto.randomUUID(),
         weeks: Array.from({ length: 4 }, (): ProgramWeek => ({
           id: crypto.randomUUID(),
-          sessions: focuses.map((focus) => ({
-            id: crypto.randomUUID(),
-            focus,
-            timedBlocks: defaultSeries(crypto.randomUUID()),
-          })),
+          sessions: focuses.map((focus) => newSession(focus, streamKind)),
         })),
       },
     ]);
@@ -274,12 +296,10 @@ export default function ProgrammingTab() {
   }
 
   function addSession() {
-    const fresh: Session = {
-      id: crypto.randomUUID(),
-      focus: 'esd',
-      timedBlocks: defaultSeries(crypto.randomUUID()),
-    };
-    patchWeekSessions((list) => [...list, fresh]);
+    // A new session belongs to this stream: its focus and the way it is
+    // written both follow the stream, not a hardcoded default.
+    const focus = streamFocuses[0] ?? sessions[0]?.focus ?? 'esd';
+    patchWeekSessions((list) => [...list, newSession(focus, streamKind)]);
     setSi(sessions.length);
   }
 
@@ -290,8 +310,13 @@ export default function ProgrammingTab() {
     setSi(0);
   }
 
+  /** A series-only edit. Circuits have no series, so this is a no-op there. */
+  function patchSeries(fn: (s: SeriesSession) => SeriesSession) {
+    patchSession((s) => (s.kind === 'series' ? fn(s) : s));
+  }
+
   function patchTimedBlock(blockId: string, fn: (b: TimedBlock) => TimedBlock | null) {
-    patchSession((s) => ({
+    patchSeries((s) => ({
       ...s,
       timedBlocks: s.timedBlocks
         .map((b) => (b.id === blockId ? fn(b) : b))
@@ -300,10 +325,11 @@ export default function ProgrammingTab() {
   }
 
   function addSlot(blockId?: string) {
+    if (session.kind !== 'series') return;
     const targetId = blockId ?? session.timedBlocks[session.timedBlocks.length - 1]?.id;
     const slot: ExerciseSlot = { id: crypto.randomUUID(), exerciseId: null, name: '' };
     if (!targetId) {
-      patchSession((s) => ({
+      patchSeries((s) => ({
         ...s,
         timedBlocks: [{ id: crypto.randomUUID(), label: 'A', minutes: 15, slots: [slot] }],
       }));
@@ -313,7 +339,7 @@ export default function ProgrammingTab() {
   }
 
   function addTimedBlock() {
-    patchSession((s) => ({
+    patchSeries((s) => ({
       ...s,
       timedBlocks: [
         ...s.timedBlocks,
@@ -437,7 +463,7 @@ export default function ProgrammingTab() {
         if (bIdx !== blockIndex) return b;
         const sibling = b.weeks
           .flatMap((w) => w.sessions)
-          .flatMap((s) => s.timedBlocks)
+          .flatMap((s) => (s.kind === 'series' ? s.timedBlocks : []))
           .find((tb) => tb.label.trim().toUpperCase() === seriesKey);
         return {
           ...b,
@@ -448,7 +474,8 @@ export default function ProgrammingTab() {
             return {
               ...w,
               sessions: w.sessions.map((s) => {
-                if (s.id !== target.id) return s;
+                // The grids only build rows from series sessions.
+                if (s.id !== target.id || s.kind !== 'series') return s;
                 if (ref) {
                   return {
                     ...s,
@@ -517,13 +544,17 @@ export default function ProgrammingTab() {
               ...b,
               weeks: b.weeks.map((w) => ({
                 ...w,
-                sessions: w.sessions.map((s) => ({
-                  ...s,
-                  timedBlocks: s.timedBlocks.map((tb) => ({
-                    ...tb,
-                    slots: tb.slots.filter((sl) => !ids.has(sl.id)),
-                  })),
-                })),
+                sessions: w.sessions.map((s) =>
+                  s.kind !== 'series'
+                    ? s
+                    : {
+                        ...s,
+                        timedBlocks: s.timedBlocks.map((tb) => ({
+                          ...tb,
+                          slots: tb.slots.filter((sl) => !ids.has(sl.id)),
+                        })),
+                      },
+                ),
               })),
             },
       ),
@@ -545,7 +576,7 @@ export default function ProgrammingTab() {
                   : {
                       ...w,
                       sessions: w.sessions.map((s) =>
-                        s.id !== ref.sessionId
+                        s.id !== ref.sessionId || s.kind !== 'series'
                           ? s
                           : {
                               ...s,
@@ -578,7 +609,7 @@ export default function ProgrammingTab() {
         if (bIdx !== t.blockIndex) return b;
         const sibling = b.weeks
           .flatMap((w) => w.sessions)
-          .flatMap((s) => s.timedBlocks)
+          .flatMap((s) => (s.kind === 'series' ? s.timedBlocks : []))
           .find((tb) => tb.label.trim().toUpperCase() === seriesKey);
         return {
           ...b,
@@ -587,7 +618,7 @@ export default function ProgrammingTab() {
             return {
               ...w,
               sessions: w.sessions.map((s) => {
-                if (s.id !== t.sessionId) return s;
+                if (s.id !== t.sessionId || s.kind !== 'series') return s;
                 const existing = s.timedBlocks.find(
                   (tb) => tb.label.trim().toUpperCase() === seriesKey,
                 );
@@ -628,7 +659,7 @@ export default function ProgrammingTab() {
   function buildLayoutForWeek() {
     const text = sessions
       .map((s) =>
-        s.circuit
+        s.kind === 'circuit'
           ? circuitToText(s.circuit, s.note)
           : s.timedBlocks.flatMap((tb) => tb.slots.map((sl) => sl.name)).join('\n'),
       )
@@ -1038,19 +1069,26 @@ export default function ProgrammingTab() {
       // Editing wants focus, not sprawl: the whole week editor caps at a
       // readable width, centred on the screen.
       <div className="mx-auto max-w-4xl">
-      {/* Session settings */}
+      {/* Session settings. This is not a navigator: the week pills above
+          select the session, these set what the selected session IS. Only the
+          focuses this stream actually runs are offered. */}
       <div className="mb-3 flex flex-wrap items-center gap-2 text-sm">
-        <span className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">Session</span>
+        <span className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
+          Session type
+        </span>
         <select
           className="rounded-md border border-ink-300 bg-white px-2 py-1 text-sm text-ink-950 focus:border-accent-600 focus:outline-none"
           value={session.focus}
-          onChange={(e) => patchSession((s) => ({ ...s, focus: e.target.value as Session['focus'] }))}
+          title="What this session is. The pills above choose which session you are editing."
+          onChange={(e) => patchSession((s) => ({ ...s, focus: e.target.value as SessionFocus }))}
         >
-          {(Object.keys(FOCUS_LABEL) as Session['focus'][]).map((f) => (
-            <option key={f} value={f}>
-              {FOCUS_LABEL[f]}
-            </option>
-          ))}
+          {(streamFocuses.length ? streamFocuses : (Object.keys(FOCUS_LABEL) as SessionFocus[])).map(
+            (f) => (
+              <option key={f} value={f}>
+                {FOCUS_LABEL[f]}
+              </option>
+            ),
+          )}
         </select>
         <input
           className="w-48 rounded-md border border-ink-300 bg-white px-2 py-1 text-sm text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none"
@@ -1096,9 +1134,15 @@ export default function ProgrammingTab() {
         />
       </div>
 
-      {/* Session: circuits for ESD / Hyrox / Game Day, series for Strength */}
-      {isCircuit ? (
-        <CircuitEditor key={session.id} session={session} onPatch={patchSession} />
+      {/* Session: circuits for ESD / Hyrox / Game Day, series for Strength.
+          Branching on the session itself, not the stream, so the editor always
+          matches the payload the session actually carries. */}
+      {session.kind === 'circuit' ? (
+        <CircuitEditor
+          key={session.id}
+          session={session}
+          onPatch={(fn) => patchSession((s) => (s.kind === 'circuit' ? fn(s) : s))}
+        />
       ) : (
       <div className="space-y-3">
         {session.timedBlocks.map((block) => (

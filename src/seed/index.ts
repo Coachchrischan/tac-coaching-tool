@@ -11,10 +11,12 @@ import type {
   PlanningDoc,
   ProgramBlock,
   ProgramDoc,
+  ProgramStream,
   ProgramWeek,
   ScheduleDoc,
   Session,
   SessionFocus,
+  TimedBlock,
 } from '../types/documents.js';
 
 // ---------- Schedule: the real TAC timetable (week of 10 Aug 2026) ----------
@@ -110,7 +112,7 @@ export function seedSchedule(): ScheduleDoc {
 const FOCUSES: SessionFocus[] = ['lower', 'upper', 'full'];
 
 // Every session starts with a Warm Up (WU) series plus A, B, C series.
-export function defaultSeries(prefix: string): Session['timedBlocks'] {
+export function defaultSeries(prefix: string): TimedBlock[] {
   return [
     { id: `${prefix}-WU`, label: 'WU', minutes: 5, slots: [] },
     { id: `${prefix}-A`, label: 'A', minutes: 15, slots: [] },
@@ -126,18 +128,25 @@ const SEED_BLOCKS: { theme: string; weeks: number }[] = [
   { theme: 'Strength', weeks: 6 },
 ];
 
-// One programming stream per class type; each starts on the same phase shape.
-const SEED_STREAMS: { id: string; name: string; focuses: SessionFocus[] }[] = [
-  { id: 'strength', name: 'Strength', focuses: FOCUSES },
-  { id: 'esd', name: 'ESD', focuses: ['esd'] },
-  { id: 'hyrox', name: 'Hyrox', focuses: ['hyrox'] },
-  { id: 'gameday', name: 'Game Day', focuses: ['gameday'] },
+// One programming stream per class type. Strength is written as series of
+// sets and reps; ESD, Hyrox and Game Day are written as circuits.
+const SEED_STREAMS: {
+  id: string;
+  name: string;
+  format: ProgramStream['format'];
+  focuses: SessionFocus[];
+}[] = [
+  { id: 'strength', name: 'Strength', format: 'strength', focuses: FOCUSES },
+  { id: 'esd', name: 'ESD', format: 'circuit', focuses: ['esd'] },
+  { id: 'hyrox', name: 'Hyrox', format: 'circuit', focuses: ['hyrox'] },
+  { id: 'gameday', name: 'Game Day', format: 'circuit', focuses: ['gameday'] },
 ];
 
 export function seedProgram(): ProgramDoc {
-  const streams = SEED_STREAMS.map(({ id, name, focuses }) => ({
+  const streams = SEED_STREAMS.map(({ id, name, format, focuses }): ProgramStream => ({
     id,
     name,
+    format,
     blocks: SEED_BLOCKS.map(({ theme, weeks }, bIdx): ProgramBlock => {
       const b = bIdx + 1;
       return {
@@ -145,13 +154,12 @@ export function seedProgram(): ProgramDoc {
         theme,
         weeks: Array.from({ length: weeks }, (_, wIdx): ProgramWeek => {
           const w = wIdx + 1;
-          const sessions = focuses.map(
-            (focus, s): Session => ({
-              id: `${id}-b${b}w${w}s${s + 1}`,
-              focus,
-              timedBlocks: defaultSeries(`${id}-b${b}w${w}s${s + 1}`),
-            }),
-          );
+          const sessions = focuses.map((focus, s): Session => {
+            const sid = `${id}-b${b}w${w}s${s + 1}`;
+            return format === 'circuit'
+              ? { id: sid, focus, kind: 'circuit', circuit: [] }
+              : { id: sid, focus, kind: 'series', timedBlocks: defaultSeries(sid) };
+          });
           return { id: `${id}-b${b}w${w}`, sessions };
         }),
       };
