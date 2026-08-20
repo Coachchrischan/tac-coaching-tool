@@ -73,6 +73,39 @@ export function trainingWeekMonday(
   return d;
 }
 
+/**
+ * Which training week contains this date, counting from 0, or null if it falls
+ * before the year starts or inside a club shutdown. Used to open the tool on
+ * the week actually running rather than on week 1.
+ */
+export function trainingWeekIndexOf(
+  startDate: string,
+  iso: string,
+  breaks: BreakWindow[] = [],
+): number | null {
+  const target = weeksBetween(startDate, mondayOfIso(iso));
+  if (target < 0) return null;
+  const blocked = shutdownOffsets(startDate, breaks);
+  if (blocked.has(target)) return null;
+  let index = 0;
+  for (let offset = 0; offset < target; offset++) {
+    if (!blocked.has(offset)) index++;
+  }
+  return index;
+}
+
+/** The Monday of the week containing this date, in local time. */
+export function mondayOfIso(iso: string): string {
+  const d = new Date(`${iso}T00:00:00`);
+  d.setDate(d.getDate() - ((d.getDay() + 6) % 7));
+  return isoDate(d);
+}
+
+/** Today, as this tool counts days: local, never a UTC round trip. */
+export function todayIso(): string {
+  return isoDate(new Date());
+}
+
 /** A calendar month's worth of training weeks, for month-cadence streams. */
 export interface MonthGroup {
   label: string; // "Sep 2026"

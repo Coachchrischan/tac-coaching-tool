@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { mostUrgent, useDoc } from '../../lib/useDoc';
 import { useLibrary } from '../../lib/useLibrary';
@@ -33,7 +33,13 @@ import {
   withStreamBlocks,
 } from '../../lib/programStreams';
 import { resolveWeekDays } from '../../lib/classDays';
-import { isoDate, shutdownBefore, trainingWeekMonday } from '../../lib/trainingWeeks';
+import {
+  isoDate,
+  shutdownBefore,
+  todayIso,
+  trainingWeekIndexOf,
+  trainingWeekMonday,
+} from '../../lib/trainingWeeks';
 import {
   gmailComposeUrl,
   looksLikeEmail,
@@ -175,6 +181,33 @@ export default function ProgrammingTab() {
     for (const e of merged ?? []) if (e.videoUrl) m.set(e.id, e.videoUrl);
     return m;
   }, [merged]);
+
+  // Open on the week actually running, not on Phase 1 Week 1. A coach opening
+  // this ten minutes before a class should not have to count forward. Runs
+  // once, and only until the coach navigates themselves.
+  const [jumped, setJumped] = useState(false);
+  useEffect(() => {
+    if (jumped || !program.data || !annual.data) return;
+    setJumped(true);
+    const start = annual.data.startDate;
+    const week = trainingWeekIndexOf(start, todayIso(), annual.data.breaks ?? []);
+    if (week === null) return; // before the year starts, or a shutdown week
+    const target = streamsOf(program.data)[Math.min(siRaw, streamsOf(program.data).length - 1)];
+    if (!target) return;
+    let remaining = week;
+    for (let b = 0; b < target.blocks.length; b++) {
+      const len = target.blocks[b].weeks.length;
+      if (remaining < len) {
+        setBi(b);
+        setWi(remaining);
+        return;
+      }
+      remaining -= len;
+    }
+    // Past the end of what is programmed: land on the last written week.
+    setBi(target.blocks.length - 1);
+    setWi(Math.max(0, target.blocks[target.blocks.length - 1].weeks.length - 1));
+  }, [jumped, program.data, annual.data, siRaw]);
 
   if (!program.data || !overrides) {
     return <p className="py-20 text-center text-sm text-ink-400">Loading program…</p>;

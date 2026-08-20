@@ -11,6 +11,24 @@ import {
   weeklyCount,
 } from '../../lib/attendancePeriods';
 
+/** Which programming stream delivers a timetable class, where one does. */
+const STREAM_FOR_CLASS: Record<string, string> = {
+  lbs: 'strength',
+  ubs: 'strength',
+  fbs: 'strength',
+  esd: 'esd',
+  hyrox: 'hyrox',
+  gameday: 'gameday',
+};
+
+const fmtTime = (min: number) => {
+  const h = Math.floor(min / 60);
+  const m = min % 60;
+  const suffix = h < 12 ? 'am' : 'pm';
+  const h12 = h % 12 === 0 ? 12 : h % 12;
+  return m === 0 ? `${h12}${suffix}` : `${h12}:${String(m).padStart(2, '0')}${suffix}`;
+};
+
 function fmtEventDate(iso: string): string {
   const d = new Date(`${iso}T00:00:00`);
   if (Number.isNaN(d.getTime())) return iso;
@@ -93,6 +111,32 @@ export default function HomeTab() {
     return <p className="py-20 text-center text-sm text-ink-400">Loading…</p>;
   }
 
+  // What is on today. The tab used to open on last quarter's numbers and never
+  // on the class about to run, so a second coach had to be told where to look.
+  const now = new Date();
+  const todayIndex = (now.getDay() + 6) % 7; // Mon = 0, matching ClassBlock.day
+  const activeScenario =
+    schedule.data.scenarios.find((s) => s.id === schedule.data!.activeScenarioId) ??
+    schedule.data.scenarios[0];
+  const nameOf = (list: { id: string; name: string }[], id: string | null) =>
+    list.find((x) => x.id === id)?.name ?? null;
+  const todayClasses = (activeScenario?.blocks ?? [])
+    .filter((b) => b.day === todayIndex)
+    .sort((a, b) => a.startMin - b.startMin)
+    .map((b) => {
+      const ct = schedule.data!.classTypes.find((c) => c.id === b.classTypeId);
+      return {
+        ...b,
+        className: ct?.name ?? b.classTypeId,
+        colour: ct?.colour ?? '#5A5A52',
+        coach: nameOf(schedule.data!.coaches, b.coachId),
+        room: nameOf(schedule.data!.rooms, b.roomId),
+        streamId: STREAM_FOR_CLASS[b.classTypeId] ?? null,
+        nowOn: now.getHours() * 60 + now.getMinutes() >= b.startMin &&
+          now.getHours() * 60 + now.getMinutes() < b.startMin + b.durationMin,
+      };
+    });
+
   const maxAvg = chart && chart.byType.length ? Math.max(...chart.byType.map((t) => t.avg)) : 1;
   const today = new Date();
   const todayIso = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
@@ -121,6 +165,77 @@ export default function HomeTab() {
           onRetry={attendance.retry}
         />
       </div>
+
+      {/* Today: the first thing a coach opening this needs */}
+      <section className="mb-5 rounded-xl border border-ink-200 bg-white p-5 shadow-sm">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <h3 className="text-sm font-semibold text-ink-950">
+            On today
+            <span className="ml-2 font-normal text-ink-500">
+              {now.toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long' })}
+            </span>
+          </h3>
+          <Link to="/schedule" className="text-[12px] font-medium text-accent-600 hover:underline">
+            Full timetable
+          </Link>
+        </div>
+
+        {todayClasses.length === 0 ? (
+          <p className="mt-3 text-sm text-ink-500">
+            No classes on the timetable today. Enjoy it.
+          </p>
+        ) : (
+          <ul className="mt-3 divide-y divide-ink-100">
+            {todayClasses.map((c) => (
+              <li key={c.id} className="flex flex-wrap items-center gap-x-3 gap-y-1 py-2">
+                <span className="w-16 shrink-0 text-[13px] font-semibold text-ink-950 tabular-nums">
+                  {fmtTime(c.startMin)}
+                </span>
+                <span
+                  className="h-2.5 w-2.5 shrink-0 rounded-full"
+                  style={{ backgroundColor: c.colour }}
+                  aria-hidden="true"
+                />
+                <span className="min-w-0 flex-1 text-[13px] text-ink-950">
+                  <span className="font-medium">{c.className}</span>
+                  {c.nowOn && (
+                    <span className="ml-2 rounded bg-accent-600 px-1.5 py-0.5 text-[9px] font-bold tracking-wide text-white uppercase">
+                      On now
+                    </span>
+                  )}
+                  <span className="block text-[12px] text-ink-500">
+                    {[c.coach, c.room].filter(Boolean).join(' · ') || 'No coach assigned'}
+                  </span>
+                </span>
+                <span className="flex shrink-0 gap-3 text-[12px]">
+                  {c.streamId ? (
+                    <>
+                      <Link
+                        to="/programming"
+                        className="font-medium text-accent-600 hover:underline"
+                        title="Open the programming for this class"
+                      >
+                        Session
+                      </Link>
+                      <Link
+                        to="/layouts"
+                        className="font-medium text-accent-600 hover:underline"
+                        title="Open the floor plan for this class"
+                      >
+                        Floor
+                      </Link>
+                    </>
+                  ) : (
+                    <span className="text-ink-300" title="This class is not programmed in the tool">
+                      not programmed here
+                    </span>
+                  )}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
 
       <div className="grid gap-5 lg:grid-cols-3">
         {/* Popularity ranking */}
