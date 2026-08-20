@@ -33,7 +33,7 @@ import {
   withStreamBlocks,
 } from '../../lib/programStreams';
 import { resolveWeekDays } from '../../lib/classDays';
-import { shutdownBefore, trainingWeekMonday } from '../../lib/trainingWeeks';
+import { isoDate, shutdownBefore, trainingWeekMonday } from '../../lib/trainingWeeks';
 import {
   gmailComposeUrl,
   looksLikeEmail,
@@ -496,7 +496,7 @@ export default function ProgrammingTab() {
     }
     const monday = mondayOfWeek(wi);
     if (!monday) return;
-    const mondayIso = monday.toISOString().slice(0, 10);
+    const mondayIso = isoDate(monday);
 
     const resolved = resolveWeekDays(
       schedule.data,

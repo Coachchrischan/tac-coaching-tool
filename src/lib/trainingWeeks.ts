@@ -8,6 +8,20 @@
 
 import type { BreakWindow } from '../types/documents';
 
+/**
+ * A Date as a plain yyyy-mm-dd, read off the LOCAL calendar.
+ *
+ * Not `toISOString().slice(0, 10)`: these dates are built at local midnight,
+ * and in Brisbane that is the previous day in UTC, so the round trip moved
+ * every date one day earlier. The TrainHeroic push sent Sunday's date under
+ * Tuesday's name because of exactly that.
+ */
+export function isoDate(d: Date): string {
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${d.getFullYear()}-${m}-${day}`;
+}
+
 /** Whole weeks between two Mondays; negative if iso is before startDate. */
 function weeksBetween(startDate: string, iso: string): number {
   const start = new Date(`${startDate}T00:00:00`).getTime();
