@@ -136,7 +136,20 @@ function DraggableItem({
       ref={setNodeRef}
       {...listeners}
       {...attributes}
-      onClick={onSelect}
+      // Without stopping here the click bubbles to the canvas, whose handler
+      // clears the selection, so a piece was selected and deselected by the
+      // same click and the whole properties panel was unreachable.
+      onClick={(e) => {
+        e.stopPropagation();
+        onSelect();
+      }}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          e.stopPropagation();
+          onSelect();
+        }
+      }}
       role="button"
       tabIndex={0}
       className={`absolute cursor-grab rounded-md ${selected ? 'ring-2 ring-accent-600 ring-offset-2' : ''} ${
