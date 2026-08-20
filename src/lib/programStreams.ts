@@ -7,6 +7,8 @@
 
 import type {
   CircuitBlock,
+  CircuitLine,
+  CircuitSession,
   ProgramBlock,
   ProgramDoc,
   ProgramStream,
@@ -58,7 +60,7 @@ type StoredSession = Omit<Session, 'kind' | 'timedBlocks' | 'circuit'> & {
 function inferKind(s: StoredSession, format: SessionKind): SessionKind {
   if (s.kind === 'series' || s.kind === 'circuit') return s.kind;
   const hasCircuit = (s.circuit ?? []).some(
-    (c) => c.heading?.trim() || (c.lines ?? []).some((l) => l.trim()),
+    (c) => c.heading?.trim() || (c.lines ?? []).some((l) => (typeof l === 'string' ? l : l.text).trim()),
   );
   if (hasCircuit) return 'circuit';
   const hasSlots = (s.timedBlocks ?? []).some((tb) => (tb.slots ?? []).some((sl) => sl.name));
@@ -77,12 +79,33 @@ export function migrateSession(stored: Session, format: SessionKind): Session {
   const kind = inferKind(s, format);
   if (s.kind === kind) {
     if (kind === 'series' && Array.isArray(s.timedBlocks)) return stored;
-    if (kind === 'circuit' && Array.isArray(s.circuit)) return stored;
+    if (kind === 'circuit' && Array.isArray(s.circuit)) {
+      const circuit = migrateCircuit(s.circuit);
+      return circuit === s.circuit ? stored : { ...(stored as CircuitSession), circuit };
+    }
   }
   const { kind: _kind, timedBlocks, circuit, ...common } = s;
   return kind === 'circuit'
-    ? { ...common, kind: 'circuit', circuit: circuit ?? [] }
+    ? { ...common, kind: 'circuit', circuit: migrateCircuit(circuit ?? []) }
     : { ...common, kind: 'series', timedBlocks: timedBlocks ?? [] };
+}
+
+/**
+ * Circuit lines used to be plain strings, before a station could carry a load.
+ * Lift them to `{ text }`, keeping identity when they are already lifted.
+ */
+function migrateCircuit(blocks: CircuitBlock[]): CircuitBlock[] {
+  let changed = false;
+  const next = blocks.map((b) => {
+    const raw = b.lines as unknown as (string | CircuitLine)[];
+    if (!raw.some((l) => typeof l === 'string')) return b;
+    changed = true;
+    return {
+      ...b,
+      lines: raw.map((l) => (typeof l === 'string' ? { text: l } : l)),
+    };
+  });
+  return changed ? next : blocks;
 }
 
 /** Migrate every session in a stream, preserving identity where nothing moved. */

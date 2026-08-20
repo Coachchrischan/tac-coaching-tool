@@ -205,10 +205,11 @@ export function CircuitSummaryGrid({
                       <>
                         <span className="block font-semibold">{piece.heading}</span>
                         {piece.lines
-                          .filter((l) => l.trim())
+                          .filter((l) => l.text.trim())
                           .map((l, li) => (
                             <span key={li} className="block text-ink-500">
-                              {l}
+                              {l.text}
+                              {l.load && <span className="text-ink-700"> · {l.load}</span>}
                             </span>
                           ))}
                         {piece.restAfter?.trim() && (

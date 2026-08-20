@@ -111,7 +111,7 @@ export default function TvPage() {
   // pieces rather than a sets-and-reps table.
   const circuit =
     session.kind === 'circuit'
-      ? session.circuit.filter((c) => c.heading.trim() || c.lines.some((l) => l.trim()))
+      ? session.circuit.filter((c) => c.heading.trim() || c.lines.some((l) => l.text.trim()))
       : [];
   const isCircuit = session.kind === 'circuit';
   // Each class gets its own backdrop: the room for strength, the members for
@@ -343,14 +343,24 @@ export default function TvPage() {
                     </div>
                     <ul className="flex-1 space-y-3 px-6 py-5">
                       {piece.lines
-                        .filter((l) => l.trim())
+                        .filter((l) => l.text.trim())
                         .map((line, li) => (
                           <li
                             key={li}
                             className="text-[34px] leading-tight font-bold"
                             style={{ color: CREAM }}
                           >
-                            {line}
+                            {line.text}
+                            {/* The station's load, so nobody has to ask what
+                                goes on the sled. */}
+                            {line.load && (
+                              <span
+                                className="block text-[26px] font-semibold"
+                                style={{ color: SAND }}
+                              >
+                                {line.load}
+                              </span>
+                            )}
                           </li>
                         ))}
                     </ul>

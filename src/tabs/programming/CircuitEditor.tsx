@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { CircuitBlock, CircuitSession } from '../../types/documents';
-import { circuitToText, parseCircuit } from '../../lib/circuit';
+import { circuitToText, lineToText, parseCircuit, splitLoad } from '../../lib/circuit';
 
 // Circuit sessions carry far less structure than strength ones: a heading, the
 // movements under it, and a rest. So the editor is close to writing it out,
@@ -129,15 +129,25 @@ export default function CircuitEditor({
               ✕
             </button>
           </div>
+          {/* Loads are typed inline the way they are said on the floor
+              ("50m Sled push @ 60kg") and split off automatically, so the board
+              can show the weight under the movement without a field per line. */}
           <textarea
             className={`${input} mt-2 resize-y leading-relaxed`}
             rows={Math.max(3, b.lines.length + 1)}
-            placeholder={'200m Run\n10 DB Push ups\n10 DB Power cleans'}
-            value={b.lines.join('\n')}
-            onChange={(e) =>
-              patchBlock(b.id, { lines: e.target.value.split('\n').filter((l) => l !== undefined) })
-            }
+            placeholder={'200m Run\n10 DB Push ups @ 22.5kg\n50m Sled push @ 60kg'}
+            value={b.lines.map(lineToText).join('\n')}
+            onChange={(e) => patchBlock(b.id, { lines: e.target.value.split('\n').map(splitLoad) })}
           />
+          {b.lines.some((l) => l.load) && (
+            <p className="mt-1 text-[11px] text-ink-500">
+              Loads on the board:{' '}
+              {b.lines
+                .filter((l) => l.load)
+                .map((l) => `${l.text} ${l.load}`)
+                .join(', ')}
+            </p>
+          )}
           <input
             className={`${input} mt-2 w-48 text-[13px] italic`}
             placeholder="Rest 2 minutes"

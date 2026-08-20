@@ -89,10 +89,18 @@ export interface TimedBlock {
 // ESD, Hyrox and Game Day are written as circuits, not sets and reps: a
 // heading ("AMRAP in 10 minutes:", "0:00-10:00"), the movements under it,
 // and an optional rest before the next piece.
+// One movement in a circuit piece. The load is held apart from the text so a
+// sled push or a dumbbell thruster can say what to put on it: written as
+// strings because a station is often "24/16" or "2x22.5", not one number.
+export interface CircuitLine {
+  text: string;
+  load?: string;
+}
+
 export interface CircuitBlock {
   id: string;
   heading: string;
-  lines: string[];
+  lines: CircuitLine[];
   restAfter?: string;
 }
 

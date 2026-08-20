@@ -5,6 +5,7 @@
 import type { ProgramDoc, Session } from '../types/documents';
 import { slotSummary } from '../tabs/programming/ProgressionViews';
 import { sessionLabel, streamsOf } from './programStreams';
+import { lineToText } from './circuit';
 
 function esc(value: string): string {
   return /[",\n]/.test(value) ? `"${value.replace(/"/g, '""')}"` : value;
@@ -57,7 +58,7 @@ export function programToCsv(doc: ProgramDoc): string {
         session.circuit.forEach((piece, pi) => {
           const label = `Piece ${pi + 1}`;
           const row = rowFor(`circuit::${pi}`, label, '');
-          const body = [piece.heading.trim(), ...piece.lines.map((l) => l.trim()).filter(Boolean)]
+          const body = [piece.heading.trim(), ...piece.lines.map((l) => lineToText(l).trim()).filter(Boolean)]
             .filter(Boolean)
             .join(' / ');
           const rest = piece.restAfter?.trim();

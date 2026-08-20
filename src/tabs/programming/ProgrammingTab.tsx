@@ -127,7 +127,7 @@ function newSession(focus: SessionFocus, kind: SessionKind): Session {
 /** Does this session hold real programming, in whichever way it is written? */
 function sessionHasContent(s: Session): boolean {
   return s.kind === 'circuit'
-    ? s.circuit.some((c) => c.heading.trim() || c.lines.some((l) => l.trim()))
+    ? s.circuit.some((c) => c.heading.trim() || c.lines.some((l) => l.text.trim()))
     : s.timedBlocks.some((tb) => tb.slots.some((sl) => sl.name));
 }
 

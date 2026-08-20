@@ -10,7 +10,28 @@
 //   ...
 //   *Both team mates run ...    <- a footnote for the session
 
-import type { CircuitBlock } from '../types/documents';
+import type { CircuitBlock, CircuitLine } from '../types/documents';
+
+// A weight on the end of a movement line is the station's load, not part of
+// the movement's name: "50m Sled push @ 60kg", "15 DB Thrusters 2x22.5kg",
+// "20 KB swings 24/16kg". Lifting it out means the board and the floor plan
+// can say what to put on the sled instead of a coach guessing.
+const LOAD_TAIL = /\s*(?:@\s*)?((?:\d+(?:\.\d+)?\s*[x/]\s*)?\d+(?:\.\d+)?\s*kg)\s*$/i;
+
+/** Split a written line into its movement and its load. */
+export function splitLoad(text: string): CircuitLine {
+  const m = text.match(LOAD_TAIL);
+  if (!m || m.index === undefined) return { text };
+  const movement = text.slice(0, m.index).trim();
+  // "60kg" on its own is the line, not a load with nothing to load.
+  if (!movement) return { text };
+  return { text: movement, load: m[1].replace(/\s+/g, '') };
+}
+
+/** Render one line back the way it is written, load included. */
+export function lineToText(l: CircuitLine): string {
+  return l.load ? `${l.text} @ ${l.load}` : l.text;
+}
 
 const HEADING = [
   /^\s*(amrap|emom|e\d+mom|for time|for quality|tabata|every\b)/i,
@@ -63,7 +84,7 @@ export function parseCircuit(text: string): {
       continue;
     }
     if (!current) current = { id: crypto.randomUUID(), heading: '', lines: [] };
-    current.lines.push(line.replace(/^\s*[-*•·]\s*/, ''));
+    current.lines.push(splitLoad(line.replace(/^\s*[-*•·]\s*/, '')));
   }
   push();
 
@@ -74,9 +95,9 @@ export function parseCircuit(text: string): {
     blocks.length > 1 &&
     !blocks[0].heading &&
     blocks[0].lines.length === 1 &&
-    !/\d/.test(blocks[0].lines[0])
+    !/\d/.test(blocks[0].lines[0].text)
   ) {
-    intent = blocks[0].lines[0].replace(/[,:]\s*$/, '');
+    intent = blocks[0].lines[0].text.replace(/[,:]\s*$/, '');
     blocks.shift();
   }
 
@@ -88,7 +109,7 @@ export function circuitToText(blocks: CircuitBlock[], note?: string): string {
   const out: string[] = [];
   blocks.forEach((b, i) => {
     if (b.heading) out.push(/[:\d]$/.test(b.heading) ? b.heading : `${b.heading}:`);
-    out.push(...b.lines);
+    out.push(...b.lines.map(lineToText));
     if (b.restAfter) out.push('', b.restAfter);
     if (i < blocks.length - 1) out.push('');
   });
