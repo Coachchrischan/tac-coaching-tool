@@ -4598,30 +4598,76 @@
                   {
                     "id": "gameday-b1w1s1",
                     "focus": "gameday",
-                    "timedBlocks": [
+                    "kind": "circuit",
+                    "name": "Game Day: the rotation",
+                    "intent": "First Game Day of the block. Teams of three, one working at a time, everybody moving all morning. Set the tone: loud, social, nobody left standing on their own. This is not a test day.",
+                    "note": "Five teams of three or four. Each team starts on a different station and rotates on the whistle, so no station is ever doubled up. Score is total metres, calories and reps added together. Call the swaps for the first two stations, then let the teams run themselves.",
+                    "circuit": [
                       {
-                        "id": "gameday-b1w1s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
+                        "id": "c9ddc214-e546-420f-8e1e-d59a69fb54be",
+                        "heading": "Station 1 · 7 minutes",
+                        "lines": [
+                          {
+                            "text": "Row for max metres"
+                          },
+                          {
+                            "text": "Swap every 250m"
+                          }
+                        ],
+                        "restAfter": "Rotate: 1 minute"
                       },
                       {
-                        "id": "gameday-b1w1s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
+                        "id": "bf8d91c1-ab32-4dc1-b63d-25b392970642",
+                        "heading": "Station 2 · 7 minutes",
+                        "lines": [
+                          {
+                            "text": "Ski for max metres"
+                          },
+                          {
+                            "text": "Swap every 250m"
+                          }
+                        ],
+                        "restAfter": "Rotate: 1 minute"
                       },
                       {
-                        "id": "gameday-b1w1s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
+                        "id": "6eb4beb8-5563-4b9e-9700-14f089610441",
+                        "heading": "Station 3 · 7 minutes",
+                        "lines": [
+                          {
+                            "text": "Bike for max calories"
+                          },
+                          {
+                            "text": "Swap every 15 calories"
+                          }
+                        ],
+                        "restAfter": "Rotate: 1 minute"
                       },
                       {
-                        "id": "gameday-b1w1s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
+                        "id": "86faa226-2353-45e6-9210-c09658f54bc5",
+                        "heading": "Station 4 · 7 minutes",
+                        "lines": [
+                          {
+                            "text": "Air runner for max metres"
+                          },
+                          {
+                            "text": "Swap every 400m"
+                          }
+                        ],
+                        "restAfter": "Rotate: 1 minute"
+                      },
+                      {
+                        "id": "1c87d991-2805-4962-b3e4-2f7ced7394f1",
+                        "heading": "Station 5 · 7 minutes",
+                        "lines": [
+                          {
+                            "text": "Max wall balls",
+                            "load": "9/6kg"
+                          },
+                          {
+                            "text": "Box step overs between turns",
+                            "load": "60/50cm"
+                          }
+                        ]
                       }
                     ]
                   }
@@ -4633,30 +4679,77 @@
                   {
                     "id": "gameday-b1w2s1",
                     "focus": "gameday",
-                    "timedBlocks": [
+                    "kind": "circuit",
+                    "name": "Game Day: the rotation, longer",
+                    "intent": "Same shape as last week so the room already knows the rules, one minute longer at each station. The point is a slightly bigger engine, not a harder session: hold the same pace for longer.",
+                    "note": "Same five teams if you can, so they can beat last week. Sleds are three lanes only, so the sled station runs as a queue: one team pushes while the next team resets the lane.",
+                    "circuit": [
                       {
-                        "id": "gameday-b1w2s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
+                        "id": "78af1843-77d3-42d9-a052-ddb0f1c256e3",
+                        "heading": "Station 1 · 8 minutes",
+                        "lines": [
+                          {
+                            "text": "Row for max metres"
+                          },
+                          {
+                            "text": "Swap every 250m"
+                          }
+                        ],
+                        "restAfter": "Rotate: 1 minute"
                       },
                       {
-                        "id": "gameday-b1w2s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
+                        "id": "d635c296-c263-40b1-ba36-ae28da7db976",
+                        "heading": "Station 2 · 8 minutes",
+                        "lines": [
+                          {
+                            "text": "Sled push and drag, max lengths",
+                            "load": "60/40kg"
+                          },
+                          {
+                            "text": "One athlete per lane, swap at the end of each length"
+                          }
+                        ],
+                        "restAfter": "Rotate: 1 minute"
                       },
                       {
-                        "id": "gameday-b1w2s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
+                        "id": "281cb680-30a6-42c8-acfa-2ca1be68a619",
+                        "heading": "Station 3 · 8 minutes",
+                        "lines": [
+                          {
+                            "text": "Bike for max calories"
+                          },
+                          {
+                            "text": "Swap every 15 calories"
+                          }
+                        ],
+                        "restAfter": "Rotate: 1 minute"
                       },
                       {
-                        "id": "gameday-b1w2s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
+                        "id": "b8fc7f0b-c99e-4d12-a338-0f2aaf584982",
+                        "heading": "Station 4 · 8 minutes",
+                        "lines": [
+                          {
+                            "text": "Air runner for max metres"
+                          },
+                          {
+                            "text": "Swap every 400m"
+                          }
+                        ],
+                        "restAfter": "Rotate: 1 minute"
+                      },
+                      {
+                        "id": "f4c83794-7cea-4171-936e-b6b6dd5c5014",
+                        "heading": "Station 5 · 8 minutes",
+                        "lines": [
+                          {
+                            "text": "Max wall balls",
+                            "load": "9/6kg"
+                          },
+                          {
+                            "text": "Farmers carry the length of the floor between turns",
+                            "load": "2x22.5kg"
+                          }
+                        ]
                       }
                     ]
                   }
@@ -4674,30 +4767,59 @@
                   {
                     "id": "gameday-b1w3s1",
                     "focus": "gameday",
-                    "timedBlocks": [
+                    "kind": "circuit",
+                    "name": "Game Day: you go, I go",
+                    "intent": "Pairs instead of teams, so nobody can hide in a group of three and everybody gets a partner they might not know. Steady aerobic effort with a hard finish.",
+                    "note": "Pairs. One works, one rests, straight swaps. Pair people across the room rather than letting friends pair up, that is half the point of the morning. Scale the run to 400m on the air runner if the legs are cooked from the week.",
+                    "circuit": [
                       {
-                        "id": "gameday-b1w3s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
+                        "id": "9b0ad2c8-bf09-4dfa-a1ad-ab8fb66520bb",
+                        "heading": "0:00-12:00",
+                        "lines": [
+                          {
+                            "text": "Run 400m"
+                          },
+                          {
+                            "text": "12 wall balls",
+                            "load": "9/6kg"
+                          },
+                          {
+                            "text": "Alternate whole rounds with your partner"
+                          }
+                        ],
+                        "restAfter": "Rest 3 minutes"
                       },
                       {
-                        "id": "gameday-b1w3s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
+                        "id": "107a9c88-7121-4deb-9d98-1c81809f602d",
+                        "heading": "12:00-24:00",
+                        "lines": [
+                          {
+                            "text": "Row 500m"
+                          },
+                          {
+                            "text": "12 dumbbell thrusters",
+                            "load": "2x15kg"
+                          },
+                          {
+                            "text": "Alternate whole rounds with your partner"
+                          }
+                        ],
+                        "restAfter": "Rest 3 minutes"
                       },
                       {
-                        "id": "gameday-b1w3s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w3s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
+                        "id": "d7407aaf-2863-4656-b800-2390b5743826",
+                        "heading": "24:00-33:00",
+                        "lines": [
+                          {
+                            "text": "Ski 250m"
+                          },
+                          {
+                            "text": "10 burpees over the erg"
+                          },
+                          {
+                            "text": "Alternate whole rounds with your partner"
+                          }
+                        ]
                       }
                     ]
                   }
@@ -4709,30 +4831,47 @@
                   {
                     "id": "gameday-b1w4s1",
                     "focus": "gameday",
-                    "timedBlocks": [
+                    "kind": "circuit",
+                    "name": "Game Day: the chipper",
+                    "intent": "One long list, one team, share it any way you like. This is the community session at its best: the fast members carry more, the newer members are still part of finishing it, and everybody stays until the last team is done.",
+                    "note": "Teams of four. Split every line however the team wants, only one person working per movement at a time. If a team finishes early they go and make noise for the team still working. Everyone stays on the floor until the last rep.",
+                    "circuit": [
                       {
-                        "id": "gameday-b1w4s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
+                        "id": "9a339247-22f9-4ca8-8d51-8e82f58884ea",
+                        "heading": "For time, as a team of four",
+                        "lines": [
+                          {
+                            "text": "4000m row"
+                          },
+                          {
+                            "text": "200 wall balls",
+                            "load": "9/6kg"
+                          },
+                          {
+                            "text": "100 box step overs",
+                            "load": "60/50kg"
+                          },
+                          {
+                            "text": "80 dumbbell snatches",
+                            "load": "22.5/15kg"
+                          },
+                          {
+                            "text": "2000m ski"
+                          },
+                          {
+                            "text": "400m farmers carry",
+                            "load": "2x22.5kg"
+                          }
+                        ]
                       },
                       {
-                        "id": "gameday-b1w4s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w4s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w4s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
+                        "id": "fb76f252-1df1-4057-baaf-551d8d272c21",
+                        "heading": "Cap: 35 minutes",
+                        "lines": [
+                          {
+                            "text": "Whatever is left when the clock stops is the score"
+                          }
+                        ]
                       }
                     ]
                   }
@@ -5219,6 +5358,6 @@
       }
     ]
   },
-  "rev": 39,
-  "updatedAt": "2026-08-19T23:19:55.181Z"
+  "rev": 40,
+  "updatedAt": "2026-08-20T00:47:00.571Z"
 }
