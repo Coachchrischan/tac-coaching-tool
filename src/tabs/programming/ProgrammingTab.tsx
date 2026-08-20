@@ -1007,7 +1007,10 @@ export default function ProgrammingTab() {
             </select>
           </div>
 
-          <div className="flex items-center gap-1.5">
+          {/* The sessions take the space between the phase dropdown and the
+              view controls, and centre in it, so the blank space either side
+              is even however long the phase name or the class list is. */}
+          <div className="flex flex-1 items-center justify-center gap-1.5">
             {sessions.map((s, i) => (
               <button key={s.id} type="button" className={pill(i === sIdx)} onClick={() => setSi(i)}>
                 {s.name || FOCUS_LABEL[s.focus]}
@@ -1045,7 +1048,7 @@ export default function ProgrammingTab() {
           {/* Right-hand controls: how you're looking at it. On this row with
               the stream, phase and session controls, so every button that
               changes what you are looking at sits on one line. */}
-          <div className="ml-auto flex items-center gap-3">
+          <div className="flex items-center gap-3">
             <div className="flex overflow-hidden rounded-md border border-ink-300">
               {(Object.keys(VIEW_LABEL) as ProgramView[]).map((v) => (
                 <button
