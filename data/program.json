@@ -15,6 +15,7 @@
                   {
                     "id": "b1w1s1",
                     "focus": "lower",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b1w1s1-WU",
@@ -122,6 +123,7 @@
                   {
                     "id": "b1w1s2",
                     "focus": "upper",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b1w1s2-WU",
@@ -221,6 +223,7 @@
                   {
                     "id": "b1w1s3",
                     "focus": "full",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b1w1s3-WU",
@@ -325,6 +328,7 @@
                   {
                     "id": "b1w2s1",
                     "focus": "lower",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b1w2s1-WU",
@@ -415,6 +419,7 @@
                   {
                     "id": "b1w2s2",
                     "focus": "upper",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b1w2s2-WU",
@@ -494,6 +499,7 @@
                   {
                     "id": "b1w2s3",
                     "focus": "full",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b1w2s3-WU",
@@ -578,6 +584,7 @@
                   {
                     "id": "b1w3s1",
                     "focus": "lower",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b1w3s1-WU",
@@ -662,6 +669,7 @@
                   {
                     "id": "b1w3s2",
                     "focus": "upper",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b1w3s2-WU",
@@ -741,6 +749,7 @@
                   {
                     "id": "b1w3s3",
                     "focus": "full",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b1w3s3-WU",
@@ -825,6 +834,7 @@
                   {
                     "id": "b1w4s1",
                     "focus": "lower",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b1w4s1-WU",
@@ -910,6 +920,7 @@
                   {
                     "id": "b1w4s2",
                     "focus": "upper",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b1w4s2-WU",
@@ -989,6 +1000,7 @@
                   {
                     "id": "b1w4s3",
                     "focus": "full",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b1w4s3-WU",
@@ -1073,6 +1085,7 @@
                   {
                     "id": "cca4e7b4-7560-4239-9921-c0b6270851f6",
                     "focus": "lower",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "f8a73cb7-b3d9-412c-b7b3-34d30fcfe10e",
@@ -1157,6 +1170,7 @@
                   {
                     "id": "a23d55cc-5245-49e5-91cd-e0c93969016e",
                     "focus": "upper",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "08cdee4f-b2e4-493a-bb72-37a05f55161d",
@@ -1236,6 +1250,7 @@
                   {
                     "id": "fb5cbe0a-27bc-42d0-9dc8-9a54406fc907",
                     "focus": "full",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "a559507a-2478-4c4c-85ca-16a25b3541e3",
@@ -1320,6 +1335,7 @@
                   {
                     "id": "1785dc2e-fc44-460c-bd49-271da012f37d",
                     "focus": "lower",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "78c25786-cd5f-4900-8e0d-0c9766a2ff9b",
@@ -1404,6 +1420,7 @@
                   {
                     "id": "afde0545-fa5f-46f6-8eb5-5286c7e701ab",
                     "focus": "upper",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "3f1bb5ce-cda3-4dc9-af2e-c6d78e55a6bc",
@@ -1483,6 +1500,7 @@
                   {
                     "id": "2aee3dc1-ff8e-4aed-b1bc-b2233a352f7e",
                     "focus": "full",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "835114d3-de82-4734-b2ae-c26cf4ced3c4",
@@ -1567,6 +1585,7 @@
                   {
                     "id": "4fd35073-8a63-4dc9-9ad3-d2220f7303b0",
                     "focus": "lower",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "2a9fc901-d5f2-4c2d-8621-28a663937f6a",
@@ -1651,6 +1670,7 @@
                   {
                     "id": "cbc5bf88-f906-446c-a412-2007cbae2d37",
                     "focus": "upper",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "8c4bf3b8-b985-4a3c-b22a-53c40fbf51b2",
@@ -1730,6 +1750,7 @@
                   {
                     "id": "ed29993f-2664-45f5-b211-9c01bb94ef75",
                     "focus": "full",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "de2e49bd-b3c1-463c-8ee6-b1ecd410b250",
@@ -1814,6 +1835,7 @@
                   {
                     "id": "288763ce-ee54-4b57-acda-142f841a72b8",
                     "focus": "lower",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "286e31f5-2e15-432f-9a91-41e9b73474e6",
@@ -1898,6 +1920,7 @@
                   {
                     "id": "0fb7aabc-c8b2-4660-ac79-9541aa3e9048",
                     "focus": "upper",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "68974898-6e4b-4715-a90f-39184b1e14c2",
@@ -1977,6 +2000,7 @@
                   {
                     "id": "fe5cd164-dfd6-483d-9fad-67694ecc8ddd",
                     "focus": "full",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "8329001b-6c0f-4004-ad3f-307ac0cc90d3",
@@ -2061,6 +2085,7 @@
                   {
                     "id": "323ff92b-4198-4e37-9c03-2654f7d3170b",
                     "focus": "lower",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b6825e60-bcb1-40f9-87ae-34278ba2dcb8",
@@ -2145,6 +2170,7 @@
                   {
                     "id": "55b4485f-f606-4d08-9a60-9813e9cb8ae2",
                     "focus": "upper",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "9e5a4b42-0255-45b0-aad5-d13e41db4dff",
@@ -2224,6 +2250,7 @@
                   {
                     "id": "a08abdf3-95cd-41c9-b201-4e56a1c96730",
                     "focus": "full",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "2c578e15-c4e4-4d4b-89b4-96fd76b1a9d8",
@@ -2308,6 +2335,7 @@
                   {
                     "id": "49810d31-6114-4db3-a5f7-405e35a0ca22",
                     "focus": "lower",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "42859598-b724-44af-be7e-d77af6b59343",
@@ -2392,6 +2420,7 @@
                   {
                     "id": "5fcc62fa-63c9-42a9-afee-17092fa9b0b2",
                     "focus": "upper",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "c6786006-527f-43b7-a58e-0f6ea18db917",
@@ -2471,6 +2500,7 @@
                   {
                     "id": "f431bc44-aa00-4fac-90dc-140936936042",
                     "focus": "full",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "e4537816-6545-4fa4-8276-46a1426775e2",
@@ -2562,6 +2592,7 @@
                   {
                     "id": "b2w1s1",
                     "focus": "lower",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b2w1s1-WU",
@@ -2592,6 +2623,7 @@
                   {
                     "id": "b2w1s2",
                     "focus": "upper",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b2w1s2-WU",
@@ -2622,6 +2654,7 @@
                   {
                     "id": "b2w1s3",
                     "focus": "full",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b2w1s3-WU",
@@ -2664,6 +2697,7 @@
                   {
                     "id": "b3w1s1",
                     "focus": "lower",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b3w1s1-WU",
@@ -2694,6 +2728,7 @@
                   {
                     "id": "b3w1s2",
                     "focus": "upper",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b3w1s2-WU",
@@ -2724,6 +2759,7 @@
                   {
                     "id": "b3w1s3",
                     "focus": "full",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b3w1s3-WU",
@@ -2759,6 +2795,7 @@
                   {
                     "id": "b3w2s1",
                     "focus": "lower",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b3w2s1-WU",
@@ -2789,6 +2826,7 @@
                   {
                     "id": "b3w2s2",
                     "focus": "upper",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b3w2s2-WU",
@@ -2819,6 +2857,7 @@
                   {
                     "id": "b3w2s3",
                     "focus": "full",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b3w2s3-WU",
@@ -2854,6 +2893,7 @@
                   {
                     "id": "b3w3s1",
                     "focus": "lower",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b3w3s1-WU",
@@ -2884,6 +2924,7 @@
                   {
                     "id": "b3w3s2",
                     "focus": "upper",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b3w3s2-WU",
@@ -2914,6 +2955,7 @@
                   {
                     "id": "b3w3s3",
                     "focus": "full",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b3w3s3-WU",
@@ -2949,6 +2991,7 @@
                   {
                     "id": "b3w4s1",
                     "focus": "lower",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b3w4s1-WU",
@@ -2979,6 +3022,7 @@
                   {
                     "id": "b3w4s2",
                     "focus": "upper",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b3w4s2-WU",
@@ -3009,6 +3053,7 @@
                   {
                     "id": "b3w4s3",
                     "focus": "full",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "b3w4s3-WU",
@@ -3044,6 +3089,7 @@
                   {
                     "id": "9529d137-9461-4f4a-8f8b-1f0d4d7dc92b",
                     "focus": "lower",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "e85de0bf-5714-4e87-8e2e-3ac7283e4b00",
@@ -3074,6 +3120,7 @@
                   {
                     "id": "d80b37b1-8972-4c77-a82d-ea697e5a2b8b",
                     "focus": "upper",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "be8a8bba-d235-4da8-9a8b-38b03abcf2b7",
@@ -3104,6 +3151,7 @@
                   {
                     "id": "d42c5757-c6b1-44ac-8034-dab80eacc500",
                     "focus": "full",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "0f59312c-5984-4eb3-b079-4d59d6641314",
@@ -3139,6 +3187,7 @@
                   {
                     "id": "2e45cf71-80a0-4649-8386-8c32377aa89a",
                     "focus": "lower",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "931a8d79-6f61-4037-a208-61dc4d2b25bb",
@@ -3169,6 +3218,7 @@
                   {
                     "id": "9251e3a1-e9ab-4a16-9eb8-56ef2ecd9ed8",
                     "focus": "upper",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "18b857dc-b29f-404f-a785-b7ae5b89fd8b",
@@ -3199,6 +3249,7 @@
                   {
                     "id": "269a59ee-47af-446d-ade6-4a5bdad68c6a",
                     "focus": "full",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "d6ec0275-1a82-40d6-a2a7-35106c5890c6",
@@ -3251,16 +3302,24 @@
                     "id": "esd-b1w1-monday",
                     "focus": "esd",
                     "name": "Monday",
-                    "timedBlocks": [],
+                    "kind": "circuit",
                     "circuit": [
                       {
                         "id": "0281f851-c93a-467b-afb6-d61bfb2a20f4",
                         "heading": "AMRAP in 10 minutes",
                         "lines": [
-                          "200m Run",
-                          "10 DB Push ups",
-                          "10 DB Power cleans",
-                          "10 Renegade Rows"
+                          {
+                            "text": "200m Run"
+                          },
+                          {
+                            "text": "10 DB Push ups"
+                          },
+                          {
+                            "text": "10 DB Power cleans"
+                          },
+                          {
+                            "text": "10 Renegade Rows"
+                          }
                         ],
                         "restAfter": "Rest 2 minutes"
                       },
@@ -3268,10 +3327,18 @@
                         "id": "3a8d8f85-9d77-488a-997e-d8ba8e5324fc",
                         "heading": "AMRAP in 10 minutes",
                         "lines": [
-                          "20 Calorie Row",
-                          "10 DB Push ups",
-                          "10 DB Power cleans",
-                          "10 Renegade Rows"
+                          {
+                            "text": "20 Calorie Row"
+                          },
+                          {
+                            "text": "10 DB Push ups"
+                          },
+                          {
+                            "text": "10 DB Power cleans"
+                          },
+                          {
+                            "text": "10 Renegade Rows"
+                          }
                         ],
                         "restAfter": "Rest 2 minutes"
                       },
@@ -3279,10 +3346,18 @@
                         "id": "b54d56ec-1d3e-4331-8a0b-a5673d04b95e",
                         "heading": "AMRAP in 10 minutes",
                         "lines": [
-                          "20 Calorie Bike",
-                          "10 DB Push ups",
-                          "10 DB Power cleans",
-                          "10 Renegade Rows"
+                          {
+                            "text": "20 Calorie Bike"
+                          },
+                          {
+                            "text": "10 DB Push ups"
+                          },
+                          {
+                            "text": "10 DB Power cleans"
+                          },
+                          {
+                            "text": "10 Renegade Rows"
+                          }
                         ]
                       }
                     ]
@@ -3291,15 +3366,21 @@
                     "id": "esd-b1w1-friday",
                     "focus": "esd",
                     "name": "Friday",
-                    "timedBlocks": [],
+                    "kind": "circuit",
                     "circuit": [
                       {
                         "id": "be9e46cc-1e68-4607-9055-f4f3b51fa779",
                         "heading": "AMRAP in 20 minutes",
                         "lines": [
-                          "500m Row or 400m Run (1K Bike)",
-                          "15 DB Thrusters",
-                          "50 skips"
+                          {
+                            "text": "500m Row or 400m Run (1K Bike)"
+                          },
+                          {
+                            "text": "15 DB Thrusters"
+                          },
+                          {
+                            "text": "50 skips"
+                          }
                         ]
                       }
                     ]
@@ -3312,32 +3393,8 @@
                   {
                     "id": "esd-b1w2s1",
                     "focus": "esd",
-                    "timedBlocks": [
-                      {
-                        "id": "esd-b1w2s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w2s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w2s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w2s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               }
@@ -3353,32 +3410,8 @@
                   {
                     "id": "esd-b1w3s1",
                     "focus": "esd",
-                    "timedBlocks": [
-                      {
-                        "id": "esd-b1w3s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w3s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w3s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w3s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -3388,32 +3421,8 @@
                   {
                     "id": "esd-b1w4s1",
                     "focus": "esd",
-                    "timedBlocks": [
-                      {
-                        "id": "esd-b1w4s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w4s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w4s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w4s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -3423,32 +3432,8 @@
                   {
                     "id": "esd-b1w5s1",
                     "focus": "esd",
-                    "timedBlocks": [
-                      {
-                        "id": "esd-b1w5s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w5s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w5s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w5s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -3458,32 +3443,8 @@
                   {
                     "id": "esd-b1w6s1",
                     "focus": "esd",
-                    "timedBlocks": [
-                      {
-                        "id": "esd-b1w6s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w6s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w6s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w6s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               }
@@ -3499,32 +3460,8 @@
                   {
                     "id": "esd-b1w7s1",
                     "focus": "esd",
-                    "timedBlocks": [
-                      {
-                        "id": "esd-b1w7s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w7s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w7s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w7s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -3534,32 +3471,8 @@
                   {
                     "id": "esd-b1w8s1",
                     "focus": "esd",
-                    "timedBlocks": [
-                      {
-                        "id": "esd-b1w8s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w8s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w8s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w8s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -3569,32 +3482,8 @@
                   {
                     "id": "esd-b1w9s1",
                     "focus": "esd",
-                    "timedBlocks": [
-                      {
-                        "id": "esd-b1w9s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w9s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w9s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w9s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -3604,32 +3493,8 @@
                   {
                     "id": "esd-b1w10s1",
                     "focus": "esd",
-                    "timedBlocks": [
-                      {
-                        "id": "esd-b1w10s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w10s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w10s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b1w10s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               }
@@ -3645,32 +3510,8 @@
                   {
                     "id": "esd-b2w1s1",
                     "focus": "esd",
-                    "timedBlocks": [
-                      {
-                        "id": "esd-b2w1s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b2w1s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b2w1s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b2w1s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -3680,32 +3521,8 @@
                   {
                     "id": "esd-b3w1s1",
                     "focus": "esd",
-                    "timedBlocks": [
-                      {
-                        "id": "esd-b3w1s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b3w1s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b3w1s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b3w1s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -3715,32 +3532,8 @@
                   {
                     "id": "esd-b3w2s1",
                     "focus": "esd",
-                    "timedBlocks": [
-                      {
-                        "id": "esd-b3w2s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b3w2s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b3w2s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b3w2s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -3750,32 +3543,8 @@
                   {
                     "id": "esd-b3w3s1",
                     "focus": "esd",
-                    "timedBlocks": [
-                      {
-                        "id": "esd-b3w3s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b3w3s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b3w3s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b3w3s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -3785,32 +3554,8 @@
                   {
                     "id": "esd-b3w4s1",
                     "focus": "esd",
-                    "timedBlocks": [
-                      {
-                        "id": "esd-b3w4s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b3w4s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b3w4s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b3w4s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               }
@@ -3826,32 +3571,8 @@
                   {
                     "id": "esd-b3w5s1",
                     "focus": "esd",
-                    "timedBlocks": [
-                      {
-                        "id": "esd-b3w5s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b3w5s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b3w5s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b3w5s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -3861,32 +3582,8 @@
                   {
                     "id": "esd-b3w6s1",
                     "focus": "esd",
-                    "timedBlocks": [
-                      {
-                        "id": "esd-b3w6s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b3w6s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b3w6s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "esd-b3w6s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               }
@@ -3911,14 +3608,18 @@
                     "id": "hyrox-b1w1-monday",
                     "focus": "hyrox",
                     "name": "Monday",
-                    "timedBlocks": [],
+                    "kind": "circuit",
                     "circuit": [
                       {
                         "id": "c4247952-7a99-4fef-a9b5-9f01aa37dbc8",
                         "heading": "In 8 minutes",
                         "lines": [
-                          "Ski 1K",
-                          "Max Sled push"
+                          {
+                            "text": "Ski 1K"
+                          },
+                          {
+                            "text": "Max Sled push"
+                          }
                         ],
                         "restAfter": "Rest 2 minutes"
                       },
@@ -3926,8 +3627,12 @@
                         "id": "a261505f-ecfe-45ed-997e-301ee99a1dbf",
                         "heading": "In 8 minutes",
                         "lines": [
-                          "Run 1000m",
-                          "Max distance Burpee broad jumps"
+                          {
+                            "text": "Run 1000m"
+                          },
+                          {
+                            "text": "Max distance Burpee broad jumps"
+                          }
                         ],
                         "restAfter": "Rest 2 minutes"
                       },
@@ -3935,8 +3640,12 @@
                         "id": "b25ddb9d-5df3-4b5a-b502-fc53d9b33ef0",
                         "heading": "In 8 minutes",
                         "lines": [
-                          "Row 1000m",
-                          "Max distance Farmers carry"
+                          {
+                            "text": "Row 1000m"
+                          },
+                          {
+                            "text": "Max distance Farmers carry"
+                          }
                         ],
                         "restAfter": "Rest 2 minutes"
                       },
@@ -3944,8 +3653,12 @@
                         "id": "6e311e0d-18bc-4c72-963a-38c3622a1f64",
                         "heading": "In 8 minutes",
                         "lines": [
-                          "Run 1K",
-                          "Max Wallballs"
+                          {
+                            "text": "Run 1K"
+                          },
+                          {
+                            "text": "Max Wallballs"
+                          }
                         ]
                       }
                     ]
@@ -3954,43 +3667,59 @@
                     "id": "hyrox-b1w1-friday",
                     "focus": "hyrox",
                     "name": "Friday",
-                    "timedBlocks": [],
+                    "note": "Both team mates run 800m at the same time. Lunge and Sled shared between them in any fashion.",
+                    "intent": "In pairs",
+                    "kind": "circuit",
                     "circuit": [
                       {
                         "id": "0c571deb-277d-4b50-b440-bfe8ffcde6a5",
                         "heading": "0:00-10:00",
                         "lines": [
-                          "Run 800m",
-                          "50m Sandbag lunge"
+                          {
+                            "text": "Run 800m"
+                          },
+                          {
+                            "text": "50m Sandbag lunge"
+                          }
                         ]
                       },
                       {
                         "id": "ccf1d9e6-554f-4d3c-b8b6-73ceed642909",
                         "heading": "10:00-20:00",
                         "lines": [
-                          "Run 1K",
-                          "50m Sled pull"
+                          {
+                            "text": "Run 1K"
+                          },
+                          {
+                            "text": "50m Sled pull"
+                          }
                         ]
                       },
                       {
                         "id": "9aef251c-ec5a-4116-b6d7-5857d4ac94b0",
                         "heading": "20:00-30:00",
                         "lines": [
-                          "Run 800m",
-                          "50m Sandbag lunge"
+                          {
+                            "text": "Run 800m"
+                          },
+                          {
+                            "text": "50m Sandbag lunge"
+                          }
                         ]
                       },
                       {
                         "id": "c191e5c4-b8df-46a9-81b6-f9244caa04b0",
                         "heading": "30:00-40:00",
                         "lines": [
-                          "Run 1K",
-                          "50m Sled pull"
+                          {
+                            "text": "Run 1K"
+                          },
+                          {
+                            "text": "50m Sled pull"
+                          }
                         ]
                       }
-                    ],
-                    "note": "Both team mates run 800m at the same time. Lunge and Sled shared between them in any fashion.",
-                    "intent": "In pairs"
+                    ]
                   }
                 ]
               },
@@ -4000,32 +3729,8 @@
                   {
                     "id": "hyrox-b1w2s1",
                     "focus": "hyrox",
-                    "timedBlocks": [
-                      {
-                        "id": "hyrox-b1w2s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w2s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w2s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w2s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               }
@@ -4041,32 +3746,8 @@
                   {
                     "id": "hyrox-b1w3s1",
                     "focus": "hyrox",
-                    "timedBlocks": [
-                      {
-                        "id": "hyrox-b1w3s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w3s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w3s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w3s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -4076,32 +3757,8 @@
                   {
                     "id": "hyrox-b1w4s1",
                     "focus": "hyrox",
-                    "timedBlocks": [
-                      {
-                        "id": "hyrox-b1w4s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w4s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w4s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w4s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -4111,32 +3768,8 @@
                   {
                     "id": "hyrox-b1w5s1",
                     "focus": "hyrox",
-                    "timedBlocks": [
-                      {
-                        "id": "hyrox-b1w5s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w5s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w5s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w5s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -4146,32 +3779,8 @@
                   {
                     "id": "hyrox-b1w6s1",
                     "focus": "hyrox",
-                    "timedBlocks": [
-                      {
-                        "id": "hyrox-b1w6s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w6s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w6s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w6s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               }
@@ -4187,32 +3796,8 @@
                   {
                     "id": "hyrox-b1w7s1",
                     "focus": "hyrox",
-                    "timedBlocks": [
-                      {
-                        "id": "hyrox-b1w7s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w7s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w7s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w7s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -4222,32 +3807,8 @@
                   {
                     "id": "hyrox-b1w8s1",
                     "focus": "hyrox",
-                    "timedBlocks": [
-                      {
-                        "id": "hyrox-b1w8s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w8s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w8s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w8s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -4257,32 +3818,8 @@
                   {
                     "id": "hyrox-b1w9s1",
                     "focus": "hyrox",
-                    "timedBlocks": [
-                      {
-                        "id": "hyrox-b1w9s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w9s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w9s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w9s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -4292,32 +3829,8 @@
                   {
                     "id": "hyrox-b1w10s1",
                     "focus": "hyrox",
-                    "timedBlocks": [
-                      {
-                        "id": "hyrox-b1w10s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w10s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w10s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b1w10s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               }
@@ -4333,32 +3846,8 @@
                   {
                     "id": "hyrox-b2w1s1",
                     "focus": "hyrox",
-                    "timedBlocks": [
-                      {
-                        "id": "hyrox-b2w1s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b2w1s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b2w1s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b2w1s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -4368,32 +3857,8 @@
                   {
                     "id": "hyrox-b3w1s1",
                     "focus": "hyrox",
-                    "timedBlocks": [
-                      {
-                        "id": "hyrox-b3w1s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b3w1s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b3w1s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b3w1s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -4403,32 +3868,8 @@
                   {
                     "id": "hyrox-b3w2s1",
                     "focus": "hyrox",
-                    "timedBlocks": [
-                      {
-                        "id": "hyrox-b3w2s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b3w2s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b3w2s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b3w2s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -4438,32 +3879,8 @@
                   {
                     "id": "hyrox-b3w3s1",
                     "focus": "hyrox",
-                    "timedBlocks": [
-                      {
-                        "id": "hyrox-b3w3s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b3w3s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b3w3s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b3w3s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -4473,32 +3890,8 @@
                   {
                     "id": "hyrox-b3w4s1",
                     "focus": "hyrox",
-                    "timedBlocks": [
-                      {
-                        "id": "hyrox-b3w4s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b3w4s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b3w4s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b3w4s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               }
@@ -4514,32 +3907,8 @@
                   {
                     "id": "hyrox-b3w5s1",
                     "focus": "hyrox",
-                    "timedBlocks": [
-                      {
-                        "id": "hyrox-b3w5s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b3w5s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b3w5s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b3w5s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -4549,32 +3918,8 @@
                   {
                     "id": "hyrox-b3w6s1",
                     "focus": "hyrox",
-                    "timedBlocks": [
-                      {
-                        "id": "hyrox-b3w6s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b3w6s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b3w6s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "hyrox-b3w6s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               }
@@ -4883,32 +4228,8 @@
                   {
                     "id": "gameday-b1w5s1",
                     "focus": "gameday",
-                    "timedBlocks": [
-                      {
-                        "id": "gameday-b1w5s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w5s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w5s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w5s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -4918,32 +4239,8 @@
                   {
                     "id": "gameday-b1w6s1",
                     "focus": "gameday",
-                    "timedBlocks": [
-                      {
-                        "id": "gameday-b1w6s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w6s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w6s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w6s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               }
@@ -4959,32 +4256,8 @@
                   {
                     "id": "gameday-b1w7s1",
                     "focus": "gameday",
-                    "timedBlocks": [
-                      {
-                        "id": "gameday-b1w7s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w7s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w7s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w7s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -4994,32 +4267,8 @@
                   {
                     "id": "gameday-b1w8s1",
                     "focus": "gameday",
-                    "timedBlocks": [
-                      {
-                        "id": "gameday-b1w8s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w8s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w8s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w8s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -5029,32 +4278,8 @@
                   {
                     "id": "gameday-b1w9s1",
                     "focus": "gameday",
-                    "timedBlocks": [
-                      {
-                        "id": "gameday-b1w9s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w9s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w9s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w9s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -5064,32 +4289,8 @@
                   {
                     "id": "gameday-b1w10s1",
                     "focus": "gameday",
-                    "timedBlocks": [
-                      {
-                        "id": "gameday-b1w10s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w10s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w10s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b1w10s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               }
@@ -5105,32 +4306,8 @@
                   {
                     "id": "gameday-b2w1s1",
                     "focus": "gameday",
-                    "timedBlocks": [
-                      {
-                        "id": "gameday-b2w1s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b2w1s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b2w1s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b2w1s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -5140,32 +4317,8 @@
                   {
                     "id": "gameday-b3w1s1",
                     "focus": "gameday",
-                    "timedBlocks": [
-                      {
-                        "id": "gameday-b3w1s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b3w1s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b3w1s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b3w1s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -5175,32 +4328,8 @@
                   {
                     "id": "gameday-b3w2s1",
                     "focus": "gameday",
-                    "timedBlocks": [
-                      {
-                        "id": "gameday-b3w2s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b3w2s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b3w2s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b3w2s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -5210,32 +4339,8 @@
                   {
                     "id": "gameday-b3w3s1",
                     "focus": "gameday",
-                    "timedBlocks": [
-                      {
-                        "id": "gameday-b3w3s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b3w3s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b3w3s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b3w3s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -5245,32 +4350,8 @@
                   {
                     "id": "gameday-b3w4s1",
                     "focus": "gameday",
-                    "timedBlocks": [
-                      {
-                        "id": "gameday-b3w4s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b3w4s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b3w4s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b3w4s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               }
@@ -5286,32 +4367,8 @@
                   {
                     "id": "gameday-b3w5s1",
                     "focus": "gameday",
-                    "timedBlocks": [
-                      {
-                        "id": "gameday-b3w5s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b3w5s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b3w5s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b3w5s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               },
@@ -5321,32 +4378,8 @@
                   {
                     "id": "gameday-b3w6s1",
                     "focus": "gameday",
-                    "timedBlocks": [
-                      {
-                        "id": "gameday-b3w6s1-WU",
-                        "label": "WU",
-                        "minutes": 5,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b3w6s1-A",
-                        "label": "A",
-                        "minutes": 15,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b3w6s1-B",
-                        "label": "B",
-                        "minutes": 12,
-                        "slots": []
-                      },
-                      {
-                        "id": "gameday-b3w6s1-C",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": []
-                      }
-                    ]
+                    "kind": "circuit",
+                    "circuit": []
                   }
                 ]
               }
@@ -5358,6 +4391,6 @@
       }
     ]
   },
-  "rev": 41,
-  "updatedAt": "2026-08-20T03:02:32.505Z"
+  "rev": 44,
+  "updatedAt": "2026-08-20T03:39:05.540Z"
 }

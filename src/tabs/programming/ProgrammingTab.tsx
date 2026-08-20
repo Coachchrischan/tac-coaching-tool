@@ -167,6 +167,8 @@ export default function ProgrammingTab() {
   const [blockPageRaw, setBlockPage] = useState(0);
   const [expandScales, setExpandScales] = useState(false);
   const [emailOpen, setEmailOpen] = useState(false);
+  // The "e" beside the session pills: name, type and remove, on demand.
+  const [sessionEditOpen, setSessionEditOpen] = useState(false);
 
   const overrides = lib.data;
   const merged = library && overrides ? mergedLibrary(library, overrides) : null;
@@ -1012,14 +1014,31 @@ export default function ProgrammingTab() {
               </button>
             ))}
             {view === 'week' && (
-              <button
-                type="button"
-                title="Add a session to this week"
-                onClick={addSession}
-                className="rounded-md border border-dashed border-ink-300 px-2.5 py-1.5 text-sm font-medium text-ink-400 hover:border-accent-600 hover:text-accent-600"
-              >
-                +
-              </button>
+              <>
+                <button
+                  type="button"
+                  title="Add a session to this week"
+                  onClick={addSession}
+                  className="rounded-md border border-dashed border-ink-300 px-2.5 py-1.5 text-sm font-medium text-ink-400 hover:border-accent-600 hover:text-accent-600"
+                >
+                  +
+                </button>
+                {/* Everything about the selected session lives behind this:
+                    its name, what it is, and removing it. Same size as +. */}
+                <button
+                  type="button"
+                  title={`Edit ${sessionLabel(session)}: name, type, remove`}
+                  aria-expanded={sessionEditOpen}
+                  onClick={() => setSessionEditOpen((v) => !v)}
+                  className={`rounded-md border px-2.5 py-1.5 text-sm font-medium ${
+                    sessionEditOpen
+                      ? 'border-accent-600 bg-accent-100/40 text-accent-700'
+                      : 'border-ink-300 text-ink-400 hover:border-accent-600 hover:text-accent-600'
+                  }`}
+                >
+                  e
+                </button>
+              </>
             )}
           </div>
           {view === 'week' && (
@@ -1216,25 +1235,6 @@ export default function ProgrammingTab() {
             >
               + Add {unit}
             </button>
-            {view === 'week' && streamFocuses.length > 1 && (
-              <label className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
-                {sessionLabel(session)} is a
-                <select
-                  className="mt-0.5 block rounded-md border border-ink-300 bg-white px-2.5 py-1.5 text-sm text-ink-950 focus:border-accent-600 focus:outline-none"
-                  value={session.focus}
-                  title="Change what the selected session is. Rarely needed: adding a session already picks the next type this stream runs."
-                  onChange={(e) =>
-                    patchSession((s) => ({ ...s, focus: e.target.value as SessionFocus }))
-                  }
-                >
-                  {streamFocuses.map((f) => (
-                    <option key={f} value={f}>
-                      {FOCUS_LABEL[f]}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            )}
             {!byMonth && annualLane && (
               <button
                 type="button"
@@ -1304,36 +1304,61 @@ export default function ProgrammingTab() {
       // Editing wants focus, not sprawl: the whole week editor caps at a
       // readable width, centred on the screen.
       <div className="mx-auto max-w-4xl">
-      {/* The pills above are the only place a session is chosen OR labelled.
-          This just gives the selected one a name of its own ("Monday" rather
-          than "ESD"); changing what a session IS lives under Edit, because it
-          is a structural change and not something done every week. */}
-      <div className="mb-3 flex flex-wrap items-center gap-2 text-sm">
-        <span className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
-          Name this session
-        </span>
-        <input
-          className="w-48 rounded-md border border-ink-300 bg-white px-2 py-1 text-sm text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none"
-          placeholder={`Optional, e.g. Monday. Blank shows "${FOCUS_LABEL[session.focus]}"`}
-          value={session.name ?? ''}
-          onChange={(e) =>
-            patchSession((s) => {
-              const next = { ...s };
-              if (e.target.value) next.name = e.target.value;
-              else delete next.name;
-              return next;
-            })
-          }
-        />
-        <button
-          type="button"
-          disabled={sessions.length <= 1}
-          onClick={removeSession}
-          className="rounded-md border border-ink-300 px-2 py-1 text-sm font-medium text-ink-500 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-40"
-        >
-          Remove session
-        </button>
-      </div>
+      {/* Behind the "e" beside the pills: everything about the selected
+          session, and nothing on screen until it is wanted. */}
+      {sessionEditOpen && (
+        <div className="mb-3 flex flex-wrap items-end gap-3 rounded-lg border border-ink-200 bg-ink-50 px-3 py-2.5">
+          <label className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
+            Name
+            <input
+              className="mt-0.5 block w-56 rounded-md border border-ink-300 bg-white px-2 py-1 text-sm text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none"
+              placeholder={`Optional, shows "${FOCUS_LABEL[session.focus]}"`}
+              value={session.name ?? ''}
+              onChange={(e) =>
+                patchSession((s) => {
+                  const next = { ...s };
+                  if (e.target.value) next.name = e.target.value;
+                  else delete next.name;
+                  return next;
+                })
+              }
+            />
+          </label>
+          {streamFocuses.length > 1 && (
+            <label className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
+              Type
+              <select
+                className="mt-0.5 block rounded-md border border-ink-300 bg-white px-2 py-1 text-sm text-ink-950 focus:border-accent-600 focus:outline-none"
+                value={session.focus}
+                onChange={(e) =>
+                  patchSession((s) => ({ ...s, focus: e.target.value as SessionFocus }))
+                }
+              >
+                {streamFocuses.map((f) => (
+                  <option key={f} value={f}>
+                    {FOCUS_LABEL[f]}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
+          <button
+            type="button"
+            disabled={sessions.length <= 1}
+            onClick={removeSession}
+            className="rounded-md border border-ink-300 bg-white px-2.5 py-1 text-sm font-medium text-ink-500 hover:border-red-300 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            Remove session
+          </button>
+          <button
+            type="button"
+            onClick={() => setSessionEditOpen(false)}
+            className="ml-auto text-[12px] font-medium text-ink-500 hover:text-ink-950"
+          >
+            Done
+          </button>
+        </div>
+      )}
 
       {/* Session intent: coach-facing note at the very top of the day */}
       <div className="mb-3 border-l-4 border-sand-500 pl-3">
