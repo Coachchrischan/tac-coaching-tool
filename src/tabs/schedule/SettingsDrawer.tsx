@@ -116,6 +116,24 @@ export default function SettingsDrawer({
                   }))
                 }
               />
+              <input
+                className={`${input} w-56`}
+                type="email"
+                placeholder="email (for the weekly programming)"
+                value={c.email ?? ''}
+                onChange={(e) =>
+                  onUpdate((d) => ({
+                    ...d,
+                    coaches: d.coaches.map((x) =>
+                      x.id === c.id
+                        ? e.target.value
+                          ? { ...x, email: e.target.value }
+                          : (({ email: _drop, ...rest }) => rest)(x)
+                        : x,
+                    ),
+                  }))
+                }
+              />
               <button
                 type="button"
                 title="Delete (classes become unassigned)"

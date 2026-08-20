@@ -30,6 +30,8 @@ export interface ClassType {
 export interface Coach {
   id: string;
   name: string;
+  /** Where the week's programming gets emailed. Optional; no email, no send. */
+  email?: string;
 }
 
 export interface Room {
