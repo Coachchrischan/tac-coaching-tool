@@ -138,6 +138,12 @@ export interface ProgramWeek {
 export interface ProgramBlock {
   id: string;
   theme?: string;
+  /**
+   * The AnnualPhase this phase delivers. Set for phase-cadence streams so the
+   * Annual Plan is the one place a phase's name and length are decided; without
+   * it the two tabs authored the same structure twice and drifted apart.
+   */
+  annualPhaseId?: string;
   weeks: ProgramWeek[];
 }
 

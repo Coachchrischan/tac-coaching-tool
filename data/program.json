@@ -2550,7 +2550,8 @@
                 ]
               }
             ],
-            "theme": "Strength-Hypertrophy"
+            "theme": "Strength-Hypertrophy",
+            "annualPhaseId": "208695d4-f069-4662-9c16-09c7cfee5ab9"
           },
           {
             "id": "block-2",
@@ -2651,7 +2652,8 @@
                 ]
               }
             ],
-            "theme": "Deload / skills"
+            "theme": "Deload / skills week",
+            "annualPhaseId": "ddd735c6-d893-430f-8b9a-a034b696e9af"
           },
           {
             "id": "block-3",
@@ -3227,7 +3229,8 @@
                 ]
               }
             ],
-            "theme": "Strength"
+            "theme": "Strength",
+            "annualPhaseId": "6248618c-2d78-431d-b7ee-a15d585f48f0"
           }
         ],
         "format": "strength",
@@ -5216,6 +5219,6 @@
       }
     ]
   },
-  "rev": 38,
-  "updatedAt": "2026-08-19T23:16:53.959Z"
+  "rev": 39,
+  "updatedAt": "2026-08-19T23:19:55.181Z"
 }

@@ -217,6 +217,62 @@ export default function ProgrammingTab() {
   const blockLabel = (i: number) =>
     byMonth ? (blocks[i].theme ?? `Month ${i + 1}`) : `Phase ${i + 1}`;
 
+  // A phase-cadence stream delivers the annual plan's lane, so the lane owns
+  // the phase names and lengths. Programming shows what it is linked to and
+  // says so when the two disagree, rather than quietly holding a second answer.
+  const annualLane = byMonth ? undefined : annual.data?.streams.find((s) => s.id === stream.id);
+  const annualPhase = (i: number) =>
+    annualLane?.phases.find((p) => p.id === blocks[i].annualPhaseId);
+  const linkedName = (i: number) => annualPhase(i)?.name ?? blocks[i].theme;
+  /** Set when this phase's length no longer matches the annual plan's. */
+  const lengthDrift = (i: number) => {
+    const p = annualPhase(i);
+    return p && p.weeks !== blocks[i].weeks.length ? p.weeks : null;
+  };
+
+  /** Bring this stream's phases into line with its annual lane. */
+  function pullFromAnnual() {
+    if (!annualLane) return;
+    const existing = new Set(blocks.map((b) => b.annualPhaseId).filter(Boolean));
+    const missing = annualLane.phases.filter((p) => !existing.has(p.id));
+    const drifts = blocks
+      .map((_, i) => ({ i, want: lengthDrift(i) }))
+      .filter((d): d is { i: number; want: number } => d.want !== null);
+
+    const lines = [
+      missing.length
+        ? `Add ${missing.length} phase${missing.length === 1 ? '' : 's'} from the annual plan:\n${missing.map((p) => `  ${p.name} (${p.weeks} wk)`).join('\n')}`
+        : null,
+      drifts.length
+        ? `These phases are a different length here than in the annual plan, and are left alone:\n${drifts.map((d) => `  ${blockLabel(d.i)}: ${blocks[d.i].weeks.length} wk here, ${d.want} wk in the plan`).join('\n')}`
+        : null,
+    ].filter(Boolean);
+
+    if (!missing.length) {
+      window.alert(
+        lines.length
+          ? `Nothing to add: every annual phase is already here.\n\n${lines.join('\n\n')}`
+          : 'Nothing to add: this stream already matches the annual plan.',
+      );
+      return;
+    }
+    if (!window.confirm(`${lines.join('\n\n')}\n\nGo ahead?`)) return;
+
+    const focuses = sessions.map((s) => s.focus);
+    updateBlocks((all) => [
+      ...all,
+      ...missing.map((p) => ({
+        id: crypto.randomUUID(),
+        theme: p.name,
+        annualPhaseId: p.id,
+        weeks: Array.from({ length: p.weeks }, (): ProgramWeek => ({
+          id: crypto.randomUUID(),
+          sessions: focuses.map((focus) => newSession(focus, streamKind)),
+        })),
+      })),
+    ]);
+  }
+
   /** Every phase edit goes through here so it lands on the active stream. */
   function updateBlocks(fn: (blocks: ProgramBlock[]) => ProgramBlock[]) {
     program.update((d: ProgramDoc) => {
@@ -1036,6 +1092,26 @@ export default function ProgrammingTab() {
                 }
               />
             </label>
+            {!byMonth && annualLane && (
+              <p className="text-[11px] tracking-normal text-ink-500 normal-case">
+                {annualPhase(bi) ? (
+                  <>
+                    Linked to the annual plan:{' '}
+                    <span className="font-semibold text-ink-950">{linkedName(bi)}</span>
+                    {lengthDrift(bi) !== null && (
+                      <span className="mt-0.5 block text-amber-600">
+                        The annual plan has this as {lengthDrift(bi)} weeks, this is{' '}
+                        {blocks[bi].weeks.length}.
+                      </span>
+                    )}
+                  </>
+                ) : (
+                  <span className="text-amber-600">
+                    Not linked to the annual plan, so its name and length are only set here.
+                  </span>
+                )}
+              </p>
+            )}
             <div className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
               {UNIT} length
               <div className="mt-0.5 flex items-center gap-1 rounded-md border border-ink-300 bg-white px-1.5 py-1">
@@ -1068,13 +1144,23 @@ export default function ProgrammingTab() {
             >
               + Add {unit}
             </button>
+            {!byMonth && annualLane && (
+              <button
+                type="button"
+                onClick={pullFromAnnual}
+                title="Add any phase from this stream's annual lane that is not here yet"
+                className="rounded-md border border-dashed border-accent-600 bg-white px-3 py-1.5 text-sm font-medium text-accent-600 hover:bg-accent-100/40"
+              >
+                Pull phases from the annual plan
+              </button>
+            )}
             <button
               type="button"
               disabled={blocks.length <= 1}
               onClick={removeBlock}
               className="rounded-md border border-red-200 bg-white px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              Delete {blockLabel(bi).toLowerCase()}
+              Delete {byMonth ? blockLabel(bi) : blockLabel(bi).toLowerCase()}
             </button>
             <p className="w-full text-[11px] text-ink-400">
               {stream.name} · {blocks.length} {unit}{blocks.length === 1 ? '' : 's'} ·{' '}
