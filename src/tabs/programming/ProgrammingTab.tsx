@@ -1041,8 +1041,53 @@ export default function ProgrammingTab() {
               </>
             )}
           </div>
+
+          {/* Right-hand controls: how you're looking at it. On this row with
+              the stream, phase and session controls, so every button that
+              changes what you are looking at sits on one line. */}
+          <div className="ml-auto flex items-center gap-3">
+            <div className="flex overflow-hidden rounded-md border border-ink-300">
+              {(Object.keys(VIEW_LABEL) as ProgramView[]).map((v) => (
+                <button
+                  key={v}
+                  type="button"
+                  onClick={() => setView(v)}
+                  className={`px-3 py-1.5 text-sm font-medium transition-colors ${
+                    view === v ? 'bg-ink-950 text-white' : 'bg-white text-ink-500 hover:text-ink-950'
+                  }`}
+                >
+                  {VIEW_LABEL[v]}
+                </button>
+              ))}
+            </div>
+            <label className="flex items-center gap-1.5 text-sm text-ink-500">
+              <input
+                type="checkbox"
+                checked={expandScales}
+                onChange={(e) => setExpandScales(e.target.checked)}
+                className="accent-accent-600"
+              />
+              Scales
+            </label>
+            <button
+              type="button"
+              title="Phase name, length and structure"
+              onClick={() => setEditOpen((v) => !v)}
+              className={`rounded-md border px-3 py-1.5 text-sm font-medium transition-colors ${
+                editOpen
+                  ? 'border-ink-950 bg-ink-950 text-white'
+                  : 'border-ink-300 bg-white text-ink-700 hover:bg-ink-100'
+              }`}
+            >
+              Edit
+            </button>
+          </div>
+        </div>
+
+        {/* Row 2: which week (or block, or phase mode), centred on the page. */}
+        <div className="flex flex-wrap items-center justify-center gap-1.5">
           {view === 'week' && (
-            <div className="flex flex-wrap items-center gap-1.5">
+            <div className="flex flex-wrap items-center justify-center gap-1.5">
               {blocks[bi].weeks.map((w, i) => {
                 // A club shutdown between two weeks is drawn as a greyed strip
                 // so the jump in dates is visible, not just implied.
@@ -1126,45 +1171,6 @@ export default function ProgrammingTab() {
               </button>
             </div>
           )}
-
-          {/* Right-hand controls: how you're looking at it */}
-          <div className="ml-auto flex items-center gap-3">
-            <div className="flex overflow-hidden rounded-md border border-ink-300">
-              {(Object.keys(VIEW_LABEL) as ProgramView[]).map((v) => (
-                <button
-                  key={v}
-                  type="button"
-                  onClick={() => setView(v)}
-                  className={`px-3 py-1.5 text-sm font-medium transition-colors ${
-                    view === v ? 'bg-ink-950 text-white' : 'bg-white text-ink-500 hover:text-ink-950'
-                  }`}
-                >
-                  {VIEW_LABEL[v]}
-                </button>
-              ))}
-            </div>
-            <label className="flex items-center gap-1.5 text-sm text-ink-500">
-              <input
-                type="checkbox"
-                checked={expandScales}
-                onChange={(e) => setExpandScales(e.target.checked)}
-                className="accent-accent-600"
-              />
-              Scales
-            </label>
-            <button
-              type="button"
-              title="Phase name, length and structure"
-              onClick={() => setEditOpen((v) => !v)}
-              className={`rounded-md border px-3 py-1.5 text-sm font-medium transition-colors ${
-                editOpen
-                  ? 'border-ink-950 bg-ink-950 text-white'
-                  : 'border-ink-300 bg-white text-ink-700 hover:bg-ink-100'
-              }`}
-            >
-              Edit
-            </button>
-          </div>
         </div>
 
         {/* Edit panel: phase structure, out of the way until wanted */}
