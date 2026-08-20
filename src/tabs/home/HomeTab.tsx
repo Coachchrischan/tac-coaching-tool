@@ -6,7 +6,8 @@ import {
   allMonths,
   allWeeks,
   fmtPeriod,
-  monthlyCount,
+  isPartRecorded,
+  monthlyPerWeek,
   weeklyCount,
 } from '../../lib/attendancePeriods';
 
@@ -32,14 +33,18 @@ export default function HomeTab() {
     const periods = grain === 'monthly' ? allMonths(entries) : allWeeks(entries);
     const shown = periodCount === 0 ? periods : periods.slice(-periodCount);
 
+    // A month is shown as an average WEEK. Raw monthly totals are not
+    // comparable: months hold four or five weeks and the current one is still
+    // running, so a flat class reads as a steep decline.
     const groups = shown.map((p) => ({
       period: p,
+      partRecorded: grain === 'monthly' && isPartRecorded(p),
       bars: classTypes
         .map((ct) => ({
           ct,
           count:
             grain === 'monthly'
-              ? monthlyCount(entries, p, ct.id)
+              ? monthlyPerWeek(entries, p, ct.id)
               : weeklyCount(entries, p, ct.id),
         }))
         .filter((b): b is { ct: (typeof classTypes)[number]; count: number } => b.count !== null),
@@ -47,15 +52,36 @@ export default function HomeTab() {
 
     const max = Math.max(1, ...groups.flatMap((g) => g.bars.map((b) => b.count)));
 
-    // Popularity: average per month (weekly data rolled up), ranked.
+    // How many times each class type runs in the active timetable. Without
+    // this the ranking measures how OFTEN a class runs, not how full it is:
+    // ESD runs nine times a week, Game Day once.
+    const scenario =
+      schedule.data.scenarios.find((s) => s.id === schedule.data!.activeScenarioId) ??
+      schedule.data.scenarios[0];
+    const runsPerWeek = new Map<string, number>();
+    for (const b of scenario?.blocks ?? []) {
+      runsPerWeek.set(b.classTypeId, (runsPerWeek.get(b.classTypeId) ?? 0) + 1);
+    }
+
+    // Popularity is heads in ONE class: the average week's attendance divided
+    // by how many of that class run in a week.
     const months = allMonths(entries);
     const byType = classTypes
       .map((ct) => {
-        const counts = months
-          .map((m) => monthlyCount(entries, m, ct.id))
+        const perWeek = months
+          .map((m) => monthlyPerWeek(entries, m, ct.id))
           .filter((c): c is number => c !== null);
-        const avg = counts.length ? counts.reduce((s, c) => s + c, 0) / counts.length : 0;
-        return { ct, avg, monthsRecorded: counts.length };
+        const weekAvg = perWeek.length ? perWeek.reduce((s, c) => s + c, 0) / perWeek.length : 0;
+        const runs = runsPerWeek.get(ct.id) ?? 0;
+        return {
+          ct,
+          weekAvg,
+          runs,
+          // No class on the timetable means there is nothing to divide by, so
+          // the week's total is the honest figure to show.
+          avg: runs > 0 ? weekAvg / runs : weekAvg,
+          monthsRecorded: perWeek.length,
+        };
       })
       .filter((t) => t.monthsRecorded > 0)
       .sort((a, b) => b.avg - a.avg);
@@ -101,8 +127,12 @@ export default function HomeTab() {
         <section className="rounded-xl border border-ink-200 bg-white p-5 shadow-sm">
           <div className="flex items-baseline justify-between">
             <h3 className="text-sm font-semibold text-ink-950">Class popularity</h3>
-            <span className="text-[11px] text-ink-400">avg / month</span>
+            <span className="text-[11px] text-ink-500">avg heads in a class</span>
           </div>
+          <p className="mt-1 text-[11px] text-ink-500">
+            An average week's attendance divided by how many of that class run each week, so a class
+            that runs nine times is not ranked above one that runs once.
+          </p>
           {!chart || chart.byType.length === 0 ? (
             <p className="mt-4 text-sm text-ink-400">
               No numbers yet. Record a month in{' '}
@@ -137,7 +167,19 @@ export default function HomeTab() {
                           </span>
                         )}
                       </span>
-                      <span className="font-bold text-ink-950">{t.avg.toFixed(0)}</span>
+                      <span
+                        className="font-bold text-ink-950 tabular-nums"
+                        title={
+                          t.runs > 0
+                            ? `${t.weekAvg.toFixed(0)} a week across ${t.runs} class${t.runs === 1 ? '' : 'es'}`
+                            : 'Not on the active timetable, so this is the whole week'
+                        }
+                      >
+                        {t.avg.toFixed(0)}
+                        {t.runs > 0 && (
+                          <span className="ml-1 font-normal text-ink-500">x{t.runs}</span>
+                        )}
+                      </span>
                     </div>
                     <div className="h-2 overflow-hidden rounded-full bg-ink-100">
                       <div
@@ -205,6 +247,7 @@ export default function HomeTab() {
               const ct = schedule.data!.classTypes.find((c) => c.id === selectedTypeId);
               const single = chart.groups.map((g) => ({
                 period: g.period,
+                partRecorded: g.partRecorded,
                 count: g.bars.find((b) => b.ct.id === selectedTypeId)?.count ?? null,
               }));
               const counts = single.map((s) => s.count).filter((c): c is number => c !== null);
@@ -222,7 +265,7 @@ export default function HomeTab() {
                         <div className="relative flex h-44 w-full max-w-16 items-end">
                           {s.count !== null && (
                             <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[11px] font-bold text-ink-950">
-                              {s.count}
+                              {s.count.toFixed(0)}
                             </span>
                           )}
                           {s.count === null ? (
@@ -238,12 +281,13 @@ export default function HomeTab() {
                                 height: `${Math.max((s.count / singleMax) * 100, 2)}%`,
                                 backgroundColor: ct?.colour,
                               }}
-                              title={`${fmtPeriod(s.period)}: ${s.count}`}
+                              title={`${fmtPeriod(s.period)}: ${s.count.toFixed(0)}${s.partRecorded ? ' (month still running)' : ''}`}
                             />
                           )}
                         </div>
                         <span className="truncate text-[10px] font-medium text-ink-500">
                           {fmtPeriod(s.period)}
+                          {s.partRecorded && <span className="text-ink-400"> so far</span>}
                         </span>
                       </div>
                     ))}
@@ -280,6 +324,12 @@ export default function HomeTab() {
                     </div>
                     <span className="truncate text-[10px] font-medium text-ink-500">
                       {fmtPeriod(g.period)}
+                      {g.partRecorded && (
+                        <span className="text-ink-400" title="This month is still running">
+                          {' '}
+                          so far
+                        </span>
+                      )}
                     </span>
                   </div>
                 ))}
