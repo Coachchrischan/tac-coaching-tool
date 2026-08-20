@@ -8,8 +8,11 @@ import {
   CANVAS_H,
   CANVAS_W,
   EQUIPMENT,
+  EQUIP_CODE,
   FIXTURES,
   equipDef,
+  fitsCode,
+  labelExtra,
 } from './roomModel';
 import type { Fixture } from './roomModel';
 import {
@@ -96,9 +99,14 @@ function ItemShape({ item, i = 0 }: { item: LayoutItem; i?: number }) {
   const w = item.w || def.w;
   const h = item.h || def.h;
   const step = (item.gap ?? 12) + (item.dir === 'col' ? h : w);
+  // The name sits inside the shape, abbreviated, so the plan reads without
+  // chasing a label. A barbell is too thin for text; it keeps its label below.
+  const code = isZone ? item.label : EQUIP_CODE[def.kind];
+  const showInside = isZone || fitsCode(w, h);
+  const fontPx = isZone ? 13 : Math.max(8, Math.min(11, Math.floor(Math.min(w / 3.4, h / 1.8))));
   return (
     <div
-      className="absolute flex items-center justify-center px-1 text-center text-[13px] leading-tight font-bold text-white shadow-sm"
+      className="absolute flex items-center justify-center px-0.5 text-center leading-none font-bold text-white shadow-sm"
       style={{
         left: item.dir === 'col' ? 0 : i * step,
         top: item.dir === 'col' ? i * step : 0,
@@ -106,9 +114,11 @@ function ItemShape({ item, i = 0 }: { item: LayoutItem; i?: number }) {
         height: h,
         backgroundColor: colour,
         borderRadius: radius,
+        fontSize: `${fontPx}px`,
+        letterSpacing: isZone ? undefined : '0.04em',
       }}
     >
-      {isZone ? item.label : null}
+      {showInside ? code : null}
     </div>
   );
 }
@@ -128,6 +138,7 @@ function DraggableItem({
   const w = item.w || def.w;
   const h = item.h || def.h;
   const span = (n: number) => count * n + (count - 1) * (item.gap ?? 12);
+  const below = labelExtra(item.label, item.kind);
   const totalW = item.dir === 'col' ? w : span(w);
   const totalH = item.dir === 'col' ? span(h) : h;
 
@@ -172,10 +183,11 @@ function DraggableItem({
           {item.station}
         </span>
       )}
-      {item.kind && item.kind !== 'zone' && (
-        <span className="pointer-events-none absolute -bottom-5 left-0 rounded bg-white/90 px-1.5 py-0.5 text-[12px] font-semibold whitespace-nowrap text-ink-950 shadow-sm">
-          {item.label}
-          {count > 1 ? ` ×${count}` : ''}
+      {/* Only what the shape cannot say itself: a load the coach typed into
+          the label, or the name when the shape is too thin to hold it. */}
+      {item.kind && item.kind !== 'zone' && (below || !fitsCode(w, h)) && (
+        <span className="pointer-events-none absolute -bottom-5 left-0 rounded bg-white/90 px-1.5 py-0.5 text-[11px] font-semibold whitespace-nowrap text-ink-950 shadow-sm">
+          {[!fitsCode(w, h) ? item.label : null, below].filter(Boolean).join(' ')}
         </span>
       )}
     </div>

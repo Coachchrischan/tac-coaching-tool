@@ -103,3 +103,41 @@ export const EQUIPMENT: EquipDef[] = [
 
 export const equipDef = (kind: string): EquipDef =>
   EQUIPMENT.find((e) => e.kind === kind) ?? EQUIPMENT[EQUIPMENT.length - 1];
+
+// What gets drawn INSIDE the shape on a floor plan. A plan is read at a glance
+// while setting the room up, so each object says what it is rather than being
+// traced to a label floating underneath it.
+export const EQUIP_CODE: Record<EquipKind, string> = {
+  bike: 'BIKE',
+  rower: 'ROW',
+  ski: 'SKI',
+  wallball: 'WB',
+  box: 'BOX',
+  band: 'BAND',
+  dumbbell: 'DB',
+  bench: 'BENCH',
+  barbell: 'BAR',
+  zone: '',
+};
+
+/** True when a shape has room for its code without the text spilling out. */
+export function fitsCode(w: number, h: number): boolean {
+  return h >= 16 && w >= 22;
+}
+
+/**
+ * Anything the coach added to the label beyond the equipment's own name, which
+ * in practice is the load: "Dumbbells 22.5kg" gives "22.5kg". That still has to
+ * reach the floor, so it stays under the shape while the name moves inside.
+ */
+export function labelExtra(label: string, kind: string | undefined): string {
+  const def = equipDef(kind ?? 'zone');
+  const trimmed = (label ?? '').trim();
+  if (!kind || kind === 'zone') return '';
+  const withoutName = trimmed.toLowerCase().startsWith(def.name.toLowerCase())
+    ? trimmed.slice(def.name.length)
+    : trimmed === def.name
+      ? ''
+      : trimmed;
+  return withoutName.replace(/^[\s,·-]+/, '').trim();
+}
