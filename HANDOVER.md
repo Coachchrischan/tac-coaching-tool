@@ -17,7 +17,9 @@ a private web app I use to plan the club's training year and run classes off the
 - **Zone rules:** read `TAC/brief.md` and `TAC/brand.md` first. Root routing is
   `C:\Users\User\Cowork\CLAUDE.md`.
 - **Plan of record:** `PROGRAMMING-PLAN.md` in this repo (the ratified 2026/27 macrocycle).
-- **Latest expert review:** `REVIEW-2026-08-20.md` in this repo. Start here.
+- **Latest expert reviews:** `REVIEW-2026-08-20.md` (code audit, 38 findings, mostly actioned) and
+  `REVIEW-2026-08-20-TABS.md` (tab-by-tab panel review written for the club owners, also published
+  as an artifact). Start with the tabs one; it is the current backlog.
 
 ## House rules (do not break these)
 
@@ -67,10 +69,16 @@ Community, Planning, Ethos.
 - **Data:** `ProgramDoc.streams[]`, one per class type, each with its own `blocks[]` (phases).
   Reads go through `src/lib/programStreams.ts` (`streamsOf` migrates the legacy `doc.blocks`
   shape in memory; `withStreamBlocks` writes). Current live state:
-  - **strength** (format `strength`): 3 phases, 17 weeks, **280 exercises** (my real Block 1).
-  - **esd** (format `circuit`): 3 phases, 17 weeks, Monday + Friday week 1 written.
-  - **hyrox** (format `circuit`): 3 phases, 17 weeks, Monday + Friday week 1 written.
-  - **gameday** (format `circuit`): 3 phases, 17 weeks, empty.
+  Each stream also declares a **cadence**. Strength runs `phases`, linked to the annual plan.
+  ESD, Hyrox and Game Day run `months` (Aug 2026 through Dec 2026), because after talking to Dave
+  those three are programmed month to month rather than periodised; the UI says "Month" for them.
+  - **strength** (`series`, phases): 3 phases, 17 weeks, **280 exercises** (my real Block 1). Each
+    phase carries `annualPhaseId` linking it to its AnnualPhase.
+  - **esd** (`circuit`, months): 5 months, 17 weeks, Monday + Friday of Aug W1 written.
+  - **hyrox** (`circuit`, months): 5 months, 17 weeks, Monday + Friday of Aug W1 written.
+  - **gameday** (`circuit`, months): 5 months, 17 weeks, **first 4 Saturdays written**.
+  34 of 104 sessions hold content. Writing the rest is the main outstanding job, and it is
+  coaching time rather than build time.
 - **Two session formats.** Strength uses `timedBlocks` (WU/A/B/C series of exercise slots with
   sets/reps/%/RPE). ESD, Hyrox and Game Day use `circuit[]`: each piece has a heading
   ("AMRAP in 10 minutes", "In 8 minutes", "0:00-10:00"), movement lines, an optional rest, plus a
@@ -78,14 +86,26 @@ Community, Planning, Ethos.
 - **Control bar:** stream dropdown, phase dropdown, session pills, then view switcher
   (**Week / Block / Phase**), Scales toggle, and an **Edit** button holding phase theme, length,
   add and delete. Week pills show their **Monday date**.
-- **Left rail:** TV output, Export for Sheets, Push to TrainHeroic (drafts), Build floor layout.
+- **Left rail:** TV output, Export for Sheets, Push to TrainHeroic (drafts), Build floor layout,
+  **Email the week** (opens a Gmail compose window with the week written out; it never sends).
+  Coach addresses live on `ScheduleDoc.coaches[].email`, edited in Schedule's settings drawer.
 - **TV board** (`/tv/:sessionId`): 1920x1080 landscape, TAC-branded, renders both formats, with
   per-class member photos as backdrops. Export PNG / PDF.
 - **TrainHeroic push:** `POST /api/team-push` via `src/server/teamPushPlugin.ts`, using
   `trainheroic-mcp`'s client and token. **Only Strength** maps to a team ("TAC Strength Class",
-  TrainHeroic program id **5071078**). Six drafts already pushed for 31 Aug / 2 Sep / 4 Sep and
-  7 / 9 / 11 Sep; they are **stale** (dated off the old start and the old Week 1 scheme) and
-  should be deleted and re-pushed.
+  TrainHeroic program id **5071078**). The six stale drafts were **deleted on 2026-08-20**; the
+  team calendar is empty for Aug to Oct and **nothing has been re-pushed yet**.
+  Session days come from the **active Schedule scenario** (currently "Suggested Format": Lower
+  Tuesday, Upper Thursday, Full Body Friday) through `src/lib/classDays.ts`, which both the
+  confirm dialogue and the server use, so they cannot disagree. A focus with no class in the
+  active timetable is named and skipped rather than guessed at.
+- **Dates are TRAINING weeks.** `src/lib/trainingWeeks.ts` turns a training-week index into a
+  calendar Monday, stepping over club shutdowns (see below). Read a Date back with its `isoDate`
+  helper, never `toISOString().slice(0, 10)`: these Dates are local midnight, and in Brisbane the
+  UTC round trip moves them a day earlier. That bug sent every push a day early once already.
+- **Club breaks.** `AnnualPlanDoc.breaks` holds dated club-wide shutdowns (Christmas break,
+  2026-12-21, 2 weeks). Phase lengths are training weeks; every lane and every Programming week
+  date steps over a break. Edit them in Annual Plan under "Club breaks".
 
 ## What the expert review said (read `REVIEW-2026-08-20.md`)
 
@@ -94,28 +114,21 @@ Community, Planning, Ethos.
 sessions were being silently emptied when a phase grew, the push read a deleted field, and the
 circuit paste buffer leaked across sessions. The TV board circuit gap was fixed in `895c4f8`.
 
-**Still open, in the panel's priority order:**
+**Closed on 2026-08-20** (see the git log for the reasoning on each):
 
-1. **#32 (critical, must-fix).** `Session` carries two mutually exclusive payloads
-   (`timedBlocks` vs `circuit`) with no discriminator, which is what caused the data-loss bugs.
-   Make it a discriminated union on `kind`, migrated on read, so the compiler catches every site.
-2. **#4 (high, top should-fix).** **Phases are authored twice** and the data already disagrees:
-   ESD phase 1 is "Strength-Hypertrophy" in Programming but "Aerobic base" in the Annual Plan;
-   Strength has 9 phases in the plan against 3 in Programming. Link them.
-3. **#5 (high).** Programming cannot express the **Christmas break**, so every date after it runs
-   two weeks early.
-4. **#2 (high).** The push hardcodes Mon/Wed/Fri, but the timetable runs **Lower Tuesday** and
-   **Upper Thursday**. Derive days from the schedule.
-5. **#11 (high).** The TV board **clips silently** when a session is long.
-6. **#37 (high).** Circuits cannot carry a **load**, so Hyrox station weights never reach the floor.
-7. **#10 (high).** Movement Check judges one phase, hides the stream, and contradicts the rolling
-   two-phase coverage rule; it still says "block".
+- **#32** `Session` is now a discriminated union on `kind` ('series' | 'circuit'), migrated on read.
+- **#3** the Block and Phase grids show a read-only circuit summary; the CSV emits circuit rows.
+- **#2** the push derives days from the active Schedule scenario and shows every date first.
+- **#5** the Christmas break is a club-wide dated window all week dating steps over.
+- **#4** Strength phases carry `annualPhaseId`, with a drift warning and a pull-from-annual action.
+- **#37** circuit lines carry a load, typed inline as "50m Sled push @ 60kg".
+- Plus, found by the tabs review: the push was sending every date **one day early** (timezone),
+  and Layouts could not select an item at all (click selected then instantly deselected).
 
-27 more medium/low items are in the report, including: no "today" entry point (#13); Game Day
-missing from the Annual Plan (#8); ESD is pine on some tabs and blue on the Annual Plan where blue
-means StretchFit (#27); "Block" means three different things (#22); contrast and focus-state
-failures (#24, #35, #36); the equipment inventory is decorative (#30); layout auto-build hardcodes
-three of everything and drops loads (#28, #38).
+**Still open from the code audit:** #11 (TV board clips silently when a session is long) and
+#10 (Movement Check judges one phase, hides the stream, and contradicts the rolling two-phase
+rule). The medium and low items are largely superseded by the tabs review, which is the better
+backlog now: it covers the same ground ordered by what it costs the club.
 
 ## Known gotchas
 
@@ -133,8 +146,20 @@ three of everything and drops loads (#28, #38).
 
 ## Where to start
 
-Go over the open review items above with me and agree an order before building. My instinct is that
-the **phase duplication (#4)** and the **session type (#32)** matter most, but tell me what you think.
-Then we still owe: Game Day's first sessions, a Gmail button on the rail to email the week's
-programming to selected recipients, the Strength floor layout, and re-pushing the stale TrainHeroic
-drafts.
+Read `REVIEW-2026-08-20-TABS.md` and go over it with me before building. Its own top five are:
+back the tool up off this laptop; fix the two Home numbers (rank by heads per class, and show per
+week averages with the current month marked); make the tool open on today; write the rest of the
+year; and give each artefact one printable way out.
+
+**Still owed from earlier:**
+
+- **Re-push the TrainHeroic drafts.** The calendar is empty and the day derivation is now correct,
+  so this is a clean first push. Confirm the dates in the dialogue before letting it run.
+- **The Strength floor layout.** `data/layouts.json` has the Strength room labelled "Gym Floor"
+  while `roomModel.ts` draws the Group Fitness Room on every layout, so this needs the room model
+  keyed by room first.
+- **Game Day beyond Sept W2**, and the rest of ESD and Hyrox.
+
+**Decisions already made, do not reopen without me:** ESD, Hyrox and Game Day are month to month,
+not periodised. TrainHeroic stays drafts only. The week email opens a Gmail compose window and
+never sends.
