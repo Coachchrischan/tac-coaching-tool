@@ -420,9 +420,16 @@ export default function ProgrammingTab() {
   }
 
   function addSession() {
-    // A new session belongs to this stream: its focus and the way it is
-    // written both follow the stream, not a hardcoded default.
-    const focus = streamFocuses[0] ?? sessions[0]?.focus ?? 'esd';
+    // Add the next session this stream runs that the week does not have yet:
+    // a week with Lower gets Upper, then Full Body. Adding always used to give
+    // another "Lower" that then had to be re-typed by hand, which is the only
+    // reason a session-type control needed to sit on screen at all.
+    const used = new Set(sessions.map((s) => s.focus));
+    const focus =
+      streamFocuses.find((f) => !used.has(f)) ??
+      streamFocuses[0] ??
+      sessions[0]?.focus ??
+      'esd';
     patchWeekSessions((list) => [...list, newSession(focus, streamKind)]);
     setSi(sessions.length);
   }
@@ -1209,6 +1216,25 @@ export default function ProgrammingTab() {
             >
               + Add {unit}
             </button>
+            {view === 'week' && streamFocuses.length > 1 && (
+              <label className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
+                {sessionLabel(session)} is a
+                <select
+                  className="mt-0.5 block rounded-md border border-ink-300 bg-white px-2.5 py-1.5 text-sm text-ink-950 focus:border-accent-600 focus:outline-none"
+                  value={session.focus}
+                  title="Change what the selected session is. Rarely needed: adding a session already picks the next type this stream runs."
+                  onChange={(e) =>
+                    patchSession((s) => ({ ...s, focus: e.target.value as SessionFocus }))
+                  }
+                >
+                  {streamFocuses.map((f) => (
+                    <option key={f} value={f}>
+                      {FOCUS_LABEL[f]}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            )}
             {!byMonth && annualLane && (
               <button
                 type="button"
@@ -1278,30 +1304,17 @@ export default function ProgrammingTab() {
       // Editing wants focus, not sprawl: the whole week editor caps at a
       // readable width, centred on the screen.
       <div className="mx-auto max-w-4xl">
-      {/* Session settings. This is not a navigator: the week pills above
-          select the session, these set what the selected session IS. Only the
-          focuses this stream actually runs are offered. */}
+      {/* The pills above are the only place a session is chosen OR labelled.
+          This just gives the selected one a name of its own ("Monday" rather
+          than "ESD"); changing what a session IS lives under Edit, because it
+          is a structural change and not something done every week. */}
       <div className="mb-3 flex flex-wrap items-center gap-2 text-sm">
         <span className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
-          Session type
+          Name this session
         </span>
-        <select
-          className="rounded-md border border-ink-300 bg-white px-2 py-1 text-sm text-ink-950 focus:border-accent-600 focus:outline-none"
-          value={session.focus}
-          title="What this session is. The pills above choose which session you are editing."
-          onChange={(e) => patchSession((s) => ({ ...s, focus: e.target.value as SessionFocus }))}
-        >
-          {(streamFocuses.length ? streamFocuses : (Object.keys(FOCUS_LABEL) as SessionFocus[])).map(
-            (f) => (
-              <option key={f} value={f}>
-                {FOCUS_LABEL[f]}
-              </option>
-            ),
-          )}
-        </select>
         <input
           className="w-48 rounded-md border border-ink-300 bg-white px-2 py-1 text-sm text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none"
-          placeholder="Custom name (optional)"
+          placeholder={`Optional, e.g. Monday. Blank shows "${FOCUS_LABEL[session.focus]}"`}
           value={session.name ?? ''}
           onChange={(e) =>
             patchSession((s) => {
