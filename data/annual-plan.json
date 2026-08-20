@@ -16,7 +16,7 @@
           },
           {
             "id": "ddd735c6-d893-430f-8b9a-a034b696e9af",
-            "name": "Deload / skills week",
+            "name": "Deload / skills",
             "focus": "Deload doubling as a skills/workshop week to teach technique for the coming strength block (e.g. deadlift workshop).",
             "weeks": 1
           },
@@ -47,7 +47,7 @@
           },
           {
             "id": "a5eaa5d1-e30b-4d90-8b44-e81f6dc5b7f4",
-            "name": "Deload / skills week (cycle 2)",
+            "name": "Deload / skills 2",
             "focus": "Deload + skills workshops prepping the strength block.",
             "weeks": 1
           },
@@ -197,6 +197,6 @@
       }
     ]
   },
-  "rev": 5,
-  "updatedAt": "2026-08-19T23:06:57.943Z"
+  "rev": 6,
+  "updatedAt": "2026-08-20T03:00:42.054Z"
 }

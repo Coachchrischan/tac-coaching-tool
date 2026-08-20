@@ -411,8 +411,12 @@ export default function AnnualPlanTab() {
                             }`}
                           >
                             {vertical ? (
+                              // Running vertically, the text's inline axis is the bar's height,
+                              // so it needs max-h-full for truncate to have anything to work
+                              // against. Without it a long name spills out and the lane clips it
+                              // mid-word. The full name is on the bar's title either way.
                               <span
-                                className="truncate text-[11px] font-bold"
+                                className="max-h-full truncate text-[11px] font-bold"
                                 style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
                               >
                                 {p.name}

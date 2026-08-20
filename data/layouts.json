@@ -13,56 +13,43 @@
         "room": "Group Fitness Room",
         "items": [
           {
-            "id": "010565be-0cd6-47cf-8aa6-2817d8925f9e",
+            "id": "a6238b50-a0cf-4e4f-ac62-f0d5e69c4d9e",
             "kind": "rower",
             "label": "Rower",
-            "x": 60,
-            "y": 300,
-            "w": 0,
-            "h": 0,
+            "x": 44,
+            "y": 282,
+            "w": 34,
+            "h": 96,
             "count": 3,
-            "gap": 16,
+            "gap": 12,
             "dir": "row",
             "station": 1
           },
           {
-            "id": "f103e56a-e711-4330-9522-fe5b316a3093",
+            "id": "da67aa69-5268-4955-bfe7-c14ed1634510",
             "kind": "bike",
             "label": "C2 Bike",
-            "x": 60,
-            "y": 346,
-            "w": 0,
-            "h": 0,
+            "x": 560,
+            "y": 282,
+            "w": 40,
+            "h": 78,
             "count": 3,
-            "gap": 16,
+            "gap": 12,
             "dir": "row",
             "station": 2
           },
           {
-            "id": "a742bc45-45e5-4ad2-b23d-2e386076bf68",
+            "id": "36cdb3a4-e32e-453f-9a34-3c805f91feb2",
             "kind": "dumbbell",
             "label": "Dumbbells",
-            "x": 60,
-            "y": 392,
-            "w": 0,
-            "h": 0,
+            "x": 44,
+            "y": 410,
+            "w": 56,
+            "h": 26,
             "count": 3,
-            "gap": 16,
+            "gap": 12,
             "dir": "row",
             "station": 3
-          },
-          {
-            "id": "f42c39f0-f9d4-4bda-95d2-3b02e62c93c1",
-            "kind": "zone",
-            "label": "Skipping ropes",
-            "x": 60,
-            "y": 438,
-            "w": 0,
-            "h": 0,
-            "count": 3,
-            "gap": 16,
-            "dir": "row",
-            "station": 4
           }
         ]
       },
@@ -133,6 +120,6 @@
       }
     ]
   },
-  "rev": 7,
-  "updatedAt": "2026-08-19T20:54:42.112Z"
+  "rev": 14,
+  "updatedAt": "2026-08-20T03:00:53.002Z"
 }

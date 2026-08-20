@@ -2652,7 +2652,7 @@
                 ]
               }
             ],
-            "theme": "Deload / skills week",
+            "theme": "Deload / skills",
             "annualPhaseId": "ddd735c6-d893-430f-8b9a-a034b696e9af"
           },
           {
@@ -5358,6 +5358,6 @@
       }
     ]
   },
-  "rev": 40,
-  "updatedAt": "2026-08-20T00:47:00.571Z"
+  "rev": 41,
+  "updatedAt": "2026-08-20T03:02:32.505Z"
 }

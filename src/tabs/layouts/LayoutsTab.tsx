@@ -400,9 +400,15 @@ function SuggestPanel({
   onClose: () => void;
 }) {
   const equipment = useDoc('equipment');
-  const [size, setSize] = useState(heads ?? 12);
+  // Held as text, not a number: coercing every keystroke means clearing the
+  // field to retype snaps it to 1, and the next digit lands after that 1.
+  const [sizeText, setSizeText] = useState(String(heads ?? 12));
   const [pairs, setPairs] = useState(room.id === 'hyrox');
   const [strength, setStrength] = useState(room.id === 'strength');
+
+  const typed = Number(sizeText);
+  const sizeValid = sizeText.trim() !== '' && Number.isFinite(typed) && typed >= 1;
+  const size = sizeValid ? Math.min(200, Math.floor(typed)) : (heads ?? 12);
 
   // The gear on the floor is the station list. Markers (no kind) are not gear.
   const stations = room.items
@@ -441,14 +447,19 @@ function SuggestPanel({
               <input
                 type="number"
                 min={1}
-                max={60}
-                value={size}
-                onChange={(e) => setSize(Math.max(1, Number(e.target.value) || 1))}
+                max={200}
+                value={sizeText}
+                onChange={(e) => setSizeText(e.target.value)}
+                onBlur={() => setSizeText(String(size))}
                 className="w-20 rounded-md border border-ink-300 bg-white px-2 py-1 text-sm text-ink-950 focus:border-accent-600"
               />
               {heads !== null && (
                 <span className="text-[11px] text-ink-500">
-                  {size === heads ? 'the recent average for this class' : `recent average is ${heads}`}
+                  {!sizeValid
+                    ? `using the recent average, ${heads}`
+                    : size === heads
+                      ? 'the recent average for this class'
+                      : `recent average is ${heads}`}
                 </span>
               )}
             </label>

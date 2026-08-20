@@ -202,14 +202,14 @@ export function seedAnnualPlan(): AnnualPlanDoc {
         // Mirrors PROGRAMMING-PLAN.md (the 2026-08-14 handover).
         phases: [
           phase('Strength-Hypertrophy', 'Wave loading 9/7/5, W1 3RM top-set testing, W7 deload', 10),
-          phase('Deload / skills week', 'Deload + workshops prepping the strength block', 1),
+          phase('Deload / skills', 'Deload + workshops prepping the strength block', 1),
           phase('Strength', 'Mini waves 7-5-3 then 5-3-1, Christmas-week retest', 6),
           // The Christmas shutdown is not a phase: it is a club-wide break
           // (see `breaks` below), so every stream's dates step over it.
           phase('Unilateral muscle-endurance', 'W1 testing; single-limb, tempo, TUT, asymmetric holds', 4),
           phase('Hypertrophy', 'Aesthetic focus, anchor strength lifts retained', 12),
           phase('Strength-Hypertrophy (cycle 2)', 'Back into the wave-loading cycle', 10),
-          phase('Deload / skills week (cycle 2)', 'Deload + skills workshops', 1),
+          phase('Deload / skills 2', 'Deload + skills workshops', 1),
           phase('Strength (cycle 2)', 'Mini waves 7-5-3 then 5-3-1, retest to close', 6),
         ],
       },
