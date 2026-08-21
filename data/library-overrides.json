@@ -13,14 +13,15 @@
           "name": "Barbell Box Squat",
           "sets": "3",
           "reps": "9 ",
-          "intensity": "70%"
+          "intensity": "70%",
+          "tempo": "2.1.1"
         },
         {
           "name": "DB Goblet Squat",
           "sets": "3",
           "reps": "10",
-          "rpe": "10",
-          "tempo": "2.1.2"
+          "rpe": "8",
+          "tempo": "2.2.2"
         }
       ],
       "2263920": [
@@ -38,11 +39,25 @@
         {
           "name": "Split Squat "
         }
+      ],
+      "name:db or plate drag through": [
+        {
+          "name": "Shoulder Taps",
+          "sets": "3",
+          "reps": "10ea",
+          "rpe": "8"
+        },
+        {
+          "name": "Front Support Hold",
+          "rpe": "8",
+          "sets": "3",
+          "reps": "45sec"
+        }
       ]
     },
     "cues": {},
     "customExercises": []
   },
-  "rev": 25,
-  "updatedAt": "2026-08-21T06:20:35.732Z"
+  "rev": 37,
+  "updatedAt": "2026-08-21T06:27:43.158Z"
 }

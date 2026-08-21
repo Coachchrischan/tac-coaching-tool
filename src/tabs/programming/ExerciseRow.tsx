@@ -6,6 +6,39 @@ import { normaliseIntensity, scaleKey, scaleOptions } from '../../lib/prescripti
 const cell =
   'w-full rounded-md border border-ink-300 bg-white px-1.5 py-1 text-center text-[13px] text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none';
 
+/**
+ * The demo video mark. A scale is a movement a member will be sent away to do
+ * on their own, so it needs the video at least as much as the main lift does.
+ * Always rendered, so every name field on the row is the same width and stops
+ * on the same pixel; without a link it is the muted crossed-out icon.
+ */
+function VideoMark({ url }: { url?: string }) {
+  if (url) {
+    return (
+      <a
+        href={url}
+        target="_blank"
+        rel="noreferrer"
+        title="Watch the exercise video (TrainHeroic)"
+        className="shrink-0 rounded p-1 text-red-600 hover:bg-red-50 hover:text-red-700"
+      >
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="2.5" y="5" width="19" height="14" rx="3" stroke="currentColor" strokeWidth="1.6" />
+          <path d="M10 9.2v5.6l4.5-2.8L10 9.2Z" fill="currentColor" />
+        </svg>
+      </a>
+    );
+  }
+  return (
+    <span title="No video linked" className="shrink-0 cursor-default rounded p-1 text-ink-200">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="2.5" y="5" width="19" height="14" rx="3" stroke="currentColor" strokeWidth="1.6" />
+        <path d="M8.5 9.5l7 5M15.5 9.5l-7 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      </svg>
+    </span>
+  );
+}
+
 export const SLOT_FIELDS = [
   ['sets', 'Sets'],
   ['reps', 'Reps'],
@@ -19,7 +52,7 @@ export default function ExerciseRow({
   slot,
   overrides,
   search,
-  videoUrl,
+  videoUrlFor,
   expandScales,
   onPatch,
   onCommitExercise,
@@ -33,7 +66,7 @@ export default function ExerciseRow({
   slot: ExerciseSlot;
   overrides: LibraryOverridesDoc;
   search: (query: string) => RankedExercise[];
-  videoUrl?: string;
+  videoUrlFor: (ref: { exerciseId?: number | null; name?: string }) => string | undefined;
   expandScales: boolean;
   onPatch: (patch: Partial<ExerciseSlot>) => void;
   onCommitExercise: (name: string, exercise: LibraryExercise | null) => void;
@@ -100,32 +133,7 @@ export default function ExerciseRow({
               S{hasScales ? scales.filter((s) => s.name.trim()).length : ''}
             </button>
             <Combobox value={slot.name} search={search} onCommit={onCommitExercise} />
-            {/* The video slot always renders so every exercise field is the
-                same width; rows without a link get a muted crossed-out icon. */}
-            {videoUrl ? (
-              <a
-                href={videoUrl}
-                target="_blank"
-                rel="noreferrer"
-                title="Watch the exercise video (TrainHeroic)"
-                className="shrink-0 rounded p-1 text-red-600 hover:bg-red-50 hover:text-red-700"
-              >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <rect x="2.5" y="5" width="19" height="14" rx="3" stroke="currentColor" strokeWidth="1.6" />
-                  <path d="M10 9.2v5.6l4.5-2.8L10 9.2Z" fill="currentColor" />
-                </svg>
-              </a>
-            ) : (
-              <span
-                title="No video linked"
-                className="shrink-0 cursor-default rounded p-1 text-ink-200"
-              >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <rect x="2.5" y="5" width="19" height="14" rx="3" stroke="currentColor" strokeWidth="1.6" />
-                  <path d="M8.5 9.5l7 5M15.5 9.5l-7 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                </svg>
-              </span>
-            )}
+            <VideoMark url={videoUrlFor(slot)} />
           </div>
         </td>
         {SLOT_FIELDS.map(([key]) => (
@@ -171,17 +179,21 @@ export default function ExerciseRow({
                   <span className="w-14 shrink-0 pl-1 text-[11px] font-medium tracking-wide text-ink-400 uppercase">
                     Scale {i + 1}
                   </span>
-                  <input
-                    className="min-w-0 flex-1 rounded-md border border-ink-300 bg-white px-2 py-1 text-[13px] text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none"
-                    placeholder={i === 0 ? 'e.g. box squat to 20 inch box' : 'optional second scale'}
+                  {/* The same picker the exercise above uses, so a scale
+                      chosen from the library carries its id and therefore its
+                      demo video. Free text still works; it just falls back to
+                      matching the name. */}
+                  <Combobox
                     value={opt.name}
-                    onChange={(e) => onSetScale(i as 0 | 1, { name: e.target.value })}
+                    search={search}
+                    placeholder={
+                      i === 0 ? 'e.g. box squat to 20 inch box' : 'optional second scale'
+                    }
+                    onCommit={(name, exercise) =>
+                      onSetScale(i as 0 | 1, { name, exerciseId: exercise?.id ?? null })
+                    }
                   />
-                  {/* An invisible copy of the video mark above, so the name box
-                      stops on the same pixel rather than on a guessed width. */}
-                  <span aria-hidden className="invisible shrink-0 p-1">
-                    <svg width="15" height="15" viewBox="0 0 24 24" />
-                  </span>
+                  <VideoMark url={videoUrlFor(opt)} />
                 </div>
               </td>
               {/* Its own prescription: a scale is rarely the same sets and reps

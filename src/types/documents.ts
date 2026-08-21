@@ -254,6 +254,14 @@ export interface CustomExercise {
 /** A scaled option: what to do instead, and how much of it. */
 export interface ScaledOption {
   name: string;
+  /**
+   * TrainHeroic library id, set when the scale was picked from the library
+   * rather than typed. It is what hangs the demo video off a scale, the same
+   * way `ExerciseSlot.exerciseId` does for the movement it replaces. Absent on
+   * scales written before scales could be picked; those fall back to matching
+   * on name.
+   */
+  exerciseId?: number | null;
   sets?: string;
   reps?: string;
   load?: string;

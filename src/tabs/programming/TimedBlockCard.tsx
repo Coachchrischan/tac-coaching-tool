@@ -31,7 +31,7 @@ export default function TimedBlockCard({
   block: SeriesBlock;
   overrides: LibraryOverridesDoc;
   search: (query: string) => RankedExercise[];
-  videoUrlFor: (exerciseId: number) => string | undefined;
+  videoUrlFor: (ref: { exerciseId?: number | null; name?: string }) => string | undefined;
   expandScales: boolean;
   onPatchBlock: (patch: Partial<SeriesBlock>) => void;
   onDeleteBlock: () => void;
@@ -109,7 +109,7 @@ export default function TimedBlockCard({
               slot={slot}
               overrides={overrides}
               search={search}
-              videoUrl={slot.exerciseId !== null ? videoUrlFor(slot.exerciseId) : undefined}
+              videoUrlFor={videoUrlFor}
               expandScales={expandScales}
               onPatch={(patch) => onPatchSlot(slot.id, patch)}
               onCommitExercise={(name, ex) => onCommitExercise(slot.id, name, ex)}

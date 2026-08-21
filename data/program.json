@@ -42,7 +42,7 @@
                             "name": "Russian Baby Maker",
                             "sets": "1",
                             "reps": "10",
-                            "showScales": true
+                            "showScales": false
                           },
                           {
                             "id": "3bffe8d3-7507-49a7-97a4-29de896dc3dc",
@@ -65,7 +65,8 @@
                             "sets": "3",
                             "reps": "9",
                             "intensity": "70%",
-                            "showScales": true
+                            "showScales": false,
+                            "tempo": "2.1.1"
                           },
                           {
                             "id": "aae3fb4f-e2ed-4bf0-a493-18451cef6429",
@@ -73,7 +74,8 @@
                             "name": "DB or Plate Drag Through",
                             "sets": "3",
                             "reps": "10ea",
-                            "showScales": true
+                            "showScales": false,
+                            "rpe": "8"
                           },
                           {
                             "id": "c911e4ca-e7ba-4ccc-b152-1fec7be2bf3c",
@@ -5520,6 +5522,6 @@
       }
     ]
   },
-  "rev": 138,
-  "updatedAt": "2026-08-21T06:20:09.692Z"
+  "rev": 147,
+  "updatedAt": "2026-08-21T06:25:05.552Z"
 }

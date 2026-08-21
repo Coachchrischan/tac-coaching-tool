@@ -213,11 +213,27 @@ export default function ProgrammingTab() {
     [merged],
   );
 
-  const videoById = useMemo(() => {
-    const m = new Map<number, string>();
-    for (const e of merged ?? []) if (e.videoUrl) m.set(e.id, e.videoUrl);
-    return m;
+  // Demo videos, by library id and also by name. The name index is what lets a
+  // scaled option written before scales could be picked from the library still
+  // find its video, and it is how any free-text row finds one at all.
+  const videoLookup = useMemo(() => {
+    const byId = new Map<number, string>();
+    const byName = new Map<string, string>();
+    for (const e of merged ?? []) {
+      if (!e.videoUrl) continue;
+      byId.set(e.id, e.videoUrl);
+      const key = e.title.trim().toLowerCase();
+      if (key && !byName.has(key)) byName.set(key, e.videoUrl);
+    }
+    return { byId, byName };
   }, [merged]);
+
+  const videoUrlFor = useCallback(
+    (ref: { exerciseId?: number | null; name?: string }) =>
+      (ref.exerciseId != null ? videoLookup.byId.get(ref.exerciseId) : undefined) ??
+      videoLookup.byName.get((ref.name ?? '').trim().toLowerCase()),
+    [videoLookup],
+  );
 
   // Open on the week actually running, not on Phase 1 Week 1. A coach opening
   // this ten minutes before a class should not have to count forward. Runs
@@ -1711,7 +1727,7 @@ export default function ProgrammingTab() {
             block={block}
             overrides={overrides}
             search={search}
-            videoUrlFor={(id) => videoById.get(id)}
+            videoUrlFor={videoUrlFor}
             expandScales={expandScales}
             onPatchBlock={(patch) => patchTimedBlock(block.id, (b) => ({ ...b, ...patch }))}
             onDeleteBlock={() => patchTimedBlock(block.id, () => null)}
