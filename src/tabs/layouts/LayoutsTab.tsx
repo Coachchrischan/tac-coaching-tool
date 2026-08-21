@@ -576,7 +576,10 @@ export default function LayoutsTab() {
       </div>
       {room && suggesting && (
         <SuggestPanel
-          key={room.id}
+          // Keyed so switching room starts a fresh suggestion. The prefix
+          // keeps it distinct from the canvas beside it: two siblings keyed
+          // "hyrox" is a duplicate-key warning, not two separate keys.
+          key={`suggest-${room.id}`}
           room={room}
           heads={heads}
           onClose={() => setSuggesting(false)}
@@ -597,7 +600,7 @@ export default function LayoutsTab() {
       )}
       {room && (
         <RoomCanvas
-          key={room.id}
+          key={`canvas-${room.id}`}
           room={room}
           onUpdateRoom={(fn) =>
             update((d) => ({
