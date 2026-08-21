@@ -1,4 +1,4 @@
-import type { ExerciseSlot, LibraryOverridesDoc, SeriesBlock } from '../../types/documents';
+import type { ExerciseSlot, LibraryOverridesDoc, ScaledOption, SeriesBlock } from '../../types/documents';
 import type { LibraryExercise, RankedExercise } from '../../lib/library';
 import ExerciseRow, { SLOT_FIELDS } from './ExerciseRow';
 
@@ -40,7 +40,7 @@ export default function TimedBlockCard({
   onCommitExercise: (slotId: string, name: string, exercise: LibraryExercise | null) => void;
   onDeleteSlot: (slotId: string) => void;
   onToggleScales: (slotId: string) => void;
-  onSetScale: (slot: ExerciseSlot, index: 0 | 1, text: string) => void;
+  onSetScale: (slot: ExerciseSlot, index: 0 | 1, patch: Partial<ScaledOption>) => void;
   onMoveSlot: (slotId: string, dir: -1 | 1) => void;
 }) {
   const style = SERIES_STYLE[block.label.toUpperCase()] ?? NEUTRAL;
@@ -115,7 +115,7 @@ export default function TimedBlockCard({
               onCommitExercise={(name, ex) => onCommitExercise(slot.id, name, ex)}
               onDelete={() => onDeleteSlot(slot.id)}
               onToggleScales={() => onToggleScales(slot.id)}
-              onSetScale={(n, text) => onSetScale(slot, n, text)}
+              onSetScale={(n, patch) => onSetScale(slot, n, patch)}
               onMove={(dir) => onMoveSlot(slot.id, dir)}
               canMoveUp={i > 0}
               canMoveDown={i < block.slots.length - 1}

@@ -8,6 +8,7 @@ import { generateBlurb } from '../../lib/blurb';
 import { mergedLibrary } from '../../lib/library';
 import type { ExerciseSlot, ProgramDoc, SeriesBlock, Session, TimedBlock } from '../../types/documents';
 import { circuitParts, seriesBlocks, streamsOf } from '../../lib/programStreams';
+import { scaleOptions, scaleSummary } from '../../lib/prescription';
 
 const W = 1920;
 const H = 1080;
@@ -133,9 +134,7 @@ export default function TvPage() {
   const cueFor = (slot: ExerciseSlot) =>
     slot.exerciseId !== null ? overrides.cues[slot.exerciseId] : undefined;
   const scalesFor = (slot: ExerciseSlot) =>
-    slot.exerciseId !== null
-      ? (overrides.scales[slot.exerciseId] ?? []).filter((s) => s.trim())
-      : [];
+    scaleOptions(overrides, slot.exerciseId).filter((s) => s.name.trim());
 
   // html-to-image's toPng uses img.decode(), which can hang in background tabs,
   // so we do the SVG -> canvas -> PNG conversion ourselves with onload.
@@ -471,7 +470,7 @@ export default function TvPage() {
                         )}
                         {scalesFor(slot).map((s, si) => (
                           <p key={si} className="mt-0.5 text-[19px] leading-snug text-white/45">
-                            Scale: {s}
+                            Scale: {scaleSummary(s)}
                           </p>
                         ))}
                       </div>

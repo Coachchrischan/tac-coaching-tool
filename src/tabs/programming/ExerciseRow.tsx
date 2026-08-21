@@ -1,7 +1,7 @@
-import type { ExerciseSlot, LibraryOverridesDoc } from '../../types/documents';
+import type { ExerciseSlot, LibraryOverridesDoc, ScaledOption } from '../../types/documents';
 import type { LibraryExercise, RankedExercise } from '../../lib/library';
 import Combobox from '../../components/Combobox';
-import { normaliseIntensity } from '../../lib/prescription';
+import { normaliseIntensity, scaleOptions } from '../../lib/prescription';
 
 const cell =
   'w-full rounded-md border border-ink-300 bg-white px-1.5 py-1 text-center text-[13px] text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none';
@@ -39,13 +39,13 @@ export default function ExerciseRow({
   onCommitExercise: (name: string, exercise: LibraryExercise | null) => void;
   onDelete: () => void;
   onToggleScales: () => void;
-  onSetScale: (index: 0 | 1, text: string) => void;
+  onSetScale: (index: 0 | 1, patch: Partial<ScaledOption>) => void;
   onMove: (dir: -1 | 1) => void;
   canMoveUp: boolean;
   canMoveDown: boolean;
 }) {
-  const scales = slot.exerciseId !== null ? (overrides.scales[slot.exerciseId] ?? []) : [];
-  const hasScales = scales.some((s) => s.trim() !== '');
+  const scales = scaleOptions(overrides, slot.exerciseId);
+  const hasScales = scales.some((s) => s.name.trim() !== '');
   const showScales = expandScales || Boolean(slot.showScales);
 
   return (
@@ -93,7 +93,7 @@ export default function ExerciseRow({
                   : 'border-ink-300 text-ink-400 hover:text-ink-950'
               } disabled:cursor-not-allowed disabled:opacity-30`}
             >
-              S{hasScales ? scales.filter((s) => s.trim()).length : ''}
+              S{hasScales ? scales.filter((s) => s.name.trim()).length : ''}
             </button>
             <Combobox value={slot.name} search={search} onCommit={onCommitExercise} />
             {/* The video slot always renders so every exercise field is the
@@ -156,19 +156,44 @@ export default function ExerciseRow({
         <tr>
           <td colSpan={8} className="pt-0 pb-2 pl-9">
             <div className="space-y-1 rounded-md border border-ink-200 bg-ink-50 px-3 py-2">
-              {[0, 1].map((i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <span className="w-14 text-[11px] font-medium tracking-wide text-ink-400 uppercase">
-                    Scale {i + 1}
-                  </span>
-                  <input
-                    className="flex-1 rounded-md border border-ink-300 bg-white px-2 py-1 text-sm text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none"
-                    placeholder={i === 0 ? 'e.g. box squat to 20 inch box' : 'optional second scale'}
-                    value={scales[i] ?? ''}
-                    onChange={(e) => onSetScale(i as 0 | 1, e.target.value)}
-                  />
-                </div>
-              ))}
+              {[0, 1].map((i) => {
+                const opt = scales[i] ?? { name: '' };
+                return (
+                  <div key={i} className="flex flex-wrap items-center gap-1.5">
+                    <span className="w-14 shrink-0 text-[11px] font-medium tracking-wide text-ink-400 uppercase">
+                      Scale {i + 1}
+                    </span>
+                    <input
+                      className="min-w-40 flex-1 rounded-md border border-ink-300 bg-white px-2 py-1 text-sm text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none"
+                      placeholder={i === 0 ? 'e.g. box squat to 20 inch box' : 'optional second scale'}
+                      value={opt.name}
+                      onChange={(e) => onSetScale(i as 0 | 1, { name: e.target.value })}
+                    />
+                    {/* Its own prescription: a scale is rarely the same sets and
+                        reps as the movement it replaces, and TrainHeroic needs
+                        the numbers to push it as a line of its own. */}
+                    {SLOT_FIELDS.map(([key, label]) => (
+                      <input
+                        key={key}
+                        className="w-14 rounded-md border border-ink-300 bg-white px-1 py-1 text-center text-[12px] text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none"
+                        placeholder={label}
+                        title={`${label} for this scaled option`}
+                        value={opt[key] ?? ''}
+                        onChange={(e) => onSetScale(i as 0 | 1, { [key]: e.target.value })}
+                        onBlur={
+                          key === 'intensity'
+                            ? (e) => {
+                                const next = normaliseIntensity(e.target.value);
+                                if (next !== e.target.value)
+                                  onSetScale(i as 0 | 1, { intensity: next });
+                              }
+                            : undefined
+                        }
+                      />
+                    ))}
+                  </div>
+                );
+              })}
               <p className="text-[11px] text-ink-400">
                 Saved with the exercise. Any session using it shows the same scales.
               </p>

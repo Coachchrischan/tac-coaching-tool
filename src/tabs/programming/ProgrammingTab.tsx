@@ -16,6 +16,7 @@ import type {
   Session,
   SessionFocus,
   SessionKind,
+  ScaledOption,
   TimedBlock,
 } from '../../types/documents';
 import TimedBlockCard from './TimedBlockCard';
@@ -52,6 +53,7 @@ import {
 import CircuitEditor from './CircuitEditor';
 import CircuitPartCard from './CircuitPartCard';
 import { circuitToText, equipmentFor } from '../../lib/circuit';
+import { scaleOptions } from '../../lib/prescription';
 
 type ProgramView = 'week' | 'block' | 'month';
 
@@ -65,6 +67,7 @@ const VIEW_LABEL: Record<ProgramView, string> = {
   month: 'Phase',
 };
 
+/** Default block length when a phase does not set its own. */
 const BLOCK_LEN = 4;
 
 // The Block view is a 4-week window into the phase; SlotRefs inside cells
@@ -257,7 +260,9 @@ export default function ProgrammingTab() {
   const blocks = stream.blocks;
   const bi = Math.min(biRaw, blocks.length - 1);
   const wi = Math.min(wiRaw, blocks[bi].weeks.length - 1);
-  const blockPages = Math.max(1, Math.ceil(blocks[bi].weeks.length / BLOCK_LEN));
+  // A block is the 3 to 4 week wave inside a phase; the phase decides which.
+  const blockLen = Math.max(1, Math.min(blocks[bi].blockLength ?? BLOCK_LEN, blocks[bi].weeks.length));
+  const blockPages = Math.max(1, Math.ceil(blocks[bi].weeks.length / blockLen));
   const blockPage = Math.min(blockPageRaw, blockPages - 1);
   const sessions = blocks[bi].weeks[wi].sessions;
 
@@ -418,6 +423,13 @@ export default function ProgrammingTab() {
       }),
     );
     if (wi >= next) setWi(next - 1);
+  }
+
+  /** How many weeks a block runs inside this phase. */
+  function setBlockLength2(next: number) {
+    const len = Math.max(1, Math.min(next, blocks[bi].weeks.length));
+    updateBlocks((all) => all.map((b, i) => (i === bi ? { ...b, blockLength: len } : b)));
+    setBlockPage(0);
   }
 
   function addBlock() {
@@ -728,15 +740,18 @@ export default function ProgrammingTab() {
     }));
   }
 
-  function setScale(slot: ExerciseSlot, index: 0 | 1, text: string) {
+  /** A scaled option carries its own prescription, so patch one field at a time. */
+  function setScale(slot: ExerciseSlot, index: 0 | 1, patch: Partial<ScaledOption>) {
     if (slot.exerciseId === null) return;
     const id = slot.exerciseId;
     lib.update((d) => {
-      const current = [...(d.scales[id] ?? ['', ''])];
-      current[index] = text;
-      while (current.length < 2) current.push('');
+      const current = scaleOptions(d, id);
+      while (current.length < 2) current.push({ name: '' });
+      current[index] = { ...current[index], ...patch };
       const scales = { ...d.scales };
-      if (current.every((s) => s.trim() === '')) delete scales[id];
+      const empty = (o: ScaledOption) =>
+        !o.name.trim() && !o.sets && !o.reps && !o.load && !o.intensity && !o.rpe && !o.tempo;
+      if (current.every(empty)) delete scales[id];
       else scales[id] = current.slice(0, 2);
       return { ...d, scales };
     });
@@ -1364,8 +1379,8 @@ export default function ProgrammingTab() {
           {view === 'block' && (
             <div className="flex items-center gap-1.5">
               {Array.from({ length: blockPages }, (_, i) => {
-                const first = i * BLOCK_LEN + 1;
-                const last = Math.min((i + 1) * BLOCK_LEN, blocks[bi].weeks.length);
+                const first = i * blockLen + 1;
+                const last = Math.min((i + 1) * blockLen, blocks[bi].weeks.length);
                 return (
                   <button
                     key={i}
@@ -1471,6 +1486,33 @@ export default function ProgrammingTab() {
                 </button>
               </div>
             </div>
+            <div className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
+              Block length
+              <div className="mt-0.5 flex items-center gap-1 rounded-md border border-ink-300 bg-white px-1.5 py-1">
+                <button
+                  type="button"
+                  title="Shorter blocks: a three-week wave instead of four"
+                  onClick={() => setBlockLength2(blockLen - 1)}
+                  disabled={blockLen <= 1}
+                  className="rounded px-1.5 text-sm font-bold text-ink-500 hover:text-ink-950 disabled:opacity-30"
+                >
+                  −
+                </button>
+                <span className="min-w-12 text-center text-sm text-ink-700">{blockLen} wk</span>
+                <button
+                  type="button"
+                  title="Longer blocks"
+                  onClick={() => setBlockLength2(blockLen + 1)}
+                  disabled={blockLen >= blocks[bi].weeks.length}
+                  className="rounded px-1.5 text-sm font-bold text-ink-500 hover:text-ink-950 disabled:opacity-30"
+                >
+                  +
+                </button>
+              </div>
+              <span className="mt-0.5 block tracking-normal normal-case">
+                {blockPages} block{blockPages === 1 ? '' : 's'} in this {unit}
+              </span>
+            </div>
             <button
               type="button"
               onClick={addBlock}
@@ -1508,10 +1550,10 @@ export default function ProgrammingTab() {
         <MonthGrid
           block={sliceBlockRows(
             buildBlockRows(blocks[bi], bi, matchSession),
-            blockPage * BLOCK_LEN,
-            (blockPage + 1) * BLOCK_LEN,
+            blockPage * blockLen,
+            (blockPage + 1) * blockLen,
           )}
-          weekOffset={blockPage * BLOCK_LEN}
+          weekOffset={blockPage * blockLen}
           onEdit={patchSlotByRef}
           onAdd={addSlotFromTarget}
           onOpenWeek={(wIdx) => {

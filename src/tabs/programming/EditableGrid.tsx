@@ -478,7 +478,42 @@ export function MonthGrid({
               className={`w-9 ${headCls} border-l-2 border-l-ink-700`}
               title="Copy the first week's prescription across the rest of the block, row by row"
             >
-              Copy
+              <span className="block">Copy</span>
+              {/* Every row at once, for a block where the whole session repeats.
+                  Use the per-row » instead when the main lifts wave. */}
+              <button
+                type="button"
+                title="Copy the first week's sets, reps, % and RPE across the block for EVERY exercise. The main lifts usually wave, so use the row buttons if only some should repeat."
+                aria-label="Copy the first week across the block for every exercise"
+                onClick={() => {
+                  const rows = block.rows.filter(
+                    (r) =>
+                      r.cells[0] &&
+                      GRID_FIELDS.some(
+                        ([key]) => (r.cells[0]!.slot[key] ?? '').toString().trim() !== '',
+                      ) &&
+                      r.cells.slice(1).some((c) => c !== null),
+                  );
+                  if (rows.length === 0) {
+                    window.alert('Nothing to copy: the first week of this block is empty.');
+                    return;
+                  }
+                  if (
+                    !window.confirm(
+                      `Copy week ${weekOffset + 1}'s sets, reps, % and RPE across this block for all ${rows.length} exercise${rows.length === 1 ? '' : 's'}?\n\nThis overwrites what the later weeks hold, including any waves already written.`,
+                    )
+                  )
+                    return;
+                  for (const row of rows) {
+                    const patch: Partial<ExerciseSlot> = {};
+                    for (const [key] of GRID_FIELDS) patch[key] = row.cells[0]!.slot[key] ?? '';
+                    for (const ref of row.cells.slice(1)) if (ref) onEdit(ref, patch);
+                  }
+                }}
+                className="mt-0.5 block w-full rounded border border-white/40 px-1 text-[9px] leading-tight font-bold text-white/70 hover:border-sand-500 hover:text-sand-500"
+              >
+                all
+              </button>
             </th>
           </tr>
           <tr>

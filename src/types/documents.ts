@@ -173,6 +173,12 @@ export interface ProgramBlock {
    * it the two tabs authored the same structure twice and drifted apart.
    */
   annualPhaseId?: string;
+  /**
+   * How many weeks a BLOCK is inside this phase. A block is the 3 to 4 week
+   * wave the Block view pages through; a three-week wave and a four-week one
+   * are both real, so the phase says which it runs. Defaults to 4.
+   */
+  blockLength?: number;
   weeks: ProgramWeek[];
 }
 
@@ -232,9 +238,25 @@ export interface CustomExercise {
   patterns: Pattern[];
 }
 
+/** A scaled option: what to do instead, and how much of it. */
+export interface ScaledOption {
+  name: string;
+  sets?: string;
+  reps?: string;
+  load?: string;
+  intensity?: string;
+  rpe?: string;
+  tempo?: string;
+}
+
 export interface LibraryOverridesDoc {
   patterns: Record<number, Pattern[]>; // exerciseId -> coach-tagged patterns (wins over guess)
-  scales: Record<number, string[]>; // exerciseId -> up to 2 scaled options
+  /**
+   * exerciseId -> up to 2 scaled options. Each carries its own prescription,
+   * because a scale is rarely the same sets and reps as the movement it
+   * replaces. Older documents hold plain strings and are lifted on read.
+   */
+  scales: Record<number, (ScaledOption | string)[]>;
   cues: Record<number, string>; // key cue per exercise, feeds the session blurb
   customExercises: CustomExercise[];
 }

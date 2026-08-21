@@ -41,7 +41,8 @@
                             "exerciseId": 8147275,
                             "name": "Russian Baby Maker",
                             "sets": "1",
-                            "reps": "10"
+                            "reps": "10",
+                            "showScales": true
                           },
                           {
                             "id": "3bffe8d3-7507-49a7-97a4-29de896dc3dc",
@@ -4576,6 +4577,6 @@
       }
     ]
   },
-  "rev": 129,
-  "updatedAt": "2026-08-21T05:34:48.497Z"
+  "rev": 130,
+  "updatedAt": "2026-08-21T05:38:19.761Z"
 }
