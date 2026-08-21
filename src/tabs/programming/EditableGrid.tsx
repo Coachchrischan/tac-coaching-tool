@@ -400,12 +400,14 @@ export function MonthGrid({
   onEdit,
   onAdd,
   onOpenWeek,
+  onCopyExercises,
 }: {
   block: BlockRows;
   weekOffset?: number; // when block is a sliced window, the absolute index of its first week
   onEdit: (ref: SlotRef, patch: Partial<ExerciseSlot>) => void;
   onAdd: (t: AddTarget) => void;
   onOpenWeek: (weekIndex: number) => void;
+  onCopyExercises?: (fromWeek: number, toWeeks: number[]) => void;
 }) {
   // ESD, Hyrox and Game Day never produce editable rows; summarise instead of
   // showing an empty grid, which read as "nothing programmed" for a written week.
@@ -433,14 +435,37 @@ export function MonthGrid({
             </th>
             {block.weekSessions.map((_, wi) => (
               <th key={wi} colSpan={GRID_FIELDS.length} className={`${headCls} border-l-2 border-l-ink-700`}>
-                <button
-                  type="button"
-                  title="Open this week in the editor"
-                  onClick={() => onOpenWeek(weekOffset + wi)}
-                  className="rounded px-1 uppercase hover:text-sand-500"
-                >
-                  Week {weekOffset + wi + 1}
-                </button>
+                <span className="inline-flex items-center gap-1">
+                  <button
+                    type="button"
+                    title="Open this week in the editor"
+                    onClick={() => onOpenWeek(weekOffset + wi)}
+                    className="rounded px-1 uppercase hover:text-sand-500"
+                  >
+                    Week {weekOffset + wi + 1}
+                  </button>
+                  {/* Only the first week of the block: push its exercise list
+                      to the rest, so changing week 5 does not leave weeks 6 to
+                      8 on the old exercises. */}
+                  {wi === 0 && block.weekSessions.length > 1 && onCopyExercises && (
+                    <button
+                      type="button"
+                      title={`Make the other ${block.weekSessions.length - 1} week${
+                        block.weekSessions.length === 2 ? '' : 's'
+                      } of this block run the same exercises as this one`}
+                      aria-label="Copy this week's exercises to the rest of the block"
+                      onClick={() =>
+                        onCopyExercises(
+                          weekOffset,
+                          block.weekSessions.map((_, i) => weekOffset + i).slice(1),
+                        )
+                      }
+                      className="rounded border border-white/30 px-1 text-[10px] leading-tight font-bold text-white/70 hover:border-sand-500 hover:text-sand-500"
+                    >
+                      »
+                    </button>
+                  )}
+                </span>
               </th>
             ))}
             <th

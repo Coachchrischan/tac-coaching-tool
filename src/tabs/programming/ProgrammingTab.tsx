@@ -552,6 +552,114 @@ export default function ProgrammingTab() {
     );
   }
 
+  /**
+   * Make the rest of a block run the same exercises as its first week.
+   *
+   * Changing week 5 used to leave weeks 6 to 8 on the old exercises, so a block
+   * quietly held two different sessions. This aligns the list: series and
+   * exercises are taken from the source week, and each target week KEEPS its
+   * own sets, reps, % and RPE for any exercise that carries over, so the wave
+   * loading across the block survives. Exercises the source week does not have
+   * are removed, which is the point, so it confirms first.
+   */
+  function copyExercisesAcross(fromWeek: number, toWeeks: number[]) {
+    const block = blocks[bi];
+    const source = matchSession(block.weeks[fromWeek]);
+    if (!source || source.kind !== 'series') return;
+
+    const keyOf = (label: string, name: string) =>
+      `${label.trim().toUpperCase()}::${name.trim().toLowerCase()}`;
+    const sourceKeys = new Set(
+      source.timedBlocks.flatMap((tb) =>
+        tb.slots.filter((sl) => sl.name).map((sl) => keyOf(tb.label, sl.name)),
+      ),
+    );
+
+    // What the coach is about to gain and lose, named in the confirm.
+    const adding = new Set<string>();
+    const removing = new Set<string>();
+    for (const wIdx of toWeeks) {
+      const target = matchSession(block.weeks[wIdx]);
+      if (!target || target.kind !== 'series') continue;
+      const mine = new Set(
+        target.timedBlocks.flatMap((tb) =>
+          tb.slots.filter((sl) => sl.name).map((sl) => keyOf(tb.label, sl.name)),
+        ),
+      );
+      for (const tb of source.timedBlocks)
+        for (const sl of tb.slots)
+          if (sl.name && !mine.has(keyOf(tb.label, sl.name))) adding.add(sl.name);
+      for (const tb of target.timedBlocks)
+        for (const sl of tb.slots)
+          if (sl.name && !sourceKeys.has(keyOf(tb.label, sl.name))) removing.add(sl.name);
+    }
+
+    const weekLabel = (i: number) => `Week ${i + 1}`;
+    const lines = [
+      `Make ${toWeeks.map(weekLabel).join(', ')} run the same exercises as ${weekLabel(fromWeek)}?`,
+      '',
+      adding.size ? `Adds: ${[...adding].join(', ')}` : null,
+      removing.size ? `Removes: ${[...removing].join(', ')}` : null,
+      !adding.size && !removing.size ? 'They already match. Nothing to change.' : null,
+      '',
+      'Sets, reps, % and RPE are kept for every exercise that stays.',
+    ].filter((l) => l !== null);
+    if (!adding.size && !removing.size) {
+      window.alert(lines.join('\n'));
+      return;
+    }
+    if (!window.confirm(lines.join('\n'))) return;
+
+    updateBlocks((all) =>
+      all.map((b, bIdx) => {
+        if (bIdx !== bi) return b;
+        return {
+          ...b,
+          weeks: b.weeks.map((w, wIdx) => {
+            if (!toWeeks.includes(wIdx)) return w;
+            const target = matchSession(w);
+            if (!target) return w;
+            return {
+              ...w,
+              sessions: w.sessions.map((s) => {
+                if (s.id !== target.id || s.kind !== 'series') return s;
+                const mine = new Map<string, ExerciseSlot>();
+                for (const tb of s.timedBlocks)
+                  for (const sl of tb.slots)
+                    if (sl.name) mine.set(keyOf(tb.label, sl.name), sl);
+                return {
+                  ...s,
+                  timedBlocks: source.timedBlocks.map((srcTb) => {
+                    const existing = s.timedBlocks.find(
+                      (tb) => tb.label.trim().toUpperCase() === srcTb.label.trim().toUpperCase(),
+                    );
+                    return {
+                      id: existing?.id ?? crypto.randomUUID(),
+                      label: srcTb.label,
+                      minutes: existing?.minutes ?? srcTb.minutes,
+                      slots: srcTb.slots
+                        .filter((sl) => sl.name)
+                        .map((srcSl) => {
+                          const kept = mine.get(keyOf(srcTb.label, srcSl.name));
+                          return kept
+                            ? { ...kept, name: srcSl.name, exerciseId: srcSl.exerciseId }
+                            : {
+                                id: crypto.randomUUID(),
+                                exerciseId: srcSl.exerciseId,
+                                name: srcSl.name,
+                              };
+                        }),
+                    };
+                  }),
+                };
+              }),
+            };
+          }),
+        };
+      }),
+    );
+  }
+
   function addTimedBlock() {
     patchSeries((s) => ({
       ...s,
@@ -1365,6 +1473,7 @@ export default function ProgrammingTab() {
             setWi(wIdx);
             setView('week');
           }}
+          onCopyExercises={copyExercisesAcross}
         />
       )}
 
