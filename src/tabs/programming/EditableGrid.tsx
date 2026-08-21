@@ -328,6 +328,60 @@ function WeekCells({
 
 // ---------- Month view: one block, four editable weeks side by side ----------
 
+/**
+ * Copy this exercise's first-week prescription across the rest of the block.
+ *
+ * Warm-ups and most accessories repeat week to week, so typing the same four
+ * numbers four times is the bulk of building a block. It is per row on purpose:
+ * the main lifts wave 9/7/5 and must NOT be flattened, so the coach chooses
+ * which rows repeat.
+ */
+function CopyAcrossCell({
+  row,
+  topBorder,
+  stickyBg,
+  onEdit,
+}: {
+  row: EditableRow;
+  topBorder: string;
+  stickyBg: string;
+  onEdit: (ref: SlotRef, patch: Partial<ExerciseSlot>) => void;
+}) {
+  const source = row.cells[0];
+  const targets = row.cells.slice(1).filter((c): c is SlotRef => c !== null);
+  const filled = source
+    ? GRID_FIELDS.some(([key]) => (source.slot[key] ?? '').toString().trim() !== '')
+    : false;
+  const canCopy = Boolean(source) && filled && targets.length > 0;
+
+  return (
+    <td
+      className={`w-9 border-b border-ink-100 border-l-2 border-l-ink-100 px-1 py-1.5 text-center ${stickyBg} ${topBorder}`}
+    >
+      <button
+        type="button"
+        disabled={!canCopy}
+        title={
+          !source || !filled
+            ? 'Fill in the first week to copy it across'
+            : targets.length === 0
+              ? 'Nothing after this week to copy into'
+              : `Copy week 1's sets, reps, % and RPE into the next ${targets.length} week${targets.length === 1 ? '' : 's'}`
+        }
+        aria-label={`Copy ${row.name} across the block`}
+        onClick={() => {
+          const patch: Partial<ExerciseSlot> = {};
+          for (const [key] of GRID_FIELDS) patch[key] = source!.slot[key] ?? '';
+          for (const ref of targets) onEdit(ref, patch);
+        }}
+        className="rounded px-1 py-0.5 text-[13px] leading-none text-ink-300 hover:text-accent-600 disabled:cursor-not-allowed disabled:opacity-25"
+      >
+        »
+      </button>
+    </td>
+  );
+}
+
 export function MonthGrid({
   block,
   weekOffset = 0,
@@ -377,6 +431,13 @@ export function MonthGrid({
                 </button>
               </th>
             ))}
+            <th
+              rowSpan={2}
+              className={`w-9 ${headCls} border-l-2 border-l-ink-700`}
+              title="Copy the first week's prescription across the rest of the block, row by row"
+            >
+              Copy
+            </th>
           </tr>
           <tr>
             {block.weekSessions.map((_, wi) =>
@@ -428,6 +489,7 @@ export function MonthGrid({
                     onAdd={onAdd}
                   />
                 ))}
+                <CopyAcrossCell row={row} topBorder={topBorder} stickyBg={stickyBg} onEdit={onEdit} />
               </tr>
             );
           })}

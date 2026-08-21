@@ -354,7 +354,11 @@
                           {
                             "id": "f0cb43a7-1502-4b83-8648-149721622107",
                             "exerciseId": null,
-                            "name": "Hip 90/90s"
+                            "name": "Hip 90/90s",
+                            "sets": "",
+                            "reps": "",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "a7be1bda-e264-4138-a446-180b312f2de5",
@@ -610,7 +614,11 @@
                           {
                             "id": "f3b8d437-100d-4f77-ac5e-8364bdd0a678",
                             "exerciseId": null,
-                            "name": "Hip 90/90s"
+                            "name": "Hip 90/90s",
+                            "sets": "",
+                            "reps": "",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "b6263848-cbb9-4081-b988-5eb348591c80",
@@ -860,7 +868,11 @@
                           {
                             "id": "5fa83360-1a2a-4963-8fe4-32772fb27d46",
                             "exerciseId": null,
-                            "name": "Hip 90/90s"
+                            "name": "Hip 90/90s",
+                            "sets": "",
+                            "reps": "",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "33b2acbc-523d-4a1e-8456-ba123b2447d0",
@@ -4407,6 +4419,6 @@
       }
     ]
   },
-  "rev": 60,
-  "updatedAt": "2026-08-21T02:20:51.194Z"
+  "rev": 63,
+  "updatedAt": "2026-08-21T02:23:34.191Z"
 }
