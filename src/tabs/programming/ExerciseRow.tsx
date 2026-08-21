@@ -25,6 +25,9 @@ export default function ExerciseRow({
   onDelete,
   onToggleScales,
   onSetScale,
+  onMove,
+  canMoveUp,
+  canMoveDown,
 }: {
   slot: ExerciseSlot;
   overrides: LibraryOverridesDoc;
@@ -36,6 +39,9 @@ export default function ExerciseRow({
   onDelete: () => void;
   onToggleScales: () => void;
   onSetScale: (index: 0 | 1, text: string) => void;
+  onMove: (dir: -1 | 1) => void;
+  canMoveUp: boolean;
+  canMoveDown: boolean;
 }) {
   const scales = slot.exerciseId !== null ? (overrides.scales[slot.exerciseId] ?? []) : [];
   const hasScales = scales.some((s) => s.trim() !== '');
@@ -46,6 +52,31 @@ export default function ExerciseRow({
       <tr className="group">
         <td className="py-1 pr-2">
           <div className="flex items-center gap-1.5">
+            {/* Reorder without deleting and retyping. Stacked so the pair is
+                no wider than one button, and applied to every week of the
+                phase, since the same exercises run all phase. */}
+            <div className="flex shrink-0 flex-col">
+              <button
+                type="button"
+                title="Move up (every week of this phase)"
+                aria-label="Move exercise up"
+                disabled={!canMoveUp}
+                onClick={() => onMove(-1)}
+                className="rounded px-1 text-[10px] leading-[1.15] text-ink-300 hover:text-ink-950 disabled:cursor-not-allowed disabled:opacity-20"
+              >
+                ▲
+              </button>
+              <button
+                type="button"
+                title="Move down (every week of this phase)"
+                aria-label="Move exercise down"
+                disabled={!canMoveDown}
+                onClick={() => onMove(1)}
+                className="rounded px-1 text-[10px] leading-[1.15] text-ink-300 hover:text-ink-950 disabled:cursor-not-allowed disabled:opacity-20"
+              >
+                ▼
+              </button>
+            </div>
             <button
               type="button"
               title={

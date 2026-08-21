@@ -26,12 +26,28 @@
                             "id": "82c8d6cc-4e4c-40d3-b89f-9757a6f6cdcd",
                             "exerciseId": null,
                             "name": "Hip 90/90s",
-                            "sets": "1"
+                            "sets": "1",
+                            "reps": "16"
                           },
                           {
                             "id": "6353016a-347a-434f-a378-6a347dcde75a",
                             "exerciseId": null,
                             "name": "Calf Stretch in Rack w/Toe Lift",
+                            "sets": "1",
+                            "reps": "30sec ea"
+                          },
+                          {
+                            "id": "ffa66321-9089-485f-974d-3eb94395b7ef",
+                            "exerciseId": 8147275,
+                            "name": "Russian Baby Maker",
+                            "sets": "1",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "3bffe8d3-7507-49a7-97a4-29de896dc3dc",
+                            "exerciseId": null,
+                            "name": "Squat Rotations",
+                            "reps": "10ea",
                             "sets": "1"
                           }
                         ]
@@ -4391,6 +4407,6 @@
       }
     ]
   },
-  "rev": 44,
-  "updatedAt": "2026-08-20T03:39:05.540Z"
+  "rev": 60,
+  "updatedAt": "2026-08-21T02:20:51.194Z"
 }

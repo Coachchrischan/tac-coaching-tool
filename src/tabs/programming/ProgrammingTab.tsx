@@ -471,6 +471,73 @@ export default function ProgrammingTab() {
     patchTimedBlock(targetId, (b) => ({ ...b, slots: [...b.slots, slot] }));
   }
 
+  /**
+   * Move an exercise up or down inside its series. The same exercises run all
+   * phase and only the prescriptions change week to week, so a reorder is
+   * applied to every week's matching series by exercise name. Reordering week 1
+   * alone would leave the other nine weeks in the old order.
+   *
+   * A slot with no name yet cannot be matched across weeks, so that case moves
+   * in this session only.
+   */
+  function moveSlot(blockId: string, slotId: string, dir: -1 | 1) {
+    if (session.kind !== 'series') return;
+    const series = session.timedBlocks.find((tb) => tb.id === blockId);
+    if (!series) return;
+    const i = series.slots.findIndex((sl) => sl.id === slotId);
+    const j = i + dir;
+    if (i < 0 || j < 0 || j >= series.slots.length) return;
+
+    const aName = series.slots[i].name.trim().toLowerCase();
+    const bName = series.slots[j].name.trim().toLowerCase();
+    const seriesKey = series.label.trim().toUpperCase();
+
+    // An unnamed slot has no identity to find in the other weeks.
+    if (!aName || !bName || aName === bName) {
+      patchTimedBlock(blockId, (b) => {
+        const slots = [...b.slots];
+        [slots[i], slots[j]] = [slots[j], slots[i]];
+        return { ...b, slots };
+      });
+      return;
+    }
+
+    updateBlocks((all) =>
+      all.map((b, bIdx) => {
+        if (bIdx !== bi) return b;
+        return {
+          ...b,
+          weeks: b.weeks.map((w) => {
+            const target = matchSession(w);
+            if (!target) return w;
+            return {
+              ...w,
+              sessions: w.sessions.map((s) => {
+                if (s.id !== target.id || s.kind !== 'series') return s;
+                return {
+                  ...s,
+                  timedBlocks: s.timedBlocks.map((tb) => {
+                    if (tb.label.trim().toUpperCase() !== seriesKey) return tb;
+                    const ai = tb.slots.findIndex(
+                      (sl) => sl.name.trim().toLowerCase() === aName,
+                    );
+                    const bj = tb.slots.findIndex(
+                      (sl) => sl.name.trim().toLowerCase() === bName,
+                    );
+                    if (ai < 0 || bj < 0 || ai === bj) return tb;
+                    const slots = [...tb.slots];
+                    [slots[ai], slots[bj]] = [slots[bj], slots[ai]];
+                    return { ...tb, slots };
+                  }),
+                };
+              }),
+            };
+          }),
+        };
+      }),
+    );
+  }
+
   function addTimedBlock() {
     patchSeries((s) => ({
       ...s,
@@ -1434,6 +1501,7 @@ export default function ProgrammingTab() {
               }))
             }
             onSetScale={setScale}
+            onMoveSlot={(slotId, dir) => moveSlot(block.id, slotId, dir)}
           />
         ))}
 

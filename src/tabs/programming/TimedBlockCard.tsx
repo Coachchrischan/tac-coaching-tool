@@ -26,6 +26,7 @@ export default function TimedBlockCard({
   onDeleteSlot,
   onToggleScales,
   onSetScale,
+  onMoveSlot,
 }: {
   block: TimedBlock;
   overrides: LibraryOverridesDoc;
@@ -40,6 +41,7 @@ export default function TimedBlockCard({
   onDeleteSlot: (slotId: string) => void;
   onToggleScales: (slotId: string) => void;
   onSetScale: (slot: ExerciseSlot, index: 0 | 1, text: string) => void;
+  onMoveSlot: (slotId: string, dir: -1 | 1) => void;
 }) {
   const style = SERIES_STYLE[block.label.toUpperCase()] ?? NEUTRAL;
   const isWarmup = block.label.toUpperCase() === 'WU';
@@ -101,7 +103,7 @@ export default function TimedBlockCard({
           </tr>
         </thead>
         <tbody>
-          {block.slots.map((slot) => (
+          {block.slots.map((slot, i) => (
             <ExerciseRow
               key={slot.id}
               slot={slot}
@@ -113,7 +115,10 @@ export default function TimedBlockCard({
               onCommitExercise={(name, ex) => onCommitExercise(slot.id, name, ex)}
               onDelete={() => onDeleteSlot(slot.id)}
               onToggleScales={() => onToggleScales(slot.id)}
-              onSetScale={(i, text) => onSetScale(slot, i, text)}
+              onSetScale={(n, text) => onSetScale(slot, n, text)}
+              onMove={(dir) => onMoveSlot(slot.id, dir)}
+              canMoveUp={i > 0}
+              canMoveDown={i < block.slots.length - 1}
             />
           ))}
         </tbody>
