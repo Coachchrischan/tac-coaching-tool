@@ -6,6 +6,7 @@
 } from '../../types/documents';
 import type { LibraryExercise, RankedExercise } from '../../lib/library';
 import Combobox from '../../components/Combobox';
+import { normaliseIntensity } from '../../lib/prescription';
 
 // Editable progression grids: Month (one block, four weeks side by side) and
 // Phase (all three blocks, exercise column repeated per block). Both mirror
@@ -319,6 +320,17 @@ function WeekCells({
             placeholder={label === '%' ? '%' : undefined}
             value={ref.slot[key] ?? ''}
             onChange={(e) => onEdit(ref, { [key]: e.target.value })}
+            // The column is headed %, so a bare number typed into it is a
+            // percentage. Added on blur, not per keystroke, so it does not
+            // fight the cursor while a two-digit number is being typed.
+            onBlur={
+              key === 'intensity'
+                ? (e) => {
+                    const next = normaliseIntensity(e.target.value);
+                    if (next !== e.target.value) onEdit(ref, { intensity: next });
+                  }
+                : undefined
+            }
           />
         </td>
       ))}

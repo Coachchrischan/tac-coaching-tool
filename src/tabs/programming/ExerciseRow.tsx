@@ -1,6 +1,7 @@
 import type { ExerciseSlot, LibraryOverridesDoc } from '../../types/documents';
 import type { LibraryExercise, RankedExercise } from '../../lib/library';
 import Combobox from '../../components/Combobox';
+import { normaliseIntensity } from '../../lib/prescription';
 
 const cell =
   'w-full rounded-md border border-ink-300 bg-white px-1.5 py-1 text-center text-[13px] text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none';
@@ -129,6 +130,14 @@ export default function ExerciseRow({
               className={cell}
               value={slot[key] ?? ''}
               onChange={(e) => onPatch({ [key]: e.target.value })}
+              onBlur={
+                key === 'intensity'
+                  ? (e) => {
+                      const next = normaliseIntensity(e.target.value);
+                      if (next !== e.target.value) onPatch({ intensity: next });
+                    }
+                  : undefined
+              }
             />
           </td>
         ))}

@@ -355,15 +355,37 @@
                             "id": "f0cb43a7-1502-4b83-8648-149721622107",
                             "exerciseId": null,
                             "name": "Hip 90/90s",
-                            "sets": "",
-                            "reps": "",
+                            "sets": "1",
+                            "reps": "16",
                             "intensity": "",
                             "rpe": ""
                           },
                           {
                             "id": "a7be1bda-e264-4138-a446-180b312f2de5",
                             "exerciseId": null,
-                            "name": "Calf Stretch in Rack w/Toe Lift"
+                            "name": "Calf Stretch in Rack w/Toe Lift",
+                            "sets": "1",
+                            "reps": "30sec ea",
+                            "intensity": "",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "ee97ab18-8b56-40bd-83c7-987f01d2811f",
+                            "exerciseId": 8147275,
+                            "name": "Russian Baby Maker",
+                            "sets": "1",
+                            "reps": "10",
+                            "intensity": "",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "cab701de-26be-4a86-bd94-87ca7ec9fc8f",
+                            "exerciseId": null,
+                            "name": "Squat Rotations",
+                            "sets": "1",
+                            "reps": "10ea",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
@@ -378,7 +400,7 @@
                             "name": "Barbell Back Squats (E3OM)",
                             "sets": "3",
                             "reps": "7",
-                            "intensity": "75",
+                            "intensity": "75%",
                             "rpe": "8",
                             "showScales": false
                           },
@@ -391,7 +413,11 @@
                             "id": "3d2c68a0-663b-4e04-a818-058699bb48a9",
                             "exerciseId": 440,
                             "name": "Depth Jump",
-                            "showScales": false
+                            "showScales": false,
+                            "sets": "3",
+                            "reps": "5",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
@@ -615,15 +641,37 @@
                             "id": "f3b8d437-100d-4f77-ac5e-8364bdd0a678",
                             "exerciseId": null,
                             "name": "Hip 90/90s",
-                            "sets": "",
-                            "reps": "",
+                            "sets": "1",
+                            "reps": "16",
                             "intensity": "",
                             "rpe": ""
                           },
                           {
                             "id": "b6263848-cbb9-4081-b988-5eb348591c80",
                             "exerciseId": null,
-                            "name": "Calf Stretch in Rack w/Toe Lift"
+                            "name": "Calf Stretch in Rack w/Toe Lift",
+                            "sets": "1",
+                            "reps": "30sec ea",
+                            "intensity": "",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "fc8850af-0615-4d6a-b70e-312a3e78afc9",
+                            "exerciseId": 8147275,
+                            "name": "Russian Baby Maker",
+                            "sets": "1",
+                            "reps": "10",
+                            "intensity": "",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "8ac6f672-7924-462e-a8eb-46f013273841",
+                            "exerciseId": null,
+                            "name": "Squat Rotations",
+                            "sets": "1",
+                            "reps": "10ea",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
@@ -635,7 +683,10 @@
                           {
                             "id": "e463fbc1-8633-47f4-abd1-414df7e6f70b",
                             "exerciseId": 688272,
-                            "name": "Barbell Back Squats (E3OM)"
+                            "name": "Barbell Back Squats (E3OM)",
+                            "sets": "4",
+                            "reps": "5",
+                            "intensity": "80%"
                           },
                           {
                             "id": "81585aad-4105-444e-9f69-057e5421a02f",
@@ -645,7 +696,11 @@
                           {
                             "id": "3d90e44e-3b06-4b0f-a370-69eacbea97d9",
                             "exerciseId": 440,
-                            "name": "Depth Jump"
+                            "name": "Depth Jump",
+                            "sets": "3",
+                            "reps": "5",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
@@ -869,15 +924,37 @@
                             "id": "5fa83360-1a2a-4963-8fe4-32772fb27d46",
                             "exerciseId": null,
                             "name": "Hip 90/90s",
-                            "sets": "",
-                            "reps": "",
+                            "sets": "1",
+                            "reps": "16",
                             "intensity": "",
                             "rpe": ""
                           },
                           {
                             "id": "33b2acbc-523d-4a1e-8456-ba123b2447d0",
                             "exerciseId": null,
-                            "name": "Calf Stretch in Rack w/Toe Lift"
+                            "name": "Calf Stretch in Rack w/Toe Lift",
+                            "sets": "1",
+                            "reps": "30sec ea",
+                            "intensity": "",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "980c65c7-91be-4212-8c0b-2080f31d28f5",
+                            "exerciseId": 8147275,
+                            "name": "Russian Baby Maker",
+                            "sets": "1",
+                            "reps": "10",
+                            "intensity": "",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "bd999f74-3b7c-4cda-ac2f-e73f59070af4",
+                            "exerciseId": null,
+                            "name": "Squat Rotations",
+                            "sets": "1",
+                            "reps": "10ea",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
@@ -900,7 +977,11 @@
                           {
                             "id": "b2187a72-b176-47b5-9370-7932e2d24f72",
                             "exerciseId": 440,
-                            "name": "Depth Jump"
+                            "name": "Depth Jump",
+                            "sets": "3",
+                            "reps": "5",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
@@ -4419,6 +4500,6 @@
       }
     ]
   },
-  "rev": 63,
-  "updatedAt": "2026-08-21T02:23:34.191Z"
+  "rev": 89,
+  "updatedAt": "2026-08-21T02:29:23.679Z"
 }
