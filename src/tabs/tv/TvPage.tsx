@@ -50,6 +50,9 @@ function findSession(doc: ProgramDoc, sessionId: string) {
               weekIndex: w,
               blockWeeks: phase.weeks.length,
               theme: phase.theme,
+              // ESD, Hyrox and Game Day are programmed month to month, so
+              // "Phase 2" means nothing on their boards. They get the month.
+              cadence: stream.cadence ?? 'phases',
             };
           }
         }
@@ -134,7 +137,7 @@ export default function TvPage() {
     );
   }
 
-  const { session, blockIndex, weekIndex, blockWeeks, theme } = found;
+  const { session, blockIndex, weekIndex, blockWeeks, theme, cadence } = found;
   const overrides = lib.data;
   const merged = library ? mergedLibrary(library, overrides) : [];
   const blurb = session.blurbOverride ?? (library ? generateBlurb(session, merged, overrides) : '');
@@ -345,7 +348,8 @@ export default function TvPage() {
                 )
               )}
               <p className="mt-1 text-[21px] font-semibold text-white/55">
-                Phase {blockIndex + 1} · Week {weekIndex + 1} of {blockWeeks}
+                {cadence === 'months' ? theme : `Phase ${blockIndex + 1}`} · Week{' '}
+                {weekIndex + 1} of {blockWeeks}
               </p>
               <p className="font-display mt-2 text-[20px] italic" style={{ color: SAND }}>
                 Train better, live better.

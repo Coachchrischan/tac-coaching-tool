@@ -96,7 +96,7 @@
                             "sets": "3",
                             "reps": "8ea",
                             "rpe": "7",
-                            "showScales": false
+                            "showScales": true
                           },
                           {
                             "id": "6182b637-e62e-4c0e-8489-8d160afdd4c4",
@@ -3597,7 +3597,117 @@
                     "id": "esd-b1w3s1",
                     "focus": "esd",
                     "kind": "circuit",
-                    "circuit": []
+                    "name": "Monday, MAP",
+                    "intent": "Maximal aerobic power. Whatever you do in round one you must match or beat in round four. If round four is worse, round one was too hard.",
+                    "note": "Loads are light on purpose. Wall ball 6/4kg to 10m, farmers carry 2x20 / 2x12.5kg, step-up bodyweight 45 to 50cm. If a floor movement forces a stop it is too heavy. No sled on Monday: it corrupts the MAP intent and the track is the wrong end of the room.",
+                    "circuit": [
+                      {
+                        "id": "e16f8307-8da2-45c0-b4f0-9cf5b1605ea1",
+                        "heading": "Warm up",
+                        "lines": [
+                          {
+                            "text": "3 min on your round 1 machine, RPE 3 building to 5"
+                          },
+                          {
+                            "text": "Flow x2: world's greatest stretch 4/side, band pull-apart 10, air squat 10, scap pull 8, leg swing 10/side"
+                          },
+                          {
+                            "text": "Touch each floor movement once: 5 burpee broad jumps, 10 light wall balls, 10 step-ups, 20m carry"
+                          },
+                          {
+                            "text": "Priming ramp on your round 1 machine",
+                            "load": "3 x 40s at RPE 6, 7, 8, 40s easy between"
+                          }
+                        ],
+                        "restAfter": "Straight to your round 1 station"
+                      },
+                      {
+                        "id": "f7678d65-bf1d-4dce-b472-b28d625c4dc3",
+                        "heading": "4 rounds: 4 min work, 3 min rest",
+                        "lines": [
+                          {
+                            "text": "3 min machine, RPE 8 to 8.5",
+                            "load": "2k pace + 3 to 6s, or 3km race pace"
+                          },
+                          {
+                            "text": "1 min paired floor movement, straight off the machine, no walk"
+                          },
+                          {
+                            "text": "Rotation: runner + burpee broad jump, rower + wall ball, ski + farmers carry, bike + bench step-up"
+                          }
+                        ],
+                        "restAfter": "Rest 3 minutes between rounds. Final rest not taken"
+                      },
+                      {
+                        "id": "d10ff4c8-236b-4df1-a8e3-58f891c937e4",
+                        "heading": "Finish",
+                        "lines": [
+                          {
+                            "text": "4 min easy machine, RPE 3. Nobody sits down"
+                          },
+                          {
+                            "text": "2 rounds: 12 band pull-apart, 10 band pull-over, 10/side side plank reach, 20s dead hang"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "esd-b2w1-friday",
+                    "focus": "esd",
+                    "kind": "circuit",
+                    "name": "Friday, threshold",
+                    "intent": "Threshold. Three blocks of eight minutes with no stopping inside the eight. RPE 7 is three or four words at a time, no more and no less.",
+                    "note": "Zones: 1 runner + 15m shuttle, 2 runner + wall ball, 3 rower + farmers carry, 4 bike + bench step-up, 5 ski + sled. Your pod stays in one zone for the whole block. Zone 5 is capped at three people, one sled lane each, so nobody ever waits. If a floor load makes you stop it is wrong: tell the coach.",
+                    "circuit": [
+                      {
+                        "id": "5c3aba71-a7c0-4243-8e25-7d6cc44bca37",
+                        "heading": "Warm up",
+                        "lines": [
+                          {
+                            "text": "4 min on your starting machine, RPE 3 building to 5"
+                          },
+                          {
+                            "text": "Mobility: 8/side 90/90 hip switch, 10/side ankle rocker, 8/side open book, 10 band pull-apart, 10 glute bridge"
+                          },
+                          {
+                            "text": "Threshold calibration, coach corrects on the floor",
+                            "load": "2 x 90s at what you think is RPE 7, 60s easy between"
+                          }
+                        ],
+                        "restAfter": "Pods to their starting zone"
+                      },
+                      {
+                        "id": "2ee902d2-7a0f-4e6c-8fb8-4cda4c094e50",
+                        "heading": "3 blocks: 8 min continuous, 3 min rest",
+                        "lines": [
+                          {
+                            "text": "3 min machine A, RPE 7",
+                            "load": "2k pace + 8 to 12s, or 10km pace"
+                          },
+                          {
+                            "text": "2 min pod floor movement, continuous, no stopping"
+                          },
+                          {
+                            "text": "3 min machine B, RPE 7",
+                            "load": "Same target as machine A"
+                          }
+                        ],
+                        "restAfter": "Rest 3 minutes between blocks. Final rest not taken"
+                      },
+                      {
+                        "id": "9e755dd8-90ee-46c7-b1c5-b410d11f5674",
+                        "heading": "Accessory",
+                        "lines": [
+                          {
+                            "text": "2 rounds: 10 ring row at RPE 6, 12 band good morning, 10/side single-leg glute bridge, 12 band face pull"
+                          },
+                          {
+                            "text": "Cool down: 2 min easy walk, then calf and soleus, adductor, lat"
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               },
@@ -3608,7 +3718,117 @@
                     "id": "esd-b1w4s1",
                     "focus": "esd",
                     "kind": "circuit",
-                    "circuit": []
+                    "name": "Monday, MAP",
+                    "intent": "Same session as last Monday with one extra round. The pace does not change. Round five puts you back on your round one machine, so it is a direct comparison.",
+                    "note": "Week 1 round 1 numbers go on the board next to each name before class. Wall ball 6/4kg to 10m, farmers carry 2x20 / 2x12.5kg, step-up bodyweight 45 to 50cm.",
+                    "circuit": [
+                      {
+                        "id": "ea2f6130-cc8d-4a9d-9670-7c663bcdf2a9",
+                        "heading": "Warm up",
+                        "lines": [
+                          {
+                            "text": "3 min on your round 1 machine, RPE 3 building to 5"
+                          },
+                          {
+                            "text": "Flow x2: world's greatest stretch 4/side, band pull-apart 10, air squat 10, scap pull 8, leg swing 10/side"
+                          },
+                          {
+                            "text": "Touch each floor movement once: 5 burpee broad jumps, 10 light wall balls, 10 step-ups, 20m carry"
+                          },
+                          {
+                            "text": "Priming ramp on your round 1 machine",
+                            "load": "3 x 40s at RPE 6, 7, 8, 40s easy between"
+                          }
+                        ],
+                        "restAfter": "Straight to your round 1 station"
+                      },
+                      {
+                        "id": "22ebb24b-d934-4452-8fd3-9a769436e934",
+                        "heading": "5 rounds: 4 min work, 3 min rest",
+                        "lines": [
+                          {
+                            "text": "3 min machine, RPE 8 to 8.5",
+                            "load": "Same pace as week 1, not faster"
+                          },
+                          {
+                            "text": "1 min paired floor movement, no walk"
+                          },
+                          {
+                            "text": "Rounds 1 to 4 rotate. Round 5 returns to your round 1 station"
+                          }
+                        ],
+                        "restAfter": "Rest 3 minutes between rounds. Final rest not taken"
+                      },
+                      {
+                        "id": "d10ff4c8-236b-4df1-a8e3-58f891c937e4",
+                        "heading": "Finish",
+                        "lines": [
+                          {
+                            "text": "4 min easy machine, RPE 3. Nobody sits down"
+                          },
+                          {
+                            "text": "2 rounds: 12 band pull-apart, 10 band pull-over, 10/side side plank reach, 20s dead hang"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "esd-b2w2-friday",
+                    "focus": "esd",
+                    "kind": "circuit",
+                    "name": "Friday, threshold",
+                    "intent": "Same pace as last Friday, two minutes longer per block. Minute ten should look identical to minute one. Do not upgrade the effort.",
+                    "note": "Zones: 1 runner + 15m shuttle, 2 runner + wall ball, 3 rower + farmers carry, 4 bike + bench step-up, 5 ski + sled. Machine legs go 3 min to 4 min; the floor leg stays at 2 min so local fatigue never forces a stop. Accessory is dropped this week to protect the clock.",
+                    "circuit": [
+                      {
+                        "id": "15ac105c-da9f-49ac-82a8-01e6f0374625",
+                        "heading": "Warm up",
+                        "lines": [
+                          {
+                            "text": "4 min on your starting machine, RPE 3 building to 5"
+                          },
+                          {
+                            "text": "Mobility: 8/side 90/90 hip switch, 10/side ankle rocker, 8/side open book, 10 band pull-apart, 10 glute bridge"
+                          },
+                          {
+                            "text": "Threshold calibration, coach corrects on the floor",
+                            "load": "2 x 90s at RPE 7, 60s easy between"
+                          }
+                        ],
+                        "restAfter": "Pods to their starting zone"
+                      },
+                      {
+                        "id": "acb6d7db-30fc-40c4-981f-2df0e0316dfe",
+                        "heading": "3 blocks: 10 min continuous, 3 min rest",
+                        "lines": [
+                          {
+                            "text": "4 min machine A, RPE 7",
+                            "load": "2k pace + 8 to 12s"
+                          },
+                          {
+                            "text": "2 min pod floor movement, continuous"
+                          },
+                          {
+                            "text": "4 min machine B, RPE 7",
+                            "load": "Same target as A"
+                          }
+                        ],
+                        "restAfter": "Rest 3 minutes between blocks. Final rest not taken"
+                      },
+                      {
+                        "id": "08eacc89-0196-4e5f-b3d2-a2bcf95a6fd8",
+                        "heading": "Finish",
+                        "lines": [
+                          {
+                            "text": "3 min easy walk or machine, nasal breathing"
+                          },
+                          {
+                            "text": "Calf and soleus, adductor, lat"
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               },
@@ -3619,7 +3839,117 @@
                     "id": "esd-b1w5s1",
                     "focus": "esd",
                     "kind": "circuit",
-                    "circuit": []
+                    "name": "Monday, MAP",
+                    "intent": "Same five rounds, same pace, rest drops to two minutes. It should feel about a point harder by round three. That is the progression, not a mistake.",
+                    "note": "Two minutes is true rest, so the layout is compressed to under 15m between stations and the call is \"moving at ninety seconds\". Round two is a trap: do not go faster because you feel good.",
+                    "circuit": [
+                      {
+                        "id": "61a1ce27-9d06-4e07-8c37-1c946f6fbd11",
+                        "heading": "Warm up",
+                        "lines": [
+                          {
+                            "text": "3 min on your round 1 machine, RPE 3 building to 5"
+                          },
+                          {
+                            "text": "Flow x2: world's greatest stretch 4/side, band pull-apart 10, air squat 10, scap pull 8, leg swing 10/side"
+                          },
+                          {
+                            "text": "Touch each floor movement once: 5 burpee broad jumps, 10 light wall balls, 10 step-ups, 20m carry"
+                          },
+                          {
+                            "text": "Priming ramp on your round 1 machine",
+                            "load": "3 x 40s at RPE 6, 7, 8, 40s easy between"
+                          }
+                        ],
+                        "restAfter": "Straight to your round 1 station"
+                      },
+                      {
+                        "id": "903177b4-8a1a-41db-8bf9-c0fadde990e2",
+                        "heading": "5 rounds: 4 min work, 2 min rest",
+                        "lines": [
+                          {
+                            "text": "3 min machine, RPE 8 to 8.5",
+                            "load": "Same absolute pace as weeks 1 and 2"
+                          },
+                          {
+                            "text": "1 min paired floor movement, no walk"
+                          },
+                          {
+                            "text": "Round 5 returns to your round 1 station"
+                          }
+                        ],
+                        "restAfter": "Rest 2 minutes. Coach calls \"moving\" at 90 seconds"
+                      },
+                      {
+                        "id": "d10ff4c8-236b-4df1-a8e3-58f891c937e4",
+                        "heading": "Finish",
+                        "lines": [
+                          {
+                            "text": "4 min easy machine, RPE 3. Nobody sits down"
+                          },
+                          {
+                            "text": "2 rounds: 12 band pull-apart, 10 band pull-over, 10/side side plank reach, 20s dead hang"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "esd-b2w3-friday",
+                    "focus": "esd",
+                    "kind": "circuit",
+                    "name": "Friday, threshold",
+                    "intent": "Same ten minutes, rest drops to two. Block three will feel like an eight and it is still a seven’s pace. Watch the number on the machine, not the feeling.",
+                    "note": "Zones: 1 runner + 15m shuttle, 2 runner + wall ball, 3 rower + farmers carry, 4 bike + bench step-up, 5 ski + sled. With a two minute rest the two pods crossing from zone 5 to zone 1 move first on the whistle, through the coned rig bays. Hardest week of the block: next week is shorter and faster.",
+                    "circuit": [
+                      {
+                        "id": "d441112f-0607-4b3f-820d-7d3ad5b7c52d",
+                        "heading": "Warm up",
+                        "lines": [
+                          {
+                            "text": "4 min on your starting machine, RPE 3 building to 5"
+                          },
+                          {
+                            "text": "Mobility: 8/side 90/90 hip switch, 10/side ankle rocker, 8/side open book, 10 band pull-apart, 10 glute bridge"
+                          },
+                          {
+                            "text": "Threshold calibration, coach corrects on the floor",
+                            "load": "2 x 90s at RPE 7, 60s easy between"
+                          }
+                        ],
+                        "restAfter": "Pods to their starting zone"
+                      },
+                      {
+                        "id": "a3d0a821-69d8-484b-9e41-b6e61e13179a",
+                        "heading": "3 blocks: 10 min continuous, 2 min rest",
+                        "lines": [
+                          {
+                            "text": "4 min machine A, RPE 7",
+                            "load": "Identical pace to week 2"
+                          },
+                          {
+                            "text": "2 min pod floor movement, continuous"
+                          },
+                          {
+                            "text": "4 min machine B, RPE 7",
+                            "load": "Same target as A"
+                          }
+                        ],
+                        "restAfter": "Rest 2 minutes. Straight to your next machine"
+                      },
+                      {
+                        "id": "88b4b8ab-e4ea-4d6a-955c-d0c7cde6301c",
+                        "heading": "Accessory",
+                        "lines": [
+                          {
+                            "text": "1 round: 10 ring row RPE 6, 12 band good morning, 10/side single-leg glute bridge, 12 band face pull"
+                          },
+                          {
+                            "text": "Cool down: 3 min easy machine RPE 2"
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               },
@@ -3630,7 +3960,123 @@
                     "id": "esd-b1w6s1",
                     "focus": "esd",
                     "kind": "circuit",
-                    "circuit": []
+                    "name": "Monday, MAP",
+                    "intent": "Shorter and faster. Rounds one to five are a nine out of ten. Round six is everything you have, on your round one machine, and it goes in the log.",
+                    "note": "Do not spend round six in round three. Round 6 is compared against week 1 round 1 on the same machine, so the machine number matters.",
+                    "circuit": [
+                      {
+                        "id": "157939c2-5e13-4b6c-9668-1847a9ed3a3f",
+                        "heading": "Warm up",
+                        "lines": [
+                          {
+                            "text": "3 min on your round 1 machine, RPE 3 building to 5"
+                          },
+                          {
+                            "text": "Flow x2: world's greatest stretch 4/side, band pull-apart 10, air squat 10, scap pull 8, leg swing 10/side"
+                          },
+                          {
+                            "text": "Touch each floor movement once: 5 burpee broad jumps, 10 light wall balls, 10 step-ups, 20m carry"
+                          },
+                          {
+                            "text": "Priming ramp on your round 1 machine",
+                            "load": "4 x 30s at RPE 6, 7, 8, then 9, 45s easy between"
+                          }
+                        ],
+                        "restAfter": "Straight to your round 1 station"
+                      },
+                      {
+                        "id": "9fac8d3b-c358-4562-8026-9e5e47ef6ce0",
+                        "heading": "6 rounds: 3 min work, 2 min rest",
+                        "lines": [
+                          {
+                            "text": "2:15 machine, RPE 9",
+                            "load": "2k pace + 0 to 3s, or 3km pace or faster"
+                          },
+                          {
+                            "text": "0:45 paired floor movement"
+                          },
+                          {
+                            "text": "Rounds 1 to 4 rotate, round 5 is your round 2 station"
+                          },
+                          {
+                            "text": "Round 6 is your round 1 station, all out, recorded"
+                          }
+                        ],
+                        "restAfter": "Rest 2 minutes. Final rest not taken"
+                      },
+                      {
+                        "id": "5a2ea626-45b9-4373-98cc-e7bbdff10845",
+                        "heading": "Finish",
+                        "lines": [
+                          {
+                            "text": "5 min easy machine, RPE 3. Nobody sits or lies down after round six"
+                          },
+                          {
+                            "text": "Calf and soleus, hip flexor, lat, thoracic, 45s each"
+                          },
+                          {
+                            "text": "Block wrap: round 6 against week 1 round 1"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "esd-b2w4-friday",
+                    "focus": "esd",
+                    "kind": "circuit",
+                    "name": "Friday, upper threshold",
+                    "intent": "Last session of the block. Blocks drop back to eight minutes and the pace goes up five to eight seconds per five hundred. Two or three words now, not four.",
+                    "note": "Floor loads go up one increment: wall ball 9/6kg, carry 2x24 / 2x16kg, step-up with 1x10kg, sled at 13 to 16s per length. The no-walking rule still applies, so if the heavier load stops you, put it back down mid-block.",
+                    "circuit": [
+                      {
+                        "id": "b4cb18f3-0d62-4c96-b1b0-63b54be59850",
+                        "heading": "Warm up",
+                        "lines": [
+                          {
+                            "text": "4 min on your starting machine, RPE 3 building to 5"
+                          },
+                          {
+                            "text": "Mobility: 8/side 90/90 hip switch, 10/side ankle rocker, 8/side open book, 10 band pull-apart, 10 glute bridge"
+                          },
+                          {
+                            "text": "Threshold calibration, coach corrects on the floor",
+                            "load": "2 x 2 min at the NEW target of RPE 7.5 to 8, 60s easy between"
+                          }
+                        ],
+                        "restAfter": "Pods to their starting zone"
+                      },
+                      {
+                        "id": "28cefda4-1f51-48db-8002-b5121b0085fa",
+                        "heading": "3 blocks: 8 min continuous, 2 min rest",
+                        "lines": [
+                          {
+                            "text": "3 min machine A, RPE 7.5 to 8",
+                            "load": "2k pace + 5 to 8s, between 10km and 5km pace"
+                          },
+                          {
+                            "text": "2 min pod floor movement, continuous, heavier load"
+                          },
+                          {
+                            "text": "3 min machine B, RPE 7.5 to 8",
+                            "load": "Same target as A"
+                          }
+                        ],
+                        "restAfter": "Rest 2 minutes. Final rest not taken"
+                      },
+                      {
+                        "id": "b3fb7cec-790c-4674-bc89-75d252606f5e",
+                        "heading": "Accessory and block wrap",
+                        "lines": [
+                          {
+                            "text": "2 rounds: 10 ring row RPE 6, 12 band good morning, 10/side single-leg glute bridge, 12 band face pull"
+                          },
+                          {
+                            "text": "Compare Friday paces across the four weeks"
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               }
@@ -3933,7 +4379,129 @@
                     "id": "hyrox-b1w3s1",
                     "focus": "hyrox",
                     "kind": "circuit",
-                    "circuit": []
+                    "name": "Monday, benchmark",
+                    "intent": "TAC Benchmark A. Five legs for time, capped at 32 minutes. This exact piece returns in week four and the target then is three to five per cent faster, so today has to be honest.",
+                    "note": "Five entry points, 3/3/3/3/4. Everyone starts on their run. If every runner is full, take the station first and tell the coach. Record your time, your entry leg and your air runner number: same runner in week four or the number means nothing. Run the first two legs at 10km pace. This is won on legs four and five.",
+                    "circuit": [
+                      {
+                        "id": "14909383-d483-4319-ad23-e4de4597e01c",
+                        "heading": "Warm up",
+                        "lines": [
+                          {
+                            "text": "4 min easy air runner or row, RPE 3 to 4"
+                          },
+                          {
+                            "text": "Dynamic: 10 leg swings/side, 10 walking lunges, 10 air squats, 10 band pull-apart, 8 scap pulls, 10m bear crawl"
+                          },
+                          {
+                            "text": "One touch of each station: 5 wall balls, one sled length at working weight, 10m carry, 3 burpee broad jumps"
+                          },
+                          {
+                            "text": "Transition rehearsal",
+                            "load": "2 rounds of 200m run at race pace then 10 wall balls, 60s easy between"
+                          }
+                        ],
+                        "restAfter": "To your entry leg"
+                      },
+                      {
+                        "id": "d956d01a-fa66-40c7-8dd0-95e04e1d698e",
+                        "heading": "Benchmark A, for time, cap 32 min",
+                        "lines": [
+                          {
+                            "text": "500m run, then 40 wall balls",
+                            "load": "9kg M / 6kg W to 10m"
+                          },
+                          {
+                            "text": "500m run, then sled push and pull",
+                            "load": "50m each, race weight"
+                          },
+                          {
+                            "text": "500m run, then 30 burpee broad jumps"
+                          },
+                          {
+                            "text": "500m run, then 200m farmers carry",
+                            "load": "2x24kg M / 2x16kg W"
+                          },
+                          {
+                            "text": "500m run, then 500m ski erg"
+                          }
+                        ],
+                        "restAfter": "No rest. 2500m of running plus five stations"
+                      },
+                      {
+                        "id": "c9fc1d41-8440-42b0-b1fe-6aa85b2ca9a9",
+                        "heading": "Finish and record",
+                        "lines": [
+                          {
+                            "text": "3 min easy bike or walk, RPE 2"
+                          },
+                          {
+                            "text": "Calf, hip flexor, thoracic rotation, forearm and grip"
+                          },
+                          {
+                            "text": "Time, entry leg and runner number onto the sheet on the way out"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b2w1-friday",
+                    "focus": "hyrox",
+                    "kind": "circuit",
+                    "name": "Friday, stations",
+                    "intent": "Not much running, a lot of work with load in your hands. Two reps in reserve at every station: thirty good beats forty rough.",
+                    "note": "Stations: A sled end, ski opener then sled push and pull, capped at 3. B runner end, runner then wall ball. C upper floor, bike then DB front rack lunge. D upper floor, rower then farmers carry shuttles. E rig, runner then ring row, dead hang, band pull-apart, farmer hold. Five stations rather than four because the sled track holds three. Group 1 is the three-person group and always starts on the sled, so the cap holds without recounting. Block 2 starts one station further along.",
+                    "circuit": [
+                      {
+                        "id": "95d1a2b6-929d-42d8-9e1e-0c675b1cab59",
+                        "heading": "Warm up",
+                        "lines": [
+                          {
+                            "text": "4 min easy runner or row, RPE 3 to 4"
+                          },
+                          {
+                            "text": "Dynamic: leg swings, walking lunges, air squats, band pull-apart, scap pulls"
+                          },
+                          {
+                            "text": "2 x 30s at each of two stations"
+                          }
+                        ],
+                        "restAfter": "To your starting station"
+                      },
+                      {
+                        "id": "c7cc60e5-11ee-467e-8067-b8cd2a96fa3b",
+                        "heading": "2 blocks of 15 min: 5 stations x 3 min",
+                        "lines": [
+                          {
+                            "text": "0:00 to 0:45, 200m on the machine beside the station, RPE 6"
+                          },
+                          {
+                            "text": "0:45 to 2:45, station work, quality reps, stop two short of form breakdown"
+                          },
+                          {
+                            "text": "2:45 to 3:00, transition on the whistle"
+                          },
+                          {
+                            "text": "Loads",
+                            "load": "Sled race weight, wall ball 9/6, lunge 2x15 / 2x10, carry 2x24 / 2x16"
+                          }
+                        ],
+                        "restAfter": "Rest 2 minutes between blocks"
+                      },
+                      {
+                        "id": "838383d8-1a9b-49a5-aa25-d4ca0ee1a725",
+                        "heading": "Finish",
+                        "lines": [
+                          {
+                            "text": "4 min easy machine, RPE 2"
+                          },
+                          {
+                            "text": "Quad, adductor, forearm, lat"
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               },
@@ -3944,7 +4512,133 @@
                     "id": "hyrox-b1w4s1",
                     "focus": "hyrox",
                     "kind": "circuit",
-                    "circuit": []
+                    "name": "Monday, race simulation",
+                    "intent": "Six legs, and this one is NOT for time. Your benchmark run pace is next to your name. Hold it on every leg including the last one.",
+                    "note": "Anyone who beats their pace on leg one and dies on leg five has done the session wrong. Six entry points this week, so congestion improves. Leg six is where you find out if you paced it.",
+                    "circuit": [
+                      {
+                        "id": "ec6739a5-840a-425b-b8f6-42a024c74da2",
+                        "heading": "Warm up",
+                        "lines": [
+                          {
+                            "text": "4 min easy air runner or row, RPE 3 to 4"
+                          },
+                          {
+                            "text": "Dynamic: 10 leg swings/side, 10 walking lunges, 10 air squats, 10 band pull-apart, 8 scap pulls, 10m bear crawl"
+                          },
+                          {
+                            "text": "One touch of each station: 5 wall balls, one sled length at working weight, 10m carry, 3 burpee broad jumps"
+                          },
+                          {
+                            "text": "Transition rehearsal",
+                            "load": "2 rounds of 200m run at race pace then 10 wall balls, 60s easy between"
+                          }
+                        ],
+                        "restAfter": "To your entry leg"
+                      },
+                      {
+                        "id": "39a7a9cc-fe85-45aa-afd0-93fe15210da1",
+                        "heading": "Six legs, hold your pace, cap 34 min",
+                        "lines": [
+                          {
+                            "text": "500m run, then 40 wall balls",
+                            "load": "9/6kg"
+                          },
+                          {
+                            "text": "500m run, then sled push and pull",
+                            "load": "50m each"
+                          },
+                          {
+                            "text": "500m run, then 30 burpee broad jumps"
+                          },
+                          {
+                            "text": "500m run, then 200m farmers carry",
+                            "load": "2x24 / 2x16kg"
+                          },
+                          {
+                            "text": "500m run, then 500m ski erg"
+                          },
+                          {
+                            "text": "500m run, then 100m DB walking lunge",
+                            "load": "2x15 / 2x10kg"
+                          }
+                        ],
+                        "restAfter": "Six entry points, 3/3/3/3/2/2. 3000m of running"
+                      },
+                      {
+                        "id": "baba24d0-7db8-448b-ab49-038ea52d4e61",
+                        "heading": "Finish",
+                        "lines": [
+                          {
+                            "text": "3 min easy bike, RPE 2"
+                          },
+                          {
+                            "text": "Calf, hip flexor, forearm"
+                          },
+                          {
+                            "text": "Whose pace held and whose faded. More than 10s per 500m of fade means you started too hot"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b2w2-friday",
+                    "focus": "hyrox",
+                    "kind": "circuit",
+                    "name": "Friday, stations",
+                    "intent": "Same five stations. Every station gives you a full extra minute of work and the loads do not change. Two reps in reserve is harder to obey in that last minute, which is the point.",
+                    "note": "Stations: A sled end, ski opener then sled push and pull, capped at 3. B runner end, runner then wall ball. C upper floor, bike then DB front rack lunge. D upper floor, rower then farmers carry shuttles. E rig, runner then ring row, dead hang, band pull-apart, farmer hold",
+                    "circuit": [
+                      {
+                        "id": "95d1a2b6-929d-42d8-9e1e-0c675b1cab59",
+                        "heading": "Warm up",
+                        "lines": [
+                          {
+                            "text": "4 min easy runner or row, RPE 3 to 4"
+                          },
+                          {
+                            "text": "Dynamic: leg swings, walking lunges, air squats, band pull-apart, scap pulls"
+                          },
+                          {
+                            "text": "2 x 30s at each of two stations"
+                          }
+                        ],
+                        "restAfter": "To your starting station"
+                      },
+                      {
+                        "id": "fb9b1f5d-9f92-4b25-8c94-44b02ebd2d1d",
+                        "heading": "2 blocks of 17:30: 5 stations x 3:30",
+                        "lines": [
+                          {
+                            "text": "0:00 to 0:45, 200m on the machine beside the station, RPE 6"
+                          },
+                          {
+                            "text": "0:45 to 3:00, station work, up one minute on week 1"
+                          },
+                          {
+                            "text": "3:00 to 3:30, transition"
+                          },
+                          {
+                            "text": "Loads",
+                            "load": "Unchanged from week 1"
+                          }
+                        ],
+                        "restAfter": "Rest 2 minutes between blocks"
+                      },
+                      {
+                        "id": "14d506a8-32f9-4e41-941d-88af44b56da3",
+                        "heading": "Finish",
+                        "lines": [
+                          {
+                            "text": "4 min easy machine, RPE 2"
+                          },
+                          {
+                            "text": "Quad, adductor, forearm, lat"
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               },
@@ -3955,7 +4649,129 @@
                     "id": "hyrox-b1w5s1",
                     "focus": "hyrox",
                     "kind": "circuit",
-                    "circuit": []
+                    "name": "Monday, transition density",
+                    "intent": "Same five legs, more work at each station, and every transition capped at twenty seconds. The coach counts them out loud. This is the whole progression.",
+                    "note": "In a race, walking between stations is where most people lose three or four minutes, and it is the cheapest time you will ever get back. If a station is full when you arrive you jog 10m shuttles until it clears. Nobody stands still today.",
+                    "circuit": [
+                      {
+                        "id": "a647e532-1529-419f-94ef-69ca77b12a23",
+                        "heading": "Warm up",
+                        "lines": [
+                          {
+                            "text": "4 min easy air runner or row, RPE 3 to 4"
+                          },
+                          {
+                            "text": "Dynamic: 10 leg swings/side, 10 walking lunges, 10 air squats, 10 band pull-apart, 8 scap pulls, 10m bear crawl"
+                          },
+                          {
+                            "text": "One touch of each station: 5 wall balls, one sled length at working weight, 10m carry, 3 burpee broad jumps"
+                          },
+                          {
+                            "text": "Transition rehearsal",
+                            "load": "3 rounds: 200m run at race pace, 20s transition on the clock, 10 wall balls, 20s transition, 100m carry. 60s easy between"
+                          }
+                        ],
+                        "restAfter": "To your entry leg"
+                      },
+                      {
+                        "id": "c22dc666-79ad-40de-80c7-2d6e2f59a18f",
+                        "heading": "Five legs, 20s transition cap, cap 32 min",
+                        "lines": [
+                          {
+                            "text": "500m run, then 50 wall balls",
+                            "load": "9/6kg, up 10 reps"
+                          },
+                          {
+                            "text": "500m run, then sled push and pull",
+                            "load": "50m each, unchanged"
+                          },
+                          {
+                            "text": "500m run, then 40 burpee broad jumps, up 10 reps"
+                          },
+                          {
+                            "text": "500m run, then 200m farmers carry",
+                            "load": "2x24 / 2x16kg"
+                          },
+                          {
+                            "text": "500m run, then 750m ski erg, up 250m"
+                          }
+                        ],
+                        "restAfter": "Twenty seconds from finishing a run to working, and from finishing a station to running"
+                      },
+                      {
+                        "id": "04530a09-21e2-4508-9b91-4953b7e99c91",
+                        "heading": "Finish",
+                        "lines": [
+                          {
+                            "text": "3 min easy bike, RPE 2"
+                          },
+                          {
+                            "text": "Calf, hip flexor, thoracic, forearm and grip"
+                          },
+                          {
+                            "text": "How much time each member would lose to walking in a race. Benchmark re-test next week"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b2w3-friday",
+                    "focus": "hyrox",
+                    "kind": "circuit",
+                    "name": "Friday, stations",
+                    "intent": "Same five stations, same block length, half the transition. Fifteen seconds between stations and the coach is counting, so the time comes off your walk and goes onto your work.",
+                    "note": "Stations: A sled end, ski opener then sled push and pull, capped at 3. B runner end, runner then wall ball. C upper floor, bike then DB front rack lunge. D upper floor, rower then farmers carry shuttles. E rig, runner then ring row, dead hang, band pull-apart, farmer hold. The 15 second transition only works because every station has its machine beside it. The one long move, sled end to runner end, goes where the block break falls, through the coned rig bays.",
+                    "circuit": [
+                      {
+                        "id": "95d1a2b6-929d-42d8-9e1e-0c675b1cab59",
+                        "heading": "Warm up",
+                        "lines": [
+                          {
+                            "text": "4 min easy runner or row, RPE 3 to 4"
+                          },
+                          {
+                            "text": "Dynamic: leg swings, walking lunges, air squats, band pull-apart, scap pulls"
+                          },
+                          {
+                            "text": "2 x 30s at each of two stations"
+                          }
+                        ],
+                        "restAfter": "To your starting station"
+                      },
+                      {
+                        "id": "db6dce68-4699-4751-9699-edeedf91b020",
+                        "heading": "2 blocks of 17:30: 5 stations x 3:30",
+                        "lines": [
+                          {
+                            "text": "0:00 to 0:45, 200m on the machine beside the station, RPE 6"
+                          },
+                          {
+                            "text": "0:45 to 3:15, station work, up 15s on week 2"
+                          },
+                          {
+                            "text": "3:15 to 3:30, transition, down from 30s"
+                          },
+                          {
+                            "text": "Loads",
+                            "load": "Unchanged"
+                          }
+                        ],
+                        "restAfter": "Rest 2 minutes between blocks"
+                      },
+                      {
+                        "id": "b3af3b83-1d36-445b-b57c-94c61d01692d",
+                        "heading": "Finish",
+                        "lines": [
+                          {
+                            "text": "4 min easy machine, RPE 2"
+                          },
+                          {
+                            "text": "Quad, adductor, forearm, lat"
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               },
@@ -3966,7 +4782,132 @@
                     "id": "hyrox-b1w6s1",
                     "focus": "hyrox",
                     "kind": "circuit",
-                    "circuit": []
+                    "name": "Monday, benchmark re-test",
+                    "intent": "The same benchmark as week one. Same five legs, same loads, same air runner, same entry leg. The target is three to five per cent faster.",
+                    "note": "Nothing changes today, because the whole point is that the number means something. Four validity rules: same runner number, same entry leg, same sled load and lengths weighed and confirmed, same wall ball and carry loads. Anyone who scaled in week one scales identically. Do not offer new scaling options on the day.",
+                    "circuit": [
+                      {
+                        "id": "61e2b467-8ee4-4a28-8708-79752fe56e89",
+                        "heading": "Warm up",
+                        "lines": [
+                          {
+                            "text": "4 min easy air runner or row, RPE 3 to 4"
+                          },
+                          {
+                            "text": "Dynamic: 10 leg swings/side, 10 walking lunges, 10 air squats, 10 band pull-apart, 8 scap pulls, 10m bear crawl"
+                          },
+                          {
+                            "text": "One touch of each station: 5 wall balls, one sled length at working weight, 10m carry, 3 burpee broad jumps"
+                          },
+                          {
+                            "text": "Transition rehearsal",
+                            "load": "2 rounds of 200m run at race pace then 10 wall balls, 60s easy between"
+                          }
+                        ],
+                        "restAfter": "To your entry leg"
+                      },
+                      {
+                        "id": "994bb5c3-61dc-489c-bf44-b1be3fc9b140",
+                        "heading": "Benchmark A, identical to week 1, cap 32 min",
+                        "lines": [
+                          {
+                            "text": "500m run, then 40 wall balls",
+                            "load": "9kg M / 6kg W to 10m"
+                          },
+                          {
+                            "text": "500m run, then sled push and pull",
+                            "load": "50m each, race weight"
+                          },
+                          {
+                            "text": "500m run, then 30 burpee broad jumps"
+                          },
+                          {
+                            "text": "500m run, then 200m farmers carry",
+                            "load": "2x24kg M / 2x16kg W"
+                          },
+                          {
+                            "text": "500m run, then 500m ski erg"
+                          }
+                        ],
+                        "restAfter": "Run leg one at your week one pace, not faster. The gains show up on legs four and five"
+                      },
+                      {
+                        "id": "b124dfcf-a409-4fc8-b46f-b42699898b30",
+                        "heading": "Finish and compare",
+                        "lines": [
+                          {
+                            "text": "3 min easy bike, RPE 2"
+                          },
+                          {
+                            "text": "Calf, hip flexor, thoracic, forearm"
+                          },
+                          {
+                            "text": "Week 1 against week 4 on the board, side by side, every member"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b2w4-friday",
+                    "focus": "hyrox",
+                    "kind": "circuit",
+                    "name": "Friday, stations",
+                    "intent": "Last stations session of the block. Every station goes up one load increment and every station is a minute shorter. Heavier, shorter, same standard.",
+                    "note": "Two reps in reserve still applies. If the extra load costs you your positions, put it back down. The opener goes to RPE 7.",
+                    "circuit": [
+                      {
+                        "id": "95d1a2b6-929d-42d8-9e1e-0c675b1cab59",
+                        "heading": "Warm up",
+                        "lines": [
+                          {
+                            "text": "4 min easy runner or row, RPE 3 to 4"
+                          },
+                          {
+                            "text": "Dynamic: leg swings, walking lunges, air squats, band pull-apart, scap pulls"
+                          },
+                          {
+                            "text": "2 x 30s at each of two stations"
+                          }
+                        ],
+                        "restAfter": "To your starting station"
+                      },
+                      {
+                        "id": "31a37fa8-70cf-4d24-bdf3-3b73ce23ccb9",
+                        "heading": "2 blocks of 15 min: 5 stations x 3 min",
+                        "lines": [
+                          {
+                            "text": "0:00 to 0:45, 200m on the machine beside the station, RPE 7"
+                          },
+                          {
+                            "text": "0:45 to 2:45, station work at the heaviest sustainable load"
+                          },
+                          {
+                            "text": "2:45 to 3:00, transition"
+                          },
+                          {
+                            "text": "Loads up one increment",
+                            "load": "Sled +20kg, wall ball to 9/6, lunge 2x20 / 2x12.5, carry 2x28 / 2x20, rig to strict pull-up and weighted farmer hold"
+                          }
+                        ],
+                        "restAfter": "Rest 2 minutes between blocks"
+                      },
+                      {
+                        "id": "d16b7a82-f48e-45ea-ba0c-6291571cd098",
+                        "heading": "Finish and block wrap",
+                        "lines": [
+                          {
+                            "text": "4 min easy machine, RPE 2"
+                          },
+                          {
+                            "text": "Quad, adductor, forearm, lat"
+                          },
+                          {
+                            "text": "What the four weeks bought you"
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               }
@@ -4577,6 +5518,6 @@
       }
     ]
   },
-  "rev": 130,
-  "updatedAt": "2026-08-21T05:38:19.761Z"
+  "rev": 134,
+  "updatedAt": "2026-08-21T06:17:57.087Z"
 }
