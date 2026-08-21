@@ -47,21 +47,23 @@ a private web app I use to plan the club's training year and run classes off the
 Home, Annual Plan, Programming, Movement Check, Schedule, Attendance, Layouts, Equipment,
 Community, Planning, Ethos.
 
-- **Home** — class-numbers dashboard. Popularity ranking; a grouped comparison chart; clicking a
+- **Home**: class-numbers dashboard. Popularity ranking; a grouped comparison chart; clicking a
   class drills into that class against itself (bar per week or month). 12 weeks of seeded demo
   attendance (Jun to Aug 2026, 108 entries).
-- **Annual Plan** — 52-week ruler with a Month / Week / Monday-date header, three lanes
+- **Annual Plan**: 52-week ruler with a Month / Week / Monday-date header, three lanes
   (Strength 9 phases, ESD 6, Hyrox 8), phases as bars (labels run vertical when 2 weeks or less),
   and **HYROX race markers**: Perth 21-23 Aug 2026, Melbourne 9-13 Dec 2026, Auckland 4-7 Feb 2027,
   Brisbane 31 Mar - 4 Apr 2027. Year starts **Mon 24 Aug 2026**.
-- **Programming** — the big one. See below.
-- **Movement Check** — pattern coverage for the Strength stream only.
-- **Schedule** — drag-drop timetable, scenarios ("Current timetable", "Suggested Format" is
-  active). Right-click an empty slot to add a class. Concurrent classes lane by **room order**.
-- **Layouts** — one floor plan per class. Fixed fixtures (air runners, rig, sled track) are drawn
+- **Programming**: the big one. See below.
+- **Movement Check**: pattern coverage for the Strength stream only.
+- **Schedule**: drag-drop timetable, named week scenarios. **"Suggested Format" is the current
+  format**, the live timetable everything acts on; "Current timetable" is the older week, kept.
+  The one on screen may be a sketch, and the tab says which you are looking at. Right-click an
+  empty slot to add a class. Concurrent classes lane by **room order**.
+- **Layouts**: one floor plan per class. Fixed fixtures (air runners, rig, sled track) are drawn
   from `roomModel.ts` on every layout; movable gear is a palette with count, spacing, direction
   and a station number.
-- **Planning** — paste box: paste anything, one **Save** button decides if it is to-dos or a dated
+- **Planning**: paste box: paste anything, one **Save** button decides if it is to-dos or a dated
   note, and lifts action lines out of prose. Notes in a dropdown. 1 real note (my meeting summary),
   13 to-dos.
 
@@ -75,10 +77,12 @@ Community, Planning, Ethos.
   those three are programmed month to month rather than periodised; the UI says "Month" for them.
   - **strength** (`series`, phases): 3 phases, 17 weeks, **280 exercises** (my real Block 1). Each
     phase carries `annualPhaseId` linking it to its AnnualPhase.
-  - **esd** (`circuit`, months): 5 months, 17 weeks, Monday + Friday of Aug W1 written.
-  - **hyrox** (`circuit`, months): 5 months, 17 weeks, Monday + Friday of Aug W1 written.
+  - **esd** (`circuit`, months): 5 months, 17 weeks. Aug W1 written, plus **all of Sept 2026**
+    (4 weeks x Monday MAP + Friday threshold) from the conditioning block document.
+  - **hyrox** (`circuit`, months): 5 months, 17 weeks. Aug W1 written, plus **all of Sept 2026**
+    (4 weeks x Monday HYROX A + Friday HYROX B).
   - **gameday** (`circuit`, months): 5 months, 17 weeks, **first 4 Saturdays written**.
-  34 of 104 sessions hold content. Writing the rest is the main outstanding job, and it is
+  50 of 104 sessions hold content. Writing the rest is the main outstanding job, and it is
   coaching time rather than build time.
 - **Two session formats.** Strength uses `timedBlocks` (WU/A/B/C series of exercise slots with
   sets/reps/%/RPE). ESD, Hyrox and Game Day use `circuit[]`: each piece has a heading
@@ -94,12 +98,14 @@ Community, Planning, Ethos.
   per-class member photos as backdrops. Export PNG / PDF.
 - **TrainHeroic push:** `POST /api/team-push` via `src/server/teamPushPlugin.ts`, using
   `trainheroic-mcp`'s client and token. **Only Strength** maps to a team ("TAC Strength Class",
-  TrainHeroic program id **5071078**). The six stale drafts were **deleted on 2026-08-20**; the
-  team calendar is empty for Aug to Oct and **nothing has been re-pushed yet**.
-  Session days come from the **active Schedule scenario** (currently "Suggested Format": Lower
-  Tuesday, Upper Thursday, Full Body Friday) through `src/lib/classDays.ts`, which both the
-  confirm dialogue and the server use, so they cannot disagree. A focus with no class in the
-  active timetable is named and skipped rather than guessed at.
+  TrainHeroic program id **5071078**). The six stale drafts were deleted on 2026-08-20 and
+  **Phase 1 weeks 1 and 2 were re-pushed on 2026-08-21**: Tue 25, Thu 27, Fri 28 Aug and Tue 1,
+  Thu 3, Fri 4 Sept. Weeks 3 to 10 are written but not pushed.
+  Session days come from the **current format** (the scenario marked live in Schedule, currently
+  "Suggested Format": Lower Tuesday, Upper Thursday, Full Body Friday) through
+  `src/lib/classDays.ts`, which both the confirm dialogue and the server use, so they cannot
+  disagree. A focus with no class in the live timetable is named and skipped rather than guessed
+  at, and an exercise with no TrainHeroic id is skipped and named too.
 - **Dates are TRAINING weeks.** `src/lib/trainingWeeks.ts` turns a training-week index into a
   calendar Monday, stepping over club shutdowns (see below). Read a Date back with its `isoDate`
   helper, never `toISOString().slice(0, 10)`: these Dates are local midnight, and in Brisbane the
