@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toSvg } from 'html-to-image';
 import { jsPDF } from 'jspdf';
@@ -12,6 +12,12 @@ import { scaleOptions, scaleSummary } from '../../lib/prescription';
 
 const W = 1920;
 const H = 1080;
+
+// How far the board is allowed to shrink its own type before it gives up and
+// says so. Below about two thirds the back of the room cannot read it, so a
+// board that still does not fit is a coaching problem, not a layout one.
+const FIT_FLOOR = 0.64;
+const FIT_STEP = 0.04;
 
 // TAC palette (TAC/brand.md): cream, charcoal, deep pine, warm sand.
 const CREAM = '#F5F3EB';
@@ -77,6 +83,37 @@ export default function TvPage() {
   const { library } = useLibrary();
   const slideRef = useRef<HTMLDivElement>(null);
   const [exporting, setExporting] = useState(false);
+  // The board is a fixed 1920x1080 slide, so a long session used to run past
+  // the bottom edge and simply disappear: the class did what was on the wall
+  // and finished two movements short, with the board still looking complete.
+  // It now measures itself and shrinks the work area until everything fits.
+  const [fit, setFit] = useState(1);
+  const [clipped, setClipped] = useState(false);
+
+  // A different session starts the measurement again from full size.
+  useLayoutEffect(() => {
+    setFit(1);
+    setClipped(false);
+  }, [sessionId]);
+
+  // No dependency list on purpose: this runs after every paint and either
+  // shrinks one step or leaves the state alone, so it settles within a few
+  // frames and then stops calling setState.
+  useLayoutEffect(() => {
+    const node = slideRef.current;
+    if (!node) return;
+    const lists = node.querySelectorAll<HTMLElement>('[data-fit-measure]');
+    let overflows = false;
+    lists.forEach((el) => {
+      if (el.scrollHeight > el.clientHeight + 1) overflows = true;
+    });
+    if (overflows) {
+      if (fit > FIT_FLOOR) setFit((f) => Math.max(FIT_FLOOR, Number((f - FIT_STEP).toFixed(2))));
+      else if (!clipped) setClipped(true);
+    } else if (clipped) {
+      setClipped(false);
+    }
+  });
 
   const found = useMemo(
     () => (program.data && sessionId ? findSession(program.data, sessionId) : null),
@@ -181,8 +218,26 @@ export default function TvPage() {
 
   const scale = `min(calc(100vw / ${W}), calc(100vh / ${H}))`;
 
+  // Lay the work area out larger than its box, then scale it back, so the type
+  // shrinks and the board keeps its full width.
+  const fitStyle = {
+    width: `${100 / fit}%`,
+    height: `${100 / fit}%`,
+    transform: `scale(${fit})`,
+    transformOrigin: 'top left',
+  } as const;
+
   return (
     <div className="flex min-h-screen items-center justify-center overflow-hidden bg-black">
+      {/* Outside the slide on purpose: this is for the coach at the laptop,
+          and it must never reach the wall or the exported image. */}
+      {clipped && (
+        <div className="fixed top-4 left-4 z-10 max-w-md rounded-md bg-amber-400 px-3 py-2 text-sm font-semibold text-amber-950 shadow-lg">
+          This session is too long for one board even at the smallest readable
+          type. Some work is not on the screen. Split it across two boards or
+          shorten the session.
+        </div>
+      )}
       {/* control bar */}
       <div className="fixed top-4 right-4 z-10 flex gap-2">
         <button
@@ -313,12 +368,12 @@ export default function TvPage() {
             <>
               {/* Kept clear of the right-hand photo panel so the members show */}
               <main
-                className="mt-6 grid min-h-0 flex-1 gap-6"
-                style={{
-                  gridTemplateColumns: `repeat(${Math.min(circuit.length, 4)}, minmax(0, 1fr))`,
-                  width: circuit.length >= 4 ? '100%' : '74%',
-                }}
+                className="mt-6 min-h-0 flex-1 overflow-hidden"
+                style={{ width: circuit.length >= 4 ? '100%' : '74%' }}
               >
+              {/* Laid out at 1/fit of the real size and scaled back down, so
+                  shrinking buys vertical room without narrowing the board. */}
+              <div className="grid gap-6" style={{ ...fitStyle, gridTemplateColumns: `repeat(${Math.min(circuit.length, 4)}, minmax(0, 1fr))` }}>
                 {circuit.map((piece, i) => (
                   <section
                     key={piece.id}
@@ -342,7 +397,7 @@ export default function TvPage() {
                         {piece.heading || '—'}
                       </p>
                     </div>
-                    <ul className="flex-1 space-y-3 px-6 py-5">
+                    <ul data-fit-measure className="flex-1 space-y-3 overflow-hidden px-6 py-5">
                       {piece.lines
                         .filter((l) => l.text.trim())
                         .map((line, li) => (
@@ -375,6 +430,7 @@ export default function TvPage() {
                     )}
                   </section>
                 ))}
+              </div>
               </main>
 
               {/* the coach note belongs on the wall, not just in the app */}
@@ -428,7 +484,8 @@ export default function TvPage() {
 
           {/* series columns */}
           {!isCircuit && (
-          <main className="mt-7 grid min-h-0 flex-1 grid-flow-col auto-cols-fr gap-8">
+          <main className="mt-7 min-h-0 flex-1 overflow-hidden">
+          <div className="grid grid-flow-col auto-cols-fr gap-8" style={fitStyle}>
             {series.map((block) => (
               <section
                 key={block.id}
@@ -446,7 +503,7 @@ export default function TvPage() {
                     {block.minutes} min
                   </span>
                 </div>
-                <ul className="flex-1 space-y-6 px-7 py-6">
+                <ul data-fit-measure className="flex-1 space-y-6 overflow-hidden px-7 py-6">
                   {filled(block).map((slot, i) => (
                     <li key={slot.id} className="flex gap-5">
                       <span
@@ -500,7 +557,7 @@ export default function TvPage() {
                       {part.minutes} min
                     </span>
                   </div>
-                  <ul className="flex-1 space-y-5 px-7 py-6">
+                  <ul data-fit-measure className="flex-1 space-y-5 overflow-hidden px-7 py-6">
                     {part.pieces.map((piece) => (
                       <li key={piece.id}>
                         {piece.heading.trim() && (
@@ -530,6 +587,7 @@ export default function TvPage() {
                   </ul>
                 </section>
               ))}
+          </div>
           </main>
           )}
 
