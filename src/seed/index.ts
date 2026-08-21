@@ -104,6 +104,9 @@ export function seedSchedule(): ScheduleDoc {
     rooms: ROOMS,
     scenarios: [{ id: 'current', name: 'Current timetable', blocks }],
     activeScenarioId: 'current',
+    // A fresh document has one week and it is the real one, so the live
+    // pointer is set from the start rather than left to the fallback.
+    liveScenarioId: 'current',
   };
 }
 

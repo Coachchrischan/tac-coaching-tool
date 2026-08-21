@@ -10,6 +10,7 @@ import {
   monthlyPerWeek,
   weeklyCount,
 } from '../../lib/attendancePeriods';
+import { liveScenario } from '../../lib/scenarios';
 
 /** Which programming stream delivers a timetable class, where one does. */
 const STREAM_FOR_CLASS: Record<string, string> = {
@@ -70,12 +71,11 @@ export default function HomeTab() {
 
     const max = Math.max(1, ...groups.flatMap((g) => g.bars.map((b) => b.count)));
 
-    // How many times each class type runs in the active timetable. Without
-    // this the ranking measures how OFTEN a class runs, not how full it is:
-    // ESD runs nine times a week, Game Day once.
-    const scenario =
-      schedule.data.scenarios.find((s) => s.id === schedule.data!.activeScenarioId) ??
-      schedule.data.scenarios[0];
+    // How many times each class type runs in the LIVE timetable. Without this
+    // the ranking measures how OFTEN a class runs, not how full it is: ESD
+    // runs nine times a week, Game Day once. Live, not viewed, so a sketched
+    // week cannot change the numbers put in front of the owners.
+    const scenario = liveScenario(schedule.data);
     const runsPerWeek = new Map<string, number>();
     for (const b of scenario?.blocks ?? []) {
       runsPerWeek.set(b.classTypeId, (runsPerWeek.get(b.classTypeId) ?? 0) + 1);
@@ -115,9 +115,9 @@ export default function HomeTab() {
   // on the class about to run, so a second coach had to be told where to look.
   const now = new Date();
   const todayIndex = (now.getDay() + 6) % 7; // Mon = 0, matching ClassBlock.day
-  const activeScenario =
-    schedule.data.scenarios.find((s) => s.id === schedule.data!.activeScenarioId) ??
-    schedule.data.scenarios[0];
+  // The live timetable: what is actually on today, not whatever week is open
+  // in the Schedule tab.
+  const activeScenario = liveScenario(schedule.data);
   const nameOf = (list: { id: string; name: string }[], id: string | null) =>
     list.find((x) => x.id === id)?.name ?? null;
   const todayClasses = (activeScenario?.blocks ?? [])
@@ -287,7 +287,7 @@ export default function HomeTab() {
                         title={
                           t.runs > 0
                             ? `${t.weekAvg.toFixed(0)} a week across ${t.runs} class${t.runs === 1 ? '' : 'es'}`
-                            : 'Not on the active timetable, so this is the whole week'
+                            : 'Not on the live timetable, so this is the whole week'
                         }
                       >
                         {t.avg.toFixed(0)}

@@ -53,6 +53,10 @@ export interface WeekScenario {
   id: string;
   name: string;
   note?: string;
+  /** Retired when a newer format went live. Kept so an old week can come back. */
+  archived?: boolean;
+  /** ISO date it was retired, shown beside its name in the archive. */
+  archivedOn?: string;
   blocks: ClassBlock[];
 }
 
@@ -61,7 +65,16 @@ export interface ScheduleDoc {
   coaches: Coach[];
   rooms: Room[];
   scenarios: WeekScenario[];
+  /** The scenario on screen in the Schedule tab. Safe to sketch on. */
   activeScenarioId: string;
+  /**
+   * The club's real timetable: the week members turn up to. The TrainHeroic
+   * push, Home's Today panel and the floor-plan class sizes read this one, so
+   * sketching a hypothetical week can no longer move the dates members see.
+   * Optional because documents written before the split do not have it; see
+   * `lib/scenarios.ts` for the fallback.
+   */
+  liveScenarioId?: string;
 }
 
 // ---------- Programming ----------

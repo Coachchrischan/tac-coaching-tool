@@ -24,6 +24,7 @@
 
 import type { AttendanceDoc, EquipmentDoc, LayoutItem, ScheduleDoc } from '../types/documents';
 import { CANVAS_W, equipDef } from '../tabs/layouts/roomModel';
+import { liveScenario } from './scenarios';
 
 /** Which timetable class types each layout room covers. */
 export const ROOM_CLASS_TYPES: Record<string, string[]> = {
@@ -36,7 +37,7 @@ export const ROOM_CLASS_TYPES: Record<string, string[]> = {
 /**
  * Typical heads in ONE class of this kind. The attendance document holds weekly
  * totals for a class type, so the per-class figure is that total divided by how
- * many of those classes the active timetable runs each week.
+ * many of those classes the live timetable runs each week.
  */
 export function typicalClassSize(
   attendance: AttendanceDoc | null,
@@ -46,8 +47,7 @@ export function typicalClassSize(
   const types = ROOM_CLASS_TYPES[roomId];
   if (!attendance || !schedule || !types) return null;
 
-  const scenario =
-    schedule.scenarios.find((s) => s.id === schedule.activeScenarioId) ?? schedule.scenarios[0];
+  const scenario = liveScenario(schedule);
   const classesPerWeek = (scenario?.blocks ?? []).filter((b) => types.includes(b.classTypeId)).length;
   if (!classesPerWeek) return null;
 

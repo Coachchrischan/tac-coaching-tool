@@ -7,6 +7,7 @@ import ScenarioBar from './ScenarioBar';
 import SettingsDrawer from './SettingsDrawer';
 import WeekGrid from './WeekGrid';
 import { DAY_END_MIN } from './scheduleLayout';
+import { liveIsAssumed, liveScenario, viewedScenario } from '../../lib/scenarios';
 
 export default function ScheduleTab() {
   const { data: doc, saveState, update, reloadTheirs, keepMine, retry } = useDoc('schedule');
@@ -17,7 +18,11 @@ export default function ScheduleTab() {
     return <p className="py-20 text-center text-sm text-ink-400">Loading timetable…</p>;
   }
 
-  const scenario = doc.scenarios.find((s) => s.id === doc.activeScenarioId) ?? doc.scenarios[0];
+  // The week on screen, which may be a sketch. What the club actually runs is
+  // liveScenario(doc), and only that decides the days sessions are pushed to.
+  const scenario = viewedScenario(doc) ?? doc.scenarios[0];
+  const live = liveScenario(doc);
+  const viewingLive = live?.id === scenario.id;
   const selectedBlock = scenario.blocks.find((b) => b.id === selectedBlockId) ?? null;
 
   function patchBlock(id: string, patch: Partial<ClassBlock>) {
@@ -100,6 +105,27 @@ export default function ScheduleTab() {
         </div>
       </div>
 
+      {/* Which week you are on is never left to be inferred: everything that
+          acts on the timetable reads the current format, not this view. */}
+      {liveIsAssumed(doc) ? (
+        <p className="mb-3 rounded-md border border-amber-300 bg-amber-50 px-3 py-2 text-[13px] text-amber-900">
+          <span className="font-semibold">No format is marked current yet.</span> Until one is, the
+          tool falls back to the week you are viewing, so a sketch can move the days sessions are
+          pushed to. Open the real week and press <strong>Make this the current format</strong>.
+        </p>
+      ) : viewingLive ? (
+        <p className="mb-3 rounded-md border border-accent-600/30 bg-accent-100/40 px-3 py-2 text-[13px] text-ink-700">
+          <span className="font-semibold text-ink-950">This is the current format.</span> It decides
+          the days sessions are pushed to TrainHeroic, what Home shows as on today, and the class
+          sizes floor layouts are built for. Sketch on a duplicate instead of editing here.
+        </p>
+      ) : (
+        <p className="mb-3 rounded-md border border-ink-300 bg-ink-100 px-3 py-2 text-[13px] text-ink-700">
+          <span className="font-semibold text-ink-950">You are sketching.</span> The current format
+          is <strong>{live?.name}</strong>, and nothing here changes what members see until you press
+          Make this the current format.
+        </p>
+      )}
       <p className="mb-3 text-[13px] text-ink-500">
         Drag classes to move them. Add a class with the button or by right-clicking an empty slot;
         click a class to edit or duplicate it.

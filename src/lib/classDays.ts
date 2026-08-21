@@ -2,13 +2,14 @@
 //
 // The TrainHeroic push used to assume Monday, Wednesday and Friday. The club
 // runs Lower on Tuesday and Upper on Thursday, so every pushed session landed
-// on a day its class does not run. Days now come from the active Schedule
-// scenario, and the confirm dialogue shows what was resolved before anything
-// is created.
+// on a day its class does not run. Days now come from the LIVE Schedule
+// scenario (see lib/scenarios.ts), not the one on screen, and the confirm
+// dialogue shows what was resolved before anything is created.
 
 // The .js extension keeps this importable from the Vite plugin, which is
 // compiled under nodenext resolution as well as from the app.
 import type { ScheduleDoc, SessionFocus } from '../types/documents.js';
+import { liveScenario } from './scenarios.js';
 
 /** Day index 0 is Monday, matching ClassBlock.day. */
 export const DAY_NAMES = [
@@ -43,7 +44,7 @@ export interface ResolvedDay {
 export interface ResolvedWeek {
   scenarioName: string;
   days: ResolvedDay[];
-  /** Focuses the active timetable has no class for. */
+  /** Focuses the live timetable has no class for. */
   missing: SessionFocus[];
 }
 
@@ -63,8 +64,9 @@ export function resolveWeekDays(
   monday: string,
   focuses: SessionFocus[],
 ): ResolvedWeek {
-  const scenario =
-    schedule.scenarios.find((s) => s.id === schedule.activeScenarioId) ?? schedule.scenarios[0];
+  // The LIVE timetable, never the one being viewed: a sketch on screen must
+  // not decide the day a real athlete session lands on.
+  const scenario = liveScenario(schedule);
   const days = focuses.map((focus): ResolvedDay => {
     const classTypeId = FOCUS_CLASS_TYPE[focus];
     const dayIndex = (scenario?.blocks ?? [])

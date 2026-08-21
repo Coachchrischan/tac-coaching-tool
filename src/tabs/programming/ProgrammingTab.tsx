@@ -794,14 +794,14 @@ export default function ProgrammingTab() {
     });
     if (resolved.days.every((d) => !d.date)) {
       window.alert(
-        `Nothing to push: the "${resolved.scenarioName}" timetable has no class for this week's sessions.`,
+        `Nothing to push: the current format, "${resolved.scenarioName}", has no class for this week's sessions.`,
       );
       return;
     }
     if (
       !window.confirm(
         `Push Phase ${bi + 1} Week ${wi + 1} to the TAC Strength Class team calendar as DRAFTS?\n\n` +
-          `Days come from the "${resolved.scenarioName}" timetable:\n${lines.join('\n')}\n\n` +
+          `Days come from the current format, "${resolved.scenarioName}":\n${lines.join('\n')}\n\n` +
           `Nothing is published; you publish in the coach app.`,
       )
     )

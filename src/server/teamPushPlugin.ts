@@ -147,7 +147,8 @@ export function teamPushPlugin(): Plugin {
             return;
           }
 
-          // Which day each session runs on comes from the active timetable.
+          // Which day each session runs on comes from the CURRENT FORMAT, the
+          // scenario marked live in Schedule, never the one on screen there.
           const schedule: ScheduleDoc = JSON.parse(
             readFileSync(join(root, 'data', 'schedule.json'), 'utf8'),
           ).data;
@@ -161,7 +162,7 @@ export function teamPushPlugin(): Plugin {
           );
           if (plan.length === 0) {
             send(res, 400, {
-              error: `no class in the "${resolved.scenarioName}" timetable runs any of these sessions, so there is no day to push them to`,
+              error: `no class in the current format, "${resolved.scenarioName}", runs any of these sessions, so there is no day to push them to`,
             });
             return;
           }
