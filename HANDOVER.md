@@ -144,6 +144,50 @@ backlog now: it covers the same ground ordered by what it costs the club.
   canvas.
 - Workflow scripts with CRLF line endings are rejected by the approval dialog; normalise to LF first.
 
+## What shipped on 2026-08-21
+
+All committed and pushed to `Coachchrischan/tac-coaching-tool`. Programming tab unless noted.
+
+- **Session parts are a union.** A part is a SERIES (sets and reps) or a CIRCUIT, on
+  `kind`, so a strength day can finish on a 10 minute AMRAP. `+ Circuit` sits beside
+  `+ Timed block`; it is written the ESD way and gets its own board column. Every
+  sets-and-reps edit goes through the `mapSeries` helper so circuit parts are never
+  touched by a series edit. A part with no `kind` is a series, so nothing needed
+  migrating. `CircuitPartCard.tsx` is its editor.
+- **Reorder arrows** on each exercise row, applied across every week of the phase by
+  exercise name, since the same exercises run all phase.
+- **Three copy actions, deliberately distinct.** Per row (the arrow in the Copy
+  column) copies that exercise's week-1 sets/reps/%/RPE across the block. `all` under
+  that header does every row at once, with a confirm, because the main lifts wave.
+  The first week's header (`Week 5 -> 6-8`) pushes that week's EXERCISE LIST to the
+  rest of the block, keeping each week's own numbers so the waves survive.
+- **Block length is per phase** (`ProgramBlock.blockLength`, default 4), stepper in
+  the Edit panel, so three-week waves are expressible. Block pages, their week ranges
+  and the grid window all follow it.
+- **Scaled options carry their own prescription** (sets, reps, load, %, RPE, tempo).
+  Older documents stored plain strings and are lifted on read by `scaleOptions()`.
+  Limitation: scales are stored against the EXERCISE, not the slot, so a scale reads
+  the same everywhere that exercise appears. Per-week scale numbers would need them
+  moved onto the slot.
+- **A bare number in the % column becomes a percentage** on blur (70 becomes 70%).
+- **The tool opens on today.** Programming jumps to the live training week; Home has
+  an "On today" panel listing today's classes with coach, room and links.
+- **Home's two numbers are honest now.** Popularity ranks by heads in one class
+  (Game Day 17 tops it, ESD 7 is eighth) rather than total attendances, and months
+  show an average week with the current one marked "so far", so ESD reads 62, 65, 73
+  climbing rather than 311, 259, 219 falling.
+- **Block pages show only their own weeks.** They used to list every exercise in the
+  phase, so Block 1 showed work from Block 2.
+- **Layouts.** Clicking an item selects it (it used to select and deselect on the
+  same click, making the whole editor dead); items are labelled inside the shape
+  (ROW, SKI, DB), with a load kept underneath; "Suggest a format" proposes a station
+  loop, two lines, pods, split room or relay lanes from the real class size and the
+  stock the club owns.
+- **The output rail is z-40** so its hover labels sit above the grids.
+
+**Known, not chased:** a duplicate React key warning mentioning `hyrox` in the
+console, seen while debugging something else. Source not identified.
+
 ## Where to start
 
 Read `REVIEW-2026-08-20-TABS.md` and go over it with me before building. Its own top five are:
