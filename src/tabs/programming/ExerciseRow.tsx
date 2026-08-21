@@ -152,52 +152,67 @@ export default function ExerciseRow({
           </button>
         </td>
       </tr>
+      {/* A scale is a row of the same table, not a panel floating under it.
+          Laid out in the table's own cells, so its name box ends exactly where
+          the exercise box above ends and every number sits under its column
+          heading. As a colSpan flexbox nothing lined up with anything. */}
+      {showScales &&
+        slot.exerciseId !== null &&
+        [0, 1].map((i) => {
+          const opt = scales[i] ?? { name: '' };
+          return (
+            <tr key={`scale-${i}`} className="bg-ink-50">
+              <td className="py-1 pr-2">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-14 shrink-0 pl-1 text-[11px] font-medium tracking-wide text-ink-400 uppercase">
+                    Scale {i + 1}
+                  </span>
+                  <input
+                    className="min-w-0 flex-1 rounded-md border border-ink-300 bg-white px-2 py-1 text-[13px] text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none"
+                    placeholder={i === 0 ? 'e.g. box squat to 20 inch box' : 'optional second scale'}
+                    value={opt.name}
+                    onChange={(e) => onSetScale(i as 0 | 1, { name: e.target.value })}
+                  />
+                  {/* An invisible copy of the video mark above, so the name box
+                      stops on the same pixel rather than on a guessed width. */}
+                  <span aria-hidden className="invisible shrink-0 p-1">
+                    <svg width="15" height="15" viewBox="0 0 24 24" />
+                  </span>
+                </div>
+              </td>
+              {/* Its own prescription: a scale is rarely the same sets and reps
+                  as the movement it replaces, and TrainHeroic needs the numbers
+                  to push it as a line of its own. */}
+              {SLOT_FIELDS.map(([key, label]) => (
+                <td key={key} className="w-16 px-0.5 py-1">
+                  <input
+                    className={cell}
+                    // No placeholder: the box now sits under its own column
+                    // heading, so repeating "Sets" inside it is noise.
+                    title={`${label} for this scaled option`}
+                    value={opt[key] ?? ''}
+                    onChange={(e) => onSetScale(i as 0 | 1, { [key]: e.target.value })}
+                    onBlur={
+                      key === 'intensity'
+                        ? (e) => {
+                            const next = normaliseIntensity(e.target.value);
+                            if (next !== e.target.value) onSetScale(i as 0 | 1, { intensity: next });
+                          }
+                        : undefined
+                    }
+                  />
+                </td>
+              ))}
+              <td className="w-8 py-1 pl-1" />
+            </tr>
+          );
+        })}
       {showScales && slot.exerciseId !== null && (
-        <tr>
-          <td colSpan={8} className="pt-0 pb-2 pl-9">
-            <div className="space-y-1 rounded-md border border-ink-200 bg-ink-50 px-3 py-2">
-              {[0, 1].map((i) => {
-                const opt = scales[i] ?? { name: '' };
-                return (
-                  <div key={i} className="flex flex-wrap items-center gap-1.5">
-                    <span className="w-14 shrink-0 text-[11px] font-medium tracking-wide text-ink-400 uppercase">
-                      Scale {i + 1}
-                    </span>
-                    <input
-                      className="min-w-40 flex-1 rounded-md border border-ink-300 bg-white px-2 py-1 text-sm text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none"
-                      placeholder={i === 0 ? 'e.g. box squat to 20 inch box' : 'optional second scale'}
-                      value={opt.name}
-                      onChange={(e) => onSetScale(i as 0 | 1, { name: e.target.value })}
-                    />
-                    {/* Its own prescription: a scale is rarely the same sets and
-                        reps as the movement it replaces, and TrainHeroic needs
-                        the numbers to push it as a line of its own. */}
-                    {SLOT_FIELDS.map(([key, label]) => (
-                      <input
-                        key={key}
-                        className="w-14 rounded-md border border-ink-300 bg-white px-1 py-1 text-center text-[12px] text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none"
-                        placeholder={label}
-                        title={`${label} for this scaled option`}
-                        value={opt[key] ?? ''}
-                        onChange={(e) => onSetScale(i as 0 | 1, { [key]: e.target.value })}
-                        onBlur={
-                          key === 'intensity'
-                            ? (e) => {
-                                const next = normaliseIntensity(e.target.value);
-                                if (next !== e.target.value)
-                                  onSetScale(i as 0 | 1, { intensity: next });
-                              }
-                            : undefined
-                        }
-                      />
-                    ))}
-                  </div>
-                );
-              })}
-              <p className="text-[11px] text-ink-400">
-                Saved with the exercise. Any session using it shows the same scales.
-              </p>
-            </div>
+        // A caption row, not a cell inside the grid: it says nothing about any
+        // one column and must not push one wider.
+        <tr className="bg-ink-50">
+          <td colSpan={8} className="pb-2 pl-[68px] text-[11px] text-ink-400">
+            Saved with the exercise. Any session using it shows the same scales.
           </td>
         </tr>
       )}
