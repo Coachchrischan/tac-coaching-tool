@@ -10,8 +10,9 @@ I am Chris Chan, Coach Leader at **Teneriffe Athletic Club** (TAC), a group-trai
 76 Commercial Road, Teneriffe, Brisbane. You are continuing work on the **TAC coaching tool**:
 a private web app I use to plan the club's training year and run classes off the floor.
 
-- **Location:** `C:\Users\User\Cowork\TAC\coaching-tool\` (its own git repo, gitignored from the
-  outer `cowork` repo, no GitHub remote yet).
+- **Location:** `C:\Users\User\Cowork\TAC\coaching-tool\` (its own git repo,
+  `Coachchrischan/tac-coaching-tool`, private; gitignored from the outer `cowork` repo and
+  covered by the Launchpad Git sync buttons).
 - **Stack:** React + Vite + TypeScript + Tailwind v4. Runs on **port 8127**
   (`preview_start` with name `tac-coaching-tool`, or it may already be running).
 - **Zone rules:** read `TAC/brief.md` and `TAC/brand.md` first. Root routing is
