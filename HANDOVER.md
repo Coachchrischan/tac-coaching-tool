@@ -237,6 +237,12 @@ All committed and pushed to `Coachchrischan/tac-coaching-tool`. Programming tab 
   (the Monday round restructure, dropping burpee broad jumps from Monday,
   cutting W3 Monday to 4 rounds, inverting the HYROX load defaults). Those are
   recommendations on Chris's programming and are his call.
+- **Scaled options carry the demo video link too.** `ScaledOption` gained an
+  optional `exerciseId`, and the scale name field is now the same library
+  picker the exercise above uses, so a scale picked from the library gets the
+  exact title, the id and the video. Video lookup is by id then by name, so
+  scales written before this still resolve where the name matches the library
+  title exactly. Free text still works and just gets no video.
 - **Month-cadence boards print the month**, not "Phase 2". Strength unchanged.
 - The duplicate `hyrox` React key was `LayoutsTab.tsx`: the suggest panel and
   the canvas were siblings both keyed `room.id`. Reproduced, fixed, confirmed.
