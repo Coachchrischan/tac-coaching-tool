@@ -174,7 +174,7 @@ export default function TvPage() {
   const cueFor = (slot: ExerciseSlot) =>
     slot.exerciseId !== null ? overrides.cues[slot.exerciseId] : undefined;
   const scalesFor = (slot: ExerciseSlot) =>
-    scaleOptions(overrides, slot.exerciseId).filter((s) => s.name.trim());
+    scaleOptions(overrides, slot).filter((s) => s.name.trim());
 
   // html-to-image's toPng uses img.decode(), which can hang in background tabs,
   // so we do the SVG -> canvas -> PNG conversion ourselves with onload.

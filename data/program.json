@@ -72,7 +72,8 @@
                             "exerciseId": null,
                             "name": "DB or Plate Drag Through",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "10ea",
+                            "showScales": true
                           },
                           {
                             "id": "c911e4ca-e7ba-4ccc-b152-1fec7be2bf3c",
@@ -103,7 +104,8 @@
                             "exerciseId": 2263920,
                             "name": "Single Leg Hamstring Bridge",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "10ea",
+                            "showScales": true
                           }
                         ]
                       },
@@ -5518,6 +5520,6 @@
       }
     ]
   },
-  "rev": 134,
-  "updatedAt": "2026-08-21T06:17:57.087Z"
+  "rev": 138,
+  "updatedAt": "2026-08-21T06:20:09.692Z"
 }

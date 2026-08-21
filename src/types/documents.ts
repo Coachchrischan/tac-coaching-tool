@@ -265,11 +265,16 @@ export interface ScaledOption {
 export interface LibraryOverridesDoc {
   patterns: Record<number, Pattern[]>; // exerciseId -> coach-tagged patterns (wins over guess)
   /**
-   * exerciseId -> up to 2 scaled options. Each carries its own prescription,
+   * Exercise key -> up to 2 scaled options. Each carries its own prescription,
    * because a scale is rarely the same sets and reps as the movement it
    * replaces. Older documents hold plain strings and are lifted on read.
+   *
+   * The key is the TrainHeroic exercise id for a library exercise and
+   * `name:<lower-case name>` for one written as free text, which is why it is
+   * a string. See `scaleKey` in lib/prescription.ts. Numeric keys serialise as
+   * strings in JSON already, so nothing needed migrating.
    */
-  scales: Record<number, (ScaledOption | string)[]>;
+  scales: Record<string, (ScaledOption | string)[]>;
   cues: Record<number, string>; // key cue per exercise, feeds the session blurb
   customExercises: CustomExercise[];
 }

@@ -9,13 +9,40 @@
         "Landing Mechanics "
       ],
       "688272": [
-        "Barbell Box Squat",
-        "DB Goblet Squat"
+        {
+          "name": "Barbell Box Squat",
+          "sets": "3",
+          "reps": "9 ",
+          "intensity": "70%"
+        },
+        {
+          "name": "DB Goblet Squat",
+          "sets": "3",
+          "reps": "10",
+          "rpe": "10",
+          "tempo": "2.1.2"
+        }
+      ],
+      "2263920": [
+        {
+          "name": "Double Leg Hamstring Bridge"
+        },
+        {
+          "name": "Hamstring Bridge HOLD"
+        }
+      ],
+      "8137642": [
+        {
+          "name": "FFE DB Split Squat "
+        },
+        {
+          "name": "Split Squat "
+        }
       ]
     },
     "cues": {},
     "customExercises": []
   },
-  "rev": 11,
-  "updatedAt": "2026-08-14T05:37:17.485Z"
+  "rev": 25,
+  "updatedAt": "2026-08-21T06:20:35.732Z"
 }

@@ -13,18 +13,42 @@
  */
 import type { LibraryOverridesDoc, ScaledOption } from '../types/documents';
 
+/** What identifies an exercise for the purpose of hanging scales off it. */
+export interface ScaleRef {
+  exerciseId: number | null;
+  name: string;
+}
+
+/**
+ * Where an exercise's scales are stored.
+ *
+ * Scales used to be keyed by the TrainHeroic library id alone, so anything
+ * written as free text ("DB or Plate Drag Through", eleven of the thirty-six
+ * exercises in the club's programming) could not be scaled at all: there was
+ * nowhere to put them. A free-text exercise is keyed by its name instead, so
+ * it behaves like every other exercise and its scales still follow it
+ * everywhere that name appears.
+ *
+ * Library exercises keep their numeric key. JSON object keys are strings
+ * anyway, so documents written before this need no migration.
+ */
+export function scaleKey(ref: ScaleRef): string | null {
+  if (ref.exerciseId !== null) return String(ref.exerciseId);
+  const name = ref.name.trim().toLowerCase();
+  return name ? `name:${name}` : null;
+}
+
 /**
  * The scaled options for an exercise. Older documents stored plain strings, so
  * lift those to a named option with no prescription of its own.
  */
 export function scaleOptions(
   overrides: LibraryOverridesDoc,
-  exerciseId: number | null,
+  ref: ScaleRef,
 ): ScaledOption[] {
-  if (exerciseId === null) return [];
-  return (overrides.scales[exerciseId] ?? []).map((s) =>
-    typeof s === 'string' ? { name: s } : s,
-  );
+  const key = scaleKey(ref);
+  if (key === null) return [];
+  return (overrides.scales[key] ?? []).map((s) => (typeof s === 'string' ? { name: s } : s));
 }
 
 /** What a scaled option reads as on one line: "DB Goblet Squat  3 x 10  20kg". */

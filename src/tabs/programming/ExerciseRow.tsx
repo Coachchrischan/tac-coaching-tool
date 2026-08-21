@@ -1,7 +1,7 @@
 import type { ExerciseSlot, LibraryOverridesDoc, ScaledOption } from '../../types/documents';
 import type { LibraryExercise, RankedExercise } from '../../lib/library';
 import Combobox from '../../components/Combobox';
-import { normaliseIntensity, scaleOptions } from '../../lib/prescription';
+import { normaliseIntensity, scaleKey, scaleOptions } from '../../lib/prescription';
 
 const cell =
   'w-full rounded-md border border-ink-300 bg-white px-1.5 py-1 text-center text-[13px] text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none';
@@ -44,9 +44,13 @@ export default function ExerciseRow({
   canMoveUp: boolean;
   canMoveDown: boolean;
 }) {
-  const scales = scaleOptions(overrides, slot.exerciseId);
+  const scales = scaleOptions(overrides, slot);
   const hasScales = scales.some((s) => s.name.trim() !== '');
   const showScales = expandScales || Boolean(slot.showScales);
+  // Anything with a name can be scaled. It used to need a TrainHeroic library
+  // id, which left eleven free-text movements, the drag through among them,
+  // with no way to record a scale.
+  const canScale = scaleKey(slot) !== null;
 
   return (
     <>
@@ -81,11 +85,11 @@ export default function ExerciseRow({
             <button
               type="button"
               title={
-                slot.exerciseId === null
-                  ? 'Pick a library exercise to add scaled options'
-                  : 'Scaled options (stored with the exercise, reused everywhere)'
+                canScale
+                  ? 'Scaled options (stored with the exercise, reused everywhere)'
+                  : 'Name the exercise first, then it can carry scaled options'
               }
-              disabled={slot.exerciseId === null}
+              disabled={!canScale}
               onClick={onToggleScales}
               className={`shrink-0 rounded border px-1.5 py-1 text-[11px] font-semibold ${
                 hasScales
@@ -157,7 +161,7 @@ export default function ExerciseRow({
           the exercise box above ends and every number sits under its column
           heading. As a colSpan flexbox nothing lined up with anything. */}
       {showScales &&
-        slot.exerciseId !== null &&
+        canScale &&
         [0, 1].map((i) => {
           const opt = scales[i] ?? { name: '' };
           return (
@@ -207,7 +211,7 @@ export default function ExerciseRow({
             </tr>
           );
         })}
-      {showScales && slot.exerciseId !== null && (
+      {showScales && canScale && (
         // A caption row, not a cell inside the grid: it says nothing about any
         // one column and must not push one wider.
         <tr className="bg-ink-50">

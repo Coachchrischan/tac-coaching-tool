@@ -53,7 +53,7 @@ import {
 import CircuitEditor from './CircuitEditor';
 import CircuitPartCard from './CircuitPartCard';
 import { circuitToText, equipmentFor } from '../../lib/circuit';
-import { scaleOptions } from '../../lib/prescription';
+import { scaleKey, scaleOptions } from '../../lib/prescription';
 
 type ProgramView = 'week' | 'block' | 'month';
 
@@ -742,17 +742,19 @@ export default function ProgrammingTab() {
 
   /** A scaled option carries its own prescription, so patch one field at a time. */
   function setScale(slot: ExerciseSlot, index: 0 | 1, patch: Partial<ScaledOption>) {
-    if (slot.exerciseId === null) return;
-    const id = slot.exerciseId;
+    // A library exercise is keyed by its TrainHeroic id, a free-text one by its
+    // name, so a movement the library has never heard of can still be scaled.
+    const key = scaleKey(slot);
+    if (key === null) return;
     lib.update((d) => {
-      const current = scaleOptions(d, id);
+      const current = scaleOptions(d, slot);
       while (current.length < 2) current.push({ name: '' });
       current[index] = { ...current[index], ...patch };
       const scales = { ...d.scales };
       const empty = (o: ScaledOption) =>
         !o.name.trim() && !o.sets && !o.reps && !o.load && !o.intensity && !o.rpe && !o.tempo;
-      if (current.every(empty)) delete scales[id];
-      else scales[id] = current.slice(0, 2);
+      if (current.every(empty)) delete scales[key];
+      else scales[key] = current.slice(0, 2);
       return { ...d, scales };
     });
   }
