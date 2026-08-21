@@ -186,8 +186,54 @@ All committed and pushed to `Coachchrischan/tac-coaching-tool`. Programming tab 
   stock the club owns.
 - **The output rail is z-40** so its hover labels sit above the grids.
 
-**Known, not chased:** a duplicate React key warning mentioning `hyrox` in the
-console, seen while debugging something else. Source not identified.
+## What shipped on 2026-08-21, later the same day
+
+- **The live timetable is separate from the one being sketched.** `ScheduleDoc`
+  gained `liveScenarioId`. `activeScenarioId` still means "what is on screen",
+  and only the live one is read by the TrainHeroic push (through
+  `classDays.ts`), Home's Today panel and popularity ranking, and the
+  floor-plan class sizes. Schedule says which of the two you are looking at.
+  **"Make this the current format"** promotes the week on screen and archives
+  the one it replaces, dated; archived weeks sit in their own group in the
+  dropdown with a Restore action, and the current format cannot be deleted.
+  Documents without `liveScenarioId` fall back to the viewed one. **Suggested
+  Format is marked current**, so the push behaves as it did before.
+  See `src/lib/scenarios.ts`.
+- **The TrainHeroic drafts are up.** Phase 1 weeks 1 and 2, six drafts:
+  Tue 25, Thu 27, Fri 28 Aug and Tue 1, Thu 3, Fri 4 Sept. Verified against
+  TrainHeroic itself: right days, `published = 0`, no auto-publish schedule.
+  One exercise is skipped on Lower each week, **Squat Rotations**, which has no
+  TrainHeroic id. Weeks 3 to 10 of Phase 1 are written but not pushed.
+- **The TV board fits itself to the slide.** The work area is laid out at
+  1/fit of its size and scaled back, so type shrinks while the board keeps its
+  width. It measures its own columns after each paint and steps down until
+  nothing is hidden, stopping at 0.64. Below that an amber note says the
+  session is too long for one board. That note sits **outside** the slide, so
+  it never reaches the wall or the export.
+- **Scaled options are laid out in the table's own columns.** Each scale is a
+  real row, so its name box ends on the same pixel as the exercise box and
+  every number sits under its heading. Field names removed from inside the
+  boxes, since each box now sits under its own heading.
+- **A free-text exercise can carry scales.** Scales were keyed by TrainHeroic
+  id alone, so eleven of the thirty-six exercises (the DB or plate drag
+  through among them) could not be scaled. The key is now the id where there
+  is one and `name:<lower-case name>` where there is not; see `scaleKey` in
+  `lib/prescription.ts`. No migration: JSON keys were strings already.
+  **`cues` and `patterns` still have the same limitation**, so a free-text
+  exercise still gets no coaching cue on the board and is invisible to
+  Movement Check. The same fix would apply.
+- **ESD and Hyrox Sept 2026 written** from Chris's TAC Conditioning Block 1
+  document, as a placeholder: 4 weeks x 2 sessions x 2 streams. ESD Monday is
+  the MAP session and Friday the threshold session. The document calls its
+  HYROX class mid-week; the club runs Hyrox Monday and Friday, so HYROX A
+  (race format) took Monday and HYROX B (stations) took Friday. Written as the
+  document's block body, **without the roundtable's Tier 1 revisions applied**
+  (the Monday round restructure, dropping burpee broad jumps from Monday,
+  cutting W3 Monday to 4 rounds, inverting the HYROX load defaults). Those are
+  recommendations on Chris's programming and are his call.
+- **Month-cadence boards print the month**, not "Phase 2". Strength unchanged.
+- The duplicate `hyrox` React key was `LayoutsTab.tsx`: the suggest panel and
+  the canvas were siblings both keyed `room.id`. Reproduced, fixed, confirmed.
 
 ## Where to start
 
@@ -198,12 +244,16 @@ year; and give each artefact one printable way out.
 
 **Still owed from earlier:**
 
-- **Re-push the TrainHeroic drafts.** The calendar is empty and the day derivation is now correct,
-  so this is a clean first push. Confirm the dates in the dialogue before letting it run.
 - **The Strength floor layout.** `data/layouts.json` has the Strength room labelled "Gym Floor"
   while `roomModel.ts` draws the Group Fitness Room on every layout, so this needs the room model
   keyed by room first.
-- **Game Day beyond Sept W2**, and the rest of ESD and Hyrox.
+- **Game Day beyond Sept W2**, ESD and Hyrox Oct to Dec, and Strength Phases 2 and 3.
+  Sept 2026 is now written for ESD and Hyrox, so the count is 50 of 104 sessions.
+- **Chris's call on the Sept ESD and Hyrox placeholder**: whether the A-to-Monday,
+  B-to-Friday mapping is right, and whether the roundtable's Tier 1 revisions go in.
+- **Push Phase 1 weeks 3 onward** when he wants them in members' calendars.
+- **`cues` and `patterns` for free-text exercises**, the same root cause as the
+  scales fix above.
 
 **Decisions already made, do not reopen without me:** ESD, Hyrox and Game Day are month to month,
 not periodised. TrainHeroic stays drafts only. The week email opens a Gmail compose window and
