@@ -447,24 +447,28 @@ export function MonthGrid({
                   {/* Only the first week of the block: push its exercise list
                       to the rest, so changing week 5 does not leave weeks 6 to
                       8 on the old exercises. */}
-                  {wi === 0 && block.weekSessions.length > 1 && onCopyExercises && (
-                    <button
-                      type="button"
-                      title={`Make the other ${block.weekSessions.length - 1} week${
-                        block.weekSessions.length === 2 ? '' : 's'
-                      } of this block run the same exercises as this one`}
-                      aria-label="Copy this week's exercises to the rest of the block"
-                      onClick={() =>
-                        onCopyExercises(
-                          weekOffset,
-                          block.weekSessions.map((_, i) => weekOffset + i).slice(1),
-                        )
-                      }
-                      className="rounded border border-white/30 px-1 text-[10px] leading-tight font-bold text-white/70 hover:border-sand-500 hover:text-sand-500"
-                    >
-                      »
-                    </button>
-                  )}
+                  {wi === 0 &&
+                    block.weekSessions.length > 1 &&
+                    onCopyExercises &&
+                    (() => {
+                      const targets = block.weekSessions.map((_, i) => weekOffset + i).slice(1);
+                      const first = targets[0] + 1;
+                      const last = targets[targets.length - 1] + 1;
+                      // Says which weeks it will change, so the button explains
+                      // itself without a tooltip: "Week 5  → 6-8".
+                      const span = first === last ? `${first}` : `${first}-${last}`;
+                      return (
+                        <button
+                          type="button"
+                          title={`Make weeks ${span} run the same exercises as week ${weekOffset + 1}. Their sets, reps, % and RPE are kept.`}
+                          aria-label={`Copy week ${weekOffset + 1}'s exercises to weeks ${span}`}
+                          onClick={() => onCopyExercises(weekOffset, targets)}
+                          className="rounded border border-white/40 px-1.5 py-0.5 text-[10px] leading-none font-bold text-white/80 hover:border-sand-500 hover:bg-sand-500/15 hover:text-sand-500"
+                        >
+                          → {span}
+                        </button>
+                      );
+                    })()}
                 </span>
               </th>
             ))}
