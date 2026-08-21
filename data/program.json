@@ -75,8 +75,8 @@
                           },
                           {
                             "id": "c911e4ca-e7ba-4ccc-b152-1fec7be2bf3c",
-                            "exerciseId": 440,
-                            "name": "Depth Jump",
+                            "exerciseId": 5526,
+                            "name": "Squat Jump",
                             "sets": "3",
                             "reps": "5",
                             "showScales": false
@@ -401,13 +401,17 @@
                             "sets": "3",
                             "reps": "7",
                             "intensity": "75%",
-                            "rpe": "8",
+                            "rpe": "",
                             "showScales": false
                           },
                           {
                             "id": "736f60d6-fce1-4a60-99b7-20949027d2e0",
                             "exerciseId": null,
-                            "name": "DB or Plate Drag Through"
+                            "name": "DB or Plate Drag Through",
+                            "sets": "3",
+                            "reps": "10ea",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "3d2c68a0-663b-4e04-a818-058699bb48a9",
@@ -429,12 +433,20 @@
                           {
                             "id": "b8e6195d-2041-4d31-8a4f-9c5a2714b6e1",
                             "exerciseId": 8137642,
-                            "name": "Barbell Jefferson Split Squat (FFE)"
+                            "name": "Barbell Jefferson Split Squat (FFE)",
+                            "sets": "3",
+                            "reps": "10ea",
+                            "intensity": "",
+                            "rpe": "7"
                           },
                           {
                             "id": "2af2014a-6717-48d4-8fde-07020428a993",
                             "exerciseId": 2263920,
-                            "name": "Single Leg Hamstring Bridge"
+                            "name": "Single Leg Hamstring Bridge",
+                            "sets": "3",
+                            "reps": "12ea",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
@@ -446,17 +458,29 @@
                           {
                             "id": "372cc49a-b644-4edc-b3e9-75627b45bdf1",
                             "exerciseId": 7784461,
-                            "name": "Cyclist Squat Finisher (1 &1/4)"
+                            "name": "Cyclist Squat Finisher (1 &1/4)",
+                            "sets": "3",
+                            "reps": "10+",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "3a1f89aa-c5ff-4e7b-bf6f-8827ca9c98ca",
                             "exerciseId": null,
-                            "name": "Weighted DB Single Leg Calf Raises"
+                            "name": "Weighted DB Single Leg Calf Raises",
+                            "sets": "3",
+                            "reps": "10ea",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "8707e209-f4bf-4112-82fb-ee28b52540c6",
                             "exerciseId": 7648107,
-                            "name": "Lateral Hip Thrust"
+                            "name": "Lateral Hip Thrust",
+                            "sets": "3",
+                            "reps": "10ea",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       }
@@ -684,14 +708,19 @@
                             "id": "e463fbc1-8633-47f4-abd1-414df7e6f70b",
                             "exerciseId": 688272,
                             "name": "Barbell Back Squats (E3OM)",
-                            "sets": "4",
+                            "sets": "3",
                             "reps": "5",
-                            "intensity": "80%"
+                            "intensity": "80%",
+                            "rpe": ""
                           },
                           {
                             "id": "81585aad-4105-444e-9f69-057e5421a02f",
                             "exerciseId": null,
-                            "name": "DB or Plate Drag Through"
+                            "name": "DB or Plate Drag Through",
+                            "sets": "3",
+                            "reps": "10ea",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "3d90e44e-3b06-4b0f-a370-69eacbea97d9",
@@ -712,12 +741,20 @@
                           {
                             "id": "9a51c678-3dca-4550-b3b5-5ef79eda4a57",
                             "exerciseId": 8137642,
-                            "name": "Barbell Jefferson Split Squat (FFE)"
+                            "name": "Barbell Jefferson Split Squat (FFE)",
+                            "sets": "3",
+                            "reps": "12ea",
+                            "intensity": "",
+                            "rpe": "7"
                           },
                           {
                             "id": "7acda173-5fa0-495a-a33a-7405db290fc9",
                             "exerciseId": 2263920,
-                            "name": "Single Leg Hamstring Bridge"
+                            "name": "Single Leg Hamstring Bridge",
+                            "sets": "3",
+                            "reps": "15ea",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
@@ -729,17 +766,29 @@
                           {
                             "id": "8ccece90-eb21-4b0d-b02e-8600e839d981",
                             "exerciseId": 7784461,
-                            "name": "Cyclist Squat Finisher (1 &1/4)"
+                            "name": "Cyclist Squat Finisher (1 &1/4)",
+                            "sets": "3",
+                            "reps": "10+",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "78589f64-1ae0-4b0c-9705-33a6ca63330d",
                             "exerciseId": null,
-                            "name": "Weighted DB Single Leg Calf Raises"
+                            "name": "Weighted DB Single Leg Calf Raises",
+                            "sets": "3",
+                            "reps": "8ea",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "f2a5bf0a-0bd8-46c5-998b-b82070d5e6d9",
                             "exerciseId": 7648107,
-                            "name": "Lateral Hip Thrust"
+                            "name": "Lateral Hip Thrust",
+                            "sets": "3",
+                            "reps": "10ea",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       }
@@ -967,12 +1016,19 @@
                             "id": "75e82498-4c5d-4f8e-9454-42ee903e612d",
                             "exerciseId": 688272,
                             "name": "Barbell Back Squats (E3OM)",
-                            "rpe": "6"
+                            "rpe": "",
+                            "sets": "3",
+                            "reps": "9",
+                            "intensity": "73%"
                           },
                           {
                             "id": "de562a89-136e-466c-a5ea-68751e8b60f6",
                             "exerciseId": null,
-                            "name": "DB or Plate Drag Through"
+                            "name": "DB or Plate Drag Through",
+                            "sets": "3",
+                            "reps": "10ea",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "b2187a72-b176-47b5-9370-7932e2d24f72",
@@ -993,12 +1049,20 @@
                           {
                             "id": "95949f11-5f25-4427-9d59-b3471b92bae5",
                             "exerciseId": 8137642,
-                            "name": "Barbell Jefferson Split Squat (FFE)"
+                            "name": "Barbell Jefferson Split Squat (FFE)",
+                            "sets": "3",
+                            "reps": "8ea",
+                            "intensity": "",
+                            "rpe": "7"
                           },
                           {
                             "id": "6dbac15f-a9b8-4eed-8ac7-77044f1626e7",
                             "exerciseId": 2263920,
-                            "name": "Single Leg Hamstring Bridge"
+                            "name": "Single Leg Hamstring Bridge",
+                            "sets": "3",
+                            "reps": "10ea",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
@@ -1010,17 +1074,29 @@
                           {
                             "id": "c42dc66f-8ee5-49a8-966e-782cd11bc243",
                             "exerciseId": 7784461,
-                            "name": "Cyclist Squat Finisher (1 &1/4)"
+                            "name": "Cyclist Squat Finisher (1 &1/4)",
+                            "sets": "3",
+                            "reps": "10+",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "39b4f9b4-66fc-450a-90fe-af44727898d7",
                             "exerciseId": null,
-                            "name": "Weighted DB Single Leg Calf Raises"
+                            "name": "Weighted DB Single Leg Calf Raises",
+                            "sets": "3",
+                            "reps": "12ea",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "c9729c74-eeef-4461-b2d4-24ee43fec5aa",
                             "exerciseId": 7648107,
-                            "name": "Lateral Hip Thrust"
+                            "name": "Lateral Hip Thrust",
+                            "sets": "3",
+                            "reps": "10ea",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       }
@@ -1225,8 +1301,8 @@
                           },
                           {
                             "id": "d63d7293-5bb6-4adc-8730-418cd5523b56",
-                            "exerciseId": null,
-                            "name": "DB or Plate Drag Through"
+                            "exerciseId": 8043256,
+                            "name": "Single Arm Plank"
                           },
                           {
                             "id": "4d972dbc-99b9-43ed-b521-25ad70d1bdfa",
@@ -2230,8 +2306,8 @@
                           },
                           {
                             "id": "42382abc-d60d-49c6-882b-0faa0d64ce20",
-                            "exerciseId": 440,
-                            "name": "Depth Jump"
+                            "exerciseId": 8051929,
+                            "name": "Depth Jump to Broad Jump"
                           }
                         ]
                       },
@@ -4500,6 +4576,6 @@
       }
     ]
   },
-  "rev": 89,
-  "updatedAt": "2026-08-21T02:29:23.679Z"
+  "rev": 106,
+  "updatedAt": "2026-08-21T02:37:27.592Z"
 }

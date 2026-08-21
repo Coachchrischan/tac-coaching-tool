@@ -65,11 +65,25 @@ const BLOCK_LEN = 4;
 
 // The Block view is a 4-week window into the phase; SlotRefs inside cells
 // keep their absolute week indices, so edits land on the right week.
+//
+// The rows are built from the WHOLE phase, so slicing the week columns is not
+// enough: an exercise that only runs in weeks 5 to 10 would still be listed on
+// Block 1 with four empty cells. Keep only the rows this window actually has,
+// and number them within the window so Block 1 reads A1, A2, A3.
 function sliceBlockRows(rows: BlockRows, start: number, end: number): BlockRows {
+  const seen = new Map<string, number>();
+  const sliced = rows.rows
+    .map((r) => ({ ...r, cells: r.cells.slice(start, end) }))
+    .filter((r) => r.cells.some((c) => c !== null))
+    .map((r) => {
+      const n = (seen.get(r.seriesKey) ?? 0) + 1;
+      seen.set(r.seriesKey, n);
+      return { ...r, n };
+    });
   return {
     blockIndex: rows.blockIndex,
     weekSessions: rows.weekSessions.slice(start, end),
-    rows: rows.rows.map((r) => ({ ...r, cells: r.cells.slice(start, end) })),
+    rows: sliced,
   };
 }
 
