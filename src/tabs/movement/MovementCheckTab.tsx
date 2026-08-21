@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { useDoc } from '../../lib/useDoc';
 import { useLibrary } from '../../lib/useLibrary';
 import { mergedLibrary, patternsFor } from '../../lib/library';
-import { streamsOf } from '../../lib/programStreams';
+import { seriesBlocks, streamsOf } from '../../lib/programStreams';
 import SaveBadge from '../../components/SaveBadge';
 import { PATTERN_LABELS, PATTERNS } from '../../types/documents';
 import type { Pattern } from '../../types/documents';
@@ -48,7 +48,7 @@ export default function MovementCheckTab() {
         // Pattern coverage is judged on the Strength stream's series only:
         // circuits carry free text with no library ids to classify.
         if (session.kind !== 'series') continue;
-        for (const block of session.timedBlocks) {
+        for (const block of seriesBlocks(session.timedBlocks)) {
           for (const slot of block.slots) {
             if (!slot.name) continue;
             const key = slot.exerciseId ?? `free:${slot.name.toLowerCase()}`;

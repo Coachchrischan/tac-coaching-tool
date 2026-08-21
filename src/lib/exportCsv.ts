@@ -4,7 +4,7 @@
 
 import type { ProgramDoc, Session } from '../types/documents';
 import { slotSummary } from '../tabs/programming/ProgressionViews';
-import { sessionLabel, streamsOf } from './programStreams';
+import { seriesBlocks, sessionLabel, streamsOf } from './programStreams';
 import { lineToText } from './circuit';
 
 function esc(value: string): string {
@@ -66,7 +66,7 @@ export function programToCsv(doc: ProgramDoc): string {
         });
         return;
       }
-      session.timedBlocks.forEach((tb) => {
+      seriesBlocks(session.timedBlocks).forEach((tb) => {
         tb.slots.forEach((slot) => {
           if (!slot.name) return;
           const key = `${tb.label}::${slot.exerciseId ?? slot.name.toLowerCase()}`;

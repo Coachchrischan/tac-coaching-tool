@@ -1323,8 +1323,8 @@
                           },
                           {
                             "id": "018ac099-17e5-4dea-8760-0495627bce68",
-                            "exerciseId": 2263920,
-                            "name": "Single Leg Hamstring Bridge"
+                            "exerciseId": 178,
+                            "name": "Partner Nordic Hamstring Curl"
                           }
                         ]
                       },
@@ -1335,18 +1335,18 @@
                         "slots": [
                           {
                             "id": "4d4ad425-db7b-4925-b5dd-32d2f8c2263d",
-                            "exerciseId": 7784461,
-                            "name": "Cyclist Squat Finisher (1 &1/4)"
+                            "exerciseId": 1241496,
+                            "name": "Single Leg Hip Thrust"
                           },
                           {
                             "id": "bd318378-5743-4cda-863c-bea4620fb35a",
                             "exerciseId": null,
-                            "name": "Weighted DB Single Leg Calf Raises"
+                            "name": ""
                           },
                           {
                             "id": "a54ae3d4-a3d9-42d9-b450-a952460aa2ee",
-                            "exerciseId": 7648107,
-                            "name": "Lateral Hip Thrust"
+                            "exerciseId": null,
+                            "name": ""
                           }
                         ]
                       }
@@ -4576,6 +4576,6 @@
       }
     ]
   },
-  "rev": 111,
-  "updatedAt": "2026-08-21T05:18:11.879Z"
+  "rev": 129,
+  "updatedAt": "2026-08-21T05:34:48.497Z"
 }

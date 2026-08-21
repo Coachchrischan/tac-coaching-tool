@@ -7,7 +7,7 @@
 
 import type { ProgramStream, Session } from '../types/documents';
 import { circuitToText, lineToText } from './circuit';
-import { sessionLabel } from './programStreams';
+import { seriesBlocks, sessionLabel } from './programStreams';
 
 /** One session, written the way a coach would want it in an email. */
 function sessionToText(s: Session): string {
@@ -16,7 +16,7 @@ function sessionToText(s: Session): string {
     const body = circuitToText(s.circuit, s.note);
     return `${head}\n${body || '(nothing written yet)'}`;
   }
-  const series = s.timedBlocks
+  const series = seriesBlocks(s.timedBlocks)
     .map((tb) => {
       const slots = tb.slots.filter((sl) => sl.name);
       if (!slots.length) return null;

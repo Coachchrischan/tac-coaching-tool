@@ -8,6 +8,7 @@ import SaveBadge from '../../components/SaveBadge';
 import type {
   Coach,
   ExerciseSlot,
+  SeriesBlock,
   ProgramBlock,
   ProgramDoc,
   ProgramWeek,
@@ -27,7 +28,9 @@ import { downloadProgramCsv } from '../../lib/exportCsv';
 import {
   FOCUS_LABEL,
   STREAM_DEFS,
+  circuitParts,
   formatOf,
+  seriesBlocks,
   sessionLabel,
   streamsOf,
   withStreamBlocks,
@@ -47,6 +50,7 @@ import {
   weekEmailSubject,
 } from '../../lib/weekEmail';
 import CircuitEditor from './CircuitEditor';
+import CircuitPartCard from './CircuitPartCard';
 import { circuitToText, equipmentFor } from '../../lib/circuit';
 
 type ProgramView = 'week' | 'block' | 'month';
@@ -132,7 +136,7 @@ function cloneSession(s: Session): Session {
   return {
     ...common,
     kind: 'series',
-    timedBlocks: s.timedBlocks.map((tb) => ({
+    timedBlocks: seriesBlocks(s.timedBlocks).map((tb) => ({
       id: crypto.randomUUID(),
       label: tb.label,
       minutes: tb.minutes,
@@ -151,11 +155,25 @@ function newSession(focus: SessionFocus, kind: SessionKind): Session {
     : { id, focus, kind: 'series', timedBlocks: defaultSeries(id) };
 }
 
+/**
+ * Rewrite a session's SERIES parts, leaving any circuit part exactly as it is.
+ * Returning null drops that part. Every sets-and-reps edit goes through here,
+ * so a circuit finisher can never be mangled by an edit meant for a series.
+ */
+function mapSeries(
+  blocks: TimedBlock[],
+  fn: (b: SeriesBlock) => TimedBlock | null,
+): TimedBlock[] {
+  return blocks
+    .map((b) => (b.kind === 'circuit' ? b : fn(b)))
+    .filter((b): b is TimedBlock => b !== null);
+}
+
 /** Does this session hold real programming, in whichever way it is written? */
 function sessionHasContent(s: Session): boolean {
   return s.kind === 'circuit'
     ? s.circuit.some((c) => c.heading.trim() || c.lines.some((l) => l.text.trim()))
-    : s.timedBlocks.some((tb) => tb.slots.some((sl) => sl.name));
+    : seriesBlocks(s.timedBlocks).some((tb) => tb.slots.some((sl) => sl.name));
 }
 
 export default function ProgrammingTab() {
@@ -462,12 +480,10 @@ export default function ProgrammingTab() {
     patchSession((s) => (s.kind === 'series' ? fn(s) : s));
   }
 
-  function patchTimedBlock(blockId: string, fn: (b: TimedBlock) => TimedBlock | null) {
+  function patchTimedBlock(blockId: string, fn: (b: SeriesBlock) => TimedBlock | null) {
     patchSeries((s) => ({
       ...s,
-      timedBlocks: s.timedBlocks
-        .map((b) => (b.id === blockId ? fn(b) : b))
-        .filter((b): b is TimedBlock => b !== null),
+      timedBlocks: mapSeries(s.timedBlocks, (b) => (b.id === blockId ? fn(b) : b)),
     }));
   }
 
@@ -478,7 +494,7 @@ export default function ProgrammingTab() {
     if (!targetId) {
       patchSeries((s) => ({
         ...s,
-        timedBlocks: [{ id: crypto.randomUUID(), label: 'A', minutes: 15, slots: [slot] }],
+        timedBlocks: [{ id: crypto.randomUUID(), kind: 'series', label: 'A', minutes: 15, slots: [slot] }],
       }));
       return;
     }
@@ -496,7 +512,7 @@ export default function ProgrammingTab() {
    */
   function moveSlot(blockId: string, slotId: string, dir: -1 | 1) {
     if (session.kind !== 'series') return;
-    const series = session.timedBlocks.find((tb) => tb.id === blockId);
+    const series = seriesBlocks(session.timedBlocks).find((tb) => tb.id === blockId);
     if (!series) return;
     const i = series.slots.findIndex((sl) => sl.id === slotId);
     const j = i + dir;
@@ -530,7 +546,7 @@ export default function ProgrammingTab() {
                 if (s.id !== target.id || s.kind !== 'series') return s;
                 return {
                   ...s,
-                  timedBlocks: s.timedBlocks.map((tb) => {
+                  timedBlocks: mapSeries(s.timedBlocks, (tb) => {
                     if (tb.label.trim().toUpperCase() !== seriesKey) return tb;
                     const ai = tb.slots.findIndex(
                       (sl) => sl.name.trim().toLowerCase() === aName,
@@ -570,7 +586,7 @@ export default function ProgrammingTab() {
     const keyOf = (label: string, name: string) =>
       `${label.trim().toUpperCase()}::${name.trim().toLowerCase()}`;
     const sourceKeys = new Set(
-      source.timedBlocks.flatMap((tb) =>
+      seriesBlocks(source.timedBlocks).flatMap((tb) =>
         tb.slots.filter((sl) => sl.name).map((sl) => keyOf(tb.label, sl.name)),
       ),
     );
@@ -582,14 +598,14 @@ export default function ProgrammingTab() {
       const target = matchSession(block.weeks[wIdx]);
       if (!target || target.kind !== 'series') continue;
       const mine = new Set(
-        target.timedBlocks.flatMap((tb) =>
+        seriesBlocks(target.timedBlocks).flatMap((tb) =>
           tb.slots.filter((sl) => sl.name).map((sl) => keyOf(tb.label, sl.name)),
         ),
       );
-      for (const tb of source.timedBlocks)
+      for (const tb of seriesBlocks(source.timedBlocks))
         for (const sl of tb.slots)
           if (sl.name && !mine.has(keyOf(tb.label, sl.name))) adding.add(sl.name);
-      for (const tb of target.timedBlocks)
+      for (const tb of seriesBlocks(target.timedBlocks))
         for (const sl of tb.slots)
           if (sl.name && !sourceKeys.has(keyOf(tb.label, sl.name))) removing.add(sl.name);
     }
@@ -624,13 +640,13 @@ export default function ProgrammingTab() {
               sessions: w.sessions.map((s) => {
                 if (s.id !== target.id || s.kind !== 'series') return s;
                 const mine = new Map<string, ExerciseSlot>();
-                for (const tb of s.timedBlocks)
+                for (const tb of seriesBlocks(s.timedBlocks))
                   for (const sl of tb.slots)
                     if (sl.name) mine.set(keyOf(tb.label, sl.name), sl);
                 return {
                   ...s,
-                  timedBlocks: source.timedBlocks.map((srcTb) => {
-                    const existing = s.timedBlocks.find(
+                  timedBlocks: seriesBlocks(source.timedBlocks).map((srcTb) => {
+                    const existing = seriesBlocks(s.timedBlocks).find(
                       (tb) => tb.label.trim().toUpperCase() === srcTb.label.trim().toUpperCase(),
                     );
                     return {
@@ -660,12 +676,33 @@ export default function ProgrammingTab() {
     );
   }
 
+  /** Add a circuit to a sets-and-reps session: a finisher, written the ESD way. */
+  function addCircuitPart() {
+    patchSession((s) =>
+      s.kind !== 'series'
+        ? s
+        : {
+            ...s,
+            timedBlocks: [
+              ...s.timedBlocks,
+              {
+                id: crypto.randomUUID(),
+                kind: 'circuit',
+                label: nextLabel(seriesBlocks(s.timedBlocks)),
+                minutes: 10,
+                pieces: [{ id: crypto.randomUUID(), heading: '', lines: [] }],
+              },
+            ],
+          },
+    );
+  }
+
   function addTimedBlock() {
     patchSeries((s) => ({
       ...s,
       timedBlocks: [
         ...s.timedBlocks,
-        { id: crypto.randomUUID(), label: nextLabel(s.timedBlocks), minutes: 10, slots: [] },
+        { id: crypto.randomUUID(), kind: 'series', label: nextLabel(seriesBlocks(s.timedBlocks)), minutes: 10, slots: [] },
       ],
     }));
   }
@@ -811,7 +848,7 @@ export default function ProgrammingTab() {
         if (bIdx !== blockIndex) return b;
         const sibling = b.weeks
           .flatMap((w) => w.sessions)
-          .flatMap((s) => (s.kind === 'series' ? s.timedBlocks : []))
+          .flatMap((s) => (s.kind === 'series' ? seriesBlocks(s.timedBlocks) : []))
           .find((tb) => tb.label.trim().toUpperCase() === seriesKey);
         return {
           ...b,
@@ -827,7 +864,7 @@ export default function ProgrammingTab() {
                 if (ref) {
                   return {
                     ...s,
-                    timedBlocks: s.timedBlocks.map((tb) =>
+                    timedBlocks: mapSeries(s.timedBlocks, (tb) =>
                       tb.id !== ref.timedBlockId
                         ? tb
                         : {
@@ -840,7 +877,7 @@ export default function ProgrammingTab() {
                   };
                 }
                 const slot: ExerciseSlot = { id: crypto.randomUUID(), exerciseId, name: trimmed };
-                const existing = s.timedBlocks.find(
+                const existing = seriesBlocks(s.timedBlocks).find(
                   (tb) => tb.label.trim().toUpperCase() === seriesKey,
                 );
                 if (existing) {
@@ -897,7 +934,7 @@ export default function ProgrammingTab() {
                     ? s
                     : {
                         ...s,
-                        timedBlocks: s.timedBlocks.map((tb) => ({
+                        timedBlocks: mapSeries(s.timedBlocks, (tb) => ({
                           ...tb,
                           slots: tb.slots.filter((sl) => !ids.has(sl.id)),
                         })),
@@ -928,7 +965,7 @@ export default function ProgrammingTab() {
                           ? s
                           : {
                               ...s,
-                              timedBlocks: s.timedBlocks.map((tb) =>
+                              timedBlocks: mapSeries(s.timedBlocks, (tb) =>
                                 tb.id !== ref.timedBlockId
                                   ? tb
                                   : {
@@ -957,7 +994,7 @@ export default function ProgrammingTab() {
         if (bIdx !== t.blockIndex) return b;
         const sibling = b.weeks
           .flatMap((w) => w.sessions)
-          .flatMap((s) => (s.kind === 'series' ? s.timedBlocks : []))
+          .flatMap((s) => (s.kind === 'series' ? seriesBlocks(s.timedBlocks) : []))
           .find((tb) => tb.label.trim().toUpperCase() === seriesKey);
         return {
           ...b,
@@ -967,13 +1004,13 @@ export default function ProgrammingTab() {
               ...w,
               sessions: w.sessions.map((s) => {
                 if (s.id !== t.sessionId || s.kind !== 'series') return s;
-                const existing = s.timedBlocks.find(
+                const existing = seriesBlocks(s.timedBlocks).find(
                   (tb) => tb.label.trim().toUpperCase() === seriesKey,
                 );
                 if (existing) {
                   return {
                     ...s,
-                    timedBlocks: s.timedBlocks.map((tb) =>
+                    timedBlocks: mapSeries(s.timedBlocks, (tb) =>
                       tb.id !== existing.id ? tb : { ...tb, slots: [...tb.slots, slot] },
                     ),
                   };
@@ -1009,7 +1046,12 @@ export default function ProgrammingTab() {
       .map((s) =>
         s.kind === 'circuit'
           ? circuitToText(s.circuit, s.note)
-          : s.timedBlocks.flatMap((tb) => tb.slots.map((sl) => sl.name)).join('\n'),
+          : [
+              ...seriesBlocks(s.timedBlocks).flatMap((tb) => tb.slots.map((sl) => sl.name)),
+              // A circuit finisher inside a strength session needs its gear
+              // placed too, so its text goes to the equipment scan as well.
+              ...circuitParts(s.timedBlocks).map((p) => circuitToText(p.pieces)),
+            ].join('\n'),
       )
       .join('\n');
     const needed = equipmentFor(text);
@@ -1106,7 +1148,10 @@ export default function ProgrammingTab() {
       <div className="flex gap-4">
       {/* Output rail: the three "send this somewhere" actions, out of the
           way of the editing controls. Labels appear on hover. */}
-      <aside className="sticky top-4 flex h-[calc(100vh-10rem)] w-14 shrink-0 flex-col items-center gap-2 self-start rounded-xl border border-ink-200 bg-white py-3 shadow-sm">
+      {/* z-40 puts the whole rail above the grids: the tooltips fly out over
+          the tables, and the sticky cells in those tables carry their own
+          z-index, so without this the labels were painted behind them. */}
+      <aside className="sticky top-4 z-40 flex h-[calc(100vh-10rem)] w-14 shrink-0 flex-col items-center gap-2 self-start rounded-xl border border-ink-200 bg-white py-3 shadow-sm">
         <RailButton label="TV output" onClick={() => navigate(`/tv/${session.id}`)}>
           <TvIcon />
         </RailButton>
@@ -1591,7 +1636,32 @@ export default function ProgrammingTab() {
         />
       ) : (
       <div className="space-y-3">
-        {session.timedBlocks.map((block) => (
+        {session.timedBlocks.map((block) =>
+          block.kind === 'circuit' ? (
+            <CircuitPartCard
+              key={block.id}
+              part={block}
+              onPatch={(patch) =>
+                patchSession((s) =>
+                  s.kind !== 'series'
+                    ? s
+                    : {
+                        ...s,
+                        timedBlocks: s.timedBlocks.map((tb) =>
+                          tb.id === block.id && tb.kind === 'circuit' ? { ...tb, ...patch } : tb,
+                        ),
+                      },
+                )
+              }
+              onDelete={() =>
+                patchSession((s) =>
+                  s.kind !== 'series'
+                    ? s
+                    : { ...s, timedBlocks: s.timedBlocks.filter((tb) => tb.id !== block.id) },
+                )
+              }
+            />
+          ) : (
           <TimedBlockCard
             key={block.id}
             block={block}
@@ -1626,7 +1696,8 @@ export default function ProgrammingTab() {
             onSetScale={setScale}
             onMoveSlot={(slotId, dir) => moveSlot(block.id, slotId, dir)}
           />
-        ))}
+          ),
+        )}
 
         <button
           type="button"
@@ -1634,6 +1705,14 @@ export default function ProgrammingTab() {
           className="rounded-md border border-dashed border-ink-300 px-4 py-2 text-sm font-medium text-ink-500 hover:border-accent-600 hover:text-accent-600"
         >
           + Timed block <span className="text-ink-400">(Ctrl+B)</span>
+        </button>
+        <button
+          type="button"
+          onClick={addCircuitPart}
+          title="Add a circuit to this session, written the way ESD and Hyrox are"
+          className="ml-2 rounded-md border border-dashed border-ink-300 px-4 py-2 text-sm font-medium text-ink-500 hover:border-accent-600 hover:text-accent-600"
+        >
+          + Circuit
         </button>
 
         {library && (

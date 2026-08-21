@@ -6,8 +6,8 @@ import { useDoc } from '../../lib/useDoc';
 import { useLibrary } from '../../lib/useLibrary';
 import { generateBlurb } from '../../lib/blurb';
 import { mergedLibrary } from '../../lib/library';
-import type { ExerciseSlot, ProgramDoc, Session, TimedBlock } from '../../types/documents';
-import { streamsOf } from '../../lib/programStreams';
+import type { ExerciseSlot, ProgramDoc, SeriesBlock, Session, TimedBlock } from '../../types/documents';
+import { circuitParts, seriesBlocks, streamsOf } from '../../lib/programStreams';
 
 const W = 1920;
 const H = 1080;
@@ -102,8 +102,10 @@ export default function TvPage() {
   const blurb = session.blurbOverride ?? (library ? generateBlurb(session, merged, overrides) : '');
   const fileBase = `tac-${session.focus}-block${blockIndex + 1}-week${weekIndex + 1}`;
 
-  const filled = (b: TimedBlock) => b.slots.filter((s) => s.name);
-  const timedBlocks = session.kind === 'series' ? session.timedBlocks : [];
+  const filled = (b: SeriesBlock) => b.slots.filter((s) => s.name);
+  const timedBlocks = session.kind === 'series' ? seriesBlocks(session.timedBlocks) : [];
+  // A strength session can finish on a circuit part; it renders as a board card.
+  const partCircuits = session.kind === 'series' ? circuitParts(session.timedBlocks) : [];
   const warmups = timedBlocks.filter((b) => isWarmup(b) && filled(b).length > 0);
   const series = timedBlocks.filter((b) => !isWarmup(b) && filled(b).length > 0);
 
@@ -478,6 +480,57 @@ export default function TvPage() {
                 </ul>
               </section>
             ))}
+            {/* A circuit finisher inside a strength session gets its own
+                column, read the same way the ESD board reads. */}
+            {partCircuits
+              .filter((p) => p.pieces.some((c) => c.heading.trim() || c.lines.some((l) => l.text.trim())))
+              .map((part) => (
+                <section
+                  key={part.id}
+                  className="flex min-w-0 flex-col overflow-hidden rounded-lg border border-white/12"
+                  style={{ backgroundColor: 'rgba(32,29,29,0.62)' }}
+                >
+                  <div
+                    className="flex items-baseline justify-between border-b-[3px] px-7 py-4"
+                    style={{ borderColor: SAND }}
+                  >
+                    <span className="text-[34px] font-extrabold tracking-[0.06em]" style={{ color: SAND }}>
+                      {part.label.toUpperCase()}
+                    </span>
+                    <span className="text-[23px] font-bold tracking-[0.1em] text-white/60 uppercase">
+                      {part.minutes} min
+                    </span>
+                  </div>
+                  <ul className="flex-1 space-y-5 px-7 py-6">
+                    {part.pieces.map((piece) => (
+                      <li key={piece.id}>
+                        {piece.heading.trim() && (
+                          <p className="text-[26px] font-extrabold" style={{ color: SAND }}>
+                            {piece.heading}
+                          </p>
+                        )}
+                        {piece.lines
+                          .filter((l) => l.text.trim())
+                          .map((line, li) => (
+                            <p key={li} className="text-[30px] leading-tight font-bold" style={{ color: CREAM }}>
+                              {line.text}
+                              {line.load && (
+                                <span className="block text-[23px] font-semibold" style={{ color: SAND }}>
+                                  {line.load}
+                                </span>
+                              )}
+                            </p>
+                          ))}
+                        {piece.restAfter?.trim() && (
+                          <p className="mt-1 text-[20px] font-semibold text-white/55">
+                            {piece.restAfter}
+                          </p>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
           </main>
           )}
 

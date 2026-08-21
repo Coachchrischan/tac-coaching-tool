@@ -8,11 +8,13 @@
 import type {
   CircuitBlock,
   CircuitLine,
+  CircuitPart,
   CircuitSession,
   ProgramBlock,
   ProgramDoc,
   ProgramStream,
   ProgramWeek,
+  SeriesBlock,
   Session,
   SessionFocus,
   SessionKind,
@@ -39,6 +41,20 @@ export function sessionLabel(s: Session): string {
   return s.name || FOCUS_LABEL[s.focus];
 }
 
+/**
+ * The sets-and-reps parts of a session. A strength session can also hold a
+ * circuit part (a finisher written the ESD way), which has no exercise slots,
+ * so everything that walks slots goes through here.
+ */
+export function seriesBlocks(blocks: TimedBlock[]): SeriesBlock[] {
+  return blocks.filter((b): b is SeriesBlock => b.kind !== 'circuit');
+}
+
+/** The circuit parts of a session, in order. */
+export function circuitParts(blocks: TimedBlock[]): CircuitPart[] {
+  return blocks.filter((b): b is CircuitPart => b.kind === 'circuit');
+}
+
 /** How a stream's sessions are written. Strength is the only series stream. */
 export function formatOf(stream: Pick<ProgramStream, 'id' | 'format'>): SessionKind {
   const format = stream.format ?? (stream.id === 'strength' ? 'strength' : 'circuit');
@@ -63,7 +79,7 @@ function inferKind(s: StoredSession, format: SessionKind): SessionKind {
     (c) => c.heading?.trim() || (c.lines ?? []).some((l) => (typeof l === 'string' ? l : l.text).trim()),
   );
   if (hasCircuit) return 'circuit';
-  const hasSlots = (s.timedBlocks ?? []).some((tb) => (tb.slots ?? []).some((sl) => sl.name));
+  const hasSlots = seriesBlocks(s.timedBlocks ?? []).some((tb) => (tb.slots ?? []).some((sl) => sl.name));
   if (hasSlots) return 'series';
   return format;
 }

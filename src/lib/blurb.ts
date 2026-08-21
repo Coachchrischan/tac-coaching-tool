@@ -4,6 +4,7 @@
 import type { CircuitSession, LibraryOverridesDoc, Pattern, Session } from '../types/documents';
 import type { LibraryExercise } from './library';
 import { patternsFor } from './library';
+import { seriesBlocks } from './programStreams';
 
 const PATTERN_PHRASE: Record<Pattern, string> = {
   squat: 'squatting',
@@ -58,7 +59,7 @@ export function generateBlurb(
 
   // Weight patterns by position: A-block exercises define the day.
   const weights = new Map<Pattern, number>();
-  session.timedBlocks.forEach((block, blockIndex) => {
+  seriesBlocks(session.timedBlocks).forEach((block, blockIndex) => {
     const weight = Math.max(3 - blockIndex, 1);
     for (const slot of block.slots) {
       const ex = slot.exerciseId !== null ? byId.get(slot.exerciseId) : undefined;
@@ -87,7 +88,7 @@ export function generateBlurb(
   }
 
   // One cue line per main (A-block) exercise: coach cue wins, generic per-pattern cue else.
-  const mainSlots = session.timedBlocks[0]?.slots ?? [];
+  const mainSlots = seriesBlocks(session.timedBlocks)[0]?.slots ?? [];
   for (const slot of mainSlots) {
     if (!slot.name) continue;
     const ex = slot.exerciseId !== null ? byId.get(slot.exerciseId) : undefined;

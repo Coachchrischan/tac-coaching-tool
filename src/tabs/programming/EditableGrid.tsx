@@ -7,6 +7,7 @@
 import type { LibraryExercise, RankedExercise } from '../../lib/library';
 import Combobox from '../../components/Combobox';
 import { normaliseIntensity } from '../../lib/prescription';
+import { seriesBlocks } from '../../lib/programStreams';
 
 // Editable progression grids: Month (one block, four weeks side by side) and
 // Phase (all three blocks, exercise column repeated per block). Both mirror
@@ -68,7 +69,7 @@ export function buildBlockRows(
     // Circuits have no editable exercise cells; the grids summarise them
     // read-only instead (see circuitSummaryRows).
     if (session.kind !== 'series') return;
-    session.timedBlocks.forEach((tb) => {
+    seriesBlocks(session.timedBlocks).forEach((tb) => {
       const seriesKey = tb.label.trim().toUpperCase();
       tb.slots.forEach((slot) => {
         if (!slot.name) return;

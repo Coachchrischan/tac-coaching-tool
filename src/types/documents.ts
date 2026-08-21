@@ -81,12 +81,31 @@ export interface ExerciseSlot {
   showScales?: boolean;
 }
 
-export interface TimedBlock {
+interface TimedBlockCommon {
   id: string;
   label: string; // "A", "B", ...
   minutes: number;
+}
+
+/** A series: sets and reps against named exercises. The usual strength part. */
+export interface SeriesBlock extends TimedBlockCommon {
+  kind?: 'series'; // absent on documents written before circuits could sit here
   slots: ExerciseSlot[];
 }
+
+/**
+ * A circuit piece inside an otherwise sets-and-reps session: a strength day
+ * that finishes on a 10 minute AMRAP. Written the same way ESD and Hyrox are,
+ * so the same editor and the same board rendering serve both.
+ */
+export interface CircuitPart extends TimedBlockCommon {
+  kind: 'circuit';
+  pieces: CircuitBlock[];
+}
+
+// A part carries one payload or the other, never both: the same discriminator
+// that stopped a session dropping its circuit, one level down.
+export type TimedBlock = SeriesBlock | CircuitPart;
 
 // ESD, Hyrox and Game Day are written as circuits, not sets and reps: a
 // heading ("AMRAP in 10 minutes:", "0:00-10:00"), the movements under it,

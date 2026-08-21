@@ -1,4 +1,4 @@
-import type { ExerciseSlot, LibraryOverridesDoc, TimedBlock } from '../../types/documents';
+import type { ExerciseSlot, LibraryOverridesDoc, SeriesBlock } from '../../types/documents';
 import type { LibraryExercise, RankedExercise } from '../../lib/library';
 import ExerciseRow, { SLOT_FIELDS } from './ExerciseRow';
 
@@ -28,12 +28,12 @@ export default function TimedBlockCard({
   onSetScale,
   onMoveSlot,
 }: {
-  block: TimedBlock;
+  block: SeriesBlock;
   overrides: LibraryOverridesDoc;
   search: (query: string) => RankedExercise[];
   videoUrlFor: (exerciseId: number) => string | undefined;
   expandScales: boolean;
-  onPatchBlock: (patch: Partial<TimedBlock>) => void;
+  onPatchBlock: (patch: Partial<SeriesBlock>) => void;
   onDeleteBlock: () => void;
   onAddSlot: () => void;
   onPatchSlot: (slotId: string, patch: Partial<ExerciseSlot>) => void;
