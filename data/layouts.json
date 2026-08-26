@@ -5,7 +5,52 @@
         "id": "strength",
         "name": "Strength",
         "room": "Gym Floor",
-        "items": []
+        "items": [
+          {
+            "id": "e78f56d3-6fa2-4355-b5a2-030b3ce323c9",
+            "kind": "ski",
+            "label": "Ski erg",
+            "x": 74,
+            "y": 393,
+            "w": 34,
+            "h": 72,
+            "count": 1,
+            "gap": 12
+          },
+          {
+            "id": "d3ce2fd7-2b5e-4ddf-ab56-269231ec79e7",
+            "kind": "ski",
+            "label": "Ski erg",
+            "x": 177,
+            "y": 436,
+            "w": 34,
+            "h": 72,
+            "count": 1,
+            "gap": 12
+          },
+          {
+            "id": "fe9553f9-e464-4d6f-88bd-eb884042b4a2",
+            "kind": "ski",
+            "label": "Ski erg",
+            "x": 405,
+            "y": 344,
+            "w": 34,
+            "h": 72,
+            "count": 1,
+            "gap": 12
+          },
+          {
+            "id": "40821db6-e4b6-4050-b977-d171beeb0ffc",
+            "kind": "ski",
+            "label": "Ski erg",
+            "x": 374,
+            "y": 400,
+            "w": 34,
+            "h": 72,
+            "count": 1,
+            "gap": 12
+          }
+        ]
       },
       {
         "id": "esd",
@@ -120,6 +165,6 @@
       }
     ]
   },
-  "rev": 17,
-  "updatedAt": "2026-08-21T02:59:03.156Z"
+  "rev": 20,
+  "updatedAt": "2026-08-21T06:42:36.883Z"
 }

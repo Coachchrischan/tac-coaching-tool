@@ -83,7 +83,7 @@
                             "name": "Squat Jump",
                             "sets": "3",
                             "reps": "5",
-                            "showScales": false
+                            "showScales": true
                           }
                         ]
                       },
@@ -5522,6 +5522,6 @@
       }
     ]
   },
-  "rev": 147,
-  "updatedAt": "2026-08-21T06:25:05.552Z"
+  "rev": 151,
+  "updatedAt": "2026-08-21T06:37:42.403Z"
 }

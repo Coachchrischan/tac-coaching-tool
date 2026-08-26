@@ -574,9 +574,9 @@
         ]
       }
     ],
-    "activeScenarioId": "e50da7f1-8ead-4deb-b7f4-dcb054a3eb56",
+    "activeScenarioId": "current",
     "liveScenarioId": "e50da7f1-8ead-4deb-b7f4-dcb054a3eb56"
   },
-  "rev": 106,
-  "updatedAt": "2026-08-21T06:01:59.089Z"
+  "rev": 113,
+  "updatedAt": "2026-08-21T06:52:08.897Z"
 }
