@@ -4234,8 +4234,9 @@
         "name": "Hyrox",
         "blocks": [
           {
-            "id": "hyrox-aug-2026",
-            "theme": "Aug 2026",
+            "id": "hyrox-leadin",
+            "theme": "Lead-in",
+            "blockLength": 1,
             "weeks": [
               {
                 "id": "hyrox-b1w1",
@@ -4358,150 +4359,576 @@
                     ]
                   }
                 ]
-              },
-              {
-                "id": "hyrox-b1w2",
-                "sessions": [
-                  {
-                    "id": "hyrox-b1w2s1",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "circuit": []
-                  }
-                ]
               }
             ]
           },
           {
-            "id": "hyrox-sept-2026",
-            "theme": "Sept 2026",
+            "id": "hyrox-b01",
+            "theme": "Block 01 Baseline",
+            "blockLength": 4,
             "weeks": [
               {
-                "id": "hyrox-b1w3",
+                "id": "hyrox-b01-w1",
                 "sessions": [
                   {
-                    "id": "hyrox-b1w3s1",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "name": "Monday, benchmark",
-                    "intent": "TAC Benchmark A. Five legs for time, capped at 32 minutes. This exact piece returns in week four and the target then is three to five per cent faster, so today has to be honest.",
-                    "note": "Five entry points, 3/3/3/3/4. Everyone starts on their run. If every runner is full, take the station first and tell the coach. Record your time, your entry leg and your air runner number: same runner in week four or the number means nothing. Run the first two legs at 10km pace. This is won on legs four and five.",
-                    "circuit": [
+                    "id": "hyrox-w1-mon-anchor",
+                    "focus": "rox-strong",
+                    "kind": "series",
+                    "name": "Anchor",
+                    "intent": "Sustainable strength endurance. A pace test disguised as a grind. Four to six rounds per pair is the target window.",
+                    "blurbOverride": "Strength endurance under a long clock. Five stations, partner alternating, sled and carries throughout. The goal is a pace you can hold for 22 minutes, not a sprint you survive.",
+                    "appDescription": "ANCHOR\n\nIn pairs, 22 min AMRAP:\n20/16 cal Ski\n20 Wall Balls\n25m Sled Push\n20m DB Farmers Carry\n20 DB Walking Lunge\n\nOne works, one rests. Swap each station.\n\nSignature session. This one comes back in\nweek 4, so remember your score.",
+                    "note": "Five stations around the room. Stagger the ten pairs: pairs 1-2 start at ski, 3-4 wall balls, 5-6 sled, 7-8 farmers, 9-10 lunge. They rotate in written order from wherever they start.\nThe stagger keeps two pairs at the sled. If a third arrives early they hold at the carry and take the lane when it frees. Say this in the brief or you lose two minutes to a queue.\nLoad check: under three rounds means too heavy, over seven means too light. Correct it live, not next week.\nThe one cue: unbroken wall balls in round four is the goal, not round one.\nTell them this returns on 21 September. Scores on the board, get them to photograph it.\nCapacity: OK at 20. Stagger is what keeps sled at 2 lanes.",
+                    "timedBlocks": [
                       {
-                        "id": "14909383-d483-4319-ad23-e4de4597e01c",
-                        "heading": "Warm up",
-                        "lines": [
+                        "id": "w1-mon-anchor-wu",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "note": "Warm-up. 3 min easy machine, then 2 rounds of the dynamic set, finishing with light wall balls and DB deadlifts.",
+                        "slots": [
                           {
-                            "text": "4 min easy air runner or row, RPE 3 to 4"
+                            "id": "w1-mon-anchor-wu-wu1",
+                            "exerciseId": null,
+                            "name": "Row, Ski or Bike",
+                            "reps": "3 min easy",
+                            "note": "Athlete's choice"
                           },
                           {
-                            "text": "Dynamic: 10 leg swings/side, 10 walking lunges, 10 air squats, 10 band pull-apart, 8 scap pulls, 10m bear crawl"
+                            "id": "w1-mon-anchor-wu-wu2",
+                            "exerciseId": null,
+                            "name": "Spiderman with Reach",
+                            "sets": "2",
+                            "reps": "10"
                           },
                           {
-                            "text": "One touch of each station: 5 wall balls, one sled length at working weight, 10m carry, 3 burpee broad jumps"
+                            "id": "w1-mon-anchor-wu-wu3",
+                            "exerciseId": null,
+                            "name": "Glute Bridge",
+                            "sets": "2",
+                            "reps": "10"
                           },
                           {
-                            "text": "Transition rehearsal",
-                            "load": "2 rounds of 200m run at race pace then 10 wall balls, 60s easy between"
+                            "id": "w1-mon-anchor-wu-wu4",
+                            "exerciseId": null,
+                            "name": "Band Pull-Apart",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w1-mon-anchor-wu-wu5",
+                            "exerciseId": null,
+                            "name": "Air Squat",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w1-mon-anchor-wu-wu6",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "10",
+                            "load": "light"
+                          },
+                          {
+                            "id": "w1-mon-anchor-wu-wu7",
+                            "exerciseId": null,
+                            "name": "DB Deadlift",
+                            "reps": "10",
+                            "load": "light"
                           }
-                        ],
-                        "restAfter": "To your entry leg"
+                        ]
                       },
                       {
-                        "id": "d956d01a-fa66-40c7-8dd0-95e04e1d698e",
-                        "heading": "Benchmark A, for time, cap 32 min",
-                        "lines": [
+                        "id": "w1-mon-anchor-prep",
+                        "kind": "series",
+                        "label": "PREP",
+                        "minutes": 5,
+                        "note": "Station prep. Sled 2 x 12.5m building to working load. 5 wall balls at working ball. 5 DB front rack reverse lunge each side. Confirm partners and starting stations before the clock.",
+                        "slots": [
                           {
-                            "text": "500m run, then 40 wall balls",
-                            "load": "9kg M / 6kg W to 10m"
+                            "id": "w1-mon-anchor-prep-p1",
+                            "exerciseId": null,
+                            "name": "Sled Push",
+                            "sets": "2",
+                            "reps": "12.5m",
+                            "note": "Building to working load"
                           },
                           {
-                            "text": "500m run, then sled push and pull",
-                            "load": "50m each, race weight"
+                            "id": "w1-mon-anchor-prep-p2",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "5",
+                            "note": "At working ball"
                           },
                           {
-                            "text": "500m run, then 30 burpee broad jumps"
-                          },
-                          {
-                            "text": "500m run, then 200m farmers carry",
-                            "load": "2x24kg M / 2x16kg W"
-                          },
-                          {
-                            "text": "500m run, then 500m ski erg"
+                            "id": "w1-mon-anchor-prep-p3",
+                            "exerciseId": null,
+                            "name": "DB Front Rack Reverse Lunge",
+                            "reps": "5 each side",
+                            "note": "At working DB"
                           }
-                        ],
-                        "restAfter": "No rest. 2500m of running plus five stations"
+                        ]
                       },
                       {
-                        "id": "c9fc1d41-8440-42b0-b1fe-6aa85b2ca9a9",
-                        "heading": "Finish and record",
-                        "lines": [
+                        "id": "w1-mon-anchor-a",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 10,
+                        "note": "Primer. 10 min EMOM, alternating.",
+                        "slots": [
                           {
-                            "text": "3 min easy bike or walk, RPE 2"
+                            "id": "w1-mon-anchor-a-a1",
+                            "exerciseId": null,
+                            "name": "DB Goblet Squat",
+                            "reps": "12",
+                            "note": "Odd minutes · Open: 10 reps, lighter DB · Foundation: 8 reps, light DB or bodyweight"
                           },
                           {
-                            "text": "Calf, hip flexor, thoracic rotation, forearm and grip"
+                            "id": "w1-mon-anchor-a-a2",
+                            "exerciseId": null,
+                            "name": "DB Romanian Deadlift",
+                            "reps": "10",
+                            "note": "Even minutes · Open: 10 reps, lighter DB · Foundation: 8 reps, light DB"
                           },
                           {
-                            "text": "Time, entry leg and runner number onto the sheet on the way out"
+                            "id": "w1-mon-anchor-a-a3",
+                            "exerciseId": null,
+                            "name": "Deadhang",
+                            "reps": "Max hold",
+                            "note": "Even minutes, time remaining after A2 · Open: Max hold · Foundation: Bar support hold or band-assisted"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w1-mon-anchor-b",
+                        "kind": "series",
+                        "label": "B",
+                        "minutes": 22,
+                        "note": "Anchor. 22 min AMRAP in pairs. One works, one rests. Swap at the end of each station. Complete in order. Score: rounds and reps per pair. Goes on the board.",
+                        "slots": [
+                          {
+                            "id": "w1-mon-anchor-b-b1",
+                            "exerciseId": null,
+                            "name": "Ski Erg",
+                            "reps": "20/16",
+                            "note": "Open: 15/12 cal · Foundation: 12/10 cal"
+                          },
+                          {
+                            "id": "w1-mon-anchor-b-b2",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "20",
+                            "load": "9/6 kg",
+                            "note": "Open: 20 reps @ 6/4kg · Foundation: 15 reps @ 4kg to lower target"
+                          },
+                          {
+                            "id": "w1-mon-anchor-b-b3",
+                            "exerciseId": null,
+                            "name": "Sled Push",
+                            "reps": "25m",
+                            "load": "Heavy, approx 60-70% bodyweight",
+                            "note": "Open: 25m moderate · Foundation: 25m light or sled only"
+                          },
+                          {
+                            "id": "w1-mon-anchor-b-b4",
+                            "exerciseId": null,
+                            "name": "DB Farmers Carry",
+                            "reps": "20m",
+                            "load": "2 x 24-32kg",
+                            "note": "Open: 20m @ 2x16-24kg · Foundation: 20m @ 2x10-16kg"
+                          },
+                          {
+                            "id": "w1-mon-anchor-b-b5",
+                            "exerciseId": null,
+                            "name": "DB Front Rack Walking Lunge",
+                            "reps": "20 steps",
+                            "load": "2 x 20-24kg",
+                            "note": "Open: 20 steps @ 2x12-16kg · Foundation: 16 steps bodyweight"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w1-mon-anchor-finish",
+                        "kind": "series",
+                        "label": "FINISH",
+                        "minutes": 8,
+                        "note": "Cooldown. 400m easy walk or row, then couch stretch, lat stretch and forearm release.",
+                        "slots": [
+                          {
+                            "id": "w1-mon-anchor-finish-f1",
+                            "exerciseId": null,
+                            "name": "Walk or Row",
+                            "reps": "400m",
+                            "note": "Easy"
+                          },
+                          {
+                            "id": "w1-mon-anchor-finish-f2",
+                            "exerciseId": null,
+                            "name": "Couch Stretch",
+                            "reps": "60s each side"
+                          },
+                          {
+                            "id": "w1-mon-anchor-finish-f3",
+                            "exerciseId": null,
+                            "name": "Lat Stretch",
+                            "reps": "45s each side"
+                          },
+                          {
+                            "id": "w1-mon-anchor-finish-f4",
+                            "exerciseId": null,
+                            "name": "Forearm and Grip Release",
+                            "reps": "60s"
                           }
                         ]
                       }
                     ]
                   },
                   {
-                    "id": "hyrox-b2w1-friday",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "name": "Friday, stations",
-                    "intent": "Not much running, a lot of work with load in your hands. Two reps in reserve at every station: thirty good beats forty rough.",
-                    "note": "Stations: A sled end, ski opener then sled push and pull, capped at 3. B runner end, runner then wall ball. C upper floor, bike then DB front rack lunge. D upper floor, rower then farmers carry shuttles. E rig, runner then ring row, dead hang, band pull-apart, farmer hold. Five stations rather than four because the sled track holds three. Group 1 is the three-person group and always starts on the sled, so the cap holds without recounting. Block 2 starts one station further along.",
-                    "circuit": [
+                    "id": "hyrox-w1-wed-triangle",
+                    "focus": "rox-engine",
+                    "kind": "series",
+                    "name": "The Triangle",
+                    "intent": "Threshold, continuous and honest. The cleanest teaching session of the block. Spend the brief on pacing, not movement.",
+                    "blurbOverride": "Three rounds of row, ski and run at 500m each. Rotating start so the machines never clash. Round three should land within 45 seconds of round one.",
+                    "appDescription": "THE TRIANGLE\n\n3 rounds for time:\n500m Row\n500m Ski\n500m Run\n\nRotating start, continuous clock.\nScore is total time.\n\nSignature session. This one comes back in\nweek 4, so remember your time.",
+                    "note": "Exact equipment fit. Seven rowers, seven skis, six to ten runners. Split into three equal groups by headcount, not ability.\nThey move as individuals, not as a group. Some will lap others, which is fine, machines free up naturally.\nStimulus is 7 to 8 out of 10. Round 3 within 45 seconds of round 1. If it is 90 seconds or more slower they went out too hard. Say it in the brief and again in the debrief.\nReturns 23 September. Times on the board.\nCapacity: Exact fit at 20. 7 + 7 + 6 = 20.",
+                    "timedBlocks": [
                       {
-                        "id": "95d1a2b6-929d-42d8-9e1e-0c675b1cab59",
-                        "heading": "Warm up",
-                        "lines": [
+                        "id": "w1-wed-triangle-wu",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "note": "Warm-up. 5 min progressive on your starting machine, then the dynamic set and a 200m run build.",
+                        "slots": [
                           {
-                            "text": "4 min easy runner or row, RPE 3 to 4"
+                            "id": "w1-wed-triangle-wu-wu1",
+                            "exerciseId": null,
+                            "name": "Starting Machine Progressive",
+                            "reps": "5 min",
+                            "note": "2 min easy, 2 min moderate, 1 min at target pace"
                           },
                           {
-                            "text": "Dynamic: leg swings, walking lunges, air squats, band pull-apart, scap pulls"
+                            "id": "w1-wed-triangle-wu-wu2",
+                            "exerciseId": null,
+                            "name": "Leg Swings",
+                            "sets": "2",
+                            "reps": "10 each"
                           },
                           {
-                            "text": "2 x 30s at each of two stations"
+                            "id": "w1-wed-triangle-wu-wu3",
+                            "exerciseId": null,
+                            "name": "Arm Circles",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w1-wed-triangle-wu-wu4",
+                            "exerciseId": null,
+                            "name": "A-Skip",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w1-wed-triangle-wu-wu5",
+                            "exerciseId": null,
+                            "name": "Air Squat",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w1-wed-triangle-wu-wu6",
+                            "exerciseId": null,
+                            "name": "Run Build",
+                            "reps": "200m"
                           }
-                        ],
-                        "restAfter": "To your starting station"
+                        ]
                       },
                       {
-                        "id": "c7cc60e5-11ee-467e-8067-b8cd2a96fa3b",
-                        "heading": "2 blocks of 15 min: 5 stations x 3 min",
-                        "lines": [
+                        "id": "w1-wed-triangle-prep",
+                        "kind": "series",
+                        "label": "PREP",
+                        "minutes": 5,
+                        "note": "Machine prep. Damper and monitor setup. Write target 500m splits on the board per machine. State the plan out loud: a 500m pace you can hold nine times, not once.",
+                        "slots": [
                           {
-                            "text": "0:00 to 0:45, 200m on the machine beside the station, RPE 6"
+                            "id": "w1-wed-triangle-prep-p1",
+                            "exerciseId": null,
+                            "name": "Monitor and Damper Setup",
+                            "note": "Per machine"
                           },
                           {
-                            "text": "0:45 to 2:45, station work, quality reps, stop two short of form breakdown"
-                          },
-                          {
-                            "text": "2:45 to 3:00, transition on the whistle"
-                          },
-                          {
-                            "text": "Loads",
-                            "load": "Sled race weight, wall ball 9/6, lunge 2x15 / 2x10, carry 2x24 / 2x16"
+                            "id": "w1-wed-triangle-prep-p2",
+                            "exerciseId": null,
+                            "name": "Target Split Board",
+                            "note": "Write 500m targets for row, ski and run"
                           }
-                        ],
-                        "restAfter": "Rest 2 minutes between blocks"
+                        ]
                       },
                       {
-                        "id": "838383d8-1a9b-49a5-aa25-d4ca0ee1a725",
-                        "heading": "Finish",
-                        "lines": [
+                        "id": "w1-wed-triangle-a",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "note": "The Triangle. 3 rounds for time. Cap 30 min. Three groups, each starting on a different station. Rotate as an individual on completion. Clock runs continuously. Score: total time for all 4,500m. Cap 30 min.",
+                        "slots": [
                           {
-                            "text": "4 min easy machine, RPE 2"
+                            "id": "w1-wed-triangle-a-a1",
+                            "exerciseId": null,
+                            "name": "Row",
+                            "reps": "500m",
+                            "note": "Open: 400m · Foundation: 300m"
                           },
                           {
-                            "text": "Quad, adductor, forearm, lat"
+                            "id": "w1-wed-triangle-a-a2",
+                            "exerciseId": null,
+                            "name": "Ski Erg",
+                            "reps": "500m",
+                            "note": "Open: 400m · Foundation: 300m"
+                          },
+                          {
+                            "id": "w1-wed-triangle-a-a3",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "500m",
+                            "note": "Open: 400m · Foundation: 300m"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w1-wed-triangle-finish",
+                        "kind": "series",
+                        "label": "FINISH",
+                        "minutes": 8,
+                        "note": "Cooldown. 5 min easy spin with nasal breathing, then hamstrings, calves and hip flexors.",
+                        "slots": [
+                          {
+                            "id": "w1-wed-triangle-finish-f1",
+                            "exerciseId": null,
+                            "name": "Easy Spin",
+                            "reps": "5 min",
+                            "note": "Nasal breathing"
+                          },
+                          {
+                            "id": "w1-wed-triangle-finish-f2",
+                            "exerciseId": null,
+                            "name": "Hamstring Stretch",
+                            "reps": "45s each"
+                          },
+                          {
+                            "id": "w1-wed-triangle-finish-f3",
+                            "exerciseId": null,
+                            "name": "Calf Stretch",
+                            "reps": "45s each"
+                          },
+                          {
+                            "id": "w1-wed-triangle-finish-f4",
+                            "exerciseId": null,
+                            "name": "Hip Flexor Stretch",
+                            "reps": "45s each"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-w1-fri-halfrox",
+                    "focus": "rox-race",
+                    "kind": "series",
+                    "name": "Half Rox",
+                    "intent": "The race, halved. Four stations, five runs, 2.5km of compromised running. Most will take 26 to 32 minutes.",
+                    "blurbOverride": "A half race simulation run solo. Alternating 500m runs and stations so the room self-balances. The teaching point is run one: if it is faster than run five, the session was paced wrong regardless of total time.",
+                    "appDescription": "HALF ROX\n\nFor time:\n500m Run / 500m Ski\n500m Run / 50 Wall Balls\n500m Run / 500m Row\n500m Run / 100m DB Farmers Carry\n500m Run\n\nHalf a race. Pace run 1 like you mean to\nfinish run 5.\n\nSignature session. This one comes back in\nweek 4.",
+                    "note": "Self-balancing. At any moment roughly half the room is running and half is at a station, which lands under the ten runner ceiling as long as you stagger the start. Do not send twenty people at once.\nNo sled, deliberately. Two lanes cannot serve twenty athletes moving through a fixed sequence. Sled lives on Monday.\nThe teaching point is run 1. Anyone whose run 1 is faster than their run 5 has failed the session regardless of total time.\nCall splits at the start of every run so they can hear the drift.\nReturns 25 September. Times on the board.\nCapacity: OK at 20 with staggered start. Do not mass start.",
+                    "timedBlocks": [
+                      {
+                        "id": "w1-fri-halfrox-wu",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "note": "Warm-up. 400m easy run, the dynamic set, then light wall balls and a 250m ski build.",
+                        "slots": [
+                          {
+                            "id": "w1-fri-halfrox-wu-wu1",
+                            "exerciseId": null,
+                            "name": "Run",
+                            "reps": "400m",
+                            "note": "Easy"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-wu-wu2",
+                            "exerciseId": null,
+                            "name": "Walking Lunge",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-wu-wu3",
+                            "exerciseId": null,
+                            "name": "Inchworm",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-wu-wu4",
+                            "exerciseId": null,
+                            "name": "Air Squat",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-wu-wu5",
+                            "exerciseId": null,
+                            "name": "Band Pull-Apart",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-wu-wu6",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "10",
+                            "load": "light"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-wu-wu7",
+                            "exerciseId": null,
+                            "name": "Ski Build",
+                            "reps": "250m"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w1-fri-halfrox-prep",
+                        "kind": "series",
+                        "label": "PREP",
+                        "minutes": 5,
+                        "note": "Course walk. Walk the course and show every transition. Assign start waves. Give a target run pace and tell them run 1 should feel too easy. Say it twice.",
+                        "slots": [
+                          {
+                            "id": "w1-fri-halfrox-prep-p1",
+                            "exerciseId": null,
+                            "name": "Course Walk",
+                            "note": "Show every transition point"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-prep-p2",
+                            "exerciseId": null,
+                            "name": "Wave Assignment",
+                            "note": "Two waves 90s apart, or stagger individuals every 30s"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-prep-p3",
+                            "exerciseId": null,
+                            "name": "Pace Target",
+                            "note": "Write target run pace on the board"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w1-fri-halfrox-a",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "note": "Half Rox. For time. Cap 33 min. Two waves 90 seconds apart, or stagger individuals every 30 seconds. Score: total time. Cap 33 min.",
+                        "slots": [
+                          {
+                            "id": "w1-fri-halfrox-a-a1",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "500m",
+                            "note": "Open: 400m · Foundation: 300m"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-a-a2",
+                            "exerciseId": null,
+                            "name": "Ski Erg",
+                            "reps": "500m",
+                            "note": "Open: 400m · Foundation: 300m"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-a-a3",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "500m",
+                            "note": "Open: 400m · Foundation: 300m"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-a-a4",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "50",
+                            "load": "9/6 kg",
+                            "note": "Open: 40 reps @ 6/4kg · Foundation: 30 reps @ 4kg"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-a-a5",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "500m",
+                            "note": "Open: 400m · Foundation: 300m"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-a-a6",
+                            "exerciseId": null,
+                            "name": "Row",
+                            "reps": "500m",
+                            "note": "Open: 400m · Foundation: 300m"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-a-a7",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "500m",
+                            "note": "Open: 400m · Foundation: 300m"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-a-a8",
+                            "exerciseId": null,
+                            "name": "DB Farmers Carry",
+                            "reps": "100m",
+                            "load": "2 x 24/16kg",
+                            "note": "Open: 80m @ 2x16-20kg · Foundation: 60m @ 2x10-12kg"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-a-a9",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "500m",
+                            "note": "Open: 400m · Foundation: 300m"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w1-fri-halfrox-finish",
+                        "kind": "series",
+                        "label": "FINISH",
+                        "minutes": 8,
+                        "note": "Cooldown. Walk it out, quads and calves, then a two minute debrief on run splits.",
+                        "slots": [
+                          {
+                            "id": "w1-fri-halfrox-finish-f1",
+                            "exerciseId": null,
+                            "name": "Walk",
+                            "reps": "200m"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-finish-f2",
+                            "exerciseId": null,
+                            "name": "Quad Stretch",
+                            "reps": "45s each"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-finish-f3",
+                            "exerciseId": null,
+                            "name": "Calf Stretch",
+                            "reps": "45s each"
+                          },
+                          {
+                            "id": "w1-fri-halfrox-finish-f4",
+                            "exerciseId": null,
+                            "name": "Split Debrief",
+                            "reps": "2 min",
+                            "note": "Compare run 1 against run 5"
                           }
                         ]
                       }
@@ -4510,135 +4937,626 @@
                 ]
               },
               {
-                "id": "hyrox-b1w4",
+                "id": "hyrox-b01-w2",
                 "sessions": [
                   {
-                    "id": "hyrox-b1w4s1",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "name": "Monday, race simulation",
-                    "intent": "Six legs, and this one is NOT for time. Your benchmark run pace is next to your name. Hold it on every leg including the last one.",
-                    "note": "Anyone who beats their pace on leg one and dies on leg five has done the session wrong. Six entry points this week, so congestion improves. Leg six is where you find out if you paced it.",
-                    "circuit": [
+                    "id": "hyrox-w2-mon-tether",
+                    "focus": "rox-strong",
+                    "kind": "series",
+                    "name": "Tether",
+                    "intent": "Work under a clock you do not control. Your partner's run is your rest, so their pacing decides your session. Most pairs finish in 18 to 22 minutes.",
+                    "blurbOverride": "Same strength endurance job as week 1, completely new game. One partner runs 400m while the other accumulates reps. The sled is first in, first served, and leaving it until last is how pairs run out of time.",
+                    "appDescription": "TETHER\n\nIn pairs, 23 min cap:\n60 Wall Balls\n40 DB Walking Lunge\n40 Alt DB Snatch\n20 Burpee Broad Jumps\n50m Sled Push\n\nOne partner runs 400m while the other\nworks. Swap on return. Any order.\nSled is first in, first served.",
+                    "note": "The run is what makes this legal. Ten pairs, one runner each, exactly ten air runners. Never let both partners leave the floor.\nSled is first in, first served. Tell them they can bank the other stations while they wait, and that any pair leaving the sled until last will run out of time. That is the game, not an accident.\nThe pacing lesson sits on the runner, not the worker. A partner who sprints the 400m gives their teammate less rest and takes less work off the list. Point that out to a pair doing it.\nWatch the snatch. Fatigued DB snatch becomes a rounded-back swing. Cut the load before you cut the reps.\nCapacity: Exact fit at 20. 10 pairs = 10 runners.",
+                    "timedBlocks": [
                       {
-                        "id": "ec6739a5-840a-425b-b8f6-42a024c74da2",
-                        "heading": "Warm up",
-                        "lines": [
+                        "id": "w2-mon-tether-wu",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "note": "Warm-up. 3 min easy bike or row, then 2 rounds of the dynamic set, finishing with light DB snatch and wall balls.",
+                        "slots": [
                           {
-                            "text": "4 min easy air runner or row, RPE 3 to 4"
+                            "id": "w2-mon-tether-wu-wu1",
+                            "exerciseId": null,
+                            "name": "Bike or Row",
+                            "reps": "3 min easy"
                           },
                           {
-                            "text": "Dynamic: 10 leg swings/side, 10 walking lunges, 10 air squats, 10 band pull-apart, 8 scap pulls, 10m bear crawl"
+                            "id": "w2-mon-tether-wu-wu2",
+                            "exerciseId": null,
+                            "name": "World's Greatest Stretch",
+                            "sets": "2",
+                            "reps": "10"
                           },
                           {
-                            "text": "One touch of each station: 5 wall balls, one sled length at working weight, 10m carry, 3 burpee broad jumps"
+                            "id": "w2-mon-tether-wu-wu3",
+                            "exerciseId": null,
+                            "name": "Glute Bridge",
+                            "sets": "2",
+                            "reps": "10"
                           },
                           {
-                            "text": "Transition rehearsal",
-                            "load": "2 rounds of 200m run at race pace then 10 wall balls, 60s easy between"
+                            "id": "w2-mon-tether-wu-wu4",
+                            "exerciseId": null,
+                            "name": "Band Pull-Apart",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w2-mon-tether-wu-wu5",
+                            "exerciseId": null,
+                            "name": "Air Squat",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w2-mon-tether-wu-wu6",
+                            "exerciseId": null,
+                            "name": "DB Snatch",
+                            "reps": "10",
+                            "load": "light"
+                          },
+                          {
+                            "id": "w2-mon-tether-wu-wu7",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "10",
+                            "load": "light"
                           }
-                        ],
-                        "restAfter": "To your entry leg"
+                        ]
                       },
                       {
-                        "id": "39a7a9cc-fe85-45aa-afd0-93fe15210da1",
-                        "heading": "Six legs, hold your pace, cap 34 min",
-                        "lines": [
+                        "id": "w2-mon-tether-prep",
+                        "kind": "series",
+                        "label": "PREP",
+                        "minutes": 5,
+                        "note": "Movement prep. DB snatch setup and turnover. Burpee broad jump landing mechanics, soft knees and a controlled stick. Sled load and lane brief.",
+                        "slots": [
                           {
-                            "text": "500m run, then 40 wall balls",
-                            "load": "9/6kg"
+                            "id": "w2-mon-tether-prep-p1",
+                            "exerciseId": null,
+                            "name": "DB Snatch Technique",
+                            "reps": "5 each",
+                            "note": "Setup and turnover"
                           },
                           {
-                            "text": "500m run, then sled push and pull",
-                            "load": "50m each"
+                            "id": "w2-mon-tether-prep-p2",
+                            "exerciseId": null,
+                            "name": "Burpee Broad Jump",
+                            "reps": "3",
+                            "note": "Landing mechanics, soft knees"
                           },
                           {
-                            "text": "500m run, then 30 burpee broad jumps"
-                          },
-                          {
-                            "text": "500m run, then 200m farmers carry",
-                            "load": "2x24 / 2x16kg"
-                          },
-                          {
-                            "text": "500m run, then 500m ski erg"
-                          },
-                          {
-                            "text": "500m run, then 100m DB walking lunge",
-                            "load": "2x15 / 2x10kg"
+                            "id": "w2-mon-tether-prep-p3",
+                            "exerciseId": null,
+                            "name": "Sled Push",
+                            "reps": "12.5m",
+                            "note": "Load check"
                           }
-                        ],
-                        "restAfter": "Six entry points, 3/3/3/3/2/2. 3000m of running"
+                        ]
                       },
                       {
-                        "id": "baba24d0-7db8-448b-ab49-038ea52d4e61",
-                        "heading": "Finish",
-                        "lines": [
+                        "id": "w2-mon-tether-a",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 10,
+                        "note": "Primer. 10 min EMOM, alternating.",
+                        "slots": [
                           {
-                            "text": "3 min easy bike, RPE 2"
+                            "id": "w2-mon-tether-a-a1",
+                            "exerciseId": null,
+                            "name": "DB Front Rack Squat",
+                            "reps": "10",
+                            "note": "Odd minutes · Open: 8 reps lighter · Foundation: 6 reps light or goblet"
                           },
                           {
-                            "text": "Calf, hip flexor, forearm"
+                            "id": "w2-mon-tether-a-a2",
+                            "exerciseId": null,
+                            "name": "Heavy Farmers Carry",
+                            "reps": "20m",
+                            "note": "Even minutes · Open: 20m moderate · Foundation: 20m light"
                           },
                           {
-                            "text": "Whose pace held and whose faded. More than 10s per 500m of fade means you started too hot"
+                            "id": "w2-mon-tether-a-a3",
+                            "exerciseId": null,
+                            "name": "Deadhang",
+                            "reps": "Max hold",
+                            "note": "Even minutes, time remaining · Open: Max hold · Foundation: Bar support hold"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w2-mon-tether-b",
+                        "kind": "series",
+                        "label": "B",
+                        "minutes": 23,
+                        "note": "Tether. 23 min cap, in pairs. Partner A runs 400m while Partner B works. Swap when the runner returns. Complete the list in any order. Score: time, or reps remaining at the cap. Sled capped at 2 pairs, take when free.",
+                        "slots": [
+                          {
+                            "id": "w2-mon-tether-b-b0",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "400m",
+                            "note": "Continuous partner rotation, not a listed task · Open: 300m · Foundation: 200m"
+                          },
+                          {
+                            "id": "w2-mon-tether-b-b1",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "60",
+                            "load": "9/6 kg",
+                            "note": "Open: 60 @ 6/4kg · Foundation: 45 @ 4kg"
+                          },
+                          {
+                            "id": "w2-mon-tether-b-b2",
+                            "exerciseId": null,
+                            "name": "DB Front Rack Walking Lunge",
+                            "reps": "40 steps",
+                            "load": "2 x 20/16kg",
+                            "note": "Open: 40 @ 2x12.5/10kg · Foundation: 30 bodyweight"
+                          },
+                          {
+                            "id": "w2-mon-tether-b-b3",
+                            "exerciseId": null,
+                            "name": "Alternating DB Snatch",
+                            "reps": "40",
+                            "load": "22.5/15kg",
+                            "note": "Open: 40 @ 15/10kg · Foundation: 30 @ 10/7.5kg"
+                          },
+                          {
+                            "id": "w2-mon-tether-b-b4",
+                            "exerciseId": null,
+                            "name": "Burpee Broad Jump",
+                            "reps": "20",
+                            "note": "Open: 20 · Foundation: 15 step back and step forward"
+                          },
+                          {
+                            "id": "w2-mon-tether-b-b5",
+                            "exerciseId": null,
+                            "name": "Sled Push",
+                            "reps": "50m",
+                            "load": "Heavy",
+                            "note": "Open: 50m moderate · Foundation: 50m light"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w2-mon-tether-finish",
+                        "kind": "series",
+                        "label": "FINISH",
+                        "minutes": 8,
+                        "note": "Cooldown. 3 min easy, then hip flexors, thoracic opener and forearms.",
+                        "slots": [
+                          {
+                            "id": "w2-mon-tether-finish-f1",
+                            "exerciseId": null,
+                            "name": "Easy Machine",
+                            "reps": "3 min"
+                          },
+                          {
+                            "id": "w2-mon-tether-finish-f2",
+                            "exerciseId": null,
+                            "name": "Hip Flexor Stretch",
+                            "reps": "45s each"
+                          },
+                          {
+                            "id": "w2-mon-tether-finish-f3",
+                            "exerciseId": null,
+                            "name": "Thoracic Opener",
+                            "reps": "60s"
+                          },
+                          {
+                            "id": "w2-mon-tether-finish-f4",
+                            "exerciseId": null,
+                            "name": "Forearm Release",
+                            "reps": "45s each"
                           }
                         ]
                       }
                     ]
                   },
                   {
-                    "id": "hyrox-b2w2-friday",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "name": "Friday, stations",
-                    "intent": "Same five stations. Every station gives you a full extra minute of work and the loads do not change. Two reps in reserve is harder to obey in that last minute, which is the point.",
-                    "note": "Stations: A sled end, ski opener then sled push and pull, capped at 3. B runner end, runner then wall ball. C upper floor, bike then DB front rack lunge. D upper floor, rower then farmers carry shuttles. E rig, runner then ring row, dead hang, band pull-apart, farmer hold",
-                    "circuit": [
+                    "id": "hyrox-w2-wed-rotations",
+                    "focus": "rox-engine",
+                    "kind": "series",
+                    "name": "Rotations",
+                    "intent": "Short intervals and top end, the exact opposite of week 1's continuous grind. Same track, same aerobic job, completely different feel on the floor.",
+                    "blurbOverride": "Three seven-minute blocks of 30 seconds hard and 30 seconds easy, rotating row to ski to run. Score is total metres, so sandbagging block one to win block three gains nothing.",
+                    "appDescription": "ROTATIONS\n\n3 x 7 min blocks:\n7 x 30s hard / 30s easy\nBlock 1 Row, Block 2 Ski, Block 3 Run\n\nScore is total metres.\n\nThen 8 min AMRAP:\n10 Wall Balls\n10 Alt DB Snatch\n10 Burpee Broad Jumps",
+                    "note": "Exact fit. Three groups: seven on row, seven on ski, six on run. Rotation happens once every seven minutes so there is no traffic.\nThe 30s easy is not a stop. Keep the handle moving and the belt turning or the interval loses its point. This is the most common failure in this session.\nMetres in block 3 should be within 5% of block 1. Tell them the score is the sum.\nFinisher is whole room at once, no bottleneck. Set the broad jumps running one direction so nobody collides.\nCapacity: Exact fit at 20. Finisher is whole-room, no bottleneck.",
+                    "timedBlocks": [
                       {
-                        "id": "95d1a2b6-929d-42d8-9e1e-0c675b1cab59",
-                        "heading": "Warm up",
-                        "lines": [
+                        "id": "w2-wed-rotations-wu",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "note": "Warm-up. 5 min progressive on your first machine, the dynamic set, then 3 x 15s builds to sprint pace.",
+                        "slots": [
                           {
-                            "text": "4 min easy runner or row, RPE 3 to 4"
+                            "id": "w2-wed-rotations-wu-wu1",
+                            "exerciseId": null,
+                            "name": "Starting Machine Progressive",
+                            "reps": "5 min",
+                            "note": "2 min easy, 2 min moderate, 1 min at target pace"
                           },
                           {
-                            "text": "Dynamic: leg swings, walking lunges, air squats, band pull-apart, scap pulls"
+                            "id": "w2-wed-rotations-wu-wu2",
+                            "exerciseId": null,
+                            "name": "Leg Swings",
+                            "sets": "2",
+                            "reps": "10 each"
                           },
                           {
-                            "text": "2 x 30s at each of two stations"
+                            "id": "w2-wed-rotations-wu-wu3",
+                            "exerciseId": null,
+                            "name": "Arm Circles",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w2-wed-rotations-wu-wu4",
+                            "exerciseId": null,
+                            "name": "A-Skip",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w2-wed-rotations-wu-wu5",
+                            "exerciseId": null,
+                            "name": "Air Squat",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w2-wed-rotations-wu-wu6",
+                            "exerciseId": null,
+                            "name": "Run Build",
+                            "reps": "200m"
+                          },
+                          {
+                            "id": "w2-wed-rotations-wu-wu7",
+                            "exerciseId": null,
+                            "name": "Sprint Build",
+                            "sets": "3",
+                            "reps": "15s",
+                            "note": "On your starting machine"
                           }
-                        ],
-                        "restAfter": "To your starting station"
+                        ]
                       },
                       {
-                        "id": "fb9b1f5d-9f92-4b25-8c94-44b02ebd2d1d",
-                        "heading": "2 blocks of 17:30: 5 stations x 3:30",
-                        "lines": [
+                        "id": "w2-wed-rotations-prep",
+                        "kind": "series",
+                        "label": "PREP",
+                        "minutes": 5,
+                        "note": "Target setting. Explain the 30/30. Set a metre target for the first effort so they have something concrete to chase, and write it on the board.",
+                        "slots": [
                           {
-                            "text": "0:00 to 0:45, 200m on the machine beside the station, RPE 6"
+                            "id": "w2-wed-rotations-prep-p1",
+                            "exerciseId": null,
+                            "name": "Interval Brief",
+                            "note": "Explain 30s hard / 30s easy, easy is not a stop"
                           },
                           {
-                            "text": "0:45 to 3:00, station work, up one minute on week 1"
-                          },
-                          {
-                            "text": "3:00 to 3:30, transition"
-                          },
-                          {
-                            "text": "Loads",
-                            "load": "Unchanged from week 1"
+                            "id": "w2-wed-rotations-prep-p2",
+                            "exerciseId": null,
+                            "name": "Metre Target Board",
+                            "note": "Write first-effort target per machine"
                           }
-                        ],
-                        "restAfter": "Rest 2 minutes between blocks"
+                        ]
                       },
                       {
-                        "id": "14d506a8-32f9-4e41-941d-88af44b56da3",
-                        "heading": "Finish",
-                        "lines": [
+                        "id": "w2-wed-rotations-a",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 23,
+                        "note": "Rotations. 3 blocks of 7 min. Within each block: 7 x 30s hard / 30s easy. 90 seconds to rotate between blocks. Three groups each starting on a different machine. Score: total metres across all three blocks.",
+                        "slots": [
                           {
-                            "text": "4 min easy machine, RPE 2"
+                            "id": "w2-wed-rotations-a-a1",
+                            "exerciseId": null,
+                            "name": "Row",
+                            "reps": "7 x 30s hard / 30s easy",
+                            "note": "Block 1 · Open: 7 x 25s hard / 35s easy · Foundation: 7 x 20s hard / 40s easy"
                           },
                           {
-                            "text": "Quad, adductor, forearm, lat"
+                            "id": "w2-wed-rotations-a-a2",
+                            "exerciseId": null,
+                            "name": "Ski Erg",
+                            "reps": "7 x 30s hard / 30s easy",
+                            "note": "Block 2 · Open: 7 x 25s hard / 35s easy · Foundation: 7 x 20s hard / 40s easy"
+                          },
+                          {
+                            "id": "w2-wed-rotations-a-a3",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "7 x 30s hard / 30s easy",
+                            "note": "Block 3 · Open: 7 x 25s hard / 35s easy · Foundation: 7 x 20s hard / 40s easy"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w2-wed-rotations-b",
+                        "kind": "series",
+                        "label": "B",
+                        "minutes": 8,
+                        "note": "Finisher. 8 min AMRAP. Whole room at once.",
+                        "slots": [
+                          {
+                            "id": "w2-wed-rotations-b-b1",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "10",
+                            "load": "9/6 kg",
+                            "note": "Open: 10 @ 6/4kg · Foundation: 10 @ 4kg"
+                          },
+                          {
+                            "id": "w2-wed-rotations-b-b2",
+                            "exerciseId": null,
+                            "name": "Alternating DB Snatch",
+                            "reps": "10",
+                            "load": "22.5/15kg",
+                            "note": "Open: 10 @ 15/10kg · Foundation: 10 @ 10/7.5kg"
+                          },
+                          {
+                            "id": "w2-wed-rotations-b-b3",
+                            "exerciseId": null,
+                            "name": "Burpee Broad Jump",
+                            "reps": "10",
+                            "note": "Open: 10 · Foundation: 10 step back and step forward"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w2-wed-rotations-finish",
+                        "kind": "series",
+                        "label": "FINISH",
+                        "minutes": 8,
+                        "note": "Cooldown. 5 min easy on any machine, then full lower body and shoulders.",
+                        "slots": [
+                          {
+                            "id": "w2-wed-rotations-finish-f1",
+                            "exerciseId": null,
+                            "name": "Easy Machine",
+                            "reps": "5 min"
+                          },
+                          {
+                            "id": "w2-wed-rotations-finish-f2",
+                            "exerciseId": null,
+                            "name": "Quad and Hamstring Stretch",
+                            "reps": "45s each"
+                          },
+                          {
+                            "id": "w2-wed-rotations-finish-f3",
+                            "exerciseId": null,
+                            "name": "Shoulder Stretch",
+                            "reps": "45s each"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-w2-fri-pyramid",
+                    "focus": "rox-race",
+                    "kind": "series",
+                    "name": "Pyramid",
+                    "intent": "A descending pyramid raced solo. It gets shorter as they get more tired. Say that out loud at the start, it changes how the room feels at minute twenty.",
+                    "blurbOverride": "Four rounds, each shorter than the last, alternating run, machine and wall balls so the room self-balances. Individual effort with a staggered start. Pairs live on Saturday, not here.",
+                    "appDescription": "PYRAMID\n\n34 min cap:\n\n800m Run / 500m Row or Ski / 40 Wall Balls\n600m Run / 400m Row or Ski / 30 Wall Balls\n400m Run / 300m Row or Ski / 20 Wall Balls\n200m Run / 200m Row or Ski / 10 Wall Balls\n\nEvery round is shorter than the last.\nStaggered start, race your own.",
+                    "note": "Stagger the start every 30 seconds. The alternating run and station structure then keeps runners under ten without you managing it.\n'Row or ski' is deliberate. Fourteen erg stations for twenty athletes, and the stagger means they never all arrive at once. Do not lock them to one machine.\nMost will finish all four rounds inside the cap. Anyone still in round 3 at 28 minutes should cut to the 200m round to finish with the group.\nThe descending structure is the engagement. Announce it, then repeat it at the start of round 3.\nNo pairs and no sled here. Saturday owns partner work, Monday owns the sled.\nCapacity: OK at 20 with staggered start. Individual, no pairs.",
+                    "timedBlocks": [
+                      {
+                        "id": "w2-fri-pyramid-wu",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "note": "Warm-up. 400m easy run, the dynamic set, light wall balls and a 250m row build.",
+                        "slots": [
+                          {
+                            "id": "w2-fri-pyramid-wu-wu1",
+                            "exerciseId": null,
+                            "name": "Run",
+                            "reps": "400m",
+                            "note": "Easy"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-wu-wu2",
+                            "exerciseId": null,
+                            "name": "Walking Lunge",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-wu-wu3",
+                            "exerciseId": null,
+                            "name": "Inchworm",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-wu-wu4",
+                            "exerciseId": null,
+                            "name": "Air Squat",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-wu-wu5",
+                            "exerciseId": null,
+                            "name": "Band Pull-Apart",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-wu-wu6",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "10",
+                            "load": "light"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-wu-wu7",
+                            "exerciseId": null,
+                            "name": "Ski Build",
+                            "reps": "250m"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w2-fri-pyramid-prep",
+                        "kind": "series",
+                        "label": "PREP",
+                        "minutes": 5,
+                        "note": "Machine and pace. Allocate machines, set a pacing target for the opening 800m, and assign stagger order.",
+                        "slots": [
+                          {
+                            "id": "w2-fri-pyramid-prep-p1",
+                            "exerciseId": null,
+                            "name": "Machine Allocation",
+                            "note": "Row or ski, athlete choice"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-prep-p2",
+                            "exerciseId": null,
+                            "name": "Pace Target",
+                            "note": "Opening 800m target on the board"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-prep-p3",
+                            "exerciseId": null,
+                            "name": "Stagger Order",
+                            "note": "30 second intervals"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w2-fri-pyramid-a",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "note": "Pyramid. 34 min cap. Individual, staggered start every 30 seconds. Score: total time, or rounds and reps at the cap.",
+                        "slots": [
+                          {
+                            "id": "w2-fri-pyramid-a-a1",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "800m",
+                            "note": "Round 1 · Open: 600m · Foundation: 450m"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-a-a2",
+                            "exerciseId": null,
+                            "name": "Row or Ski",
+                            "reps": "500m",
+                            "note": "Round 1 · Open: 400m · Foundation: 300m"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-a-a3",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "40",
+                            "load": "9/6 kg",
+                            "note": "Round 1 · Open: 30 @ 6/4kg · Foundation: 24 @ 4kg"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-a-a4",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "600m",
+                            "note": "Round 2 · Open: 450m · Foundation: 350m"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-a-a5",
+                            "exerciseId": null,
+                            "name": "Row or Ski",
+                            "reps": "400m",
+                            "note": "Round 2 · Open: 320m · Foundation: 240m"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-a-a6",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "30",
+                            "load": "9/6 kg",
+                            "note": "Round 2 · Open: 24 @ 6/4kg · Foundation: 18 @ 4kg"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-a-a7",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "400m",
+                            "note": "Round 3 · Open: 300m · Foundation: 240m"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-a-a8",
+                            "exerciseId": null,
+                            "name": "Row or Ski",
+                            "reps": "300m",
+                            "note": "Round 3 · Open: 240m · Foundation: 180m"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-a-a9",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "20",
+                            "load": "9/6 kg",
+                            "note": "Round 3 · Open: 16 @ 6/4kg · Foundation: 12 @ 4kg"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-a-a10",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "200m",
+                            "note": "Round 4 · Open: 160m · Foundation: 120m"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-a-a11",
+                            "exerciseId": null,
+                            "name": "Row or Ski",
+                            "reps": "200m",
+                            "note": "Round 4 · Open: 160m · Foundation: 120m"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-a-a12",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "10",
+                            "load": "9/6 kg",
+                            "note": "Round 4 · Open: 8 @ 6/4kg · Foundation: 6 @ 4kg"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w2-fri-pyramid-finish",
+                        "kind": "series",
+                        "label": "FINISH",
+                        "minutes": 8,
+                        "note": "Cooldown. Easy walk, then hamstrings, calves and shoulders.",
+                        "slots": [
+                          {
+                            "id": "w2-fri-pyramid-finish-f1",
+                            "exerciseId": null,
+                            "name": "Walk",
+                            "reps": "200m"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-finish-f2",
+                            "exerciseId": null,
+                            "name": "Hamstring Stretch",
+                            "reps": "45s each"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-finish-f3",
+                            "exerciseId": null,
+                            "name": "Calf Stretch",
+                            "reps": "45s each"
+                          },
+                          {
+                            "id": "w2-fri-pyramid-finish-f4",
+                            "exerciseId": null,
+                            "name": "Shoulder Stretch",
+                            "reps": "45s each"
                           }
                         ]
                       }
@@ -4647,131 +5565,576 @@
                 ]
               },
               {
-                "id": "hyrox-b1w5",
+                "id": "hyrox-b01-w3",
                 "sessions": [
                   {
-                    "id": "hyrox-b1w5s1",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "name": "Monday, transition density",
-                    "intent": "Same five legs, more work at each station, and every transition capped at twenty seconds. The coach counts them out loud. This is the whole progression.",
-                    "note": "In a race, walking between stations is where most people lose three or four minutes, and it is the cheapest time you will ever get back. If a station is full when you arrive you jog 10m shuttles until it clears. Nobody stands still today.",
-                    "circuit": [
+                    "id": "hyrox-w3-mon-thefive",
+                    "focus": "rox-strong",
+                    "kind": "series",
+                    "name": "The Five",
+                    "intent": "Peak week. Heaviest day of the block. Fixed work, fixed rotation, nowhere to hide. Round two scores will drop and that is correct.",
+                    "blurbOverride": "Five stations, four athletes each, two and a half minutes on and thirty seconds to rotate, twice through. Twenty-five minutes of actual working time at the heaviest loads of the block.",
+                    "appDescription": "THE FIVE\n\n5 stations, 2:30 on / 30s rotate, 2 rounds:\n\nSled Push\nDB Farmers Carry\nWall Balls\nDB Walking Lunge\nAir Runner\n\nHeaviest day of the block.\nEvery station gets a score.",
+                    "note": "Five stations x four athletes is exactly twenty. With sixteen, run the same five stations with three each and the same clock. Do not cut stations.\nSled: four athletes, two lanes. They pair up inside the station and alternate 12.5m. Each gets roughly half the work time, which is correct for a heavy sled and is why this station is written as shuttles.\nRunner station is four of ten machines. No conflict with anything else in the room.\nLoads should feel genuinely hard by round 2. Tell them round 2 will be lower than round 1 so they do not chase round 1 and blow up at station 3.\nCapacity: Exact fit at 20. 5 stations x 4. Sled pairs alternate within station.",
+                    "timedBlocks": [
                       {
-                        "id": "a647e532-1529-419f-94ef-69ca77b12a23",
-                        "heading": "Warm up",
-                        "lines": [
+                        "id": "w3-mon-thefive-wu",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "note": "Warm-up. 3 min easy machine, then 2 rounds of the dynamic set, finishing with goblet squats and light wall balls.",
+                        "slots": [
                           {
-                            "text": "4 min easy air runner or row, RPE 3 to 4"
+                            "id": "w3-mon-thefive-wu-wu1",
+                            "exerciseId": null,
+                            "name": "Row, Ski or Bike",
+                            "reps": "3 min easy",
+                            "note": "Athlete's choice"
                           },
                           {
-                            "text": "Dynamic: 10 leg swings/side, 10 walking lunges, 10 air squats, 10 band pull-apart, 8 scap pulls, 10m bear crawl"
+                            "id": "w3-mon-thefive-wu-wu2",
+                            "exerciseId": null,
+                            "name": "Spiderman with Reach",
+                            "sets": "2",
+                            "reps": "10"
                           },
                           {
-                            "text": "One touch of each station: 5 wall balls, one sled length at working weight, 10m carry, 3 burpee broad jumps"
+                            "id": "w3-mon-thefive-wu-wu3",
+                            "exerciseId": null,
+                            "name": "Glute Bridge",
+                            "sets": "2",
+                            "reps": "10"
                           },
                           {
-                            "text": "Transition rehearsal",
-                            "load": "3 rounds: 200m run at race pace, 20s transition on the clock, 10 wall balls, 20s transition, 100m carry. 60s easy between"
+                            "id": "w3-mon-thefive-wu-wu4",
+                            "exerciseId": null,
+                            "name": "Band Pull-Apart",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w3-mon-thefive-wu-wu5",
+                            "exerciseId": null,
+                            "name": "Air Squat",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w3-mon-thefive-wu-wu6",
+                            "exerciseId": null,
+                            "name": "DB Goblet Squat",
+                            "reps": "10",
+                            "load": "light"
+                          },
+                          {
+                            "id": "w3-mon-thefive-wu-wu7",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "10",
+                            "load": "light"
                           }
-                        ],
-                        "restAfter": "To your entry leg"
+                        ]
                       },
                       {
-                        "id": "c22dc666-79ad-40de-80c7-2d6e2f59a18f",
-                        "heading": "Five legs, 20s transition cap, cap 32 min",
-                        "lines": [
+                        "id": "w3-mon-thefive-prep",
+                        "kind": "series",
+                        "label": "PREP",
+                        "minutes": 5,
+                        "note": "Load stations. Load every station to working weight before the clock. Build the sled in two passes and set the DBs out at each station rather than mid-rotation.",
+                        "slots": [
                           {
-                            "text": "500m run, then 50 wall balls",
-                            "load": "9/6kg, up 10 reps"
+                            "id": "w3-mon-thefive-prep-p1",
+                            "exerciseId": null,
+                            "name": "Sled Build",
+                            "sets": "2",
+                            "reps": "12.5m",
+                            "note": "Two passes to working load"
                           },
                           {
-                            "text": "500m run, then sled push and pull",
-                            "load": "50m each, unchanged"
-                          },
-                          {
-                            "text": "500m run, then 40 burpee broad jumps, up 10 reps"
-                          },
-                          {
-                            "text": "500m run, then 200m farmers carry",
-                            "load": "2x24 / 2x16kg"
-                          },
-                          {
-                            "text": "500m run, then 750m ski erg, up 250m"
+                            "id": "w3-mon-thefive-prep-p2",
+                            "exerciseId": null,
+                            "name": "Station Loading",
+                            "note": "DBs set at each station before the clock"
                           }
-                        ],
-                        "restAfter": "Twenty seconds from finishing a run to working, and from finishing a station to running"
+                        ]
                       },
                       {
-                        "id": "04530a09-21e2-4508-9b91-4953b7e99c91",
-                        "heading": "Finish",
-                        "lines": [
+                        "id": "w3-mon-thefive-a",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 32,
+                        "note": "The Five. 5 stations, 4 athletes per station. 2:30 work / 30s rotate. 2 full rounds. 25 min of working time. Score every station separately, then total.",
+                        "slots": [
                           {
-                            "text": "3 min easy bike, RPE 2"
+                            "id": "w3-mon-thefive-a-a1",
+                            "exerciseId": null,
+                            "name": "Sled Push",
+                            "reps": "12.5m shuttles",
+                            "load": "Heavy, approx 70% bodyweight",
+                            "note": "4 athletes, 2 lanes, pair up and alternate · Open: Moderate load · Foundation: Light or sled only"
                           },
                           {
-                            "text": "Calf, hip flexor, thoracic, forearm and grip"
+                            "id": "w3-mon-thefive-a-a2",
+                            "exerciseId": null,
+                            "name": "DB Farmers Carry",
+                            "reps": "20m shuttles",
+                            "load": "2 x 24-32kg",
+                            "note": "Open: 2x16-24kg · Foundation: 2x10-16kg"
                           },
                           {
-                            "text": "How much time each member would lose to walking in a race. Benchmark re-test next week"
+                            "id": "w3-mon-thefive-a-a3",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "Max",
+                            "load": "9/6 kg",
+                            "note": "Open: 6/4kg · Foundation: 4kg to lower target"
+                          },
+                          {
+                            "id": "w3-mon-thefive-a-a4",
+                            "exerciseId": null,
+                            "name": "DB Front Rack Walking Lunge",
+                            "reps": "Max steps",
+                            "load": "2 x 20-24kg",
+                            "note": "Open: 2x12-16kg · Foundation: Bodyweight or single DB"
+                          },
+                          {
+                            "id": "w3-mon-thefive-a-a5",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "Max metres",
+                            "note": "Open: Max metres · Foundation: Steady pace, not max"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w3-mon-thefive-finish",
+                        "kind": "series",
+                        "label": "FINISH",
+                        "minutes": 8,
+                        "note": "Cooldown. Full lower body stretch, unhurried. Quads, adductors, calves, glutes. They will need all eight minutes.",
+                        "slots": [
+                          {
+                            "id": "w3-mon-thefive-finish-f1",
+                            "exerciseId": null,
+                            "name": "Quad Stretch",
+                            "reps": "60s each"
+                          },
+                          {
+                            "id": "w3-mon-thefive-finish-f2",
+                            "exerciseId": null,
+                            "name": "Adductor Stretch",
+                            "reps": "60s each"
+                          },
+                          {
+                            "id": "w3-mon-thefive-finish-f3",
+                            "exerciseId": null,
+                            "name": "Calf Stretch",
+                            "reps": "45s each"
+                          },
+                          {
+                            "id": "w3-mon-thefive-finish-f4",
+                            "exerciseId": null,
+                            "name": "Glute Stretch",
+                            "reps": "60s each"
                           }
                         ]
                       }
                     ]
                   },
                   {
-                    "id": "hyrox-b2w3-friday",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "name": "Friday, stations",
-                    "intent": "Same five stations, same block length, half the transition. Fifteen seconds between stations and the coach is counting, so the time comes off your walk and goes onto your work.",
-                    "note": "Stations: A sled end, ski opener then sled push and pull, capped at 3. B runner end, runner then wall ball. C upper floor, bike then DB front rack lunge. D upper floor, rower then farmers carry shuttles. E rig, runner then ring row, dead hang, band pull-apart, farmer hold. The 15 second transition only works because every station has its machine beside it. The one long move, sled end to runner end, goes where the block break falls, through the coned rig bays.",
-                    "circuit": [
+                    "id": "hyrox-w3-wed-threshold",
+                    "focus": "rox-engine",
+                    "kind": "series",
+                    "name": "Threshold",
+                    "intent": "Peak week. Long intervals at threshold, the hardest engine day of the block. Three minutes is long enough that they have to pace it, which is the point.",
+                    "blurbOverride": "Five rounds of three minutes hard and ninety seconds easy, changing machine every round. Rounds four and five are athlete's choice with no repeats, which self-balances the room and hands members a decision.",
+                    "appDescription": "THRESHOLD\n\n5 x 3 min hard / 90s easy:\nR1 Row, R2 Ski, R3 Run\nR4 and R5 your choice, no repeats\n\nScore is total metres. Hold them flat.\n\nThen 10 min EMOM:\nOdd: 12 Wall Balls\nEven: 12 DB Box Step-Overs",
+                    "note": "Rounds 4 and 5 are athlete's choice on purpose. A fixed run round for all twenty would need twenty runners and you have ten. Choice with a no-repeat rule self-balances the room and hands members a small decision, which they like.\nRounds 1 to 3 are a clean three-group rotation. Call the machine at the start of each 90 second rest so nobody is still deciding when the clock starts.\nFlat metres across five rounds is the whole test. Anyone whose round 1 is their best round paced it wrong.\nFinisher is whole room, no bottleneck. Benches for the step-overs, DBs held at the side rather than front rack.\nCapacity: OK at 20. Choice rounds prevent 20-on-10-runners.",
+                    "timedBlocks": [
                       {
-                        "id": "95d1a2b6-929d-42d8-9e1e-0c675b1cab59",
-                        "heading": "Warm up",
-                        "lines": [
+                        "id": "w3-wed-threshold-wu",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "note": "Warm-up. 5 min progressive on your starting machine, the dynamic set, finishing with a 90 second effort at intended interval pace.",
+                        "slots": [
                           {
-                            "text": "4 min easy runner or row, RPE 3 to 4"
+                            "id": "w3-wed-threshold-wu-wu1",
+                            "exerciseId": null,
+                            "name": "Starting Machine Progressive",
+                            "reps": "5 min",
+                            "note": "2 min easy, 2 min moderate, 1 min at target pace"
                           },
                           {
-                            "text": "Dynamic: leg swings, walking lunges, air squats, band pull-apart, scap pulls"
+                            "id": "w3-wed-threshold-wu-wu2",
+                            "exerciseId": null,
+                            "name": "Leg Swings",
+                            "sets": "2",
+                            "reps": "10 each"
                           },
                           {
-                            "text": "2 x 30s at each of two stations"
+                            "id": "w3-wed-threshold-wu-wu3",
+                            "exerciseId": null,
+                            "name": "Arm Circles",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w3-wed-threshold-wu-wu4",
+                            "exerciseId": null,
+                            "name": "A-Skip",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w3-wed-threshold-wu-wu5",
+                            "exerciseId": null,
+                            "name": "Air Squat",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w3-wed-threshold-wu-wu6",
+                            "exerciseId": null,
+                            "name": "Run Build",
+                            "reps": "200m"
+                          },
+                          {
+                            "id": "w3-wed-threshold-wu-wu7",
+                            "exerciseId": null,
+                            "name": "Pace Calibration",
+                            "reps": "90s",
+                            "note": "At intended interval pace"
                           }
-                        ],
-                        "restAfter": "To your starting station"
+                        ]
                       },
                       {
-                        "id": "db6dce68-4699-4751-9699-edeedf91b020",
-                        "heading": "2 blocks of 17:30: 5 stations x 3:30",
-                        "lines": [
+                        "id": "w3-wed-threshold-prep",
+                        "kind": "series",
+                        "label": "PREP",
+                        "minutes": 5,
+                        "note": "Targets and choice rules. Write the round 1 metre target on the board per machine. Explain the choice rounds: rounds 4 and 5 are athlete's choice, one machine per round, no repeats.",
+                        "slots": [
                           {
-                            "text": "0:00 to 0:45, 200m on the machine beside the station, RPE 6"
+                            "id": "w3-wed-threshold-prep-p1",
+                            "exerciseId": null,
+                            "name": "Metre Target Board",
+                            "note": "Round 1 target per machine"
                           },
                           {
-                            "text": "0:45 to 3:15, station work, up 15s on week 2"
-                          },
-                          {
-                            "text": "3:15 to 3:30, transition, down from 30s"
-                          },
-                          {
-                            "text": "Loads",
-                            "load": "Unchanged"
+                            "id": "w3-wed-threshold-prep-p2",
+                            "exerciseId": null,
+                            "name": "Choice Rule Brief",
+                            "note": "R4 and R5 athlete choice, no repeats"
                           }
-                        ],
-                        "restAfter": "Rest 2 minutes between blocks"
+                        ]
                       },
                       {
-                        "id": "b3af3b83-1d36-445b-b57c-94c61d01692d",
-                        "heading": "Finish",
-                        "lines": [
+                        "id": "w3-wed-threshold-a",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 23,
+                        "note": "Threshold. 5 rounds of 3 min hard / 90s easy. Change machine every round. Score: total metres. Metres per round should hold flat, not descend.",
+                        "slots": [
                           {
-                            "text": "4 min easy machine, RPE 2"
+                            "id": "w3-wed-threshold-a-a1",
+                            "exerciseId": null,
+                            "name": "Row",
+                            "reps": "3 min hard",
+                            "note": "Round 1, then 90s easy · Open: 2:30 hard / 2 min easy · Foundation: 2 min hard / 2 min easy"
                           },
                           {
-                            "text": "Quad, adductor, forearm, lat"
+                            "id": "w3-wed-threshold-a-a2",
+                            "exerciseId": null,
+                            "name": "Ski Erg",
+                            "reps": "3 min hard",
+                            "note": "Round 2, then 90s easy · Open: 2:30 hard / 2 min easy · Foundation: 2 min hard / 2 min easy"
+                          },
+                          {
+                            "id": "w3-wed-threshold-a-a3",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "3 min hard",
+                            "note": "Round 3, then 90s easy · Open: 2:30 hard / 2 min easy · Foundation: 2 min hard / 2 min easy"
+                          },
+                          {
+                            "id": "w3-wed-threshold-a-a4",
+                            "exerciseId": null,
+                            "name": "Athlete's Choice Machine",
+                            "reps": "3 min hard",
+                            "note": "Round 4, no repeats · Open: 2:30 hard / 2 min easy · Foundation: Round 4 is final round"
+                          },
+                          {
+                            "id": "w3-wed-threshold-a-a5",
+                            "exerciseId": null,
+                            "name": "Athlete's Choice Machine",
+                            "reps": "3 min hard",
+                            "note": "Round 5, no repeats · Open: 2:30 hard / 2 min easy · Foundation: Omit, 4 rounds only"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w3-wed-threshold-b",
+                        "kind": "series",
+                        "label": "B",
+                        "minutes": 10,
+                        "note": "Finisher. 10 min EMOM, alternating. Whole room at once.",
+                        "slots": [
+                          {
+                            "id": "w3-wed-threshold-b-b1",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "12",
+                            "load": "9/6 kg",
+                            "note": "Odd minutes · Open: 12 @ 6/4kg · Foundation: 10 @ 4kg"
+                          },
+                          {
+                            "id": "w3-wed-threshold-b-b2",
+                            "exerciseId": null,
+                            "name": "DB Box Step-Over",
+                            "reps": "12",
+                            "load": "2 x 15-20kg",
+                            "note": "Even minutes, bench · Open: 12 @ 2x10-12.5kg · Foundation: 10 bodyweight, lower step"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w3-wed-threshold-finish",
+                        "kind": "series",
+                        "label": "FINISH",
+                        "minutes": 8,
+                        "note": "Cooldown. 5 min easy with long exhales, then quads, calves and lats.",
+                        "slots": [
+                          {
+                            "id": "w3-wed-threshold-finish-f1",
+                            "exerciseId": null,
+                            "name": "Easy Machine",
+                            "reps": "5 min",
+                            "note": "Long exhales"
+                          },
+                          {
+                            "id": "w3-wed-threshold-finish-f2",
+                            "exerciseId": null,
+                            "name": "Quad Stretch",
+                            "reps": "45s each"
+                          },
+                          {
+                            "id": "w3-wed-threshold-finish-f3",
+                            "exerciseId": null,
+                            "name": "Calf Stretch",
+                            "reps": "45s each"
+                          },
+                          {
+                            "id": "w3-wed-threshold-finish-f4",
+                            "exerciseId": null,
+                            "name": "Lat Stretch",
+                            "reps": "45s each"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-w3-fri-longone",
+                    "focus": "rox-race",
+                    "kind": "series",
+                    "name": "The Long One",
+                    "intent": "Peak week and the longest continuous piece of the block. Raced solo. This is the closest a weekday session gets to a full race.",
+                    "blurbOverride": "Four kilometres of running broken by four stations, alternating so the room self-balances. The hardest single effort in Block 01 and the best preparation for a real race distance.",
+                    "appDescription": "THE LONG ONE\n\nFor time, 35 min cap:\n1000m Run\n50 Wall Balls\n750m Row\n40 DB Walking Lunge\n750m Run\n100m DB Farmers Carry\n750m Ski\n30 Wall Balls\n500m Run\n\nLongest session of the block.\nStaggered start. Race your own.",
+                    "note": "Stagger every 30 seconds. The run and station alternation then keeps runners under ten on its own, same mechanism as Half Rox.\nThis is the longest session in the block and members should know that before they book. Say it in the app description and again in the brief.\nCap is 35 min and most will need 30 to 34. Anyone past 32 minutes and still on the ski should skip to the final 500m run so the class finishes together.\nPacing cue for the day: the opening 1000m is the trap. It should be slower than their Half Rox 500m pace, not faster.\nNo pairs, no sled. Saturday owns partner work, Monday owns the sled.\nCapacity: OK at 20 with staggered start. Individual, no pairs.",
+                    "timedBlocks": [
+                      {
+                        "id": "w3-fri-longone-wu",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "note": "Warm-up. 400m easy run, the dynamic set, light wall balls and a 250m ski build.",
+                        "slots": [
+                          {
+                            "id": "w3-fri-longone-wu-wu1",
+                            "exerciseId": null,
+                            "name": "Run",
+                            "reps": "400m",
+                            "note": "Easy"
+                          },
+                          {
+                            "id": "w3-fri-longone-wu-wu2",
+                            "exerciseId": null,
+                            "name": "Walking Lunge",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w3-fri-longone-wu-wu3",
+                            "exerciseId": null,
+                            "name": "Inchworm",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w3-fri-longone-wu-wu4",
+                            "exerciseId": null,
+                            "name": "Air Squat",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w3-fri-longone-wu-wu5",
+                            "exerciseId": null,
+                            "name": "Band Pull-Apart",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w3-fri-longone-wu-wu6",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "10",
+                            "load": "light"
+                          },
+                          {
+                            "id": "w3-fri-longone-wu-wu7",
+                            "exerciseId": null,
+                            "name": "Ski Build",
+                            "reps": "250m"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w3-fri-longone-prep",
+                        "kind": "series",
+                        "label": "PREP",
+                        "minutes": 5,
+                        "note": "Course and pace. Walk the transitions. Assign stagger order. Give an opening 1000m pace target and tell them it should feel conservative.",
+                        "slots": [
+                          {
+                            "id": "w3-fri-longone-prep-p1",
+                            "exerciseId": null,
+                            "name": "Course Walk",
+                            "note": "Show all transitions"
+                          },
+                          {
+                            "id": "w3-fri-longone-prep-p2",
+                            "exerciseId": null,
+                            "name": "Stagger Order",
+                            "note": "30 second intervals"
+                          },
+                          {
+                            "id": "w3-fri-longone-prep-p3",
+                            "exerciseId": null,
+                            "name": "Pace Target",
+                            "note": "Opening 1000m, deliberately conservative"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w3-fri-longone-a",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "note": "The Long One. For time. Cap 35 min. Individual, staggered start every 30 seconds. Score: total time. Cap 35 min.",
+                        "slots": [
+                          {
+                            "id": "w3-fri-longone-a-a1",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "1000m",
+                            "note": "Open: 800m · Foundation: 600m"
+                          },
+                          {
+                            "id": "w3-fri-longone-a-a2",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "50",
+                            "load": "9/6 kg",
+                            "note": "Open: 40 @ 6/4kg · Foundation: 30 @ 4kg"
+                          },
+                          {
+                            "id": "w3-fri-longone-a-a3",
+                            "exerciseId": null,
+                            "name": "Row",
+                            "reps": "750m",
+                            "note": "Open: 600m · Foundation: 450m"
+                          },
+                          {
+                            "id": "w3-fri-longone-a-a4",
+                            "exerciseId": null,
+                            "name": "DB Front Rack Walking Lunge",
+                            "reps": "40 steps",
+                            "load": "2 x 20/16kg",
+                            "note": "Open: 30 @ 2x12.5/10kg · Foundation: 24 bodyweight"
+                          },
+                          {
+                            "id": "w3-fri-longone-a-a5",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "750m",
+                            "note": "Open: 600m · Foundation: 450m"
+                          },
+                          {
+                            "id": "w3-fri-longone-a-a6",
+                            "exerciseId": null,
+                            "name": "DB Farmers Carry",
+                            "reps": "100m",
+                            "load": "2 x 24/16kg",
+                            "note": "Open: 80m @ 2x16-20kg · Foundation: 60m @ 2x10-12kg"
+                          },
+                          {
+                            "id": "w3-fri-longone-a-a7",
+                            "exerciseId": null,
+                            "name": "Ski Erg",
+                            "reps": "750m",
+                            "note": "Open: 600m · Foundation: 450m"
+                          },
+                          {
+                            "id": "w3-fri-longone-a-a8",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "30",
+                            "load": "9/6 kg",
+                            "note": "Open: 24 @ 6/4kg · Foundation: 18 @ 4kg"
+                          },
+                          {
+                            "id": "w3-fri-longone-a-a9",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "500m",
+                            "note": "Open: 400m · Foundation: 300m"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w3-fri-longone-finish",
+                        "kind": "series",
+                        "label": "FINISH",
+                        "minutes": 8,
+                        "note": "Cooldown. Walk it out properly, then quads, calves, hamstrings and shoulders. Announce that the signature sessions return next week.",
+                        "slots": [
+                          {
+                            "id": "w3-fri-longone-finish-f1",
+                            "exerciseId": null,
+                            "name": "Walk",
+                            "reps": "400m"
+                          },
+                          {
+                            "id": "w3-fri-longone-finish-f2",
+                            "exerciseId": null,
+                            "name": "Quad and Hamstring Stretch",
+                            "reps": "45s each"
+                          },
+                          {
+                            "id": "w3-fri-longone-finish-f3",
+                            "exerciseId": null,
+                            "name": "Calf Stretch",
+                            "reps": "45s each"
+                          },
+                          {
+                            "id": "w3-fri-longone-finish-f4",
+                            "exerciseId": null,
+                            "name": "Week 4 Announcement",
+                            "reps": "2 min",
+                            "note": "Signature sessions return, come to the ones you did in week 1"
                           }
                         ]
                       }
@@ -4780,134 +6143,545 @@
                 ]
               },
               {
-                "id": "hyrox-b1w6",
+                "id": "hyrox-b01-w4",
                 "sessions": [
                   {
-                    "id": "hyrox-b1w6s1",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "name": "Monday, benchmark re-test",
-                    "intent": "The same benchmark as week one. Same five legs, same loads, same air runner, same entry leg. The target is three to five per cent faster.",
-                    "note": "Nothing changes today, because the whole point is that the number means something. Four validity rules: same runner number, same entry leg, same sled load and lengths weighed and confirmed, same wall ball and carry loads. Anyone who scaled in week one scales identically. Do not offer new scaling options on the day.",
-                    "circuit": [
+                    "id": "hyrox-w4-mon-anchor-rt",
+                    "focus": "rox-strong",
+                    "kind": "series",
+                    "name": "Anchor (retest)",
+                    "intent": "Repeat of 31 August. Same distances, same loads, same stagger, same partners wherever possible. Primer cut from 10 min to 6 min so the retest is fresh.",
+                    "blurbOverride": "The week 1 signature returns unchanged. Lower primer volume this week, which is the deload. Put the week 1 scores on the board before anyone walks in.",
+                    "appDescription": "ANCHOR // RETEST\n\nIn pairs, 22 min AMRAP:\n20/16 cal Ski\n20 Wall Balls\n25m Sled Push\n20m DB Farmers Carry\n20 DB Walking Lunge\n\nSame session, same loads as week 1.\nBring your score. Let's see it move.",
+                    "note": "Same partner as week 1. If someone's partner is missing, pair them with a similar output and write it on the board next to the score so the comparison stays honest.\nSame loads. Not heavier. Members will want to go up. Tell them no, and that the next block is where the load moves.\nExpect 10 to 20% more rounds. Anyone going backwards has usually gone out too hard because they remembered the finish, not the pace.\nBe honest in the debrief: a good chunk of a four week improvement is learning to pace the session, not fitness. Tell them the real answer comes when these return in late November.\nDo not add the accessory volume back. The reduced primer is the deload.\nCapacity: OK at 20. Same setup as week 1.",
+                    "timedBlocks": [
                       {
-                        "id": "61e2b467-8ee4-4a28-8708-79752fe56e89",
-                        "heading": "Warm up",
-                        "lines": [
+                        "id": "w4-mon-anchor-rt-wu",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "note": "Warm-up. Identical to 31 August. 3 min easy machine, dynamic set, light wall balls and DB deadlifts.",
+                        "slots": [
                           {
-                            "text": "4 min easy air runner or row, RPE 3 to 4"
+                            "id": "w4-mon-anchor-rt-wu-wu1",
+                            "exerciseId": null,
+                            "name": "Row, Ski or Bike",
+                            "reps": "3 min easy",
+                            "note": "Athlete's choice"
                           },
                           {
-                            "text": "Dynamic: 10 leg swings/side, 10 walking lunges, 10 air squats, 10 band pull-apart, 8 scap pulls, 10m bear crawl"
+                            "id": "w4-mon-anchor-rt-wu-wu2",
+                            "exerciseId": null,
+                            "name": "Spiderman with Reach",
+                            "sets": "2",
+                            "reps": "10"
                           },
                           {
-                            "text": "One touch of each station: 5 wall balls, one sled length at working weight, 10m carry, 3 burpee broad jumps"
+                            "id": "w4-mon-anchor-rt-wu-wu3",
+                            "exerciseId": null,
+                            "name": "Glute Bridge",
+                            "sets": "2",
+                            "reps": "10"
                           },
                           {
-                            "text": "Transition rehearsal",
-                            "load": "2 rounds of 200m run at race pace then 10 wall balls, 60s easy between"
+                            "id": "w4-mon-anchor-rt-wu-wu4",
+                            "exerciseId": null,
+                            "name": "Band Pull-Apart",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w4-mon-anchor-rt-wu-wu5",
+                            "exerciseId": null,
+                            "name": "Air Squat",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w4-mon-anchor-rt-wu-wu6",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "10",
+                            "load": "light"
+                          },
+                          {
+                            "id": "w4-mon-anchor-rt-wu-wu7",
+                            "exerciseId": null,
+                            "name": "DB Deadlift",
+                            "reps": "10",
+                            "load": "light"
                           }
-                        ],
-                        "restAfter": "To your entry leg"
+                        ]
                       },
                       {
-                        "id": "994bb5c3-61dc-489c-bf44-b1be3fc9b140",
-                        "heading": "Benchmark A, identical to week 1, cap 32 min",
-                        "lines": [
+                        "id": "w4-mon-anchor-rt-prep",
+                        "kind": "series",
+                        "label": "PREP",
+                        "minutes": 5,
+                        "note": "Station prep. Identical to 31 August. Sled build, working ball, working DB. Put the week 1 scores on the board before the class walks in.",
+                        "slots": [
                           {
-                            "text": "500m run, then 40 wall balls",
-                            "load": "9kg M / 6kg W to 10m"
+                            "id": "w4-mon-anchor-rt-prep-p1",
+                            "exerciseId": null,
+                            "name": "Sled Push",
+                            "sets": "2",
+                            "reps": "12.5m",
+                            "note": "Building to week 1 working load"
                           },
                           {
-                            "text": "500m run, then sled push and pull",
-                            "load": "50m each, race weight"
+                            "id": "w4-mon-anchor-rt-prep-p2",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "5",
+                            "note": "Same ball as week 1"
                           },
                           {
-                            "text": "500m run, then 30 burpee broad jumps"
-                          },
-                          {
-                            "text": "500m run, then 200m farmers carry",
-                            "load": "2x24kg M / 2x16kg W"
-                          },
-                          {
-                            "text": "500m run, then 500m ski erg"
+                            "id": "w4-mon-anchor-rt-prep-p3",
+                            "exerciseId": null,
+                            "name": "Week 1 Scoreboard",
+                            "note": "Week 1 scores written up before class starts"
                           }
-                        ],
-                        "restAfter": "Run leg one at your week one pace, not faster. The gains show up on legs four and five"
+                        ]
                       },
                       {
-                        "id": "b124dfcf-a409-4fc8-b46f-b42699898b30",
-                        "heading": "Finish and compare",
-                        "lines": [
+                        "id": "w4-mon-anchor-rt-a",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 6,
+                        "note": "Primer (shortened). 6 min EMOM, alternating. Cut from 10 min so the retest is fresh.",
+                        "slots": [
                           {
-                            "text": "3 min easy bike, RPE 2"
+                            "id": "w4-mon-anchor-rt-a-a1",
+                            "exerciseId": null,
+                            "name": "DB Goblet Squat",
+                            "reps": "10",
+                            "note": "Odd minutes · Open: 8 reps lighter · Foundation: 6 reps light"
                           },
                           {
-                            "text": "Calf, hip flexor, thoracic, forearm"
+                            "id": "w4-mon-anchor-rt-a-a2",
+                            "exerciseId": null,
+                            "name": "DB Romanian Deadlift",
+                            "reps": "8",
+                            "note": "Even minutes · Open: 8 reps lighter · Foundation: 6 reps light"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w4-mon-anchor-rt-b",
+                        "kind": "series",
+                        "label": "B",
+                        "minutes": 22,
+                        "note": "Anchor (retest). 22 min AMRAP in pairs. Identical to 31 August. One works, one rests, swap each station. Score: rounds and reps per pair. Compare against 31 August.",
+                        "slots": [
+                          {
+                            "id": "w4-mon-anchor-rt-b-b1",
+                            "exerciseId": null,
+                            "name": "Ski Erg",
+                            "reps": "20/16",
+                            "note": "Same as week 1 · Open: 15/12 cal · Foundation: 12/10 cal"
                           },
                           {
-                            "text": "Week 1 against week 4 on the board, side by side, every member"
+                            "id": "w4-mon-anchor-rt-b-b2",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "20",
+                            "load": "9/6 kg",
+                            "note": "Same as week 1 · Open: 20 @ 6/4kg · Foundation: 15 @ 4kg to lower target"
+                          },
+                          {
+                            "id": "w4-mon-anchor-rt-b-b3",
+                            "exerciseId": null,
+                            "name": "Sled Push",
+                            "reps": "25m",
+                            "load": "Same as week 1",
+                            "note": "Open: 25m moderate · Foundation: 25m light"
+                          },
+                          {
+                            "id": "w4-mon-anchor-rt-b-b4",
+                            "exerciseId": null,
+                            "name": "DB Farmers Carry",
+                            "reps": "20m",
+                            "load": "Same as week 1",
+                            "note": "Open: 20m @ 2x16-24kg · Foundation: 20m @ 2x10-16kg"
+                          },
+                          {
+                            "id": "w4-mon-anchor-rt-b-b5",
+                            "exerciseId": null,
+                            "name": "DB Front Rack Walking Lunge",
+                            "reps": "20 steps",
+                            "load": "Same as week 1",
+                            "note": "Open: 20 @ 2x12-16kg · Foundation: 16 bodyweight"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w4-mon-anchor-rt-finish",
+                        "kind": "series",
+                        "label": "FINISH",
+                        "minutes": 8,
+                        "note": "Cooldown. 400m easy, couch stretch, lat stretch, forearm release.",
+                        "slots": [
+                          {
+                            "id": "w4-mon-anchor-rt-finish-f1",
+                            "exerciseId": null,
+                            "name": "Walk or Row",
+                            "reps": "400m"
+                          },
+                          {
+                            "id": "w4-mon-anchor-rt-finish-f2",
+                            "exerciseId": null,
+                            "name": "Couch Stretch",
+                            "reps": "60s each"
+                          },
+                          {
+                            "id": "w4-mon-anchor-rt-finish-f3",
+                            "exerciseId": null,
+                            "name": "Lat Stretch",
+                            "reps": "45s each"
+                          },
+                          {
+                            "id": "w4-mon-anchor-rt-finish-f4",
+                            "exerciseId": null,
+                            "name": "Forearm Release",
+                            "reps": "60s"
                           }
                         ]
                       }
                     ]
                   },
                   {
-                    "id": "hyrox-b2w4-friday",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "name": "Friday, stations",
-                    "intent": "Last stations session of the block. Every station goes up one load increment and every station is a minute shorter. Heavier, shorter, same standard.",
-                    "note": "Two reps in reserve still applies. If the extra load costs you your positions, put it back down. The opener goes to RPE 7.",
-                    "circuit": [
+                    "id": "hyrox-w4-wed-triangle-rt",
+                    "focus": "rox-engine",
+                    "kind": "series",
+                    "name": "The Triangle (retest)",
+                    "intent": "Repeat of 2 September. Same distances, same rotation, same groups, same starting machine. No finisher this week.",
+                    "blurbOverride": "The cleanest data point of the block. Same 4,500m, same rotation. Compare round 3 against round 1, not just the total time.",
+                    "appDescription": "THE TRIANGLE // RETEST\n\n3 rounds for time:\n500m Row\n500m Ski\n500m Run\n\nSame session as week 1.\nBring your time.",
+                    "note": "Same starting machine as week 1. Starting on run instead of row changes the time enough to spoil the comparison. Write the week 1 groups on the board.\nRead them their round splits from week 1 in the brief. The coaching point is that round 3 should be closer to round 1 this time, not just that the total is faster.\nThis is the cleanest data of the block. It is the number to quote in the block debrief and in any content you make about the program.\nNo finisher this week. That is the deload, do not add one.\nCapacity: Exact fit at 20. Same as week 1.",
+                    "timedBlocks": [
                       {
-                        "id": "95d1a2b6-929d-42d8-9e1e-0c675b1cab59",
-                        "heading": "Warm up",
-                        "lines": [
+                        "id": "w4-wed-triangle-rt-wu",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "note": "Warm-up. Identical to 2 September. 5 min progressive, dynamic set, 200m run build.",
+                        "slots": [
                           {
-                            "text": "4 min easy runner or row, RPE 3 to 4"
+                            "id": "w4-wed-triangle-rt-wu-wu1",
+                            "exerciseId": null,
+                            "name": "Starting Machine Progressive",
+                            "reps": "5 min",
+                            "note": "2 min easy, 2 min moderate, 1 min at target pace"
                           },
                           {
-                            "text": "Dynamic: leg swings, walking lunges, air squats, band pull-apart, scap pulls"
+                            "id": "w4-wed-triangle-rt-wu-wu2",
+                            "exerciseId": null,
+                            "name": "Leg Swings",
+                            "sets": "2",
+                            "reps": "10 each"
                           },
                           {
-                            "text": "2 x 30s at each of two stations"
+                            "id": "w4-wed-triangle-rt-wu-wu3",
+                            "exerciseId": null,
+                            "name": "Arm Circles",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w4-wed-triangle-rt-wu-wu4",
+                            "exerciseId": null,
+                            "name": "A-Skip",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w4-wed-triangle-rt-wu-wu5",
+                            "exerciseId": null,
+                            "name": "Air Squat",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w4-wed-triangle-rt-wu-wu6",
+                            "exerciseId": null,
+                            "name": "Run Build",
+                            "reps": "200m"
                           }
-                        ],
-                        "restAfter": "To your starting station"
+                        ]
                       },
                       {
-                        "id": "31a37fa8-70cf-4d24-bdf3-3b73ce23ccb9",
-                        "heading": "2 blocks of 15 min: 5 stations x 3 min",
-                        "lines": [
+                        "id": "w4-wed-triangle-rt-prep",
+                        "kind": "series",
+                        "label": "PREP",
+                        "minutes": 5,
+                        "note": "Groups and splits. Restore the week 1 groups and starting machines. Read out week 1 round splits so they know what to beat.",
+                        "slots": [
                           {
-                            "text": "0:00 to 0:45, 200m on the machine beside the station, RPE 7"
+                            "id": "w4-wed-triangle-rt-prep-p1",
+                            "exerciseId": null,
+                            "name": "Week 1 Group Restore",
+                            "note": "Same groups, same starting machine"
                           },
                           {
-                            "text": "0:45 to 2:45, station work at the heaviest sustainable load"
-                          },
-                          {
-                            "text": "2:45 to 3:00, transition"
-                          },
-                          {
-                            "text": "Loads up one increment",
-                            "load": "Sled +20kg, wall ball to 9/6, lunge 2x20 / 2x12.5, carry 2x28 / 2x20, rig to strict pull-up and weighted farmer hold"
+                            "id": "w4-wed-triangle-rt-prep-p2",
+                            "exerciseId": null,
+                            "name": "Week 1 Split Board",
+                            "note": "Round splits from 2 September on the board"
                           }
-                        ],
-                        "restAfter": "Rest 2 minutes between blocks"
+                        ]
                       },
                       {
-                        "id": "d16b7a82-f48e-45ea-ba0c-6291571cd098",
-                        "heading": "Finish and block wrap",
-                        "lines": [
+                        "id": "w4-wed-triangle-rt-a",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "note": "The Triangle (retest). 3 rounds for time. Cap 30 min. Identical to 2 September. Score: total time for 4,500m. Compare against 2 September.",
+                        "slots": [
                           {
-                            "text": "4 min easy machine, RPE 2"
+                            "id": "w4-wed-triangle-rt-a-a1",
+                            "exerciseId": null,
+                            "name": "Row",
+                            "reps": "500m",
+                            "note": "Same as week 1 · Open: 400m · Foundation: 300m"
                           },
                           {
-                            "text": "Quad, adductor, forearm, lat"
+                            "id": "w4-wed-triangle-rt-a-a2",
+                            "exerciseId": null,
+                            "name": "Ski Erg",
+                            "reps": "500m",
+                            "note": "Same as week 1 · Open: 400m · Foundation: 300m"
                           },
                           {
-                            "text": "What the four weeks bought you"
+                            "id": "w4-wed-triangle-rt-a-a3",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "500m",
+                            "note": "Same as week 1 · Open: 400m · Foundation: 300m"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w4-wed-triangle-rt-finish",
+                        "kind": "series",
+                        "label": "FINISH",
+                        "minutes": 8,
+                        "note": "Cooldown. 5 min easy spin, hamstrings, calves, hip flexors.",
+                        "slots": [
+                          {
+                            "id": "w4-wed-triangle-rt-finish-f1",
+                            "exerciseId": null,
+                            "name": "Easy Spin",
+                            "reps": "5 min"
+                          },
+                          {
+                            "id": "w4-wed-triangle-rt-finish-f2",
+                            "exerciseId": null,
+                            "name": "Hamstring Stretch",
+                            "reps": "45s each"
+                          },
+                          {
+                            "id": "w4-wed-triangle-rt-finish-f3",
+                            "exerciseId": null,
+                            "name": "Calf Stretch",
+                            "reps": "45s each"
+                          },
+                          {
+                            "id": "w4-wed-triangle-rt-finish-f4",
+                            "exerciseId": null,
+                            "name": "Hip Flexor Stretch",
+                            "reps": "45s each"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-w4-fri-halfrox-rt",
+                    "focus": "rox-race",
+                    "kind": "series",
+                    "name": "Half Rox (retest)",
+                    "intent": "Repeat of 4 September, then the block debrief and Block 02 announcement. Same wave, same start order.",
+                    "blurbOverride": "The block closes where it opened. Compare run 1 against run 5, not just the total: a member whose total is unchanged but whose split drift halved has made the improvement that matters for a race.",
+                    "appDescription": "HALF ROX // RETEST\n\nFor time:\n500m Run / 500m Ski\n500m Run / 50 Wall Balls\n500m Run / 500m Row\n500m Run / 100m DB Farmers Carry\n500m Run\n\nLast session of Block 01.\nSame as week 1. Bring your time.",
+                    "note": "Same wave and same start order as week 1. Consistency matters more than convenience here.\nCompare run 1 against run 5, not just the total. A member whose total is unchanged but whose split drift halved has made the improvement that actually matters for a race.\nClose the block. Five minutes at the end: what moved, what is coming in Block 02, and any race dates worth putting on the wall.\nThis is where the next four weeks of attendance gets sold. Do not let the class drift out the door.\nCapacity: OK at 20 with staggered start. Same as week 1.",
+                    "timedBlocks": [
+                      {
+                        "id": "w4-fri-halfrox-rt-wu",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "note": "Warm-up. Identical to 4 September. 400m easy run, dynamic set, light wall balls, 250m ski build.",
+                        "slots": [
+                          {
+                            "id": "w4-fri-halfrox-rt-wu-wu1",
+                            "exerciseId": null,
+                            "name": "Run",
+                            "reps": "400m",
+                            "note": "Easy"
+                          },
+                          {
+                            "id": "w4-fri-halfrox-rt-wu-wu2",
+                            "exerciseId": null,
+                            "name": "Walking Lunge",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w4-fri-halfrox-rt-wu-wu3",
+                            "exerciseId": null,
+                            "name": "Inchworm",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w4-fri-halfrox-rt-wu-wu4",
+                            "exerciseId": null,
+                            "name": "Air Squat",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w4-fri-halfrox-rt-wu-wu5",
+                            "exerciseId": null,
+                            "name": "Band Pull-Apart",
+                            "sets": "2",
+                            "reps": "10"
+                          },
+                          {
+                            "id": "w4-fri-halfrox-rt-wu-wu6",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "10",
+                            "load": "light"
+                          },
+                          {
+                            "id": "w4-fri-halfrox-rt-wu-wu7",
+                            "exerciseId": null,
+                            "name": "Ski Build",
+                            "reps": "250m"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w4-fri-halfrox-rt-prep",
+                        "kind": "series",
+                        "label": "PREP",
+                        "minutes": 5,
+                        "note": "Waves and splits. Restore week 1 wave order. Read out week 1 run splits. Remind them the target is closing the gap between run 1 and run 5.",
+                        "slots": [
+                          {
+                            "id": "w4-fri-halfrox-rt-prep-p1",
+                            "exerciseId": null,
+                            "name": "Wave Restore",
+                            "note": "Same waves and order as week 1"
+                          },
+                          {
+                            "id": "w4-fri-halfrox-rt-prep-p2",
+                            "exerciseId": null,
+                            "name": "Week 1 Split Board",
+                            "note": "Run splits from 4 September"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w4-fri-halfrox-rt-a",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "note": "Half Rox (retest). For time. Cap 33 min. Identical to 4 September. Score: total time. Compare against 4 September.",
+                        "slots": [
+                          {
+                            "id": "w4-fri-halfrox-rt-a-a1",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "500m",
+                            "note": "Open: 400m · Foundation: 300m"
+                          },
+                          {
+                            "id": "w4-fri-halfrox-rt-a-a2",
+                            "exerciseId": null,
+                            "name": "Ski Erg",
+                            "reps": "500m",
+                            "note": "Open: 400m · Foundation: 300m"
+                          },
+                          {
+                            "id": "w4-fri-halfrox-rt-a-a3",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "500m",
+                            "note": "Open: 400m · Foundation: 300m"
+                          },
+                          {
+                            "id": "w4-fri-halfrox-rt-a-a4",
+                            "exerciseId": null,
+                            "name": "Wall Ball",
+                            "reps": "50",
+                            "load": "9/6 kg",
+                            "note": "Open: 40 @ 6/4kg · Foundation: 30 @ 4kg"
+                          },
+                          {
+                            "id": "w4-fri-halfrox-rt-a-a5",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "500m",
+                            "note": "Open: 400m · Foundation: 300m"
+                          },
+                          {
+                            "id": "w4-fri-halfrox-rt-a-a6",
+                            "exerciseId": null,
+                            "name": "Row",
+                            "reps": "500m",
+                            "note": "Open: 400m · Foundation: 300m"
+                          },
+                          {
+                            "id": "w4-fri-halfrox-rt-a-a7",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "500m",
+                            "note": "Open: 400m · Foundation: 300m"
+                          },
+                          {
+                            "id": "w4-fri-halfrox-rt-a-a8",
+                            "exerciseId": null,
+                            "name": "DB Farmers Carry",
+                            "reps": "100m",
+                            "load": "2 x 24/16kg",
+                            "note": "Open: 80m @ 2x16-20kg · Foundation: 60m @ 2x10-12kg"
+                          },
+                          {
+                            "id": "w4-fri-halfrox-rt-a-a9",
+                            "exerciseId": null,
+                            "name": "Run (Air Runner)",
+                            "reps": "500m",
+                            "note": "Open: 400m · Foundation: 300m"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "w4-fri-halfrox-rt-finish",
+                        "kind": "series",
+                        "label": "FINISH",
+                        "minutes": 8,
+                        "note": "Block debrief. Walk it out, stretch, then close the block: what moved, what is coming in Block 02, and race dates on the wall.",
+                        "slots": [
+                          {
+                            "id": "w4-fri-halfrox-rt-finish-f1",
+                            "exerciseId": null,
+                            "name": "Walk",
+                            "reps": "200m"
+                          },
+                          {
+                            "id": "w4-fri-halfrox-rt-finish-f2",
+                            "exerciseId": null,
+                            "name": "Quad and Calf Stretch",
+                            "reps": "45s each"
+                          },
+                          {
+                            "id": "w4-fri-halfrox-rt-finish-f3",
+                            "exerciseId": null,
+                            "name": "Block Debrief",
+                            "reps": "5 min",
+                            "note": "What moved, Block 02 preview, race dates"
                           }
                         ]
                       }
@@ -4918,147 +6692,845 @@
             ]
           },
           {
-            "id": "hyrox-oct-2026",
-            "theme": "Oct 2026",
+            "id": "hyrox-b02",
+            "theme": "Block 02",
+            "blockLength": 4,
             "weeks": [
               {
-                "id": "hyrox-b1w7",
+                "id": "hyrox-b02-w1",
                 "sessions": [
                   {
-                    "id": "hyrox-b1w7s1",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "circuit": []
+                    "id": "hyrox-b02-w1s1",
+                    "focus": "rox-strong",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b02-w1s1-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b02-w1s1-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b02-w1s2",
+                    "focus": "rox-engine",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b02-w1s2-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b02-w1s2-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b02-w1s3",
+                    "focus": "rox-race",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b02-w1s3-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b02-w1s3-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
                   }
                 ]
               },
               {
-                "id": "hyrox-b1w8",
+                "id": "hyrox-b02-w2",
                 "sessions": [
                   {
-                    "id": "hyrox-b1w8s1",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "circuit": []
+                    "id": "hyrox-b02-w2s1",
+                    "focus": "rox-strong",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b02-w2s1-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b02-w2s1-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b02-w2s2",
+                    "focus": "rox-engine",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b02-w2s2-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b02-w2s2-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b02-w2s3",
+                    "focus": "rox-race",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b02-w2s3-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b02-w2s3-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
                   }
                 ]
               },
               {
-                "id": "hyrox-b1w9",
+                "id": "hyrox-b02-w3",
                 "sessions": [
                   {
-                    "id": "hyrox-b1w9s1",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "circuit": []
+                    "id": "hyrox-b02-w3s1",
+                    "focus": "rox-strong",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b02-w3s1-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b02-w3s1-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b02-w3s2",
+                    "focus": "rox-engine",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b02-w3s2-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b02-w3s2-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b02-w3s3",
+                    "focus": "rox-race",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b02-w3s3-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b02-w3s3-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
                   }
                 ]
               },
               {
-                "id": "hyrox-b1w10",
+                "id": "hyrox-b02-w4",
                 "sessions": [
                   {
-                    "id": "hyrox-b1w10s1",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "circuit": []
+                    "id": "hyrox-b02-w4s1",
+                    "focus": "rox-strong",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b02-w4s1-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b02-w4s1-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b02-w4s2",
+                    "focus": "rox-engine",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b02-w4s2-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b02-w4s2-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b02-w4s3",
+                    "focus": "rox-race",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b02-w4s3-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b02-w4s3-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
                   }
                 ]
               }
             ]
           },
           {
-            "id": "hyrox-nov-2026",
-            "theme": "Nov 2026",
+            "id": "hyrox-b03",
+            "theme": "Block 03",
+            "blockLength": 4,
             "weeks": [
               {
-                "id": "hyrox-b2w1",
+                "id": "hyrox-b03-w1",
                 "sessions": [
                   {
-                    "id": "hyrox-b2w1s1",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "circuit": []
+                    "id": "hyrox-b03-w1s1",
+                    "focus": "rox-strong",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b03-w1s1-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b03-w1s1-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b03-w1s2",
+                    "focus": "rox-engine",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b03-w1s2-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b03-w1s2-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b03-w1s3",
+                    "focus": "rox-race",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b03-w1s3-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b03-w1s3-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
                   }
                 ]
               },
               {
-                "id": "hyrox-b3w1",
+                "id": "hyrox-b03-w2",
                 "sessions": [
                   {
-                    "id": "hyrox-b3w1s1",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "circuit": []
+                    "id": "hyrox-b03-w2s1",
+                    "focus": "rox-strong",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b03-w2s1-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b03-w2s1-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b03-w2s2",
+                    "focus": "rox-engine",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b03-w2s2-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b03-w2s2-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b03-w2s3",
+                    "focus": "rox-race",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b03-w2s3-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b03-w2s3-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
                   }
                 ]
               },
               {
-                "id": "hyrox-b3w2",
+                "id": "hyrox-b03-w3",
                 "sessions": [
                   {
-                    "id": "hyrox-b3w2s1",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "circuit": []
+                    "id": "hyrox-b03-w3s1",
+                    "focus": "rox-strong",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b03-w3s1-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b03-w3s1-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b03-w3s2",
+                    "focus": "rox-engine",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b03-w3s2-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b03-w3s2-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b03-w3s3",
+                    "focus": "rox-race",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b03-w3s3-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b03-w3s3-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
                   }
                 ]
               },
               {
-                "id": "hyrox-b3w3",
+                "id": "hyrox-b03-w4",
                 "sessions": [
                   {
-                    "id": "hyrox-b3w3s1",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "circuit": []
-                  }
-                ]
-              },
-              {
-                "id": "hyrox-b3w4",
-                "sessions": [
+                    "id": "hyrox-b03-w4s1",
+                    "focus": "rox-strong",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b03-w4s1-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b03-w4s1-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
                   {
-                    "id": "hyrox-b3w4s1",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "circuit": []
+                    "id": "hyrox-b03-w4s2",
+                    "focus": "rox-engine",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b03-w4s2-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b03-w4s2-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b03-w4s3",
+                    "focus": "rox-race",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b03-w4s3-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b03-w4s3-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
                   }
                 ]
               }
             ]
           },
           {
-            "id": "hyrox-dec-2026",
-            "theme": "Dec 2026",
+            "id": "hyrox-b04",
+            "theme": "Block 04 quarterly anchor",
+            "blockLength": 4,
             "weeks": [
               {
-                "id": "hyrox-b3w5",
+                "id": "hyrox-b04-w1",
                 "sessions": [
                   {
-                    "id": "hyrox-b3w5s1",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "circuit": []
+                    "id": "hyrox-b04-w1s1",
+                    "focus": "rox-strong",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b04-w1s1-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b04-w1s1-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b04-w1s2",
+                    "focus": "rox-engine",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b04-w1s2-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b04-w1s2-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b04-w1s3",
+                    "focus": "rox-race",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b04-w1s3-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b04-w1s3-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
                   }
                 ]
               },
               {
-                "id": "hyrox-b3w6",
+                "id": "hyrox-b04-w2",
                 "sessions": [
                   {
-                    "id": "hyrox-b3w6s1",
-                    "focus": "hyrox",
-                    "kind": "circuit",
-                    "circuit": []
+                    "id": "hyrox-b04-w2s1",
+                    "focus": "rox-strong",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b04-w2s1-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b04-w2s1-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b04-w2s2",
+                    "focus": "rox-engine",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b04-w2s2-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b04-w2s2-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b04-w2s3",
+                    "focus": "rox-race",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b04-w2s3-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b04-w2s3-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "hyrox-b04-w3",
+                "sessions": [
+                  {
+                    "id": "hyrox-b04-w3s1",
+                    "focus": "rox-strong",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b04-w3s1-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b04-w3s1-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b04-w3s2",
+                    "focus": "rox-engine",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b04-w3s2-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b04-w3s2-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b04-w3s3",
+                    "focus": "rox-race",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b04-w3s3-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b04-w3s3-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "hyrox-b04-w4",
+                "sessions": [
+                  {
+                    "id": "hyrox-b04-w4s1",
+                    "focus": "rox-strong",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b04-w4s1-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b04-w4s1-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b04-w4s2",
+                    "focus": "rox-engine",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b04-w4s2-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b04-w4s2-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hyrox-b04-w4s3",
+                    "focus": "rox-race",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "hyrox-b04-w4s3-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 9,
+                        "slots": []
+                      },
+                      {
+                        "id": "hyrox-b04-w4s3-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 35,
+                        "slots": []
+                      }
+                    ]
                   }
                 ]
               }
             ]
           }
         ],
-        "format": "circuit",
-        "cadence": "months"
+        "format": "strength",
+        "cadence": "blocks"
       },
       {
         "id": "gameday",
@@ -5522,6 +7994,6 @@
       }
     ]
   },
-  "rev": 151,
-  "updatedAt": "2026-08-21T06:37:42.403Z"
+  "rev": 152,
+  "updatedAt": "2026-08-28T04:17:36.711Z"
 }
