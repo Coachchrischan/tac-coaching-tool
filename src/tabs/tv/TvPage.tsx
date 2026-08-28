@@ -13,10 +13,17 @@ import { scaleOptions, scaleSummary } from '../../lib/prescription';
 const W = 1920;
 const H = 1080;
 
-// How far the board is allowed to shrink its own type before it gives up and
-// says so. Below about two thirds the back of the room cannot read it, so a
-// board that still does not fit is a coaching problem, not a layout one.
-const FIT_FLOOR = 0.64;
+// Two different thresholds, and conflating them is how work gets hidden.
+//
+// FIT_MIN is how far the board will shrink to get everything on screen. It is
+// a sanity bound, not a judgement: showing the whole session small always beats
+// showing part of it large, because the class does what is on the wall.
+//
+// FIT_WARN is where the type stops being readable from the back of the room.
+// Going below it is allowed, but the coach is told, because at that point the
+// session is too long for one board and the fix is coaching, not layout.
+const FIT_MIN = 0.42;
+const FIT_WARN = 0.64;
 const FIT_STEP = 0.04;
 
 // TAC palette (TAC/brand.md): cream, charcoal, deep pine, warm sand.
@@ -30,6 +37,9 @@ const FOCUS_TITLE: Record<Session['focus'], string> = {
   full: 'FULL BODY',
   esd: 'ESD',
   hyrox: 'HYROX',
+  'rox-strong': 'ROX STRONG',
+  'rox-engine': 'ROX ENGINE',
+  'rox-race': 'ROX RACE',
   gameday: 'GAME DAY',
 };
 
@@ -50,8 +60,8 @@ function findSession(doc: ProgramDoc, sessionId: string) {
               weekIndex: w,
               blockWeeks: phase.weeks.length,
               theme: phase.theme,
-              // ESD, Hyrox and Game Day are programmed month to month, so
-              // "Phase 2" means nothing on their boards. They get the month.
+              // Only Strength runs numbered phases. A month or a block
+              // container is named, and its name is what the wall needs.
               cadence: stream.cadence ?? 'phases',
             };
           }
@@ -91,12 +101,15 @@ export default function TvPage() {
   // and finished two movements short, with the board still looking complete.
   // It now measures itself and shrinks the work area until everything fits.
   const [fit, setFit] = useState(1);
-  const [clipped, setClipped] = useState(false);
+  // 'ok' fits at readable size, 'small' fits but below FIT_WARN, 'cut' means it
+  // shrank as far as it goes and work is still off the board. The three are
+  // different things to tell a coach, so they are not one boolean.
+  const [fitState, setFitState] = useState<'ok' | 'small' | 'cut'>('ok');
 
   // A different session starts the measurement again from full size.
   useLayoutEffect(() => {
     setFit(1);
-    setClipped(false);
+    setFitState('ok');
   }, [sessionId]);
 
   // No dependency list on purpose: this runs after every paint and either
@@ -110,12 +123,12 @@ export default function TvPage() {
     lists.forEach((el) => {
       if (el.scrollHeight > el.clientHeight + 1) overflows = true;
     });
-    if (overflows) {
-      if (fit > FIT_FLOOR) setFit((f) => Math.max(FIT_FLOOR, Number((f - FIT_STEP).toFixed(2))));
-      else if (!clipped) setClipped(true);
-    } else if (clipped) {
-      setClipped(false);
+    if (overflows && fit > FIT_MIN) {
+      setFit((f) => Math.max(FIT_MIN, Number((f - FIT_STEP).toFixed(2))));
+      return;
     }
+    const next = overflows ? 'cut' : fit < FIT_WARN ? 'small' : 'ok';
+    if (next !== fitState) setFitState(next);
   });
 
   const found = useMemo(
@@ -162,6 +175,9 @@ export default function TvPage() {
   const BACKDROP: Record<string, string> = {
     esd: '/tv/bg-esd.jpg',
     hyrox: '/tv/bg-hyrox.jpg',
+    'rox-strong': '/tv/bg-hyrox.jpg',
+    'rox-engine': '/tv/bg-hyrox.jpg',
+    'rox-race': '/tv/bg-hyrox.jpg',
     gameday: '/tv/bg-gameday.jpg',
   };
   const backdrop = BACKDROP[session.focus] ?? '/tv/bg-gym-dark.jpg';
@@ -234,11 +250,25 @@ export default function TvPage() {
     <div className="flex min-h-screen items-center justify-center overflow-hidden bg-black">
       {/* Outside the slide on purpose: this is for the coach at the laptop,
           and it must never reach the wall or the exported image. */}
-      {clipped && (
-        <div className="fixed top-4 left-4 z-10 max-w-md rounded-md bg-amber-400 px-3 py-2 text-sm font-semibold text-amber-950 shadow-lg">
-          This session is too long for one board even at the smallest readable
-          type. Some work is not on the screen. Split it across two boards or
-          shorten the session.
+      {fitState !== 'ok' && (
+        <div
+          className={`fixed top-4 left-4 z-10 max-w-md rounded-md px-3 py-2 text-sm font-semibold shadow-lg ${
+            fitState === 'cut' ? 'bg-red-500 text-white' : 'bg-amber-400 text-amber-950'
+          }`}
+        >
+          {fitState === 'cut' ? (
+            <>
+              This session does not fit on one board. It is down to{' '}
+              {Math.round(fit * 100)}% type and work is still off the screen. Split
+              it across two boards, or take the scaling off the wall.
+            </>
+          ) : (
+            <>
+              Everything is on the board, but only at {Math.round(fit * 100)}%
+              type, which is small from the back of the room. Consider splitting
+              it across two boards.
+            </>
+          )}
         </div>
       )}
       {/* control bar */}
@@ -348,7 +378,7 @@ export default function TvPage() {
                 )
               )}
               <p className="mt-1 text-[21px] font-semibold text-white/55">
-                {cadence === 'months' ? theme : `Phase ${blockIndex + 1}`} · Week{' '}
+                {cadence === 'phases' ? `Phase ${blockIndex + 1}` : theme} · Week{' '}
                 {weekIndex + 1} of {blockWeeks}
               </p>
               <p className="font-display mt-2 text-[20px] italic" style={{ color: SAND }}>
@@ -507,6 +537,17 @@ export default function TvPage() {
                     {block.minutes} min
                   </span>
                 </div>
+                {/* How the part is run. Without it the wall lists movements and
+                    never says it is a 22 minute AMRAP in pairs, which is the
+                    one thing the class needs before it starts. */}
+                {block.note && (
+                  <p
+                    className="border-b border-white/10 px-7 py-3 text-[21px] leading-snug font-semibold"
+                    style={{ color: SAND }}
+                  >
+                    {block.note}
+                  </p>
+                )}
                 <ul data-fit-measure className="flex-1 space-y-6 overflow-hidden px-7 py-6">
                   {filled(block).map((slot, i) => (
                     <li key={slot.id} className="flex gap-5">
@@ -524,6 +565,14 @@ export default function TvPage() {
                         {slotDetail(slot) && (
                           <p className="mt-1 text-[24px] leading-tight font-semibold" style={{ color: SAND }}>
                             {slotDetail(slot)}
+                          </p>
+                        )}
+                        {/* Which minute of the EMOM, whose choice the machine
+                            is, the scaling for this slot. It is written per
+                            slot, so it belongs beside the slot. */}
+                        {slot.note && (
+                          <p className="mt-1 text-[19px] leading-snug" style={{ color: 'rgba(222,197,174,0.75)' }}>
+                            {slot.note}
                           </p>
                         )}
                         {cueFor(slot) && (

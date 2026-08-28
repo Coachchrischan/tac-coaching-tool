@@ -141,7 +141,7 @@ const SEED_STREAMS: {
 }[] = [
   { id: 'strength', name: 'Strength', format: 'strength', focuses: FOCUSES },
   { id: 'esd', name: 'ESD', format: 'circuit', focuses: ['esd'] },
-  { id: 'hyrox', name: 'Hyrox', format: 'circuit', focuses: ['hyrox'] },
+  { id: 'hyrox', name: 'Hyrox', format: 'strength', focuses: ['rox-strong', 'rox-race'] },
   { id: 'gameday', name: 'Game Day', format: 'circuit', focuses: ['gameday'] },
 ];
 

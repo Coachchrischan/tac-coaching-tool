@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { ExerciseSlot, LibraryOverridesDoc, ScaledOption } from '../../types/documents';
 import type { LibraryExercise, RankedExercise } from '../../lib/library';
 import Combobox from '../../components/Combobox';
@@ -84,6 +85,7 @@ export default function ExerciseRow({
   // id, which left eleven free-text movements, the drag through among them,
   // with no way to record a scale.
   const canScale = scaleKey(slot) !== null;
+  const [noteOpen, setNoteOpen] = useState(false);
 
   return (
     <>
@@ -135,6 +137,29 @@ export default function ExerciseRow({
             <Combobox value={slot.name} search={search} onCommit={onCommitExercise} />
             <VideoMark url={videoUrlFor(slot)} />
           </div>
+          {/* What the columns cannot hold: which minute of an EMOM this is,
+              that the machine is the athlete's choice, the scaling for THIS
+              slot. Only takes up room once it has something in it; before
+              that it appears on hover, so the strength grid stays clean. */}
+          {(slot.note || noteOpen) && (
+            <input
+              autoFocus={noteOpen && !slot.note}
+              className="mt-1 ml-[68px] w-[calc(100%-68px)] rounded-md border border-transparent bg-transparent px-2 py-0.5 text-[11px] text-ink-500 placeholder:text-ink-300 hover:border-ink-200 focus:border-accent-600 focus:bg-white focus:outline-none"
+              placeholder="Note for this exercise"
+              value={slot.note ?? ''}
+              onChange={(e) => onPatch({ note: e.target.value || undefined })}
+              onBlur={() => setNoteOpen(false)}
+            />
+          )}
+          {!slot.note && !noteOpen && (
+            <button
+              type="button"
+              onClick={() => setNoteOpen(true)}
+              className="mt-0.5 ml-[68px] rounded px-1 text-[11px] text-ink-300 opacity-0 transition-opacity group-hover:opacity-100 hover:text-ink-950"
+            >
+              + note
+            </button>
+          )}
         </td>
         {SLOT_FIELDS.map(([key]) => (
           <td key={key} className="w-16 px-0.5 py-1">

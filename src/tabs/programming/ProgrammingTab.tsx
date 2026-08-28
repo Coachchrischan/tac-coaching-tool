@@ -304,19 +304,22 @@ export default function ProgrammingTab() {
   // How this stream is written, and the focuses it is allowed to use.
   const streamKind = formatOf(stream);
   const streamFocuses = STREAM_DEFS.find((d) => d.id === stream.id)?.focuses ?? [];
-  // Strength runs the annual plan's phases. ESD, Hyrox and Game Day are
-  // programmed month to month, so the same control is called a Month there.
-  const byMonth = stream.cadence === 'months';
-  const UNIT = byMonth ? 'Month' : 'Phase';
-  const unit = byMonth ? 'month' : 'phase';
-  /** What a block is called in this stream: its month name, or "Phase 2". */
+  // Strength runs the annual plan's numbered phases. ESD and Game Day are
+  // programmed month to month and Hyrox in four-week blocks, so the same
+  // control is called a Month or a Block there and the container carries its
+  // own name instead of a number.
+  const streamCadence = stream.cadence ?? 'phases';
+  const numbered = streamCadence === 'phases';
+  const UNIT = streamCadence === 'months' ? 'Month' : streamCadence === 'blocks' ? 'Block' : 'Phase';
+  const unit = UNIT.toLowerCase();
+  /** What a container is called here: "Phase 2", or its own name. */
   const blockLabel = (i: number) =>
-    byMonth ? (blocks[i].theme ?? `Month ${i + 1}`) : `Phase ${i + 1}`;
+    numbered ? `Phase ${i + 1}` : (blocks[i].theme ?? `${UNIT} ${i + 1}`);
 
   // A phase-cadence stream delivers the annual plan's lane, so the lane owns
   // the phase names and lengths. Programming shows what it is linked to and
   // says so when the two disagree, rather than quietly holding a second answer.
-  const annualLane = byMonth ? undefined : annual.data?.streams.find((s) => s.id === stream.id);
+  const annualLane = numbered ? annual.data?.streams.find((s) => s.id === stream.id) : undefined;
   const annualPhase = (i: number) =>
     annualLane?.phases.find((p) => p.id === blocks[i].annualPhaseId);
   const linkedName = (i: number) => annualPhase(i)?.name ?? blocks[i].theme;
@@ -470,7 +473,7 @@ export default function ProgrammingTab() {
     const block = blocks[bi];
     if (
       !window.confirm(
-        `Remove ${blockLabel(bi)}${!byMonth && block.theme ? ` (${block.theme})` : ''}${
+        `Remove ${blockLabel(bi)}${numbered && block.theme ? ` (${block.theme})` : ''}${
           blockHasContent(block) ? ' and ALL its programming' : ''
         }? This cannot be undone.`,
       )
@@ -795,6 +798,15 @@ export default function ProgrammingTab() {
       window.alert('The annual plan or the timetable has not loaded yet. Try again in a moment.');
       return;
     }
+    // Only Strength has a TrainHeroic team. Say so here rather than offering a
+    // dialogue naming the Strength team and letting the server refuse it.
+    if (stream.id !== 'strength') {
+      window.alert(
+        `${stream.name} has no TrainHeroic team yet, so there is nowhere to push it.\n\n` +
+          'Only Strength maps to a team ("TAC Strength Class").',
+      );
+      return;
+    }
     const monday = mondayOfWeek(wi);
     if (!monday) return;
     const mondayIso = isoDate(monday);
@@ -818,7 +830,7 @@ export default function ProgrammingTab() {
     }
     if (
       !window.confirm(
-        `Push Phase ${bi + 1} Week ${wi + 1} to the TAC Strength Class team calendar as DRAFTS?\n\n` +
+        `Push ${blockLabel(bi)} Week ${wi + 1} to the TAC Strength Class team calendar as DRAFTS?\n\n` +
           `Days come from the current format, "${resolved.scenarioName}":\n${lines.join('\n')}\n\n` +
           `Nothing is published; you publish in the coach app.`,
       )
@@ -1167,7 +1179,7 @@ export default function ProgrammingTab() {
         />
         <p className="text-[11px] font-semibold tracking-[0.28em] text-sand-500 uppercase">
           {stream.name} · {blockLabel(bi)}
-          {!byMonth && blocks[bi].theme ? ` · ${blocks[bi].theme}` : ''} · Week {wi + 1} of{' '}
+          {numbered && blocks[bi].theme ? ` · ${blocks[bi].theme}` : ''} · Week {wi + 1} of{' '}
           {blocks[bi].weeks.length}
           {mondayOfWeek(wi) && (
             <span className="ml-2 text-white/70">
@@ -1268,7 +1280,7 @@ export default function ProgrammingTab() {
               {blocks.map((b, i) => (
                 <option key={b.id} value={i}>
                   {blockLabel(i)}
-                  {!byMonth && b.theme ? ` · ${b.theme}` : ''} ({b.weeks.length} wk)
+                  {numbered && b.theme ? ` · ${b.theme}` : ''} ({b.weeks.length} wk)
                 </option>
               ))}
             </select>
@@ -1447,10 +1459,16 @@ export default function ProgrammingTab() {
         {editOpen && (
           <div className="flex flex-wrap items-end gap-4 rounded-lg border border-ink-200 bg-ink-50 px-4 py-3">
             <label className="text-[11px] font-medium tracking-wide text-ink-500 uppercase">
-              {byMonth ? 'Month name' : `Phase ${bi + 1} theme`}
+              {numbered ? `Phase ${bi + 1} theme` : `${UNIT} name`}
               <input
                 className="mt-0.5 block w-56 rounded-md border border-ink-300 bg-white px-2.5 py-1.5 text-sm text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none"
-                placeholder={byMonth ? 'e.g. Sept 2026' : 'e.g. Strength-Hypertrophy'}
+                placeholder={
+                  numbered
+                    ? 'e.g. Strength-Hypertrophy'
+                    : streamCadence === 'months'
+                      ? 'e.g. Sept 2026'
+                      : 'e.g. Block 01 Baseline'
+                }
                 value={blocks[bi].theme ?? ''}
                 onChange={(e) =>
                   updateBlocks((all) =>
@@ -1459,7 +1477,7 @@ export default function ProgrammingTab() {
                 }
               />
             </label>
-            {!byMonth && annualLane && (
+            {numbered && annualLane && (
               <p className="text-[11px] tracking-normal text-ink-500 normal-case">
                 {annualPhase(bi) ? (
                   <>
@@ -1538,7 +1556,7 @@ export default function ProgrammingTab() {
             >
               + Add {unit}
             </button>
-            {!byMonth && annualLane && (
+            {numbered && annualLane && (
               <button
                 type="button"
                 onClick={pullFromAnnual}
@@ -1554,7 +1572,7 @@ export default function ProgrammingTab() {
               onClick={removeBlock}
               className="rounded-md border border-red-200 bg-white px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              Delete {byMonth ? blockLabel(bi) : blockLabel(bi).toLowerCase()}
+              Delete {numbered ? blockLabel(bi).toLowerCase() : blockLabel(bi)}
             </button>
             <p className="w-full text-[11px] text-ink-400">
               {stream.name} · {blocks.length} {unit}{blocks.length === 1 ? '' : 's'} ·{' '}
@@ -1684,6 +1702,54 @@ export default function ProgrammingTab() {
           }
         />
       </div>
+
+      {/* What members read when they book. Kept apart from the intent above,
+          which is for the coach, and from the note further down, which is the
+          floor detail nobody outside the club should see. */}
+      <div className="mb-3 border-l-4 border-ink-200 pl-3">
+        <label className="text-[11px] font-semibold tracking-wide text-ink-500 uppercase">
+          Member app description
+        </label>
+        <textarea
+          className="mt-0.5 w-full resize-y rounded-md border border-transparent bg-transparent px-2 py-1 font-mono text-[12px] leading-relaxed whitespace-pre-wrap text-ink-950 placeholder:text-ink-300 hover:border-ink-200 focus:border-accent-600 focus:bg-white focus:outline-none"
+          rows={session.appDescription ? Math.min(16, session.appDescription.split('\n').length + 1) : 1}
+          placeholder="The session as members read it in the booking app."
+          value={session.appDescription ?? ''}
+          onChange={(e) =>
+            patchSession((s) => {
+              const next = { ...s };
+              if (e.target.value) next.appDescription = e.target.value;
+              else delete next.appDescription;
+              return next;
+            })
+          }
+        />
+      </div>
+
+      {/* The floor detail: staggers, capacity, what to watch. A circuit session
+          keeps its own copy of this inside CircuitEditor, so only series
+          sessions need it here and neither kind ends up with two. */}
+      {session.kind === 'series' && (
+        <div className="mb-3 border-l-4 border-ink-200 pl-3">
+          <label className="text-[11px] font-semibold tracking-wide text-ink-500 uppercase">
+            Note for coaches
+          </label>
+          <textarea
+            className="mt-0.5 w-full resize-y rounded-md border border-transparent bg-transparent px-2 py-1 text-[13px] leading-relaxed whitespace-pre-wrap text-ink-700 placeholder:text-ink-300 hover:border-ink-200 focus:border-accent-600 focus:bg-white focus:outline-none"
+            rows={session.note ? Math.min(12, session.note.split('\n').length + 1) : 2}
+            placeholder="How to run the room: staggers, capacity, what to watch."
+            value={session.note ?? ''}
+            onChange={(e) =>
+              patchSession((s) => {
+                const next = { ...s };
+                if (e.target.value) next.note = e.target.value;
+                else delete next.note;
+                return next;
+              })
+            }
+          />
+        </div>
+      )}
 
       {/* Session: circuits for ESD / Hyrox / Game Day, series for Strength.
           Branching on the session itself, not the stream, so the editor always

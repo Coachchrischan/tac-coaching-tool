@@ -29,7 +29,27 @@ export const FOCUS_CLASS_TYPE: Record<SessionFocus, string> = {
   full: 'fbs',
   esd: 'esd',
   hyrox: 'hyrox',
+  'rox-strong': 'hyrox',
+  'rox-engine': 'hyrox',
+  'rox-race': 'hyrox',
   gameday: 'gameday',
+};
+
+/**
+ * Which of a class type's days a focus takes, where several focuses share one
+ * class type. The Hyrox class runs twice a week and the tracks are written for
+ * specific days: ROX Strong is the Monday session and ROX Race the Friday one,
+ * so taking the earliest day for both would put them on the same day.
+ *
+ * `null` means the track deliberately has no day yet. ROX Engine is written but
+ * the club runs only two Hyrox classes, so it is parked rather than guessed at.
+ * A focus absent from this table takes the earliest day its class runs, which
+ * is what every single-focus class wants.
+ */
+export const FOCUS_DAY_PICK: Partial<Record<SessionFocus, number | null>> = {
+  'rox-strong': 0,
+  'rox-race': 1,
+  'rox-engine': null,
 };
 
 export interface ResolvedDay {
@@ -69,9 +89,13 @@ export function resolveWeekDays(
   const scenario = liveScenario(schedule);
   const days = focuses.map((focus): ResolvedDay => {
     const classTypeId = FOCUS_CLASS_TYPE[focus];
-    const dayIndex = (scenario?.blocks ?? [])
-      .filter((b) => b.classTypeId === classTypeId)
-      .reduce<number | null>((min, b) => (min === null || b.day < min ? b.day : min), null);
+    // Distinct days the class runs, in week order. A class running twice on
+    // one day is still one day: the week's programming belongs to the first.
+    const classDays = [
+      ...new Set((scenario?.blocks ?? []).filter((b) => b.classTypeId === classTypeId).map((b) => b.day)),
+    ].sort((a, b) => a - b);
+    const pick = focus in FOCUS_DAY_PICK ? FOCUS_DAY_PICK[focus] : 0;
+    const dayIndex = pick === null || pick === undefined ? null : (classDays[pick] ?? null);
     return {
       focus,
       dayIndex,

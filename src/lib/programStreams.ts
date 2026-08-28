@@ -24,7 +24,9 @@ import type {
 export const STREAM_DEFS: { id: string; name: string; focuses: SessionFocus[] }[] = [
   { id: 'strength', name: 'Strength', focuses: ['lower', 'upper', 'full'] },
   { id: 'esd', name: 'ESD', focuses: ['esd'] },
-  { id: 'hyrox', name: 'Hyrox', focuses: ['hyrox'] },
+  // 'hyrox' is last: it is the pre-tracks focus, kept so the August sessions
+  // written before the tracks existed still belong to this stream.
+  { id: 'hyrox', name: 'Hyrox', focuses: ['rox-strong', 'rox-engine', 'rox-race', 'hyrox'] },
   { id: 'gameday', name: 'Game Day', focuses: ['gameday'] },
 ];
 
@@ -34,6 +36,9 @@ export const FOCUS_LABEL: Record<SessionFocus, string> = {
   full: 'Full Body',
   esd: 'ESD',
   hyrox: 'Hyrox',
+  'rox-strong': 'ROX Strong',
+  'rox-engine': 'ROX Engine',
+  'rox-race': 'ROX Race',
   gameday: 'Game Day',
 };
 

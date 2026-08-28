@@ -79,7 +79,22 @@ export interface ScheduleDoc {
 
 // ---------- Programming ----------
 
-export type SessionFocus = 'lower' | 'upper' | 'full' | 'esd' | 'hyrox' | 'gameday';
+/**
+ * The Hyrox stream runs named TRACKS rather than one undifferentiated class:
+ * ROX Strong is strength endurance, ROX Engine is intervals and threshold,
+ * ROX Race is compromised running raced solo. `hyrox` stays for sessions
+ * written before the tracks existed.
+ */
+export type SessionFocus =
+  | 'lower'
+  | 'upper'
+  | 'full'
+  | 'esd'
+  | 'hyrox'
+  | 'rox-strong'
+  | 'rox-engine'
+  | 'rox-race'
+  | 'gameday';
 
 export interface ExerciseSlot {
   id: string;
@@ -91,6 +106,14 @@ export interface ExerciseSlot {
   intensity?: string;
   rpe?: string;
   tempo?: string;
+  /**
+   * What the columns cannot hold: which minute of an EMOM this is, that a
+   * machine is the athlete's choice, or the scaled options for THIS slot.
+   * Scales are stored against the exercise, so a movement used three ways in
+   * one block cannot carry three different scalings there; per-slot scaling
+   * lives here until scales move onto the slot.
+   */
+  note?: string;
   showScales?: boolean;
 }
 
@@ -98,6 +121,12 @@ interface TimedBlockCommon {
   id: string;
   label: string; // "A", "B", ...
   minutes: number;
+  /**
+   * How the part is run: "22 min AMRAP in pairs, one works one rests", and
+   * what the score is. The slots say what the movements are; this says what
+   * to do with them.
+   */
+  note?: string;
 }
 
 /** A series: sets and reps against named exercises. The usual strength part. */
@@ -149,6 +178,12 @@ interface SessionCommon {
   intent?: string; // coach-facing note at the top: the day's intent
   note?: string; // footnote, e.g. how a pairs workout is shared
   blurbOverride?: string; // coach-edited blurb wins over generated
+  /**
+   * The session as members read it in the booking app: the workout written
+   * out plainly, no coaching apparatus. Distinct from `note` (for coaches) and
+   * from the blurb (one line of sell), so it is kept as its own field.
+   */
+  appDescription?: string;
 }
 
 /** Strength: series (WU/A/B/C) of exercise slots with sets, reps and load. */
@@ -203,10 +238,13 @@ export interface ProgramStream {
   format?: 'strength' | 'circuit'; // how its sessions are written; default strength
   /**
    * How the stream is organised in time. Strength runs the periodised phases of
-   * the annual plan. ESD, Hyrox and Game Day are programmed month to month, so
-   * their blocks[] are calendar months and the UI calls them months.
+   * the annual plan. ESD and Game Day are programmed month to month, so their
+   * blocks[] are calendar months and the UI calls them months. Hyrox runs
+   * four-week BLOCKS, each setting a signature session in its first week and
+   * retesting it unchanged in its fourth, so a month container would split the
+   * set from the retest.
    */
-  cadence?: 'phases' | 'months';
+  cadence?: 'phases' | 'months' | 'blocks';
   blocks: ProgramBlock[]; // phases or months (variable length)
 }
 

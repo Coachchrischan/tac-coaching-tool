@@ -22,6 +22,9 @@ const FOCUS_LABEL: Record<Session['focus'], string> = {
   full: 'Full Body',
   esd: 'ESD',
   hyrox: 'Hyrox',
+  'rox-strong': 'ROX Strong',
+  'rox-engine': 'ROX Engine',
+  'rox-race': 'ROX Race',
   gameday: 'Game Day',
 };
 

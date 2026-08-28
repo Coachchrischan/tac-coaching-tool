@@ -85,6 +85,15 @@ export default function TimedBlockCard({
         </button>
       </div>
 
+      {/* How the part is run and what the score is. The rows below say what the
+          movements are; a 22 minute AMRAP in pairs needs somewhere to say so. */}
+      <input
+        className="mt-1.5 w-full rounded-md border border-transparent bg-transparent px-2 py-1 text-[12px] text-ink-700 placeholder:text-ink-300 hover:border-ink-200 focus:border-accent-600 focus:bg-white focus:outline-none"
+        placeholder="How it runs, and the score. e.g. 22 min AMRAP in pairs, one works one rests."
+        value={block.note ?? ''}
+        onChange={(e) => onPatchBlock({ note: e.target.value || undefined })}
+      />
+
       <table className="mt-2 w-full table-fixed border-separate border-spacing-0">
         <thead>
           <tr>
