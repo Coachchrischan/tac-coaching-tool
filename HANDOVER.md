@@ -79,10 +79,9 @@ Community, Planning, Ethos.
     phase carries `annualPhaseId` linking it to its AnnualPhase.
   - **esd** (`circuit`, months): 5 months, 17 weeks. Aug W1 written, plus **all of Sept 2026**
     (4 weeks x Monday MAP + Friday threshold) from the conditioning block document.
-  - **hyrox** (`circuit`, months): 5 months, 17 weeks. Aug W1 written, plus **all of Sept 2026**
-    (4 weeks x Monday HYROX A + Friday HYROX B).
+  - **hyrox** (`series`, **blocks**): 5 blocks, 17 weeks, **three tracks**. See below.
   - **gameday** (`circuit`, months): 5 months, 17 weeks, **first 4 Saturdays written**.
-  50 of 104 sessions hold content. Writing the rest is the main outstanding job, and it is
+  58 of 140 sessions hold content. Writing the rest is the main outstanding job, and it is
   coaching time rather than build time.
 - **Two session formats.** Strength uses `timedBlocks` (WU/A/B/C series of exercise slots with
   sets/reps/%/RPE). ESD, Hyrox and Game Day use `circuit[]`: each piece has a heading
@@ -261,12 +260,47 @@ year; and give each artefact one printable way out.
   keyed by room first.
 - **Game Day beyond Sept W2**, ESD and Hyrox Oct to Dec, and Strength Phases 2 and 3.
   Sept 2026 is now written for ESD and Hyrox, so the count is 50 of 104 sessions.
-- **Chris's call on the Sept ESD and Hyrox placeholder**: whether the A-to-Monday,
-  B-to-Friday mapping is right, and whether the roundtable's Tier 1 revisions go in.
+- **Chris's call on the Sept ESD placeholder** and whether the roundtable's Tier 1 revisions
+  go in. The Sept Hyrox placeholder written that morning was **replaced** by Block 01.
+- **What the Hyrox wall carries.** Two boards need splitting or trimming (see above). The
+  cooldown and station-prep columns are the obvious candidates to take off the wall.
+- **Scales onto the slot**, so per-slot scaling stops living in a note.
 - **Push Phase 1 weeks 3 onward** when he wants them in members' calendars.
 - **`cues` and `patterns` for free-text exercises**, the same root cause as the
   scales fix above.
 
-**Decisions already made, do not reopen without me:** ESD, Hyrox and Game Day are month to month,
-not periodised. TrainHeroic stays drafts only. The week email opens a Gmail compose window and
-never sends.
+## The Hyrox stream: tracks and blocks (changed 2026-08-28)
+
+Hyrox no longer looks like ESD and Game Day. Chris handed over a HYROX Block 01 document
+(`tac-hyrox-block01.json` and three CSVs, in Downloads) and asked the tool to follow its shape.
+
+- **Three tracks, not one focus.** `SessionFocus` gained `rox-strong`, `rox-engine` and
+  `rox-race`, so a Hyrox week holds three named sessions the way Strength holds Lower, Upper
+  and Full Body. The old `hyrox` focus stays for the August sessions written before this.
+- **Two of the three run.** The club runs Hyrox Monday and Friday only. `FOCUS_DAY_PICK` in
+  `classDays.ts` gives ROX Strong the Monday class and ROX Race the Friday one; **ROX Engine
+  is parked with no day** (`null`), so its four sessions are written and visible but the push
+  names them as skipped rather than guessing a day. Chris decided against adding a Wednesday
+  Hyrox class. If one is ever added, give `rox-engine` an ordinal.
+- **Cadence is `blocks`, a third option beside phases and months.** Block 01 runs w/c 31 Aug to
+  w/c 21 Sept, which straddles the Aug and Sept month containers, and the block sets a
+  signature session in week 1 and retests it unchanged in week 4. Containers:
+  Lead-in (1 wk, the old August week), **Block 01 Baseline (4 wk, written)**, Block 02, 03 and
+  04 (4 wk each, empty). Block 04 starts w/c 23 Nov, which is the week 13 quarterly anchor the
+  document points at.
+- **Sessions are segments.** Each document segment became a series part labelled with its CODE
+  (WU, PREP, A, B, FINISH), because the TV board keys its warm-up strip off a label of `WU`.
+  The descriptive label, the prescription and the score went into the new part note.
+- **Three optional fields were added** and all render: `ExerciseSlot.note`,
+  `TimedBlock.note` and `Session.appDescription`. Nothing needed migrating.
+- **Per-slot scaling is in the slot note, not the scales system.** The document scales per
+  slot; the app stores scales against the exercise, so a wall ball used three ways in one block
+  cannot hold three scalings. Moving scales onto the slot is the real fix and is still open.
+- **Two Hyrox boards do not fit one screen.** `The Long One` (nine stations, each with scaling)
+  is cut even at the 42% floor and says so in red; `Anchor` fits at 60% and says so in amber.
+  That is the format being richer than a 1920x1080 board, not a layout bug.
+
+**Decisions already made, do not reopen without me:** ESD and Game Day are month to month, not
+periodised (**Hyrox was, and is now four-week blocks**, changed 2026-08-28 on Chris's call).
+TrainHeroic stays drafts only. The week email opens a Gmail compose window and never sends.
+Hyrox runs two days a week, not three.
