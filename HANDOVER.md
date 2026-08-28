@@ -259,7 +259,8 @@ year; and give each artefact one printable way out.
   while `roomModel.ts` draws the Group Fitness Room on every layout, so this needs the room model
   keyed by room first.
 - **Game Day beyond Sept W2**, ESD and Hyrox Oct to Dec, and Strength Phases 2 and 3.
-  Sept 2026 is now written for ESD and Hyrox, so the count is 50 of 104 sessions.
+  Sept 2026 is written for ESD, and Hyrox holds Block 01, so the count is 58 of 140 sessions.
+  The total grew because the Hyrox stream went from one session a week to three.
 - **Chris's call on the Sept ESD placeholder** and whether the roundtable's Tier 1 revisions
   go in. The Sept Hyrox placeholder written that morning was **replaced** by Block 01.
 - **What the Hyrox wall carries.** Two boards need splitting or trimming (see above). The
