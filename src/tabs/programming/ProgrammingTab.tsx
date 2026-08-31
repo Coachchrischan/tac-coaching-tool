@@ -1200,6 +1200,12 @@ export default function ProgrammingTab() {
         <RailButton label="TV output" onClick={() => navigate(`/tv/${session.id}`)}>
           <TvIcon />
         </RailButton>
+        <RailButton
+          label="Block overview (PDF for coaches)"
+          onClick={() => navigate('/overview')}
+        >
+          <OverviewIcon />
+        </RailButton>
         <RailButton label="Export for Sheets" onClick={() => downloadProgramCsv(doc)}>
           <SheetsIcon />
         </RailButton>
@@ -2056,6 +2062,18 @@ function RailButton({
         {label}
       </span>
     </div>
+  );
+}
+
+/** Block overview: a stacked-pages document on the same dark tile. */
+function OverviewIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="1.5" y="1.5" width="21" height="21" rx="5.5" fill="#1B1B1B" />
+      <rect x="6.2" y="4.8" width="10" height="13" rx="1.4" fill="#F5F3EB" />
+      <rect x="8.2" y="6.8" width="10" height="13" rx="1.4" fill="#DEC5AE" />
+      <path d="M10.5 10.4h5.4M10.5 13h5.4M10.5 15.6h3.4" stroke="#1B1B1B" strokeWidth="1.3" strokeLinecap="round" />
+    </svg>
   );
 }
 

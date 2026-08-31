@@ -12,11 +12,13 @@ import PlanningTab from './tabs/planning/PlanningTab';
 import LayoutsTab from './tabs/layouts/LayoutsTab';
 import EquipmentTab from './tabs/equipment/EquipmentTab';
 import TvPage from './tabs/tv/TvPage';
+import OverviewPage from './tabs/overview/OverviewPage';
 
 export default function App() {
   return (
     <Routes>
       <Route path="/tv/:sessionId" element={<TvPage />} />
+      <Route path="/overview" element={<OverviewPage />} />
       <Route
         path="*"
         element={
