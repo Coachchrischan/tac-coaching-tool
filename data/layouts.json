@@ -49,6 +49,72 @@
             "h": 72,
             "count": 1,
             "gap": 12
+          },
+          {
+            "id": "c841fc5d-f8df-4757-8aff-2e98e8a8cd26",
+            "kind": "bike",
+            "label": "C2 Bike",
+            "x": 60,
+            "y": 300,
+            "w": 40,
+            "h": 78,
+            "count": 1,
+            "gap": 12
+          },
+          {
+            "id": "4aa2c365-bacd-4ca5-9308-081f5c7343db",
+            "kind": "rower",
+            "label": "Rower",
+            "x": 60,
+            "y": 300,
+            "w": 34,
+            "h": 96,
+            "count": 1,
+            "gap": 12
+          },
+          {
+            "id": "a14a992d-ddb0-4135-a7df-d3930170b68f",
+            "kind": "ski",
+            "label": "Ski erg",
+            "x": 60,
+            "y": 300,
+            "w": 34,
+            "h": 72,
+            "count": 1,
+            "gap": 12
+          },
+          {
+            "id": "9166b597-2317-4d10-b96f-582ee5681ee1",
+            "kind": "box",
+            "label": "Box",
+            "x": 60,
+            "y": 300,
+            "w": 52,
+            "h": 52,
+            "count": 1,
+            "gap": 12
+          },
+          {
+            "id": "d32bea07-3136-48db-affa-94d1ac11b5e1",
+            "kind": "wallball",
+            "label": "Wall ball",
+            "x": 60,
+            "y": 300,
+            "w": 40,
+            "h": 40,
+            "count": 1,
+            "gap": 12
+          },
+          {
+            "id": "bc54fab4-2dfb-442d-bae6-3f07dcb4038e",
+            "kind": "wallball",
+            "label": "Wall ball",
+            "x": 60,
+            "y": 300,
+            "w": 40,
+            "h": 40,
+            "count": 1,
+            "gap": 12
           }
         ]
       },
@@ -165,8 +231,8 @@
       }
     ]
   },
-  "rev": 21,
-  "updatedAt": "2026-09-01T09:47:54.533Z",
-  "machine": "DESKTOP-T7OQ0UN",
+  "rev": 22,
+  "updatedAt": "2026-09-06T22:21:32.218Z",
+  "machine": "DESKTOP-28NQR37",
   "schemaVersion": 2
 }
