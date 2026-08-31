@@ -4,8 +4,6 @@
   ProgramWeek,
   Session,
 } from '../../types/documents';
-import type { LibraryExercise, RankedExercise } from '../../lib/library';
-import Combobox from '../../components/Combobox';
 import { normaliseIntensity } from '../../lib/prescription';
 import { seriesBlocks } from '../../lib/programStreams';
 
@@ -73,7 +71,11 @@ export function buildBlockRows(
       const seriesKey = tb.label.trim().toUpperCase();
       tb.slots.forEach((slot) => {
         if (!slot.name) return;
-        const key = `${seriesKey}::${slot.exerciseId ?? slot.name.trim().toLowerCase()}`;
+        // Key by name as well as id: a variation borrows the base lift's id
+        // for its video (Tempo Barbell Bench Press on the bench press id), and
+        // keying by id alone merged all three bench variants into one row
+        // wearing whichever name came first.
+        const key = `${seriesKey}::${slot.exerciseId ?? ''}::${slot.name.trim().toLowerCase()}`;
         let row = index.get(key);
         if (!row) {
           row = {
@@ -398,6 +400,7 @@ function CopyAcrossCell({
 export function MonthGrid({
   block,
   weekOffset = 0,
+  embedded = false,
   onEdit,
   onAdd,
   onOpenWeek,
@@ -405,11 +408,20 @@ export function MonthGrid({
 }: {
   block: BlockRows;
   weekOffset?: number; // when block is a sliced window, the absolute index of its first week
+  /**
+   * True when the grid sits inside a wider scroll container (the Phase view
+   * puts the rotation overview beside it, under ONE scroll bar). Sticky
+   * columns would pin to that container's edge and smear over the panel to
+   * their left, so embedding turns them off along with the grid's own
+   * horizontal scrollbar.
+   */
+  embedded?: boolean;
   onEdit: (ref: SlotRef, patch: Partial<ExerciseSlot>) => void;
   onAdd: (t: AddTarget) => void;
   onOpenWeek: (weekIndex: number) => void;
   onCopyExercises?: (fromWeek: number, toWeeks: number[]) => void;
 }) {
+  const stick = (cls: string) => (embedded ? '' : cls);
   // ESD, Hyrox and Game Day never produce editable rows; summarise instead of
   // showing an empty grid, which read as "nothing programmed" for a written week.
   if (block.rows.length === 0) {
@@ -421,17 +433,17 @@ export function MonthGrid({
 
   let lastSeries = '';
   return (
-    <div className="overflow-x-auto rounded-xl border border-ink-200 bg-white shadow-sm">
+    <div className={`${embedded ? '' : 'overflow-x-auto '}rounded-xl border border-ink-200 bg-white shadow-sm`}>
       <table className="w-full border-separate border-spacing-0">
         <thead>
           <tr>
-            <th rowSpan={2} className={`sticky left-0 z-10 w-9 ${headCls}`}>
+            <th rowSpan={2} className={`${stick('sticky left-0 z-10')} w-9 ${headCls}`}>
               Seg
             </th>
-            <th rowSpan={2} className={`sticky left-9 z-10 w-7 ${headCls}`}>
+            <th rowSpan={2} className={`${stick('sticky left-9 z-10')} w-7 ${headCls}`}>
               #
             </th>
-            <th rowSpan={2} className={`sticky left-16 z-10 min-w-48 text-left ${headCls}`}>
+            <th rowSpan={2} className={`${stick('sticky left-16 z-10')} min-w-48 text-left ${headCls}`}>
               Exercise
             </th>
             {block.weekSessions.map((_, wi) => (
@@ -540,14 +552,14 @@ export function MonthGrid({
             const stickyBg = rowBand ? 'bg-ink-50' : 'bg-white';
             return (
               <tr key={`${row.seriesKey}-${row.n}`}>
-                <td className={`sticky left-0 z-10 w-9 border-b border-ink-100 px-1.5 py-1.5 text-center ${stickyBg} ${topBorder}`}>
+                <td className={`${stick('sticky left-0 z-10')} w-9 border-b border-ink-100 px-1.5 py-1.5 text-center ${stickyBg} ${topBorder}`}>
                   <SegChip series={row.series} />
                 </td>
-                <td className={`sticky left-9 z-10 w-7 border-b border-ink-100 px-1 py-1.5 text-center text-[11px] text-ink-400 ${stickyBg} ${topBorder}`}>
+                <td className={`${stick('sticky left-9 z-10')} w-7 border-b border-ink-100 px-1 py-1.5 text-center text-[11px] text-ink-400 ${stickyBg} ${topBorder}`}>
                   {row.n}
                 </td>
                 <td
-                  className={`sticky left-16 z-10 min-w-48 border-b border-ink-100 px-2 py-1.5 text-[13px] font-medium whitespace-nowrap text-ink-950 ${stickyBg} ${topBorder}`}
+                  className={`${stick('sticky left-16 z-10')} min-w-48 border-b border-ink-100 px-2 py-1.5 text-[13px] font-medium whitespace-nowrap text-ink-950 ${stickyBg} ${topBorder}`}
                   title={row.name}
                 >
                   {row.name}
@@ -614,119 +626,116 @@ function buildPhaseRows(blocks: BlockRows[], withSpareRow = false): PhaseRow[] {
   return out;
 }
 
-// ---------- Phase exercise view: phase-to-phase exercise planning, no prescriptions ----------
-//
-// One column per block, exercise names only, side by side. This is where the
-// coach plans which accessories rotate every four weeks while the compounds
-// hold. Committing an exercise into an empty cell creates it in every week of
-// that block (same series); committing over an existing one renames it across
-// the block, keeping each week's prescription.
+// ---------- Phase rotation: the blocks of the phase side by side, names only ----------
 
-export function PhaseExerciseGrid({
-  blocks,
-  themes,
-  search,
-  onCommitCell,
-  onRemoveCell,
+export interface RotationSection {
+  /** The session identity this table describes, e.g. "Full Body A". */
+  title: string;
+  /** One BlockRows per training block window inside the phase. */
+  columns: BlockRows[];
+  /** The challenge finisher heading per block window, where one exists. */
+  challenges: (string | null)[];
+}
+
+/**
+ * The phase's blocks side by side, exercise names only: Chris's paper sheet as
+ * a view. Rows align by slot position (A1, A2, B1...), so where an accessory
+ * rotates at a block boundary the change is visible in one glance; a cell that
+ * differs from the block before it is tinted sand. Read-only on purpose: this
+ * is the overview, the editing lives in the Week and Block views (a column
+ * heading opens its block).
+ */
+export function PhaseRotation({
+  sections,
+  columnLabels,
+  onOpenBlock,
 }: {
-  blocks: BlockRows[];
-  themes: (string | undefined)[];
-  search: (query: string) => RankedExercise[];
-  onCommitCell: (
-    blockIndex: number,
-    series: string,
-    n: number,
-    row: EditableRow | null,
-    name: string,
-    exercise: LibraryExercise | null,
-  ) => void;
-  onRemoveCell: (blockIndex: number, row: EditableRow) => void;
+  sections: RotationSection[];
+  columnLabels: string[];
+  onOpenBlock: (page: number) => void;
 }) {
-  const rows = buildPhaseRows(blocks, true);
-  if (rows.length === 0) return <EmptyState />;
-
-  let lastSeries = '';
-  // No overflow container: the grid is narrow and the exercise dropdowns
-  // must be free to extend past the table edge.
   return (
-    <div className="rounded-xl border border-ink-200 bg-white shadow-sm">
-      <table className="w-full border-separate border-spacing-0">
-        <thead>
-          <tr>
-            <th className={`w-9 rounded-tl-xl ${headCls}`}>Seg</th>
-            <th className={`w-7 ${headCls}`}>#</th>
-            {blocks.map((_b, bi) => (
-              <th
-                key={bi}
-                className={`${headCls} border-l-2 border-l-sand-500 text-left ${
-                  bi === blocks.length - 1 ? 'rounded-tr-xl' : ''
-                }`}
-              >
-                Phase {bi + 1}
-                {themes[bi] ? (
-                  <span className="ml-2 font-normal normal-case text-ink-300">{themes[bi]}</span>
-                ) : null}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, ri) => {
-            const seriesStart = row.seriesKey !== lastSeries;
-            lastSeries = row.seriesKey;
-            const topBorder = seriesStart ? 'border-t-2 border-t-ink-200' : '';
-            const rowBand = ri % 2 === 1;
-            return (
-              <tr key={`${row.seriesKey}-${row.n}`} className="group">
-                <td
-                  className={`w-9 border-b border-ink-100 px-1.5 py-1.5 text-center ${
-                    rowBand ? 'bg-ink-50' : ''
-                  } ${topBorder}`}
-                >
-                  <SegChip series={row.series} />
-                </td>
-                <td
-                  className={`w-7 border-b border-ink-100 px-1 py-1.5 text-center text-[11px] text-ink-400 ${
-                    rowBand ? 'bg-ink-50' : ''
-                  } ${topBorder}`}
-                >
-                  {row.n}
-                </td>
-                {row.perBlock.map((blockRow, bi) => (
-                  <td
-                    key={bi}
-                    className={`border-b border-ink-100 border-l-2 border-l-sand-500/60 px-1.5 py-1 ${cellShade(
-                      rowBand,
-                      bi % 2 === 1,
-                    )} ${topBorder}`}
-                  >
-                    <div className="flex items-center gap-1">
-                      <Combobox
-                        value={blockRow?.name ?? ''}
-                        search={search}
-                        placeholder="Add exercise…"
-                        onCommit={(name, ex) =>
-                          onCommitCell(blocks[bi].blockIndex, row.series, row.n, blockRow, name, ex)
-                        }
-                      />
-                      {blockRow && (
-                        <button
-                          type="button"
-                          title={`Remove ${blockRow.name} from every week of Phase ${blocks[bi].blockIndex + 1}`}
-                          onClick={() => onRemoveCell(blocks[bi].blockIndex, blockRow)}
-                          className="shrink-0 rounded px-1 py-0.5 text-sm text-ink-200 hover:text-red-600"
-                        >
-                          ✕
-                        </button>
-                      )}
-                    </div>
-                  </td>
-                ))}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+    <div className="shrink-0 space-y-4">
+      {sections.map((section) => {
+        const rows = buildPhaseRows(section.columns);
+        const hasChallenges = section.challenges.some(Boolean);
+        let lastSeries = '';
+        return (
+          <div key={section.title} className="overflow-hidden rounded-xl border border-ink-200 bg-white shadow-sm">
+            <p className="bg-accent-600 px-3 py-2 text-[12px] font-semibold tracking-wide text-white uppercase">
+              {section.title}
+              <span className="ml-2 font-normal normal-case text-white/60">exercise rotation</span>
+            </p>
+            <table className="w-full border-separate border-spacing-0">
+              <thead>
+                <tr>
+                  <th className={`w-9 ${headCls}`}>Seg</th>
+                  <th className={`w-7 ${headCls}`}>#</th>
+                  {columnLabels.map((label, i) => (
+                    <th key={i} className={`${headCls} min-w-44 border-l-2 border-l-sand-500 text-left`}>
+                      <button
+                        type="button"
+                        title="Open this block in the Block view"
+                        onClick={() => onOpenBlock(i)}
+                        className="rounded px-1 uppercase hover:text-sand-500"
+                      >
+                        {label}
+                      </button>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row, ri) => {
+                  const seriesStart = row.seriesKey !== lastSeries;
+                  lastSeries = row.seriesKey;
+                  const topBorder = seriesStart ? 'border-t-2 border-t-ink-200' : '';
+                  const rowBand = ri % 2 === 1;
+                  return (
+                    <tr key={`${row.seriesKey}-${row.n}`}>
+                      <td className={`w-9 border-b border-ink-100 px-1.5 py-1.5 text-center ${rowBand ? 'bg-ink-50' : ''} ${topBorder}`}>
+                        <SegChip series={row.series} />
+                      </td>
+                      <td className={`w-7 border-b border-ink-100 px-1 py-1.5 text-center text-[11px] text-ink-400 ${rowBand ? 'bg-ink-50' : ''} ${topBorder}`}>
+                        {row.n}
+                      </td>
+                      {row.perBlock.map((cell, ci) => {
+                        const prev = ci > 0 ? row.perBlock[ci - 1] : null;
+                        // A rotation is a change of movement at the boundary;
+                        // same name carrying on is continuity, not news.
+                        const changed = ci > 0 && cell && cell.name !== (prev?.name ?? null);
+                        return (
+                          <td
+                            key={ci}
+                            className={`border-b border-ink-100 border-l-2 border-l-sand-500/60 px-2 py-1.5 text-[12.5px] whitespace-nowrap ${topBorder} ${
+                              changed ? 'bg-sand-500/25 font-semibold text-ink-950' : `${cellShade(rowBand, false)} text-ink-800`
+                            }`}
+                          >
+                            {cell?.name ?? <span className="text-ink-200">·</span>}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
+                {hasChallenges && (
+                  <tr>
+                    <td className="w-9 border-t-2 border-t-ink-200 px-1.5 py-1.5 text-center">
+                      <span className="inline-block rounded bg-sand-500 px-1.5 py-0.5 text-[10px] font-bold text-ink-950">CH</span>
+                    </td>
+                    <td className="w-7 border-t-2 border-t-ink-200" />
+                    {section.challenges.map((ch, ci) => (
+                      <td key={ci} className="border-t-2 border-t-ink-200 border-l-2 border-l-sand-500/60 px-2 py-1.5 text-[12px] whitespace-nowrap text-ink-500 italic">
+                        {ch ?? <span className="text-ink-200">·</span>}
+                      </td>
+                    ))}
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        );
+      })}
     </div>
   );
 }

@@ -22,9 +22,9 @@ import type {
 import TimedBlockCard from './TimedBlockCard';
 import SessionBlurb from './SessionBlurb';
 import { defaultSeries } from '../../seed';
-import { MonthGrid, PhaseExerciseGrid, buildBlockRows } from './EditableGrid';
+import { MonthGrid, PhaseRotation, buildBlockRows } from './EditableGrid';
 import type { BlockRows } from './EditableGrid';
-import type { AddTarget, EditableRow, SlotRef } from './EditableGrid';
+import type { AddTarget, SlotRef } from './EditableGrid';
 import { downloadProgramCsv } from '../../lib/exportCsv';
 import {
   FOCUS_LABEL,
@@ -57,10 +57,10 @@ import { scaleKey, scaleOptions } from '../../lib/prescription';
 
 type ProgramView = 'week' | 'block' | 'month';
 
-// Chris's terminology: blocks[] in the data model are PHASES (10/1/6 weeks);
-// the 3-4 week training blocks live inside a phase. Views: Week (edit one
-// week), Block (one 4-week block within the phase), Phase (the whole phase's
-// weeks, plus the phase-to-phase Exercise rotation planner as a mode).
+// Chris's terminology: blocks[] in the data model are PHASES; the 3-4 week
+// training blocks live inside a phase. Views: Week (edit one week), Block
+// (one block within the phase), Phase (the blocks' exercise rotation side by
+// side, then every week's periodisation, under one scroll bar).
 const VIEW_LABEL: Record<ProgramView, string> = {
   week: 'Week',
   block: 'Block',
@@ -195,9 +195,6 @@ export default function ProgrammingTab() {
   const [si, setSi] = useState(0);
   const [view, setView] = useState<ProgramView>('week');
   const [pushState, setPushState] = useState<'idle' | 'pushing'>('idle');
-  // Phase view has two modes: this phase's weeks, or the phase-to-phase
-  // exercise rotation planner (names only, across all phases).
-  const [phaseMode, setPhaseMode] = useState<'weeks' | 'exercises'>('weeks');
   // Which 4-week block within the phase the Block view shows.
   const [blockPageRaw, setBlockPage] = useState(0);
   const [expandScales, setExpandScales] = useState(false);
@@ -328,6 +325,59 @@ export default function ProgrammingTab() {
     const p = annualPhase(i);
     return p && p.weeks !== blocks[i].weeks.length ? p.weeks : null;
   };
+
+  // The rotation overview's data: for every session identity in this phase
+  // (Full Body A, Full Body B), one column per training block window, names
+  // only, plus each window's challenge heading. Read-only; editing stays in
+  // the Week and Block views.
+  const rotationLabels = Array.from({ length: blockPages }, (_, pg) => {
+    const first = pg * blockLen + 1;
+    const last = Math.min((pg + 1) * blockLen, blocks[bi].weeks.length);
+    return `Block ${pg + 1} · ${first === last ? `W${first}` : `W${first}-${last}`}`;
+  });
+  const rotationSections = (() => {
+    const identities: { key: string; title: string; match: (week: ProgramWeek) => Session | undefined }[] = [];
+    for (const week of blocks[bi].weeks) {
+      for (const sess of week.sessions) {
+        const key = sess.name || sess.focus;
+        if (!identities.some((i) => i.key === key)) {
+          identities.push({
+            key,
+            title: sessionLabel(sess),
+            match: (week2) => week2.sessions.find((s2) => (s2.name || s2.focus) === key),
+          });
+        }
+      }
+    }
+    return identities
+      .map((identity) => {
+        // Each column is built from its own window's weeks, not sliced from
+        // the whole phase: slicing kept the phase-wide first-seen row order,
+        // which put block 3's pull-ups above its bench because pull-ups
+        // appeared first back in block 2. A window orders by its own slots.
+        const columns = Array.from({ length: blockPages }, (_, pg) =>
+          buildBlockRows(
+            { ...blocks[bi], weeks: blocks[bi].weeks.slice(pg * blockLen, (pg + 1) * blockLen) },
+            bi,
+            identity.match,
+          ),
+        );
+        const challenges = Array.from({ length: blockPages }, (_, pg) => {
+          const heads: string[] = [];
+          for (const week of blocks[bi].weeks.slice(pg * blockLen, (pg + 1) * blockLen)) {
+            const sess = identity.match(week);
+            if (sess?.kind !== 'series') continue;
+            for (const tb of sess.timedBlocks) {
+              if (tb.kind !== 'circuit') continue;
+              for (const piece of tb.pieces) if (piece.heading.trim()) heads.push(piece.heading.trim());
+            }
+          }
+          return heads.length ? [...new Set(heads)].join(' · ') : null;
+        });
+        return { title: identity.title, columns, challenges };
+      })
+      .filter((section) => section.columns.some((c) => c.rows.length > 0));
+  })();
 
   /** What the week's email says: this stream, this week, these sessions. */
   const emailInput = {
@@ -871,128 +921,6 @@ export default function ProgrammingTab() {
   // occupant of the series position. Existing slots rename in place (keeping
   // each week's prescription); weeks without the slot get it created, so a
   // freshly planned block fills all four weeks at once.
-  function commitPhaseExercise(
-    blockIndex: number,
-    series: string,
-    n: number,
-    row: EditableRow | null,
-    name: string,
-    exercise: LibraryExercise | null,
-  ) {
-    const trimmed = name.trim();
-    if (!trimmed) return;
-    let resolved = exercise;
-    if (!resolved && merged) {
-      const needle = trimmed.toLowerCase();
-      resolved = merged.find((e) => e.title.toLowerCase() === needle) ?? null;
-    }
-    const exerciseId = resolved ? resolved.id : null;
-    const seriesKey = series.trim().toUpperCase();
-    updateBlocks((all) =>
-      all.map((b, bIdx) => {
-        if (bIdx !== blockIndex) return b;
-        const sibling = b.weeks
-          .flatMap((w) => w.sessions)
-          .flatMap((s) => (s.kind === 'series' ? seriesBlocks(s.timedBlocks) : []))
-          .find((tb) => tb.label.trim().toUpperCase() === seriesKey);
-        return {
-          ...b,
-          weeks: b.weeks.map((w, wIdx) => {
-            const target = matchSession(w);
-            if (!target) return w;
-            const ref = row?.cells[wIdx] ?? null;
-            return {
-              ...w,
-              sessions: w.sessions.map((s) => {
-                // The grids only build rows from series sessions.
-                if (s.id !== target.id || s.kind !== 'series') return s;
-                if (ref) {
-                  return {
-                    ...s,
-                    timedBlocks: mapSeries(s.timedBlocks, (tb) =>
-                      tb.id !== ref.timedBlockId
-                        ? tb
-                        : {
-                            ...tb,
-                            slots: tb.slots.map((sl) =>
-                              sl.id !== ref.slotId ? sl : { ...sl, name: trimmed, exerciseId },
-                            ),
-                          },
-                    ),
-                  };
-                }
-                const slot: ExerciseSlot = { id: crypto.randomUUID(), exerciseId, name: trimmed };
-                const existing = seriesBlocks(s.timedBlocks).find(
-                  (tb) => tb.label.trim().toUpperCase() === seriesKey,
-                );
-                if (existing) {
-                  // Insert at the row's position so out-of-order planning still
-                  // lines the blocks up once the earlier positions are filled.
-                  const at = Math.min(n - 1, existing.slots.length);
-                  const slots = [...existing.slots];
-                  slots.splice(at, 0, slot);
-                  return {
-                    ...s,
-                    timedBlocks: s.timedBlocks.map((tb) =>
-                      tb.id !== existing.id ? tb : { ...tb, slots },
-                    ),
-                  };
-                }
-                return {
-                  ...s,
-                  timedBlocks: [
-                    ...s.timedBlocks,
-                    {
-                      id: crypto.randomUUID(),
-                      label: series,
-                      minutes: sibling?.minutes ?? 10,
-                      slots: [slot],
-                    },
-                  ],
-                };
-              }),
-            };
-          }),
-        };
-      }),
-    );
-  }
-
-  function removePhaseExercise(blockIndex: number, row: EditableRow) {
-    if (
-      !window.confirm(
-        `Remove ${row.name} (and its sets/reps) from every week of Phase ${blockIndex + 1}?`,
-      )
-    )
-      return;
-    const ids = new Set(row.cells.filter(Boolean).map((ref) => ref!.slotId));
-    updateBlocks((all) =>
-      all.map((b, bIdx) =>
-        bIdx !== blockIndex
-          ? b
-          : {
-              ...b,
-              weeks: b.weeks.map((w) => ({
-                ...w,
-                sessions: w.sessions.map((s) =>
-                  s.kind !== 'series'
-                    ? s
-                    : {
-                        ...s,
-                        timedBlocks: mapSeries(s.timedBlocks, (tb) => ({
-                          ...tb,
-                          slots: tb.slots.filter((sl) => !ids.has(sl.id)),
-                        })),
-                      },
-                ),
-              })),
-            },
-      ),
-    );
-  }
-
-  // Patch a single slot anywhere in the program, addressed by ids (the
-  // Month/Phase grids edit slots outside the currently selected week).
   function patchSlotByRef(ref: SlotRef, patch: Partial<ExerciseSlot>) {
     updateBlocks((all) =>
       all.map((b, bIdx) =>
@@ -1433,32 +1361,6 @@ export default function ProgrammingTab() {
               })}
             </div>
           )}
-          {view === 'month' && (
-            /* Mode toggle: segmented control, matching the view switcher
-               (segmented = pick a mode, pills = pick an item). */
-            <div className="flex overflow-hidden rounded-md border border-ink-300">
-              <button
-                type="button"
-                title="This phase's weeks side by side"
-                className={`px-3 py-1.5 text-sm font-medium transition-colors ${
-                  phaseMode === 'weeks' ? 'bg-ink-950 text-white' : 'bg-white text-ink-500 hover:text-ink-950'
-                }`}
-                onClick={() => setPhaseMode('weeks')}
-              >
-                Weeks
-              </button>
-              <button
-                type="button"
-                title="Plan which exercises rotate phase to phase, names only"
-                className={`px-3 py-1.5 text-sm font-medium transition-colors ${
-                  phaseMode === 'exercises' ? 'bg-ink-950 text-white' : 'bg-white text-ink-500 hover:text-ink-950'
-                }`}
-                onClick={() => setPhaseMode('exercises')}
-              >
-                Exercise rotation
-              </button>
-            </div>
-          )}
         </div>
 
         {/* Edit panel: phase structure, out of the way until wanted */}
@@ -1606,26 +1508,36 @@ export default function ProgrammingTab() {
         />
       )}
 
-      {view === 'month' && phaseMode === 'weeks' && (
-        <MonthGrid
-          block={buildBlockRows(blocks[bi], bi, matchSession)}
-          onEdit={patchSlotByRef}
-          onAdd={addSlotFromTarget}
-          onOpenWeek={(wIdx) => {
-            setWi(wIdx);
-            setView('week');
-          }}
-        />
-      )}
-
-      {view === 'month' && phaseMode === 'exercises' && (
-        <PhaseExerciseGrid
-          blocks={blocks.map((b, bIdx) => buildBlockRows(b, bIdx, matchSession))}
-          themes={blocks.map((b) => b.theme)}
-          search={search}
-          onCommitCell={commitPhaseExercise}
-          onRemoveCell={removePhaseExercise}
-        />
+      {view === 'month' && (
+        /* The FULL phase view: the phase's blocks side by side as an exercise
+           rotation overview (Chris's paper sheet), then the week-by-week
+           periodisation grid, all under ONE horizontal scroll bar. */
+        <div className="overflow-x-auto pb-2">
+          <div className="flex min-w-max items-start gap-5">
+            {rotationSections.length > 0 && rotationLabels.length > 1 && (
+              <PhaseRotation
+                sections={rotationSections}
+                columnLabels={rotationLabels}
+                onOpenBlock={(page) => {
+                  setBlockPage(page);
+                  setView('block');
+                }}
+              />
+            )}
+            <div className="shrink-0">
+              <MonthGrid
+                embedded
+                block={buildBlockRows(blocks[bi], bi, matchSession)}
+                onEdit={patchSlotByRef}
+                onAdd={addSlotFromTarget}
+                onOpenWeek={(wIdx) => {
+                  setWi(wIdx);
+                  setView('week');
+                }}
+              />
+            </div>
+          </div>
+        </div>
       )}
 
       {view === 'week' && (
