@@ -92,14 +92,17 @@ Community, Planning, Ethos.
 - **Control bar:** stream dropdown, phase dropdown, session pills, then view switcher
   (**Week / Block / Phase**), Scales toggle, and an **Edit** button holding phase theme, length,
   add and delete. Week pills show their **Monday date**.
-- **Phase view (rebuilt 2026-08-31):** per session identity, the phase's training blocks side
-  by side as read-only exercise-rotation columns (names only, rows aligned by slot position,
-  changed cells tinted sand, challenges on the bottom row, headings open the Block view), with
-  the week-by-week periodisation grid to the right, all under one horizontal scroll bar. This
-  replaced the old phase-to-phase Exercise rotation planner and its Weeks toggle. Editing
-  happens in the Week and Block views; `MonthGrid` has an `embedded` mode for this layout.
-  `buildBlockRows` keys rows by id AND name, so bench variants sharing the bench id stay
-  separate rows.
+- **Phase view (rebuilt 2026-08-31):** two views behind a segmented button. **Exercise
+  rotation** shows, per session identity, the phase's training blocks side by side as
+  read-only columns (names only, rows aligned by slot position, changed cells tinted sand,
+  challenges on the bottom row, headings open the Block view). **Periodisation** is the
+  full-width week-by-week grid, editable. The toggle only shows where rotation exists (2+
+  block windows with series rows); circuit streams and single-block phases go straight to
+  the grid. This replaced the old phase-to-phase Exercise rotation planner. Edits sync
+  across Week, Block and Phase automatically (one document, one store; verified with a live
+  round trip). `MonthGrid` has an unused `embedded` mode from the earlier side-by-side
+  layout. `buildBlockRows` keys rows by id AND name, so bench variants sharing the bench id
+  stay separate rows.
 - **Left rail:** TV output, Export for Sheets, Push to TrainHeroic (drafts), Build floor layout,
   **Email the week** (opens a Gmail compose window with the week written out; it never sends).
   Coach addresses live on `ScheduleDoc.coaches[].email`, edited in Schedule's settings drawer.
