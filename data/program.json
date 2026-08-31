@@ -288,7 +288,8 @@
                             "reps": "9",
                             "rpe": "7",
                             "note": "Or front squat, same wave. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
-                            "intensity": "65%"
+                            "intensity": "65%",
+                            "showScales": false
                           },
                           {
                             "id": "str2-hyp-w1a-a1",
@@ -296,7 +297,8 @@
                             "name": "Depth Jump",
                             "sets": "3",
                             "reps": "3",
-                            "note": "Step down, stick the landing for 2 seconds. Height over reps. New members jump-and-stick from the floor instead of the box."
+                            "note": "Step down, stick the landing for 2 seconds. Height over reps. New members jump-and-stick from the floor instead of the box.",
+                            "showScales": false
                           }
                         ]
                       },
@@ -314,7 +316,8 @@
                             "reps": "9",
                             "rpe": "7",
                             "tempo": "30X1",
-                            "note": "3 second lower."
+                            "note": "3 second lower.",
+                            "showScales": false
                           },
                           {
                             "id": "str2-hyp-w1a-b3",
@@ -322,7 +325,8 @@
                             "name": "Weighted Chin Ups",
                             "sets": "10",
                             "reps": "2",
-                            "note": "EMOM 10 minutes: 2 reps at the top of each minute. Add load only if every rep is crisp. Stagger the rig: half start on the minute, half on the 30."
+                            "note": "EMOM 10 minutes: 2 reps at the top of each minute. Add load only if every rep is crisp. Stagger the rig: half start on the minute, half on the 30.",
+                            "showScales": false
                           }
                         ]
                       },
@@ -7240,6 +7244,6 @@
       }
     ]
   },
-  "rev": 154,
-  "updatedAt": "2026-08-31T02:25:31.771Z"
+  "rev": 157,
+  "updatedAt": "2026-08-31T03:51:48.738Z"
 }
