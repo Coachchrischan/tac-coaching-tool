@@ -197,6 +197,11 @@ export default function ProgrammingTab() {
   const [pushState, setPushState] = useState<'idle' | 'pushing'>('idle');
   // Which 4-week block within the phase the Block view shows.
   const [blockPageRaw, setBlockPage] = useState(0);
+  // The Phase view is two views behind one button: the blocks' exercise
+  // rotation side by side (names only), or the week-by-week periodisation
+  // grid. Both edit the same document, so a change in either is a change in
+  // the Week and Block views too.
+  const [phaseMode, setPhaseMode] = useState<'rotation' | 'weeks'>('rotation');
   const [expandScales, setExpandScales] = useState(false);
   const [emailOpen, setEmailOpen] = useState(false);
   // The "e" beside the session pills: name, type and remove, on demand.
@@ -378,6 +383,11 @@ export default function ProgrammingTab() {
       })
       .filter((section) => section.columns.some((c) => c.rows.length > 0));
   })();
+
+  // Rotation needs at least two block columns and some series rows; a circuit
+  // stream or a single-block phase falls back to the periodisation grid.
+  const rotationAvailable = rotationSections.length > 0 && rotationLabels.length > 1;
+  const phaseModeEffective = rotationAvailable ? phaseMode : 'weeks';
 
   /** What the week's email says: this stream, this week, these sessions. */
   const emailInput = {
@@ -1361,6 +1371,32 @@ export default function ProgrammingTab() {
               })}
             </div>
           )}
+          {view === 'month' && rotationAvailable && (
+            /* Two views behind one button: segmented, matching the view
+               switcher (segmented = pick a mode, pills = pick an item). */
+            <div className="flex overflow-hidden rounded-md border border-ink-300">
+              <button
+                type="button"
+                title="The phase's blocks side by side, exercise names only"
+                className={`px-3 py-1.5 text-sm font-medium transition-colors ${
+                  phaseModeEffective === 'rotation' ? 'bg-ink-950 text-white' : 'bg-white text-ink-500 hover:text-ink-950'
+                }`}
+                onClick={() => setPhaseMode('rotation')}
+              >
+                Exercise rotation
+              </button>
+              <button
+                type="button"
+                title="Every week of the phase with sets, reps, % and RPE, editable"
+                className={`px-3 py-1.5 text-sm font-medium transition-colors ${
+                  phaseModeEffective === 'weeks' ? 'bg-ink-950 text-white' : 'bg-white text-ink-500 hover:text-ink-950'
+                }`}
+                onClick={() => setPhaseMode('weeks')}
+              >
+                Periodisation
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Edit panel: phase structure, out of the way until wanted */}
@@ -1508,36 +1544,33 @@ export default function ProgrammingTab() {
         />
       )}
 
-      {view === 'month' && (
-        /* The FULL phase view: the phase's blocks side by side as an exercise
-           rotation overview (Chris's paper sheet), then the week-by-week
-           periodisation grid, all under ONE horizontal scroll bar. */
+      {view === 'month' && phaseModeEffective === 'rotation' && (
+        /* Chris's paper sheet as a view: the phase's blocks side by side,
+           names only, one table per session identity. */
         <div className="overflow-x-auto pb-2">
-          <div className="flex min-w-max items-start gap-5">
-            {rotationSections.length > 0 && rotationLabels.length > 1 && (
-              <PhaseRotation
-                sections={rotationSections}
-                columnLabels={rotationLabels}
-                onOpenBlock={(page) => {
-                  setBlockPage(page);
-                  setView('block');
-                }}
-              />
-            )}
-            <div className="shrink-0">
-              <MonthGrid
-                embedded
-                block={buildBlockRows(blocks[bi], bi, matchSession)}
-                onEdit={patchSlotByRef}
-                onAdd={addSlotFromTarget}
-                onOpenWeek={(wIdx) => {
-                  setWi(wIdx);
-                  setView('week');
-                }}
-              />
-            </div>
-          </div>
+          <PhaseRotation
+            sections={rotationSections}
+            columnLabels={rotationLabels}
+            onOpenBlock={(page) => {
+              setBlockPage(page);
+              setView('block');
+            }}
+          />
         </div>
+      )}
+
+      {view === 'month' && phaseModeEffective === 'weeks' && (
+        /* Every week of the phase, editable: an edit here IS an edit in the
+           Week and Block views, they all read the same document. */
+        <MonthGrid
+          block={buildBlockRows(blocks[bi], bi, matchSession)}
+          onEdit={patchSlotByRef}
+          onAdd={addSlotFromTarget}
+          onOpenWeek={(wIdx) => {
+            setWi(wIdx);
+            setView('week');
+          }}
+        />
       )}
 
       {view === 'week' && (
