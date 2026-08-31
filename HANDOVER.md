@@ -333,6 +333,13 @@ holds every open question from the rebuild. Key facts:
   one A4 page per stream in TAC brand, exporting one PDF for coaches. Data-driven from the
   live documents (session intents are the summary lines). Each stream shows the block
   containing today with live written work, else the next written one.
+- **A 4x3 roundtable reviewed the restructure the same day** (12 reviewers, adversarial
+  verify, 4-lead vote: 47 confirmed findings). The must-fix and high-value items were
+  applied the same night, headlined by the TrainHeroic push crashing on challenge weeks
+  (circuit parts have no `slots`) and the push, email and CSV all dropping slot notes or
+  challenge parts. The RDL wave went RPE-primary, bench week 7 became a calibration top
+  set, and week 9 Day A tapers. Items needing Chris sit at the top of
+  `BANKED-2026-08-31.md`, led by renaming the Tue/Thu classes.
 
 **Decisions already made, do not reopen without me:** ESD and Game Day are month to month, not
 periodised (**Hyrox was, and is now four-week blocks**, changed 2026-08-28 on Chris's call).
