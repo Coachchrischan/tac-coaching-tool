@@ -75,13 +75,15 @@ Community, Planning, Ethos.
   Each stream also declares a **cadence**. Strength runs `phases`, linked to the annual plan.
   ESD, Hyrox and Game Day run `months` (Aug 2026 through Dec 2026), because after talking to Dave
   those three are programmed month to month rather than periodised; the UI says "Month" for them.
-  - **strength** (`series`, phases): 3 phases, 17 weeks, **280 exercises** (my real Block 1). Each
-    phase carries `annualPhaseId` linking it to its AnnualPhase.
+  - **strength** (`series`, phases): 3 phases, 17 weeks: Primer 3 (empty, off-app),
+    **Strength-Hypertrophy 9 (the written A/B block, 147 slots)**, Strength 5 (empty). Each
+    phase carries `annualPhaseId` linking it to its AnnualPhase. The old Lower/Upper/Full
+    programming lives in `archive/`.
   - **esd** (`circuit`, months): 5 months, 17 weeks. Aug W1 written, plus **all of Sept 2026**
     (4 weeks x Monday MAP + Friday threshold) from the conditioning block document.
   - **hyrox** (`series`, **blocks**): 5 blocks, 17 weeks, **three tracks**. See below.
   - **gameday** (`circuit`, months): 5 months, 17 weeks, **first 4 Saturdays written**.
-  58 of 140 sessions hold content. Writing the rest is the main outstanding job, and it is
+  46 of 123 sessions hold content. Writing the rest is the main outstanding job, and it is
   coaching time rather than build time.
 - **Two session formats.** Strength uses `timedBlocks` (WU/A/B/C series of exercise slots with
   sets/reps/%/RPE). ESD, Hyrox and Game Day use `circuit[]`: each piece has a heading
@@ -259,8 +261,8 @@ year; and give each artefact one printable way out.
   while `roomModel.ts` draws the Group Fitness Room on every layout, so this needs the room model
   keyed by room first.
 - **Game Day beyond Sept W2**, ESD and Hyrox Oct to Dec, and Strength Phases 2 and 3.
-  Sept 2026 is written for ESD, and Hyrox holds Block 01, so the count is 58 of 140 sessions.
-  The total grew because the Hyrox stream went from one session a week to three.
+  Sept 2026 is written for ESD, Hyrox holds Block 01 and Strength the nine-week A/B block,
+  so the count is 46 of 123 sessions (the strength total shrank with the two-day split).
 - **Chris's call on the Sept ESD placeholder** and whether the roundtable's Tier 1 revisions
   go in. The Sept Hyrox placeholder written that morning was **replaced** by Block 01.
 - **What the Hyrox wall carries.** Two boards need splitting or trimming (see above). The
@@ -301,7 +303,40 @@ Hyrox no longer looks like ESD and Game Day. Chris handed over a HYROX Block 01 
   is cut even at the 42% floor and says so in red; `Anchor` fits at 60% and says so in amber.
   That is the format being richer than a 1920x1080 board, not a layout bug.
 
+## The Strength rebuild: Full Body A/B (changed 2026-08-31)
+
+The club changed Phase 1 on 2026-08-31 and Chris had the tool rebuilt the same day, presenting
+that night. `PROGRAMMING-PLAN.md` carries the revised plan of record; `BANKED-2026-08-31.md`
+holds every open question from the rebuild. Key facts:
+
+- **Two-day split.** `SessionFocus` gained `full-a` (squat + upper, Tuesday) and `full-b`
+  (RDL + lower, Thursday), mapped to the `lbs`/`ubs` classes in `FOCUS_CLASS_TYPE`. **Friday
+  strength is on hold**: nothing maps to `fbs` while that holds, and the timetable was left
+  alone. `STRENGTH_PLAN` in the push plugin now pushes A and B only.
+- **Stream shape** (dated off the 24 Aug year start so W1 lands on Mon 14 Sept): Primer 3 wk
+  (empty; intro week + primer run off-app, programming emailed), Strength-Hypertrophy 9 wk
+  (written, blockLength 3), Strength 5 wk (empty, structure TBC). The annual lane mirrors it
+  (`ap-2026-*` ids, 3/9/5 replacing 10/1/6; both sum to 17 so later phases kept their dates).
+  The standalone Deload/Skills week is gone on the club's call.
+- **The nine weeks**: compounds wave 9/7/5, 9/7/5 heavier, 7/5/3 (65 to 85 per cent with RPE);
+  bench goes tempo, paused, straight; chin/pull-ups go EMOM, full-rest strength, top-set
+  triples; accessories swap each micro and climb inside it; week 3 of each micro ends on a
+  challenge (Day A), written as a circuit part so it gets its own board card.
+- **The old Lower/Upper/Full programming is archived**, not lost:
+  `archive/strength-lower-upper-full-2026-08.json` (30 sessions, 286 slots), restorable.
+- **TrainHeroic**: the stale 1 to 4 Sept drafts were deleted with Chris's approval; the run
+  25 to 28 Aug week stays as history. Nothing for the new block is pushed yet.
+- **Movement patterns**: the unambiguous compounds were tagged so Movement Check reads
+  honestly; arm/delt/calf accessories are untagged because no pattern fits them. Carry: 0
+  across the block is true and flagged.
+- **Block overview PDF**: a new rail button beside TV output opens `/overview`, a cover plus
+  one A4 page per stream in TAC brand, exporting one PDF for coaches. Data-driven from the
+  live documents (session intents are the summary lines). Each stream shows the block
+  containing today with live written work, else the next written one.
+
 **Decisions already made, do not reopen without me:** ESD and Game Day are month to month, not
 periodised (**Hyrox was, and is now four-week blocks**, changed 2026-08-28 on Chris's call).
 TrainHeroic stays drafts only. The week email opens a Gmail compose window and never sends.
-Hyrox runs two days a week, not three.
+Hyrox runs two days a week, not three. **Strength is the two-day Full Body A/B split from
+14 Sept, Friday strength is on hold, and the Deload/Skills week is removed** (club decisions,
+2026-08-31).
