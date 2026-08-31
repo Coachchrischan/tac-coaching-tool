@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDoc } from '../../lib/useDoc';
+import { todayIso } from '../../lib/trainingWeeks';
 import SaveBadge from '../../components/SaveBadge';
 import type { CommunityEvent } from '../../types/documents';
 
@@ -62,7 +63,8 @@ export default function CommunityTab() {
 
   if (!data) return <p className="py-20 text-center text-sm text-ink-400">Loading…</p>;
 
-  const today = new Date().toISOString().slice(0, 10);
+  // Local calendar, not UTC: the UTC round trip said yesterday until 10am Brisbane.
+  const today = todayIso();
   const sorted = [...data.events].sort((a, b) => a.date.localeCompare(b.date));
   const upcoming = sorted.filter((e) => e.date >= today);
   const past = sorted.filter((e) => e.date < today).reverse();

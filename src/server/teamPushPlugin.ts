@@ -112,7 +112,10 @@ export function teamPushPlugin(): Plugin {
             timedBlocks?: {
               label: string;
               minutes: number;
-              slots: {
+              // A part can be a circuit (a challenge finisher) with pieces and
+              // no slots at all; the push loop must skip those, not crash.
+              kind?: 'series' | 'circuit';
+              slots?: {
                 name: string;
                 exerciseId: number | null;
                 sets?: string;
@@ -120,6 +123,8 @@ export function teamPushPlugin(): Plugin {
                 load?: string;
                 intensity?: string;
                 rpe?: string;
+                tempo?: string;
+                note?: string;
               }[];
             }[];
           };
@@ -206,20 +211,43 @@ export function teamPushPlugin(): Plugin {
             let blockOrder = 0;
             let exCount = 0;
             for (const tb of session.timedBlocks) {
+              // A challenge finisher is a CIRCUIT part with pieces, not slots.
+              // Touching .slots on it crashed the push mid-week and left the
+              // draft half-built; it lives on the wall board, so name it in
+              // the report rather than pretending the day was fully pushed.
+              if (tb.kind === 'circuit' || !Array.isArray(tb.slots)) {
+                skipped.push(`${p.title}: ${tb.label} (a circuit part; it stays on the wall board)`);
+                continue;
+              }
               const slots = tb.slots.filter((sl: { name: string }) => sl.name);
-              if (!slots.length) continue;
+              // Only create the TrainHeroic block if something in it will
+              // actually resolve; otherwise the draft collects empty shells
+              // (every session's WU holds only the free-text warm-up line).
+              const resolvable = slots.filter(
+                (sl: { name: string; exerciseId: number | null }) =>
+                  sl.exerciseId ?? CUSTOM_IDS[sl.name.trim().toLowerCase()],
+              );
+              for (const sl of slots) {
+                if (!resolvable.includes(sl)) skipped.push(`${p.title}: ${sl.name}`);
+              }
+              if (!resolvable.length) continue;
               blockOrder++;
               const thBlock = await th.createBlock({ workoutId: created.workout_id, order: blockOrder, title: tb.label });
               let exOrder = 0;
-              for (const sl of slots) {
+              for (const sl of resolvable) {
                 const exerciseId = sl.exerciseId ?? CUSTOM_IDS[sl.name.trim().toLowerCase()];
-                if (!exerciseId) {
-                  skipped.push(`${p.title}: ${sl.name}`);
-                  continue;
-                }
                 exOrder++;
                 const { reps, repUnit, note } = mapReps(sl.reps);
-                const cue = [sl.intensity ? `@ ${sl.intensity}` : null, sl.rpe ? `RPE ${sl.rpe}` : null, note]
+                // The note carries what the columns cannot (EMOM format, each
+                // side, the wave instruction); dropping it stripped the
+                // coaching out of 135 of the block's 147 slots.
+                const cue = [
+                  sl.intensity ? `@ ${sl.intensity}` : null,
+                  sl.rpe ? `RPE ${sl.rpe}` : null,
+                  sl.tempo ? `${sl.tempo} tempo` : null,
+                  note,
+                  sl.note,
+                ]
                   .filter(Boolean)
                   .join(' · ');
                 await th.addExercise({

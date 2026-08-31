@@ -371,7 +371,7 @@ export default function HomeTab() {
                 <>
                   <p className="mt-3 text-[12px] font-medium text-ink-500">
                     <span className="font-bold text-ink-950">{ct?.name}</span>{' '}
-                    {grain === 'weekly' ? 'week by week' : 'month by month'} — click another class
+                    {grain === 'weekly' ? 'week by week' : 'month by month'}. Click another class
                     below to switch, or Show all for the comparison.
                   </p>
                   <div className="mt-3 flex items-end justify-around gap-2">
@@ -415,7 +415,7 @@ export default function HomeTab() {
               {/* Same-height caption as the drill-down view so the chart
                   doesn't jump when a class is selected. */}
               <p className="mt-3 text-[12px] font-medium text-ink-500">
-                All classes side by side — click one to see it against itself.
+                All classes side by side. Click one to see it against itself.
               </p>
               <div className="mt-3 flex items-end justify-around gap-4">
                 {chart.groups.map((g) => (

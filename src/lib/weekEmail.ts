@@ -7,7 +7,7 @@
 
 import type { ProgramStream, Session } from '../types/documents';
 import { circuitToText, lineToText } from './circuit';
-import { seriesBlocks, sessionLabel } from './programStreams';
+import { circuitParts, seriesBlocks, sessionLabel } from './programStreams';
 
 /** One session, written the way a coach would want it in an email. */
 function sessionToText(s: Session): string {
@@ -30,13 +30,27 @@ function sessionToText(s: Session): string {
         ]
           .filter(Boolean)
           .join('  ');
-        return `  ${sl.name}${detail ? `  ${detail}` : ''}`;
+        // The note carries the format (EMOM, each side, hold times); an email
+        // without it hands the coach movements with the coaching stripped out.
+        const noted = sl.note ? `${detail ? `${detail}  ` : ''}(${sl.note})` : detail;
+        return `  ${sl.name}${noted ? `  ${noted}` : ''}`;
       });
       return `${tb.label}${tb.minutes ? ` (${tb.minutes} min)` : ''}\n${lines.join('\n')}`;
     })
     .filter(Boolean)
     .join('\n\n');
-  return `${head}\n${series || '(nothing written yet)'}${s.note ? `\n\nNote: ${s.note}` : ''}`;
+  // A strength session can end on a circuit part (the challenge weeks); the
+  // wall board shows it, so the email must too.
+  const parts = circuitParts(s.timedBlocks)
+    .map((part) => {
+      const body = circuitToText(part.pieces);
+      if (!body.trim()) return null;
+      return `${part.label}${part.minutes ? ` (${part.minutes} min)` : ''}\n${body}`;
+    })
+    .filter(Boolean)
+    .join('\n\n');
+  const all = [series, parts].filter(Boolean).join('\n\n');
+  return `${head}\n${all || '(nothing written yet)'}${s.note ? `\n\nNote: ${s.note}` : ''}`;
 }
 
 export interface WeekEmailInput {

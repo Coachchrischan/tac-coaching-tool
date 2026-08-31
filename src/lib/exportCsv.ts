@@ -4,7 +4,7 @@
 
 import type { ProgramDoc, Session } from '../types/documents';
 import { slotSummary } from '../tabs/programming/ProgressionViews';
-import { seriesBlocks, sessionLabel, streamsOf } from './programStreams';
+import { circuitParts, seriesBlocks, sessionLabel, streamsOf } from './programStreams';
 import { lineToText } from './circuit';
 
 function esc(value: string): string {
@@ -69,9 +69,24 @@ export function programToCsv(doc: ProgramDoc): string {
       seriesBlocks(session.timedBlocks).forEach((tb) => {
         tb.slots.forEach((slot) => {
           if (!slot.name) return;
-          const key = `${tb.label}::${slot.exerciseId ?? slot.name.toLowerCase()}`;
+          // Key by name as well as id: a variation carries the base lift's id
+          // for its video (Tempo Barbell Bench Press on the bench press id),
+          // and keying by id alone merged it into the base lift's row.
+          const key = `${tb.label}::${slot.exerciseId ?? ''}::${slot.name.toLowerCase()}`;
           const row = rowFor(key, tb.label, slot.name);
           row.cells[ci] = slotSummary(slot) || '·';
+        });
+      });
+      // Challenge finishers are circuit parts inside a series session; the
+      // wall board shows them, so the spreadsheet must too.
+      circuitParts(session.timedBlocks).forEach((part) => {
+        part.pieces.forEach((piece, pi) => {
+          const body = [piece.heading.trim(), ...piece.lines.map((l) => lineToText(l).trim()).filter(Boolean)]
+            .filter(Boolean)
+            .join(' / ');
+          if (!body) return;
+          const row = rowFor(`part::${part.label}::${pi}`, part.label, '');
+          row.cells[ci] = body;
         });
       });
     });

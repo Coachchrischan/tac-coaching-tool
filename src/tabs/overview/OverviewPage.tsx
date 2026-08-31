@@ -49,22 +49,33 @@ function pickBlock(stream: ProgramStream, startDate: string, breaks: { id: strin
     before += b.weeks.length;
     return { block: b, first, weekStarts };
   });
+  // A stream with no blocks yet has nothing to overview.
+  if (!spans.length) return null;
   const current = spans.findIndex((s, i) => {
     const next = spans[i + 1];
     return isoDate(s.first) <= today && (!next || today < isoDate(next.first));
   });
   const from = current >= 0 ? current : 0;
+  // Today's block if it still has live written work, else the next written
+  // one. What is happening NOW between then (an off-app primer, a finished
+  // week) is returned too, so the page can say it instead of leaving a hole.
+  const interim = current >= 0 ? spans[current] : null;
   for (let i = from; i < spans.length; i++) {
     const s = spans[i];
-    // Written work in a week not yet finished?
     const live = s.block.weeks.some((w, wi) => {
       const end = new Date(s.weekStarts[wi]);
       end.setDate(end.getDate() + 6);
       return isoDate(end) >= today && w.sessions.some(sessionWritten);
     });
-    if (live) return s;
+    if (live) return { ...s, interim: s === interim ? null : interim };
   }
-  return spans.find((s) => blockWritten(s.block) > 0) ?? spans[0];
+  // Nothing live ahead: fall back forward-first, so a finished old block never
+  // outranks a written future one.
+  const fallback =
+    spans.slice(from).find((s) => blockWritten(s.block) > 0) ??
+    spans.slice(0, from).reverse().find((s) => blockWritten(s.block) > 0) ??
+    spans[from];
+  return { ...fallback, interim: null };
 }
 
 /** One coach-readable line for a session: its intent, else its first heading. */
@@ -79,6 +90,7 @@ function summaryLine(s: Session): string {
 }
 
 const fmt = (d: Date) => d.toLocaleDateString('en-AU', { day: 'numeric', month: 'short' });
+const fmtY = (d: Date) => d.toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' });
 
 export default function OverviewPage() {
   const navigate = useNavigate();
@@ -92,8 +104,9 @@ export default function OverviewPage() {
     if (!program.data || !annual.data || !schedule.data) return null;
     const startDate = annual.data.startDate;
     const breaks = annual.data.breaks ?? [];
-    const streams = streamsOf(program.data).map((stream) => {
+    const streams = streamsOf(program.data).flatMap((stream) => {
       const picked = pickBlock(stream, startDate, breaks);
+      if (!picked) return [];
       const lane = annual.data!.streams.find((l) => l.id === stream.id);
       const phase = lane?.phases.find((p) => p.id === picked.block.annualPhaseId);
       // Which day each focus runs, off the live timetable.
@@ -101,17 +114,24 @@ export default function OverviewPage() {
       const resolved = resolveWeekDays(schedule.data!, isoDate(picked.first), focuses as SessionFocus[]);
       const dayOf = new Map(resolved.days.map((d) => [d.focus, d.dayName]));
       const last = picked.weekStarts[picked.weekStarts.length - 1];
-      return {
+      // What is running between now and this block's start (an off-app primer,
+      // a lead-in), so the document does not open on an unexplained hole.
+      const interimLine =
+        picked.interim && blockWritten(picked.interim.block) === 0
+          ? `Now to ${fmt(new Date(picked.first.getTime() - 86400000))}: ${picked.interim.block.theme ?? 'lead-in'}, run off-app.`
+          : null;
+      return [{
         stream,
         block: picked.block,
         weekStarts: picked.weekStarts,
         from: picked.first,
         to: last,
         focusLine: phase?.focus ?? '',
+        interimLine,
         written: blockWritten(picked.block),
         total: picked.block.weeks.reduce((n, w) => n + w.sessions.length, 0),
         dayOf,
-      };
+      }];
     });
     return { streams, generated: new Date() };
   }, [program.data, annual.data, schedule.data]);
@@ -124,7 +144,7 @@ export default function OverviewPage() {
     setExporting(true);
     try {
       const pages = Array.from(pagesRef.current!.querySelectorAll<HTMLElement>('[data-page]'));
-      const pdf = new jsPDF({ orientation: 'portrait', unit: 'px', format: [PW, PH] });
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'px', format: [PW, PH], hotfixes: ['px_scaling'] });
       for (let i = 0; i < pages.length; i++) {
         const svgUrl = await toSvg(pages[i], { width: PW, height: PH, style: { transform: 'none' } });
         const img = new Image();
@@ -141,6 +161,9 @@ export default function OverviewPage() {
         pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, PW, PH);
       }
       pdf.save(`tac-block-overview-${todayIso()}.pdf`);
+    } catch (err) {
+      // A silent failure reads as a working button that did nothing.
+      window.alert(`PDF export failed: ${String(err)}`);
     } finally {
       setExporting(false);
     }
@@ -185,7 +208,7 @@ export default function OverviewPage() {
               Block overview
             </h1>
             <p className="mt-2 text-[17px] font-semibold" style={{ color: SAND }}>
-              {fmt(span.from)} to week of {fmt(span.to)}
+              {fmtY(span.from)} to week of {fmtY(span.to)}
             </p>
             <div className="mt-12 space-y-6">
               {streams.map(({ stream, block, from, to, written, total }) => (
@@ -196,7 +219,7 @@ export default function OverviewPage() {
                       {block.theme ?? ''}
                     </span>
                   </p>
-                  <p className="mt-0.5 text-[13px] text-white/60">
+                  <p className="mt-0.5 text-[13px] text-[rgba(245,243,235,0.6)]">
                     {fmt(from)} to week of {fmt(to)} · {block.weeks.length} weeks · {written} of {total} sessions written
                   </p>
                 </div>
@@ -206,15 +229,15 @@ export default function OverviewPage() {
               <p className="text-[15px] italic" style={{ fontFamily: 'Fraunces, serif', color: SAND }}>
                 Train better, live better.
               </p>
-              <p className="mt-2 text-[11px] font-semibold tracking-[0.28em] text-white/35 uppercase">
-                76 Commercial Road, Teneriffe · prepared {fmt(model.generated)} · for coaches
+              <p className="mt-2 text-[11px] font-semibold tracking-[0.28em] text-[rgba(245,243,235,0.4)] uppercase">
+                76 Commercial Road, Teneriffe · prepared {fmtY(model.generated)} · for coaches
               </p>
             </div>
           </div>
         </div>
 
         {/* One page per stream */}
-        {streams.map(({ stream, block, weekStarts, focusLine, dayOf }) => (
+        {streams.map(({ stream, block, weekStarts, focusLine, interimLine, dayOf }) => (
           <div key={stream.id} data-page className={page} style={{ width: PW, height: PH, backgroundColor: CREAM }}>
             <div className="flex h-full flex-col px-12 py-12">
               <header className="border-b-2 pb-4" style={{ borderColor: PINE }}>
@@ -237,22 +260,27 @@ export default function OverviewPage() {
                     {focusLine}
                   </p>
                 )}
+                {interimLine && (
+                  <p className="mt-1 text-[12px] font-semibold" style={{ color: PINE }}>
+                    {interimLine}
+                  </p>
+                )}
               </header>
 
               <div className="mt-4 min-h-0 flex-1 space-y-2 overflow-hidden">
                 {block.weeks.map((week, wi) => {
                   const sessions = week.sessions.filter(sessionWritten);
                   return (
-                    <div key={week.id} className="flex gap-3 border-b border-black/10 pb-2">
+                    <div key={week.id} className="flex gap-3 border-b border-[rgba(32,29,29,0.12)] pb-2">
                       <div className="w-20 shrink-0 pt-0.5">
                         <p className="text-[13px] font-extrabold" style={{ color: PINE }}>
                           W{wi + 1}
                         </p>
-                        <p className="text-[11px] font-semibold text-black/45">{fmt(weekStarts[wi])}</p>
+                        <p className="text-[11px] font-semibold text-[rgba(32,29,29,0.5)]">{fmt(weekStarts[wi])}</p>
                       </div>
                       <div className="min-w-0 flex-1 space-y-1">
                         {sessions.length === 0 ? (
-                          <p className="text-[12px] text-black/40 italic">
+                          <p className="text-[12px] text-[rgba(32,29,29,0.45)] italic">
                             {week.sessions[0]?.intent ?? 'Not written yet'}
                           </p>
                         ) : (
@@ -274,7 +302,7 @@ export default function OverviewPage() {
               </div>
 
               <footer className="mt-3 border-t pt-3" style={{ borderColor: SAND }}>
-                <p className="text-[10.5px] leading-snug text-black/55">
+                <p className="text-[10.5px] leading-snug text-[rgba(32,29,29,0.6)]">
                   Full sessions, loads, cues and scaled options live in the coaching tool under Programming; the wall
                   boards come from each session's TV output. Nothing in this overview is published to members.
                 </p>

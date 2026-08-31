@@ -287,7 +287,7 @@
                             "sets": "3",
                             "reps": "9",
                             "rpe": "7",
-                            "note": "Or front squat, same wave. Wave loading: leave 2 reps in the tank on the last set.",
+                            "note": "Or front squat, same wave. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
                             "intensity": "65%"
                           },
                           {
@@ -296,7 +296,7 @@
                             "name": "Depth Jump",
                             "sets": "3",
                             "reps": "3",
-                            "note": "Step down, stick the landing for 2 seconds. Height over reps."
+                            "note": "Step down, stick the landing for 2 seconds. Height over reps. New members jump-and-stick from the floor instead of the box."
                           }
                         ]
                       },
@@ -322,7 +322,7 @@
                             "name": "Weighted Chin Ups",
                             "sets": "10",
                             "reps": "2",
-                            "note": "EMOM 10 minutes: 2 reps at the top of each minute. Add load only if every rep is crisp."
+                            "note": "EMOM 10 minutes: 2 reps at the top of each minute. Add load only if every rep is crisp. Stagger the rig: half start on the minute, half on the 30."
                           }
                         ]
                       },
@@ -403,8 +403,7 @@
                             "sets": "3",
                             "reps": "9",
                             "rpe": "7",
-                            "note": "Wave loading: leave 2 reps in the tank on the last set.",
-                            "intensity": "65%"
+                            "note": "Set the anchor: the heaviest 9 you own with a flat back. Record it. Ramp to the working load in 2 to 3 builder sets first."
                           },
                           {
                             "id": "str2-hyp-w1b-a1",
@@ -518,7 +517,7 @@
                             "sets": "3",
                             "reps": "7",
                             "rpe": "7.5",
-                            "note": "Or front squat, same wave. Wave loading: leave 2 reps in the tank on the last set.",
+                            "note": "Or front squat, same wave. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
                             "intensity": "70%"
                           },
                           {
@@ -527,7 +526,7 @@
                             "name": "Depth Jump",
                             "sets": "3",
                             "reps": "3",
-                            "note": "Step down, stick the landing for 2 seconds. Height over reps."
+                            "note": "Step down, stick the landing for 2 seconds. Height over reps. New members jump-and-stick from the floor instead of the box."
                           }
                         ]
                       },
@@ -553,7 +552,7 @@
                             "name": "Weighted Chin Ups",
                             "sets": "10",
                             "reps": "3",
-                            "note": "EMOM 10 minutes: 3 reps each minute, 30 total."
+                            "note": "EMOM 10 minutes: 3 reps each minute, 30 total. Stagger the rig: half start on the minute, half on the 30."
                           }
                         ]
                       },
@@ -634,8 +633,7 @@
                             "sets": "3",
                             "reps": "7",
                             "rpe": "7.5",
-                            "note": "Wave loading: leave 2 reps in the tank on the last set.",
-                            "intensity": "70%"
+                            "note": "Same bar speed as last week, a touch heavier. Ramp to the working load in 2 to 3 builder sets first."
                           },
                           {
                             "id": "str2-hyp-w2b-a1",
@@ -749,7 +747,7 @@
                             "sets": "3",
                             "reps": "5",
                             "rpe": "8",
-                            "note": "Or front squat, same wave. Wave loading: leave 2 reps in the tank on the last set.",
+                            "note": "Or front squat, same wave. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
                             "intensity": "75%"
                           },
                           {
@@ -758,7 +756,7 @@
                             "name": "Depth Jump",
                             "sets": "3",
                             "reps": "3",
-                            "note": "Step down, stick the landing for 2 seconds. Height over reps."
+                            "note": "Step down, stick the landing for 2 seconds. Height over reps. New members jump-and-stick from the floor instead of the box."
                           }
                         ]
                       },
@@ -784,7 +782,7 @@
                             "name": "Weighted Chin Ups",
                             "sets": "10",
                             "reps": "3",
-                            "note": "EMOM 10 minutes. Small load jump on last week if all 30 were crisp."
+                            "note": "EMOM 10 minutes. Small load jump on last week if all 30 were crisp. Stagger the rig: half start on the minute, half on the 30."
                           }
                         ]
                       },
@@ -888,8 +886,7 @@
                             "sets": "3",
                             "reps": "5",
                             "rpe": "8",
-                            "note": "Wave loading: leave 2 reps in the tank on the last set.",
-                            "intensity": "75%"
+                            "note": "Heaviest RDL week of wave 1. If the back rounds, the load is wrong. Ramp to the working load in 2 to 3 builder sets first."
                           },
                           {
                             "id": "str2-hyp-w3b-a1",
@@ -1003,7 +1000,7 @@
                             "sets": "3",
                             "reps": "9",
                             "rpe": "7.5",
-                            "note": "Or front squat. Second wave: same reps as weeks 1 to 3, a touch heavier.",
+                            "note": "Or front squat. Second wave: same reps as weeks 1 to 3, a touch heavier. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
                             "intensity": "67.5%"
                           },
                           {
@@ -1121,8 +1118,7 @@
                             "sets": "3",
                             "reps": "9",
                             "rpe": "7.5",
-                            "note": "Second wave: same reps as weeks 1 to 3, a touch heavier.",
-                            "intensity": "67.5%"
+                            "note": "Wave 2: start around your wave 1 week 2 load. Ramp to the working load in 2 to 3 builder sets first."
                           },
                           {
                             "id": "str2-hyp-w4b-a1",
@@ -1235,7 +1231,7 @@
                             "sets": "3",
                             "reps": "7",
                             "rpe": "8",
-                            "note": "Or front squat. Second wave: same reps as weeks 1 to 3, a touch heavier.",
+                            "note": "Or front squat. Second wave: same reps as weeks 1 to 3, a touch heavier. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
                             "intensity": "72.5%"
                           },
                           {
@@ -1353,8 +1349,7 @@
                             "sets": "3",
                             "reps": "7",
                             "rpe": "8",
-                            "note": "Second wave: same reps as weeks 1 to 3, a touch heavier.",
-                            "intensity": "72.5%"
+                            "note": "A touch heavier than last week. Ramp to the working load in 2 to 3 builder sets first."
                           },
                           {
                             "id": "str2-hyp-w5b-a1",
@@ -1467,7 +1462,7 @@
                             "sets": "3",
                             "reps": "5",
                             "rpe": "8.5",
-                            "note": "Or front squat. Second wave: same reps as weeks 1 to 3, a touch heavier.",
+                            "note": "Or front squat. Second wave: same reps as weeks 1 to 3, a touch heavier. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
                             "intensity": "77.5%"
                           },
                           {
@@ -1608,8 +1603,7 @@
                             "sets": "3",
                             "reps": "5",
                             "rpe": "8.5",
-                            "note": "Second wave: same reps as weeks 1 to 3, a touch heavier.",
-                            "intensity": "77.5%"
+                            "note": "Heaviest RDL of the block so far. Ramp to the working load in 2 to 3 builder sets first."
                           },
                           {
                             "id": "str2-hyp-w6b-a1",
@@ -1722,16 +1716,16 @@
                             "sets": "3",
                             "reps": "7",
                             "rpe": "8",
-                            "note": "Or front squat. Final wave 7/5/3: heaviest of the block.",
+                            "note": "Or front squat. Final wave 7/5/3: heaviest of the block. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
                             "intensity": "75%"
                           },
                           {
                             "id": "str2-hyp-w7a-a1",
-                            "exerciseId": 445,
-                            "name": "Single Leg Depth Jump",
+                            "exerciseId": 7430055,
+                            "name": "Broad Jump to Vertical Jump",
                             "sets": "3",
                             "reps": "3",
-                            "note": "Each side, low box. Or broad-to-vertical jump, coach’s pick."
+                            "note": "Stick both landings. Experienced jumpers may use single leg depth jumps off a low box instead."
                           }
                         ]
                       },
@@ -1747,8 +1741,8 @@
                             "name": "Barbell Bench Press",
                             "sets": "3",
                             "reps": "7",
-                            "intensity": "75%",
-                            "rpe": "8"
+                            "rpe": "8",
+                            "note": "Calibration: work to a hard but crisp top set of 7 and record it. This is your bench anchor for weeks 8 and 9."
                           },
                           {
                             "id": "str2-hyp-w7a-b3",
@@ -1791,7 +1785,7 @@
                             "sets": "3",
                             "reps": "8",
                             "rpe": "7",
-                            "note": "Hands on the barbell in the rack (barbell supported)."
+                            "note": "From the rig, not a barbell in the rack. Lying leg lowers off the bench if the rig is full."
                           }
                         ]
                       }
@@ -1830,8 +1824,7 @@
                             "sets": "3",
                             "reps": "7",
                             "rpe": "8",
-                            "note": "Final wave 7/5/3: heaviest of the block.",
-                            "intensity": "75%"
+                            "note": "Final wave entry: back off to around your wave 1 sevens. Ramp to the working load in 2 to 3 builder sets first."
                           },
                           {
                             "id": "str2-hyp-w7b-a1",
@@ -1934,16 +1927,16 @@
                             "sets": "3",
                             "reps": "5",
                             "rpe": "8.5",
-                            "note": "Or front squat. Final wave 7/5/3: heaviest of the block.",
+                            "note": "Or front squat. Final wave 7/5/3: heaviest of the block. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
                             "intensity": "80%"
                           },
                           {
                             "id": "str2-hyp-w8a-a1",
-                            "exerciseId": 445,
-                            "name": "Single Leg Depth Jump",
+                            "exerciseId": 7430055,
+                            "name": "Broad Jump to Vertical Jump",
                             "sets": "3",
                             "reps": "3",
-                            "note": "Each side, low box. Or broad-to-vertical jump, coach’s pick."
+                            "note": "Stick both landings. Experienced jumpers may use single leg depth jumps off a low box instead."
                           }
                         ]
                       },
@@ -1959,8 +1952,8 @@
                             "name": "Barbell Bench Press",
                             "sets": "3",
                             "reps": "5",
-                            "intensity": "80%",
-                            "rpe": "8.5"
+                            "rpe": "8.5",
+                            "note": "Roughly 5 per cent above your week 7 top set."
                           },
                           {
                             "id": "str2-hyp-w8a-b3",
@@ -2003,7 +1996,7 @@
                             "sets": "3",
                             "reps": "10",
                             "rpe": "7.5",
-                            "note": "Hands on the barbell in the rack (barbell supported)."
+                            "note": "From the rig, not a barbell in the rack. Lying leg lowers off the bench if the rig is full."
                           }
                         ]
                       }
@@ -2042,8 +2035,7 @@
                             "sets": "3",
                             "reps": "5",
                             "rpe": "8.5",
-                            "note": "Final wave 7/5/3: heaviest of the block.",
-                            "intensity": "80%"
+                            "note": "Heavier than week 7. Ramp to the working load in 2 to 3 builder sets first."
                           },
                           {
                             "id": "str2-hyp-w8b-a1",
@@ -2146,16 +2138,16 @@
                             "sets": "3",
                             "reps": "3",
                             "rpe": "9",
-                            "note": "Or front squat. Final wave 7/5/3: heaviest of the block.",
+                            "note": "Or front squat. Final wave 7/5/3: heaviest of the block. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
                             "intensity": "85%"
                           },
                           {
                             "id": "str2-hyp-w9a-a1",
-                            "exerciseId": 445,
-                            "name": "Single Leg Depth Jump",
+                            "exerciseId": 7430055,
+                            "name": "Broad Jump to Vertical Jump",
                             "sets": "3",
                             "reps": "3",
-                            "note": "Each side, low box. Or broad-to-vertical jump, coach’s pick."
+                            "note": "Stick both landings. Experienced jumpers may use single leg depth jumps off a low box instead."
                           }
                         ]
                       },
@@ -2171,8 +2163,8 @@
                             "name": "Barbell Bench Press",
                             "sets": "3",
                             "reps": "3",
-                            "intensity": "85%",
-                            "rpe": "9"
+                            "rpe": "9",
+                            "note": "Roughly 10 per cent above your week 7 top set. The RPE cap is the law."
                           },
                           {
                             "id": "str2-hyp-w9a-b3",
@@ -2181,7 +2173,7 @@
                             "sets": "4",
                             "reps": "3",
                             "rpe": "9",
-                            "note": "Match or beat the block’s best triple, then back-offs."
+                            "note": "Back-off triples only at minus 10 per cent, no max attempt: the deadhang challenge is the grip test today."
                           }
                         ]
                       },
@@ -2195,27 +2187,28 @@
                             "id": "str2-hyp-w9a-c4",
                             "exerciseId": 76843,
                             "name": "Barbell Row",
-                            "sets": "3",
+                            "sets": "2",
                             "reps": "6",
-                            "rpe": "8.5"
+                            "rpe": "8",
+                            "note": "Taper week: two sets. Save it for the wave and the challenge."
                           },
                           {
                             "id": "str2-hyp-w9a-c5",
                             "exerciseId": 8211170,
                             "name": "Pike Push Up",
-                            "sets": "3",
+                            "sets": "2",
                             "reps": "10",
                             "rpe": "8",
-                            "note": "Superset. Second arm movement still to be named on the plan."
+                            "note": "Taper week: two sets. Superset partner still to be named on the plan."
                           },
                           {
                             "id": "str2-hyp-w9a-c6",
                             "exerciseId": 10133,
                             "name": "Hanging Knee Raise",
-                            "sets": "3",
+                            "sets": "2",
                             "reps": "10",
                             "rpe": "8",
-                            "note": "Hands on the barbell in the rack (barbell supported)."
+                            "note": "From the rig. Taper week: two sets."
                           }
                         ]
                       },
@@ -2274,8 +2267,7 @@
                             "sets": "3",
                             "reps": "3",
                             "rpe": "9",
-                            "note": "Final wave 7/5/3: heaviest of the block.",
-                            "intensity": "85%"
+                            "note": "Heaviest triple of the block. The RPE cap is the law here, not a target. Ramp to the working load in 2 to 3 builder sets first."
                           },
                           {
                             "id": "str2-hyp-w9b-a1",
@@ -3018,7 +3010,7 @@
                         "restAfter": "Rest 3 minutes between rounds. Final rest not taken"
                       },
                       {
-                        "id": "d10ff4c8-236b-4df1-a8e3-58f891c937e4",
+                        "id": "e51916d4-b8ac-46e4-aff0-99503f1a8531",
                         "heading": "Finish",
                         "lines": [
                           {
@@ -3139,7 +3131,7 @@
                         "restAfter": "Rest 2 minutes. Coach calls \"moving\" at 90 seconds"
                       },
                       {
-                        "id": "d10ff4c8-236b-4df1-a8e3-58f891c937e4",
+                        "id": "500775aa-fd78-46d8-8c0c-7c209014441a",
                         "heading": "Finish",
                         "lines": [
                           {
@@ -7248,6 +7240,6 @@
       }
     ]
   },
-  "rev": 153,
-  "updatedAt": "2026-08-31T00:29:46.317Z"
+  "rev": 154,
+  "updatedAt": "2026-08-31T02:25:31.771Z"
 }

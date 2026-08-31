@@ -229,7 +229,7 @@ export default function TvPage() {
     setExporting(true);
     try {
       const dataUrl = await capturePng();
-      const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [W, H] });
+      const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [W, H], hotfixes: ['px_scaling'] });
       pdf.addImage(dataUrl, 'PNG', 0, 0, W, H);
       pdf.save(`${fileBase}.pdf`);
     } finally {
@@ -430,7 +430,7 @@ export default function TvPage() {
                         className="text-[30px] leading-tight font-extrabold"
                         style={{ color: SAND }}
                       >
-                        {piece.heading || '—'}
+                        {piece.heading || '·'}
                       </p>
                     </div>
                     <ul data-fit-measure className="flex-1 space-y-3 overflow-hidden px-6 py-5">

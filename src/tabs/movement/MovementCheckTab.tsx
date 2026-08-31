@@ -27,13 +27,23 @@ export default function MovementCheckTab() {
   const program = useDoc('program');
   const lib = useDoc('library-overrides');
   const { library } = useLibrary();
-  const [bi, setBi] = useState(0);
+  // null until the document loads, then the first phase that actually holds
+  // exercises. Defaulting to index 0 opened the tab on the empty Primer and
+  // presented a wall of zero-coverage warnings about a phase run off-app.
+  const [bi, setBi] = useState<number | null>(null);
 
   const overrides = lib.data;
   // Coverage is judged on the Strength stream: it is where patterns are
   // programmed deliberately. Other streams have their own metrics.
   const phases = program.data ? (streamsOf(program.data)[0]?.blocks ?? []) : [];
-  const phaseIndex = Math.min(bi, Math.max(phases.length - 1, 0));
+  const firstWritten = phases.findIndex((p) =>
+    p.weeks.some((w) =>
+      w.sessions.some(
+        (s) => s.kind === 'series' && s.timedBlocks.some((tb) => tb.kind !== 'circuit' && tb.slots.some((sl) => sl.name)),
+      ),
+    ),
+  );
+  const phaseIndex = Math.min(bi ?? Math.max(firstWritten, 0), Math.max(phases.length - 1, 0));
 
   const analysis = useMemo(() => {
     if (!program.data || !overrides || !library) return null;
@@ -104,7 +114,7 @@ export default function MovementCheckTab() {
           <h2 className="font-display text-2xl text-ink-950">Movement check</h2>
           <div className="flex items-center gap-1.5">
             {phases.map((b, i) => (
-              <button key={b.id} type="button" className={pill(i === bi)} onClick={() => setBi(i)}>
+              <button key={b.id} type="button" className={pill(i === phaseIndex)} onClick={() => setBi(i)}>
                 Phase {i + 1}
               </button>
             ))}
