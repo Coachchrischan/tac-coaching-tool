@@ -34,6 +34,8 @@ const FOCUS_TITLE: Record<Session['focus'], string> = {
   lower: 'Lower body day',
   upper: 'Upper body day',
   full: 'Full body day',
+  'full-a': 'Full Body A',
+  'full-b': 'Full Body B',
   esd: 'ESD day',
   hyrox: 'Hyrox day',
   'rox-strong': 'ROX Strong day',

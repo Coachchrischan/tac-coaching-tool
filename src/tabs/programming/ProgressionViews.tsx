@@ -20,6 +20,8 @@ const FOCUS_LABEL: Record<Session['focus'], string> = {
   lower: 'Lower',
   upper: 'Upper',
   full: 'Full Body',
+  'full-a': 'Full Body A',
+  'full-b': 'Full Body B',
   esd: 'ESD',
   hyrox: 'Hyrox',
   'rox-strong': 'ROX Strong',

@@ -8,24 +8,22 @@
         "colour": "#003030",
         "phases": [
           {
-            "id": "208695d4-f069-4662-9c16-09c7cfee5ab9",
+            "id": "ap-2026-primer",
+            "name": "Primer",
+            "focus": "Intro week + 2-week primer. Run off-app: programming emailed to coaches.",
+            "weeks": 3
+          },
+          {
+            "id": "ap-2026-hyp9",
             "name": "Strength-Hypertrophy",
-            "focus": "Wave loading on the main lifts: 9s, 7s, 5s across three cycles. W1 top-set 3RM triple + 2x7 back-offs (doubles as testing). W7 mid-block deload, W8-10 final push.",
-            "weeks": 10,
-            "notes": "Accessories: ascending volume within each three-week wave. Anchor lifts stay stable across blocks."
+            "focus": "Full Body A/B split (Tue/Thu). Three 3-week micros: 9/7/5, 9/7/5 heavier, 7/5/3. Week 3 of each micro ends on a challenge.",
+            "weeks": 9
           },
           {
-            "id": "ddd735c6-d893-430f-8b9a-a034b696e9af",
-            "name": "Deload / skills",
-            "focus": "Deload doubling as a skills/workshop week to teach technique for the coming strength block (e.g. deadlift workshop).",
-            "weeks": 1
-          },
-          {
-            "id": "6248618c-2d78-431d-b7ee-a15d585f48f0",
+            "id": "ap-2026-str5",
             "name": "Strength",
-            "focus": "Two mini waves: 7-5-3 then 5-3-1. Accessories: descending volume, increasing intensity, strength-accessory emphasis.",
-            "weeks": 6,
-            "notes": "End-of-block retest: one Christmas-week class testing all compounds trained through the block."
+            "focus": "Closes the year into Christmas. Structure TBC.",
+            "weeks": 5
           },
           {
             "id": "2aed6a9c-77ce-4471-9e5c-35075b6ebc50",
@@ -197,6 +195,6 @@
       }
     ]
   },
-  "rev": 6,
-  "updatedAt": "2026-08-20T03:00:42.054Z"
+  "rev": 7,
+  "updatedAt": "2026-08-31T00:29:46.306Z"
 }

@@ -35,10 +35,12 @@ const CUSTOM_IDS: Record<string, number> = {
 
 // The Strength stream's three sessions, in the order they are titled. Which
 // day each lands on comes from the timetable, not from this list.
+// The two-day Full Body split, live from 14 Sept 2026. The old three-day
+// entries are gone because their weeks are archived out of the document; a
+// week is pushed session-by-focus, so only live focuses belong here.
 const STRENGTH_PLAN: { focus: SessionFocus; title: string }[] = [
-  { focus: 'lower', title: 'Day 1 - Lower' },
-  { focus: 'upper', title: 'Day 2 - Upper' },
-  { focus: 'full', title: 'Day 3 - Full Body' },
+  { focus: 'full-a', title: 'Day 1 - Full Body A' },
+  { focus: 'full-b', title: 'Day 2 - Full Body B' },
 ];
 
 function partsOf(iso: string) {

@@ -89,6 +89,11 @@ export type SessionFocus =
   | 'lower'
   | 'upper'
   | 'full'
+  // The two-day Full Body split that replaced Lower/Upper/Full from 14 Sept
+  // 2026: A is squat + upper focus (Tuesday), B is RDL + lower focus
+  // (Thursday). The old three stay valid for the archived era.
+  | 'full-a'
+  | 'full-b'
   | 'esd'
   | 'hyrox'
   | 'rox-strong'

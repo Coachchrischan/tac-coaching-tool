@@ -27,6 +27,11 @@ export const FOCUS_CLASS_TYPE: Record<SessionFocus, string> = {
   lower: 'lbs',
   upper: 'ubs',
   full: 'fbs',
+  // The A/B split runs A on the Tuesday class and B on the Thursday class.
+  // Friday strength is on hold (club decision, 2026-08-31), so nothing maps
+  // to fbs while the split is live.
+  'full-a': 'lbs',
+  'full-b': 'ubs',
   esd: 'esd',
   hyrox: 'hyrox',
   'rox-strong': 'hyrox',
