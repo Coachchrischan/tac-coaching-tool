@@ -92,6 +92,14 @@ Community, Planning, Ethos.
 - **Control bar:** stream dropdown, phase dropdown, session pills, then view switcher
   (**Week / Block / Phase**), Scales toggle, and an **Edit** button holding phase theme, length,
   add and delete. Week pills show their **Monday date**.
+- **Phase view (rebuilt 2026-08-31):** per session identity, the phase's training blocks side
+  by side as read-only exercise-rotation columns (names only, rows aligned by slot position,
+  changed cells tinted sand, challenges on the bottom row, headings open the Block view), with
+  the week-by-week periodisation grid to the right, all under one horizontal scroll bar. This
+  replaced the old phase-to-phase Exercise rotation planner and its Weeks toggle. Editing
+  happens in the Week and Block views; `MonthGrid` has an `embedded` mode for this layout.
+  `buildBlockRows` keys rows by id AND name, so bench variants sharing the bench id stay
+  separate rows.
 - **Left rail:** TV output, Export for Sheets, Push to TrainHeroic (drafts), Build floor layout,
   **Email the week** (opens a Gmail compose window with the week written out; it never sends).
   Coach addresses live on `ScheduleDoc.coaches[].email`, edited in Schedule's settings drawer.
