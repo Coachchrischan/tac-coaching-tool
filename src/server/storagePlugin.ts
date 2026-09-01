@@ -56,6 +56,7 @@ const DOC_IDS = new Set<string>([
   'planning',
   'layouts',
   'equipment',
+  'push-log',
 ]);
 
 const HISTORY_KEEP = 50;
@@ -89,6 +90,37 @@ function quarantineFiles(root: string, docId: string): string[] {
   } catch {
     return [];
   }
+}
+
+/**
+ * Read a document server-side through the same quarantine-aware path the
+ * store uses. Sibling middleware (the push plugin) must never readFileSync a
+ * document raw: it would bypass the corrupt-file tombstone and re-guess the
+ * envelope shape.
+ */
+export function loadDocOnServer(root: string, docId: DocId): Envelope {
+  return loadDoc(root, docId);
+}
+
+/**
+ * Append-style server-side update for sibling middleware (the push plugin
+ * writes the push log through the same load/snapshot/write path the store
+ * uses, so revs and history stay consistent).
+ */
+export function updateDocOnServer(
+  root: string,
+  docId: DocId,
+  mutate: (data: unknown) => unknown,
+): void {
+  const current = loadDoc(root, docId);
+  const next: Envelope = {
+    data: mutate(current.data),
+    rev: current.rev + 1,
+    updatedAt: new Date().toISOString(),
+    machine: hostname(),
+  };
+  snapshotDoc(root, docId, current);
+  writeDoc(root, docId, next);
 }
 
 // Seed ONLY when the file does not exist AND no quarantined copy of it does.

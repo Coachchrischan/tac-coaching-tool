@@ -11,12 +11,15 @@ export type DocId =
   | 'community'
   | 'planning'
   | 'layouts'
-  | 'equipment';
+  | 'equipment'
+  | 'push-log';
 
 export interface DocEnvelope<T> {
   data: T;
   rev: number;
   updatedAt: string;
+  /** Hostname of the machine that wrote this version (two-machine visibility). */
+  machine?: string;
 }
 
 // ---------- Schedule ----------
@@ -469,6 +472,31 @@ export interface EquipmentDoc {
   items: EquipmentItem[];
 }
 
+// ---------------------------------------------------------------------------
+// Push log: what has actually been sent to TrainHeroic, so push state lives in
+// the tool instead of in handover prose and Chris's memory. Appended by the
+// push endpoint; read by Programming's week pills and push dialogue.
+// ---------------------------------------------------------------------------
+
+export interface PushLogEntry {
+  id: string;
+  /** ISO timestamp of the push. */
+  at: string;
+  streamId: string;
+  /** 1-based phase and week indices as the push endpoint receives them. */
+  block: number;
+  week: number;
+  monday: string;
+  /** ISO dates drafts were created on in this run. */
+  dates: string[];
+  pushed: string[];
+  skipped: string[];
+}
+
+export interface PushLogDoc {
+  entries: PushLogEntry[];
+}
+
 // Maps DocId to its document type, used by the store for typing.
 export interface DocTypes {
   schedule: ScheduleDoc;
@@ -481,4 +509,5 @@ export interface DocTypes {
   planning: PlanningDoc;
   layouts: LayoutsDoc;
   equipment: EquipmentDoc;
+  'push-log': PushLogDoc;
 }
