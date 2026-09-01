@@ -28,6 +28,10 @@ describe('mapReps', () => {
     expect(m.note).toContain('leaving 2 in reserve');
   });
 
+  it('bare MAX never reaches the app unexplained', () => {
+    expect(mapReps('MAX')).toEqual({ reps: '', note: 'as many quality reps as possible' });
+  });
+
   it('free text falls through to the note with empty reps', () => {
     expect(mapReps('as many as week 1')).toEqual({ reps: '', note: 'as many as week 1' });
   });

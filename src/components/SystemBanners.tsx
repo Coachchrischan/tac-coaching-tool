@@ -29,19 +29,30 @@ export default function SystemBanners() {
       /* Intl unavailable: nothing useful to say */
     }
 
-    void fetch('/api/store/program')
-      .then((r) => (r.ok ? r.json() : null))
-      .then((env: { machine?: string; currentMachine?: string } | null) => {
-        if (env?.machine && env.currentMachine && env.machine !== env.currentMachine) {
-          found.push(
-            `The program was last saved on ${env.machine}, not this machine ` +
-              `(${env.currentMachine}). Fine if you have just pulled; if both machines hold ` +
-              `unsynced edits, sort the sync before editing here.`,
-          );
-        }
-        setMessages([...found]);
-      })
-      .catch(() => setMessages([...found]));
+    // Meta only (rev, machine), never the payloads: checking the writing
+    // machine must not download 300KB of programming, and it must cover
+    // every document the two machines actually edit.
+    const CHECK = ['program', 'schedule', 'annual-plan', 'library-overrides', 'layouts'];
+    void Promise.all(
+      CHECK.map((id) =>
+        fetch(`/api/store/${id}/meta`)
+          .then((r) => (r.ok ? r.json() : null))
+          .then((meta: { machine?: string; currentMachine?: string } | null) => ({ id, meta }))
+          .catch(() => ({ id, meta: null })),
+      ),
+    ).then((results) => {
+      const foreign = results.filter(
+        (r) => r.meta?.machine && r.meta.currentMachine && r.meta.machine !== r.meta.currentMachine,
+      );
+      if (foreign.length > 0) {
+        found.push(
+          `Last saved on ${foreign[0].meta?.machine}, not this machine: ` +
+            `${foreign.map((f) => f.id).join(', ')}. Fine if you have just pulled; if both ` +
+            `machines hold unsynced edits, sort the sync before editing here.`,
+        );
+      }
+      setMessages([...found]);
+    });
   }, []);
 
   if (messages.length === 0) return null;

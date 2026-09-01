@@ -59,7 +59,11 @@ const DOC_IDS = new Set<string>([
   'push-log',
 ]);
 
-const HISTORY_KEEP = 50;
+// Programming churns ~10 snapshots per 25 minutes of editing (measured), so a
+// flat 50 is a ring buffer of recent keystrokes for that doc. Deeper for the
+// documents whose loss hurts; the backup branch covers the coarse timeline.
+const HISTORY_KEEP_DEFAULT = 50;
+const HISTORY_KEEP: Record<string, number> = { program: 250, schedule: 100 };
 /** The on-disk shape version scripts/migrate-docs.mjs writes. */
 const CURRENT_SCHEMA_VERSION = 2;
 const BACKUP_DEBOUNCE_MS = 5 * 60 * 1000;
@@ -138,8 +142,9 @@ function loadDoc(root: string, docId: DocId): Envelope {
   if (blocked.length > 0) {
     throw new DocBlockedError(
       `document '${docId}' is blocked: a quarantined copy exists (${blocked.join(', ')}). ` +
-        `Restore it (rename back over ${docId}.json after fixing, or use the history ` +
-        `snapshots in data/_history/${docId}/) then delete the .corrupt file to unblock.`,
+        `Recover it from the Data safety panel on Home (restore a snapshot; the corrupt ` +
+        `file is archived automatically), or by hand: fix and rename the .corrupt file ` +
+        `back over ${docId}.json.`,
     );
   }
   let raw: string;
@@ -147,6 +152,22 @@ function loadDoc(root: string, docId: DocId): Envelope {
     raw = readFileSync(target, 'utf8');
   } catch (err) {
     if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
+      // A missing FILE is not a missing DOCUMENT. If history snapshots exist,
+      // this doc has lived here before, and seeding demo data over its grave
+      // is the same silent-loss hole the corrupt-tombstone closed (2026-09-01
+      // second panel, three brains independently). Seed only on a true first
+      // run for this document.
+      const dir = historyDir(root, docId);
+      const hasHistory =
+        existsSync(dir) && readdirSync(dir).some((f) => /^\d+\.json$/.test(f));
+      if (hasHistory) {
+        throw new DocBlockedError(
+          `document '${docId}' is missing but its history exists ` +
+            `(data/_history/${docId}/). Refusing to seed over it: restore a ` +
+            `snapshot from the Data safety panel on Home, or copy one back to ` +
+            `data/${docId}.json by hand.`,
+        );
+      }
       const env: Envelope = {
         data: seeds[docId](),
         rev: 1,
@@ -167,14 +188,18 @@ function loadDoc(root: string, docId: DocId): Envelope {
     return env;
   } catch (err) {
     const quarantine = `${target}.corrupt-${Date.now()}`;
+    let quarantined = true;
     try {
       renameSync(target, quarantine);
     } catch {
-      /* keep the original in place if even the rename fails */
+      quarantined = false; // keep the original in place if even the rename fails
     }
     throw new DocReadError(
-      `document '${docId}' is corrupt (${String(err)}); moved to ${quarantine}. ` +
-        `Not reseeded, and the document is now blocked until the .corrupt file is resolved.`,
+      `document '${docId}' is corrupt (${String(err)}); ` +
+        (quarantined
+          ? `moved to ${quarantine}. `
+          : `the quarantine rename ALSO failed (file locked?), the corrupt file is still at ${target}. `) +
+        `Not reseeded. Recover it from the Data safety panel on Home.`,
     );
   }
 }
@@ -193,10 +218,11 @@ function snapshotDoc(root: string, docId: string, env: Envelope) {
     const dir = historyDir(root, docId);
     mkdirSync(dir, { recursive: true });
     writeFileSync(join(dir, `${env.rev}.json`), JSON.stringify(env, null, 2), 'utf8');
+    const keep = HISTORY_KEEP[docId] ?? HISTORY_KEEP_DEFAULT;
     const files = readdirSync(dir)
       .filter((f) => /^\d+\.json$/.test(f))
       .sort((a, b) => parseInt(a) - parseInt(b));
-    while (files.length > HISTORY_KEEP) {
+    while (files.length > keep) {
       const oldest = files.shift();
       if (oldest) rmSync(join(dir, oldest), { force: true });
     }
@@ -257,7 +283,15 @@ function git(root: string, args: string[], env?: Record<string, string>): Promis
     execFile(
       'git',
       args,
-      { cwd: root, env: { ...process.env, ...env }, windowsHide: true },
+      {
+        cwd: root,
+        // GIT_TERMINAL_PROMPT=0: a credential prompt would otherwise hang the
+        // subprocess forever, and with it every future backup (backupRunning
+        // never clears). The timeout is the second belt on the same trousers.
+        env: { ...process.env, ...env, GIT_TERMINAL_PROMPT: '0' },
+        windowsHide: true,
+        timeout: 60 * 1000,
+      },
       (err, stdout, stderr) => {
         if (err) reject(new Error(stderr.trim() || String(err)));
         else resolve(stdout.trim());
@@ -266,11 +300,29 @@ function git(root: string, args: string[], env?: Record<string, string>): Promis
   });
 }
 
+/** Safety-net health, surfaced via GET /api/store/_status: nets that fail
+ *  silently are false comfort (2026-09-01 second panel, five brains). */
+const backupStatus = {
+  lastAttemptAt: null as string | null,
+  lastCommitAt: null as string | null,
+  lastPushAt: null as string | null,
+  lastError: null as string | null,
+};
+
 let backupRunning = false;
+let backupRunningSince = 0;
 
 async function runDataBackup(root: string) {
-  if (backupRunning) return;
+  if (backupRunning) {
+    console.error(
+      `[tac-backup] skipped: a backup has been running for ` +
+        `${Math.round((Date.now() - backupRunningSince) / 1000)}s (wedged?)`,
+    );
+    return;
+  }
   backupRunning = true;
+  backupRunningSince = Date.now();
+  backupStatus.lastAttemptAt = new Date().toISOString();
   const branch = `data-backup-${hostname()}`;
   const tmpIndex = join(root, '.git', `backup-index-${process.pid}`);
   const idx = { GIT_INDEX_FILE: tmpIndex };
@@ -300,20 +352,34 @@ async function runDataBackup(root: string) {
       `data backup ${new Date().toISOString()} (${hostname()})`,
     ]);
     await git(root, ['update-ref', `refs/heads/${branch}`, commit]);
+    backupStatus.lastCommitAt = new Date().toISOString();
     try {
       await git(root, ['push', 'origin', `${branch}:${branch}`]);
+      backupStatus.lastPushAt = new Date().toISOString();
+      backupStatus.lastError = null;
       console.log(`[tac-backup] pushed ${branch} (${commit.slice(0, 8)})`);
     } catch (err) {
+      backupStatus.lastError = `push failed: ${String(err)}`;
       console.error(
         `[tac-backup] local backup committed to ${branch} but the push failed ` +
           `(will retry next cycle): ${String(err)}`,
       );
     }
   } catch (err) {
+    backupStatus.lastError = String(err);
     console.error(`[tac-backup] backup failed: ${String(err)}`);
   } finally {
     rmSync(tmpIndex, { force: true });
     backupRunning = false;
+  }
+}
+
+/** How many local master commits are not on origin (off-machine code lag). */
+async function masterLag(root: string): Promise<number | null> {
+  try {
+    return parseInt(await git(root, ['rev-list', '--count', 'origin/master..master']), 10);
+  } catch {
+    return null;
   }
 }
 
@@ -324,29 +390,56 @@ export function storagePlugin(): Plugin {
     clearTimeout(backupTimer);
     backupTimer = setTimeout(() => void runDataBackup(root), BACKUP_DEBOUNCE_MS);
   };
-  return {
-    name: 'tac-storage',
-    configResolved(config) {
-      root = config.root;
-    },
-    configureServer(server) {
-      const hourly = setInterval(() => void runDataBackup(root), BACKUP_INTERVAL_MS);
-      // Startup kick: the debounce resets on every save and dev-server
-      // restarts drop pending timers, so an active editing session could
-      // otherwise defer the backup indefinitely. A fresh server always takes
-      // one shortly after boot (no-op when nothing changed).
-      const kick = setTimeout(() => void runDataBackup(root), 90 * 1000);
-      server.httpServer?.on('close', () => {
-        clearInterval(hourly);
-        clearTimeout(backupTimer);
-        clearTimeout(kick);
-      });
+  const startBackupLoop = (httpServer: { on: (ev: string, fn: () => void) => void } | null) => {
+    // Sweep temp indexes orphaned by killed processes (the Launchpad
+    // refresh kills node without ceremony).
+    try {
+      for (const f of readdirSync(join(root, '.git')).filter((x) =>
+        x.startsWith('backup-index-'),
+      )) {
+        rmSync(join(root, '.git', f), { force: true });
+      }
+    } catch {
+      /* not a git checkout: backups will fail loudly on their own */
+    }
+    const hourly = setInterval(() => void runDataBackup(root), BACKUP_INTERVAL_MS);
+    // Startup kick: the debounce resets on every save and dev-server
+    // restarts drop pending timers, so an active editing session could
+    // otherwise defer the backup indefinitely. A fresh server always takes
+    // one shortly after boot (no-op when nothing changed).
+    const kick = setTimeout(() => void runDataBackup(root), 90 * 1000);
+    httpServer?.on('close', () => {
+      clearInterval(hourly);
+      clearTimeout(backupTimer);
+      clearTimeout(kick);
+      // A shutdown inside the debounce window must not strand the latest
+      // saves on local disk only (second panel): take one final backup.
+      void runDataBackup(root);
+    });
+  };
 
-      server.middlewares.use('/api/store', (req, res) => {
+  const handler = (req: IncomingMessage, res: ServerResponse) => {
         void (async () => {
           const parts = (req.url ?? '').replace(/^\//, '').split('?')[0].split('/');
           const docId = parts[0];
           const action = parts[1];
+
+          // Safety-net health: every net that can fail silently is listed
+          // here so the Data safety panel can show it instead of hiding it
+          // in a console nobody watches.
+          if (req.method === 'GET' && docId === '_status') {
+            const quarantines = readdirSync(join(root, 'data')).filter((f) =>
+              f.includes('.json.corrupt-'),
+            );
+            send(res, 200, {
+              backup: backupStatus,
+              quarantines,
+              masterLag: await masterLag(root),
+              machine: hostname(),
+            });
+            return;
+          }
+
           if (!DOC_IDS.has(docId)) {
             send(res, 404, { error: `unknown document '${docId}'` });
             return;
@@ -355,6 +448,20 @@ export function storagePlugin(): Plugin {
 
           if (req.method === 'GET' && action === 'history') {
             send(res, 200, { snapshots: listHistory(root, id) });
+            return;
+          }
+
+          // Envelope metadata without the payload: the banners check every
+          // doc's writing machine without downloading 300KB of programming.
+          if (req.method === 'GET' && action === 'meta') {
+            const env = loadDoc(root, id);
+            send(res, 200, {
+              rev: env.rev,
+              updatedAt: env.updatedAt,
+              machine: env.machine,
+              schemaVersion: env.schemaVersion,
+              currentMachine: hostname(),
+            });
             return;
           }
 
@@ -376,14 +483,37 @@ export function storagePlugin(): Plugin {
               return;
             }
             const snapshot = JSON.parse(readFileSync(file, 'utf8')) as Envelope;
-            const current = loadDoc(root, id);
-            snapshotDoc(root, id, current); // a restore is always reversible
+            // Restore must WORK on a blocked document: the tombstone exists
+            // for corruption, and restore is the cure, so the two must
+            // compose (found by four brains of the second panel). Archive
+            // the quarantined file into the history folder and proceed.
+            let current: Envelope | null = null;
+            try {
+              current = loadDoc(root, id);
+            } catch (err) {
+              if (!(err instanceof DocBlockedError)) throw err;
+              for (const q of quarantineFiles(root, id)) {
+                const dest = join(historyDir(root, id), `resolved-${q}`);
+                mkdirSync(historyDir(root, id), { recursive: true });
+                renameSync(join(root, 'data', q), dest);
+                console.log(`[tac-storage] archived quarantined ${q} to _history during restore`);
+              }
+              try {
+                current = loadDoc(root, id); // ENOENT path may seed or block
+              } catch {
+                current = null; // nothing readable to snapshot; restore anyway
+              }
+            }
+            if (current) snapshotDoc(root, id, current); // a restore is always reversible
             const next: Envelope = {
               data: snapshot.data,
-              rev: current.rev + 1,
+              rev: (current?.rev ?? snapshot.rev) + 1,
               updatedAt: new Date().toISOString(),
               machine: hostname(),
-              schemaVersion: current.schemaVersion,
+              // The snapshot's own shape version, never the current doc's:
+              // stamping v2 onto pre-migration data would lie to any future
+              // version gate.
+              schemaVersion: snapshot.schemaVersion,
             };
             writeDoc(root, id, next);
             scheduleBackup();
@@ -403,7 +533,7 @@ export function storagePlugin(): Plugin {
           }
 
           if (req.method === 'PUT') {
-            let parsed: { data?: unknown; baseRev?: number };
+            let parsed: { data?: unknown; baseRev?: number; baseUpdatedAt?: string };
             try {
               parsed = JSON.parse(await readBody(req));
             } catch {
@@ -420,7 +550,15 @@ export function storagePlugin(): Plugin {
               return;
             }
             const current = loadDoc(root, id);
-            if (parsed.baseRev !== current.rev) {
+            // Rev numbers are not unique across two machines: both count up
+            // independently between syncs, so equal-count divergence passes a
+            // rev-only check and silently overwrites a just-pulled file. The
+            // updatedAt stamp disambiguates (second panel, write-identity).
+            if (
+              parsed.baseRev !== current.rev ||
+              (typeof parsed.baseUpdatedAt === 'string' &&
+                parsed.baseUpdatedAt !== current.updatedAt)
+            ) {
               send(res, 409, { current });
               return;
             }
@@ -443,7 +581,23 @@ export function storagePlugin(): Plugin {
           const status = err instanceof DocBlockedError ? 503 : 500;
           send(res, status, { error: String(err) });
         });
-      });
+  };
+
+  return {
+    name: 'tac-storage',
+    configResolved(config) {
+      root = config.root;
+    },
+    configureServer(server) {
+      startBackupLoop(server.httpServer);
+      server.middlewares.use('/api/store', handler);
+    },
+    // `vite preview` (and any static-ish launch) must serve the same store:
+    // a build that looks like the app but has no backend was an operational
+    // footgun for a non-developer owner (second panel).
+    configurePreviewServer(server) {
+      startBackupLoop(server.httpServer);
+      server.middlewares.use('/api/store', handler);
     },
   };
 }

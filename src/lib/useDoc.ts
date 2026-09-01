@@ -42,27 +42,38 @@ export function useDoc<K extends DocId>(id: K): UseDoc<DocTypes[K]> {
   const [conflictInfo, setConflictInfo] = useState<ConflictInfo | null>(null);
 
   const revRef = useRef(0);
+  const updatedAtRef = useRef('');
   const dataRef = useRef<T | null>(null);
   const dirtyRef = useRef(false);
   const timerRef = useRef<number | null>(null);
   const retryRef = useRef<number | null>(null);
   const decayRef = useRef<number | null>(null);
   const conflictRef = useRef<DocEnvelope<unknown> | null>(null);
+  // Retrying after a FAILED LOAD must reload, not flush: flush no-ops while
+  // data is null, which left a tombstoned (503) tab dead with no way back.
+  const loadRef = useRef<() => void>(() => {});
 
   useEffect(() => {
     let cancelled = false;
-    store
-      .load(id)
-      .then((env) => {
-        if (cancelled) return;
-        revRef.current = env.rev;
-        dataRef.current = env.data;
-        setData(env.data);
-        setSaveState('idle');
-      })
-      .catch(() => {
-        if (!cancelled) setSaveState('error');
-      });
+    const initialLoad = () => {
+      store
+        .load(id)
+        .then((env) => {
+          if (cancelled) return;
+          revRef.current = env.rev;
+          updatedAtRef.current = env.updatedAt;
+          dataRef.current = env.data;
+          setData(env.data);
+          setSaveState('idle');
+        })
+        .catch((err: unknown) => {
+          if (cancelled) return;
+          console.error(`[useDoc] load '${id}' failed:`, err);
+          setSaveState('error');
+        });
+    };
+    loadRef.current = initialLoad;
+    initialLoad();
 
     // Never drop a pending debounced save: flush it if the page is closed or
     // the component unmounts (e.g. switching tabs right after typing). The
@@ -70,9 +81,13 @@ export function useDoc<K extends DocId>(id: K): UseDoc<DocTypes[K]> {
     const flushPending = (keepalive: boolean) => {
       if (!dirtyRef.current || dataRef.current === null) return;
       void store
-        .save(id, dataRef.current, revRef.current, { keepalive })
+        .save(id, dataRef.current, revRef.current, {
+          keepalive,
+          baseUpdatedAt: updatedAtRef.current,
+        })
         .then((env) => {
           revRef.current = env.rev;
+          updatedAtRef.current = env.updatedAt;
           dirtyRef.current = false;
         })
         .catch((err: unknown) => {
@@ -89,15 +104,25 @@ export function useDoc<K extends DocId>(id: K): UseDoc<DocTypes[K]> {
       } else {
         // The keepalive quota would reject this payload, so the flush cannot
         // be trusted. Ask the browser to prompt instead; staying on the page
-        // lets the normal debounced save land within a second.
+        // lets the normal debounced save land within a second. Some browsers
+        // need returnValue set as well as preventDefault to actually prompt.
         e.preventDefault();
+        e.returnValue = '';
       }
     };
+    // Flush the moment the page is hidden (tab switch, minimise): a normal
+    // fetch can complete from a hidden page, and this removes most of the
+    // window where a close could outrun the 800ms debounce.
+    const onVisibility = () => {
+      if (document.visibilityState === 'hidden') flushPending(false);
+    };
     window.addEventListener('beforeunload', onBeforeUnload);
+    document.addEventListener('visibilitychange', onVisibility);
 
     return () => {
       cancelled = true;
       window.removeEventListener('beforeunload', onBeforeUnload);
+      document.removeEventListener('visibilitychange', onVisibility);
       if (timerRef.current !== null) window.clearTimeout(timerRef.current);
       if (retryRef.current !== null) window.clearTimeout(retryRef.current);
       if (decayRef.current !== null) window.clearTimeout(decayRef.current);
@@ -114,9 +139,11 @@ export function useDoc<K extends DocId>(id: K): UseDoc<DocTypes[K]> {
     }
     setSaveState('saving');
     store
-      .save(id, current, revRef.current)
+      .save(id, current, revRef.current, { baseUpdatedAt: updatedAtRef.current })
       .then((env) => {
         revRef.current = env.rev;
+        updatedAtRef.current = env.updatedAt;
+        setConflictInfo(null);
         if (dataRef.current === current) {
           // No newer edits arrived while saving: truly clean.
           dirtyRef.current = false;
@@ -170,6 +197,7 @@ export function useDoc<K extends DocId>(id: K): UseDoc<DocTypes[K]> {
     conflictRef.current = null;
     setConflictInfo(null);
     revRef.current = theirs.rev;
+    updatedAtRef.current = theirs.updatedAt;
     dataRef.current = theirs.data as T;
     dirtyRef.current = false;
     setData(theirs.data as T);
@@ -182,10 +210,17 @@ export function useDoc<K extends DocId>(id: K): UseDoc<DocTypes[K]> {
     conflictRef.current = null;
     setConflictInfo(null);
     revRef.current = theirs.rev; // retry on top of their rev
+    updatedAtRef.current = theirs.updatedAt;
     flush();
   }, [flush]);
 
-  return { data, saveState, conflictInfo, update, reloadTheirs, keepMine, retry: flush };
+  const retry = useCallback(() => {
+    // A failed initial load has nothing to flush; reload instead.
+    if (dataRef.current === null) loadRef.current();
+    else flush();
+  }, [flush]);
+
+  return { data, saveState, conflictInfo, update, reloadTheirs, keepMine, retry };
 }
 
 /** Pick the doc whose save state most urgently needs the coach's attention.
