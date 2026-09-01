@@ -22,7 +22,10 @@ const H = 1080;
 // FIT_WARN is where the type stops being readable from the back of the room.
 // Going below it is allowed, but the coach is told, because at that point the
 // session is too long for one board and the fix is coaching, not layout.
-const FIT_MIN = 0.42;
+// The floor rose from 0.42 once parts could be curated off the board: type
+// below ~55% is unreadable from the back of the room, so past that the board
+// says "cut" and the fix is curation, not more compression.
+const FIT_MIN = 0.55;
 const FIT_WARN = 0.64;
 const FIT_STEP = 0.04;
 
@@ -159,9 +162,13 @@ export default function TvPage() {
   const fileBase = `tac-${session.focus}-block${blockIndex + 1}-week${weekIndex + 1}`;
 
   const filled = (b: SeriesBlock) => b.slots.filter((s) => s.name);
-  const timedBlocks = session.kind === 'series' ? seriesBlocks(session.timedBlocks) : [];
+  // Curation beats compression: parts marked off-board (cooldown, station
+  // prep) never reach the wall or the export; they stay in the email and PDF.
+  const onBoard = <T extends { hideFromBoard?: boolean }>(parts: T[]) =>
+    parts.filter((p) => !p.hideFromBoard);
+  const timedBlocks = session.kind === 'series' ? onBoard(seriesBlocks(session.timedBlocks)) : [];
   // A strength session can finish on a circuit part; it renders as a board card.
-  const partCircuits = session.kind === 'series' ? circuitParts(session.timedBlocks) : [];
+  const partCircuits = session.kind === 'series' ? onBoard(circuitParts(session.timedBlocks)) : [];
   const warmups = timedBlocks.filter((b) => isWarmup(b) && filled(b).length > 0);
   const series = timedBlocks.filter((b) => !isWarmup(b) && filled(b).length > 0);
 
@@ -169,8 +176,12 @@ export default function TvPage() {
   // pieces rather than a sets-and-reps table.
   const circuit =
     session.kind === 'circuit'
-      ? session.circuit.filter((c) => c.heading.trim() || c.lines.some((l) => l.text.trim()))
+      ? onBoard(session.circuit).filter((c) => c.heading.trim() || c.lines.some((l) => l.text.trim()))
       : [];
+  const hiddenParts =
+    session.kind === 'circuit'
+      ? session.circuit.filter((c) => c.hideFromBoard).map((c) => c.heading || 'untitled piece')
+      : session.timedBlocks.filter((b) => b.hideFromBoard).map((b) => b.label);
   const isCircuit = session.kind === 'circuit';
   // Each class gets its own backdrop: the room for strength, the members for
   // the group classes.
@@ -261,16 +272,22 @@ export default function TvPage() {
           {fitState === 'cut' ? (
             <>
               This session does not fit on one board. It is down to{' '}
-              {Math.round(fit * 100)}% type and work is still off the screen. Split
-              it across two boards, or take the scaling off the wall.
+              {Math.round(fit * 100)}% type and work is still off the screen. In
+              Programming, mark the parts the wall does not need (cooldown,
+              station prep) as off-board; they stay in the email and PDF.
             </>
           ) : (
             <>
               Everything is on the board, but only at {Math.round(fit * 100)}%
-              type, which is small from the back of the room. Consider splitting
-              it across two boards.
+              type, which is small from the back of the room. Consider taking a
+              part off the board in Programming.
             </>
           )}
+        </div>
+      )}
+      {hiddenParts.length > 0 && (
+        <div className="fixed bottom-4 left-4 z-10 max-w-md rounded-md bg-white/10 px-3 py-1.5 text-xs text-white/70 backdrop-blur">
+          Off the wall (still in the email and PDF): {hiddenParts.join(', ')}
         </div>
       )}
       {/* control bar */}

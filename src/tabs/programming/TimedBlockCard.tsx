@@ -73,11 +73,29 @@ export default function TimedBlockCard({
           />
           <span className="text-sm text-ink-500">min</span>
         </div>
+        {/* Curation beats compression: the wall shows what the class needs,
+            the email/PDF keep everything. */}
+        <button
+          type="button"
+          title={
+            block.hideFromBoard
+              ? 'Hidden from the TV board (still in the email, CSV and PDF). Click to put it back on the wall.'
+              : 'On the TV board. Click to take it off the wall (it stays in the email, CSV and PDF).'
+          }
+          onClick={() => onPatchBlock({ hideFromBoard: block.hideFromBoard ? undefined : true })}
+          className={`ml-auto rounded border px-2 py-0.5 text-[10px] font-semibold tracking-wide uppercase ${
+            block.hideFromBoard
+              ? 'border-amber-400 bg-amber-50 text-amber-700'
+              : 'border-ink-200 text-ink-400 hover:text-ink-700'
+          }`}
+        >
+          {block.hideFromBoard ? 'off board' : 'on board'}
+        </button>
         <button
           type="button"
           title="Remove this series"
           onClick={onDeleteBlock}
-          className="ml-auto rounded px-2 py-1 text-sm text-ink-300 hover:text-red-600"
+          className="rounded px-2 py-1 text-sm text-ink-300 hover:text-red-600"
         >
           ✕
         </button>

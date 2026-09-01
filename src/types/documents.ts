@@ -142,6 +142,12 @@ interface TimedBlockCommon {
    * to do with them.
    */
   note?: string;
+  /**
+   * Curation beats compression on a wall board (2026-09-01 roundtable): a
+   * part the class does not need on the wall (cooldown, station prep) is
+   * hidden from the TV board but stays in the email, CSV and PDF.
+   */
+  hideFromBoard?: boolean;
 }
 
 /** A series: sets and reps against named exercises. The usual strength part. */
@@ -180,6 +186,8 @@ export interface CircuitBlock {
   heading: string;
   lines: CircuitLine[];
   restAfter?: string;
+  /** Hidden from the TV board only; see TimedBlockCommon.hideFromBoard. */
+  hideFromBoard?: boolean;
 }
 
 /** How a session is written. Set on read by `programStreams.migrateSession`. */

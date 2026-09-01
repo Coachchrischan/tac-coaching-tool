@@ -122,6 +122,22 @@ export default function CircuitEditor({
             </button>
             <button
               type="button"
+              title={
+                b.hideFromBoard
+                  ? 'Hidden from the TV board (still in the email, CSV and PDF). Click to put it back on the wall.'
+                  : 'On the TV board. Click to take it off the wall (it stays in the email, CSV and PDF).'
+              }
+              onClick={() => patchBlock(b.id, { hideFromBoard: b.hideFromBoard ? undefined : true })}
+              className={`rounded border px-1.5 py-0.5 text-[10px] font-semibold tracking-wide uppercase ${
+                b.hideFromBoard
+                  ? 'border-amber-400 bg-amber-50 text-amber-700'
+                  : 'border-ink-200 text-ink-400 hover:text-ink-700'
+              }`}
+            >
+              {b.hideFromBoard ? 'off board' : 'on board'}
+            </button>
+            <button
+              type="button"
               title="Remove this piece"
               onClick={() => setBlocks(blocks.filter((x) => x.id !== b.id))}
               className="rounded px-1.5 py-1 text-sm text-ink-300 hover:text-red-600"
