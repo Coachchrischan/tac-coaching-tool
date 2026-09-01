@@ -22,40 +22,11 @@ export const DAY_NAMES = [
   'Sunday',
 ] as const;
 
-/** The Schedule class type each programming focus is delivered as. */
-export const FOCUS_CLASS_TYPE: Record<SessionFocus, string> = {
-  lower: 'lbs',
-  upper: 'ubs',
-  full: 'fbs',
-  // The A/B split runs A on the Tuesday class and B on the Thursday class.
-  // Friday strength is on hold (club decision, 2026-08-31), so nothing maps
-  // to fbs while the split is live.
-  'full-a': 'lbs',
-  'full-b': 'ubs',
-  esd: 'esd',
-  hyrox: 'hyrox',
-  'rox-strong': 'hyrox',
-  'rox-engine': 'hyrox',
-  'rox-race': 'hyrox',
-  gameday: 'gameday',
-};
+// The focus-to-class mapping and day picks live in ONE place, the focus
+// catalog; re-exported here so existing import sites keep working.
+import { FOCUS_CLASS_TYPE, FOCUS_DAY_PICK } from './focusCatalog.js';
 
-/**
- * Which of a class type's days a focus takes, where several focuses share one
- * class type. The Hyrox class runs twice a week and the tracks are written for
- * specific days: ROX Strong is the Monday session and ROX Race the Friday one,
- * so taking the earliest day for both would put them on the same day.
- *
- * `null` means the track deliberately has no day yet. ROX Engine is written but
- * the club runs only two Hyrox classes, so it is parked rather than guessed at.
- * A focus absent from this table takes the earliest day its class runs, which
- * is what every single-focus class wants.
- */
-export const FOCUS_DAY_PICK: Partial<Record<SessionFocus, number | null>> = {
-  'rox-strong': 0,
-  'rox-race': 1,
-  'rox-engine': null,
-};
+export { FOCUS_CLASS_TYPE, FOCUS_DAY_PICK };
 
 export interface ResolvedDay {
   focus: SessionFocus;

@@ -16,35 +16,15 @@ import type {
   ProgramWeek,
   SeriesBlock,
   Session,
-  SessionFocus,
   SessionKind,
   TimedBlock,
 } from '../types/documents';
 
-export const STREAM_DEFS: { id: string; name: string; focuses: SessionFocus[] }[] = [
-  // A/B first: they are the live split. The old three focuses stay valid for
-  // the archived Lower/Upper/Full era.
-  { id: 'strength', name: 'Strength', focuses: ['full-a', 'full-b', 'lower', 'upper', 'full'] },
-  { id: 'esd', name: 'ESD', focuses: ['esd'] },
-  // 'hyrox' is last: it is the pre-tracks focus, kept so the August sessions
-  // written before the tracks existed still belong to this stream.
-  { id: 'hyrox', name: 'Hyrox', focuses: ['rox-strong', 'rox-engine', 'rox-race', 'hyrox'] },
-  { id: 'gameday', name: 'Game Day', focuses: ['gameday'] },
-];
+// The stream and label facts live in ONE place, the focus catalog;
+// re-exported here so existing import sites keep working.
+import { FOCUS_LABEL, STREAM_DEFS } from './focusCatalog.js';
 
-export const FOCUS_LABEL: Record<SessionFocus, string> = {
-  lower: 'Lower',
-  upper: 'Upper',
-  full: 'Full Body',
-  'full-a': 'Full Body A',
-  'full-b': 'Full Body B',
-  esd: 'ESD',
-  hyrox: 'Hyrox',
-  'rox-strong': 'ROX Strong',
-  'rox-engine': 'ROX Engine',
-  'rox-race': 'ROX Race',
-  gameday: 'Game Day',
-};
+export { FOCUS_LABEL, STREAM_DEFS };
 
 export function sessionLabel(s: Session): string {
   return s.name || FOCUS_LABEL[s.focus];
