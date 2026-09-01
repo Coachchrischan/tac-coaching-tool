@@ -1,0 +1,1939 @@
+{
+ "note": "Roundtable review of the 2026-08-31 A/B restructure: 4 disciplines x 3 personas, adversarial verify gate, 4-lead vote. Must-fix and high-value items were applied the same day (see git log around d04ef69); items needing Chris are in BANKED-2026-08-31.md.",
+ "distinctItems": 51,
+ "verified": {
+  "confirmed": 47,
+  "unverified": 0,
+  "rejected": 4
+ },
+ "quorum": {
+  "counted": 4,
+  "qualified": 4,
+  "lowConfidence": false
+ },
+ "mustNow": [
+  {
+   "id": 1,
+   "title": "TrainHeroic push crashes on challenge weeks (3, 6, 9) and leaves the week half-pushed",
+   "area": "src/server/teamPushPlugin.ts + data/program.json str2-hyp weeks 3/6/9",
+   "severity": "critical",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 20,
+   "ballotCoverage": 4,
+   "mustFixVotes": 4,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 100,
+   "suggestion": "Skip non-series parts before touching slots: `if (tb.kind === 'circuit' || !Array.isArray(tb.slots)) continue;`, optionally appending the challenge pieces as a final note so the draft is not silent about it.",
+   "evidence": "teamPushPlugin.ts:208-209: `for (const tb of session.timedBlocks) { const slots = tb.slots.filter((sl) => sl.name);` while Full Body A weeks 3/6/9 end with a `kind: 'circuit'` Challenge part (e.g. str2-hyp-w3a-CH) that has pieces and no slots property. The kind:'circuit' guard at line 199 only skips whole circuit sessions, not circuit parts inside a series session.",
+   "championedBy": "programming,coherence,code,presentation"
+  },
+  {
+   "id": 2,
+   "title": "TrainHeroic push silently discards every per-exercise note and tempo",
+   "area": "src/server/teamPushPlugin.ts (cue builder) + data/program.json str2-hyp slots",
+   "severity": "high",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 18,
+   "ballotCoverage": 4,
+   "mustFixVotes": 2,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 64,
+   "suggestion": "Append sl.tempo and sl.note to the cue join, add both to the PushSession slot type, and pass tb.note through to the TrainHeroic block so series-level instructions survive.",
+   "evidence": "teamPushPlugin.ts:222-224 builds the cue only from intensity, rpe and mapReps output; the PushSession slot type (lines 115-123) omits note and tempo entirely. 135 of 147 named slots in the 9-week block carry a note, e.g. Back Squat W1: 'Or front squat, same wave. Wave loading: leave 2 reps in the tank on the last set.' SeriesBlock.note is likewise never sent."
+  },
+  {
+   "id": 21,
+   "title": "Hanging knee raises from a barbell in J-hooks: unbudgeted rack re-rig after heavy bench, and not a secure hang point",
+   "area": "data/program.json:1794/2006/2218 (str2-hyp weeks 7-9, Day A block C)",
+   "severity": "high",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 15,
+   "ballotCoverage": 4,
+   "mustFixVotes": 2,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 55,
+   "suggestion": "Change the movement to hanging knee raises from the rig (run in the same waves as the pull-up work) or a lying leg raise off the bench already in place, and delete the barbell-in-rack instruction.",
+   "evidence": "Hanging Knee Raise note: 'Hands on the barbell in the rack (barbell supported).' It follows block B's 75-85% bench in the same racks with 0 transition minutes between blocks."
+  },
+  {
+   "id": 6,
+   "title": "Tuesday and Thursday classes are still named Lower Body Strength and Upper Body Strength while delivering Full Body A/B",
+   "area": "data/schedule.json classTypes + src/lib/classDays.ts:33-34 (FOCUS_CLASS_TYPE)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 3,
+   "discs": [
+    "coherence",
+    "presentation"
+   ],
+   "panelScore": 17,
+   "ballotCoverage": 4,
+   "mustFixVotes": 1,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 39,
+   "suggestion": "Rename the two display names (keeping ids lbs/ubs so mappings and slots keep working), e.g. 'Strength A (Full Body)' and 'Strength B (Full Body)', or get Chris's explicit call tonight and record it in BANKED.",
+   "evidence": "schedule.json classTypes: lbs = 'Lower Body Strength', ubs = 'Upper Body Strength'; classDays.ts maps 'full-a': 'lbs' and 'full-b': 'ubs'. Programming, the TV board, the TrainHeroic draft title and the overview PDF all say Full Body A/B while Schedule, Home's Today panel and the booking story say Lower/Upper. Thursday's 'Upper Body Strength' carries the RDL-plus-lower Full Body B, close to inverted against its name."
+  },
+  {
+   "id": 26,
+   "title": "Phase numbering off by one: the plan of record's Phase 1 renders as Phase 2 in the tool",
+   "area": "src/tabs/programming/ProgrammingTab.tsx:317 + src/tabs/movement/MovementCheckTab.tsx:108 vs PROGRAMMING-PLAN.md",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 2,
+   "discs": [
+    "coherence",
+    "presentation"
+   ],
+   "panelScore": 17,
+   "ballotCoverage": 4,
+   "mustFixVotes": 1,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 39,
+   "suggestion": "Pick one numbering: label the primer 'Primer' (Phase 0) and number delivered phases from the nine-week block, or renumber PROGRAMMING-PLAN.md to match the tool; alternatively label containers by theme and dates instead of ordinals.",
+   "evidence": "ProgrammingTab labels containers by array index (`Phase ${i + 1}`) and the stream orders str2-primer first, so the primer is 'Phase 1' and Strength-Hypertrophy 'Phase 2'; PROGRAMMING-PLAN.md numbers the primer 0 and heads the block 'Phase 1: Strength-Hypertrophy, 9 weeks (14 Sept)'. HANDOVER.md uses the plan's numbering too."
+  }
+ ],
+ "should": [
+  {
+   "id": 3,
+   "title": "Push creates workouts and blocks before validating content: empty drafts, empty WU shells, and silently dropped exercises",
+   "area": "src/server/teamPushPlugin.ts:197-219 (create-before-check ordering)",
+   "severity": "high",
+   "verdict": "confirmed",
+   "mergedCount": 2,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 16,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 48,
+   "suggestion": "Count resolvable exercises per session and per block before creating anything, skip with a reported reason when zero, and warn listing unresolved movements (or create them as custom exercises like the 2026-08-14 CUSTOM_IDS batch) before any workout exists.",
+   "evidence": "teamPushPlugin.ts:199-205 calls createWorkoutForDay and setWorkoutTitle before any slot is inspected; lines 209-219 call createBlock before the per-slot exerciseId check. 'Warm Up for Time' (all 18 sessions), 'Weighted Squat Jump' (weeks 4-6, a primary A-series wave movement) and 'DB Front + Lateral Raise' have no exerciseId and no CUSTOM_IDS entry; every str2-primer and str2-str5 session has 0 named slots."
+  },
+  {
+   "id": 4,
+   "title": "Week email drops every slot note, so EMOM formats, hold times and alternatives vanish from the coach handout",
+   "area": "src/lib/weekEmail.ts (sessionToText)",
+   "severity": "high",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 16,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 48,
+   "suggestion": "Append the note to each slot line in sessionToText, e.g. `${detail}${sl.note ? `  (${sl.note})` : ''}`, matching what the TV board already shows.",
+   "evidence": "weekEmail.ts:24-30 builds the per-exercise line from sets/reps/load/intensity/rpe/tempo only; sl.note is never emitted. Week 3 Day A: Weighted Chin Ups is sets 10, reps 3, note 'EMOM 10 minutes...' and Hollow Hold has no reps at all, only note '20 to 30 seconds.'"
+  },
+  {
+   "id": 5,
+   "title": "Week email and CSV export silently omit the week 3/6/9 Challenge block",
+   "area": "src/lib/weekEmail.ts:19 and src/lib/exportCsv.ts:69 (seriesBlocks filter)",
+   "severity": "high",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 15,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 45,
+   "suggestion": "After the series blocks, walk circuitParts(s.timedBlocks) and emit each piece's heading and lines (email as a labelled section; CSV as a Challenge row reusing the circuit-session joining logic).",
+   "evidence": "Both call seriesBlocks, defined at programStreams.ts:58-60 as `blocks.filter((b) => b.kind !== 'circuit')`, which removes the new circuit Challenge parts (str2-hyp-w3a-CH etc.). TvPage.tsx:594-644 renders the part explicitly, so the wall shows the challenge while the email and CSV do not."
+  },
+  {
+   "id": 14,
+   "title": "RDL waved on percentages with no reference lift, peaking at 3x3 at 85% RPE 9",
+   "area": "data/program.json (all str2-hyp full-b main slots, w1b through w9b)",
+   "severity": "high",
+   "verdict": "confirmed",
+   "mergedCount": 2,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 15,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 45,
+   "suggestion": "Make the RDL RPE-primary (delete the percentage, keep the rep wave and RPE caps), or state the anchor in every note, e.g. percentages of the week 1 3x9 working load, an anchor every member actually possesses.",
+   "evidence": "str2-hyp-w9b-a0: Romanian Deadlift 3x3 RPE 9 intensity 85%, note 'Final wave 7/5/3: heaviest of the block.' No slot, note or plan text says 85 per cent of what."
+  },
+  {
+   "id": 38,
+   "title": "jsPDF px unit without the px_scaling hotfix makes the 'A4' PDF physically oversized",
+   "area": "src/tabs/overview/OverviewPage.tsx:127",
+   "severity": "high",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 15,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 45,
+   "suggestion": "Pass `hotfixes: ['px_scaling']` in the constructor (and later in TvPage.tsx:232 for consistency), then print one page to confirm 210 by 297 mm.",
+   "evidence": "`new jsPDF({ orientation: 'portrait', unit: 'px', format: [PW, PH] })` with PW=794, PH=1123; jspdf 4.2.1's docs state px units need `hotfixes: ['px_scaling']` for correct scaling."
+  },
+  {
+   "id": 20,
+   "title": "Single leg depth jumps in weeks 7-9 with no single-leg landing progression anywhere in weeks 1-6",
+   "area": "data/program.json:1731/1943/2155 (str2-hyp micro 3, Day A)",
+   "severity": "high",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 14,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 42,
+   "suggestion": "Make broad-to-vertical jump (already the coach alternative) the headline exercise for micro 3 and gate the single leg depth jump on demonstrated hop-and-stick competence, deferring true SL depth work until after Phase 3's unilateral block.",
+   "evidence": "'Single Leg Depth Jump' 3x3, note 'Each side, low box. Or broad-to-vertical jump, coach's pick', in the same sessions as the block's heaviest squats (up to 3x3 at 85% RPE 9). The micro 2 jump is the bilateral, concentric-biased Weighted Squat Jump, so no hop, bound or stick-landing drill precedes it."
+  },
+  {
+   "id": 24,
+   "title": "ESD and Hyrox annual lanes overrun the 52-week ruler after the Christmas break was added",
+   "area": "data/annual-plan.json (lane week totals) vs src/tabs/annual/AnnualPlanTab.tsx:7",
+   "severity": "high",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "coherence"
+   ],
+   "panelScore": 14,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 42,
+   "suggestion": "Trim two weeks from each lane's final maintenance phase (ESD 'Re-base' 10 to 8, Hyrox 'Build 2' 10 to 8) so all three total 50 plus the break, then re-check 2027 boundaries against the race markers.",
+   "evidence": "Lane phase-week totals: strength 50, esd 52, hyrox 52, with a 2-week break from 2026-12-21 that every lane steps over, against a fixed `YEAR_WEEKS = 52` ruler."
+  }
+ ],
+ "nice": [
+  {
+   "id": 8,
+   "title": "The Annual Plan's Hyrox lane still tells the pre-restructure story, links to nothing, and cannot answer the Melbourne race question",
+   "area": "data/annual-plan.json hyrox lane vs program.json hyrox stream; src/tabs/overview/OverviewPage.tsx:98-110",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 2,
+   "discs": [
+    "coherence",
+    "presentation"
+   ],
+   "panelScore": 14,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 28,
+   "suggestion": "Rebuild the hyrox lane as the real containers (Lead-in, Blocks 01-04) with a block boundary before the Melbourne window, give each hyrox block an annualPhaseId like str2-* does, and collapse the ESD lane to a month-to-month band.",
+   "evidence": "The lane runs 'Off-season GPP' (10 wk), 'Strength-endurance build' (10 wk), 'Race prep' (8 wk)... while the stream runs Lead-in plus Blocks 01-04, with annualPhaseId undefined on every hyrox block. HYROX Melbourne (2026-12-09, a race marker on the same document) falls mid 'Strength-endurance build' with 'Comp + taper' arriving after the race. OverviewPage resolves the PDF focus line via annualPhaseId, so the Hyrox page's focus renders as an empty string."
+  },
+  {
+   "id": 10,
+   "title": "The overview PDF skips the primer, leaving a two-week hole starting tomorrow",
+   "area": "src/tabs/overview/OverviewPage.tsx:57-67 (pickBlock) + data/program.json str2-primer",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "presentation"
+   ],
+   "panelScore": 14,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 28,
+   "suggestion": "When the block containing today has no written sessions but carries intents, return it (the empty-week fallback already prints intents), or render a banner above the next block: 'Primer to 13 Sept: run off-app, programming emailed to coaches.'",
+   "evidence": "pickBlock advances past any block with no written sessions; str2-primer's six sessions hold 0 slots, only intents such as 'Run off-app. Primer week 1: programming emailed to coaches.' On 2026-08-31 the Strength page renders str2-hyp beginning 14 Sept and the primer appears nowhere in the PDF."
+  },
+  {
+   "id": 15,
+   "title": "Straight bench percentages start at week 7 with zero straight-bench calibration anywhere in the block",
+   "area": "data/program.json (str2-hyp-w7a-b2, w9a-b2)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 13,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 26,
+   "suggestion": "Make W7 the calibration week: 3x7 at RPE 8 with no percentage, note 'record your top set; this is your new bench anchor', then express W8 and W9 as percentages of that top set (roughly 106 and 113 per cent).",
+   "evidence": "First straight bench is str2-hyp-w7a-b2: 3x7 at 75% RPE 8; weeks 1 to 6 are Tempo (30X1) and Paused bench with RPE only and no intensity. Week 9 then asks 3x3 at 85% RPE 9."
+  },
+  {
+   "id": 18,
+   "title": "No ramp-up sets exist anywhere before 75-85% work; a 5-minute unspecified circuit is the only preparation",
+   "area": "data/program.json (str2-hyp weeks 3, 6, 7-9, both days, WU and A blocks)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 13,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 26,
+   "suggestion": "Extend WU to 8 minutes on weeks 3, 6 and 7-9 (trimming C) and write the ramp into the WU note: 'Circuit 4 min, then build sets: bar x8, 55% x5, 65% x3, 75% x1 before the first work set.'",
+   "evidence": "program.json:273: the WU slot is 'Warm Up for Time' noted '5 minutes, coach's circuit.' and nothing else; week 9's A block is Back Squat 3x3 at 85% inside 15 minutes that also hold the plyo superset and shared bars."
+  },
+  {
+   "id": 23,
+   "title": "HANDOVER.md's current-state sections still describe the pre-restructure tool",
+   "area": "HANDOVER.md (terminology bullet, timetable and push paragraphs, lane counts)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "coherence"
+   ],
+   "panelScore": 13,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 26,
+   "suggestion": "Rewrite the three current-state sections (per-stream terminology and 3/9/5, full-a/full-b mapping with Friday on hold, corrected counts) and add a dated 'What shipped on 2026-08-31' section covering the rebuild, the archive file and /overview.",
+   "evidence": "HANDOVER.md:28 'blocks[] in the data model are PHASES in all UI copy (10/1/6 weeks)'; :104-105 'Lower Tuesday, Upper Thursday, Full Body Friday'; :101-102 'Weeks 3 to 10 are written but not pushed'; :55 counts 9 strength phases where the lane now holds 8. No section covers the A/B rebuild or /overview."
+  },
+  {
+   "id": 28,
+   "title": "Percentage and RPE anchors diverge as the block gets heavier, splitting the class into two different programs",
+   "area": "data/program.json (main-lift slots, all nine weeks)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 13,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 26,
+   "suggestion": "Declare the RPE a ceiling in the main-lift note ('load off the percentage; the RPE is the do-not-exceed line'), or realign the labels (week 3 RPE 7, week 6 RPE 7.5, week 9 RPE 8) keeping the percentages.",
+   "evidence": "str2-hyp-w9a-a0: 3x3 at 85% labelled RPE 9; by standard rep-max relationships 3 at 85% is about RPE 7.5 to 8 and RPE 9 for a triple implies roughly 89 to 90%. In week 1 the anchors agree."
+  },
+  {
+   "id": 33,
+   "title": "Team push server trusts the client-supplied Monday: no Monday check, no block/week agreement, no shutdown check",
+   "area": "src/server/teamPushPlugin.ts:98-157",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "coherence"
+   ],
+   "panelScore": 13,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 26,
+   "suggestion": "Recompute the expected Monday server-side from data/annual-plan.json via trainingWeekMonday using the same cumulative-week rule as ProgrammingTab, and refuse with a 400 naming both dates when the client disagrees.",
+   "evidence": "`if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(monday ?? ''))` is the only validation; content is selected by `stream.blocks[block - 1]?.weeks[week - 1]` while dates come independently from resolveWeekDays(schedule, monday, ...). Nothing verifies they describe the same training week."
+  },
+  {
+   "id": 7,
+   "title": "Nothing in the app tells a coach which day Full Body A and B run",
+   "area": "src/tabs/programming/ProgrammingTab.tsx:1300-1301 session pills; src/tabs/tv/TvPage.tsx:341-390 header",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "presentation"
+   ],
+   "panelScore": 12,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 24,
+   "suggestion": "Call resolveWeekDays where the session pills render and append the day ('Full Body A · Tue'), and put the same day or date in the TV board header.",
+   "evidence": "ProgrammingTab renders the session pill as only `{s.name || FOCUS_LABEL[s.focus]}` ('Full Body A') and the TV header shows 'Week 1 · FULL BODY A' with no day or date anywhere. The A-to-Tuesday mapping exists only in a classDays.ts code comment, the push confirm dialogue and the /overview PDF header."
+  },
+  {
+   "id": 19,
+   "title": "Depth jumps programmed from week 1 for a general population class, inverting the old plan's jump ramp",
+   "area": "data/program.json:296 (str2-hyp micro 1, Day A) vs archive/strength-lower-upper-full-2026-08.json",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 12,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 24,
+   "suggestion": "Swap micro 1 to a floor-based jump with a stick landing (squat jump or low box jump), or rename the slot Depth Drop and cap the height in the note (e.g. box no higher than 30 cm) so the floor reading matches intent.",
+   "evidence": "program.json:296: 'Depth Jump' 3x3, note 'Step down, stick the landing for 2 seconds. Height over reps.' in the first on-app session. The archived plan's sequence was Squat Jump, then Depth Jump, then Depth Jump to Broad Jump."
+  },
+  {
+   "id": 36,
+   "title": "Movement Check opens on the empty primer, presenting a wall of zero-coverage warnings tonight",
+   "area": "src/tabs/movement/MovementCheckTab.tsx:30",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "presentation"
+   ],
+   "panelScore": 12,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 24,
+   "suggestion": "Default bi to the phase containing today's training week that has written sessions (falling forward like OverviewPage.pickBlock), so Movement Check opens on the Strength-Hypertrophy block.",
+   "evidence": "`const [bi, setBi] = useState(0);` with no on-today logic; blocks[0] is str2-primer with zero slots, and every zero-count pattern styles amber ('border-amber-300 bg-amber-50')."
+  },
+  {
+   "id": 44,
+   "title": "The live scenario driving push days is a sketch containing an orphaned coachless ESD block",
+   "area": "data/schedule.json (liveScenarioId vs activeScenarioId; block 6b598281)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "coherence"
+   ],
+   "panelScore": 12,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 24,
+   "suggestion": "Confirm with Chris which scenario is genuinely live, align activeScenarioId and liveScenarioId (or document the difference), and delete the null-coach null-room Tuesday ESD block.",
+   "evidence": "activeScenarioId is 'current' but liveScenarioId is the 'Suggested Format' sketch, which contains a 7:15am Tuesday esd block with `coachId: null, roomId: null` that has no counterpart in 'Current timetable'."
+  },
+  {
+   "id": 9,
+   "title": "pickBlock's final fallback scans from block 1, so the overview PDF regresses to the oldest finished block",
+   "area": "src/tabs/overview/OverviewPage.tsx:67 (pickBlock)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 2,
+   "discs": [
+    "code",
+    "coherence"
+   ],
+   "panelScore": 11,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 22,
+   "suggestion": "Scope the fallback to the present (`spans.slice(from).find(...) ?? spans[Math.max(current, 0)]`) so an empty current block shows honestly as '0 of 10 sessions written', and banner any shown block whose last Monday is before today.",
+   "evidence": "`return spans.find((s) => blockWritten(s.block) > 0) ?? spans[0];` after a forward loop from the block containing today. Simulated on live data: on 2026-11-16 the Strength page picks the finished str2-hyp dated 14 Sept ('18 of 18 sessions written'); on 2026-11-09 the Hyrox page picks the 24 Aug lead-in. The docstring promises 'the next block with content'."
+  },
+  {
+   "id": 17,
+   "title": "EMOM chin-ups put 12-20 members on shared rig space at the same second, with no stagger instruction",
+   "area": "data/program.json (str2-hyp weeks 1-3, Day A) and class delivery",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 11,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 22,
+   "suggestion": "Add a delivery line to the note: 'Run in two waves: half the room starts on 0:00, half on 0:30' (three waves at 20 members), which also dovetails with the bench alternation fix.",
+   "evidence": "program.json:325: 'EMOM 10 minutes: 2 reps at the top of each minute.' No slot or note in str2-hyp mentions staggered starts, waves or per-station clocks; schedule.json shows single 60-minute classes."
+  },
+  {
+   "id": 25,
+   "title": "The Annual Plan's 2027 cycle-2 phases re-instate exactly what tonight's restructure removed",
+   "area": "data/annual-plan.json strength lane (phases from 26 Apr 2027) vs PROGRAMMING-PLAN.md",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 2,
+   "discs": [
+    "presentation",
+    "coherence"
+   ],
+   "panelScore": 11,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 22,
+   "suggestion": "Mark the three cycle-2 phases provisional in their focus text (e.g. 'Structure TBC: to mirror the 2026 A/B decisions after this cycle's review') and drop the orphaned numeral, or reshape them now to the 3/9/5 pattern.",
+   "evidence": "annual-plan.json: 'Strength-Hypertrophy (cycle 2)' 10 wk with 'mid-block deload', 'Deload / skills 2' 1 wk, 'Strength (cycle 2)' 6 wk 'Mini waves 7-5-3 then 5-3-1'. PROGRAMMING-PLAN.md:5: 'the standalone Deload/Skills week was removed, and the closing strength block shortened to five weeks'."
+  },
+  {
+   "id": 27,
+   "title": "Per-stream unit terminology leaks: 'Phase' shows on Month and Block streams, and the PDF calls everything a Block",
+   "area": "src/tabs/programming/ProgrammingTab.tsx (VIEW_LABEL, three dialogue strings) + src/tabs/overview/OverviewPage.tsx headers",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 2,
+   "discs": [
+    "presentation",
+    "coherence"
+   ],
+   "panelScore": 11,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 22,
+   "suggestion": "Derive the third view's label and the three hard-coded strings from UNIT/blockLabel, and give each PDF stream page a unit-correct eyebrow: 'Phase · Strength-Hypertrophy', 'Month · Sept 2026', 'Block 01 · Baseline'.",
+   "evidence": "ProgrammingTab.tsx:64-68 `VIEW_LABEL = { week: 'Week', block: 'Block', month: 'Phase' }` renders unchanged for every stream, and line 964's confirm says 'every week of Phase N' even on ESD Months; the overview PDF's cover and every stream eyebrow say 'Block overview' with no unit word on the Strength page."
+  },
+  {
+   "id": 29,
+   "title": "Micro 3 fatigue management is asymmetric: Day B tapers into week 9, Day A keeps ramping under peak intensity plus the deadhang challenge",
+   "area": "data/program.json (str2-hyp weeks 7-9, full-a vs full-b)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 11,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 22,
+   "suggestion": "Mirror Day B's taper: hold Day A week 9 accessories at week 8 reps or cut to 2 sets, cap accessory RPE at 8, and move the deadhang before the pull-up work (or drop the W9 top-triple attempt).",
+   "evidence": "Day B descends (Hip Thrust 10/8/6, Z-Press 6/6/5) while Day A ascends accessories to RPE 8-8.5 into week 9's 3x3 at 85% squat and bench, the pull-up 'match or beat the block's best triple', then the Deadhang Challenge. The plan's accessory ceiling is 'RPE climbing 7 to 8'."
+  },
+  {
+   "id": 34,
+   "title": "CSV merges Tempo Barbell Bench Press with plain Barbell Bench Press into one mislabelled row",
+   "area": "src/lib/exportCsv.ts:72 (row key)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 11,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 22,
+   "suggestion": "Include the slot name in the row key, e.g. `${tb.label}::${slot.exerciseId ?? ''}::${slot.name.toLowerCase()}`, so renamed variants of one library exercise get their own rows.",
+   "evidence": "`const key = `${tb.label}::${slot.exerciseId ?? slot.name.toLowerCase()}`;` while str2-hyp's B label holds exerciseId 686395 as 'Tempo Barbell Bench Press' (weeks 1-3, 30X1) and 'Barbell Bench Press' (weeks 7-9, no tempo)."
+  },
+  {
+   "id": 50,
+   "title": "Movement Check silently counts untagged accessories via patternGuess",
+   "area": "src/lib/library.ts:53-58 (patternsFor) as consumed by MovementCheckTab.tsx:65",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 11,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 22,
+   "suggestion": "Set explicit empty overrides for the accessories judged untaggable, or count only overridden patterns and render guessed ones as hollow secondary chips.",
+   "evidence": "`return overrides.patterns[exercise.id] ?? exercise.patternGuess;`: Bench Dips, Powell raise and Diamond Push-Up all contribute guessed patterns to the coverage tiles despite carrying no coach tag, while BANKED item 17 records those accessories were deliberately left untagged."
+  },
+  {
+   "id": 30,
+   "title": "Supersets pair two bench-dependent movements, so partners sharing a station cannot alternate",
+   "area": "data/program.json (str2-hyp Day B block B, micros 1 and 2)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 10,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 20,
+   "suggestion": "Write the floor fix into the note: default the bridge/hip thrust to the floor version ('bench if free, floor otherwise') so one bench per pair serves the elevated-foot movement while the partner bridges on the floor.",
+   "evidence": "str2-hyp-w1b-B pairs Barbell FFE Jefferson Split Squat ('Rear foot elevated.') with Single Leg Hamstring Bridge ('shoulders on the bench.'); weeks 4-6 repeat the pattern with Bulgarian Split Squat and Weighted Single Leg Hip Thrust."
+  },
+  {
+   "id": 31,
+   "title": "Challenge-week Day A budgets 50 of 60 minutes with zero transition allowance across five blocks",
+   "area": "data/program.json (str2-hyp-w3a, w6a, w9a) + schedule.json class durations",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 10,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 20,
+   "suggestion": "On weeks 3, 6 and 9, trim Day A's C block to 6 minutes (drop one accessory, keep the superset) so the session budgets 46 minutes and the challenge has a real buffer.",
+   "evidence": "Summing minutes for str2-hyp-w9a: WU 5 + A 15 + B 12 + C 10 + Challenge 8 = 50 in a 60-minute class, on the day A holds 3x3 at 85% and the challenge needs the rig cleared for a whole-room deadhang."
+  },
+  {
+   "id": 35,
+   "title": "Home's Today panel still offers a live Session link for Friday classes nothing maps to",
+   "area": "src/tabs/home/HomeTab.tsx:16-23 (STREAM_FOR_CLASS)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 10,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 20,
+   "suggestion": "While the split is live, derive STREAM_FOR_CLASS from FOCUS_CLASS_TYPE (reverse lookup) or remove the fbs entry so Friday classes show the not-programmed fallback.",
+   "evidence": "HomeTab.tsx:18-20 maps `lbs: 'strength', ubs: 'strength', fbs: 'strength'` while classDays.ts comments 'nothing maps to fbs while the split is live'; the live scenario runs fbs three times on Friday."
+  },
+  {
+   "id": 40,
+   "title": "No year appears anywhere on the overview document, including the prepared date",
+   "area": "src/tabs/overview/OverviewPage.tsx:81 (fmt) and its call sites",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "presentation"
+   ],
+   "panelScore": 10,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 20,
+   "suggestion": "Add the year to the cover span and prepared line ('prepared 31 Aug 2026'), and include years on stream-page spans whenever from and to fall in different years.",
+   "evidence": "`const fmt = (d: Date) => d.toLocaleDateString('en-AU', { day: 'numeric', month: 'short' });` feeds the cover span, stream headers, week labels and the prepared stamp ('prepared 31 Aug')."
+  },
+  {
+   "id": 46,
+   "title": "exportPdf swallows failures; the coach gets no signal when export dies",
+   "area": "src/tabs/overview/OverviewPage.tsx:123-147",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 10,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 20,
+   "suggestion": "Add a catch that surfaces the failure in the UI, e.g. an exportError state rendered beside the button, so a failed export states itself instead of miming success.",
+   "evidence": "`async function exportPdf() { setExporting(true); try { ... } finally { setExporting(false); } }` with no catch; toSvg can reject and the img.onerror path rejects with 'page render failed'."
+  },
+  {
+   "id": 12,
+   "title": "overflow-hidden on the overview week list can silently clip week 9 of the Strength page",
+   "area": "src/tabs/overview/OverviewPage.tsx:242",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "presentation"
+   ],
+   "panelScore": 9,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 18,
+   "suggestion": "Compare the week list's scrollHeight to clientHeight after render; on overflow, step the text down one size (the TV fit pattern) or break onto a second page, and show a visible warning in the preview whenever clipping would occur.",
+   "evidence": "`<div className=\"mt-4 min-h-0 flex-1 space-y-2 overflow-hidden\">` inside a fixed 794x1123 frame; the 9-week x 2-session str2-hyp page measures roughly 780px of an approximately 816px budget, leaving about two wrapped lines of slack across the whole page."
+  },
+  {
+   "id": 32,
+   "title": "CommunityTab derives 'today' via UTC, misclassifying events until 10am Brisbane every day",
+   "area": "src/tabs/community/CommunityTab.tsx:65",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "coherence"
+   ],
+   "panelScore": 9,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 18,
+   "suggestion": "Replace line 65 with `const today = todayIso();` imported from '../../lib/trainingWeeks'.",
+   "evidence": "`const today = new Date().toISOString().slice(0, 10);`, the exact pattern trainingWeeks.ts:14 bans ('in Brisbane that is the previous day in UTC') and todayIso() exists to replace."
+  },
+  {
+   "id": 45,
+   "title": "pickBlock crashes the whole /overview route for a stream with zero blocks",
+   "area": "src/tabs/overview/OverviewPage.tsx:67 and 96-103",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 8,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 16,
+   "suggestion": "Return null from pickBlock for an empty stream, filter or render those streams as 'no blocks yet', and treat weekStarts.length === 0 the same way.",
+   "evidence": "`?? spans[0]` returns undefined for an empty stream and the caller immediately dereferences picked.block; a zero-week block similarly reaches fmt(undefined) and throws inside toLocaleDateString."
+  },
+  {
+   "id": 41,
+   "title": "Literal em dashes in user-visible copy on Home and the TV board",
+   "area": "src/tabs/home/HomeTab.tsx:374, 418; src/tabs/tv/TvPage.tsx:433",
+   "severity": "low",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "coherence"
+   ],
+   "panelScore": 12,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 12,
+   "suggestion": "Recast the two Home captions with a full stop ('...week by week. Click another class below to switch...') and replace the TV placeholder with a middle dot, an empty string, or 'Untitled'.",
+   "evidence": "Two Home captions join clauses with a literal em dash character ('week by week' caption and 'All classes side by side' caption), and TvPage.tsx:433 renders an em dash as the placeholder for a circuit piece with no heading, putting one on the gym wall."
+  },
+  {
+   "id": 51,
+   "title": "Single Leg Depth Jump is the one library-picked exercise in the 17 weeks with no demo video",
+   "area": "public/data/exercise-library.json id 445 (str2-hyp micro 3, Day A)",
+   "severity": "low",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 10,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 10,
+   "suggestion": "Add a videoUrl override for 445, or swap to a library variant that carries one and keep the single leg depth jump in the note.",
+   "evidence": "Every exerciseId used across the strength and hyrox streams resolves; the only library entry without a videoUrl is 445 Single Leg Depth Jump, used in weeks 7-9."
+  },
+  {
+   "id": 37,
+   "title": "FOCUS_DAY_PICK encodes a weekday intent as a fragile ordinal",
+   "area": "src/lib/classDays.ts:54-58 and 99-103 (resolveWeekDays)",
+   "severity": "low",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 8,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 8,
+   "suggestion": "Store weekday preferences (e.g. rox-race: 4) resolved as `classDays.includes(pref) ? pref : fallback`, with the fallback the last or first day the class runs, so the code matches its comment and degrades predictably.",
+   "evidence": "`'rox-strong': 0, 'rox-race': 1` against the comment 'ROX Strong is the Monday session and ROX Race the Friday one'; resolution sorts the class type's distinct days and indexes into them."
+  },
+  {
+   "id": 39,
+   "title": "Export rasterises pages at roughly 192dpi, below print standard, with unselectable text",
+   "area": "src/tabs/overview/OverviewPage.tsx:137-141",
+   "severity": "low",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "presentation"
+   ],
+   "panelScore": 8,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 8,
+   "suggestion": "Raise the canvas multiplier to 3x (or a constant shared with the TV export) to reach about 288dpi; the pages are mostly flat colour so the size cost is modest.",
+   "evidence": "`canvas.width = PW * 2; // 2x for crisp print` then addImage of a PNG; PW=794 is A4 at 96dpi, so 2x yields about 192dpi effective."
+  },
+  {
+   "id": 42,
+   "title": "Accessory rep ramp entered inconsistently against the stated base/+2/+2 rule",
+   "area": "data/program.json (str2-hyp Day B accessories)",
+   "severity": "low",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 8,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 8,
+   "suggestion": "Change both to 8/10/10 so the +2 lands in week 2 of each micro like everything else; leave the calves if the +3 was deliberate for the higher-rep range.",
+   "evidence": "Barbell FFE Jefferson Split Squat runs 8/8/10 (weeks 1-3) and DB Deficit Curtsey Lunge 8/8/10 (weeks 7-9) versus the plan's 'week 1 base, weeks 2 and 3 plus two reps', which every Day A accessory follows; both calf raises jump +3 (12/15/15)."
+  },
+  {
+   "id": 47,
+   "title": "Severe density imbalance between the Strength page and the sparse ESD/Game Day pages",
+   "area": "src/tabs/overview/OverviewPage.tsx:242, 276",
+   "severity": "low",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "presentation"
+   ],
+   "panelScore": 8,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 8,
+   "suggestion": "For streams with 5 or fewer week rows, step the week typography up one size and increase row spacing so content breathes into the height, keeping the same grid and palette.",
+   "evidence": "The week list is a top-aligned space-y-2 column with the footer pinned to the page bottom; picked blocks range from 9 weeks x 2 sessions down to 4 weeks x 1 session (Game Day months)."
+  },
+  {
+   "id": 49,
+   "title": "isoAfter keeps the banned toISOString().slice pattern in the push-date path",
+   "area": "src/lib/classDays.ts:76-80 (isoAfter, used by resolveWeekDays)",
+   "severity": "low",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "coherence"
+   ],
+   "panelScore": 8,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 8,
+   "suggestion": "Rewrite isoAfter to the house pattern: parse `${monday}T00:00:00` local, step with setDate, and return isoDate(d) from trainingWeeks so one audited function owns every Date-to-string conversion.",
+   "evidence": "`return d.toISOString().slice(0, 10);` inside isoAfter, whose output becomes the ResolvedDay.date sent to TrainHeroic; trainingWeeks.ts:14-17 documents that this exact pattern once 'sent Sunday's date under Tuesday's name'."
+  },
+  {
+   "id": 43,
+   "title": "Duplicate circuit-piece id copied across three ESD weeks",
+   "area": "data/program.json (esd-sept-2026, lines 2900/3021/3142)",
+   "severity": "low",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "coherence"
+   ],
+   "panelScore": 7,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 7,
+   "suggestion": "Regenerate fresh ids for the week-4 and week-5 copies, and make whatever copy-week helper produced this re-id everything it clones.",
+   "evidence": "The id 'd10ff4c8-236b-4df1-a8e3-58f891c937e4' appears three times as the 'Finish' piece of esd-b1w3, esd-b1w4 and esd-b1w5's first sessions; a scan of all 921 ids found it as the only duplicate."
+  },
+  {
+   "id": 48,
+   "title": "Cover and page meta text use cool white/black opacities instead of the warm TAC neutral scale",
+   "area": "src/tabs/overview/OverviewPage.tsx:199, 209, 246-277",
+   "severity": "low",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "presentation"
+   ],
+   "panelScore": 5,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 5,
+   "suggestion": "Replace white/NN with cream (#F5F3EB) at reduced opacity and black/NN with charcoal (#201d1d) at opacity, matching the ink scale in src/index.css.",
+   "evidence": "text-white/60 and text-white/35 on the charcoal cover; text-black/45, text-black/55 and border-black/10 on the cream pages, rather than the warm ink scale src/index.css already defines."
+  }
+ ],
+ "ranked": [
+  {
+   "id": 1,
+   "title": "TrainHeroic push crashes on challenge weeks (3, 6, 9) and leaves the week half-pushed",
+   "area": "src/server/teamPushPlugin.ts + data/program.json str2-hyp weeks 3/6/9",
+   "severity": "critical",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 20,
+   "ballotCoverage": 4,
+   "mustFixVotes": 4,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 100,
+   "suggestion": "Skip non-series parts before touching slots: `if (tb.kind === 'circuit' || !Array.isArray(tb.slots)) continue;`, optionally appending the challenge pieces as a final note so the draft is not silent about it.",
+   "evidence": "teamPushPlugin.ts:208-209: `for (const tb of session.timedBlocks) { const slots = tb.slots.filter((sl) => sl.name);` while Full Body A weeks 3/6/9 end with a `kind: 'circuit'` Challenge part (e.g. str2-hyp-w3a-CH) that has pieces and no slots property. The kind:'circuit' guard at line 199 only skips whole circuit sessions, not circuit parts inside a series session.",
+   "championedBy": "programming,coherence,code,presentation"
+  },
+  {
+   "id": 2,
+   "title": "TrainHeroic push silently discards every per-exercise note and tempo",
+   "area": "src/server/teamPushPlugin.ts (cue builder) + data/program.json str2-hyp slots",
+   "severity": "high",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 18,
+   "ballotCoverage": 4,
+   "mustFixVotes": 2,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 64,
+   "suggestion": "Append sl.tempo and sl.note to the cue join, add both to the PushSession slot type, and pass tb.note through to the TrainHeroic block so series-level instructions survive.",
+   "evidence": "teamPushPlugin.ts:222-224 builds the cue only from intensity, rpe and mapReps output; the PushSession slot type (lines 115-123) omits note and tempo entirely. 135 of 147 named slots in the 9-week block carry a note, e.g. Back Squat W1: 'Or front squat, same wave. Wave loading: leave 2 reps in the tank on the last set.' SeriesBlock.note is likewise never sent."
+  },
+  {
+   "id": 21,
+   "title": "Hanging knee raises from a barbell in J-hooks: unbudgeted rack re-rig after heavy bench, and not a secure hang point",
+   "area": "data/program.json:1794/2006/2218 (str2-hyp weeks 7-9, Day A block C)",
+   "severity": "high",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 15,
+   "ballotCoverage": 4,
+   "mustFixVotes": 2,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 55,
+   "suggestion": "Change the movement to hanging knee raises from the rig (run in the same waves as the pull-up work) or a lying leg raise off the bench already in place, and delete the barbell-in-rack instruction.",
+   "evidence": "Hanging Knee Raise note: 'Hands on the barbell in the rack (barbell supported).' It follows block B's 75-85% bench in the same racks with 0 transition minutes between blocks."
+  },
+  {
+   "id": 6,
+   "title": "Tuesday and Thursday classes are still named Lower Body Strength and Upper Body Strength while delivering Full Body A/B",
+   "area": "data/schedule.json classTypes + src/lib/classDays.ts:33-34 (FOCUS_CLASS_TYPE)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 3,
+   "discs": [
+    "coherence",
+    "presentation"
+   ],
+   "panelScore": 17,
+   "ballotCoverage": 4,
+   "mustFixVotes": 1,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 39,
+   "suggestion": "Rename the two display names (keeping ids lbs/ubs so mappings and slots keep working), e.g. 'Strength A (Full Body)' and 'Strength B (Full Body)', or get Chris's explicit call tonight and record it in BANKED.",
+   "evidence": "schedule.json classTypes: lbs = 'Lower Body Strength', ubs = 'Upper Body Strength'; classDays.ts maps 'full-a': 'lbs' and 'full-b': 'ubs'. Programming, the TV board, the TrainHeroic draft title and the overview PDF all say Full Body A/B while Schedule, Home's Today panel and the booking story say Lower/Upper. Thursday's 'Upper Body Strength' carries the RDL-plus-lower Full Body B, close to inverted against its name."
+  },
+  {
+   "id": 26,
+   "title": "Phase numbering off by one: the plan of record's Phase 1 renders as Phase 2 in the tool",
+   "area": "src/tabs/programming/ProgrammingTab.tsx:317 + src/tabs/movement/MovementCheckTab.tsx:108 vs PROGRAMMING-PLAN.md",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 2,
+   "discs": [
+    "coherence",
+    "presentation"
+   ],
+   "panelScore": 17,
+   "ballotCoverage": 4,
+   "mustFixVotes": 1,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 39,
+   "suggestion": "Pick one numbering: label the primer 'Primer' (Phase 0) and number delivered phases from the nine-week block, or renumber PROGRAMMING-PLAN.md to match the tool; alternatively label containers by theme and dates instead of ordinals.",
+   "evidence": "ProgrammingTab labels containers by array index (`Phase ${i + 1}`) and the stream orders str2-primer first, so the primer is 'Phase 1' and Strength-Hypertrophy 'Phase 2'; PROGRAMMING-PLAN.md numbers the primer 0 and heads the block 'Phase 1: Strength-Hypertrophy, 9 weeks (14 Sept)'. HANDOVER.md uses the plan's numbering too."
+  },
+  {
+   "id": 3,
+   "title": "Push creates workouts and blocks before validating content: empty drafts, empty WU shells, and silently dropped exercises",
+   "area": "src/server/teamPushPlugin.ts:197-219 (create-before-check ordering)",
+   "severity": "high",
+   "verdict": "confirmed",
+   "mergedCount": 2,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 16,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 48,
+   "suggestion": "Count resolvable exercises per session and per block before creating anything, skip with a reported reason when zero, and warn listing unresolved movements (or create them as custom exercises like the 2026-08-14 CUSTOM_IDS batch) before any workout exists.",
+   "evidence": "teamPushPlugin.ts:199-205 calls createWorkoutForDay and setWorkoutTitle before any slot is inspected; lines 209-219 call createBlock before the per-slot exerciseId check. 'Warm Up for Time' (all 18 sessions), 'Weighted Squat Jump' (weeks 4-6, a primary A-series wave movement) and 'DB Front + Lateral Raise' have no exerciseId and no CUSTOM_IDS entry; every str2-primer and str2-str5 session has 0 named slots."
+  },
+  {
+   "id": 4,
+   "title": "Week email drops every slot note, so EMOM formats, hold times and alternatives vanish from the coach handout",
+   "area": "src/lib/weekEmail.ts (sessionToText)",
+   "severity": "high",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 16,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 48,
+   "suggestion": "Append the note to each slot line in sessionToText, e.g. `${detail}${sl.note ? `  (${sl.note})` : ''}`, matching what the TV board already shows.",
+   "evidence": "weekEmail.ts:24-30 builds the per-exercise line from sets/reps/load/intensity/rpe/tempo only; sl.note is never emitted. Week 3 Day A: Weighted Chin Ups is sets 10, reps 3, note 'EMOM 10 minutes...' and Hollow Hold has no reps at all, only note '20 to 30 seconds.'"
+  },
+  {
+   "id": 5,
+   "title": "Week email and CSV export silently omit the week 3/6/9 Challenge block",
+   "area": "src/lib/weekEmail.ts:19 and src/lib/exportCsv.ts:69 (seriesBlocks filter)",
+   "severity": "high",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 15,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 45,
+   "suggestion": "After the series blocks, walk circuitParts(s.timedBlocks) and emit each piece's heading and lines (email as a labelled section; CSV as a Challenge row reusing the circuit-session joining logic).",
+   "evidence": "Both call seriesBlocks, defined at programStreams.ts:58-60 as `blocks.filter((b) => b.kind !== 'circuit')`, which removes the new circuit Challenge parts (str2-hyp-w3a-CH etc.). TvPage.tsx:594-644 renders the part explicitly, so the wall shows the challenge while the email and CSV do not."
+  },
+  {
+   "id": 14,
+   "title": "RDL waved on percentages with no reference lift, peaking at 3x3 at 85% RPE 9",
+   "area": "data/program.json (all str2-hyp full-b main slots, w1b through w9b)",
+   "severity": "high",
+   "verdict": "confirmed",
+   "mergedCount": 2,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 15,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 45,
+   "suggestion": "Make the RDL RPE-primary (delete the percentage, keep the rep wave and RPE caps), or state the anchor in every note, e.g. percentages of the week 1 3x9 working load, an anchor every member actually possesses.",
+   "evidence": "str2-hyp-w9b-a0: Romanian Deadlift 3x3 RPE 9 intensity 85%, note 'Final wave 7/5/3: heaviest of the block.' No slot, note or plan text says 85 per cent of what."
+  },
+  {
+   "id": 38,
+   "title": "jsPDF px unit without the px_scaling hotfix makes the 'A4' PDF physically oversized",
+   "area": "src/tabs/overview/OverviewPage.tsx:127",
+   "severity": "high",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 15,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 45,
+   "suggestion": "Pass `hotfixes: ['px_scaling']` in the constructor (and later in TvPage.tsx:232 for consistency), then print one page to confirm 210 by 297 mm.",
+   "evidence": "`new jsPDF({ orientation: 'portrait', unit: 'px', format: [PW, PH] })` with PW=794, PH=1123; jspdf 4.2.1's docs state px units need `hotfixes: ['px_scaling']` for correct scaling."
+  },
+  {
+   "id": 20,
+   "title": "Single leg depth jumps in weeks 7-9 with no single-leg landing progression anywhere in weeks 1-6",
+   "area": "data/program.json:1731/1943/2155 (str2-hyp micro 3, Day A)",
+   "severity": "high",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 14,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 42,
+   "suggestion": "Make broad-to-vertical jump (already the coach alternative) the headline exercise for micro 3 and gate the single leg depth jump on demonstrated hop-and-stick competence, deferring true SL depth work until after Phase 3's unilateral block.",
+   "evidence": "'Single Leg Depth Jump' 3x3, note 'Each side, low box. Or broad-to-vertical jump, coach's pick', in the same sessions as the block's heaviest squats (up to 3x3 at 85% RPE 9). The micro 2 jump is the bilateral, concentric-biased Weighted Squat Jump, so no hop, bound or stick-landing drill precedes it."
+  },
+  {
+   "id": 24,
+   "title": "ESD and Hyrox annual lanes overrun the 52-week ruler after the Christmas break was added",
+   "area": "data/annual-plan.json (lane week totals) vs src/tabs/annual/AnnualPlanTab.tsx:7",
+   "severity": "high",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "coherence"
+   ],
+   "panelScore": 14,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 42,
+   "suggestion": "Trim two weeks from each lane's final maintenance phase (ESD 'Re-base' 10 to 8, Hyrox 'Build 2' 10 to 8) so all three total 50 plus the break, then re-check 2027 boundaries against the race markers.",
+   "evidence": "Lane phase-week totals: strength 50, esd 52, hyrox 52, with a 2-week break from 2026-12-21 that every lane steps over, against a fixed `YEAR_WEEKS = 52` ruler."
+  },
+  {
+   "id": 8,
+   "title": "The Annual Plan's Hyrox lane still tells the pre-restructure story, links to nothing, and cannot answer the Melbourne race question",
+   "area": "data/annual-plan.json hyrox lane vs program.json hyrox stream; src/tabs/overview/OverviewPage.tsx:98-110",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 2,
+   "discs": [
+    "coherence",
+    "presentation"
+   ],
+   "panelScore": 14,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 28,
+   "suggestion": "Rebuild the hyrox lane as the real containers (Lead-in, Blocks 01-04) with a block boundary before the Melbourne window, give each hyrox block an annualPhaseId like str2-* does, and collapse the ESD lane to a month-to-month band.",
+   "evidence": "The lane runs 'Off-season GPP' (10 wk), 'Strength-endurance build' (10 wk), 'Race prep' (8 wk)... while the stream runs Lead-in plus Blocks 01-04, with annualPhaseId undefined on every hyrox block. HYROX Melbourne (2026-12-09, a race marker on the same document) falls mid 'Strength-endurance build' with 'Comp + taper' arriving after the race. OverviewPage resolves the PDF focus line via annualPhaseId, so the Hyrox page's focus renders as an empty string."
+  },
+  {
+   "id": 10,
+   "title": "The overview PDF skips the primer, leaving a two-week hole starting tomorrow",
+   "area": "src/tabs/overview/OverviewPage.tsx:57-67 (pickBlock) + data/program.json str2-primer",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "presentation"
+   ],
+   "panelScore": 14,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 28,
+   "suggestion": "When the block containing today has no written sessions but carries intents, return it (the empty-week fallback already prints intents), or render a banner above the next block: 'Primer to 13 Sept: run off-app, programming emailed to coaches.'",
+   "evidence": "pickBlock advances past any block with no written sessions; str2-primer's six sessions hold 0 slots, only intents such as 'Run off-app. Primer week 1: programming emailed to coaches.' On 2026-08-31 the Strength page renders str2-hyp beginning 14 Sept and the primer appears nowhere in the PDF."
+  },
+  {
+   "id": 15,
+   "title": "Straight bench percentages start at week 7 with zero straight-bench calibration anywhere in the block",
+   "area": "data/program.json (str2-hyp-w7a-b2, w9a-b2)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 13,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 26,
+   "suggestion": "Make W7 the calibration week: 3x7 at RPE 8 with no percentage, note 'record your top set; this is your new bench anchor', then express W8 and W9 as percentages of that top set (roughly 106 and 113 per cent).",
+   "evidence": "First straight bench is str2-hyp-w7a-b2: 3x7 at 75% RPE 8; weeks 1 to 6 are Tempo (30X1) and Paused bench with RPE only and no intensity. Week 9 then asks 3x3 at 85% RPE 9."
+  },
+  {
+   "id": 18,
+   "title": "No ramp-up sets exist anywhere before 75-85% work; a 5-minute unspecified circuit is the only preparation",
+   "area": "data/program.json (str2-hyp weeks 3, 6, 7-9, both days, WU and A blocks)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 13,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 26,
+   "suggestion": "Extend WU to 8 minutes on weeks 3, 6 and 7-9 (trimming C) and write the ramp into the WU note: 'Circuit 4 min, then build sets: bar x8, 55% x5, 65% x3, 75% x1 before the first work set.'",
+   "evidence": "program.json:273: the WU slot is 'Warm Up for Time' noted '5 minutes, coach's circuit.' and nothing else; week 9's A block is Back Squat 3x3 at 85% inside 15 minutes that also hold the plyo superset and shared bars."
+  },
+  {
+   "id": 23,
+   "title": "HANDOVER.md's current-state sections still describe the pre-restructure tool",
+   "area": "HANDOVER.md (terminology bullet, timetable and push paragraphs, lane counts)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "coherence"
+   ],
+   "panelScore": 13,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 26,
+   "suggestion": "Rewrite the three current-state sections (per-stream terminology and 3/9/5, full-a/full-b mapping with Friday on hold, corrected counts) and add a dated 'What shipped on 2026-08-31' section covering the rebuild, the archive file and /overview.",
+   "evidence": "HANDOVER.md:28 'blocks[] in the data model are PHASES in all UI copy (10/1/6 weeks)'; :104-105 'Lower Tuesday, Upper Thursday, Full Body Friday'; :101-102 'Weeks 3 to 10 are written but not pushed'; :55 counts 9 strength phases where the lane now holds 8. No section covers the A/B rebuild or /overview."
+  },
+  {
+   "id": 28,
+   "title": "Percentage and RPE anchors diverge as the block gets heavier, splitting the class into two different programs",
+   "area": "data/program.json (main-lift slots, all nine weeks)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 13,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 26,
+   "suggestion": "Declare the RPE a ceiling in the main-lift note ('load off the percentage; the RPE is the do-not-exceed line'), or realign the labels (week 3 RPE 7, week 6 RPE 7.5, week 9 RPE 8) keeping the percentages.",
+   "evidence": "str2-hyp-w9a-a0: 3x3 at 85% labelled RPE 9; by standard rep-max relationships 3 at 85% is about RPE 7.5 to 8 and RPE 9 for a triple implies roughly 89 to 90%. In week 1 the anchors agree."
+  },
+  {
+   "id": 33,
+   "title": "Team push server trusts the client-supplied Monday: no Monday check, no block/week agreement, no shutdown check",
+   "area": "src/server/teamPushPlugin.ts:98-157",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "coherence"
+   ],
+   "panelScore": 13,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 26,
+   "suggestion": "Recompute the expected Monday server-side from data/annual-plan.json via trainingWeekMonday using the same cumulative-week rule as ProgrammingTab, and refuse with a 400 naming both dates when the client disagrees.",
+   "evidence": "`if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(monday ?? ''))` is the only validation; content is selected by `stream.blocks[block - 1]?.weeks[week - 1]` while dates come independently from resolveWeekDays(schedule, monday, ...). Nothing verifies they describe the same training week."
+  },
+  {
+   "id": 7,
+   "title": "Nothing in the app tells a coach which day Full Body A and B run",
+   "area": "src/tabs/programming/ProgrammingTab.tsx:1300-1301 session pills; src/tabs/tv/TvPage.tsx:341-390 header",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "presentation"
+   ],
+   "panelScore": 12,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 24,
+   "suggestion": "Call resolveWeekDays where the session pills render and append the day ('Full Body A · Tue'), and put the same day or date in the TV board header.",
+   "evidence": "ProgrammingTab renders the session pill as only `{s.name || FOCUS_LABEL[s.focus]}` ('Full Body A') and the TV header shows 'Week 1 · FULL BODY A' with no day or date anywhere. The A-to-Tuesday mapping exists only in a classDays.ts code comment, the push confirm dialogue and the /overview PDF header."
+  },
+  {
+   "id": 19,
+   "title": "Depth jumps programmed from week 1 for a general population class, inverting the old plan's jump ramp",
+   "area": "data/program.json:296 (str2-hyp micro 1, Day A) vs archive/strength-lower-upper-full-2026-08.json",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 12,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 24,
+   "suggestion": "Swap micro 1 to a floor-based jump with a stick landing (squat jump or low box jump), or rename the slot Depth Drop and cap the height in the note (e.g. box no higher than 30 cm) so the floor reading matches intent.",
+   "evidence": "program.json:296: 'Depth Jump' 3x3, note 'Step down, stick the landing for 2 seconds. Height over reps.' in the first on-app session. The archived plan's sequence was Squat Jump, then Depth Jump, then Depth Jump to Broad Jump."
+  },
+  {
+   "id": 36,
+   "title": "Movement Check opens on the empty primer, presenting a wall of zero-coverage warnings tonight",
+   "area": "src/tabs/movement/MovementCheckTab.tsx:30",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "presentation"
+   ],
+   "panelScore": 12,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 24,
+   "suggestion": "Default bi to the phase containing today's training week that has written sessions (falling forward like OverviewPage.pickBlock), so Movement Check opens on the Strength-Hypertrophy block.",
+   "evidence": "`const [bi, setBi] = useState(0);` with no on-today logic; blocks[0] is str2-primer with zero slots, and every zero-count pattern styles amber ('border-amber-300 bg-amber-50')."
+  },
+  {
+   "id": 44,
+   "title": "The live scenario driving push days is a sketch containing an orphaned coachless ESD block",
+   "area": "data/schedule.json (liveScenarioId vs activeScenarioId; block 6b598281)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "coherence"
+   ],
+   "panelScore": 12,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 24,
+   "suggestion": "Confirm with Chris which scenario is genuinely live, align activeScenarioId and liveScenarioId (or document the difference), and delete the null-coach null-room Tuesday ESD block.",
+   "evidence": "activeScenarioId is 'current' but liveScenarioId is the 'Suggested Format' sketch, which contains a 7:15am Tuesday esd block with `coachId: null, roomId: null` that has no counterpart in 'Current timetable'."
+  },
+  {
+   "id": 9,
+   "title": "pickBlock's final fallback scans from block 1, so the overview PDF regresses to the oldest finished block",
+   "area": "src/tabs/overview/OverviewPage.tsx:67 (pickBlock)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 2,
+   "discs": [
+    "code",
+    "coherence"
+   ],
+   "panelScore": 11,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 22,
+   "suggestion": "Scope the fallback to the present (`spans.slice(from).find(...) ?? spans[Math.max(current, 0)]`) so an empty current block shows honestly as '0 of 10 sessions written', and banner any shown block whose last Monday is before today.",
+   "evidence": "`return spans.find((s) => blockWritten(s.block) > 0) ?? spans[0];` after a forward loop from the block containing today. Simulated on live data: on 2026-11-16 the Strength page picks the finished str2-hyp dated 14 Sept ('18 of 18 sessions written'); on 2026-11-09 the Hyrox page picks the 24 Aug lead-in. The docstring promises 'the next block with content'."
+  },
+  {
+   "id": 17,
+   "title": "EMOM chin-ups put 12-20 members on shared rig space at the same second, with no stagger instruction",
+   "area": "data/program.json (str2-hyp weeks 1-3, Day A) and class delivery",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 11,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 22,
+   "suggestion": "Add a delivery line to the note: 'Run in two waves: half the room starts on 0:00, half on 0:30' (three waves at 20 members), which also dovetails with the bench alternation fix.",
+   "evidence": "program.json:325: 'EMOM 10 minutes: 2 reps at the top of each minute.' No slot or note in str2-hyp mentions staggered starts, waves or per-station clocks; schedule.json shows single 60-minute classes."
+  },
+  {
+   "id": 25,
+   "title": "The Annual Plan's 2027 cycle-2 phases re-instate exactly what tonight's restructure removed",
+   "area": "data/annual-plan.json strength lane (phases from 26 Apr 2027) vs PROGRAMMING-PLAN.md",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 2,
+   "discs": [
+    "presentation",
+    "coherence"
+   ],
+   "panelScore": 11,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 22,
+   "suggestion": "Mark the three cycle-2 phases provisional in their focus text (e.g. 'Structure TBC: to mirror the 2026 A/B decisions after this cycle's review') and drop the orphaned numeral, or reshape them now to the 3/9/5 pattern.",
+   "evidence": "annual-plan.json: 'Strength-Hypertrophy (cycle 2)' 10 wk with 'mid-block deload', 'Deload / skills 2' 1 wk, 'Strength (cycle 2)' 6 wk 'Mini waves 7-5-3 then 5-3-1'. PROGRAMMING-PLAN.md:5: 'the standalone Deload/Skills week was removed, and the closing strength block shortened to five weeks'."
+  },
+  {
+   "id": 27,
+   "title": "Per-stream unit terminology leaks: 'Phase' shows on Month and Block streams, and the PDF calls everything a Block",
+   "area": "src/tabs/programming/ProgrammingTab.tsx (VIEW_LABEL, three dialogue strings) + src/tabs/overview/OverviewPage.tsx headers",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 2,
+   "discs": [
+    "presentation",
+    "coherence"
+   ],
+   "panelScore": 11,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 22,
+   "suggestion": "Derive the third view's label and the three hard-coded strings from UNIT/blockLabel, and give each PDF stream page a unit-correct eyebrow: 'Phase · Strength-Hypertrophy', 'Month · Sept 2026', 'Block 01 · Baseline'.",
+   "evidence": "ProgrammingTab.tsx:64-68 `VIEW_LABEL = { week: 'Week', block: 'Block', month: 'Phase' }` renders unchanged for every stream, and line 964's confirm says 'every week of Phase N' even on ESD Months; the overview PDF's cover and every stream eyebrow say 'Block overview' with no unit word on the Strength page."
+  },
+  {
+   "id": 29,
+   "title": "Micro 3 fatigue management is asymmetric: Day B tapers into week 9, Day A keeps ramping under peak intensity plus the deadhang challenge",
+   "area": "data/program.json (str2-hyp weeks 7-9, full-a vs full-b)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 11,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 22,
+   "suggestion": "Mirror Day B's taper: hold Day A week 9 accessories at week 8 reps or cut to 2 sets, cap accessory RPE at 8, and move the deadhang before the pull-up work (or drop the W9 top-triple attempt).",
+   "evidence": "Day B descends (Hip Thrust 10/8/6, Z-Press 6/6/5) while Day A ascends accessories to RPE 8-8.5 into week 9's 3x3 at 85% squat and bench, the pull-up 'match or beat the block's best triple', then the Deadhang Challenge. The plan's accessory ceiling is 'RPE climbing 7 to 8'."
+  },
+  {
+   "id": 34,
+   "title": "CSV merges Tempo Barbell Bench Press with plain Barbell Bench Press into one mislabelled row",
+   "area": "src/lib/exportCsv.ts:72 (row key)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 11,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 22,
+   "suggestion": "Include the slot name in the row key, e.g. `${tb.label}::${slot.exerciseId ?? ''}::${slot.name.toLowerCase()}`, so renamed variants of one library exercise get their own rows.",
+   "evidence": "`const key = `${tb.label}::${slot.exerciseId ?? slot.name.toLowerCase()}`;` while str2-hyp's B label holds exerciseId 686395 as 'Tempo Barbell Bench Press' (weeks 1-3, 30X1) and 'Barbell Bench Press' (weeks 7-9, no tempo)."
+  },
+  {
+   "id": 50,
+   "title": "Movement Check silently counts untagged accessories via patternGuess",
+   "area": "src/lib/library.ts:53-58 (patternsFor) as consumed by MovementCheckTab.tsx:65",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 11,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 22,
+   "suggestion": "Set explicit empty overrides for the accessories judged untaggable, or count only overridden patterns and render guessed ones as hollow secondary chips.",
+   "evidence": "`return overrides.patterns[exercise.id] ?? exercise.patternGuess;`: Bench Dips, Powell raise and Diamond Push-Up all contribute guessed patterns to the coverage tiles despite carrying no coach tag, while BANKED item 17 records those accessories were deliberately left untagged."
+  },
+  {
+   "id": 30,
+   "title": "Supersets pair two bench-dependent movements, so partners sharing a station cannot alternate",
+   "area": "data/program.json (str2-hyp Day B block B, micros 1 and 2)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 10,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 20,
+   "suggestion": "Write the floor fix into the note: default the bridge/hip thrust to the floor version ('bench if free, floor otherwise') so one bench per pair serves the elevated-foot movement while the partner bridges on the floor.",
+   "evidence": "str2-hyp-w1b-B pairs Barbell FFE Jefferson Split Squat ('Rear foot elevated.') with Single Leg Hamstring Bridge ('shoulders on the bench.'); weeks 4-6 repeat the pattern with Bulgarian Split Squat and Weighted Single Leg Hip Thrust."
+  },
+  {
+   "id": 31,
+   "title": "Challenge-week Day A budgets 50 of 60 minutes with zero transition allowance across five blocks",
+   "area": "data/program.json (str2-hyp-w3a, w6a, w9a) + schedule.json class durations",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 10,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 20,
+   "suggestion": "On weeks 3, 6 and 9, trim Day A's C block to 6 minutes (drop one accessory, keep the superset) so the session budgets 46 minutes and the challenge has a real buffer.",
+   "evidence": "Summing minutes for str2-hyp-w9a: WU 5 + A 15 + B 12 + C 10 + Challenge 8 = 50 in a 60-minute class, on the day A holds 3x3 at 85% and the challenge needs the rig cleared for a whole-room deadhang."
+  },
+  {
+   "id": 35,
+   "title": "Home's Today panel still offers a live Session link for Friday classes nothing maps to",
+   "area": "src/tabs/home/HomeTab.tsx:16-23 (STREAM_FOR_CLASS)",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 10,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 20,
+   "suggestion": "While the split is live, derive STREAM_FOR_CLASS from FOCUS_CLASS_TYPE (reverse lookup) or remove the fbs entry so Friday classes show the not-programmed fallback.",
+   "evidence": "HomeTab.tsx:18-20 maps `lbs: 'strength', ubs: 'strength', fbs: 'strength'` while classDays.ts comments 'nothing maps to fbs while the split is live'; the live scenario runs fbs three times on Friday."
+  },
+  {
+   "id": 40,
+   "title": "No year appears anywhere on the overview document, including the prepared date",
+   "area": "src/tabs/overview/OverviewPage.tsx:81 (fmt) and its call sites",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "presentation"
+   ],
+   "panelScore": 10,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 20,
+   "suggestion": "Add the year to the cover span and prepared line ('prepared 31 Aug 2026'), and include years on stream-page spans whenever from and to fall in different years.",
+   "evidence": "`const fmt = (d: Date) => d.toLocaleDateString('en-AU', { day: 'numeric', month: 'short' });` feeds the cover span, stream headers, week labels and the prepared stamp ('prepared 31 Aug')."
+  },
+  {
+   "id": 46,
+   "title": "exportPdf swallows failures; the coach gets no signal when export dies",
+   "area": "src/tabs/overview/OverviewPage.tsx:123-147",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 10,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 20,
+   "suggestion": "Add a catch that surfaces the failure in the UI, e.g. an exportError state rendered beside the button, so a failed export states itself instead of miming success.",
+   "evidence": "`async function exportPdf() { setExporting(true); try { ... } finally { setExporting(false); } }` with no catch; toSvg can reject and the img.onerror path rejects with 'page render failed'."
+  },
+  {
+   "id": 12,
+   "title": "overflow-hidden on the overview week list can silently clip week 9 of the Strength page",
+   "area": "src/tabs/overview/OverviewPage.tsx:242",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "presentation"
+   ],
+   "panelScore": 9,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 18,
+   "suggestion": "Compare the week list's scrollHeight to clientHeight after render; on overflow, step the text down one size (the TV fit pattern) or break onto a second page, and show a visible warning in the preview whenever clipping would occur.",
+   "evidence": "`<div className=\"mt-4 min-h-0 flex-1 space-y-2 overflow-hidden\">` inside a fixed 794x1123 frame; the 9-week x 2-session str2-hyp page measures roughly 780px of an approximately 816px budget, leaving about two wrapped lines of slack across the whole page."
+  },
+  {
+   "id": 32,
+   "title": "CommunityTab derives 'today' via UTC, misclassifying events until 10am Brisbane every day",
+   "area": "src/tabs/community/CommunityTab.tsx:65",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "coherence"
+   ],
+   "panelScore": 9,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 18,
+   "suggestion": "Replace line 65 with `const today = todayIso();` imported from '../../lib/trainingWeeks'.",
+   "evidence": "`const today = new Date().toISOString().slice(0, 10);`, the exact pattern trainingWeeks.ts:14 bans ('in Brisbane that is the previous day in UTC') and todayIso() exists to replace."
+  },
+  {
+   "id": 45,
+   "title": "pickBlock crashes the whole /overview route for a stream with zero blocks",
+   "area": "src/tabs/overview/OverviewPage.tsx:67 and 96-103",
+   "severity": "medium",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 8,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 16,
+   "suggestion": "Return null from pickBlock for an empty stream, filter or render those streams as 'no blocks yet', and treat weekStarts.length === 0 the same way.",
+   "evidence": "`?? spans[0]` returns undefined for an empty stream and the caller immediately dereferences picked.block; a zero-week block similarly reaches fmt(undefined) and throws inside toLocaleDateString."
+  },
+  {
+   "id": 41,
+   "title": "Literal em dashes in user-visible copy on Home and the TV board",
+   "area": "src/tabs/home/HomeTab.tsx:374, 418; src/tabs/tv/TvPage.tsx:433",
+   "severity": "low",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "coherence"
+   ],
+   "panelScore": 12,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 12,
+   "suggestion": "Recast the two Home captions with a full stop ('...week by week. Click another class below to switch...') and replace the TV placeholder with a middle dot, an empty string, or 'Untitled'.",
+   "evidence": "Two Home captions join clauses with a literal em dash character ('week by week' caption and 'All classes side by side' caption), and TvPage.tsx:433 renders an em dash as the placeholder for a circuit piece with no heading, putting one on the gym wall."
+  },
+  {
+   "id": 51,
+   "title": "Single Leg Depth Jump is the one library-picked exercise in the 17 weeks with no demo video",
+   "area": "public/data/exercise-library.json id 445 (str2-hyp micro 3, Day A)",
+   "severity": "low",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 10,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 10,
+   "suggestion": "Add a videoUrl override for 445, or swap to a library variant that carries one and keep the single leg depth jump in the note.",
+   "evidence": "Every exerciseId used across the strength and hyrox streams resolves; the only library entry without a videoUrl is 445 Single Leg Depth Jump, used in weeks 7-9."
+  },
+  {
+   "id": 37,
+   "title": "FOCUS_DAY_PICK encodes a weekday intent as a fragile ordinal",
+   "area": "src/lib/classDays.ts:54-58 and 99-103 (resolveWeekDays)",
+   "severity": "low",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "code"
+   ],
+   "panelScore": 8,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 8,
+   "suggestion": "Store weekday preferences (e.g. rox-race: 4) resolved as `classDays.includes(pref) ? pref : fallback`, with the fallback the last or first day the class runs, so the code matches its comment and degrades predictably.",
+   "evidence": "`'rox-strong': 0, 'rox-race': 1` against the comment 'ROX Strong is the Monday session and ROX Race the Friday one'; resolution sorts the class type's distinct days and indexes into them."
+  },
+  {
+   "id": 39,
+   "title": "Export rasterises pages at roughly 192dpi, below print standard, with unselectable text",
+   "area": "src/tabs/overview/OverviewPage.tsx:137-141",
+   "severity": "low",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "presentation"
+   ],
+   "panelScore": 8,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 8,
+   "suggestion": "Raise the canvas multiplier to 3x (or a constant shared with the TV export) to reach about 288dpi; the pages are mostly flat colour so the size cost is modest.",
+   "evidence": "`canvas.width = PW * 2; // 2x for crisp print` then addImage of a PNG; PW=794 is A4 at 96dpi, so 2x yields about 192dpi effective."
+  },
+  {
+   "id": 42,
+   "title": "Accessory rep ramp entered inconsistently against the stated base/+2/+2 rule",
+   "area": "data/program.json (str2-hyp Day B accessories)",
+   "severity": "low",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "programming"
+   ],
+   "panelScore": 8,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 8,
+   "suggestion": "Change both to 8/10/10 so the +2 lands in week 2 of each micro like everything else; leave the calves if the +3 was deliberate for the higher-rep range.",
+   "evidence": "Barbell FFE Jefferson Split Squat runs 8/8/10 (weeks 1-3) and DB Deficit Curtsey Lunge 8/8/10 (weeks 7-9) versus the plan's 'week 1 base, weeks 2 and 3 plus two reps', which every Day A accessory follows; both calf raises jump +3 (12/15/15)."
+  },
+  {
+   "id": 47,
+   "title": "Severe density imbalance between the Strength page and the sparse ESD/Game Day pages",
+   "area": "src/tabs/overview/OverviewPage.tsx:242, 276",
+   "severity": "low",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "presentation"
+   ],
+   "panelScore": 8,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 8,
+   "suggestion": "For streams with 5 or fewer week rows, step the week typography up one size and increase row spacing so content breathes into the height, keeping the same grid and palette.",
+   "evidence": "The week list is a top-aligned space-y-2 column with the footer pinned to the page bottom; picked blocks range from 9 weeks x 2 sessions down to 4 weeks x 1 session (Game Day months)."
+  },
+  {
+   "id": 49,
+   "title": "isoAfter keeps the banned toISOString().slice pattern in the push-date path",
+   "area": "src/lib/classDays.ts:76-80 (isoAfter, used by resolveWeekDays)",
+   "severity": "low",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "coherence"
+   ],
+   "panelScore": 8,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 0,
+   "dissent": [],
+   "rank": 8,
+   "suggestion": "Rewrite isoAfter to the house pattern: parse `${monday}T00:00:00` local, step with setDate, and return isoDate(d) from trainingWeeks so one audited function owns every Date-to-string conversion.",
+   "evidence": "`return d.toISOString().slice(0, 10);` inside isoAfter, whose output becomes the ResolvedDay.date sent to TrainHeroic; trainingWeeks.ts:14-17 documents that this exact pattern once 'sent Sunday's date under Tuesday's name'."
+  },
+  {
+   "id": 43,
+   "title": "Duplicate circuit-piece id copied across three ESD weeks",
+   "area": "data/program.json (esd-sept-2026, lines 2900/3021/3142)",
+   "severity": "low",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "coherence"
+   ],
+   "panelScore": 7,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 7,
+   "suggestion": "Regenerate fresh ids for the week-4 and week-5 copies, and make whatever copy-week helper produced this re-id everything it clones.",
+   "evidence": "The id 'd10ff4c8-236b-4df1-a8e3-58f891c937e4' appears three times as the 'Finish' piece of esd-b1w3, esd-b1w4 and esd-b1w5's first sessions; a scan of all 921 ids found it as the only duplicate."
+  },
+  {
+   "id": 48,
+   "title": "Cover and page meta text use cool white/black opacities instead of the warm TAC neutral scale",
+   "area": "src/tabs/overview/OverviewPage.tsx:199, 209, 246-277",
+   "severity": "low",
+   "verdict": "confirmed",
+   "mergedCount": 1,
+   "discs": [
+    "presentation"
+   ],
+   "panelScore": 5,
+   "ballotCoverage": 4,
+   "mustFixVotes": 0,
+   "disputedVotes": 0,
+   "scoreSpread": 1,
+   "dissent": [],
+   "rank": 5,
+   "suggestion": "Replace white/NN with cream (#F5F3EB) at reduced opacity and black/NN with charcoal (#201d1d) at opacity, matching the ink scale in src/index.css.",
+   "evidence": "text-white/60 and text-white/35 on the charcoal cover; text-black/45, text-black/55 and border-black/10 on the cream pages, rather than the warm ink scale src/index.css already defines."
+  }
+ ],
+ "rejected": [
+  {
+   "id": 11,
+   "title": "Fraunces and Mulish are never loaded, so the branded PDF silently falls back to Georgia and Segoe UI",
+   "verdictEvidence": "The fonts are loaded. src/main.tsx lines 4-8: `import '@fontsource/mulish/400.css'; import '@fontsource/mulish/600.css'; import '@fontsource/mulish/700.css'; import '@fontsource/fraunces/400.css'; import '@fontsource/fraunces/600.css';`. package.json declares `\"@fontsource/fraunces\": \"^5.3.0\"` and `\"@fontsource/mulish\": \"^5.3.0\"`, both installed; node_modules/@fontsource/fraunces/400.css contains real `@font-face { font-family: 'Fraunces'; ... woff2 }` rules bundled by Vite. The reviewer's repo-wide grep missed node_modules-sourced @font-face. The OverviewPage route lives inside the same app entry, so both faces render self-hosted, preview and export alike. (Minor residual only: weight 800 (font-extrabold) and italic styles are synthesised, not the claimed Georgia/Segoe UI fallback.)"
+  },
+  {
+   "id": 13,
+   "title": "Wave 3 entry raises main-lift demand instead of resetting it: week 7 is the hardest volume-load week of the block",
+   "verdictEvidence": "The quoted slots are real (str2-hyp-w6a-a0: 3x5, 77.5%, RPE 8.5; str2-hyp-w7a-a0: 3x7, 75%, RPE 8, note 'Final wave 7/5/3: heaviest of the block.') and the w6-to-w7 delta (+40% reps, -2.5% load, ~+35% volume-load) checks out, but the headline claim is arithmetically false. Main-lift volume-load (reps x %1RM) by week: w1 27x65=1755, w2 1470, w3 1125, w4 27x67.5=1822.5, w5 1522.5, w6 1162.5, w7 21x75=1575, w8 1200, w9 765. Week 7 is only the fourth-highest volume-load week; weeks 4 and 1 both exceed it. Every wave entry behaves the same way (w3-to-w4 is a +62% VL jump, larger than w6-to-w7's +35%) and prescribed RPE drops from 8.5 (w6) to 8 (w7). This is uniform undulating wave loading, not a week-7 anomaly, and 'hardest volume-load week of the block' does not hold."
+  },
+  {
+   "id": 16,
+   "title": "Day A's B block cannot run to the clock in any microcycle: EMOM and rest prescriptions exceed the 12 minutes",
+   "verdictEvidence": "The quotes are real (block B \"minutes\": 12 all nine weeks; w1a chin note 'EMOM 10 minutes: 2 reps at the top of each minute. Add load only if every rep is crisp.'; w4a pull-up note 'Strength focus: full rest, 2 to 3 minutes between sets.') but the impossibility arithmetic fails. The reviewer's 'no minute left for 45-second tempo bench sets' is wrong: 2-3 weighted chins at the top of each minute take ~10-15 seconds, leaving ~45-50 seconds of every EMOM minute free, which comfortably holds the ~40-second tempo/paused bench sets (3 of the 10 gaps used, plus 2 spare minutes). For micros 2-3, the '16 to 18 minutes' figure assumes strictly sequential rests; run as the paired station the block layout implies (full 2-3 minute rest between same-movement sets, partner lift in the gap), 3 bench sets + 4 pull-up sets alternate at ~75-second spacing and finish in ~8-9 of the 12 minutes. Nothing in the data mandates sequential execution, and every B block in the programme pairs two movements this way. The RPE 8.5-9 weeks are tight, and a clarifying note ('bench sets inside the EMOM gaps' / 'alternate during rests') would help coaches, but 'cannot run to the clock in any microcycle' does not hold."
+  },
+  {
+   "id": 22,
+   "title": "TrainHeroic still holds drafts of the abandoned Lower/Upper plan on dates the new plan calls off-app primer",
+   "verdictEvidence": "Already handled. HANDOVER.md:327-328 (in 'The Strength rebuild: Full Body A/B (changed 2026-08-31)'): 'the stale 1 to 4 Sept drafts were deleted with Chris’s approval; the run 25 to 28 Aug week stays as history. Nothing for the new block is pushed yet.' The evidence quote the finding relies on (drafts 'up' for Tue 1, Thu 3, Fri 4 Sept, HANDOVER.md:209-213) is the older 2026-08-21 section, superseded within the same file. It is true PROGRAMMING-PLAN.md and BANKED-2026-08-31.md do not record the fate, but HANDOVER.md does, so the claimed live contradiction in TrainHeroic does not exist per the record."
+  }
+ ],
+ "report": "# TAC Coaching Tool · Review after the 2026-08-31 restructure\n\nPanel: 4 of 4 discipline leads returned ballots, all 4 counted toward quorum. An adversarial verification pass ran; every item below is confirmed against the files unless noted. Four false positives were removed before ranking. No score spread reached the disagreement threshold, so there is no panel dissent to report. Items already in BANKED-2026-08-31.md and ratified club decisions are excluded.\n\n## Must-fix now (before tonight if possible, before the first push regardless)\n\n1. **TrainHeroic push crashes on challenge weeks 3, 6 and 9 and leaves the week half-pushed** (critical, championed by all four leads). The push code touches `slots` on non-series parts, so the circuit-style Challenge block throws mid-run and drafts stop at whatever session it died on. In `src/server/teamPushPlugin.ts`, skip non-series parts before touching slots (`if (tb.kind === 'circuit' || !Array.isArray(tb.slots)) continue;`), optionally appending the challenge pieces as a final note so the draft is not silent about them.\n\n2. **TrainHeroic push silently discards every per-exercise note and tempo.** Coaches on the floor lose EMOM formats, tempos and alternatives the moment a week is pushed. In the cue builder, append `sl.tempo` and `sl.note` to the cue join, add both to the PushSession slot type, and pass `tb.note` through so series-level instructions survive.\n\n3. **Hanging knee raises hung from a barbell in J-hooks (weeks 7 to 9, Day A block C)** is an unbudgeted rack re-rig straight after heavy bench and not a secure hang point. Change the movement to hanging knee raises from the rig, or a lying leg raise off the bench already in place, and delete the barbell-in-rack instruction in `data/program.json:1794/2006/2218`.\n\n4. **Tuesday and Thursday classes are still named Lower Body Strength and Upper Body Strength** while delivering Full Body A/B, so the Schedule tab contradicts the Programming tab in front of the room tonight. Rename the two display names in `data/schedule.json` and `src/lib/classDays.ts:33-34` (keep ids `lbs`/`ubs` so mappings and slots keep working), e.g. \"Strength A (Full Body)\" and \"Strength B (Full Body)\", or get Chris's explicit call tonight and record it in BANKED.\n\n5. **Phase numbering is off by one**: PROGRAMMING-PLAN.md's Phase 1 renders as Phase 2 in Programming and Movement Check. Pick one numbering: label the primer \"Primer\" (Phase 0) and count delivered phases from the nine-week block, or renumber the plan doc to match the tool, or label containers by theme and dates instead of ordinals.\n\n## Should-fix (this week)\n\n6. **Push creates workouts and blocks before validating content** (`teamPushPlugin.ts:197-219`), producing empty drafts, empty warm-up shells and silently dropped exercises. Count resolvable exercises per session and block first, skip with a reported reason when zero, and warn on unresolved movements (or create them as customs like the 2026-08-14 batch) before any workout exists.\n\n7. **The week email drops every slot note** (`src/lib/weekEmail.ts` sessionToText), so EMOM formats, hold times and alternatives vanish from the coach handout. Append the note to each slot line, matching what the TV board already shows.\n\n8. **The week email and CSV export omit the week 3/6/9 Challenge block** (seriesBlocks filter in `weekEmail.ts:19` and `exportCsv.ts:69`). Walk `circuitParts(s.timedBlocks)` after the series blocks and emit each piece as a labelled section or Challenge row.\n\n9. **The RDL is waved on percentages with no reference lift**, peaking at 3x3 at 85% RPE 9; nobody has an RDL 1RM to take 85% of. Make it RPE-primary (drop the percentage, keep the rep wave and RPE caps), or anchor every note to the week 1 3x9 working load, which every member actually possesses.\n\n10. **The overview PDF is not actually A4**: jsPDF's px unit without the px_scaling hotfix makes the page physically oversized. Pass `hotfixes: ['px_scaling']` in the constructor at `OverviewPage.tsx:127` (and `TvPage.tsx:232` for consistency), then print one page to confirm 210 by 297 mm.\n\n11. **Single leg depth jumps land in weeks 7 to 9 with no single-leg landing progression anywhere in weeks 1 to 6.** Make broad-to-vertical jump (already the coach alternative) the headline for micro 3 and gate true single leg depth work on demonstrated hop-and-stick competence.\n\n12. **The ESD and Hyrox annual lanes overrun the 52-week ruler** since the Christmas break was added. Trim two weeks from each lane's final maintenance phase (ESD Re-base 10 to 8, Hyrox Build 2 10 to 8) so all three lanes total 50 plus the break, then re-check the 2027 boundaries against the race markers.\n\n## Nice-to-have (top 15 shown; 20 further items were ranked and are omitted from this report)\n\n13. **The Annual Plan's Hyrox lane still tells the pre-restructure story** and cannot answer the Melbourne race question. Rebuild it as the real containers (Lead-in, Blocks 01 to 04) with a boundary before the Melbourne window, give each Hyrox block an annualPhaseId, and collapse ESD to a month band.\n14. **The overview PDF skips the primer**, leaving a two-week hole starting tomorrow. Return the intent-carrying current block from pickBlock, or banner \"Primer to 13 Sept: run off-app, programming emailed to coaches.\"\n15. **Straight bench percentages start at week 7 with no straight-bench calibration.** Make W7 the calibration week (3x7 at RPE 8, \"record your top set\"), then express W8 and W9 off that anchor.\n16. **No ramp-up sets exist before 75 to 85% work.** Extend the warm-up to 8 minutes on weeks 3, 6 and 7 to 9 and write build sets into the WU note.\n17. **HANDOVER.md still describes the pre-restructure tool.** Rewrite the three current-state sections and add a dated \"What shipped on 2026-08-31\" section.\n18. **Percentage and RPE anchors diverge as the block gets heavier**, splitting the class into two programs. Declare the RPE a ceiling in the main-lift note, or realign the labels (W3 RPE 7, W6 7.5, W9 8).\n19. **The push server trusts the client-supplied Monday** with no block/week agreement check. Recompute the expected Monday server-side from the annual plan and refuse with a 400 naming both dates on mismatch.\n20. **Nothing in the app says which day Full Body A and B run.** Append the day to the session pills (\"Full Body A · Tue\") and put it in the TV header.\n21. **Depth jumps from week 1 for a general population class** invert the old jump ramp. Swap micro 1 to a floor-based jump with a stick landing, or rename the slot Depth Drop and cap the box height in the note.\n22. **Movement Check opens on the empty primer**, showing a wall of zero-coverage warnings tonight. Default to the phase containing today's training week that has written sessions, falling forward like pickBlock.\n23. **The live scenario is a sketch with an orphaned coachless ESD block.** Confirm which scenario is genuinely live, align activeScenarioId and liveScenarioId, and delete the null-coach Tuesday ESD block.\n24. **pickBlock's final fallback scans from block 1**, so the PDF can regress to the oldest finished block. Scope the fallback to the present and banner any block whose last Monday is in the past.\n25. **EMOM chin-ups put 12 to 20 members on shared rig space at the same second.** Add a delivery line: run in two waves, half on 0:00, half on 0:30 (three waves at 20).\n26. **The 2027 cycle-2 phases re-instate exactly what tonight's restructure removed.** Mark them provisional (\"Structure TBC after this cycle's review\") or reshape them now to the 3/9/5 pattern.\n27. **Per-stream unit terminology leaks**: \"Phase\" shows on Month and Block streams and the PDF calls everything a Block. Derive the labels from UNIT/blockLabel and give each PDF stream page a unit-correct eyebrow.\n\n## Single highest-leverage change\n\nFix the TrainHeroic push path in `src/server/teamPushPlugin.ts` as one piece of work: the challenge-week crash (item 1), the discarded notes and tempos (item 2), and validate-before-create (item 6). All four leads championed the crash, it fires on a third of the block's weeks, and until the push is trustworthy the whole restructure only exists inside the app. One focused session on that file makes the tool's flagship claim (write once, push everywhere) actually true."
+}
