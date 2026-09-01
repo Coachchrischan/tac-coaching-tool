@@ -1767,6 +1767,48 @@ export default function ProgrammingTab() {
         </div>
       )}
 
+      {/* Most of the year's unwritten sessions are circuits, and ESD / Game
+          Day weeks are heavily templated: starting from last week's structure
+          converts coaching time to output far faster than a blank editor. */}
+      {session.kind === 'circuit' &&
+        session.circuit.length === 0 &&
+        (() => {
+          const prevWeek =
+            wi > 0
+              ? blocks[bi].weeks[wi - 1]
+              : bi > 0
+                ? blocks[bi - 1].weeks[blocks[bi - 1].weeks.length - 1]
+                : undefined;
+          const source = prevWeek?.sessions.find(
+            (s) => s.focus === session.focus && s.kind === 'circuit' && s.circuit.length > 0,
+          );
+          if (!source || source.kind !== 'circuit') return null;
+          return (
+            <button
+              type="button"
+              className="mb-3 rounded-md border border-dashed border-ink-300 px-4 py-2 text-sm font-medium text-ink-500 hover:border-accent-600 hover:text-accent-600"
+              onClick={() =>
+                patchSession((s) =>
+                  s.kind !== 'circuit'
+                    ? s
+                    : {
+                        ...s,
+                        intent: s.intent || source.intent,
+                        note: s.note || source.note,
+                        circuit: source.circuit.map((p) => ({
+                          ...p,
+                          id: crypto.randomUUID(),
+                          lines: p.lines.map((l) => ({ ...l })),
+                        })),
+                      },
+                )
+              }
+            >
+              Start from last week's {sessionLabel(source)} (copies the pieces here to edit)
+            </button>
+          );
+        })()}
+
       {/* Session: circuits for ESD / Hyrox / Game Day, series for Strength.
           Branching on the session itself, not the stream, so the editor always
           matches the payload the session actually carries. */}
@@ -1997,8 +2039,8 @@ function EmailWeekPanel({
 
         {copied && (
           <p className="mt-2 text-[12px] text-accent-700">
-            The programming was too long for the compose link, so it is on your clipboard. Paste it
-            into the email before sending.
+            The week is on your clipboard. If Gmail opened with an empty body, the programming was
+            too long for the compose link; paste it in before sending.
           </p>
         )}
 
@@ -2010,6 +2052,16 @@ function EmailWeekPanel({
             className="rounded-md bg-ink-950 px-3 py-1.5 text-sm font-medium text-white hover:bg-ink-800 disabled:cursor-not-allowed disabled:opacity-40"
           >
             Open in Gmail
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              void navigator.clipboard.writeText(body).then(() => setCopied(true));
+            }}
+            className="rounded-md border border-ink-300 px-3 py-1.5 text-sm font-medium text-ink-700 hover:bg-ink-100"
+            title="Copy the whole week as plain text, for any email client or WhatsApp"
+          >
+            Copy as text
           </button>
           <span className="text-[12px] text-ink-500">
             {to.length === 0

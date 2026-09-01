@@ -270,6 +270,7 @@ export function seedAttendance(): AttendanceDoc {
       period: '2026-07',
       classTypeId,
       count,
+      seeded: true,
     })),
   };
 }

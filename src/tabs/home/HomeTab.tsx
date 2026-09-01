@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { mostUrgent, useDoc } from '../../lib/useDoc';
 import SaveBadge from '../../components/SaveBadge';
+import DataSafetyPanel from '../../components/DataSafetyPanel';
 import {
   allMonths,
   allWeeks,
@@ -147,6 +148,13 @@ export default function HomeTab() {
 
   return (
     <div>
+      {attendance.data?.entries.some((e) => e.seeded) && (
+        <div className="mb-4 rounded-lg border border-amber-300 bg-amber-50 px-4 py-2.5 text-[13px] text-amber-900">
+          ⚠ DEMO DATA: the attendance behind these charts is seeded, not real. Do not use these
+          numbers in any conversation with the owners. Enter real counts in Attendance (real
+          entries replace the picture as they come in), or delete the demo rows there.
+        </div>
+      )}
       <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
         <div>
           <h2 className="font-display text-2xl text-ink-950">Group class programming</h2>
@@ -510,6 +518,8 @@ export default function HomeTab() {
           </ul>
         )}
       </section>
+
+      <DataSafetyPanel />
     </div>
   );
 }

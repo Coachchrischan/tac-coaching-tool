@@ -5,654 +5,762 @@
         "id": "2026-06-01:esd",
         "period": "2026-06-01",
         "classTypeId": "esd",
-        "count": 64
+        "count": 64,
+        "seeded": true
       },
       {
         "id": "2026-06-08:esd",
         "period": "2026-06-08",
         "classTypeId": "esd",
-        "count": 65
+        "count": 65,
+        "seeded": true
       },
       {
         "id": "2026-06-15:esd",
         "period": "2026-06-15",
         "classTypeId": "esd",
-        "count": 66
+        "count": 66,
+        "seeded": true
       },
       {
         "id": "2026-06-22:esd",
         "period": "2026-06-22",
         "classTypeId": "esd",
-        "count": 67
+        "count": 67,
+        "seeded": true
       },
       {
         "id": "2026-06-29:esd",
         "period": "2026-06-29",
         "classTypeId": "esd",
-        "count": 49
+        "count": 49,
+        "seeded": true
       },
       {
         "id": "2026-07-06:esd",
         "period": "2026-07-06",
         "classTypeId": "esd",
-        "count": 49
+        "count": 49,
+        "seeded": true
       },
       {
         "id": "2026-07-13:esd",
         "period": "2026-07-13",
         "classTypeId": "esd",
-        "count": 69
+        "count": 69,
+        "seeded": true
       },
       {
         "id": "2026-07-20:esd",
         "period": "2026-07-20",
         "classTypeId": "esd",
-        "count": 70
+        "count": 70,
+        "seeded": true
       },
       {
         "id": "2026-07-27:esd",
         "period": "2026-07-27",
         "classTypeId": "esd",
-        "count": 71
+        "count": 71,
+        "seeded": true
       },
       {
         "id": "2026-08-03:esd",
         "period": "2026-08-03",
         "classTypeId": "esd",
-        "count": 72
+        "count": 72,
+        "seeded": true
       },
       {
         "id": "2026-08-10:esd",
         "period": "2026-08-10",
         "classTypeId": "esd",
-        "count": 73
+        "count": 73,
+        "seeded": true
       },
       {
         "id": "2026-08-17:esd",
         "period": "2026-08-17",
         "classTypeId": "esd",
-        "count": 74
+        "count": 74,
+        "seeded": true
       },
       {
         "id": "2026-06-01:hyrox",
         "period": "2026-06-01",
         "classTypeId": "hyrox",
-        "count": 38
+        "count": 38,
+        "seeded": true
       },
       {
         "id": "2026-06-08:hyrox",
         "period": "2026-06-08",
         "classTypeId": "hyrox",
-        "count": 39
+        "count": 39,
+        "seeded": true
       },
       {
         "id": "2026-06-15:hyrox",
         "period": "2026-06-15",
         "classTypeId": "hyrox",
-        "count": 39
+        "count": 39,
+        "seeded": true
       },
       {
         "id": "2026-06-22:hyrox",
         "period": "2026-06-22",
         "classTypeId": "hyrox",
-        "count": 40
+        "count": 40,
+        "seeded": true
       },
       {
         "id": "2026-06-29:hyrox",
         "period": "2026-06-29",
         "classTypeId": "hyrox",
-        "count": 29
+        "count": 29,
+        "seeded": true
       },
       {
         "id": "2026-07-06:hyrox",
         "period": "2026-07-06",
         "classTypeId": "hyrox",
-        "count": 30
+        "count": 30,
+        "seeded": true
       },
       {
         "id": "2026-07-13:hyrox",
         "period": "2026-07-13",
         "classTypeId": "hyrox",
-        "count": 42
+        "count": 42,
+        "seeded": true
       },
       {
         "id": "2026-07-20:hyrox",
         "period": "2026-07-20",
         "classTypeId": "hyrox",
-        "count": 43
+        "count": 43,
+        "seeded": true
       },
       {
         "id": "2026-07-27:hyrox",
         "period": "2026-07-27",
         "classTypeId": "hyrox",
-        "count": 44
+        "count": 44,
+        "seeded": true
       },
       {
         "id": "2026-08-03:hyrox",
         "period": "2026-08-03",
         "classTypeId": "hyrox",
-        "count": 45
+        "count": 45,
+        "seeded": true
       },
       {
         "id": "2026-08-10:hyrox",
         "period": "2026-08-10",
         "classTypeId": "hyrox",
-        "count": 44
+        "count": 44,
+        "seeded": true
       },
       {
         "id": "2026-08-17:hyrox",
         "period": "2026-08-17",
         "classTypeId": "hyrox",
-        "count": 45
+        "count": 45,
+        "seeded": true
       },
       {
         "id": "2026-06-01:lbs",
         "period": "2026-06-01",
         "classTypeId": "lbs",
-        "count": 32
+        "count": 32,
+        "seeded": true
       },
       {
         "id": "2026-06-08:lbs",
         "period": "2026-06-08",
         "classTypeId": "lbs",
-        "count": 32
+        "count": 32,
+        "seeded": true
       },
       {
         "id": "2026-06-15:lbs",
         "period": "2026-06-15",
         "classTypeId": "lbs",
-        "count": 32
+        "count": 32,
+        "seeded": true
       },
       {
         "id": "2026-06-22:lbs",
         "period": "2026-06-22",
         "classTypeId": "lbs",
-        "count": 33
+        "count": 33,
+        "seeded": true
       },
       {
         "id": "2026-06-29:lbs",
         "period": "2026-06-29",
         "classTypeId": "lbs",
-        "count": 24
+        "count": 24,
+        "seeded": true
       },
       {
         "id": "2026-07-06:lbs",
         "period": "2026-07-06",
         "classTypeId": "lbs",
-        "count": 24
+        "count": 24,
+        "seeded": true
       },
       {
         "id": "2026-07-13:lbs",
         "period": "2026-07-13",
         "classTypeId": "lbs",
-        "count": 34
+        "count": 34,
+        "seeded": true
       },
       {
         "id": "2026-07-20:lbs",
         "period": "2026-07-20",
         "classTypeId": "lbs",
-        "count": 34
+        "count": 34,
+        "seeded": true
       },
       {
         "id": "2026-07-27:lbs",
         "period": "2026-07-27",
         "classTypeId": "lbs",
-        "count": 34
+        "count": 34,
+        "seeded": true
       },
       {
         "id": "2026-08-03:lbs",
         "period": "2026-08-03",
         "classTypeId": "lbs",
-        "count": 35
+        "count": 35,
+        "seeded": true
       },
       {
         "id": "2026-08-10:lbs",
         "period": "2026-08-10",
         "classTypeId": "lbs",
-        "count": 37
+        "count": 37,
+        "seeded": true
       },
       {
         "id": "2026-08-17:lbs",
         "period": "2026-08-17",
         "classTypeId": "lbs",
-        "count": 38
+        "count": 38,
+        "seeded": true
       },
       {
         "id": "2026-06-01:ubs",
         "period": "2026-06-01",
         "classTypeId": "ubs",
-        "count": 30
+        "count": 30,
+        "seeded": true
       },
       {
         "id": "2026-06-08:ubs",
         "period": "2026-06-08",
         "classTypeId": "ubs",
-        "count": 31
+        "count": 31,
+        "seeded": true
       },
       {
         "id": "2026-06-15:ubs",
         "period": "2026-06-15",
         "classTypeId": "ubs",
-        "count": 31
+        "count": 31,
+        "seeded": true
       },
       {
         "id": "2026-06-22:ubs",
         "period": "2026-06-22",
         "classTypeId": "ubs",
-        "count": 31
+        "count": 31,
+        "seeded": true
       },
       {
         "id": "2026-06-29:ubs",
         "period": "2026-06-29",
         "classTypeId": "ubs",
-        "count": 23
+        "count": 23,
+        "seeded": true
       },
       {
         "id": "2026-07-06:ubs",
         "period": "2026-07-06",
         "classTypeId": "ubs",
-        "count": 23
+        "count": 23,
+        "seeded": true
       },
       {
         "id": "2026-07-13:ubs",
         "period": "2026-07-13",
         "classTypeId": "ubs",
-        "count": 32
+        "count": 32,
+        "seeded": true
       },
       {
         "id": "2026-07-20:ubs",
         "period": "2026-07-20",
         "classTypeId": "ubs",
-        "count": 32
+        "count": 32,
+        "seeded": true
       },
       {
         "id": "2026-07-27:ubs",
         "period": "2026-07-27",
         "classTypeId": "ubs",
-        "count": 33
+        "count": 33,
+        "seeded": true
       },
       {
         "id": "2026-08-03:ubs",
         "period": "2026-08-03",
         "classTypeId": "ubs",
-        "count": 33
+        "count": 33,
+        "seeded": true
       },
       {
         "id": "2026-08-10:ubs",
         "period": "2026-08-10",
         "classTypeId": "ubs",
-        "count": 34
+        "count": 34,
+        "seeded": true
       },
       {
         "id": "2026-08-17:ubs",
         "period": "2026-08-17",
         "classTypeId": "ubs",
-        "count": 34
+        "count": 34,
+        "seeded": true
       },
       {
         "id": "2026-06-01:stretch",
         "period": "2026-06-01",
         "classTypeId": "stretch",
-        "count": 19
+        "count": 19,
+        "seeded": true
       },
       {
         "id": "2026-06-08:stretch",
         "period": "2026-06-08",
         "classTypeId": "stretch",
-        "count": 19
+        "count": 19,
+        "seeded": true
       },
       {
         "id": "2026-06-15:stretch",
         "period": "2026-06-15",
         "classTypeId": "stretch",
-        "count": 19
+        "count": 19,
+        "seeded": true
       },
       {
         "id": "2026-06-22:stretch",
         "period": "2026-06-22",
         "classTypeId": "stretch",
-        "count": 19
+        "count": 19,
+        "seeded": true
       },
       {
         "id": "2026-06-29:stretch",
         "period": "2026-06-29",
         "classTypeId": "stretch",
-        "count": 14
+        "count": 14,
+        "seeded": true
       },
       {
         "id": "2026-07-06:stretch",
         "period": "2026-07-06",
         "classTypeId": "stretch",
-        "count": 14
+        "count": 14,
+        "seeded": true
       },
       {
         "id": "2026-07-13:stretch",
         "period": "2026-07-13",
         "classTypeId": "stretch",
-        "count": 19
+        "count": 19,
+        "seeded": true
       },
       {
         "id": "2026-07-20:stretch",
         "period": "2026-07-20",
         "classTypeId": "stretch",
-        "count": 19
+        "count": 19,
+        "seeded": true
       },
       {
         "id": "2026-07-27:stretch",
         "period": "2026-07-27",
         "classTypeId": "stretch",
-        "count": 20
+        "count": 20,
+        "seeded": true
       },
       {
         "id": "2026-08-03:stretch",
         "period": "2026-08-03",
         "classTypeId": "stretch",
-        "count": 20
+        "count": 20,
+        "seeded": true
       },
       {
         "id": "2026-08-10:stretch",
         "period": "2026-08-10",
         "classTypeId": "stretch",
-        "count": 21
+        "count": 21,
+        "seeded": true
       },
       {
         "id": "2026-08-17:stretch",
         "period": "2026-08-17",
         "classTypeId": "stretch",
-        "count": 21
+        "count": 21,
+        "seeded": true
       },
       {
         "id": "2026-06-01:gameday",
         "period": "2026-06-01",
         "classTypeId": "gameday",
-        "count": 16
+        "count": 16,
+        "seeded": true
       },
       {
         "id": "2026-06-08:gameday",
         "period": "2026-06-08",
         "classTypeId": "gameday",
-        "count": 17
+        "count": 17,
+        "seeded": true
       },
       {
         "id": "2026-06-15:gameday",
         "period": "2026-06-15",
         "classTypeId": "gameday",
-        "count": 17
+        "count": 17,
+        "seeded": true
       },
       {
         "id": "2026-06-22:gameday",
         "period": "2026-06-22",
         "classTypeId": "gameday",
-        "count": 17
+        "count": 17,
+        "seeded": true
       },
       {
         "id": "2026-06-29:gameday",
         "period": "2026-06-29",
         "classTypeId": "gameday",
-        "count": 12
+        "count": 12,
+        "seeded": true
       },
       {
         "id": "2026-07-06:gameday",
         "period": "2026-07-06",
         "classTypeId": "gameday",
-        "count": 13
+        "count": 13,
+        "seeded": true
       },
       {
         "id": "2026-07-13:gameday",
         "period": "2026-07-13",
         "classTypeId": "gameday",
-        "count": 18
+        "count": 18,
+        "seeded": true
       },
       {
         "id": "2026-07-20:gameday",
         "period": "2026-07-20",
         "classTypeId": "gameday",
-        "count": 18
+        "count": 18,
+        "seeded": true
       },
       {
         "id": "2026-07-27:gameday",
         "period": "2026-07-27",
         "classTypeId": "gameday",
-        "count": 18
+        "count": 18,
+        "seeded": true
       },
       {
         "id": "2026-08-03:gameday",
         "period": "2026-08-03",
         "classTypeId": "gameday",
-        "count": 19
+        "count": 19,
+        "seeded": true
       },
       {
         "id": "2026-08-10:gameday",
         "period": "2026-08-10",
         "classTypeId": "gameday",
-        "count": 18
+        "count": 18,
+        "seeded": true
       },
       {
         "id": "2026-08-17:gameday",
         "period": "2026-08-17",
         "classTypeId": "gameday",
-        "count": 19
+        "count": 19,
+        "seeded": true
       },
       {
         "id": "2026-06-01:run",
         "period": "2026-06-01",
         "classTypeId": "run",
-        "count": 13
+        "count": 13,
+        "seeded": true
       },
       {
         "id": "2026-06-08:run",
         "period": "2026-06-08",
         "classTypeId": "run",
-        "count": 13
+        "count": 13,
+        "seeded": true
       },
       {
         "id": "2026-06-15:run",
         "period": "2026-06-15",
         "classTypeId": "run",
-        "count": 13
+        "count": 13,
+        "seeded": true
       },
       {
         "id": "2026-06-22:run",
         "period": "2026-06-22",
         "classTypeId": "run",
-        "count": 13
+        "count": 13,
+        "seeded": true
       },
       {
         "id": "2026-06-29:run",
         "period": "2026-06-29",
         "classTypeId": "run",
-        "count": 10
+        "count": 10,
+        "seeded": true
       },
       {
         "id": "2026-07-06:run",
         "period": "2026-07-06",
         "classTypeId": "run",
-        "count": 10
+        "count": 10,
+        "seeded": true
       },
       {
         "id": "2026-07-13:run",
         "period": "2026-07-13",
         "classTypeId": "run",
-        "count": 14
+        "count": 14,
+        "seeded": true
       },
       {
         "id": "2026-07-20:run",
         "period": "2026-07-20",
         "classTypeId": "run",
-        "count": 14
+        "count": 14,
+        "seeded": true
       },
       {
         "id": "2026-07-27:run",
         "period": "2026-07-27",
         "classTypeId": "run",
-        "count": 14
+        "count": 14,
+        "seeded": true
       },
       {
         "id": "2026-08-03:run",
         "period": "2026-08-03",
         "classTypeId": "run",
-        "count": 14
+        "count": 14,
+        "seeded": true
       },
       {
         "id": "2026-08-10:run",
         "period": "2026-08-10",
         "classTypeId": "run",
-        "count": 14
+        "count": 14,
+        "seeded": true
       },
       {
         "id": "2026-08-17:run",
         "period": "2026-08-17",
         "classTypeId": "run",
-        "count": 14
+        "count": 14,
+        "seeded": true
       },
       {
         "id": "2026-06-01:flow",
         "period": "2026-06-01",
         "classTypeId": "flow",
-        "count": 12
+        "count": 12,
+        "seeded": true
       },
       {
         "id": "2026-06-08:flow",
         "period": "2026-06-08",
         "classTypeId": "flow",
-        "count": 12
+        "count": 12,
+        "seeded": true
       },
       {
         "id": "2026-06-15:flow",
         "period": "2026-06-15",
         "classTypeId": "flow",
-        "count": 12
+        "count": 12,
+        "seeded": true
       },
       {
         "id": "2026-06-22:flow",
         "period": "2026-06-22",
         "classTypeId": "flow",
-        "count": 12
+        "count": 12,
+        "seeded": true
       },
       {
         "id": "2026-06-29:flow",
         "period": "2026-06-29",
         "classTypeId": "flow",
-        "count": 9
+        "count": 9,
+        "seeded": true
       },
       {
         "id": "2026-07-06:flow",
         "period": "2026-07-06",
         "classTypeId": "flow",
-        "count": 9
+        "count": 9,
+        "seeded": true
       },
       {
         "id": "2026-07-13:flow",
         "period": "2026-07-13",
         "classTypeId": "flow",
-        "count": 12
+        "count": 12,
+        "seeded": true
       },
       {
         "id": "2026-07-20:flow",
         "period": "2026-07-20",
         "classTypeId": "flow",
-        "count": 12
+        "count": 12,
+        "seeded": true
       },
       {
         "id": "2026-07-27:flow",
         "period": "2026-07-27",
         "classTypeId": "flow",
-        "count": 12
+        "count": 12,
+        "seeded": true
       },
       {
         "id": "2026-08-03:flow",
         "period": "2026-08-03",
         "classTypeId": "flow",
-        "count": 12
+        "count": 12,
+        "seeded": true
       },
       {
         "id": "2026-08-10:flow",
         "period": "2026-08-10",
         "classTypeId": "flow",
-        "count": 11
+        "count": 11,
+        "seeded": true
       },
       {
         "id": "2026-08-17:flow",
         "period": "2026-08-17",
         "classTypeId": "flow",
-        "count": 11
+        "count": 11,
+        "seeded": true
       },
       {
         "id": "2026-06-01:yin",
         "period": "2026-06-01",
         "classTypeId": "yin",
-        "count": 9
+        "count": 9,
+        "seeded": true
       },
       {
         "id": "2026-06-08:yin",
         "period": "2026-06-08",
         "classTypeId": "yin",
-        "count": 9
+        "count": 9,
+        "seeded": true
       },
       {
         "id": "2026-06-15:yin",
         "period": "2026-06-15",
         "classTypeId": "yin",
-        "count": 9
+        "count": 9,
+        "seeded": true
       },
       {
         "id": "2026-06-22:yin",
         "period": "2026-06-22",
         "classTypeId": "yin",
-        "count": 9
+        "count": 9,
+        "seeded": true
       },
       {
         "id": "2026-06-29:yin",
         "period": "2026-06-29",
         "classTypeId": "yin",
-        "count": 7
+        "count": 7,
+        "seeded": true
       },
       {
         "id": "2026-07-06:yin",
         "period": "2026-07-06",
         "classTypeId": "yin",
-        "count": 7
+        "count": 7,
+        "seeded": true
       },
       {
         "id": "2026-07-13:yin",
         "period": "2026-07-13",
         "classTypeId": "yin",
-        "count": 9
+        "count": 9,
+        "seeded": true
       },
       {
         "id": "2026-07-20:yin",
         "period": "2026-07-20",
         "classTypeId": "yin",
-        "count": 9
+        "count": 9,
+        "seeded": true
       },
       {
         "id": "2026-07-27:yin",
         "period": "2026-07-27",
         "classTypeId": "yin",
-        "count": 9
+        "count": 9,
+        "seeded": true
       },
       {
         "id": "2026-08-03:yin",
         "period": "2026-08-03",
         "classTypeId": "yin",
-        "count": 9
+        "count": 9,
+        "seeded": true
       },
       {
         "id": "2026-08-10:yin",
         "period": "2026-08-10",
         "classTypeId": "yin",
-        "count": 9
+        "count": 9,
+        "seeded": true
       },
       {
         "id": "2026-08-17:yin",
         "period": "2026-08-17",
         "classTypeId": "yin",
-        "count": 9
+        "count": 9,
+        "seeded": true
       }
     ]
   },
-  "rev": 5,
-  "updatedAt": "2026-09-01T09:47:54.528Z",
+  "rev": 6,
+  "updatedAt": "2026-09-01T10:01:47.066Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }

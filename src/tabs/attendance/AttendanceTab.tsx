@@ -65,6 +65,29 @@ export default function AttendanceTab() {
             Record totals per class type, monthly or weekly. Weekly numbers roll up into their month
             on the Home dashboard.
           </p>
+          {attendance.data?.entries.some((e) => e.seeded) && (
+            <button
+              type="button"
+              className="mt-1 rounded border border-amber-400 bg-amber-50 px-2 py-1 text-[12px] font-medium text-amber-800 hover:bg-amber-100"
+              title="The seeded demo rows keep Home's charts populated but the numbers are invented"
+              onClick={() => {
+                const n = attendance.data?.entries.filter((e) => e.seeded).length ?? 0;
+                if (
+                  window.confirm(
+                    `Delete the ${n} seeded demo attendance entries? Real entries you have typed stay. ` +
+                      `Home's charts will be empty until real counts go in.`,
+                  )
+                ) {
+                  attendance.update((d) => ({
+                    ...d,
+                    entries: d.entries.filter((e) => !e.seeded),
+                  }));
+                }
+              }}
+            >
+              Delete the seeded demo entries
+            </button>
+          )}
         </div>
         <SaveBadge
           state={mostUrgent([attendance, schedule]).saveState}

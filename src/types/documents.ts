@@ -414,6 +414,12 @@ export interface AttendanceEntry {
   period: string;
   classTypeId: string; // references ScheduleDoc.classTypes
   count: number; // total attendances for that class type in the period
+  /**
+   * True for the invented demo rows the tool seeded. Home banners every chart
+   * while any survive: numbers that look real but are not would otherwise
+   * reach the owners (2026-09-01 roundtable).
+   */
+  seeded?: boolean;
 }
 
 export interface AttendanceDoc {
