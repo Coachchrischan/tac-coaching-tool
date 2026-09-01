@@ -20,7 +20,9 @@ a private web app I use to plan the club's training year and run classes off the
 - **Plan of record:** `PROGRAMMING-PLAN.md` in this repo (the ratified 2026/27 macrocycle).
 - **Latest expert reviews:** `REVIEW-2026-08-20.md` (code audit, 38 findings, mostly actioned) and
   `REVIEW-2026-08-20-TABS.md` (tab-by-tab panel review written for the club owners, also published
-  as an artifact). Start with the tabs one; it is the current backlog.
+  as an artifact), and REVIEW-2026-08-31-roundtable.json (the panel review of the A/B
+  restructure; its must-fixes are already applied, the open items live in
+  BANKED-2026-08-31.md). Start with the tabs one plus BANKED; together they are the backlog.
 
 ## House rules (do not break these)
 
