@@ -12,6 +12,8 @@ import type {
   ProgramBlock,
   ProgramDoc,
   ProgramWeek,
+  PushLogDoc,
+  PushLogEntry,
   SeriesSession,
   Session,
   SessionFocus,
@@ -36,7 +38,7 @@ import {
   streamsOf,
   withStreamBlocks,
 } from '../../lib/programStreams';
-import { resolveWeekDays } from '../../lib/classDays';
+import { FOCUS_DAY_PICK, resolveWeekDays } from '../../lib/classDays';
 import {
   isoDate,
   shutdownBefore,
@@ -207,6 +209,22 @@ export default function ProgrammingTab() {
   // The "e" beside the session pills: name, type and remove, on demand.
   const [sessionEditOpen, setSessionEditOpen] = useState(false);
 
+  // The push log is the tool's memory of what members' calendars hold. Read
+  // directly (not through useDoc): this tab only ever reads it, and it must
+  // refresh right after a push without joining the autosave machinery.
+  const [pushEntries, setPushEntries] = useState<PushLogEntry[]>([]);
+  const refreshPushLog = useCallback(() => {
+    void fetch('/api/store/push-log')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((env: { data?: PushLogDoc } | null) => {
+        if (env?.data) setPushEntries(env.data.entries ?? []);
+      })
+      .catch(() => {});
+  }, []);
+  useEffect(() => {
+    refreshPushLog();
+  }, [refreshPushLog]);
+
   const overrides = lib.data;
   const merged = library && overrides ? mergedLibrary(library, overrides) : null;
 
@@ -276,6 +294,13 @@ export default function ProgrammingTab() {
   const streamIndex = Math.min(siRaw, streams.length - 1);
   const stream = streams[streamIndex];
   const blocks = stream.blocks;
+  /** The most recent push of a given week of the selected phase, if any. */
+  const lastPushOf = (weekIndex: number): PushLogEntry | undefined => {
+    const hits = pushEntries.filter(
+      (e) => e.streamId === stream.id && e.block === bi + 1 && e.week === weekIndex + 1,
+    );
+    return hits[hits.length - 1];
+  };
   const bi = Math.min(biRaw, blocks.length - 1);
   const wi = Math.min(wiRaw, blocks[bi].weeks.length - 1);
   // A block is the 3 to 4 week wave inside a phase; the phase decides which.
@@ -888,9 +913,19 @@ export default function ProgrammingTab() {
       );
       return;
     }
+    const prior = lastPushOf(wi);
+    const priorLine = prior
+      ? `This week was already pushed ${new Date(prior.at).toLocaleString('en-AU', {
+          day: 'numeric',
+          month: 'short',
+          hour: 'numeric',
+          minute: '2-digit',
+        })}. Days already holding a session are left as they are; only missing days are created.\n\n`
+      : '';
     if (
       !window.confirm(
         `Push ${blockLabel(bi)} Week ${wi + 1} to the TAC Strength Class team calendar as DRAFTS?\n\n` +
+          priorLine +
           `Days come from the current format, "${resolved.scenarioName}":\n${lines.join('\n')}\n\n` +
           `Nothing is published; you publish in the coach app.`,
       )
@@ -915,10 +950,13 @@ export default function ProgrammingTab() {
         );
         return;
       }
+      refreshPushLog();
       window.alert(
         `Pushed as drafts, dated off the "${out.scenario}" timetable:\n${out.pushed.join('\n')}${
+          out.alreadyPresent?.length ? '\n\nLeft as they were:\n' + out.alreadyPresent.join('\n') : ''
+        }${
           out.missing?.length ? '\n\nNo class runs these, so they were not pushed:\n' + out.missing.join(', ') : ''
-        }${out.skipped?.length ? '\n\nSkipped (no TrainHeroic id):\n' + out.skipped.join('\n') : ''}`,
+        }${out.skipped?.length ? '\n\nSkipped:\n' + out.skipped.join('\n') : ''}`,
       );
     } catch (err) {
       window.alert(`Push failed: ${String(err)}`);
@@ -1235,11 +1273,27 @@ export default function ProgrammingTab() {
               view controls, and centre in it, so the blank space either side
               is even however long the phase name or the class list is. */}
           <div className="flex flex-1 items-center justify-center gap-1.5">
-            {sessions.map((s, i) => (
-              <button key={s.id} type="button" className={pill(i === sIdx)} onClick={() => setSi(i)}>
-                {s.name || FOCUS_LABEL[s.focus]}
-              </button>
-            ))}
+            {sessions.map((s, i) => {
+              // A parked track (FOCUS_DAY_PICK null) is written but has no
+              // class day, so it must not look like deliverable coverage.
+              const parked = FOCUS_DAY_PICK[s.focus] === null;
+              return (
+                <button
+                  key={s.id}
+                  type="button"
+                  className={`${pill(i === sIdx)} ${parked ? 'opacity-60' : ''}`}
+                  onClick={() => setSi(i)}
+                  title={
+                    parked
+                      ? 'Parked: no class day runs this track, so it is never pushed or emailed. Written for when a day exists.'
+                      : undefined
+                  }
+                >
+                  {s.name || FOCUS_LABEL[s.focus]}
+                  {parked && <span className="ml-1 text-[10px] font-normal uppercase">· parked</span>}
+                </button>
+              );
+            })}
             {view === 'week' && (
               <>
                 <button
@@ -1331,19 +1385,29 @@ export default function ProgrammingTab() {
                     )}
                     <button
                       type="button"
-                      className={`${pill(i === wi)} flex flex-col items-center leading-tight`}
+                      className={`${pill(i === wi)} relative flex flex-col items-center leading-tight`}
                       onClick={() => setWi(i)}
-                      title={
+                      title={[
                         mondayOfWeek(i)
                           ? `Week starting ${fmtDay(mondayOfWeek(i), { weekday: 'long', day: 'numeric', month: 'long' })}`
-                          : undefined
-                      }
+                          : null,
+                        lastPushOf(i)
+                          ? `Pushed to TrainHeroic ${new Date(lastPushOf(i)!.at).toLocaleString('en-AU', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' })} (drafts)`
+                          : null,
+                      ]
+                        .filter(Boolean)
+                        .join('\n')}
                     >
                       W{i + 1}
                       {mondayOfWeek(i) && (
                         <span className="text-[10px] font-normal opacity-70">
                           {fmtDay(mondayOfWeek(i))}
                         </span>
+                      )}
+                      {/* The push ledger's badge: this week is in members'
+                          calendars as drafts. Hover for when. */}
+                      {lastPushOf(i) && (
+                        <span className="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full border border-white bg-sand-500" />
                       )}
                     </button>
                   </span>

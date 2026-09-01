@@ -8,9 +8,12 @@ import SettingsDrawer from './SettingsDrawer';
 import WeekGrid from './WeekGrid';
 import { DAY_END_MIN } from './scheduleLayout';
 import { liveIsAssumed, liveScenario, viewedScenario } from '../../lib/scenarios';
+import { FOCUS_CLASS_TYPE } from '../../lib/classDays';
+import { streamsOf } from '../../lib/programStreams';
 
 export default function ScheduleTab() {
   const { data: doc, saveState, update, reloadTheirs, keepMine, retry } = useDoc('schedule');
+  const program = useDoc('program');
   const [selectedBlockId, setSelectedBlockId] = useState<string | null>(null);
   const [showSettings, setShowSettings] = useState(false);
 
@@ -24,6 +27,27 @@ export default function ScheduleTab() {
   const live = liveScenario(doc);
   const viewingLive = live?.id === scenario.id;
   const selectedBlock = scenario.blocks.find((b) => b.id === selectedBlockId) ?? null;
+
+  // A bookable class the programming no longer feeds is an improvised class:
+  // members book it, no board or plan exists behind it (the roundtable's
+  // Friday-strength finding). Warn, and leave the timetable itself to Chris.
+  const unfedClasses = (() => {
+    if (!program.data || !live) return [];
+    const programmedFocuses = new Set(
+      streamsOf(program.data).flatMap((s) =>
+        s.blocks.flatMap((b) => b.weeks.flatMap((w) => w.sessions.map((sess) => sess.focus))),
+      ),
+    );
+    const programmableTypes = new Set(Object.values(FOCUS_CLASS_TYPE));
+    const liveTypes = [...new Set(live.blocks.map((b) => b.classTypeId))];
+    return liveTypes
+      .filter((ct) => programmableTypes.has(ct))
+      .filter(
+        (ct) =>
+          ![...programmedFocuses].some((f) => FOCUS_CLASS_TYPE[f] === ct),
+      )
+      .map((ct) => doc.classTypes.find((c) => c.id === ct)?.name ?? ct);
+  })();
 
   function patchBlock(id: string, patch: Partial<ClassBlock>) {
     update((d) => ({
@@ -84,6 +108,15 @@ export default function ScheduleTab() {
 
   return (
     <div>
+      {unfedClasses.length > 0 && (
+        <div className="mb-4 rounded-lg border border-amber-300 bg-amber-50 px-4 py-2.5 text-[13px] text-amber-900">
+          ⚠ Bookable but not programmed: <strong>{unfedClasses.join(', ')}</strong>. Members can
+          book {unfedClasses.length === 1 ? 'this class' : 'these classes'}, but no programming in
+          the tool feeds {unfedClasses.length === 1 ? 'it' : 'them'}, so whatever runs is
+          improvised. Remove {unfedClasses.length === 1 ? 'it' : 'them'} from the live format,
+          repoint {unfedClasses.length === 1 ? 'it' : 'them'}, or write a holding session.
+        </div>
+      )}
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <ScenarioBar doc={doc} onUpdate={update} />
         <div className="flex items-center gap-3">
