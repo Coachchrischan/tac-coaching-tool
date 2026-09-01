@@ -354,6 +354,71 @@ holds every open question from the rebuild. Key facts:
   set, and week 9 Day A tapers. Items needing Chris sit at the top of
   `BANKED-2026-08-31.md`, led by renaming the Tue/Thu classes.
 
+## What shipped on 2026-09-01 (the roundtable build)
+
+Chris's morning calls first: Tue/Thu classes renamed to **Full Body Strength
+A/B** (ids stay `lbs`/`ubs`), the ESD and Hyrox annual lanes fit the ruler
+(50 training weeks each; Hyrox tells the real block story around the three
+race windows), and the 2027 cycle 2 mirrors the 3/9/5 structure.
+
+Then the **LLM roundtable review of the whole tool** ran
+(`REVIEW-2026-09-01-llm-roundtable.md`: 4 seats × GPT/Gemini/Grok/Claude,
+adversarially verified, ~US$1.30) and Chris approved implementing nearly all
+of it the same day:
+
+- **Data safety**: a corrupt doc now tombstones (503) instead of silently
+  reseeding; every PUT snapshots the replaced version to `data/_history/`
+  (50 per doc) with restore endpoints and a Data safety panel on Home; a
+  debounced + hourly + on-boot git job commits `data/` to a local
+  `data-backup-<hostname>` branch via a temp index (master untouched, no
+  merge pressure) and pushes it. **Verified pushing to GitHub from the
+  running server.** `.gitattributes` makes `data/*.json` whole-file merges.
+  Envelopes carry the writing machine's hostname and a `schemaVersion` (2).
+- **Tests + strict**: vitest (56 tests over trainingWeeks, classDays,
+  programStreams, prescription, pushMapping, with the shipped bugs as named
+  regression cases), `strict: true` in both tsconfigs (zero errors), and
+  `npm run check` (the correct tsc + tests). Run it before claiming.
+- **Push overhaul**: the plugin reads through `loadDocOnServer` + `streamsOf`
+  (no more hand-copied types), pre-flights the token (expiry is a clear 401),
+  resumes past already-present days instead of wedging, best-effort deletes a
+  half-built day, pushes circuit challenges as workout instruction text so
+  members see them, asserts drafts-only mechanically, and appends every push
+  to the new `push-log` doc. Week pills show a pushed dot; `mapReps` no
+  longer emits reps MAX for RIR. `TRAINHEROIC_MCP_DIR` overrides the path.
+- **Model**: scales can override per slot (`ExerciseSlot.scales`; presence of
+  the field is the mode, empty = deliberately no scales on that slot);
+  `cues`/`patterns` are keyed like scales so free text gets cues and pattern
+  counts; `showScales` left the document (React state now: browsing cannot
+  dirty data/git); a one-off migration (`scripts/migrate-docs.mjs`) wrote
+  everything back to one on-disk shape. **Read-path compat code is kept until
+  the laptop is confirmed synced**, then it can be deleted.
+- **Programming content** (Chris-approved): real warm-ups in all 18 A/B
+  sessions, farmers carries in Day B weeks 7 to 9 (carry gap closed, banked
+  items 5/13 resolved), front squat marked RPE-primary in all nine notes,
+  anchor-capture lines in W1 and W7. Percentage-primary loading and the
+  jump progression stand as written: **testing happens in the two primer
+  weeks** (Chris, 2026-09-01), and the jumps carry scaled options.
+- **UI**: Movement Check audits the rolling two-phase window with free text
+  taggable and untagged work labelled (audit #10 closed); the TV board has
+  per-part on/off-board curation with the shrink floor raised to 55% (#11
+  closed properly); ROX Engine pills are badged parked; Schedule warns about
+  bookable-but-unprogrammed classes (Friday, currently, while the club
+  weighs the two formats); empty circuit sessions offer "start from last
+  week"; the nav is six working tabs plus a Club group; every route has an
+  error boundary; banners warn on wrong machine timezone (it caught this PC
+  on **Australia/Sydney**, tell Chris) and foreign-machine documents; the
+  conflict dialogue names when and where "theirs" was saved; the email
+  dialogue has Copy as text; Home banners DEMO DATA over the seeded
+  attendance (deletable in Attendance).
+- **Deliberately NOT built yet**: the ProgrammingTab split and the focus
+  catalog consolidation (planned, not rushed at the end of a long session);
+  the Launchpad refresh-script reordering (outer repo, Chris's); finding 6's
+  in-block trough (Chris is designing his own answer).
+
+Everything above was personally tested in the running app the same day,
+including a live 409 conflict (resolved), a slot-scale override round trip,
+the push confirm (cancelled before creating anything) and the backup push.
+
 **Decisions already made, do not reopen without me:** ESD and Game Day are month to month, not
 periodised (**Hyrox was, and is now four-week blocks**, changed 2026-08-28 on Chris's call).
 TrainHeroic stays drafts only. The week email opens a Gmail compose window and never sends.
