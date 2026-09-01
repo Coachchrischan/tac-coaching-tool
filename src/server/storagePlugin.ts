@@ -60,6 +60,8 @@ const DOC_IDS = new Set<string>([
 ]);
 
 const HISTORY_KEEP = 50;
+/** The on-disk shape version scripts/migrate-docs.mjs writes. */
+const CURRENT_SCHEMA_VERSION = 2;
 const BACKUP_DEBOUNCE_MS = 5 * 60 * 1000;
 const BACKUP_INTERVAL_MS = 60 * 60 * 1000;
 
@@ -69,6 +71,8 @@ interface Envelope {
   updatedAt: string;
   /** hostname of the machine that wrote this version (sync visibility). */
   machine?: string;
+  /** On-disk shape version, stamped by scripts/migrate-docs.mjs. Carried forward on every write. */
+  schemaVersion?: number;
 }
 
 function docPath(root: string, docId: string) {
@@ -118,6 +122,7 @@ export function updateDocOnServer(
     rev: current.rev + 1,
     updatedAt: new Date().toISOString(),
     machine: hostname(),
+    schemaVersion: current.schemaVersion,
   };
   snapshotDoc(root, docId, current);
   writeDoc(root, docId, next);
@@ -147,6 +152,7 @@ function loadDoc(root: string, docId: DocId): Envelope {
         rev: 1,
         updatedAt: new Date().toISOString(),
         machine: hostname(),
+        schemaVersion: CURRENT_SCHEMA_VERSION,
       };
       writeDoc(root, docId, env);
       return env;
@@ -371,6 +377,7 @@ export function storagePlugin(): Plugin {
               rev: current.rev + 1,
               updatedAt: new Date().toISOString(),
               machine: hostname(),
+              schemaVersion: current.schemaVersion,
             };
             writeDoc(root, id, next);
             scheduleBackup();
@@ -416,6 +423,7 @@ export function storagePlugin(): Plugin {
               rev: current.rev + 1,
               updatedAt: new Date().toISOString(),
               machine: hostname(),
+              schemaVersion: current.schemaVersion,
             };
             snapshotDoc(root, id, current);
             writeDoc(root, id, next);

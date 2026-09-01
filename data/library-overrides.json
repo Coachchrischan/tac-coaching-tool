@@ -80,8 +80,12 @@
     },
     "scales": {
       "440": [
-        "Squat Jump ",
-        "Landing Mechanics "
+        {
+          "name": "Squat Jump "
+        },
+        {
+          "name": "Landing Mechanics "
+        }
       ],
       "688272": [
         {
@@ -133,6 +137,8 @@
     "cues": {},
     "customExercises": []
   },
-  "rev": 38,
-  "updatedAt": "2026-08-31T00:32:21.867Z"
+  "rev": 39,
+  "updatedAt": "2026-09-01T09:47:54.525Z",
+  "machine": "DESKTOP-T7OQ0UN",
+  "schemaVersion": 2
 }

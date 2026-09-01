@@ -18,8 +18,8 @@
                   {
                     "id": "str2-primer-w1s1",
                     "focus": "full-a",
-                    "kind": "series",
                     "intent": "Run off-app. Intro week under the old plan (25 to 28 Aug).",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-primer-w1s1-WU",
@@ -54,8 +54,8 @@
                   {
                     "id": "str2-primer-w1s2",
                     "focus": "full-b",
-                    "kind": "series",
                     "intent": "Run off-app. Intro week under the old plan (25 to 28 Aug).",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-primer-w1s2-WU",
@@ -95,8 +95,8 @@
                   {
                     "id": "str2-primer-w2s1",
                     "focus": "full-a",
-                    "kind": "series",
                     "intent": "Run off-app. Primer week 1: programming emailed to coaches.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-primer-w2s1-WU",
@@ -131,8 +131,8 @@
                   {
                     "id": "str2-primer-w2s2",
                     "focus": "full-b",
-                    "kind": "series",
                     "intent": "Run off-app. Primer week 1: programming emailed to coaches.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-primer-w2s2-WU",
@@ -172,8 +172,8 @@
                   {
                     "id": "str2-primer-w3s1",
                     "focus": "full-a",
-                    "kind": "series",
                     "intent": "Run off-app. Primer week 2: programming emailed to coaches.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-primer-w3s1-WU",
@@ -208,8 +208,8 @@
                   {
                     "id": "str2-primer-w3s2",
                     "focus": "full-b",
-                    "kind": "series",
                     "intent": "Run off-app. Primer week 2: programming emailed to coaches.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-primer-w3s2-WU",
@@ -257,8 +257,8 @@
                   {
                     "id": "str2-hyp-w1a",
                     "focus": "full-a",
-                    "kind": "series",
                     "intent": "Squat + upper focus. Micro 1 of 3 (9/7/5 wave one), week 1: main lifts 3x9 at 65%.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-hyp-w1a-WU",
@@ -288,8 +288,7 @@
                             "reps": "9",
                             "rpe": "7",
                             "note": "Or front squat, same wave. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
-                            "intensity": "65%",
-                            "showScales": false
+                            "intensity": "65%"
                           },
                           {
                             "id": "str2-hyp-w1a-a1",
@@ -297,8 +296,7 @@
                             "name": "Depth Jump",
                             "sets": "3",
                             "reps": "3",
-                            "note": "Step down, stick the landing for 2 seconds. Height over reps. New members jump-and-stick from the floor instead of the box.",
-                            "showScales": false
+                            "note": "Step down, stick the landing for 2 seconds. Height over reps. New members jump-and-stick from the floor instead of the box."
                           }
                         ]
                       },
@@ -316,8 +314,7 @@
                             "reps": "9",
                             "rpe": "7",
                             "tempo": "30X1",
-                            "note": "3 second lower.",
-                            "showScales": false
+                            "note": "3 second lower."
                           },
                           {
                             "id": "str2-hyp-w1a-b3",
@@ -325,8 +322,7 @@
                             "name": "Weighted Chin Ups",
                             "sets": "10",
                             "reps": "2",
-                            "note": "EMOM 10 minutes: 2 reps at the top of each minute. Add load only if every rep is crisp. Stagger the rig: half start on the minute, half on the 30.",
-                            "showScales": false
+                            "note": "EMOM 10 minutes: 2 reps at the top of each minute. Add load only if every rep is crisp. Stagger the rig: half start on the minute, half on the 30."
                           }
                         ]
                       },
@@ -377,8 +373,8 @@
                   {
                     "id": "str2-hyp-w1b",
                     "focus": "full-b",
-                    "kind": "series",
                     "intent": "RDL + lower focus. Micro 1 of 3 (9/7/5 wave one), week 1: main lifts 3x9 at 65%.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-hyp-w1b-WU",
@@ -491,8 +487,8 @@
                   {
                     "id": "str2-hyp-w2a",
                     "focus": "full-a",
-                    "kind": "series",
                     "intent": "Squat + upper focus. Micro 1 of 3 (9/7/5 wave one), week 2: main lifts 3x7 at 70%.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-hyp-w2a-WU",
@@ -607,8 +603,8 @@
                   {
                     "id": "str2-hyp-w2b",
                     "focus": "full-b",
-                    "kind": "series",
                     "intent": "RDL + lower focus. Micro 1 of 3 (9/7/5 wave one), week 2: main lifts 3x7 at 70%.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-hyp-w2b-WU",
@@ -721,8 +717,8 @@
                   {
                     "id": "str2-hyp-w3a",
                     "focus": "full-a",
-                    "kind": "series",
                     "intent": "Squat + upper focus. Micro 1 of 3 (9/7/5 wave one), week 3: main lifts 3x5 at 75%. Challenge week: Push Up Challenge: Sally.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-hyp-w3a-WU",
@@ -860,8 +856,8 @@
                   {
                     "id": "str2-hyp-w3b",
                     "focus": "full-b",
-                    "kind": "series",
                     "intent": "RDL + lower focus. Micro 1 of 3 (9/7/5 wave one), week 3: main lifts 3x5 at 75%.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-hyp-w3b-WU",
@@ -974,8 +970,8 @@
                   {
                     "id": "str2-hyp-w4a",
                     "focus": "full-a",
-                    "kind": "series",
                     "intent": "Squat + upper focus. Micro 2 of 3 (9/7/5 wave two), week 1: main lifts 3x9 at 67.5%.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-hyp-w4a-WU",
@@ -1092,8 +1088,8 @@
                   {
                     "id": "str2-hyp-w4b",
                     "focus": "full-b",
-                    "kind": "series",
                     "intent": "RDL + lower focus. Micro 2 of 3 (9/7/5 wave two), week 1: main lifts 3x9 at 67.5%.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-hyp-w4b-WU",
@@ -1205,8 +1201,8 @@
                   {
                     "id": "str2-hyp-w5a",
                     "focus": "full-a",
-                    "kind": "series",
                     "intent": "Squat + upper focus. Micro 2 of 3 (9/7/5 wave two), week 2: main lifts 3x7 at 72.5%.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-hyp-w5a-WU",
@@ -1323,8 +1319,8 @@
                   {
                     "id": "str2-hyp-w5b",
                     "focus": "full-b",
-                    "kind": "series",
                     "intent": "RDL + lower focus. Micro 2 of 3 (9/7/5 wave two), week 2: main lifts 3x7 at 72.5%.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-hyp-w5b-WU",
@@ -1436,8 +1432,8 @@
                   {
                     "id": "str2-hyp-w6a",
                     "focus": "full-a",
-                    "kind": "series",
                     "intent": "Squat + upper focus. Micro 2 of 3 (9/7/5 wave two), week 3: main lifts 3x5 at 77.5%. Challenge week: Mechanical Drop Set Plank Challenge.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-hyp-w6a-WU",
@@ -1577,8 +1573,8 @@
                   {
                     "id": "str2-hyp-w6b",
                     "focus": "full-b",
-                    "kind": "series",
                     "intent": "RDL + lower focus. Micro 2 of 3 (9/7/5 wave two), week 3: main lifts 3x5 at 77.5%.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-hyp-w6b-WU",
@@ -1690,8 +1686,8 @@
                   {
                     "id": "str2-hyp-w7a",
                     "focus": "full-a",
-                    "kind": "series",
                     "intent": "Squat + upper focus. Micro 3 of 3 (7/5/3 final wave), week 1: main lifts 3x7 at 75%.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-hyp-w7a-WU",
@@ -1798,8 +1794,8 @@
                   {
                     "id": "str2-hyp-w7b",
                     "focus": "full-b",
-                    "kind": "series",
                     "intent": "RDL + lower focus. Micro 3 of 3 (7/5/3 final wave), week 1: main lifts 3x7 at 75%.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-hyp-w7b-WU",
@@ -1901,8 +1897,8 @@
                   {
                     "id": "str2-hyp-w8a",
                     "focus": "full-a",
-                    "kind": "series",
                     "intent": "Squat + upper focus. Micro 3 of 3 (7/5/3 final wave), week 2: main lifts 3x5 at 80%.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-hyp-w8a-WU",
@@ -2009,8 +2005,8 @@
                   {
                     "id": "str2-hyp-w8b",
                     "focus": "full-b",
-                    "kind": "series",
                     "intent": "RDL + lower focus. Micro 3 of 3 (7/5/3 final wave), week 2: main lifts 3x5 at 80%.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-hyp-w8b-WU",
@@ -2112,8 +2108,8 @@
                   {
                     "id": "str2-hyp-w9a",
                     "focus": "full-a",
-                    "kind": "series",
                     "intent": "Squat + upper focus. Micro 3 of 3 (7/5/3 final wave), week 3: main lifts 3x3 at 85%. Challenge week: Deadhang Challenge.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-hyp-w9a-WU",
@@ -2241,8 +2237,8 @@
                   {
                     "id": "str2-hyp-w9b",
                     "focus": "full-b",
-                    "kind": "series",
                     "intent": "RDL + lower focus. Micro 3 of 3 (7/5/3 final wave), week 3: main lifts 3x3 at 85%.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-hyp-w9b-WU",
@@ -2850,10 +2846,10 @@
                   {
                     "id": "esd-b1w3s1",
                     "focus": "esd",
-                    "kind": "circuit",
                     "name": "Monday, MAP",
                     "intent": "Maximal aerobic power. Whatever you do in round one you must match or beat in round four. If round four is worse, round one was too hard.",
                     "note": "Loads are light on purpose. Wall ball 6/4kg to 10m, farmers carry 2x20 / 2x12.5kg, step-up bodyweight 45 to 50cm. If a floor movement forces a stop it is too heavy. No sled on Monday: it corrupts the MAP intent and the track is the wrong end of the room.",
+                    "kind": "circuit",
                     "circuit": [
                       {
                         "id": "e16f8307-8da2-45c0-b4f0-9cf5b1605ea1",
@@ -2909,10 +2905,10 @@
                   {
                     "id": "esd-b2w1-friday",
                     "focus": "esd",
-                    "kind": "circuit",
                     "name": "Friday, threshold",
                     "intent": "Threshold. Three blocks of eight minutes with no stopping inside the eight. RPE 7 is three or four words at a time, no more and no less.",
                     "note": "Zones: 1 runner + 15m shuttle, 2 runner + wall ball, 3 rower + farmers carry, 4 bike + bench step-up, 5 ski + sled. Your pod stays in one zone for the whole block. Zone 5 is capped at three people, one sled lane each, so nobody ever waits. If a floor load makes you stop it is wrong: tell the coach.",
+                    "kind": "circuit",
                     "circuit": [
                       {
                         "id": "5c3aba71-a7c0-4243-8e25-7d6cc44bca37",
@@ -2971,10 +2967,10 @@
                   {
                     "id": "esd-b1w4s1",
                     "focus": "esd",
-                    "kind": "circuit",
                     "name": "Monday, MAP",
                     "intent": "Same session as last Monday with one extra round. The pace does not change. Round five puts you back on your round one machine, so it is a direct comparison.",
                     "note": "Week 1 round 1 numbers go on the board next to each name before class. Wall ball 6/4kg to 10m, farmers carry 2x20 / 2x12.5kg, step-up bodyweight 45 to 50cm.",
+                    "kind": "circuit",
                     "circuit": [
                       {
                         "id": "ea2f6130-cc8d-4a9d-9670-7c663bcdf2a9",
@@ -3030,10 +3026,10 @@
                   {
                     "id": "esd-b2w2-friday",
                     "focus": "esd",
-                    "kind": "circuit",
                     "name": "Friday, threshold",
                     "intent": "Same pace as last Friday, two minutes longer per block. Minute ten should look identical to minute one. Do not upgrade the effort.",
                     "note": "Zones: 1 runner + 15m shuttle, 2 runner + wall ball, 3 rower + farmers carry, 4 bike + bench step-up, 5 ski + sled. Machine legs go 3 min to 4 min; the floor leg stays at 2 min so local fatigue never forces a stop. Accessory is dropped this week to protect the clock.",
+                    "kind": "circuit",
                     "circuit": [
                       {
                         "id": "15ac105c-da9f-49ac-82a8-01e6f0374625",
@@ -3092,10 +3088,10 @@
                   {
                     "id": "esd-b1w5s1",
                     "focus": "esd",
-                    "kind": "circuit",
                     "name": "Monday, MAP",
                     "intent": "Same five rounds, same pace, rest drops to two minutes. It should feel about a point harder by round three. That is the progression, not a mistake.",
                     "note": "Two minutes is true rest, so the layout is compressed to under 15m between stations and the call is \"moving at ninety seconds\". Round two is a trap: do not go faster because you feel good.",
+                    "kind": "circuit",
                     "circuit": [
                       {
                         "id": "61a1ce27-9d06-4e07-8c37-1c946f6fbd11",
@@ -3151,10 +3147,10 @@
                   {
                     "id": "esd-b2w3-friday",
                     "focus": "esd",
-                    "kind": "circuit",
                     "name": "Friday, threshold",
                     "intent": "Same ten minutes, rest drops to two. Block three will feel like an eight and it is still a seven’s pace. Watch the number on the machine, not the feeling.",
                     "note": "Zones: 1 runner + 15m shuttle, 2 runner + wall ball, 3 rower + farmers carry, 4 bike + bench step-up, 5 ski + sled. With a two minute rest the two pods crossing from zone 5 to zone 1 move first on the whistle, through the coned rig bays. Hardest week of the block: next week is shorter and faster.",
+                    "kind": "circuit",
                     "circuit": [
                       {
                         "id": "d441112f-0607-4b3f-820d-7d3ad5b7c52d",
@@ -3213,10 +3209,10 @@
                   {
                     "id": "esd-b1w6s1",
                     "focus": "esd",
-                    "kind": "circuit",
                     "name": "Monday, MAP",
                     "intent": "Shorter and faster. Rounds one to five are a nine out of ten. Round six is everything you have, on your round one machine, and it goes in the log.",
                     "note": "Do not spend round six in round three. Round 6 is compared against week 1 round 1 on the same machine, so the machine number matters.",
+                    "kind": "circuit",
                     "circuit": [
                       {
                         "id": "157939c2-5e13-4b6c-9668-1847a9ed3a3f",
@@ -3278,10 +3274,10 @@
                   {
                     "id": "esd-b2w4-friday",
                     "focus": "esd",
-                    "kind": "circuit",
                     "name": "Friday, upper threshold",
                     "intent": "Last session of the block. Blocks drop back to eight minutes and the pace goes up five to eight seconds per five hundred. Two or three words now, not four.",
                     "note": "Floor loads go up one increment: wall ball 9/6kg, carry 2x24 / 2x16kg, step-up with 1x10kg, sled at 13 to 16s per length. The no-walking rule still applies, so if the heavier load stops you, put it back down mid-block.",
+                    "kind": "circuit",
                     "circuit": [
                       {
                         "id": "b4cb18f3-0d62-4c96-b1b0-63b54be59850",
@@ -3623,12 +3619,12 @@
                   {
                     "id": "hyrox-w1-mon-anchor",
                     "focus": "rox-strong",
-                    "kind": "series",
                     "name": "Anchor",
                     "intent": "Sustainable strength endurance. A pace test disguised as a grind. Four to six rounds per pair is the target window.",
                     "blurbOverride": "Strength endurance under a long clock. Five stations, partner alternating, sled and carries throughout. The goal is a pace you can hold for 22 minutes, not a sprint you survive.",
                     "appDescription": "ANCHOR\n\nIn pairs, 22 min AMRAP:\n20/16 cal Ski\n20 Wall Balls\n25m Sled Push\n20m DB Farmers Carry\n20 DB Walking Lunge\n\nOne works, one rests. Swap each station.\n\nSignature session. This one comes back in\nweek 4, so remember your score.",
                     "note": "Five stations around the room. Stagger the ten pairs: pairs 1-2 start at ski, 3-4 wall balls, 5-6 sled, 7-8 farmers, 9-10 lunge. They rotate in written order from wherever they start.\nThe stagger keeps two pairs at the sled. If a third arrives early they hold at the carry and take the lane when it frees. Say this in the brief or you lose two minutes to a queue.\nLoad check: under three rounds means too heavy, over seven means too light. Correct it live, not next week.\nThe one cue: unbroken wall balls in round four is the goal, not round one.\nTell them this returns on 21 September. Scores on the board, get them to photograph it.\nCapacity: OK at 20. Stagger is what keeps sled at 2 lanes.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "w1-mon-anchor-wu",
@@ -3836,12 +3832,12 @@
                   {
                     "id": "hyrox-w1-wed-triangle",
                     "focus": "rox-engine",
-                    "kind": "series",
                     "name": "The Triangle",
                     "intent": "Threshold, continuous and honest. The cleanest teaching session of the block. Spend the brief on pacing, not movement.",
                     "blurbOverride": "Three rounds of row, ski and run at 500m each. Rotating start so the machines never clash. Round three should land within 45 seconds of round one.",
                     "appDescription": "THE TRIANGLE\n\n3 rounds for time:\n500m Row\n500m Ski\n500m Run\n\nRotating start, continuous clock.\nScore is total time.\n\nSignature session. This one comes back in\nweek 4, so remember your time.",
                     "note": "Exact equipment fit. Seven rowers, seven skis, six to ten runners. Split into three equal groups by headcount, not ability.\nThey move as individuals, not as a group. Some will lap others, which is fine, machines free up naturally.\nStimulus is 7 to 8 out of 10. Round 3 within 45 seconds of round 1. If it is 90 seconds or more slower they went out too hard. Say it in the brief and again in the debrief.\nReturns 23 September. Times on the board.\nCapacity: Exact fit at 20. 7 + 7 + 6 = 20.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "w1-wed-triangle-wu",
@@ -3983,12 +3979,12 @@
                   {
                     "id": "hyrox-w1-fri-halfrox",
                     "focus": "rox-race",
-                    "kind": "series",
                     "name": "Half Rox",
                     "intent": "The race, halved. Four stations, five runs, 2.5km of compromised running. Most will take 26 to 32 minutes.",
                     "blurbOverride": "A half race simulation run solo. Alternating 500m runs and stations so the room self-balances. The teaching point is run one: if it is faster than run five, the session was paced wrong regardless of total time.",
                     "appDescription": "HALF ROX\n\nFor time:\n500m Run / 500m Ski\n500m Run / 50 Wall Balls\n500m Run / 500m Row\n500m Run / 100m DB Farmers Carry\n500m Run\n\nHalf a race. Pace run 1 like you mean to\nfinish run 5.\n\nSignature session. This one comes back in\nweek 4.",
                     "note": "Self-balancing. At any moment roughly half the room is running and half is at a station, which lands under the ten runner ceiling as long as you stagger the start. Do not send twenty people at once.\nNo sled, deliberately. Two lanes cannot serve twenty athletes moving through a fixed sequence. Sled lives on Monday.\nThe teaching point is run 1. Anyone whose run 1 is faster than their run 5 has failed the session regardless of total time.\nCall splits at the start of every run so they can hear the drift.\nReturns 25 September. Times on the board.\nCapacity: OK at 20 with staggered start. Do not mass start.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "w1-fri-halfrox-wu",
@@ -4192,12 +4188,12 @@
                   {
                     "id": "hyrox-w2-mon-tether",
                     "focus": "rox-strong",
-                    "kind": "series",
                     "name": "Tether",
                     "intent": "Work under a clock you do not control. Your partner's run is your rest, so their pacing decides your session. Most pairs finish in 18 to 22 minutes.",
                     "blurbOverride": "Same strength endurance job as week 1, completely new game. One partner runs 400m while the other accumulates reps. The sled is first in, first served, and leaving it until last is how pairs run out of time.",
                     "appDescription": "TETHER\n\nIn pairs, 23 min cap:\n60 Wall Balls\n40 DB Walking Lunge\n40 Alt DB Snatch\n20 Burpee Broad Jumps\n50m Sled Push\n\nOne partner runs 400m while the other\nworks. Swap on return. Any order.\nSled is first in, first served.",
                     "note": "The run is what makes this legal. Ten pairs, one runner each, exactly ten air runners. Never let both partners leave the floor.\nSled is first in, first served. Tell them they can bank the other stations while they wait, and that any pair leaving the sled until last will run out of time. That is the game, not an accident.\nThe pacing lesson sits on the runner, not the worker. A partner who sprints the 400m gives their teammate less rest and takes less work off the list. Point that out to a pair doing it.\nWatch the snatch. Fatigued DB snatch becomes a rounded-back swing. Cut the load before you cut the reps.\nCapacity: Exact fit at 20. 10 pairs = 10 runners.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "w2-mon-tether-wu",
@@ -4409,12 +4405,12 @@
                   {
                     "id": "hyrox-w2-wed-rotations",
                     "focus": "rox-engine",
-                    "kind": "series",
                     "name": "Rotations",
                     "intent": "Short intervals and top end, the exact opposite of week 1's continuous grind. Same track, same aerobic job, completely different feel on the floor.",
                     "blurbOverride": "Three seven-minute blocks of 30 seconds hard and 30 seconds easy, rotating row to ski to run. Score is total metres, so sandbagging block one to win block three gains nothing.",
                     "appDescription": "ROTATIONS\n\n3 x 7 min blocks:\n7 x 30s hard / 30s easy\nBlock 1 Row, Block 2 Ski, Block 3 Run\n\nScore is total metres.\n\nThen 8 min AMRAP:\n10 Wall Balls\n10 Alt DB Snatch\n10 Burpee Broad Jumps",
                     "note": "Exact fit. Three groups: seven on row, seven on ski, six on run. Rotation happens once every seven minutes so there is no traffic.\nThe 30s easy is not a stop. Keep the handle moving and the belt turning or the interval loses its point. This is the most common failure in this session.\nMetres in block 3 should be within 5% of block 1. Tell them the score is the sum.\nFinisher is whole room at once, no bottleneck. Set the broad jumps running one direction so nobody collides.\nCapacity: Exact fit at 20. Finisher is whole-room, no bottleneck.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "w2-wed-rotations-wu",
@@ -4589,12 +4585,12 @@
                   {
                     "id": "hyrox-w2-fri-pyramid",
                     "focus": "rox-race",
-                    "kind": "series",
                     "name": "Pyramid",
                     "intent": "A descending pyramid raced solo. It gets shorter as they get more tired. Say that out loud at the start, it changes how the room feels at minute twenty.",
                     "blurbOverride": "Four rounds, each shorter than the last, alternating run, machine and wall balls so the room self-balances. Individual effort with a staggered start. Pairs live on Saturday, not here.",
                     "appDescription": "PYRAMID\n\n34 min cap:\n\n800m Run / 500m Row or Ski / 40 Wall Balls\n600m Run / 400m Row or Ski / 30 Wall Balls\n400m Run / 300m Row or Ski / 20 Wall Balls\n200m Run / 200m Row or Ski / 10 Wall Balls\n\nEvery round is shorter than the last.\nStaggered start, race your own.",
                     "note": "Stagger the start every 30 seconds. The alternating run and station structure then keeps runners under ten without you managing it.\n'Row or ski' is deliberate. Fourteen erg stations for twenty athletes, and the stagger means they never all arrive at once. Do not lock them to one machine.\nMost will finish all four rounds inside the cap. Anyone still in round 3 at 28 minutes should cut to the 200m round to finish with the group.\nThe descending structure is the engagement. Announce it, then repeat it at the start of round 3.\nNo pairs and no sled here. Saturday owns partner work, Monday owns the sled.\nCapacity: OK at 20 with staggered start. Individual, no pairs.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "w2-fri-pyramid-wu",
@@ -4820,12 +4816,12 @@
                   {
                     "id": "hyrox-w3-mon-thefive",
                     "focus": "rox-strong",
-                    "kind": "series",
                     "name": "The Five",
                     "intent": "Peak week. Heaviest day of the block. Fixed work, fixed rotation, nowhere to hide. Round two scores will drop and that is correct.",
                     "blurbOverride": "Five stations, four athletes each, two and a half minutes on and thirty seconds to rotate, twice through. Twenty-five minutes of actual working time at the heaviest loads of the block.",
                     "appDescription": "THE FIVE\n\n5 stations, 2:30 on / 30s rotate, 2 rounds:\n\nSled Push\nDB Farmers Carry\nWall Balls\nDB Walking Lunge\nAir Runner\n\nHeaviest day of the block.\nEvery station gets a score.",
                     "note": "Five stations x four athletes is exactly twenty. With sixteen, run the same five stations with three each and the same clock. Do not cut stations.\nSled: four athletes, two lanes. They pair up inside the station and alternate 12.5m. Each gets roughly half the work time, which is correct for a heavy sled and is why this station is written as shuttles.\nRunner station is four of ten machines. No conflict with anything else in the room.\nLoads should feel genuinely hard by round 2. Tell them round 2 will be lower than round 1 so they do not chase round 1 and blow up at station 3.\nCapacity: Exact fit at 20. 5 stations x 4. Sled pairs alternate within station.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "w3-mon-thefive-wu",
@@ -4994,12 +4990,12 @@
                   {
                     "id": "hyrox-w3-wed-threshold",
                     "focus": "rox-engine",
-                    "kind": "series",
                     "name": "Threshold",
                     "intent": "Peak week. Long intervals at threshold, the hardest engine day of the block. Three minutes is long enough that they have to pace it, which is the point.",
                     "blurbOverride": "Five rounds of three minutes hard and ninety seconds easy, changing machine every round. Rounds four and five are athlete's choice with no repeats, which self-balances the room and hands members a decision.",
                     "appDescription": "THRESHOLD\n\n5 x 3 min hard / 90s easy:\nR1 Row, R2 Ski, R3 Run\nR4 and R5 your choice, no repeats\n\nScore is total metres. Hold them flat.\n\nThen 10 min EMOM:\nOdd: 12 Wall Balls\nEven: 12 DB Box Step-Overs",
                     "note": "Rounds 4 and 5 are athlete's choice on purpose. A fixed run round for all twenty would need twenty runners and you have ten. Choice with a no-repeat rule self-balances the room and hands members a small decision, which they like.\nRounds 1 to 3 are a clean three-group rotation. Call the machine at the start of each 90 second rest so nobody is still deciding when the clock starts.\nFlat metres across five rounds is the whole test. Anyone whose round 1 is their best round paced it wrong.\nFinisher is whole room, no bottleneck. Benches for the step-overs, DBs held at the side rather than front rack.\nCapacity: OK at 20. Choice rounds prevent 20-on-10-runners.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "w3-wed-threshold-wu",
@@ -5187,12 +5183,12 @@
                   {
                     "id": "hyrox-w3-fri-longone",
                     "focus": "rox-race",
-                    "kind": "series",
                     "name": "The Long One",
                     "intent": "Peak week and the longest continuous piece of the block. Raced solo. This is the closest a weekday session gets to a full race.",
                     "blurbOverride": "Four kilometres of running broken by four stations, alternating so the room self-balances. The hardest single effort in Block 01 and the best preparation for a real race distance.",
                     "appDescription": "THE LONG ONE\n\nFor time, 35 min cap:\n1000m Run\n50 Wall Balls\n750m Row\n40 DB Walking Lunge\n750m Run\n100m DB Farmers Carry\n750m Ski\n30 Wall Balls\n500m Run\n\nLongest session of the block.\nStaggered start. Race your own.",
                     "note": "Stagger every 30 seconds. The run and station alternation then keeps runners under ten on its own, same mechanism as Half Rox.\nThis is the longest session in the block and members should know that before they book. Say it in the app description and again in the brief.\nCap is 35 min and most will need 30 to 34. Anyone past 32 minutes and still on the ski should skip to the final 500m run so the class finishes together.\nPacing cue for the day: the opening 1000m is the trap. It should be slower than their Half Rox 500m pace, not faster.\nNo pairs, no sled. Saturday owns partner work, Monday owns the sled.\nCapacity: OK at 20 with staggered start. Individual, no pairs.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "w3-fri-longone-wu",
@@ -5398,12 +5394,12 @@
                   {
                     "id": "hyrox-w4-mon-anchor-rt",
                     "focus": "rox-strong",
-                    "kind": "series",
                     "name": "Anchor (retest)",
                     "intent": "Repeat of 31 August. Same distances, same loads, same stagger, same partners wherever possible. Primer cut from 10 min to 6 min so the retest is fresh.",
                     "blurbOverride": "The week 1 signature returns unchanged. Lower primer volume this week, which is the deload. Put the week 1 scores on the board before anyone walks in.",
                     "appDescription": "ANCHOR // RETEST\n\nIn pairs, 22 min AMRAP:\n20/16 cal Ski\n20 Wall Balls\n25m Sled Push\n20m DB Farmers Carry\n20 DB Walking Lunge\n\nSame session, same loads as week 1.\nBring your score. Let's see it move.",
                     "note": "Same partner as week 1. If someone's partner is missing, pair them with a similar output and write it on the board next to the score so the comparison stays honest.\nSame loads. Not heavier. Members will want to go up. Tell them no, and that the next block is where the load moves.\nExpect 10 to 20% more rounds. Anyone going backwards has usually gone out too hard because they remembered the finish, not the pace.\nBe honest in the debrief: a good chunk of a four week improvement is learning to pace the session, not fitness. Tell them the real answer comes when these return in late November.\nDo not add the accessory volume back. The reduced primer is the deload.\nCapacity: OK at 20. Same setup as week 1.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "w4-mon-anchor-rt-wu",
@@ -5602,12 +5598,12 @@
                   {
                     "id": "hyrox-w4-wed-triangle-rt",
                     "focus": "rox-engine",
-                    "kind": "series",
                     "name": "The Triangle (retest)",
                     "intent": "Repeat of 2 September. Same distances, same rotation, same groups, same starting machine. No finisher this week.",
                     "blurbOverride": "The cleanest data point of the block. Same 4,500m, same rotation. Compare round 3 against round 1, not just the total time.",
                     "appDescription": "THE TRIANGLE // RETEST\n\n3 rounds for time:\n500m Row\n500m Ski\n500m Run\n\nSame session as week 1.\nBring your time.",
                     "note": "Same starting machine as week 1. Starting on run instead of row changes the time enough to spoil the comparison. Write the week 1 groups on the board.\nRead them their round splits from week 1 in the brief. The coaching point is that round 3 should be closer to round 1 this time, not just that the total is faster.\nThis is the cleanest data of the block. It is the number to quote in the block debrief and in any content you make about the program.\nNo finisher this week. That is the deload, do not add one.\nCapacity: Exact fit at 20. Same as week 1.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "w4-wed-triangle-rt-wu",
@@ -5748,12 +5744,12 @@
                   {
                     "id": "hyrox-w4-fri-halfrox-rt",
                     "focus": "rox-race",
-                    "kind": "series",
                     "name": "Half Rox (retest)",
                     "intent": "Repeat of 4 September, then the block debrief and Block 02 announcement. Same wave, same start order.",
                     "blurbOverride": "The block closes where it opened. Compare run 1 against run 5, not just the total: a member whose total is unchanged but whose split drift halved has made the improvement that matters for a race.",
                     "appDescription": "HALF ROX // RETEST\n\nFor time:\n500m Run / 500m Ski\n500m Run / 50 Wall Balls\n500m Run / 500m Row\n500m Run / 100m DB Farmers Carry\n500m Run\n\nLast session of Block 01.\nSame as week 1. Bring your time.",
                     "note": "Same wave and same start order as week 1. Consistency matters more than convenience here.\nCompare run 1 against run 5, not just the total. A member whose total is unchanged but whose split drift halved has made the improvement that actually matters for a race.\nClose the block. Five minutes at the end: what moved, what is coming in Block 02, and any race dates worth putting on the wall.\nThis is where the next four weeks of attendance gets sold. Do not let the class drift out the door.\nCapacity: OK at 20 with staggered start. Same as week 1.",
+                    "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "w4-fri-halfrox-rt-wu",
@@ -6796,10 +6792,10 @@
                   {
                     "id": "gameday-b1w1s1",
                     "focus": "gameday",
-                    "kind": "circuit",
                     "name": "Game Day: the rotation",
                     "intent": "First Game Day of the block. Teams of three, one working at a time, everybody moving all morning. Set the tone: loud, social, nobody left standing on their own. This is not a test day.",
                     "note": "Five teams of three or four. Each team starts on a different station and rotates on the whistle, so no station is ever doubled up. Score is total metres, calories and reps added together. Call the swaps for the first two stations, then let the teams run themselves.",
+                    "kind": "circuit",
                     "circuit": [
                       {
                         "id": "c9ddc214-e546-420f-8e1e-d59a69fb54be",
@@ -6877,10 +6873,10 @@
                   {
                     "id": "gameday-b1w2s1",
                     "focus": "gameday",
-                    "kind": "circuit",
                     "name": "Game Day: the rotation, longer",
                     "intent": "Same shape as last week so the room already knows the rules, one minute longer at each station. The point is a slightly bigger engine, not a harder session: hold the same pace for longer.",
                     "note": "Same five teams if you can, so they can beat last week. Sleds are three lanes only, so the sled station runs as a queue: one team pushes while the next team resets the lane.",
+                    "kind": "circuit",
                     "circuit": [
                       {
                         "id": "78af1843-77d3-42d9-a052-ddb0f1c256e3",
@@ -6965,10 +6961,10 @@
                   {
                     "id": "gameday-b1w3s1",
                     "focus": "gameday",
-                    "kind": "circuit",
                     "name": "Game Day: you go, I go",
                     "intent": "Pairs instead of teams, so nobody can hide in a group of three and everybody gets a partner they might not know. Steady aerobic effort with a hard finish.",
                     "note": "Pairs. One works, one rests, straight swaps. Pair people across the room rather than letting friends pair up, that is half the point of the morning. Scale the run to 400m on the air runner if the legs are cooked from the week.",
+                    "kind": "circuit",
                     "circuit": [
                       {
                         "id": "9b0ad2c8-bf09-4dfa-a1ad-ab8fb66520bb",
@@ -7029,10 +7025,10 @@
                   {
                     "id": "gameday-b1w4s1",
                     "focus": "gameday",
-                    "kind": "circuit",
                     "name": "Game Day: the chipper",
                     "intent": "One long list, one team, share it any way you like. This is the community session at its best: the fast members carry more, the newer members are still part of finishing it, and everybody stays until the last team is done.",
                     "note": "Teams of four. Split every line however the team wants, only one person working per movement at a time. If a team finishes early they go and make noise for the team still working. Everyone stays on the floor until the last rep.",
+                    "kind": "circuit",
                     "circuit": [
                       {
                         "id": "9a339247-22f9-4ca8-8d51-8e82f58884ea",
@@ -7244,6 +7240,8 @@
       }
     ]
   },
-  "rev": 159,
-  "updatedAt": "2026-08-31T06:58:41.124Z"
+  "rev": 160,
+  "updatedAt": "2026-09-01T09:47:54.517Z",
+  "machine": "DESKTOP-T7OQ0UN",
+  "schemaVersion": 2
 }

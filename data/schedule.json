@@ -577,6 +577,8 @@
     "activeScenarioId": "current",
     "liveScenarioId": "e50da7f1-8ead-4deb-b7f4-dcb054a3eb56"
   },
-  "rev": 114,
-  "updatedAt": "2026-09-01T00:00:00.000Z"
+  "rev": 115,
+  "updatedAt": "2026-09-01T09:47:54.526Z",
+  "machine": "DESKTOP-T7OQ0UN",
+  "schemaVersion": 2
 }
