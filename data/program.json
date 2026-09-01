@@ -269,10 +269,34 @@
                           {
                             "id": "str2-hyp-w1a-wu1",
                             "exerciseId": null,
-                            "name": "Warm Up for Time",
-                            "note": "5 minutes, coach’s circuit."
+                            "name": "Bike or Row",
+                            "note": "2 minutes easy, building every 30 seconds"
+                          },
+                          {
+                            "id": "str2-hyp-w1a-wu2",
+                            "exerciseId": null,
+                            "name": "World's Greatest Stretch",
+                            "sets": "1",
+                            "reps": "5",
+                            "note": "each side, slow"
+                          },
+                          {
+                            "id": "str2-hyp-w1a-wu3",
+                            "exerciseId": null,
+                            "name": "Air Squat + Jump-and-Stick",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "then 5 jump-and-stick landings, quiet feet"
+                          },
+                          {
+                            "id": "str2-hyp-w1a-wu4",
+                            "exerciseId": null,
+                            "name": "Band Pull-Apart",
+                            "sets": "1",
+                            "reps": "15"
                           }
-                        ]
+                        ],
+                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
                       },
                       {
                         "id": "str2-hyp-w1a-A",
@@ -287,7 +311,7 @@
                             "sets": "3",
                             "reps": "9",
                             "rpe": "7",
-                            "note": "Or front squat, same wave. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
+                            "note": "Front squat option: same reps, RPE-primary, roughly 7.5 to 10 per cent down on the back squat number. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
                             "intensity": "65%"
                           },
                           {
@@ -368,7 +392,8 @@
                           }
                         ]
                       }
-                    ]
+                    ],
+                    "appDescription": "Week 1 is discovery: find a weight that fits the reps and RPE, and record your top working weights. They anchor the rest of the block."
                   },
                   {
                     "id": "str2-hyp-w1b",
@@ -385,10 +410,35 @@
                           {
                             "id": "str2-hyp-w1b-wu1",
                             "exerciseId": null,
-                            "name": "Warm Up for Time",
-                            "note": "5 minutes, coach’s circuit."
+                            "name": "Ski or Row",
+                            "note": "2 minutes easy, building every 30 seconds"
+                          },
+                          {
+                            "id": "str2-hyp-w1b-wu2",
+                            "exerciseId": null,
+                            "name": "Glute Bridge",
+                            "sets": "1",
+                            "reps": "12",
+                            "note": "2 second squeeze at the top"
+                          },
+                          {
+                            "id": "str2-hyp-w1b-wu3",
+                            "exerciseId": null,
+                            "name": "Unloaded RDL to Reach",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "empty bar or PVC, slow hinge, feel the hamstrings"
+                          },
+                          {
+                            "id": "str2-hyp-w1b-wu4",
+                            "exerciseId": null,
+                            "name": "Dead Bug",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "each side, slow exhale"
                           }
-                        ]
+                        ],
+                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
                       },
                       {
                         "id": "str2-hyp-w1b-A",
@@ -477,7 +527,8 @@
                           }
                         ]
                       }
-                    ]
+                    ],
+                    "appDescription": "Week 1 is discovery: find a weight that fits the reps and RPE, and record your top working weights. They anchor the rest of the block."
                   }
                 ]
               },
@@ -499,10 +550,34 @@
                           {
                             "id": "str2-hyp-w2a-wu1",
                             "exerciseId": null,
-                            "name": "Warm Up for Time",
-                            "note": "5 minutes, coach’s circuit."
+                            "name": "Bike or Row",
+                            "note": "2 minutes easy, building every 30 seconds"
+                          },
+                          {
+                            "id": "str2-hyp-w2a-wu2",
+                            "exerciseId": null,
+                            "name": "World's Greatest Stretch",
+                            "sets": "1",
+                            "reps": "5",
+                            "note": "each side, slow"
+                          },
+                          {
+                            "id": "str2-hyp-w2a-wu3",
+                            "exerciseId": null,
+                            "name": "Air Squat + Jump-and-Stick",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "then 5 jump-and-stick landings, quiet feet"
+                          },
+                          {
+                            "id": "str2-hyp-w2a-wu4",
+                            "exerciseId": null,
+                            "name": "Band Pull-Apart",
+                            "sets": "1",
+                            "reps": "15"
                           }
-                        ]
+                        ],
+                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
                       },
                       {
                         "id": "str2-hyp-w2a-A",
@@ -517,7 +592,7 @@
                             "sets": "3",
                             "reps": "7",
                             "rpe": "7.5",
-                            "note": "Or front squat, same wave. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
+                            "note": "Front squat option: same reps, RPE-primary, roughly 7.5 to 10 per cent down on the back squat number. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
                             "intensity": "70%"
                           },
                           {
@@ -615,10 +690,35 @@
                           {
                             "id": "str2-hyp-w2b-wu1",
                             "exerciseId": null,
-                            "name": "Warm Up for Time",
-                            "note": "5 minutes, coach’s circuit."
+                            "name": "Ski or Row",
+                            "note": "2 minutes easy, building every 30 seconds"
+                          },
+                          {
+                            "id": "str2-hyp-w2b-wu2",
+                            "exerciseId": null,
+                            "name": "Glute Bridge",
+                            "sets": "1",
+                            "reps": "12",
+                            "note": "2 second squeeze at the top"
+                          },
+                          {
+                            "id": "str2-hyp-w2b-wu3",
+                            "exerciseId": null,
+                            "name": "Unloaded RDL to Reach",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "empty bar or PVC, slow hinge, feel the hamstrings"
+                          },
+                          {
+                            "id": "str2-hyp-w2b-wu4",
+                            "exerciseId": null,
+                            "name": "Dead Bug",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "each side, slow exhale"
                           }
-                        ]
+                        ],
+                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
                       },
                       {
                         "id": "str2-hyp-w2b-A",
@@ -729,10 +829,34 @@
                           {
                             "id": "str2-hyp-w3a-wu1",
                             "exerciseId": null,
-                            "name": "Warm Up for Time",
-                            "note": "5 minutes, coach’s circuit."
+                            "name": "Bike or Row",
+                            "note": "2 minutes easy, building every 30 seconds"
+                          },
+                          {
+                            "id": "str2-hyp-w3a-wu2",
+                            "exerciseId": null,
+                            "name": "World's Greatest Stretch",
+                            "sets": "1",
+                            "reps": "5",
+                            "note": "each side, slow"
+                          },
+                          {
+                            "id": "str2-hyp-w3a-wu3",
+                            "exerciseId": null,
+                            "name": "Air Squat + Jump-and-Stick",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "then 5 jump-and-stick landings, quiet feet"
+                          },
+                          {
+                            "id": "str2-hyp-w3a-wu4",
+                            "exerciseId": null,
+                            "name": "Band Pull-Apart",
+                            "sets": "1",
+                            "reps": "15"
                           }
-                        ]
+                        ],
+                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
                       },
                       {
                         "id": "str2-hyp-w3a-A",
@@ -747,7 +871,7 @@
                             "sets": "3",
                             "reps": "5",
                             "rpe": "8",
-                            "note": "Or front squat, same wave. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
+                            "note": "Front squat option: same reps, RPE-primary, roughly 7.5 to 10 per cent down on the back squat number. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
                             "intensity": "75%"
                           },
                           {
@@ -868,10 +992,35 @@
                           {
                             "id": "str2-hyp-w3b-wu1",
                             "exerciseId": null,
-                            "name": "Warm Up for Time",
-                            "note": "5 minutes, coach’s circuit."
+                            "name": "Ski or Row",
+                            "note": "2 minutes easy, building every 30 seconds"
+                          },
+                          {
+                            "id": "str2-hyp-w3b-wu2",
+                            "exerciseId": null,
+                            "name": "Glute Bridge",
+                            "sets": "1",
+                            "reps": "12",
+                            "note": "2 second squeeze at the top"
+                          },
+                          {
+                            "id": "str2-hyp-w3b-wu3",
+                            "exerciseId": null,
+                            "name": "Unloaded RDL to Reach",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "empty bar or PVC, slow hinge, feel the hamstrings"
+                          },
+                          {
+                            "id": "str2-hyp-w3b-wu4",
+                            "exerciseId": null,
+                            "name": "Dead Bug",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "each side, slow exhale"
                           }
-                        ]
+                        ],
+                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
                       },
                       {
                         "id": "str2-hyp-w3b-A",
@@ -982,10 +1131,34 @@
                           {
                             "id": "str2-hyp-w4a-wu1",
                             "exerciseId": null,
-                            "name": "Warm Up for Time",
-                            "note": "5 minutes, coach’s circuit."
+                            "name": "Bike or Row",
+                            "note": "2 minutes easy, building every 30 seconds"
+                          },
+                          {
+                            "id": "str2-hyp-w4a-wu2",
+                            "exerciseId": null,
+                            "name": "World's Greatest Stretch",
+                            "sets": "1",
+                            "reps": "5",
+                            "note": "each side, slow"
+                          },
+                          {
+                            "id": "str2-hyp-w4a-wu3",
+                            "exerciseId": null,
+                            "name": "Air Squat + Jump-and-Stick",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "then 5 jump-and-stick landings, quiet feet"
+                          },
+                          {
+                            "id": "str2-hyp-w4a-wu4",
+                            "exerciseId": null,
+                            "name": "Band Pull-Apart",
+                            "sets": "1",
+                            "reps": "15"
                           }
-                        ]
+                        ],
+                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
                       },
                       {
                         "id": "str2-hyp-w4a-A",
@@ -1000,7 +1173,7 @@
                             "sets": "3",
                             "reps": "9",
                             "rpe": "7.5",
-                            "note": "Or front squat. Second wave: same reps as weeks 1 to 3, a touch heavier. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
+                            "note": "Front squat option: same reps, RPE-primary, roughly 7.5 to 10 per cent down on the back squat number. Second wave: same reps as weeks 1 to 3, a touch heavier. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
                             "intensity": "67.5%"
                           },
                           {
@@ -1100,10 +1273,35 @@
                           {
                             "id": "str2-hyp-w4b-wu1",
                             "exerciseId": null,
-                            "name": "Warm Up for Time",
-                            "note": "5 minutes, coach’s circuit."
+                            "name": "Ski or Row",
+                            "note": "2 minutes easy, building every 30 seconds"
+                          },
+                          {
+                            "id": "str2-hyp-w4b-wu2",
+                            "exerciseId": null,
+                            "name": "Glute Bridge",
+                            "sets": "1",
+                            "reps": "12",
+                            "note": "2 second squeeze at the top"
+                          },
+                          {
+                            "id": "str2-hyp-w4b-wu3",
+                            "exerciseId": null,
+                            "name": "Unloaded RDL to Reach",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "empty bar or PVC, slow hinge, feel the hamstrings"
+                          },
+                          {
+                            "id": "str2-hyp-w4b-wu4",
+                            "exerciseId": null,
+                            "name": "Dead Bug",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "each side, slow exhale"
                           }
-                        ]
+                        ],
+                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
                       },
                       {
                         "id": "str2-hyp-w4b-A",
@@ -1213,10 +1411,34 @@
                           {
                             "id": "str2-hyp-w5a-wu1",
                             "exerciseId": null,
-                            "name": "Warm Up for Time",
-                            "note": "5 minutes, coach’s circuit."
+                            "name": "Bike or Row",
+                            "note": "2 minutes easy, building every 30 seconds"
+                          },
+                          {
+                            "id": "str2-hyp-w5a-wu2",
+                            "exerciseId": null,
+                            "name": "World's Greatest Stretch",
+                            "sets": "1",
+                            "reps": "5",
+                            "note": "each side, slow"
+                          },
+                          {
+                            "id": "str2-hyp-w5a-wu3",
+                            "exerciseId": null,
+                            "name": "Air Squat + Jump-and-Stick",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "then 5 jump-and-stick landings, quiet feet"
+                          },
+                          {
+                            "id": "str2-hyp-w5a-wu4",
+                            "exerciseId": null,
+                            "name": "Band Pull-Apart",
+                            "sets": "1",
+                            "reps": "15"
                           }
-                        ]
+                        ],
+                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
                       },
                       {
                         "id": "str2-hyp-w5a-A",
@@ -1231,7 +1453,7 @@
                             "sets": "3",
                             "reps": "7",
                             "rpe": "8",
-                            "note": "Or front squat. Second wave: same reps as weeks 1 to 3, a touch heavier. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
+                            "note": "Front squat option: same reps, RPE-primary, roughly 7.5 to 10 per cent down on the back squat number. Second wave: same reps as weeks 1 to 3, a touch heavier. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
                             "intensity": "72.5%"
                           },
                           {
@@ -1331,10 +1553,35 @@
                           {
                             "id": "str2-hyp-w5b-wu1",
                             "exerciseId": null,
-                            "name": "Warm Up for Time",
-                            "note": "5 minutes, coach’s circuit."
+                            "name": "Ski or Row",
+                            "note": "2 minutes easy, building every 30 seconds"
+                          },
+                          {
+                            "id": "str2-hyp-w5b-wu2",
+                            "exerciseId": null,
+                            "name": "Glute Bridge",
+                            "sets": "1",
+                            "reps": "12",
+                            "note": "2 second squeeze at the top"
+                          },
+                          {
+                            "id": "str2-hyp-w5b-wu3",
+                            "exerciseId": null,
+                            "name": "Unloaded RDL to Reach",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "empty bar or PVC, slow hinge, feel the hamstrings"
+                          },
+                          {
+                            "id": "str2-hyp-w5b-wu4",
+                            "exerciseId": null,
+                            "name": "Dead Bug",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "each side, slow exhale"
                           }
-                        ]
+                        ],
+                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
                       },
                       {
                         "id": "str2-hyp-w5b-A",
@@ -1444,10 +1691,34 @@
                           {
                             "id": "str2-hyp-w6a-wu1",
                             "exerciseId": null,
-                            "name": "Warm Up for Time",
-                            "note": "5 minutes, coach’s circuit."
+                            "name": "Bike or Row",
+                            "note": "2 minutes easy, building every 30 seconds"
+                          },
+                          {
+                            "id": "str2-hyp-w6a-wu2",
+                            "exerciseId": null,
+                            "name": "World's Greatest Stretch",
+                            "sets": "1",
+                            "reps": "5",
+                            "note": "each side, slow"
+                          },
+                          {
+                            "id": "str2-hyp-w6a-wu3",
+                            "exerciseId": null,
+                            "name": "Air Squat + Jump-and-Stick",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "then 5 jump-and-stick landings, quiet feet"
+                          },
+                          {
+                            "id": "str2-hyp-w6a-wu4",
+                            "exerciseId": null,
+                            "name": "Band Pull-Apart",
+                            "sets": "1",
+                            "reps": "15"
                           }
-                        ]
+                        ],
+                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
                       },
                       {
                         "id": "str2-hyp-w6a-A",
@@ -1462,7 +1733,7 @@
                             "sets": "3",
                             "reps": "5",
                             "rpe": "8.5",
-                            "note": "Or front squat. Second wave: same reps as weeks 1 to 3, a touch heavier. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
+                            "note": "Front squat option: same reps, RPE-primary, roughly 7.5 to 10 per cent down on the back squat number. Second wave: same reps as weeks 1 to 3, a touch heavier. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
                             "intensity": "77.5%"
                           },
                           {
@@ -1585,10 +1856,35 @@
                           {
                             "id": "str2-hyp-w6b-wu1",
                             "exerciseId": null,
-                            "name": "Warm Up for Time",
-                            "note": "5 minutes, coach’s circuit."
+                            "name": "Ski or Row",
+                            "note": "2 minutes easy, building every 30 seconds"
+                          },
+                          {
+                            "id": "str2-hyp-w6b-wu2",
+                            "exerciseId": null,
+                            "name": "Glute Bridge",
+                            "sets": "1",
+                            "reps": "12",
+                            "note": "2 second squeeze at the top"
+                          },
+                          {
+                            "id": "str2-hyp-w6b-wu3",
+                            "exerciseId": null,
+                            "name": "Unloaded RDL to Reach",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "empty bar or PVC, slow hinge, feel the hamstrings"
+                          },
+                          {
+                            "id": "str2-hyp-w6b-wu4",
+                            "exerciseId": null,
+                            "name": "Dead Bug",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "each side, slow exhale"
                           }
-                        ]
+                        ],
+                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
                       },
                       {
                         "id": "str2-hyp-w6b-A",
@@ -1698,10 +1994,34 @@
                           {
                             "id": "str2-hyp-w7a-wu1",
                             "exerciseId": null,
-                            "name": "Warm Up for Time",
-                            "note": "5 minutes, coach’s circuit."
+                            "name": "Bike or Row",
+                            "note": "2 minutes easy, building every 30 seconds"
+                          },
+                          {
+                            "id": "str2-hyp-w7a-wu2",
+                            "exerciseId": null,
+                            "name": "World's Greatest Stretch",
+                            "sets": "1",
+                            "reps": "5",
+                            "note": "each side, slow"
+                          },
+                          {
+                            "id": "str2-hyp-w7a-wu3",
+                            "exerciseId": null,
+                            "name": "Air Squat + Jump-and-Stick",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "then 5 jump-and-stick landings, quiet feet"
+                          },
+                          {
+                            "id": "str2-hyp-w7a-wu4",
+                            "exerciseId": null,
+                            "name": "Band Pull-Apart",
+                            "sets": "1",
+                            "reps": "15"
                           }
-                        ]
+                        ],
+                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
                       },
                       {
                         "id": "str2-hyp-w7a-A",
@@ -1716,7 +2036,7 @@
                             "sets": "3",
                             "reps": "7",
                             "rpe": "8",
-                            "note": "Or front squat. Final wave 7/5/3: heaviest of the block. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
+                            "note": "Front squat option: same reps, RPE-primary, roughly 7.5 to 10 per cent down on the back squat number. Final wave 7/5/3: heaviest of the block. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
                             "intensity": "75%"
                           },
                           {
@@ -1789,7 +2109,8 @@
                           }
                         ]
                       }
-                    ]
+                    ],
+                    "appDescription": "Bench calibration this week: record your top set of 7. Weeks 8 and 9 build on that number."
                   },
                   {
                     "id": "str2-hyp-w7b",
@@ -1806,10 +2127,35 @@
                           {
                             "id": "str2-hyp-w7b-wu1",
                             "exerciseId": null,
-                            "name": "Warm Up for Time",
-                            "note": "5 minutes, coach’s circuit."
+                            "name": "Ski or Row",
+                            "note": "2 minutes easy, building every 30 seconds"
+                          },
+                          {
+                            "id": "str2-hyp-w7b-wu2",
+                            "exerciseId": null,
+                            "name": "Glute Bridge",
+                            "sets": "1",
+                            "reps": "12",
+                            "note": "2 second squeeze at the top"
+                          },
+                          {
+                            "id": "str2-hyp-w7b-wu3",
+                            "exerciseId": null,
+                            "name": "Unloaded RDL to Reach",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "empty bar or PVC, slow hinge, feel the hamstrings"
+                          },
+                          {
+                            "id": "str2-hyp-w7b-wu4",
+                            "exerciseId": null,
+                            "name": "Dead Bug",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "each side, slow exhale"
                           }
-                        ]
+                        ],
+                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
                       },
                       {
                         "id": "str2-hyp-w7b-A",
@@ -1884,6 +2230,14 @@
                             "reps": "10",
                             "rpe": "7",
                             "note": "Lower trap focus. Light, chest on an incline bench."
+                          },
+                          {
+                            "id": "str2-hyp-w7b-c-carry",
+                            "exerciseId": null,
+                            "name": "Farmers Carry",
+                            "sets": "3",
+                            "rpe": "7-8",
+                            "note": "40m per set, heavy but posture stays tall; suitcase carry (one side at a time) as the scale"
                           }
                         ]
                       }
@@ -1909,10 +2263,34 @@
                           {
                             "id": "str2-hyp-w8a-wu1",
                             "exerciseId": null,
-                            "name": "Warm Up for Time",
-                            "note": "5 minutes, coach’s circuit."
+                            "name": "Bike or Row",
+                            "note": "2 minutes easy, building every 30 seconds"
+                          },
+                          {
+                            "id": "str2-hyp-w8a-wu2",
+                            "exerciseId": null,
+                            "name": "World's Greatest Stretch",
+                            "sets": "1",
+                            "reps": "5",
+                            "note": "each side, slow"
+                          },
+                          {
+                            "id": "str2-hyp-w8a-wu3",
+                            "exerciseId": null,
+                            "name": "Air Squat + Jump-and-Stick",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "then 5 jump-and-stick landings, quiet feet"
+                          },
+                          {
+                            "id": "str2-hyp-w8a-wu4",
+                            "exerciseId": null,
+                            "name": "Band Pull-Apart",
+                            "sets": "1",
+                            "reps": "15"
                           }
-                        ]
+                        ],
+                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
                       },
                       {
                         "id": "str2-hyp-w8a-A",
@@ -1927,7 +2305,7 @@
                             "sets": "3",
                             "reps": "5",
                             "rpe": "8.5",
-                            "note": "Or front squat. Final wave 7/5/3: heaviest of the block. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
+                            "note": "Front squat option: same reps, RPE-primary, roughly 7.5 to 10 per cent down on the back squat number. Final wave 7/5/3: heaviest of the block. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
                             "intensity": "80%"
                           },
                           {
@@ -2017,10 +2395,35 @@
                           {
                             "id": "str2-hyp-w8b-wu1",
                             "exerciseId": null,
-                            "name": "Warm Up for Time",
-                            "note": "5 minutes, coach’s circuit."
+                            "name": "Ski or Row",
+                            "note": "2 minutes easy, building every 30 seconds"
+                          },
+                          {
+                            "id": "str2-hyp-w8b-wu2",
+                            "exerciseId": null,
+                            "name": "Glute Bridge",
+                            "sets": "1",
+                            "reps": "12",
+                            "note": "2 second squeeze at the top"
+                          },
+                          {
+                            "id": "str2-hyp-w8b-wu3",
+                            "exerciseId": null,
+                            "name": "Unloaded RDL to Reach",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "empty bar or PVC, slow hinge, feel the hamstrings"
+                          },
+                          {
+                            "id": "str2-hyp-w8b-wu4",
+                            "exerciseId": null,
+                            "name": "Dead Bug",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "each side, slow exhale"
                           }
-                        ]
+                        ],
+                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
                       },
                       {
                         "id": "str2-hyp-w8b-A",
@@ -2095,6 +2498,14 @@
                             "reps": "12",
                             "rpe": "7.5",
                             "note": "Lower trap focus. Light, chest on an incline bench."
+                          },
+                          {
+                            "id": "str2-hyp-w8b-c-carry",
+                            "exerciseId": null,
+                            "name": "Farmers Carry",
+                            "sets": "3",
+                            "rpe": "7-8",
+                            "note": "40m per set, heavy but posture stays tall; suitcase carry (one side at a time) as the scale"
                           }
                         ]
                       }
@@ -2120,10 +2531,34 @@
                           {
                             "id": "str2-hyp-w9a-wu1",
                             "exerciseId": null,
-                            "name": "Warm Up for Time",
-                            "note": "5 minutes, coach’s circuit."
+                            "name": "Bike or Row",
+                            "note": "2 minutes easy, building every 30 seconds"
+                          },
+                          {
+                            "id": "str2-hyp-w9a-wu2",
+                            "exerciseId": null,
+                            "name": "World's Greatest Stretch",
+                            "sets": "1",
+                            "reps": "5",
+                            "note": "each side, slow"
+                          },
+                          {
+                            "id": "str2-hyp-w9a-wu3",
+                            "exerciseId": null,
+                            "name": "Air Squat + Jump-and-Stick",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "then 5 jump-and-stick landings, quiet feet"
+                          },
+                          {
+                            "id": "str2-hyp-w9a-wu4",
+                            "exerciseId": null,
+                            "name": "Band Pull-Apart",
+                            "sets": "1",
+                            "reps": "15"
                           }
-                        ]
+                        ],
+                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
                       },
                       {
                         "id": "str2-hyp-w9a-A",
@@ -2138,7 +2573,7 @@
                             "sets": "3",
                             "reps": "3",
                             "rpe": "9",
-                            "note": "Or front squat. Final wave 7/5/3: heaviest of the block. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
+                            "note": "Front squat option: same reps, RPE-primary, roughly 7.5 to 10 per cent down on the back squat number. Final wave 7/5/3: heaviest of the block. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
                             "intensity": "85%"
                           },
                           {
@@ -2249,10 +2684,35 @@
                           {
                             "id": "str2-hyp-w9b-wu1",
                             "exerciseId": null,
-                            "name": "Warm Up for Time",
-                            "note": "5 minutes, coach’s circuit."
+                            "name": "Ski or Row",
+                            "note": "2 minutes easy, building every 30 seconds"
+                          },
+                          {
+                            "id": "str2-hyp-w9b-wu2",
+                            "exerciseId": null,
+                            "name": "Glute Bridge",
+                            "sets": "1",
+                            "reps": "12",
+                            "note": "2 second squeeze at the top"
+                          },
+                          {
+                            "id": "str2-hyp-w9b-wu3",
+                            "exerciseId": null,
+                            "name": "Unloaded RDL to Reach",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "empty bar or PVC, slow hinge, feel the hamstrings"
+                          },
+                          {
+                            "id": "str2-hyp-w9b-wu4",
+                            "exerciseId": null,
+                            "name": "Dead Bug",
+                            "sets": "1",
+                            "reps": "10",
+                            "note": "each side, slow exhale"
                           }
-                        ]
+                        ],
+                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
                       },
                       {
                         "id": "str2-hyp-w9b-A",
@@ -2327,6 +2787,14 @@
                             "reps": "12",
                             "rpe": "8",
                             "note": "Lower trap focus. Light, chest on an incline bench."
+                          },
+                          {
+                            "id": "str2-hyp-w9b-c-carry",
+                            "exerciseId": null,
+                            "name": "Farmers Carry",
+                            "sets": "3",
+                            "rpe": "7-8",
+                            "note": "40m per set, heavy but posture stays tall; suitcase carry (one side at a time) as the scale"
                           }
                         ]
                       }
@@ -7240,8 +7708,8 @@
       }
     ]
   },
-  "rev": 160,
-  "updatedAt": "2026-09-01T09:47:54.517Z",
+  "rev": 162,
+  "updatedAt": "2026-09-01T09:50:47.951Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }

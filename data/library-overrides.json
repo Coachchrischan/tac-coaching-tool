@@ -76,6 +76,24 @@
       ],
       "8211172": [
         "core-rotation"
+      ],
+      "name:farmers carry": [
+        "carry"
+      ],
+      "name:glute bridge": [
+        "hinge"
+      ],
+      "name:dead bug": [
+        "core-rotation"
+      ],
+      "name:air squat + jump-and-stick": [
+        "squat"
+      ],
+      "name:unloaded rdl to reach": [
+        "hinge"
+      ],
+      "name:band pull-apart": [
+        "h-pull"
       ]
     },
     "scales": {
@@ -137,8 +155,8 @@
     "cues": {},
     "customExercises": []
   },
-  "rev": 39,
-  "updatedAt": "2026-09-01T09:47:54.525Z",
+  "rev": 40,
+  "updatedAt": "2026-09-01T09:50:30.884Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }
