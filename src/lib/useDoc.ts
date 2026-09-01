@@ -8,9 +8,22 @@ const SAVED_DECAY_MS = 2500;
 
 export type SaveState = 'idle' | 'dirty' | 'saving' | 'saved' | 'conflict' | 'error';
 
+/** What the coach needs to choose between keep-mine and load-theirs. */
+export interface ConflictInfo {
+  theirUpdatedAt: string;
+  theirMachine?: string;
+}
+
+// fetch keepalive bodies are capped at 64KB by the browser; a larger payload
+// is rejected outright, so the final-chance flush must not pretend otherwise
+// (program.json is ~300KB). Leave headroom for JSON overhead.
+const KEEPALIVE_MAX_BYTES = 60 * 1024;
+
 export interface UseDoc<T> {
   data: T | null;
   saveState: SaveState;
+  /** Set while saveState is 'conflict': when and where "theirs" was saved. */
+  conflictInfo: ConflictInfo | null;
   /** Apply a pure update to the document; persistence is debounced automatically. */
   update: (fn: (current: T) => T) => void;
   /** After a conflict: discard local changes and take the server's version. */
@@ -26,6 +39,7 @@ export function useDoc<K extends DocId>(id: K): UseDoc<DocTypes[K]> {
 
   const [data, setData] = useState<T | null>(null);
   const [saveState, setSaveState] = useState<SaveState>('idle');
+  const [conflictInfo, setConflictInfo] = useState<ConflictInfo | null>(null);
 
   const revRef = useRef(0);
   const dataRef = useRef<T | null>(null);
@@ -61,11 +75,24 @@ export function useDoc<K extends DocId>(id: K): UseDoc<DocTypes[K]> {
           revRef.current = env.rev;
           dirtyRef.current = false;
         })
-        .catch(() => {
-          /* final-chance flush; conflicts surface on next load */
+        .catch((err: unknown) => {
+          // Final-chance flush; conflicts surface on next load. Logged so a
+          // dropped flush is at least visible in the console.
+          console.warn(`[useDoc] final flush for '${id}' failed:`, err);
         });
     };
-    const onBeforeUnload = () => flushPending(true);
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (!dirtyRef.current || dataRef.current === null) return;
+      const bytes = new Blob([JSON.stringify(dataRef.current)]).size;
+      if (bytes <= KEEPALIVE_MAX_BYTES) {
+        flushPending(true);
+      } else {
+        // The keepalive quota would reject this payload, so the flush cannot
+        // be trusted. Ask the browser to prompt instead; staying on the page
+        // lets the normal debounced save land within a second.
+        e.preventDefault();
+      }
+    };
     window.addEventListener('beforeunload', onBeforeUnload);
 
     return () => {
@@ -104,6 +131,11 @@ export function useDoc<K extends DocId>(id: K): UseDoc<DocTypes[K]> {
       .catch((err: unknown) => {
         if (err instanceof ConflictError) {
           conflictRef.current = err.current;
+          const theirs = err.current as { updatedAt?: string; machine?: string };
+          setConflictInfo({
+            theirUpdatedAt: theirs.updatedAt ?? '',
+            theirMachine: theirs.machine,
+          });
           setSaveState('conflict');
         } else {
           // The edit is still unsaved: keep it dirty and retry on a timer.
@@ -136,6 +168,7 @@ export function useDoc<K extends DocId>(id: K): UseDoc<DocTypes[K]> {
     const theirs = conflictRef.current;
     if (!theirs) return;
     conflictRef.current = null;
+    setConflictInfo(null);
     revRef.current = theirs.rev;
     dataRef.current = theirs.data as T;
     dirtyRef.current = false;
@@ -147,11 +180,12 @@ export function useDoc<K extends DocId>(id: K): UseDoc<DocTypes[K]> {
     const theirs = conflictRef.current;
     if (!theirs) return;
     conflictRef.current = null;
+    setConflictInfo(null);
     revRef.current = theirs.rev; // retry on top of their rev
     flush();
   }, [flush]);
 
-  return { data, saveState, update, reloadTheirs, keepMine, retry: flush };
+  return { data, saveState, conflictInfo, update, reloadTheirs, keepMine, retry: flush };
 }
 
 /** Pick the doc whose save state most urgently needs the coach's attention.

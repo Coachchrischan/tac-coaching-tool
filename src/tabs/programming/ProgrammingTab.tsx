@@ -1103,6 +1103,7 @@ export default function ProgrammingTab() {
             return (
               <SaveBadge
                 state={urgent.saveState}
+                conflictInfo={urgent.conflictInfo}
                 onReloadTheirs={urgent.reloadTheirs}
                 onKeepMine={urgent.keepMine}
                 onRetry={urgent.retry}

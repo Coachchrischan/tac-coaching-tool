@@ -1,4 +1,4 @@
-import type { SaveState } from '../lib/useDoc';
+import type { ConflictInfo, SaveState } from '../lib/useDoc';
 
 const LABELS: Record<SaveState, string> = {
   idle: '',
@@ -11,19 +11,38 @@ const LABELS: Record<SaveState, string> = {
 
 export default function SaveBadge({
   state,
+  conflictInfo,
   onReloadTheirs,
   onKeepMine,
   onRetry,
 }: {
   state: SaveState;
+  conflictInfo?: ConflictInfo | null;
   onReloadTheirs?: () => void;
   onKeepMine?: () => void;
   onRetry?: () => void;
 }) {
   if (state === 'conflict') {
+    // Name when and where "theirs" was saved: choosing between two whole
+    // documents blind was the roundtable's complaint, and knowing it was the
+    // other machine (a git pull underneath) changes which button is right.
+    const when = conflictInfo?.theirUpdatedAt
+      ? new Date(conflictInfo.theirUpdatedAt).toLocaleString('en-AU', {
+          day: 'numeric',
+          month: 'short',
+          hour: 'numeric',
+          minute: '2-digit',
+        })
+      : null;
+    const detail = [when ? `saved ${when}` : null, conflictInfo?.theirMachine ?? null]
+      .filter(Boolean)
+      .join(' on ');
     return (
       <span className="flex items-center gap-2 text-xs">
-        <span className="font-medium text-amber-700">Someone else saved a newer version.</span>
+        <span className="font-medium text-amber-700">
+          Someone else saved a newer version{detail ? ` (${detail})` : ''}. Keeping yours
+          discards theirs entirely.
+        </span>
         <button
           type="button"
           onClick={onReloadTheirs}
