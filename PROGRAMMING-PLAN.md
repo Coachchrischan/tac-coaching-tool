@@ -74,7 +74,21 @@ floor), weighted squat jumps in micro 2, broad-to-vertical jumps in micro 3
 **Accessories**: swap each micro, ascending volume inside it (week 1 base,
 weeks 2 and 3 roughly plus two reps; unilateral and calf work varies), RPE
 climbing 7 to 8. **Week 9 Day A tapers**: accessories drop to two sets so the
-final wave and the challenge get what is left.
+final wave and the challenge get what is left. **Farmers carries fill the Day
+B micro 3 accessory slot** (weeks 7 to 9, suitcase carry as the scale), added
+2026-09-01 on Chris's approval: it fills the sheet's blank C3 and closes the
+block's carry-pattern gap in one move.
+
+**Warm-ups** (written 2026-09-01, replacing the "coach's circuit"
+placeholder): Day A runs bike/row build, world's greatest stretch, air squats
+with jump-and-stick landings, band pull-aparts; Day B runs ski/row build,
+glute bridges, unloaded RDL reaches, dead bugs. Both close with 2 to 3
+builder sets on the day's first lift. **The front squat option is
+RPE-primary**, roughly 7.5 to 10 per cent down on the back squat number,
+never the back squat's percentage wave. **Anchor capture**: week 1 sessions
+tell members to record their top working weights (testing happens in the two
+primer weeks, so percentages are computable); week 7 Day A tells them to
+record the bench calibration top set that weeks 8 and 9 build on.
 
 There is **no deload inside the nine weeks** (the standalone Deload/Skills week
 was removed by the club). Flagged as a fatigue watch-point; the primer weeks
@@ -111,5 +125,6 @@ Two tracking layers run side by side:
 Plus **trunk categories** to tick off: lower abs, rectus abdominis, rotation,
 anti-rotation, anti-flexion, anti-extension.
 
-Known gap in the nine-week block as written: the **carry pattern appears
-nowhere** (the old plan carried farmers carries). Raised with Chris.
+The nine-week block's carry gap closed 2026-09-01: farmers carries run in
+Day B weeks 7 to 9 (see Phase 2 above). Movement Check now audits the
+rolling two-phase window, free-text exercises included.
