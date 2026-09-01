@@ -14,14 +14,7 @@ import {
 import { liveScenario } from '../../lib/scenarios';
 
 /** Which programming stream delivers a timetable class, where one does. */
-const STREAM_FOR_CLASS: Record<string, string> = {
-  lbs: 'strength',
-  ubs: 'strength',
-  fbs: 'strength',
-  esd: 'esd',
-  hyrox: 'hyrox',
-  gameday: 'gameday',
-};
+import { STREAM_FOR_CLASS } from '../../lib/focusCatalog';
 
 const fmtTime = (min: number) => {
   const h = Math.floor(min / 60);

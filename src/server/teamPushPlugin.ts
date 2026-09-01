@@ -28,13 +28,9 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { Plugin } from 'vite';
-import type {
-  ProgramDoc,
-  PushLogDoc,
-  ScheduleDoc,
-  SessionFocus,
-} from '../types/documents.js';
+import type { ProgramDoc, PushLogDoc, ScheduleDoc } from '../types/documents.js';
 import { resolveWeekDays } from '../lib/classDays.js';
+import { pushPlanFor } from '../lib/focusCatalog.js';
 import { circuitParts, seriesBlocks, streamsOf } from '../lib/programStreams.js';
 import { buildCue, circuitPartText, mapReps } from '../lib/pushMapping.js';
 import { loadDocOnServer, updateDocOnServer } from './storagePlugin.js';
@@ -58,13 +54,10 @@ const CUSTOM_IDS: Record<string, number> = {
   'glute bridge w/rotation': 8380185,
 };
 
-// The Strength stream's sessions, in the order they are titled. Which day
-// each lands on comes from the timetable, not from this list.
-// The two-day Full Body split, live from 14 Sept 2026.
-const STRENGTH_PLAN: { focus: SessionFocus; title: string }[] = [
-  { focus: 'full-a', title: 'Day 1 - Full Body A' },
-  { focus: 'full-b', title: 'Day 2 - Full Body B' },
-];
+// The push plan (which focuses push, with what titles) is derived from the
+// focus catalog: this file used to keep its own copy, the fifth
+// hand-synchronised focus table. Which day each session lands on comes from
+// the timetable, not from the plan.
 
 function partsOf(iso: string) {
   const d = new Date(`${iso}T00:00:00Z`);
@@ -244,12 +237,13 @@ export function teamPushPlugin(): Plugin {
           // Which day each session runs on comes from the CURRENT FORMAT, the
           // scenario marked live in Schedule, never the one on screen there.
           const schedule = loadDocOnServer(root, 'schedule').data as ScheduleDoc;
+          const pushPlan = pushPlanFor(stream.id);
           const resolved = resolveWeekDays(
             schedule,
             monday,
-            STRENGTH_PLAN.map((p) => p.focus),
+            pushPlan.map((p) => p.focus),
           );
-          const plan = STRENGTH_PLAN.map((p, i) => ({ ...p, day: resolved.days[i] })).filter(
+          const plan = pushPlan.map((p, i) => ({ ...p, day: resolved.days[i] })).filter(
             (p) => p.day.date !== null,
           );
           if (plan.length === 0) {
