@@ -1,0 +1,5 @@
+# Store documents are whole-file states, not line-mergeable text. A git merge
+# that interleaves two machines' versions of a 300KB JSON produces conflict
+# markers inside the file, which the server then quarantines. -merge makes any
+# conflict a whole-file binary conflict: pick ours or theirs, never a splice.
+data/*.json -merge

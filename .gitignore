@@ -12,9 +12,14 @@ dist
 dist-ssr
 *.local
 data/*.json.tmp
+data/_history/
+data/*.json.corrupt-*
 
 # NOTE: data/ (store documents) and public/data/exercise-library.json (generated
-# library) are deliberately committed. Do not ignore them.
+# library) are deliberately committed. Do not ignore them. data/_history/ is the
+# local per-doc undo trail (pruned to 50 snapshots) and stays out of git; the
+# off-machine copy is the data-backup-<hostname> branch pushed by the storage
+# plugin.
 
 # Editor directories and files
 .vscode/*
