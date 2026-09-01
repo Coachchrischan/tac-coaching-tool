@@ -1,9 +1,10 @@
 // THE storage module. Every component persists through this interface and
 // nothing else. No localStorage, no direct fetch calls elsewhere.
 //
-// Backend today: Vite dev middleware writing data/*.json (src/server/storagePlugin.ts).
-// Backend later: Vercel serverless functions over Postgres/Supabase serving the
-// exact same routes. Swapping backends must not touch any UI code.
+// Backend: Vite middleware writing data/*.json (src/server/storagePlugin.ts),
+// on both dev and preview servers. This local-first shape IS the architecture
+// for a one-coach, two-machine tool; both 2026-09-01 review panels ruled a
+// hosted database over-engineering until a second concurrent editor exists.
 
 import type { DocEnvelope, DocId, DocTypes } from '../types/documents';
 
@@ -28,7 +29,14 @@ export interface Store {
     id: K,
     data: DocTypes[K],
     baseRev: number,
-    opts?: SaveOptions,
+    opts?: SaveOptions & {
+      /**
+       * The updatedAt of the version this edit is based on. Sent so the
+       * server can 409 on equal-rev divergence across the two machines
+       * (rev numbers alone are not globally unique).
+       */
+      baseUpdatedAt?: string;
+    },
   ): Promise<DocEnvelope<DocTypes[K]>>;
 }
 
@@ -42,11 +50,19 @@ async function parseJson(res: Response): Promise<unknown> {
   }
 }
 
+/** The server writes real recovery guidance into error bodies (which file was
+ *  quarantined, where the snapshots live); swallowing it left the coach with
+ *  a bare status code at exactly the wrong moment. */
+function serverError(prefix: string, res: Response, body: unknown): Error {
+  const detail = (body as { error?: string })?.error;
+  return new Error(detail ? `${prefix}: ${detail}` : `${prefix} (${res.status})`);
+}
+
 export const store: Store = {
   async load(id) {
     const res = await fetch(`${BASE}/${id}`);
     const body = await parseJson(res);
-    if (!res.ok) throw new Error(`Failed to load '${id}' (${res.status})`);
+    if (!res.ok) throw serverError(`Failed to load '${id}'`, res, body);
     return body as DocEnvelope<never>;
   },
 
@@ -54,14 +70,14 @@ export const store: Store = {
     const res = await fetch(`${BASE}/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data, baseRev }),
+      body: JSON.stringify({ data, baseRev, baseUpdatedAt: opts?.baseUpdatedAt }),
       keepalive: opts?.keepalive ?? false,
     });
     const body = await parseJson(res);
     if (res.status === 409) {
       throw new ConflictError((body as { current: DocEnvelope<unknown> }).current);
     }
-    if (!res.ok) throw new Error(`Failed to save '${id}' (${res.status})`);
+    if (!res.ok) throw serverError(`Failed to save '${id}'`, res, body);
     return body as DocEnvelope<never>;
   },
 };

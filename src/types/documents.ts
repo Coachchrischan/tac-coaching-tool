@@ -20,6 +20,8 @@ export interface DocEnvelope<T> {
   updatedAt: string;
   /** Hostname of the machine that wrote this version (two-machine visibility). */
   machine?: string;
+  /** On-disk shape version, stamped by scripts/migrate-docs.mjs (currently 2). */
+  schemaVersion?: number;
 }
 
 // ---------- Schedule ----------

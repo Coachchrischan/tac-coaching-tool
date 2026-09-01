@@ -294,11 +294,16 @@ export default function ProgrammingTab() {
   const streamIndex = Math.min(siRaw, streams.length - 1);
   const stream = streams[streamIndex];
   const blocks = stream.blocks;
-  /** The most recent push of a given week of the selected phase, if any. */
+  /**
+   * The most recent push of a given week, matched by its MONDAY DATE, never
+   * by phase/week position: positions slide when the phase structure is
+   * edited, and a ledger that shifts with the plan is worse than none.
+   */
   const lastPushOf = (weekIndex: number): PushLogEntry | undefined => {
-    const hits = pushEntries.filter(
-      (e) => e.streamId === stream.id && e.block === bi + 1 && e.week === weekIndex + 1,
-    );
+    const monday = mondayOfWeek(weekIndex);
+    if (!monday) return undefined;
+    const iso = isoDate(monday);
+    const hits = pushEntries.filter((e) => e.streamId === stream.id && e.monday === iso);
     return hits[hits.length - 1];
   };
   const bi = Math.min(biRaw, blocks.length - 1);

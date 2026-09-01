@@ -74,7 +74,13 @@ function partsOf(iso: string) {
 function readBody(req: IncomingMessage): Promise<string> {
   return new Promise((resolve, reject) => {
     let body = '';
-    req.on('data', (c) => (body += c));
+    req.on('data', (c) => {
+      body += c;
+      if (body.length > 64 * 1024) {
+        reject(new Error('body too large'));
+        req.destroy();
+      }
+    });
     req.on('end', () => resolve(body));
     req.on('error', reject);
   });
@@ -178,6 +184,21 @@ export function teamPushPlugin(): Plugin {
             send(res, 405, { error: 'method not allowed' });
             return;
           }
+          // A push is the one action where a wrong date reaches members'
+          // calendars, and every date here is machine-local. Refuse outright
+          // on the wrong timezone rather than trusting a banner (this PC was
+          // caught on Australia/Sydney, which diverges from Brisbane when
+          // DST starts in October).
+          const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          if (tz !== 'Australia/Brisbane') {
+            send(res, 400, {
+              error:
+                `refusing to push: this machine's timezone is ${tz}, not ` +
+                `Australia/Brisbane. Push dates follow the machine clock, so fix the ` +
+                `Windows timezone first. Nothing was created.`,
+            });
+            return;
+          }
           const { block, week, monday, streamId } = JSON.parse(await readBody(req)) as {
             block: number;
             week: number;
@@ -250,7 +271,18 @@ export function teamPushPlugin(): Plugin {
                   'GET',
                   `/1.0/coach/programs/edit/${PROGRAM}/${y}/${m}/4`,
                 )) as { programWorkouts?: { date: string; title: string }[] };
-                months.set(key, read.programWorkouts ?? []);
+                // Assert the shape rather than defaulting a missing field to
+                // "empty month": if TrainHeroic renames programWorkouts, the
+                // duplicate guard would otherwise become the duplicator.
+                if (!Array.isArray(read.programWorkouts)) {
+                  send(res, 502, {
+                    error:
+                      'TrainHeroic response shape changed (no programWorkouts array in the ' +
+                      'month read). Not pushing anything until trainheroic-mcp is updated.',
+                  });
+                  return;
+                }
+                months.set(key, read.programWorkouts);
               }
             }
           } catch (err) {
@@ -286,11 +318,61 @@ export function teamPushPlugin(): Plugin {
           const pushed: string[] = [];
           const skipped: string[] = [];
           const dates: string[] = [];
+          // The ledger must record whatever DID land even when a later day
+          // fails: the resume model's whole point is surviving mid-week
+          // failures, and an unlogged partial push made the week pill lie
+          // (second panel, three brains).
+          const logPush = (partial: boolean) => {
+            if (pushed.length === 0 && skipped.length === 0) return;
+            try {
+              updateDocOnServer(root, 'push-log', (data) => {
+                const log = data as PushLogDoc;
+                return {
+                  entries: [
+                    ...(log.entries ?? []),
+                    {
+                      id: `push-${Date.now()}`,
+                      at: new Date().toISOString(),
+                      streamId: stream.id,
+                      block,
+                      week,
+                      monday,
+                      dates,
+                      pushed: partial ? [...pushed, '(push failed part-way; see skipped)'] : pushed,
+                      skipped,
+                    },
+                  ],
+                };
+              });
+            } catch (err) {
+              console.error(`[tac-push] logging the push failed: ${String(err)}`);
+            }
+          };
           for (const p of toPush) {
             const session = target.sessions.find((s) => s.focus === p.focus);
-            if (!session || session.kind === 'circuit') continue;
+            // Every skip is NAMED: this was the one silent drop left in the
+            // pipeline (second panel, three brains).
+            if (!session) {
+              skipped.push(`${p.title} (${p.day.date}): no session with this focus in the week`);
+              continue;
+            }
+            if (session.kind === 'circuit') {
+              skipped.push(
+                `${p.title} (${p.day.date}): a circuit-kind session; only series sessions push`,
+              );
+              continue;
+            }
             const date = p.day.date!;
             const { y, m, d } = partsOf(date);
+            // The instruction text (challenge circuits) goes in the SAME PUT
+            // as the title, before any blocks exist. Writing it after the
+            // exercise loop sent sets: [] over a built workout, which
+            // plausibly wipes everything just created (never verified live;
+            // not worth finding out on a real challenge week).
+            const circuits = circuitParts(session.timedBlocks);
+            const instruction = circuits.length
+              ? circuits.map(circuitPartText).join('\n\n')
+              : '';
             const created = await th.createWorkoutForDay({
               programId: PROGRAM,
               year: y,
@@ -299,12 +381,12 @@ export function teamPushPlugin(): Plugin {
               session: 0,
             });
             try {
-              await th.setWorkoutTitle({
+              await setWorkoutInstruction(th, {
                 id: created.id,
                 workoutId: created.workout_id,
-                programId: PROGRAM,
                 date,
                 title: p.title,
+                instruction,
               });
               let blockOrder = 0;
               let exCount = 0;
@@ -353,18 +435,15 @@ export function teamPushPlugin(): Plugin {
                   exCount++;
                 }
               }
-              // Challenges and other circuit parts go into the workout's
-              // instruction text so members actually see them.
-              const circuits = circuitParts(session.timedBlocks);
-              if (circuits.length) {
-                const instruction = circuits.map(circuitPartText).join('\n\n');
-                await setWorkoutInstruction(th, {
-                  id: created.id,
-                  workoutId: created.workout_id,
-                  date,
-                  title: p.title,
-                  instruction,
-                });
+              // A day where nothing resolved and no circuit text exists is a
+              // titled empty shell: delete it and say so, rather than leave
+              // draft litter in the coach app.
+              if (exCount === 0 && !circuits.length) {
+                await th.removeWorkout({ programId: PROGRAM, workoutDayId: created.id });
+                skipped.push(
+                  `${p.title} (${date}): nothing resolved to a TrainHeroic exercise; empty draft removed`,
+                );
+                continue;
               }
               pushed.push(
                 `${p.title} (${p.day.dayName} ${date}): ${exCount} exercises` +
@@ -382,34 +461,13 @@ export function teamPushPlugin(): Plugin {
                   `${p.title} (${date}): failed mid-build AND cleanup failed; delete the draft in TrainHeroic before retrying this day`,
                 );
               }
+              logPush(true);
               throw err;
             }
           }
 
           // The push log is the tool's memory of what members' calendars hold.
-          try {
-            updateDocOnServer(root, 'push-log', (data) => {
-              const log = data as PushLogDoc;
-              return {
-                entries: [
-                  ...(log.entries ?? []),
-                  {
-                    id: `push-${Date.now()}`,
-                    at: new Date().toISOString(),
-                    streamId: stream.id,
-                    block,
-                    week,
-                    monday,
-                    dates,
-                    pushed,
-                    skipped,
-                  },
-                ],
-              };
-            });
-          } catch (err) {
-            console.error(`[tac-push] push succeeded but logging it failed: ${String(err)}`);
-          }
+          logPush(false);
 
           send(res, 200, {
             ok: true,

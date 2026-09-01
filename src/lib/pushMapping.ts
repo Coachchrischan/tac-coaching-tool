@@ -26,6 +26,8 @@ export function mapReps(raw: unknown): MappedReps {
   // says what to do in plain words instead.
   if ((m = s.match(/^(\d+)\s*RIR$/i)))
     return { reps: '', note: `as many quality reps as you can, leaving ${m[1]} in reserve` };
+  // Bare MAX in a member's app reads as "1RM weight" as often as "max reps".
+  if (/^MAX$/i.test(s)) return { reps: '', note: 'as many quality reps as possible' };
   if (/^\d+$/.test(s)) return { reps: Number(s), note: null };
   return { reps: '', note: s };
 }
