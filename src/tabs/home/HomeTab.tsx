@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { mostUrgent, useDoc } from '../../lib/useDoc';
 import SaveBadge from '../../components/SaveBadge';
@@ -15,6 +15,10 @@ import { liveScenario } from '../../lib/scenarios';
 
 /** Which programming stream delivers a timetable class, where one does. */
 import { STREAM_FOR_CLASS } from '../../lib/focusCatalog';
+import { todaySessions, unfedClassTypes, weekReadiness } from '../../lib/weekReadiness';
+import { thisMonday } from '../../lib/attendancePeriods';
+import ThisWeekPanel from './ThisWeekPanel';
+import type { PushLogDoc, PushLogEntry } from '../../types/documents';
 
 const fmtTime = (min: number) => {
   const h = Math.floor(min / 60);
@@ -34,6 +38,18 @@ export default function HomeTab() {
   const attendance = useDoc('attendance');
   const schedule = useDoc('schedule');
   const community = useDoc('community');
+  const program = useDoc('program');
+  const annual = useDoc('annual-plan');
+  // Read-only, like Programming's copy: the ledger backs the pushed line.
+  const [pushEntries, setPushEntries] = useState<PushLogEntry[]>([]);
+  useEffect(() => {
+    void fetch('/api/store/push-log')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((env: { data?: PushLogDoc } | null) => {
+        if (env?.data) setPushEntries(env.data.entries ?? []);
+      })
+      .catch(() => {});
+  }, []);
   const [selectedTypeId, setSelectedTypeId] = useState<string | null>(null);
   const [grain, setGrain] = useState<'monthly' | 'weekly'>('monthly');
   const [periodCount, setPeriodCount] = useState<6 | 12 | 0>(6);
@@ -131,6 +147,28 @@ export default function HomeTab() {
       };
     });
 
+  // The readiness picture for the live training week, and today's boards.
+  const readiness =
+    program.data && annual.data
+      ? weekReadiness(program.data, annual.data, schedule.data, pushEntries)
+      : null;
+  const boardsToday = readiness ? todaySessions(readiness) : new Map<string, never>();
+  const unfedNames = (
+    program.data ? unfedClassTypes(schedule.data, program.data) : []
+  ).map((id) => schedule.data!.classTypes.find((c) => c.id === id)?.name ?? id);
+
+  function saveWeekCount(classTypeId: string, count: number | null) {
+    const period = thisMonday();
+    attendance.update((d) => {
+      const rest = d.entries.filter(
+        (e) => !(e.period === period && e.classTypeId === classTypeId),
+      );
+      return count === null
+        ? { ...d, entries: rest }
+        : { ...d, entries: [...rest, { id: `${period}:${classTypeId}`, period, classTypeId, count }] };
+    });
+  }
+
   const maxAvg = chart && chart.byType.length ? Math.max(...chart.byType.map((t) => t.avg)) : 1;
   const today = new Date();
   const todayIso = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
@@ -211,6 +249,30 @@ export default function HomeTab() {
                 <span className="flex shrink-0 gap-3 text-[12px]">
                   {c.streamId ? (
                     <>
+                      {(() => {
+                        // One click to the wall: today's session for this
+                        // class, straight to its board when it is written.
+                        const s = boardsToday.get(c.classTypeId);
+                        if (s?.hasContent) {
+                          return (
+                            <Link
+                              to={`/tv/${s.id}`}
+                              className="font-semibold text-accent-600 hover:underline"
+                              title={`Open the wall board: ${s.label}`}
+                            >
+                              Board
+                            </Link>
+                          );
+                        }
+                        if (s) {
+                          return (
+                            <span className="font-medium text-amber-600" title="Today's session has no content yet">
+                              unwritten
+                            </span>
+                          );
+                        }
+                        return null;
+                      })()}
                       <Link
                         to="/programming"
                         className="font-medium text-accent-600 hover:underline"
@@ -237,6 +299,16 @@ export default function HomeTab() {
           </ul>
         )}
       </section>
+
+      {readiness && (
+        <ThisWeekPanel
+          readiness={readiness}
+          unfedNames={unfedNames}
+          schedule={schedule.data}
+          entries={attendance.data.entries}
+          onSaveCount={saveWeekCount}
+        />
+      )}
 
       <div className="grid gap-5 lg:grid-cols-3">
         {/* Popularity ranking */}
