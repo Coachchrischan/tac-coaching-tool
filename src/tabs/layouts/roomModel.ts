@@ -1,8 +1,12 @@
-// The Group Fitness Room, as coaches actually draw it.
+// The club's physical rooms, as coaches actually draw them.
 //
-// Three things never move and belong on every layout: the air runners across
-// the back, the rig, and the sled track. They are drawn from this file rather
-// than stored per layout, so they can't be dragged away or forgotten.
+// Fixed fixtures never move and belong on every layout in THEIR room: the
+// Group Fitness Room's air runners, rig and sled track. They are drawn from
+// this file rather than stored per layout, so they can't be dragged away or
+// forgotten - and they are keyed BY ROOM, because drawing the Group Fitness
+// Room's rig on a Gym Floor plan taught coaches a false map (both 2026-09-01
+// panels). A room with no measured model yet draws no fixtures and the tab
+// says so, which is honest, unlike the wrong room's furniture.
 //
 // Everything else (Concept2 bikes, rowers, skis, wall balls, boxes, bands,
 // dumbbells) comes in and out of the room, so it lives in the document as
@@ -30,7 +34,7 @@ export interface Fixture {
 const RUNNER_W = 62;
 const RUNNER_GAP = 46;
 
-export const FIXTURES: Fixture[] = [
+const GROUP_FITNESS_FIXTURES: Fixture[] = [
   {
     id: 'air-runners',
     label: 'Air runners',
@@ -62,6 +66,27 @@ export const FIXTURES: Fixture[] = [
     tone: 'outline',
   },
 ];
+
+/**
+ * Fixed fixtures per physical room, keyed by the name `LayoutRoom.room`
+ * carries (which mirrors ScheduleDoc.rooms names). The Gym Floor's model is
+ * an empty list until Chris's measurements go in (2026-09-02): add its
+ * fixtures here and every Strength layout picks them up.
+ */
+const FIXTURES_BY_ROOM: Record<string, Fixture[]> = {
+  'Group Fitness Room': GROUP_FITNESS_FIXTURES,
+  'Gym Floor': [],
+};
+
+/** The fixture set for a layout's room; unknown or unmeasured rooms draw none. */
+export function fixturesFor(room: string | undefined): Fixture[] {
+  return (room && FIXTURES_BY_ROOM[room]) || [];
+}
+
+/** True when the room has a measured fixture model in this file. */
+export function roomIsModelled(room: string | undefined): boolean {
+  return Boolean(room && FIXTURES_BY_ROOM[room]?.length);
+}
 
 // ---------- Movable equipment ----------
 

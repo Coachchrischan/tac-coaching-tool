@@ -9,7 +9,8 @@ import {
   CANVAS_W,
   EQUIPMENT,
   EQUIP_CODE,
-  FIXTURES,
+  fixturesFor,
+  roomIsModelled,
   equipDef,
   fitsCode,
   labelExtra,
@@ -371,7 +372,7 @@ function RoomCanvas({
             }}
             onClick={() => setSelectedId(null)}
           >
-            {FIXTURES.map((f) => (
+            {fixturesFor(room.room).map((f) => (
               <FixtureShape key={f.id} f={f} />
             ))}
             {room.items.map((item) => (
@@ -385,10 +386,19 @@ function RoomCanvas({
           </div>
         </DndContext>
       </div>
-      <p className="mt-2 text-[11px] text-ink-400">
-        The air runners, rig and sled track are fixed and appear on every layout. Everything else
-        drags; pick an item to set how many, spacing and a station number.
-      </p>
+      {roomIsModelled(room.room) ? (
+        <p className="mt-2 text-[11px] text-ink-400">
+          The fixed fixtures are drawn from the {room.room} model and appear on every layout in
+          this room. Everything else drags; pick an item to set how many, spacing and a station
+          number.
+        </p>
+      ) : (
+        <p className="mt-2 rounded-md border border-amber-300 bg-amber-50 px-3 py-1.5 text-[11px] text-amber-800">
+          {room.room ? `The ${room.room} has` : 'This layout has'} no measured fixture model yet,
+          so no fixed fixtures are drawn. That is honest, not a bug: the wrong room's furniture
+          taught a false map. Add the measurements to roomModel.ts and they appear here.
+        </p>
+      )}
     </section>
   );
 }
