@@ -24,7 +24,6 @@ export default function TimedBlockCard({
   onPatchSlot,
   onCommitExercise,
   onDeleteSlot,
-  onToggleScales,
   onSetScale,
   onMoveSlot,
 }: {
@@ -39,7 +38,6 @@ export default function TimedBlockCard({
   onPatchSlot: (slotId: string, patch: Partial<ExerciseSlot>) => void;
   onCommitExercise: (slotId: string, name: string, exercise: LibraryExercise | null) => void;
   onDeleteSlot: (slotId: string) => void;
-  onToggleScales: (slotId: string) => void;
   onSetScale: (slot: ExerciseSlot, index: 0 | 1, patch: Partial<ScaledOption>) => void;
   onMoveSlot: (slotId: string, dir: -1 | 1) => void;
 }) {
@@ -123,7 +121,6 @@ export default function TimedBlockCard({
               onPatch={(patch) => onPatchSlot(slot.id, patch)}
               onCommitExercise={(name, ex) => onCommitExercise(slot.id, name, ex)}
               onDelete={() => onDeleteSlot(slot.id)}
-              onToggleScales={() => onToggleScales(slot.id)}
               onSetScale={(n, patch) => onSetScale(slot, n, patch)}
               onMove={(dir) => onMoveSlot(slot.id, dir)}
               canMoveUp={i > 0}

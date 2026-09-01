@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { ExerciseSlot, LibraryOverridesDoc, ScaledOption } from '../../types/documents';
 import type { LibraryExercise, RankedExercise } from '../../lib/library';
 import Combobox from '../../components/Combobox';
-import { normaliseIntensity, scaleKey, scaleOptions } from '../../lib/prescription';
+import { effectiveScales, normaliseIntensity, scaleKey } from '../../lib/prescription';
 
 const cell =
   'w-full rounded-md border border-ink-300 bg-white px-1.5 py-1 text-center text-[13px] text-ink-950 placeholder:text-ink-300 focus:border-accent-600 focus:outline-none';
@@ -58,7 +58,6 @@ export default function ExerciseRow({
   onPatch,
   onCommitExercise,
   onDelete,
-  onToggleScales,
   onSetScale,
   onMove,
   canMoveUp,
@@ -72,20 +71,47 @@ export default function ExerciseRow({
   onPatch: (patch: Partial<ExerciseSlot>) => void;
   onCommitExercise: (name: string, exercise: LibraryExercise | null) => void;
   onDelete: () => void;
-  onToggleScales: () => void;
   onSetScale: (index: 0 | 1, patch: Partial<ScaledOption>) => void;
   onMove: (dir: -1 | 1) => void;
   canMoveUp: boolean;
   canMoveDown: boolean;
 }) {
-  const scales = scaleOptions(overrides, slot);
+  const scales = effectiveScales(overrides, slot);
   const hasScales = scales.some((s) => s.name.trim() !== '');
-  const showScales = expandScales || Boolean(slot.showScales);
+  // Whether this slot carries its own scales, overriding the shared ones.
+  const slotMode = Boolean(slot.scales?.some((s) => s.name.trim()));
+  // Disclosure is React state, never the document: persisting it meant that
+  // merely browsing the tab dirtied program.json and the git tree.
+  const [open, setOpen] = useState(false);
+  const showScales = expandScales || open;
   // Anything with a name can be scaled. It used to need a TrainHeroic library
   // id, which left eleven free-text movements, the drag through among them,
   // with no way to record a scale.
   const canScale = scaleKey(slot) !== null;
   const [noteOpen, setNoteOpen] = useState(false);
+
+  /** Route a scale edit to the slot override or the shared library scales. */
+  function setScale(i: 0 | 1, patch: Partial<ScaledOption>) {
+    if (slotMode) {
+      const next: ScaledOption[] = [scales[0] ?? { name: '' }, scales[1] ?? { name: '' }].map(
+        (s, idx) => (idx === i ? { ...s, ...patch } : s),
+      );
+      onPatch({ scales: next });
+    } else {
+      onSetScale(i, patch);
+    }
+  }
+
+  /** Flip between shared (exercise-level) and this-slot-only scales. */
+  function toggleSlotMode() {
+    if (slotMode) {
+      onPatch({ scales: undefined });
+    } else {
+      // Start the override from what currently shows, so flipping the switch
+      // never blanks the board.
+      onPatch({ scales: [scales[0] ?? { name: '' }, scales[1] ?? { name: '' }] });
+    }
+  }
 
   return (
     <>
@@ -121,11 +147,13 @@ export default function ExerciseRow({
               type="button"
               title={
                 canScale
-                  ? 'Scaled options (stored with the exercise, reused everywhere)'
+                  ? slotMode
+                    ? 'Scaled options (this slot only)'
+                    : 'Scaled options (shared with the exercise everywhere it appears)'
                   : 'Name the exercise first, then it can carry scaled options'
               }
               disabled={!canScale}
-              onClick={onToggleScales}
+              onClick={() => setOpen((o) => !o)}
               className={`shrink-0 rounded border px-1.5 py-1 text-[11px] font-semibold ${
                 hasScales
                   ? 'border-accent-600 bg-accent-100 text-accent-700'
@@ -215,7 +243,7 @@ export default function ExerciseRow({
                       i === 0 ? 'e.g. box squat to 20 inch box' : 'optional second scale'
                     }
                     onCommit={(name, exercise) =>
-                      onSetScale(i as 0 | 1, { name, exerciseId: exercise?.id ?? null })
+                      setScale(i as 0 | 1, { name, exerciseId: exercise?.id ?? null })
                     }
                   />
                   <VideoMark url={videoUrlFor(opt)} />
@@ -232,12 +260,12 @@ export default function ExerciseRow({
                     // heading, so repeating "Sets" inside it is noise.
                     title={`${label} for this scaled option`}
                     value={opt[key] ?? ''}
-                    onChange={(e) => onSetScale(i as 0 | 1, { [key]: e.target.value })}
+                    onChange={(e) => setScale(i as 0 | 1, { [key]: e.target.value })}
                     onBlur={
                       key === 'intensity'
                         ? (e) => {
                             const next = normaliseIntensity(e.target.value);
-                            if (next !== e.target.value) onSetScale(i as 0 | 1, { intensity: next });
+                            if (next !== e.target.value) setScale(i as 0 | 1, { intensity: next });
                           }
                         : undefined
                     }
@@ -253,7 +281,21 @@ export default function ExerciseRow({
         // one column and must not push one wider.
         <tr className="bg-ink-50">
           <td colSpan={8} className="pb-2 pl-[68px] text-[11px] text-ink-400">
-            Saved with the exercise. Any session using it shows the same scales.
+            {slotMode
+              ? 'Scales for THIS slot only, overriding the shared ones. '
+              : 'Saved with the exercise. Any session using it shows the same scales. '}
+            <button
+              type="button"
+              onClick={toggleSlotMode}
+              className="rounded px-1 font-medium text-accent-700 underline decoration-dotted hover:text-accent-600"
+              title={
+                slotMode
+                  ? 'Drop the override and go back to the shared scales'
+                  : 'Copy these scales onto this slot so this station can scale differently'
+              }
+            >
+              {slotMode ? 'Use the shared scales' : 'Scale this slot differently'}
+            </button>
           </td>
         </tr>
       )}

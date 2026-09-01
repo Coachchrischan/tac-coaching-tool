@@ -51,6 +51,20 @@ export function scaleOptions(
   return (overrides.scales[key] ?? []).map((s) => (typeof s === 'string' ? { name: s } : s));
 }
 
+/**
+ * The scales that apply to one slot: the slot's own override when any is
+ * named, else the exercise-level scales shared everywhere the exercise
+ * appears. Every renderer (grid, board, CSV, email) reads through here so a
+ * Hyrox wall ball scaled three ways shows the right scaling at each station.
+ */
+export function effectiveScales(
+  overrides: LibraryOverridesDoc,
+  slot: ScaleRef & { scales?: ScaledOption[] },
+): ScaledOption[] {
+  if (slot.scales?.some((s) => s.name.trim())) return slot.scales;
+  return scaleOptions(overrides, slot);
+}
+
 /** What a scaled option reads as on one line: "DB Goblet Squat  3 x 10  20kg". */
 export function scaleSummary(o: ScaledOption): string {
   const detail = [

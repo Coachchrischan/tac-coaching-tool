@@ -1762,14 +1762,6 @@ export default function ProgrammingTab() {
                 slots: b.slots.filter((sl) => sl.id !== slotId),
               }))
             }
-            onToggleScales={(slotId) =>
-              patchTimedBlock(block.id, (b) => ({
-                ...b,
-                slots: b.slots.map((sl) =>
-                  sl.id === slotId ? { ...sl, showScales: !sl.showScales } : sl,
-                ),
-              }))
-            }
             onSetScale={setScale}
             onMoveSlot={(slotId, dir) => moveSlot(block.id, slotId, dir)}
           />

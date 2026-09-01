@@ -8,7 +8,7 @@ import { generateBlurb } from '../../lib/blurb';
 import { mergedLibrary } from '../../lib/library';
 import type { ExerciseSlot, ProgramDoc, SeriesBlock, Session, TimedBlock } from '../../types/documents';
 import { circuitParts, seriesBlocks, streamsOf } from '../../lib/programStreams';
-import { cueFor as cueForRef, scaleOptions, scaleSummary } from '../../lib/prescription';
+import { cueFor as cueForRef, effectiveScales, scaleSummary } from '../../lib/prescription';
 
 const W = 1920;
 const H = 1080;
@@ -192,7 +192,7 @@ export default function TvPage() {
   // Free text included: cues are keyed like scales (id, or name for free text).
   const cueFor = (slot: ExerciseSlot) => cueForRef(overrides, slot);
   const scalesFor = (slot: ExerciseSlot) =>
-    scaleOptions(overrides, slot).filter((s) => s.name.trim());
+    effectiveScales(overrides, slot).filter((s) => s.name.trim());
 
   // html-to-image's toPng uses img.decode(), which can hang in background tabs,
   // so we do the SVG -> canvas -> PNG conversion ourselves with onload.

@@ -115,14 +115,21 @@ export interface ExerciseSlot {
   rpe?: string;
   tempo?: string;
   /**
-   * What the columns cannot hold: which minute of an EMOM this is, that a
-   * machine is the athlete's choice, or the scaled options for THIS slot.
-   * Scales are stored against the exercise, so a movement used three ways in
-   * one block cannot carry three different scalings there; per-slot scaling
-   * lives here until scales move onto the slot.
+   * Scales for THIS slot only, overriding the exercise-level ones in
+   * library-overrides when any is named. A wall ball used three ways in one
+   * Hyrox block needs three scalings; exercise-level scales stay the default
+   * for the Strength case (same movement, same regression all phase).
+   */
+  scales?: ScaledOption[];
+  /**
+   * What the columns cannot hold: which minute of an EMOM this is, or that a
+   * machine is the athlete's choice. Per-slot scaling used to squat here as
+   * text; it now lives in `scales` above.
    */
   note?: string;
-  showScales?: boolean;
+  // showScales (a UI disclosure flag) used to persist here, which meant
+  // browsing the tab dirtied the document and the git tree. It is React
+  // state now; the stale key is stripped by the one-off migration.
 }
 
 interface TimedBlockCommon {

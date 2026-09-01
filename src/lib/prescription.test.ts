@@ -2,7 +2,13 @@
 // no TrainHeroic id) and the bare-number percentage lift.
 
 import { describe, expect, it } from 'vitest';
-import { normaliseIntensity, scaleKey, scaleOptions, scaleSummary } from './prescription';
+import {
+  effectiveScales,
+  normaliseIntensity,
+  scaleKey,
+  scaleOptions,
+  scaleSummary,
+} from './prescription';
 import type { LibraryOverridesDoc } from '../types/documents';
 
 describe('scaleKey', () => {
@@ -36,6 +42,31 @@ describe('scaleOptions', () => {
 
   it('returns empty for an exercise with no scales', () => {
     expect(scaleOptions(overrides, { exerciseId: 999, name: 'x' })).toEqual([]);
+  });
+});
+
+describe('effectiveScales', () => {
+  const overrides = {
+    scales: { '100': [{ name: 'Shared scale' }] },
+  } as unknown as LibraryOverridesDoc;
+
+  it('a slot override wins when any of its scales is named', () => {
+    const out = effectiveScales(overrides, {
+      exerciseId: 100,
+      name: 'Wall Ball',
+      scales: [{ name: 'Lighter ball' }],
+    });
+    expect(out[0].name).toBe('Lighter ball');
+  });
+
+  it('an empty or absent override falls back to the shared scales', () => {
+    expect(effectiveScales(overrides, { exerciseId: 100, name: 'Wall Ball' })[0].name).toBe(
+      'Shared scale',
+    );
+    expect(
+      effectiveScales(overrides, { exerciseId: 100, name: 'Wall Ball', scales: [{ name: ' ' }] })[0]
+        .name,
+    ).toBe('Shared scale');
   });
 });
 
