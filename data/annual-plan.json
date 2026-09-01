@@ -38,22 +38,22 @@
             "weeks": 12
           },
           {
-            "id": "81553116-2160-459e-b2e9-b43def25aa61",
+            "id": "ap-2027-primer",
+            "name": "Primer (cycle 2)",
+            "focus": "Intro week + primer, mirroring the year-one entry.",
+            "weeks": 3
+          },
+          {
+            "id": "ap-2027-hyp9",
             "name": "Strength-Hypertrophy (cycle 2)",
-            "focus": "Back into the strength-hypertrophy cycle: wave loading 9-7-5, mid-block deload.",
-            "weeks": 10
+            "focus": "Full Body A/B split. Three 3-week micros: 9/7/5, 9/7/5 heavier, 7/5/3. Week 3 of each micro ends on a challenge.",
+            "weeks": 9
           },
           {
-            "id": "a5eaa5d1-e30b-4d90-8b44-e81f6dc5b7f4",
-            "name": "Deload / skills 2",
-            "focus": "Deload + skills workshops prepping the strength block.",
-            "weeks": 1
-          },
-          {
-            "id": "7e54f3e3-b9fa-45a6-8978-1e6f2a9b663a",
+            "id": "ap-2027-str5",
             "name": "Strength (cycle 2)",
-            "focus": "Mini waves 7-5-3 then 5-3-1, retest to close.",
-            "weeks": 6
+            "focus": "Structure TBC, mirroring Phase 3.",
+            "weeks": 5
           }
         ]
       },
@@ -90,13 +90,13 @@
             "id": "ap-13",
             "name": "Aerobic maintenance",
             "focus": "Hold the engine, deload the intensity",
-            "weeks": 10
+            "weeks": 9
           },
           {
             "id": "ap-14",
             "name": "Re-base",
             "focus": "Back to zone 2 volume before the next build",
-            "weeks": 10
+            "weeks": 9
           }
         ]
       },
@@ -106,52 +106,70 @@
         "colour": "#C64545",
         "phases": [
           {
-            "id": "ap-15",
-            "name": "Off-season GPP",
-            "focus": "General strength and engine, technique on the eight stations",
-            "weeks": 10
+            "id": "ap-hx-leadin",
+            "name": "Lead-in",
+            "focus": "Bridge week: the pre-blocks August programming.",
+            "weeks": 1
           },
           {
-            "id": "ap-16",
-            "name": "Strength-endurance build",
-            "focus": "Compromised running, station volume",
-            "weeks": 10
-          },
-          {
-            "id": "ap-17",
-            "name": "Race prep",
-            "focus": "Race simulations, pacing, transitions",
-            "weeks": 8
-          },
-          {
-            "id": "ap-18",
-            "name": "Comp + taper",
-            "focus": "Sharpen, taper, race window",
+            "id": "ap-hx-b01",
+            "name": "Block 01: Baseline",
+            "focus": "Signature session set in week 1, retested unchanged in week 4. ROX Strong Monday, ROX Race Friday; ROX Engine written but parked.",
             "weeks": 4
           },
           {
-            "id": "ap-19",
-            "name": "Recover",
-            "focus": "Down week, review the race",
-            "weeks": 2
+            "id": "ap-hx-b02",
+            "name": "Block 02",
+            "focus": "Builds on the baseline. Programming TBC.",
+            "weeks": 4
           },
           {
-            "id": "ap-20",
-            "name": "Build 2",
-            "focus": "Second build off the race learnings",
-            "weeks": 10
+            "id": "ap-hx-b03",
+            "name": "Block 03",
+            "focus": "Programming TBC.",
+            "weeks": 4
           },
           {
-            "id": "ap-21",
-            "name": "Race prep 2",
-            "focus": "Simulations for the second race window",
-            "weeks": 6
+            "id": "ap-hx-b04",
+            "name": "Block 04",
+            "focus": "Starts on the week 13 quarterly anchor (w/c 23 Nov). Holds the Melbourne race window (9 to 13 Dec).",
+            "weeks": 4
           },
           {
-            "id": "ap-22",
-            "name": "Comp 2",
-            "focus": "Race window two",
-            "weeks": 2
+            "id": "ap-hx-b05",
+            "name": "Block 05: Auckland prep",
+            "focus": "Sharpen for Auckland (4 to 7 Feb).",
+            "weeks": 4
+          },
+          {
+            "id": "ap-hx-b06",
+            "name": "Block 06: Auckland race",
+            "focus": "Race week, then recover and rebuild.",
+            "weeks": 4
+          },
+          {
+            "id": "ap-hx-b07",
+            "name": "Block 07: Brisbane prep",
+            "focus": "Build to Brisbane (31 Mar to 4 Apr).",
+            "weeks": 4
+          },
+          {
+            "id": "ap-hx-b08",
+            "name": "Block 08: Brisbane race",
+            "focus": "Race week, then down weeks and review.",
+            "weeks": 4
+          },
+          {
+            "id": "ap-hx-gpp",
+            "name": "Off-season GPP",
+            "focus": "General strength and engine, technique on the eight stations.",
+            "weeks": 8
+          },
+          {
+            "id": "ap-hx-rebuild",
+            "name": "Rebuild",
+            "focus": "Four-week blocks resume toward the 27/28 season.",
+            "weeks": 9
           }
         ]
       }
@@ -195,6 +213,6 @@
       }
     ]
   },
-  "rev": 7,
-  "updatedAt": "2026-08-31T00:29:46.306Z"
+  "rev": 8,
+  "updatedAt": "2026-09-01T00:00:00.000Z"
 }
