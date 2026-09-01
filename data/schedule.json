@@ -8,12 +8,12 @@
       },
       {
         "id": "lbs",
-        "name": "Lower Body Strength",
+        "name": "Full Body Strength A",
         "colour": "#5A5A52"
       },
       {
         "id": "ubs",
-        "name": "Upper Body Strength",
+        "name": "Full Body Strength B",
         "colour": "#6E7B74"
       },
       {
@@ -577,6 +577,6 @@
     "activeScenarioId": "current",
     "liveScenarioId": "e50da7f1-8ead-4deb-b7f4-dcb054a3eb56"
   },
-  "rev": 113,
-  "updatedAt": "2026-08-21T06:52:08.897Z"
+  "rev": 114,
+  "updatedAt": "2026-09-01T00:00:00.000Z"
 }
