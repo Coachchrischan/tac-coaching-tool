@@ -39,7 +39,7 @@ import {
 } from 'node:fs';
 import { join } from 'node:path';
 import { hostname } from 'node:os';
-import { execFile } from 'node:child_process';
+import { execFile, execFileSync } from 'node:child_process';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { Plugin } from 'vite';
 import { seeds } from '../seed/index.js';
@@ -160,11 +160,30 @@ function loadDoc(root: string, docId: DocId): Envelope {
       const dir = historyDir(root, docId);
       const hasHistory =
         existsSync(dir) && readdirSync(dir).some((f) => /^\d+\.json$/.test(f));
-      if (hasHistory) {
+      // On a fresh clone _history/ is empty (gitignored), so it is a weak
+      // existence proof; git itself is the strong one: a doc file tracked at
+      // HEAD that is missing from disk was deleted, not never-created.
+      let trackedInGit = false;
+      if (!hasHistory) {
+        try {
+          trackedInGit =
+            execFileSync('git', ['ls-files', '--', `data/${docId}.json`], {
+              cwd: root,
+              windowsHide: true,
+              timeout: 5000,
+            })
+              .toString()
+              .trim() !== '';
+        } catch {
+          /* not a git checkout: fall through to the history-only guard */
+        }
+      }
+      if (hasHistory || trackedInGit) {
         throw new DocBlockedError(
-          `document '${docId}' is missing but its history exists ` +
-            `(data/_history/${docId}/). Refusing to seed over it: restore a ` +
-            `snapshot from the Data safety panel on Home, or copy one back to ` +
+          `document '${docId}' is missing but ` +
+            (hasHistory ? `its history exists (data/_history/${docId}/)` : `git tracks it`) +
+            `. Refusing to seed demo data over it: restore a snapshot from the Data safety ` +
+            `panel on Home, restore the file from git, or copy a backup over ` +
             `data/${docId}.json by hand.`,
         );
       }
@@ -544,21 +563,24 @@ export function storagePlugin(): Plugin {
               parsed.data === undefined ||
               parsed.data === null ||
               typeof parsed.data !== 'object' ||
-              typeof parsed.baseRev !== 'number'
+              typeof parsed.baseRev !== 'number' ||
+              typeof parsed.baseUpdatedAt !== 'string'
             ) {
-              send(res, 400, { error: 'body must be { data: object, baseRev: number }' });
+              send(res, 400, {
+                error:
+                  'body must be { data: object, baseRev: number, baseUpdatedAt: string } ' +
+                  '(read baseUpdatedAt from the GET envelope; it is the write-identity check)',
+              });
               return;
             }
             const current = loadDoc(root, id);
             // Rev numbers are not unique across two machines: both count up
             // independently between syncs, so equal-count divergence passes a
             // rev-only check and silently overwrites a just-pulled file. The
-            // updatedAt stamp disambiguates (second panel, write-identity).
-            if (
-              parsed.baseRev !== current.rev ||
-              (typeof parsed.baseUpdatedAt === 'string' &&
-                parsed.baseUpdatedAt !== current.updatedAt)
-            ) {
+            // updatedAt stamp disambiguates, and it is REQUIRED (an optional
+            // check is rev-only behaviour for any client that forgets it,
+            // per the verification gate).
+            if (parsed.baseRev !== current.rev || parsed.baseUpdatedAt !== current.updatedAt) {
               send(res, 409, { current });
               return;
             }
