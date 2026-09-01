@@ -59,14 +59,17 @@ describe('effectiveScales', () => {
     expect(out[0].name).toBe('Lighter ball');
   });
 
-  it('an empty or absent override falls back to the shared scales', () => {
+  it('an absent override falls back to the shared scales', () => {
     expect(effectiveScales(overrides, { exerciseId: 100, name: 'Wall Ball' })[0].name).toBe(
       'Shared scale',
     );
+  });
+
+  it('an empty override deliberately hides the shared scales for this slot', () => {
     expect(
-      effectiveScales(overrides, { exerciseId: 100, name: 'Wall Ball', scales: [{ name: ' ' }] })[0]
-        .name,
-    ).toBe('Shared scale');
+      effectiveScales(overrides, { exerciseId: 100, name: 'Wall Ball', scales: [{ name: ' ' }] })
+        .filter((s) => s.name.trim()),
+    ).toHaveLength(0);
   });
 });
 

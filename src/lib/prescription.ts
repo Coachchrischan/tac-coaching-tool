@@ -61,7 +61,9 @@ export function effectiveScales(
   overrides: LibraryOverridesDoc,
   slot: ScaleRef & { scales?: ScaledOption[] },
 ): ScaledOption[] {
-  if (slot.scales?.some((s) => s.name.trim())) return slot.scales;
+  // The field's PRESENCE is the override: an empty override deliberately
+  // shows no scales for this slot even where shared ones exist.
+  if (slot.scales !== undefined) return slot.scales;
   return scaleOptions(overrides, slot);
 }
 

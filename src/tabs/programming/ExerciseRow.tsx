@@ -79,7 +79,9 @@ export default function ExerciseRow({
   const scales = effectiveScales(overrides, slot);
   const hasScales = scales.some((s) => s.name.trim() !== '');
   // Whether this slot carries its own scales, overriding the shared ones.
-  const slotMode = Boolean(slot.scales?.some((s) => s.name.trim()));
+  // Presence of the field is the mode: an empty override legitimately means
+  // "no scales on this slot" even where shared ones exist.
+  const slotMode = slot.scales !== undefined;
   // Disclosure is React state, never the document: persisting it meant that
   // merely browsing the tab dirtied program.json and the git tree.
   const [open, setOpen] = useState(false);
