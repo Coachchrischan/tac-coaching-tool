@@ -317,7 +317,14 @@ export interface ScaledOption {
 }
 
 export interface LibraryOverridesDoc {
-  patterns: Record<number, Pattern[]>; // exerciseId -> coach-tagged patterns (wins over guess)
+  /**
+   * Exercise key -> coach-tagged patterns (wins over the guess). Keyed the
+   * same way as `scales`: the TrainHeroic id for a library exercise,
+   * `name:<lower-case name>` for free text, so the eleven free-text exercises
+   * in the live block stopped being invisible to Movement Check. Numeric JSON
+   * keys are strings already, so nothing needed migrating. See `scaleKey`.
+   */
+  patterns: Record<string, Pattern[]>;
   /**
    * Exercise key -> up to 2 scaled options. Each carries its own prescription,
    * because a scale is rarely the same sets and reps as the movement it
@@ -329,7 +336,8 @@ export interface LibraryOverridesDoc {
    * strings in JSON already, so nothing needed migrating.
    */
   scales: Record<string, (ScaledOption | string)[]>;
-  cues: Record<number, string>; // key cue per exercise, feeds the session blurb
+  /** Key cue per exercise, feeds the blurb and the board. Keyed like scales. */
+  cues: Record<string, string>;
   customExercises: CustomExercise[];
 }
 

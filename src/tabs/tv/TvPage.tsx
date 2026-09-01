@@ -8,7 +8,7 @@ import { generateBlurb } from '../../lib/blurb';
 import { mergedLibrary } from '../../lib/library';
 import type { ExerciseSlot, ProgramDoc, SeriesBlock, Session, TimedBlock } from '../../types/documents';
 import { circuitParts, seriesBlocks, streamsOf } from '../../lib/programStreams';
-import { scaleOptions, scaleSummary } from '../../lib/prescription';
+import { cueFor as cueForRef, scaleOptions, scaleSummary } from '../../lib/prescription';
 
 const W = 1920;
 const H = 1080;
@@ -189,8 +189,8 @@ export default function TvPage() {
     ? { width: '42%', objectPosition: '50% 32%', filter: 'brightness(1.05)' }
     : { width: '66%', objectPosition: '50% 62%', filter: 'brightness(1.3)' };
 
-  const cueFor = (slot: ExerciseSlot) =>
-    slot.exerciseId !== null ? overrides.cues[slot.exerciseId] : undefined;
+  // Free text included: cues are keyed like scales (id, or name for free text).
+  const cueFor = (slot: ExerciseSlot) => cueForRef(overrides, slot);
   const scalesFor = (slot: ExerciseSlot) =>
     scaleOptions(overrides, slot).filter((s) => s.name.trim());
 

@@ -11,7 +11,7 @@
  * and anything that is not a number ("BW", "as last week") is left exactly as
  * the coach wrote it.
  */
-import type { LibraryOverridesDoc, ScaledOption } from '../types/documents';
+import type { LibraryOverridesDoc, Pattern, ScaledOption } from '../types/documents';
 
 /** What identifies an exercise for the purpose of hanging scales off it. */
 export interface ScaleRef {
@@ -63,6 +63,28 @@ export function scaleSummary(o: ScaledOption): string {
     .filter(Boolean)
     .join('  ');
   return detail ? `${o.name}  ${detail}` : o.name;
+}
+
+/**
+ * The coach's cue for an exercise, free text included. Cues used to be keyed
+ * by TrainHeroic id alone, so a free-text exercise got no cue on the board.
+ */
+export function cueFor(overrides: LibraryOverridesDoc, ref: ScaleRef): string | undefined {
+  const key = scaleKey(ref);
+  return key === null ? undefined : overrides.cues[key];
+}
+
+/**
+ * Coach-tagged movement patterns for an exercise by key, free text included,
+ * or undefined when the coach has not tagged it (callers fall back to the
+ * library's guess where one exists).
+ */
+export function taggedPatterns(
+  overrides: LibraryOverridesDoc,
+  ref: ScaleRef,
+): Pattern[] | undefined {
+  const key = scaleKey(ref);
+  return key === null ? undefined : overrides.patterns[key];
 }
 
 export function normaliseIntensity(raw: string | undefined): string {

@@ -4,6 +4,7 @@
 import type { CircuitSession, LibraryOverridesDoc, Pattern, Session } from '../types/documents';
 import type { LibraryExercise } from './library';
 import { patternsFor } from './library';
+import { cueFor, taggedPatterns } from './prescription';
 import { seriesBlocks } from './programStreams';
 
 const PATTERN_PHRASE: Record<Pattern, string> = {
@@ -68,8 +69,10 @@ export function generateBlurb(
     const weight = Math.max(3 - blockIndex, 1);
     for (const slot of block.slots) {
       const ex = slot.exerciseId !== null ? byId.get(slot.exerciseId) : undefined;
-      if (!ex) continue;
-      for (const p of patternsFor(ex, overrides)) {
+      const patterns = ex
+        ? patternsFor(ex, overrides)
+        : (taggedPatterns(overrides, slot) ?? []);
+      for (const p of patterns) {
         weights.set(p, (weights.get(p) ?? 0) + weight);
       }
     }
@@ -97,12 +100,13 @@ export function generateBlurb(
   for (const slot of mainSlots) {
     if (!slot.name) continue;
     const ex = slot.exerciseId !== null ? byId.get(slot.exerciseId) : undefined;
-    const coachCue = ex ? overrides.cues[ex.id] : undefined;
+    // Keyed like scales, so a free-text exercise gets its coach cue too.
+    const coachCue = cueFor(overrides, slot);
     if (coachCue) {
       sentences.push(`${slot.name}: ${coachCue}`);
       continue;
     }
-    const patterns = ex ? patternsFor(ex, overrides) : [];
+    const patterns = ex ? patternsFor(ex, overrides) : (taggedPatterns(overrides, slot) ?? []);
     if (patterns.length > 0) {
       sentences.push(`${slot.name}: ${PATTERN_CUE[patterns[0]]}.`);
     }

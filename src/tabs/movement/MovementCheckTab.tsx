@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { useDoc } from '../../lib/useDoc';
 import { useLibrary } from '../../lib/useLibrary';
 import { mergedLibrary, patternsFor } from '../../lib/library';
+import { scaleKey, taggedPatterns } from '../../lib/prescription';
 import { seriesBlocks, streamsOf } from '../../lib/programStreams';
 import SaveBadge from '../../components/SaveBadge';
 import { PATTERN_LABELS, PATTERNS } from '../../types/documents';
@@ -15,7 +16,8 @@ const pill = (active: boolean) =>
   }`;
 
 interface UsedExercise {
-  id: number;
+  /** Stable overrides key: the library id, or name:<lower> for free text. */
+  key: string;
   name: string;
   count: number;
   patterns: Pattern[];
@@ -34,7 +36,8 @@ export default function MovementCheckTab() {
 
   const overrides = lib.data;
   // Coverage is judged on the Strength stream: it is where patterns are
-  // programmed deliberately. Other streams have their own metrics.
+  // programmed deliberately. The heading says so; circuits (Hyrox, ESD,
+  // Game Day) are free text and are NOT analysed here.
   const phases = program.data ? (streamsOf(program.data)[0]?.blocks ?? []) : [];
   const firstWritten = phases.findIndex((p) =>
     p.weeks.some((w) =>
@@ -44,38 +47,49 @@ export default function MovementCheckTab() {
     ),
   );
   const phaseIndex = Math.min(bi ?? Math.max(firstWritten, 0), Math.max(phases.length - 1, 0));
+  // The coaching rule is ROLLING TWO-PHASE coverage: variety is judged over
+  // this phase plus the one before it, not one phase in isolation. The tab
+  // used to judge a single phase while stating the two-phase rule (audit #10).
+  const windowIndexes = phaseIndex > 0 ? [phaseIndex - 1, phaseIndex] : [phaseIndex];
 
   const analysis = useMemo(() => {
     if (!program.data || !overrides || !library) return null;
     const merged = mergedLibrary(library, overrides);
     const byId = new Map(merged.map((e) => [e.id, e]));
-    const target = streamsOf(program.data)[0]?.blocks[phaseIndex];
-    if (!target) return null;
+    const stream = streamsOf(program.data)[0];
+    if (!stream) return null;
 
-    const used = new Map<number | string, UsedExercise>();
-    for (const week of target.weeks) {
-      for (const session of week.sessions) {
-        // Pattern coverage is judged on the Strength stream's series only:
-        // circuits carry free text with no library ids to classify.
-        if (session.kind !== 'series') continue;
-        for (const block of seriesBlocks(session.timedBlocks)) {
-          for (const slot of block.slots) {
-            if (!slot.name) continue;
-            const key = slot.exerciseId ?? `free:${slot.name.toLowerCase()}`;
-            const existing = used.get(key);
-            if (existing) {
-              existing.count += 1;
-              continue;
+    const used = new Map<string, UsedExercise>();
+    for (const wi of windowIndexes) {
+      const target = stream.blocks[wi];
+      if (!target) continue;
+      for (const week of target.weeks) {
+        for (const session of week.sessions) {
+          if (session.kind !== 'series') continue;
+          for (const block of seriesBlocks(session.timedBlocks)) {
+            for (const slot of block.slots) {
+              if (!slot.name) continue;
+              const key = scaleKey(slot);
+              if (key === null) continue;
+              const existing = used.get(key);
+              if (existing) {
+                existing.count += 1;
+                continue;
+              }
+              const ex = slot.exerciseId !== null ? byId.get(slot.exerciseId) : undefined;
+              used.set(key, {
+                key,
+                name: ex?.title ?? slot.name,
+                count: 1,
+                // Coach tags win everywhere; free text can be tagged too now
+                // that patterns are keyed like scales (id or name:<lower>).
+                patterns: ex
+                  ? patternsFor(ex, overrides)
+                  : (taggedPatterns(overrides, slot) ?? []),
+                regions: ex ? ex.tags.filter((t) => (REGION_TAGS as readonly string[]).includes(t)) : [],
+                inLibrary: Boolean(ex),
+              });
             }
-            const ex = slot.exerciseId !== null ? byId.get(slot.exerciseId) : undefined;
-            used.set(key, {
-              id: slot.exerciseId ?? 0,
-              name: ex?.title ?? slot.name,
-              count: 1,
-              patterns: ex ? patternsFor(ex, overrides) : [],
-              regions: ex ? ex.tags.filter((t) => (REGION_TAGS as readonly string[]).includes(t)) : [],
-              inLibrary: Boolean(ex),
-            });
           }
         }
       }
@@ -90,22 +104,27 @@ export default function MovementCheckTab() {
 
     const exercises = [...used.values()].sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
     return { exercises, patternCounts, regionCounts };
+    // windowIndexes derives from phaseIndex, which is the real dependency.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [program.data, overrides, library, phaseIndex]);
 
   if (!program.data || !overrides || !library) {
     return <p className="py-20 text-center text-sm text-ink-400">Loading…</p>;
   }
 
-  function togglePattern(exerciseId: number, pattern: Pattern, current: Pattern[]) {
+  function togglePattern(key: string, pattern: Pattern, current: Pattern[]) {
     const next = current.includes(pattern)
       ? current.filter((p) => p !== pattern)
       : [...current, pattern];
-    lib.update((d) => ({ ...d, patterns: { ...d.patterns, [exerciseId]: next } }));
+    lib.update((d) => ({ ...d, patterns: { ...d.patterns, [key]: next } }));
   }
 
   const maxCount = analysis ? Math.max(1, ...Object.values(analysis.patternCounts)) : 1;
-  const untagged = analysis ? analysis.exercises.filter((e) => e.inLibrary && e.patterns.length === 0) : [];
-  const freeText = analysis ? analysis.exercises.filter((e) => !e.inLibrary) : [];
+  const untagged = analysis ? analysis.exercises.filter((e) => e.patterns.length === 0) : [];
+  const windowLabel =
+    windowIndexes.length === 2
+      ? `Phases ${windowIndexes[0] + 1} + ${windowIndexes[1] + 1} (rolling two-phase rule)`
+      : `Phase ${phaseIndex + 1}`;
 
   return (
     <div>
@@ -124,11 +143,18 @@ export default function MovementCheckTab() {
         <SaveBadge state={lib.saveState} onReloadTheirs={lib.reloadTheirs} onKeepMine={lib.keepMine} onRetry={lib.retry} />
       </div>
 
+      <p className="mb-4 text-[13px] text-ink-500">
+        Strength stream only. Hyrox, ESD and Game Day circuits are free text and are not analysed
+        here, so a pattern delivered in those classes will not show in these counts.
+      </p>
+
       {/* Pattern coverage */}
       <section className="rounded-xl border border-ink-200 bg-white p-5 shadow-sm">
-        <h3 className="text-sm font-semibold text-ink-950">Movement pattern coverage</h3>
+        <h3 className="text-sm font-semibold text-ink-950">Movement pattern coverage · {windowLabel}</h3>
         <p className="mt-1 text-[13px] text-ink-500">
-          Times each pattern appears across every week of this phase (every session, every slot).
+          Times each pattern appears across every week of the window (every session, every slot).
+          Variety is judged across two consecutive phases, so a pattern resting one phase is fine;
+          zero across the window is the flag.
         </p>
         <div className="mt-4 grid grid-cols-3 gap-3">
           {PATTERNS.map((p) => {
@@ -152,7 +178,7 @@ export default function MovementCheckTab() {
                     style={{ width: `${Math.round((count / maxCount) * 100)}%` }}
                   />
                 </div>
-                {count === 0 && <p className="mt-1.5 text-[11px] text-amber-700">Not covered this block</p>}
+                {count === 0 && <p className="mt-1.5 text-[11px] text-amber-700">Not covered in this window</p>}
               </div>
             );
           })}
@@ -166,7 +192,7 @@ export default function MovementCheckTab() {
             </span>
           ))}
           <span className="text-[11px] text-ink-400 self-center">
-            (body regions, from TrainHeroic tags where present)
+            (body regions, from TrainHeroic tags where present; free-text exercises carry none)
           </span>
         </div>
       </section>
@@ -175,57 +201,57 @@ export default function MovementCheckTab() {
       {untagged.length > 0 && (
         <section className="mt-4 rounded-xl border border-amber-300 bg-amber-50 p-5">
           <h3 className="text-sm font-semibold text-amber-900">
-            {untagged.length} exercise{untagged.length === 1 ? '' : 's'} in this block ha
+            {untagged.length} exercise{untagged.length === 1 ? '' : 's'} in this window ha
             {untagged.length === 1 ? 's' : 've'} no movement pattern yet
           </h3>
           <p className="mt-1 text-[13px] text-amber-800">
-            Tag them once here; the tag is saved to the library and reused in every block and future program.
+            Not classified means not counted above. Tag them once here (free text included); the tag
+            is saved to the library overrides and reused in every block and future program. Arm,
+            delt and calf accessories legitimately fit no pattern; leaving them untagged is honest.
           </p>
         </section>
       )}
 
       {/* All exercises with tag chips */}
       <section className="mt-4 rounded-xl border border-ink-200 bg-white p-5 shadow-sm">
-        <h3 className="text-sm font-semibold text-ink-950">Exercises in this block</h3>
+        <h3 className="text-sm font-semibold text-ink-950">Exercises in this window</h3>
         {analysis && analysis.exercises.length === 0 && (
-          <p className="mt-2 text-sm text-ink-400">Nothing programmed in this block yet.</p>
+          <p className="mt-2 text-sm text-ink-400">Nothing programmed in this window yet.</p>
         )}
         <ul className="mt-3 divide-y divide-ink-100">
-          {analysis?.exercises
-            .filter((e) => e.inLibrary)
-            .map((ex) => (
-              <li key={ex.id} className="flex flex-wrap items-center gap-2 py-2.5">
-                <span className="min-w-56 text-sm font-medium text-ink-950">{ex.name}</span>
-                <span className="text-xs text-ink-400">×{ex.count}</span>
-                <div className="ml-auto flex flex-wrap gap-1">
-                  {PATTERNS.map((p) => {
-                    const on = ex.patterns.includes(p);
-                    return (
-                      <button
-                        key={p}
-                        type="button"
-                        onClick={() => togglePattern(ex.id, p, ex.patterns)}
-                        className={`rounded-full border px-2 py-0.5 text-[11px] font-medium transition-colors ${
-                          on
-                            ? 'border-accent-600 bg-accent-600 text-white'
-                            : 'border-ink-300 text-ink-400 hover:border-ink-500 hover:text-ink-700'
-                        }`}
-                      >
-                        {PATTERN_LABELS[p]}
-                      </button>
-                    );
-                  })}
-                </div>
-              </li>
-            ))}
+          {analysis?.exercises.map((ex) => (
+            <li key={ex.key} className="flex flex-wrap items-center gap-2 py-2.5">
+              <span className="min-w-56 text-sm font-medium text-ink-950">
+                {ex.name}
+                {!ex.inLibrary && (
+                  <span className="ml-2 rounded bg-ink-100 px-1.5 py-0.5 text-[10px] font-normal text-ink-500">
+                    free text
+                  </span>
+                )}
+              </span>
+              <span className="text-xs text-ink-400">×{ex.count}</span>
+              <div className="ml-auto flex flex-wrap gap-1">
+                {PATTERNS.map((p) => {
+                  const on = ex.patterns.includes(p);
+                  return (
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => togglePattern(ex.key, p, ex.patterns)}
+                      className={`rounded-full border px-2 py-0.5 text-[11px] font-medium transition-colors ${
+                        on
+                          ? 'border-accent-600 bg-accent-600 text-white'
+                          : 'border-ink-300 text-ink-400 hover:border-ink-500 hover:text-ink-700'
+                      }`}
+                    >
+                      {PATTERN_LABELS[p]}
+                    </button>
+                  );
+                })}
+              </div>
+            </li>
+          ))}
         </ul>
-        {freeText.length > 0 && (
-          <p className="mt-3 text-[13px] text-ink-400">
-            Free-text entries (not in the library, not counted):{' '}
-            {freeText.map((e) => e.name).join(', ')}. Pick them from the library in Programming to
-            include them here.
-          </p>
-        )}
       </section>
     </div>
   );
