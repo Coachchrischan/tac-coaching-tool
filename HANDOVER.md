@@ -419,6 +419,30 @@ Everything above was personally tested in the running app the same day,
 including a live 409 conflict (resolved), a slot-scale override round trip,
 the push confirm (cancelled before creating anything) and the backup push.
 
+## The second roundtable and its fixes (2026-09-01, evening)
+
+After a full personal test pass in the running app (every tab, a live 409, a
+slot-scale round trip, the push confirm cancelled before creating anything),
+a SECOND full-depth roundtable reviewed the post-build state:
+`REVIEW-2026-09-01-llm-roundtable-2.md`. It broke the day's own safety
+features in review and everything it broke was fixed and live-verified the
+same evening (commits `6e92e72` onward): restore now works through the
+corrupt tombstone; a missing doc file refuses to seed when history or git
+says it existed; the backup cannot wedge, runs on shutdown, and reports its
+health at `GET /api/store/_status` (shown in the Data safety panel); the
+push ledger records partial pushes and matches weeks by Monday date; every
+push skip is named; the month-read shape is asserted; the challenge
+instruction writes with the title before any blocks exist; **the push
+refuses outright on a non-Brisbane machine timezone** (this PC is on
+Australia/Sydney — Chris must fix Windows time settings, Sydney DST starts
+4 October); PUTs require `baseUpdatedAt` (equal-rev divergence across the
+machines now 409s — any script writing via the API must send it, read from
+the GET envelope); `vite preview` serves the same store. 57 tests.
+
+The round-2 file also carries the agreed sequencing for the deferred work
+(focus catalog → pure-mutator extraction → ProgrammingTab split → Today
+cockpit) and the coaching calls still open for Chris.
+
 **Decisions already made, do not reopen without me:** ESD and Game Day are month to month, not
 periodised (**Hyrox was, and is now four-week blocks**, changed 2026-08-28 on Chris's call).
 TrainHeroic stays drafts only. The week email opens a Gmail compose window and never sends.
