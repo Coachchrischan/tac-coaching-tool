@@ -331,9 +331,15 @@ export function storagePlugin(): Plugin {
     },
     configureServer(server) {
       const hourly = setInterval(() => void runDataBackup(root), BACKUP_INTERVAL_MS);
+      // Startup kick: the debounce resets on every save and dev-server
+      // restarts drop pending timers, so an active editing session could
+      // otherwise defer the backup indefinitely. A fresh server always takes
+      // one shortly after boot (no-op when nothing changed).
+      const kick = setTimeout(() => void runDataBackup(root), 90 * 1000);
       server.httpServer?.on('close', () => {
         clearInterval(hourly);
         clearTimeout(backupTimer);
+        clearTimeout(kick);
       });
 
       server.middlewares.use('/api/store', (req, res) => {
