@@ -8,8 +8,7 @@ import SettingsDrawer from './SettingsDrawer';
 import WeekGrid from './WeekGrid';
 import { DAY_END_MIN } from './scheduleLayout';
 import { liveIsAssumed, liveScenario, viewedScenario } from '../../lib/scenarios';
-import { FOCUS_CLASS_TYPE } from '../../lib/classDays';
-import { streamsOf } from '../../lib/programStreams';
+import { unfedClassTypes } from '../../lib/weekReadiness';
 
 export default function ScheduleTab() {
   const { data: doc, saveState, update, reloadTheirs, keepMine, retry } = useDoc('schedule');
@@ -30,24 +29,11 @@ export default function ScheduleTab() {
 
   // A bookable class the programming no longer feeds is an improvised class:
   // members book it, no board or plan exists behind it (the roundtable's
-  // Friday-strength finding). Warn, and leave the timetable itself to Chris.
-  const unfedClasses = (() => {
-    if (!program.data || !live) return [];
-    const programmedFocuses = new Set(
-      streamsOf(program.data).flatMap((s) =>
-        s.blocks.flatMap((b) => b.weeks.flatMap((w) => w.sessions.map((sess) => sess.focus))),
-      ),
-    );
-    const programmableTypes = new Set(Object.values(FOCUS_CLASS_TYPE));
-    const liveTypes = [...new Set(live.blocks.map((b) => b.classTypeId))];
-    return liveTypes
-      .filter((ct) => programmableTypes.has(ct))
-      .filter(
-        (ct) =>
-          ![...programmedFocuses].some((f) => FOCUS_CLASS_TYPE[f] === ct),
-      )
-      .map((ct) => doc.classTypes.find((c) => c.id === ct)?.name ?? ct);
-  })();
+  // Friday-strength finding). Shared with Home's cockpit via weekReadiness so
+  // the two banners can never disagree. The timetable itself stays Chris's.
+  const unfedClasses = (
+    program.data ? unfedClassTypes(doc, program.data) : []
+  ).map((ct) => doc.classTypes.find((c) => c.id === ct)?.name ?? ct);
 
   function patchBlock(id: string, patch: Partial<ClassBlock>) {
     update((d) => ({

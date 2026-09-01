@@ -440,8 +440,41 @@ machines now 409s — any script writing via the API must send it, read from
 the GET envelope); `vite preview` serves the same store. 57 tests.
 
 The round-2 file also carries the agreed sequencing for the deferred work
-(focus catalog → pure-mutator extraction → ProgrammingTab split → Today
-cockpit) and the coaching calls still open for Chris.
+and the coaching calls still open for Chris.
+
+## The build sequence, executed (2026-09-02)
+
+Chris fixed the machine to Australia/Brisbane, pushed the code, and approved
+the sequence; all five steps shipped, one commit each, live-verified:
+
+1. **Focus catalog** (`src/lib/focusCatalog.ts`): the six hand-synchronised
+   focus tables (labels, class mapping, day picks, streams, the push plan,
+   Home's stream-for-class) are one file now, derived and re-exported from
+   their historical homes. Adding a focus or a future ESD TrainHeroic team is
+   one record, not five edits. Six derivation tests.
+2. **Pure mutators out** (`src/lib/sessionEdits.ts`): cloneSession,
+   newSession, mapSeries, sessionHasContent, nextLabel (now duplicate-proof),
+   nine tests.
+3. **WeekView extracted** (`src/tabs/programming/WeekView.tsx`, 24-prop
+   contract) plus EmailWeekPanel and RailButton/icons: ProgrammingTab went
+   2,128 → 1,604 lines with the daily editing surface isolated. Block/Phase
+   views were already thin wrappers over EditableGrid.
+4. **The This Week cockpit on Home** (`ThisWeekPanel` over the new pure
+   `src/lib/weekReadiness.ts`): per stream for the live training week -
+   container, written state (parked excluded), weekday per session, one-click
+   wall boards (also from the Today list), the Strength pushed/not-pushed
+   line from the ledger, the unfed-class warning (shared with Schedule via
+   `unfedClassTypes` so they cannot disagree), and a 20-second per-class
+   weekly attendance capture that writes real entries.
+5. **Room-keyed layout fixtures** (`fixturesFor` in `roomModel.ts`): the
+   Strength plan no longer draws the Group Fitness Room's furniture; the
+   Gym Floor draws nothing plus an honest banner until Chris's measurements
+   go into `FIXTURES_BY_ROOM`. **Add them there and every Strength layout
+   picks them up.**
+
+72 tests, strict clean. Still deliberately open: the rest of the
+ProgrammingTab thinning (control bar / Edit panel, if ever needed), and
+everything in the round-2 file's "later, with Chris" list.
 
 **Decisions already made, do not reopen without me:** ESD and Game Day are month to month, not
 periodised (**Hyrox was, and is now four-week blocks**, changed 2026-08-28 on Chris's call).
