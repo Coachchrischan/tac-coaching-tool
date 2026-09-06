@@ -15,6 +15,7 @@ import LayoutsTab from './tabs/layouts/LayoutsTab';
 import EquipmentTab from './tabs/equipment/EquipmentTab';
 import TvPage from './tabs/tv/TvPage';
 import OverviewPage from './tabs/overview/OverviewPage';
+import DesignerPackPage from './tabs/designer/DesignerPackPage';
 
 export default function App() {
   // The boundary is keyed by route so a crash in one tab never blanks the
@@ -35,6 +36,14 @@ export default function App() {
         element={
           <ErrorBoundary key={pathname}>
             <OverviewPage />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path="/designer-pack"
+        element={
+          <ErrorBoundary key={pathname}>
+            <DesignerPackPage />
           </ErrorBoundary>
         }
       />

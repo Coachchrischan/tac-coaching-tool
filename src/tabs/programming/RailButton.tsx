@@ -45,6 +45,20 @@ export function OverviewIcon() {
   );
 }
 
+/** Designer pack: a screen with a swatch strip under it, the board's inputs handed to the agency. */
+export function DesignerPackIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="1.5" y="1.5" width="21" height="21" rx="5.5" fill="#1B1B1B" />
+      <rect x="4.6" y="4.8" width="14.8" height="9.2" rx="1.6" fill="#F5F3EB" />
+      <path d="M7.2 8h6M7.2 10.6h4" stroke="#1B1B1B" strokeWidth="1.2" strokeLinecap="round" />
+      <rect x="4.6" y="16.2" width="4.4" height="3.2" rx="0.8" fill="#DEC5AE" />
+      <rect x="9.8" y="16.2" width="4.4" height="3.2" rx="0.8" fill="#F5F3EB" />
+      <rect x="15" y="16.2" width="4.4" height="3.2" rx="0.8" fill="#4D8C86" />
+    </svg>
+  );
+}
+
 /** TV output: a screen on a dark tile, matching the other two rail marks. */
 export function TvIcon() {
   return (

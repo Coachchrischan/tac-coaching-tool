@@ -105,9 +105,14 @@ Community, Planning, Ethos.
   round trip). `MonthGrid` has an unused `embedded` mode from the earlier side-by-side
   layout. `buildBlockRows` keys rows by id AND name, so bench variants sharing the bench id
   stay separate rows.
-- **Left rail:** TV output, Export for Sheets, Push to TrainHeroic (drafts), Build floor layout,
+- **Left rail:** TV output, Block overview, **Designer pack** (`/designer-pack`: one PDF + JSON
+  per block of one stream for the marketing agency's board redesign, every field marked ON THE
+  WALL or COACH ONLY by the same rules `TvBoard` renders by, `src/lib/designerPack.ts`, tested),
+  Export for Sheets, Push to TrainHeroic (drafts), Build floor layout,
   **Email the week** (opens a Gmail compose window with the week written out; it never sends).
   Coach addresses live on `ScheduleDoc.coaches[].email`, edited in Schedule's settings drawer.
+  The TV page has an export-size picker (1080p, 1440p, 4K); the board is authored at 1080p in
+  `src/tabs/tv/TvBoard.tsx` and re-rasterised, so only the backdrop photos limit sharpness.
 - **TV board** (`/tv/:sessionId`): 1920x1080 landscape, TAC-branded, renders both formats, with
   per-class member photos as backdrops. Export PNG / PDF.
 - **TrainHeroic push:** `POST /api/team-push` via `src/server/teamPushPlugin.ts`, using
