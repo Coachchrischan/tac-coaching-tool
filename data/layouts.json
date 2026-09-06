@@ -115,6 +115,39 @@
             "h": 40,
             "count": 1,
             "gap": 12
+          },
+          {
+            "id": "358a15e1-255e-4705-a8d2-806e3717e9e0",
+            "kind": "rower",
+            "label": "Rower",
+            "x": 89,
+            "y": 228,
+            "w": 34,
+            "h": 96,
+            "count": 1,
+            "gap": 12
+          },
+          {
+            "id": "c27df78b-a570-4174-9e23-9a9490cb60bb",
+            "kind": "rower",
+            "label": "Rower",
+            "x": 253,
+            "y": 224,
+            "w": 34,
+            "h": 96,
+            "count": 1,
+            "gap": 12
+          },
+          {
+            "id": "ac9bf341-4a3f-49e2-9e5f-a33c063751a6",
+            "kind": "rower",
+            "label": "Rower",
+            "x": 217,
+            "y": 302,
+            "w": 34,
+            "h": 96,
+            "count": 1,
+            "gap": 12
           }
         ]
       },
@@ -231,8 +264,8 @@
       }
     ]
   },
-  "rev": 22,
-  "updatedAt": "2026-09-06T22:21:32.218Z",
+  "rev": 26,
+  "updatedAt": "2026-09-06T22:26:37.168Z",
   "machine": "DESKTOP-28NQR37",
   "schemaVersion": 2
 }
