@@ -21,6 +21,7 @@ import type {
 import EmailWeekPanel, { GmailIcon } from './EmailWeekPanel';
 import WeekView from './WeekView';
 import RailButton, {
+  DesignerPackIcon,
   LayoutIcon,
   OverviewIcon,
   SheetsIcon,
@@ -1140,6 +1141,14 @@ export default function ProgrammingTab() {
           onClick={() => navigate('/overview')}
         >
           <OverviewIcon />
+        </RailButton>
+        <RailButton
+          label={`Designer pack: ${stream.name} ${blockLabel(bi)}, block ${blockPage + 1} (PDF + JSON for the agency)`}
+          onClick={() =>
+            navigate(`/designer-pack?stream=${encodeURIComponent(stream.id)}&container=${bi}&window=${blockPage}`)
+          }
+        >
+          <DesignerPackIcon />
         </RailButton>
         <RailButton label="Export for Sheets" onClick={() => downloadProgramCsv(doc)}>
           <SheetsIcon />

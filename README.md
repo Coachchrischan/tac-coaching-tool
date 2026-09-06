@@ -37,4 +37,8 @@ The script reads `../../trainheroic-mcp/.exercise-cache.json` (no session token 
 
 ## TV output
 
-`/tv/:sessionId` renders a 1920x1080 display of one session for the gym TVs, exportable as PNG and PDF from the Programming tab.
+`/tv/:sessionId` renders a 1920x1080 display of one session for the gym TVs, exportable as PNG and PDF from the Programming tab. The board is authored at 1080p and the export size picker re-rasterises it at 1440p or 4K (the backdrop photos in `public/tv/` are the only limit; text stays sharp). The board itself is `src/tabs/tv/TvBoard.tsx`; the rules every reader shares (slide size, titles, the one-line prescription) live in `boardRules.ts`.
+
+## Designer pack
+
+`/designer-pack?stream=&container=&window=` (rail button on Programming) builds one A4-landscape PDF plus a JSON twin for one block of one stream: a cover with the legend, then every written session with every field it carries, each marked **ON THE WALL** (the current board prints it) or **COACH ONLY** (never on the wall), scaled options under each movement, and the current board rendered after each session for reference. The labelling is computed in `src/lib/designerPack.ts` from the same rules `TvBoard` renders by, and is unit-tested. Files are named `TAC-designer-pack-<stream>-<phase>-block<N>.pdf/.json`. Made for the marketing agency redesigning the wall boards; nothing in it is published to members.
