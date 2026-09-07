@@ -22,14 +22,15 @@ describe('focus catalog derivations', () => {
     }
   });
 
-  it('the A/B split maps to the Tue/Thu classes and Friday stays unmapped live', () => {
+  it('Lower / Upper / Full Body map to the three strength classes, and the archived A/B still resolve', () => {
+    expect(FOCUS_CLASS_TYPE['lower']).toBe('lbs');
+    expect(FOCUS_CLASS_TYPE['upper']).toBe('ubs');
+    expect(FOCUS_CLASS_TYPE['full']).toBe('fbs');
     expect(FOCUS_CLASS_TYPE['full-a']).toBe('lbs');
     expect(FOCUS_CLASS_TYPE['full-b']).toBe('ubs');
-    // Only the archived 'full' focus points at fbs while Friday is on hold.
-    const liveToFbs = Object.entries(FOCUS_CLASS_TYPE).filter(
-      ([f, ct]) => ct === 'fbs' && f !== 'full',
-    );
-    expect(liveToFbs).toEqual([]);
+    // Only the live 'full' focus points at the Full Body class.
+    const toFbs = Object.entries(FOCUS_CLASS_TYPE).filter(([, ct]) => ct === 'fbs');
+    expect(toFbs).toEqual([['full', 'fbs']]);
   });
 
   it('the Hyrox tracks split the two class days and ROX Engine stays parked', () => {
@@ -38,10 +39,11 @@ describe('focus catalog derivations', () => {
     expect(FOCUS_DAY_PICK['rox-engine']).toBeNull();
   });
 
-  it('only Strength pushes, A then B, with the ratified titles', () => {
+  it('only Strength pushes, Lower then Upper then Full Body, and the archived A/B never push', () => {
     expect(pushPlanFor('strength')).toEqual([
-      { focus: 'full-a', title: 'Day 1 - Full Body A' },
-      { focus: 'full-b', title: 'Day 2 - Full Body B' },
+      { focus: 'lower', title: 'Day 1 - Lower' },
+      { focus: 'upper', title: 'Day 2 - Upper' },
+      { focus: 'full', title: 'Day 3 - Full Body' },
     ]);
     expect(pushPlanFor('esd')).toEqual([]);
     expect(pushPlanFor('hyrox')).toEqual([]);

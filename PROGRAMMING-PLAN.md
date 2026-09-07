@@ -1,12 +1,17 @@
 # TAC Programming Plan: 2026/27 macrocycle (plan of record)
 
 > Handed over by Chris 2026-08-14 after the annual-plan review, **revised by the
-> club 2026-08-31**: the strength delivery became a two-day Full Body A/B split
-> starting 14 September, the standalone Deload/Skills week was removed, and the
-> closing strength block shortened to five weeks. Phase numbers here match the
-> tool exactly (the Primer is Phase 1). The Annual Plan tab mirrors this; the
-> Programming tab builds each block from it. The superseded Lower/Upper/Full
-> programming is kept in `archive/strength-lower-upper-full-2026-08.json`.
+> club 2026-08-31** (a two-day Full Body A/B split from 14 September, the
+> standalone Deload/Skills week removed, the closing strength block shortened
+> to five weeks), then **reverted by the club 2026-09-07, before the A/B block
+> started**: strength is the **Lower / Upper / Full Body three-day split**
+> again, with Full Body on the **Saturday 6am** class instead of Friday. The
+> 3 / 9 / 5 phase structure stands. Phase numbers here match the tool exactly
+> (the Primer is Phase 1). The Annual Plan tab mirrors this; the Programming
+> tab builds each block from it. The A/B programming written for the nine
+> weeks is kept in `archive/strength-full-body-ab-2026-09.json`, restorable;
+> the August Lower/Upper/Full block it replaced was restored from
+> `archive/strength-lower-upper-full-2026-08.json` and is what Phase 2 holds.
 > Australian English, no em dashes.
 
 ## Calendar window
@@ -20,24 +25,43 @@
 | # | Phase | Weeks | Dates (week beginning) |
 |---|-------|-------|------------------------|
 | 1 | Primer (intro week + 2-week primer, run off-app, emailed) | 3 | 24 Aug - 7 Sept 2026 |
-| 2 | Strength-Hypertrophy (Full Body A/B) | 9 | 14 Sept - 9 Nov 2026 |
+| 2 | Strength-Hypertrophy (Lower / Upper / Full Body) | 9 | 14 Sept - 9 Nov 2026 |
 | 3 | Strength | 5 | 16 Nov - 14 Dec 2026 |
 | - | Christmas gap | 2 | 21 Dec - 28 Dec 2026 |
 | 4 | Unilateral muscle-endurance | 4 | 4 Jan - 25 Jan 2027 |
 | 5 | Hypertrophy (aesthetic focus) | 12 | 1 Feb - 19 Apr 2027 |
 | 6 | Back into the strength-hypertrophy to strength cycle | - | from 26 Apr 2027 |
 
-## The delivery format (changed 2026-08-31)
+## The delivery format (reverted 2026-09-07)
 
-Strength is a **two-day full-body split**, not the old Lower/Upper/Full three-day:
+Strength is the **Lower / Upper / Full Body three-day split**:
 
-- **Full Body A** (Tuesday class): squat + upper focus.
-- **Full Body B** (Thursday class): RDL + lower focus.
-- **Friday strength is on hold** by the club's decision; the Friday class slot
-  keeps existing on the timetable but carries no strength programming while
-  that holds.
+- **Day 1, Lower** (Tuesday class): squat day.
+- **Day 2, Upper** (Thursday class): chin-up and bench day.
+- **Day 3, Full Body** (**Saturday 6am** class, moved from Friday): RDL day.
 
-## Phase 2: Strength-Hypertrophy, 9 weeks (14 Sept)
+The two-day Full Body A/B split the club chose on 2026-08-31 was reverted a
+week before it started. Its nine written weeks are archived, not lost
+(`archive/strength-full-body-ab-2026-09.json`), and the section below records
+its design in case the club returns to it.
+
+## Phase 2: Strength-Hypertrophy, 9 weeks (14 Sept), as restored
+
+Phase 2 now holds weeks 1 to 9 of the August Lower/Upper/Full block (its week
+10 is not used: the phase is nine weeks). **Week 1 is Chris's sheet exactly**:
+Lower runs Back Squat (E3OM) 3x9 at 70%, Drag Through, jumps, Jefferson
+Split Squat (FFE) 3x8 at RPE 7, Single Leg Hamstring Bridge, Cyclist Squat
+finisher, single leg calf raises and Lateral Hip Thrust; Upper runs Weighted
+Chin Up (E3OM) 3x5 at RPE 7, Prone Angels, Bench 3x7 at 75%, Gorilla Row,
+push-ups to 1 RIR, Rear Delt Fly, Oblique Crunch; Full Body runs RDL (E3OM)
+3x5 at 80%, a unilateral lower option, Z-Press 3x8 at RPE 7, Inverted Rows,
+Banded Bicep Curls, Skullcrushers, Double Leg Lowers. Lower weeks 2 to 4
+carry the 9/7/5 wave as written in August (3x7 at 75%, 3x5 at 80%, then 3x9
+at 73%); **Upper and Full Body weeks 2 to 9, and Lower weeks 5 to 9, hold
+exercise names only** and still need their prescriptions written. That is
+coaching time, not build time.
+
+## The A/B design (2026-08-31 to 2026-09-07, archived)
 
 Three 3-week microcycles. The compounds stay the same all phase and wave;
 accessories interchange at each microcycle boundary; **week 3 of each
