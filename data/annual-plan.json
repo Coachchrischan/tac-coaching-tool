@@ -16,7 +16,7 @@
           {
             "id": "ap-2026-hyp9",
             "name": "Strength-Hypertrophy",
-            "focus": "Full Body A/B split (Tue/Thu). Three 3-week micros: 9/7/5, 9/7/5 heavier, 7/5/3. Week 3 of each micro ends on a challenge.",
+            "focus": "Lower / Upper / Full Body split (Tue / Thu / Sat 6am), restored 2026-09-07. Week 1 is the sheet: squat 3x9 at 70%, bench 3x7 at 75%, RDL 3x5 at 80%. Main lifts wave 9/7/5 across each 3-week micro.",
             "weeks": 9
           },
           {
@@ -46,7 +46,7 @@
           {
             "id": "ap-2027-hyp9",
             "name": "Strength-Hypertrophy (cycle 2)",
-            "focus": "Full Body A/B split. Three 3-week micros: 9/7/5, 9/7/5 heavier, 7/5/3. Week 3 of each micro ends on a challenge.",
+            "focus": "Lower / Upper / Full Body split (Tue / Thu / Sat). Main lifts wave 9/7/5 across each 3-week micro.",
             "weeks": 9
           },
           {
@@ -213,8 +213,8 @@
       }
     ]
   },
-  "rev": 9,
-  "updatedAt": "2026-09-01T09:47:54.528Z",
-  "machine": "DESKTOP-T7OQ0UN",
+  "rev": 10,
+  "updatedAt": "2026-09-07T05:52:28.547Z",
+  "machine": "DESKTOP-28NQR37",
   "schemaVersion": 2
 }

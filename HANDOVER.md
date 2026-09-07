@@ -321,7 +321,32 @@ Hyrox no longer looks like ESD and Game Day. Chris handed over a HYROX Block 01 
   is cut even at the 42% floor and says so in red; `Anchor` fits at 60% and says so in amber.
   That is the format being richer than a 1920x1080 board, not a layout bug.
 
-## The Strength rebuild: Full Body A/B (changed 2026-08-31)
+## Back to Lower / Upper / Full Body, Saturday Full Body (2026-09-07)
+
+The club reverted the A/B decision a week before the block started. Done on
+2026-09-07 through `scripts/oneoff-2026-09-07-lower-upper-full.mjs` (store
+API, re-runnable):
+
+- **Programming**: the A/B strength stream is archived to
+  `archive/strength-full-body-ab-2026-09.json` (restorable). Phase 2 holds
+  weeks 1 to 9 of the August Lower/Upper/Full block from
+  `archive/strength-lower-upper-full-2026-08.json`, re-id'd `str2-luf-w{n}-{focus}`;
+  week 1 is Chris's sheet. Phases 1 and 3 are empty Lower/Upper/Full
+  skeletons (primer intents kept). Phase ids, themes, annualPhaseIds and
+  week ids are unchanged.
+- **Timetable** (live "Suggested Format"): the three coachless Friday Full Body
+  classes became one **Saturday 06:00** Full Body class (gym floor, no coach
+  set yet); the Tue/Thu class types are named Lower / Upper Body Strength
+  again (ids still `lbs`/`ubs`).
+- **Focus catalogue**: `lower` / `upper` / `full` carry the push titles
+  (Day 1 - Lower, Day 2 - Upper, Day 3 - Full Body) and lead the stream;
+  `full-a` / `full-b` stay valid for the archive and are not pushed. The
+  push, email, Home and TV all derive from it, so Full Body now lands on
+  Saturday everywhere.
+- **Still to write**: Upper and Full Body weeks 2 to 9 and Lower weeks 5 to 9
+  have exercise names only (as the August block was left).
+
+## The Strength rebuild: Full Body A/B (changed 2026-08-31, reverted 2026-09-07)
 
 The club changed Phase 1 on 2026-08-31 and Chris had the tool rebuilt the same day, presenting
 that night. `PROGRAMMING-PLAN.md` carries the revised plan of record; `BANKED-2026-08-31.md`

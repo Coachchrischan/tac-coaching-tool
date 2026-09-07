@@ -8,12 +8,12 @@
       },
       {
         "id": "lbs",
-        "name": "Full Body Strength A",
+        "name": "Lower Body Strength",
         "colour": "#5A5A52"
       },
       {
         "id": "ubs",
-        "name": "Full Body Strength B",
+        "name": "Upper Body Strength",
         "colour": "#6E7B74"
       },
       {
@@ -536,33 +536,6 @@
             "roomId": "gfr"
           },
           {
-            "id": "blk-f65f96a9",
-            "day": 4,
-            "startMin": 300,
-            "durationMin": 60,
-            "classTypeId": "fbs",
-            "coachId": null,
-            "roomId": "gym-floor"
-          },
-          {
-            "id": "blk-5d64d239",
-            "day": 4,
-            "startMin": 360,
-            "durationMin": 60,
-            "classTypeId": "fbs",
-            "coachId": null,
-            "roomId": "gym-floor"
-          },
-          {
-            "id": "blk-8bb1c092",
-            "day": 4,
-            "startMin": 720,
-            "durationMin": 60,
-            "classTypeId": "fbs",
-            "coachId": null,
-            "roomId": "gym-floor"
-          },
-          {
             "id": "6b598281-0a42-437a-ac66-5e4f148b3472",
             "day": 1,
             "startMin": 435,
@@ -570,6 +543,15 @@
             "classTypeId": "esd",
             "coachId": null,
             "roomId": null
+          },
+          {
+            "id": "blk-916f7abb",
+            "day": 5,
+            "startMin": 360,
+            "durationMin": 60,
+            "classTypeId": "fbs",
+            "coachId": null,
+            "roomId": "gym-floor"
           }
         ]
       }
@@ -577,8 +559,8 @@
     "activeScenarioId": "current",
     "liveScenarioId": "e50da7f1-8ead-4deb-b7f4-dcb054a3eb56"
   },
-  "rev": 115,
-  "updatedAt": "2026-09-01T09:47:54.526Z",
-  "machine": "DESKTOP-T7OQ0UN",
+  "rev": 116,
+  "updatedAt": "2026-09-07T05:52:28.537Z",
+  "machine": "DESKTOP-28NQR37",
   "schemaVersion": 2
 }

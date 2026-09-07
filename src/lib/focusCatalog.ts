@@ -43,15 +43,18 @@ export interface StreamDef {
 }
 
 const FOCUS_DEFS: FocusDef[] = [
-  // Strength. A/B first: they are the live split (from 14 Sept 2026). The
-  // old three focuses stay valid for the archived Lower/Upper/Full era.
-  // Friday strength is on hold (club decision, 2026-08-31), so no LIVE focus
-  // maps to fbs while the split runs; the archived 'full' one still does.
-  { focus: 'full-a', label: 'Full Body A', classTypeId: 'lbs', pushTitle: 'Day 1 - Full Body A' },
-  { focus: 'full-b', label: 'Full Body B', classTypeId: 'ubs', pushTitle: 'Day 2 - Full Body B' },
-  { focus: 'lower', label: 'Lower', classTypeId: 'lbs' },
-  { focus: 'upper', label: 'Upper', classTypeId: 'ubs' },
-  { focus: 'full', label: 'Full Body', classTypeId: 'fbs' },
+  // Strength. Lower / Upper / Full Body is the live split again (the club
+  // reverted on 2026-09-07, before the A/B block started): Lower on the
+  // Tuesday class, Upper on the Thursday class, Full Body on the Saturday
+  // 6am class (it was Friday under the old plan). Only these three carry a
+  // push title. The A/B focuses stay valid for the archived
+  // September rebuild (`archive/strength-full-body-ab-2026-09.json`) and
+  // are not pushed.
+  { focus: 'lower', label: 'Lower', classTypeId: 'lbs', pushTitle: 'Day 1 - Lower' },
+  { focus: 'upper', label: 'Upper', classTypeId: 'ubs', pushTitle: 'Day 2 - Upper' },
+  { focus: 'full', label: 'Full Body', classTypeId: 'fbs', pushTitle: 'Day 3 - Full Body' },
+  { focus: 'full-a', label: 'Full Body A', classTypeId: 'lbs' },
+  { focus: 'full-b', label: 'Full Body B', classTypeId: 'ubs' },
   // ESD.
   { focus: 'esd', label: 'ESD', classTypeId: 'esd' },
   // Hyrox: the club runs two Hyrox classes a week (Monday and Friday). ROX
@@ -67,7 +70,7 @@ const FOCUS_DEFS: FocusDef[] = [
 ];
 
 export const STREAM_DEFS: StreamDef[] = [
-  { id: 'strength', name: 'Strength', focuses: ['full-a', 'full-b', 'lower', 'upper', 'full'] },
+  { id: 'strength', name: 'Strength', focuses: ['lower', 'upper', 'full', 'full-a', 'full-b'] },
   { id: 'esd', name: 'ESD', focuses: ['esd'] },
   // 'hyrox' last: pre-tracks sessions still belong to this stream.
   { id: 'hyrox', name: 'Hyrox', focuses: ['rox-strong', 'rox-engine', 'rox-race', 'hyrox'] },
