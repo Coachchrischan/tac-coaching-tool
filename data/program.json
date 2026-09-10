@@ -270,23 +270,29 @@
                             "id": "str2-hyp-w1l-wu0",
                             "exerciseId": null,
                             "name": "Calf Stretch in Rack w/Toe Lift",
-                            "sets": "1"
+                            "sets": "1-2",
+                            "reps": "30sec"
                           },
                           {
                             "id": "str2-hyp-w1l-wu1",
                             "exerciseId": null,
                             "name": "Hip CARS",
-                            "sets": "1"
+                            "sets": "1-2",
+                            "reps": "5ea"
                           },
                           {
                             "id": "str2-hyp-w1l-wu2",
                             "exerciseId": 1172,
-                            "name": "Goblet Squat"
+                            "name": "Goblet Squat",
+                            "sets": "1-2",
+                            "reps": "10"
                           },
                           {
                             "id": "str2-hyp-w1l-wu3",
                             "exerciseId": 597514,
-                            "name": "Squat Jumps"
+                            "name": "Squat Jumps",
+                            "sets": "1-2",
+                            "reps": "30sec"
                           }
                         ]
                       },
@@ -309,7 +315,7 @@
                             "exerciseId": null,
                             "name": "DB or Plate Drag Through",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "8ea"
                           },
                           {
                             "id": "str2-hyp-w1l-a2",
@@ -361,14 +367,14 @@
                             "exerciseId": null,
                             "name": "Weighted DB Single Leg Calf Raises",
                             "sets": "3",
-                            "reps": "12ea"
+                            "reps": "8ea"
                           },
                           {
                             "id": "str2-hyp-w1l-c2",
                             "exerciseId": 7149355,
                             "name": "Reverse Copenhagen Plank",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "30sec ea"
                           }
                         ]
                       }
@@ -391,25 +397,29 @@
                             "id": "str2-hyp-w1u-wu0",
                             "exerciseId": null,
                             "name": "Banded Lat Activation",
-                            "sets": "1",
-                            "reps": "10"
+                            "sets": "1-2",
+                            "reps": "10ea"
                           },
                           {
                             "id": "str2-hyp-w1u-wu1",
                             "exerciseId": null,
-                            "name": "Hanging Scap Retracts"
+                            "name": "Hanging Scap Retracts",
+                            "sets": "1-2",
+                            "reps": "10"
                           },
                           {
                             "id": "str2-hyp-w1u-wu2",
                             "exerciseId": null,
                             "name": "Medball Thoracic Opener",
-                            "sets": "1",
+                            "sets": "1-2",
                             "reps": "10"
                           },
                           {
                             "id": "str2-hyp-w1u-wu3",
                             "exerciseId": null,
-                            "name": "Push Up to Downward Dog"
+                            "name": "Push Up to Downward Dog",
+                            "sets": "1-2",
+                            "reps": "5"
                           }
                         ]
                       },
@@ -423,16 +433,16 @@
                             "id": "str2-hyp-w1u-a0",
                             "exerciseId": 240,
                             "name": "Weighted Chin Up",
-                            "sets": "3",
+                            "sets": "4",
                             "reps": "5",
-                            "rpe": "7"
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w1u-a1",
                             "exerciseId": null,
                             "name": "Prone Angels",
                             "sets": "3",
-                            "reps": "12"
+                            "reps": "15"
                           }
                         ]
                       },
@@ -447,16 +457,17 @@
                             "exerciseId": 686395,
                             "name": "Tempo Barbell Bench Press",
                             "sets": "3",
-                            "reps": "7",
-                            "intensity": "75%",
-                            "tempo": "30X1"
+                            "reps": "6",
+                            "intensity": "",
+                            "tempo": "30X1",
+                            "rpe": "2RIR"
                           },
                           {
                             "id": "str2-hyp-w1u-b1",
                             "exerciseId": 8211110,
                             "name": "KB Gorilla Row / Single Arm DB Row",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "8ea"
                           }
                         ]
                       },
@@ -478,14 +489,14 @@
                             "exerciseId": null,
                             "name": "DB Rear Delt Fly",
                             "sets": "3",
-                            "reps": "15"
+                            "reps": "12-15"
                           },
                           {
                             "id": "str2-hyp-w1u-c2",
                             "exerciseId": 5947834,
                             "name": "Oblique Crunch",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "8ea"
                           }
                         ]
                       }
@@ -508,25 +519,29 @@
                             "id": "str2-hyp-w1f-wu0",
                             "exerciseId": 7372167,
                             "name": "Quadruped Glute Stretch",
-                            "sets": "1",
+                            "sets": "1-2",
                             "reps": "30sec ea"
                           },
                           {
                             "id": "str2-hyp-w1f-wu1",
                             "exerciseId": null,
-                            "name": "Adductor Rock Backs"
+                            "name": "Adductor Rock Backs",
+                            "sets": "1-2",
+                            "reps": "10 x 3 sec"
                           },
                           {
                             "id": "str2-hyp-w1f-wu2",
                             "exerciseId": null,
-                            "name": "Glute Bridge w/Rotation"
+                            "name": "Glute Bridge w/Rotation",
+                            "sets": "1-2",
+                            "reps": "8ea"
                           },
                           {
                             "id": "str2-hyp-w1f-wu3",
                             "exerciseId": 7872827,
                             "name": "Single Leg Arabesque",
-                            "sets": "1",
-                            "reps": "10ea"
+                            "sets": "1-2",
+                            "reps": "8ea"
                           }
                         ]
                       },
@@ -541,15 +556,15 @@
                             "exerciseId": 597556,
                             "name": "Barbell RDL (E3OM)",
                             "sets": "3",
-                            "reps": "5",
-                            "intensity": "80%"
+                            "reps": "9",
+                            "intensity": "70%"
                           },
                           {
                             "id": "str2-hyp-w1f-a1",
                             "exerciseId": 651035,
                             "name": "Cossack Squat",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "8ea"
                           }
                         ]
                       },
@@ -564,15 +579,16 @@
                             "exerciseId": 54656,
                             "name": "Barbell Z-Press",
                             "sets": "3",
-                            "reps": "8",
-                            "rpe": "7"
+                            "reps": "6-8",
+                            "rpe": "2RIR"
                           },
                           {
                             "id": "str2-hyp-w1f-b1",
                             "exerciseId": 222,
                             "name": "Inverted Rows - Feet Elevated",
                             "sets": "3",
-                            "reps": "10"
+                            "reps": "8-15",
+                            "rpe": "1RIR"
                           }
                         ]
                       },
@@ -594,7 +610,7 @@
                             "exerciseId": 2529795,
                             "name": "DB Skullcrushers",
                             "sets": "3",
-                            "reps": "15"
+                            "reps": "10-12"
                           },
                           {
                             "id": "str2-hyp-w1f-c2",
@@ -629,23 +645,37 @@
                             "id": "str2-hyp-w2l-wu0",
                             "exerciseId": null,
                             "name": "Calf Stretch in Rack w/Toe Lift",
-                            "sets": "1"
+                            "sets": "1",
+                            "reps": "30sec",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w2l-wu1",
                             "exerciseId": null,
                             "name": "Hip CARS",
-                            "sets": "1"
+                            "sets": "1",
+                            "reps": "5ea",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w2l-wu2",
                             "exerciseId": 1172,
-                            "name": "Goblet Squat"
+                            "name": "Goblet Squat",
+                            "sets": "1",
+                            "reps": "10",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w2l-wu3",
                             "exerciseId": 597514,
-                            "name": "Squat Jumps"
+                            "name": "Squat Jumps",
+                            "sets": "1",
+                            "reps": "30sec",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
@@ -660,15 +690,15 @@
                             "exerciseId": 688272,
                             "name": "Barbell Back Squats",
                             "sets": "3",
-                            "reps": "9",
-                            "intensity": "70%"
+                            "reps": "7",
+                            "intensity": "75%"
                           },
                           {
                             "id": "str2-hyp-w2l-a1",
                             "exerciseId": null,
                             "name": "DB or Plate Drag Through",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "8ea"
                           },
                           {
                             "id": "str2-hyp-w2l-a2",
@@ -690,7 +720,7 @@
                             "exerciseId": 8137642,
                             "name": "Barbell Jefferson Split Squat (FFE)",
                             "sets": "3",
-                            "reps": "8ea",
+                            "reps": "10ea",
                             "rpe": "7"
                           },
                           {
@@ -698,7 +728,7 @@
                             "exerciseId": 2263920,
                             "name": "Single Leg Hamstring Bridge (Off Box)",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "12ea"
                           }
                         ]
                       },
@@ -720,14 +750,14 @@
                             "exerciseId": null,
                             "name": "Weighted DB Single Leg Calf Raises",
                             "sets": "3",
-                            "reps": "12ea"
+                            "reps": "10ea"
                           },
                           {
                             "id": "str2-hyp-w2l-c2",
                             "exerciseId": 7149355,
                             "name": "Reverse Copenhagen Plank",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "35sec ea"
                           }
                         ]
                       }
@@ -750,24 +780,36 @@
                             "exerciseId": null,
                             "name": "Banded Lat Activation",
                             "sets": "1",
-                            "reps": "10"
+                            "reps": "10ea",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w2u-wu1",
                             "exerciseId": null,
-                            "name": "Hanging Scap Retracts"
+                            "name": "Hanging Scap Retracts",
+                            "sets": "1",
+                            "reps": "10",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w2u-wu2",
                             "exerciseId": null,
                             "name": "Medball Thoracic Opener",
                             "sets": "1",
-                            "reps": "10"
+                            "reps": "10",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w2u-wu3",
                             "exerciseId": null,
-                            "name": "Push Up to Downward Dog"
+                            "name": "Push Up to Downward Dog",
+                            "sets": "1",
+                            "reps": "5",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
@@ -781,16 +823,18 @@
                             "id": "str2-hyp-w2u-a0",
                             "exerciseId": 240,
                             "name": "Weighted Chin Up",
-                            "sets": "3",
+                            "sets": "5",
                             "reps": "5",
-                            "rpe": "7"
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w2u-a1",
                             "exerciseId": null,
                             "name": "Prone Angels",
                             "sets": "3",
-                            "reps": "12"
+                            "reps": "15",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
@@ -805,9 +849,10 @@
                             "exerciseId": 686395,
                             "name": "Tempo Barbell Bench Press",
                             "sets": "3",
-                            "reps": "7",
-                            "intensity": "75%",
-                            "tempo": "30X1"
+                            "reps": "6",
+                            "intensity": "",
+                            "tempo": "30X1",
+                            "rpe": "1RIR"
                           },
                           {
                             "id": "str2-hyp-w2u-b1",
@@ -843,7 +888,7 @@
                             "exerciseId": 5947834,
                             "name": "Oblique Crunch",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "9ea"
                           }
                         ]
                       }
@@ -865,25 +910,37 @@
                             "id": "str2-hyp-w2f-wu0",
                             "exerciseId": 7372167,
                             "name": "Quadruped Glute Stretch",
-                            "sets": "1",
-                            "reps": "30sec ea"
+                            "sets": "1-2",
+                            "reps": "30sec ea",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w2f-wu1",
                             "exerciseId": null,
-                            "name": "Adductor Rock Backs"
+                            "name": "Adductor Rock Backs",
+                            "sets": "1-2",
+                            "reps": "10 x 3 sec",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w2f-wu2",
                             "exerciseId": null,
-                            "name": "Glute Bridge w/Rotation"
+                            "name": "Glute Bridge w/Rotation",
+                            "sets": "1-2",
+                            "reps": "8ea",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w2f-wu3",
                             "exerciseId": 7872827,
                             "name": "Single Leg Arabesque",
-                            "sets": "1",
-                            "reps": "10ea"
+                            "sets": "1-2",
+                            "reps": "8ea",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
@@ -898,8 +955,8 @@
                             "exerciseId": 597556,
                             "name": "Barbell RDL (E3OM)",
                             "sets": "3",
-                            "reps": "5",
-                            "intensity": "80%"
+                            "reps": "7",
+                            "intensity": "75%"
                           },
                           {
                             "id": "str2-hyp-w2f-a1",
@@ -921,15 +978,16 @@
                             "exerciseId": 54656,
                             "name": "Barbell Z-Press",
                             "sets": "3",
-                            "reps": "8",
-                            "rpe": "7"
+                            "reps": "8-10",
+                            "rpe": "1RIR"
                           },
                           {
                             "id": "str2-hyp-w2f-b1",
                             "exerciseId": 222,
                             "name": "Inverted Rows - Feet Elevated",
                             "sets": "3",
-                            "reps": "10"
+                            "reps": "8-15",
+                            "rpe": "1RIR"
                           }
                         ]
                       },
@@ -951,14 +1009,14 @@
                             "exerciseId": 2529795,
                             "name": "DB Skullcrushers",
                             "sets": "3",
-                            "reps": "15"
+                            "reps": "12-15"
                           },
                           {
                             "id": "str2-hyp-w2f-c2",
                             "exerciseId": 8043375,
                             "name": "Double Leg Lowers",
                             "sets": "3",
-                            "reps": "10"
+                            "reps": "11"
                           }
                         ]
                       }
@@ -985,23 +1043,37 @@
                             "id": "str2-hyp-w3l-wu0",
                             "exerciseId": null,
                             "name": "Calf Stretch in Rack w/Toe Lift",
-                            "sets": "1"
+                            "sets": "1",
+                            "reps": "30sec",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w3l-wu1",
                             "exerciseId": null,
                             "name": "Hip CARS",
-                            "sets": "1"
+                            "sets": "1",
+                            "reps": "5ea",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w3l-wu2",
                             "exerciseId": 1172,
-                            "name": "Goblet Squat"
+                            "name": "Goblet Squat",
+                            "sets": "1",
+                            "reps": "10",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w3l-wu3",
                             "exerciseId": 597514,
-                            "name": "Squat Jumps"
+                            "name": "Squat Jumps",
+                            "sets": "1",
+                            "reps": "30sec",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
@@ -1016,15 +1088,15 @@
                             "exerciseId": 688272,
                             "name": "Barbell Back Squats",
                             "sets": "3",
-                            "reps": "9",
-                            "intensity": "70%"
+                            "reps": "5",
+                            "intensity": "80%"
                           },
                           {
                             "id": "str2-hyp-w3l-a1",
                             "exerciseId": null,
                             "name": "DB or Plate Drag Through",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "8ea"
                           },
                           {
                             "id": "str2-hyp-w3l-a2",
@@ -1046,7 +1118,7 @@
                             "exerciseId": 8137642,
                             "name": "Barbell Jefferson Split Squat (FFE)",
                             "sets": "3",
-                            "reps": "8ea",
+                            "reps": "12ea",
                             "rpe": "7"
                           },
                           {
@@ -1054,7 +1126,7 @@
                             "exerciseId": 2263920,
                             "name": "Single Leg Hamstring Bridge (Off Box)",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "15ea"
                           }
                         ]
                       },
@@ -1083,7 +1155,7 @@
                             "exerciseId": 7149355,
                             "name": "Reverse Copenhagen Plank",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "40sec ea"
                           }
                         ]
                       }
@@ -1106,24 +1178,36 @@
                             "exerciseId": null,
                             "name": "Banded Lat Activation",
                             "sets": "1",
-                            "reps": "10"
+                            "reps": "10ea",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w3u-wu1",
                             "exerciseId": null,
-                            "name": "Hanging Scap Retracts"
+                            "name": "Hanging Scap Retracts",
+                            "sets": "1",
+                            "reps": "10",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w3u-wu2",
                             "exerciseId": null,
                             "name": "Medball Thoracic Opener",
                             "sets": "1",
-                            "reps": "10"
+                            "reps": "10",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w3u-wu3",
                             "exerciseId": null,
-                            "name": "Push Up to Downward Dog"
+                            "name": "Push Up to Downward Dog",
+                            "sets": "1",
+                            "reps": "5",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
@@ -1137,16 +1221,18 @@
                             "id": "str2-hyp-w3u-a0",
                             "exerciseId": 240,
                             "name": "Weighted Chin Up",
-                            "sets": "3",
+                            "sets": "6",
                             "reps": "5",
-                            "rpe": "7"
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w3u-a1",
                             "exerciseId": null,
                             "name": "Prone Angels",
                             "sets": "3",
-                            "reps": "12"
+                            "reps": "15",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
@@ -1160,17 +1246,18 @@
                             "id": "str2-hyp-w3u-b0",
                             "exerciseId": 686395,
                             "name": "Tempo Barbell Bench Press",
-                            "sets": "3",
-                            "reps": "7",
-                            "intensity": "75%",
-                            "tempo": "30X1"
+                            "sets": "4",
+                            "reps": "6",
+                            "intensity": "",
+                            "tempo": "30X1",
+                            "rpe": "1RIR"
                           },
                           {
                             "id": "str2-hyp-w3u-b1",
                             "exerciseId": 8211110,
                             "name": "KB Gorilla Row / Single Arm DB Row",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "12ea"
                           }
                         ]
                       },
@@ -1192,7 +1279,7 @@
                             "exerciseId": null,
                             "name": "DB Rear Delt Fly",
                             "sets": "3",
-                            "reps": "15"
+                            "reps": "15-20"
                           },
                           {
                             "id": "str2-hyp-w3u-c2",
@@ -1221,25 +1308,37 @@
                             "id": "str2-hyp-w3f-wu0",
                             "exerciseId": 7372167,
                             "name": "Quadruped Glute Stretch",
-                            "sets": "1",
-                            "reps": "30sec ea"
+                            "sets": "1-2",
+                            "reps": "30sec ea",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w3f-wu1",
                             "exerciseId": null,
-                            "name": "Adductor Rock Backs"
+                            "name": "Adductor Rock Backs",
+                            "sets": "1-2",
+                            "reps": "10 x 3 sec",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w3f-wu2",
                             "exerciseId": null,
-                            "name": "Glute Bridge w/Rotation"
+                            "name": "Glute Bridge w/Rotation",
+                            "sets": "1-2",
+                            "reps": "8ea",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
                             "id": "str2-hyp-w3f-wu3",
                             "exerciseId": 7872827,
                             "name": "Single Leg Arabesque",
-                            "sets": "1",
-                            "reps": "10ea"
+                            "sets": "1-2",
+                            "reps": "8ea",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
@@ -1262,7 +1361,7 @@
                             "exerciseId": 651035,
                             "name": "Cossack Squat",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "12ea"
                           }
                         ]
                       },
@@ -1277,15 +1376,16 @@
                             "exerciseId": 54656,
                             "name": "Barbell Z-Press",
                             "sets": "3",
-                            "reps": "8",
-                            "rpe": "7"
+                            "reps": "10-12",
+                            "rpe": "1RIR"
                           },
                           {
                             "id": "str2-hyp-w3f-b1",
                             "exerciseId": 222,
                             "name": "Inverted Rows - Feet Elevated",
                             "sets": "3",
-                            "reps": "10"
+                            "reps": "8-15",
+                            "rpe": "1RIR"
                           }
                         ]
                       },
@@ -1314,7 +1414,7 @@
                             "exerciseId": 8043375,
                             "name": "Double Leg Lowers",
                             "sets": "3",
-                            "reps": "10"
+                            "reps": "12"
                           }
                         ]
                       }
@@ -6906,8 +7006,8 @@
       }
     ]
   },
-  "rev": 171,
-  "updatedAt": "2026-09-10T02:45:23.582Z",
+  "rev": 272,
+  "updatedAt": "2026-09-10T02:58:21.364Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }
