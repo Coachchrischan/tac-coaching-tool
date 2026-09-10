@@ -8,6 +8,9 @@
       "187": [
         "h-pull"
       ],
+      "222": [
+        "h-pull"
+      ],
       "240": [
         "v-pull"
       ],
@@ -15,6 +18,9 @@
         "squat"
       ],
       "445": [
+        "squat"
+      ],
+      "1172": [
         "squat"
       ],
       "10133": [
@@ -31,6 +37,15 @@
       ],
       "76843": [
         "h-pull"
+      ],
+      "597514": [
+        "squat"
+      ],
+      "597556": [
+        "hinge"
+      ],
+      "651035": [
+        "lunge"
       ],
       "686395": [
         "h-push"
@@ -59,17 +74,26 @@
       "5947811": [
         "lunge"
       ],
+      "5947834": [
+        "core-rotation"
+      ],
       "5947846": [
         "lunge"
       ],
       "7149355": [
         "core-rotation"
       ],
+      "7784461": [
+        "squat"
+      ],
       "8043375": [
         "core-rotation"
       ],
       "8137642": [
         "lunge"
+      ],
+      "8211110": [
+        "h-pull"
       ],
       "8211162": [
         "h-pull"
@@ -97,12 +121,61 @@
       ]
     },
     "scales": {
-      "440": [
+      "200": [
         {
-          "name": "Squat Jump "
+          "name": "DB Bicep Curl"
         },
         {
-          "name": "Landing Mechanics "
+          "name": "Banded Bicep Curl"
+        }
+      ],
+      "222": [
+        {
+          "name": "Inverted Rows"
+        },
+        {
+          "name": "Banded Row"
+        }
+      ],
+      "240": [
+        {
+          "name": "Chin Up"
+        },
+        {
+          "name": "Chin Up Negative"
+        }
+      ],
+      "440": [
+        {
+          "name": "Counter Movement Jump",
+          "sets": "3",
+          "reps": "5"
+        },
+        {
+          "name": "Single Leg Tall to Short",
+          "sets": "3",
+          "reps": "5"
+        }
+      ],
+      "54656": [
+        {
+          "name": "DB Z-Press"
+        }
+      ],
+      "597556": [
+        {
+          "name": "DB RDL"
+        },
+        {
+          "name": "Single Leg Arabesque"
+        }
+      ],
+      "686395": [
+        {
+          "name": "Barbell Floor Press"
+        },
+        {
+          "name": "DB Floor Press"
         }
       ],
       "688272": [
@@ -123,18 +196,63 @@
       ],
       "2263920": [
         {
-          "name": "Double Leg Hamstring Bridge"
+          "name": "Single Leg Hamstring Bridge"
         },
         {
-          "name": "Hamstring Bridge HOLD"
+          "name": "Double Leg Hamstring Bridge",
+          "sets": "3",
+          "reps": "15"
+        }
+      ],
+      "2529795": [
+        {
+          "name": "Overhead DB Tricep Extension"
+        }
+      ],
+      "5947834": [
+        {
+          "name": "Table Top Hold"
+        }
+      ],
+      "7149355": [
+        {
+          "name": "Side Plank"
+        },
+        {
+          "name": "Knee Side Plank"
+        }
+      ],
+      "7784461": [
+        {
+          "name": "Single Leg Wall Sit"
+        },
+        {
+          "name": "Wall Sit"
+        }
+      ],
+      "8043375": [
+        {
+          "name": "Deadbug Taps"
+        },
+        {
+          "name": "Deadbug Hold"
         }
       ],
       "8137642": [
         {
-          "name": "FFE DB Split Squat "
+          "name": "DB FFE Split Squat",
+          "sets": "",
+          "reps": ""
         },
         {
-          "name": "Split Squat "
+          "name": "DB Split Squat",
+          "sets": "",
+          "reps": ""
+        }
+      ],
+      "8211110": [
+        {
+          "name": "Banded Row"
         }
       ],
       "name:db or plate drag through": [
@@ -145,18 +263,35 @@
           "rpe": "8"
         },
         {
-          "name": "Front Support Hold",
-          "rpe": "8",
+          "name": "Tall Plank",
           "sets": "3",
           "reps": "45sec"
+        }
+      ],
+      "name:weighted db single leg calf raises": [
+        {
+          "name": "Single Leg Calf Raises"
+        },
+        {
+          "name": "Double Leg Calf Raises"
+        }
+      ],
+      "name:tricep push ups": [
+        {
+          "name": "Knee Push Ups"
+        }
+      ],
+      "name:db rear delt fly": [
+        {
+          "name": "Band Pull Aparts"
         }
       ]
     },
     "cues": {},
     "customExercises": []
   },
-  "rev": 40,
-  "updatedAt": "2026-09-01T09:50:30.884Z",
+  "rev": 50,
+  "updatedAt": "2026-09-10T03:14:11.152Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }

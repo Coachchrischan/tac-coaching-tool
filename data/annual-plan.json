@@ -16,7 +16,7 @@
           {
             "id": "ap-2026-hyp9",
             "name": "Strength-Hypertrophy",
-            "focus": "Full Body A/B split (Tue/Thu). Three 3-week micros: 9/7/5, 9/7/5 heavier, 7/5/3. Week 3 of each micro ends on a challenge.",
+            "focus": "Three-day Lower / Upper / Full Body split (Tue / Thu / Fri), loaded from the club sheet 2026-09-10. Three 3-week microcycles; micro 1 written (week 1 prescription repeated across weeks 1 to 3), micros 2 and 3 to be written.",
             "weeks": 9
           },
           {
@@ -213,8 +213,8 @@
       }
     ]
   },
-  "rev": 9,
-  "updatedAt": "2026-09-01T09:47:54.528Z",
+  "rev": 10,
+  "updatedAt": "2026-09-10T03:04:25.392Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }

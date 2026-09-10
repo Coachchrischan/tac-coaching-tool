@@ -1,7 +1,9 @@
 # TAC Programming Plan: 2026/27 macrocycle (plan of record)
 
 > Handed over by Chris 2026-08-14 after the annual-plan review, **revised by the
-> club 2026-08-31**: the strength delivery became a two-day Full Body A/B split
+> club 2026-08-31** and **again by Chris 2026-09-10** (back to the three-day
+> Lower / Upper / Full Body split, microcycle 1 loaded from the club sheet;
+> see "The delivery format" below). The 2026-08-31 revision: the strength delivery became a two-day Full Body A/B split
 > starting 14 September, the standalone Deload/Skills week was removed, and the
 > closing strength block shortened to five weeks. Phase numbers here match the
 > tool exactly (the Primer is Phase 1). The Annual Plan tab mirrors this; the
@@ -20,75 +22,63 @@
 | # | Phase | Weeks | Dates (week beginning) |
 |---|-------|-------|------------------------|
 | 1 | Primer (intro week + 2-week primer, run off-app, emailed) | 3 | 24 Aug - 7 Sept 2026 |
-| 2 | Strength-Hypertrophy (Full Body A/B) | 9 | 14 Sept - 9 Nov 2026 |
+| 2 | Strength-Hypertrophy (Lower / Upper / Full Body, micro 1 written) | 9 | 14 Sept - 9 Nov 2026 |
 | 3 | Strength | 5 | 16 Nov - 14 Dec 2026 |
 | - | Christmas gap | 2 | 21 Dec - 28 Dec 2026 |
 | 4 | Unilateral muscle-endurance | 4 | 4 Jan - 25 Jan 2027 |
 | 5 | Hypertrophy (aesthetic focus) | 12 | 1 Feb - 19 Apr 2027 |
 | 6 | Back into the strength-hypertrophy to strength cycle | - | from 26 Apr 2027 |
 
-## The delivery format (changed 2026-08-31)
+## The delivery format (changed again 2026-09-10)
 
-Strength is a **two-day full-body split**, not the old Lower/Upper/Full three-day:
+Strength is back to the **three-day split** on Chris's call of 2026-09-10,
+loaded from the club sheet (tab "Phase 1 - Upper / Lower / Full Body"):
 
-- **Full Body A** (Tuesday class): squat + upper focus.
-- **Full Body B** (Thursday class): RDL + lower focus.
-- **Friday strength is on hold** by the club's decision; the Friday class slot
-  keeps existing on the timetable but carries no strength programming while
-  that holds.
+- **Lower** (Tuesday class, `lbs`).
+- **Upper** (Thursday class, `ubs`).
+- **Full Body** (Friday class, `fbs`). Friday strength is back on.
+
+Which weekday each day lands on comes from the live timetable in Schedule,
+not the sheet's Day 1/2/3 numbering (the sheet numbers Upper as Day 1; the
+timetable runs Lower on Tuesday). If the club swaps the days, change the
+timetable and everything follows.
+
+The two-day Full Body A/B split the club chose on 2026-08-31 (nine fully
+written weeks with the 9/7/5 waves, tempo/paused/straight bench, EMOM to
+top-set chins, the three challenges) is **archived, not lost**:
+`archive/strength-full-body-ab-2026-09.json` holds the block at the rev it
+was replaced, plus the scales it used. The write-up of that plan lives in
+the git history of this file (the commit before 2026-09-10) and in
+`HANDOVER.md`.
 
 ## Phase 2: Strength-Hypertrophy, 9 weeks (14 Sept)
 
-Three 3-week microcycles. The compounds stay the same all phase and wave;
-accessories interchange at each microcycle boundary; **week 3 of each
-microcycle ends on a challenge** (Day A: Sally push-up challenge, mechanical
-drop set plank, deadhang).
+Three 3-week microcycles. **Only microcycle 1 is written** (weeks 1 to 3):
+the sheet holds micro 1's exercises, scales and warm-ups with a week 1
+prescription, repeated as written across weeks 1 to 3 on Chris's call. Weeks
+4 to 9 are empty in the tool; Chris fills the next microcycles in when ready.
 
-**Main lifts** (Back/Front Squat on A, Romanian Deadlift on B; bench family on
-A follows the same reps):
+**Microcycle 1 (weeks 1 to 3), as loaded:**
 
-| Micro | Weeks | Wave | Squat loading |
-|-------|-------|------|---------------|
-| 1 | 1-3 | 9 / 7 / 5 | 65% / 70% / 75%, RPE 7 to 8 |
-| 2 | 4-6 | 9 / 7 / 5 | 67.5% / 72.5% / 77.5%, RPE 7.5 to 8.5 |
-| 3 | 7-9 | 7 / 5 / 3 | 75% / 80% / 85%, RPE 8 to 9 |
+| Day | WU | A | B | C |
+|-----|----|---|---|---|
+| Lower (Tue) | Calf stretch in rack w/toe lift, Hip CARS, Goblet squat, Squat jumps | Back squat 3x9 @ 70%; DB/plate drag through 3x10ea; Depth jump 3x5 | Jefferson split squat (FFE) 3x8ea RPE 7; SL hamstring bridge (off box) 3x10ea | Cyclist squat finisher 3x10+; Weighted SL calf raise 3x12ea; Reverse Copenhagen plank 3x10ea |
+| Upper (Thu) | Banded lat activation 1x10, Hanging scap retracts, Medball thoracic opener 1x10, Push up to downward dog | Weighted chin up 3x5 RPE 7; Prone angels 3x12 | Tempo bench 3x7 @ 75% (30X1, carried from the A/B micro 1); Gorilla row / SA DB row 3x10ea | Tricep push ups 3 x 1RIR; DB rear delt fly 3x15; Oblique crunch 3x10ea |
+| Full Body (Fri) | Quadruped glute stretch 1x30sec ea, Adductor rock backs, Glute bridge w/rotation, SL arabesque 1x10ea | RDL (E3OM) 3x5 @ 80%; Cossack squat 3x10ea | Z-press 3x8 RPE 7; Feet-elevated inverted row 3x10 | BB bicep curls 3x20; DB skullcrushers 3x15; Double leg lowers 3x10 |
 
-Anchoring rules (roundtable-reviewed 2026-08-31): the squat keeps percentages
-with the **RPE as the do-not-exceed line**, and every main lift ramps to its
-working load in 2 to 3 builder sets. The **RDL runs RPE-primary** (no member
-has a testable RDL max): the rep wave is identical, anchored to the heaviest
-crisp 9 recorded in week 1. The **bench is RPE-primary in micro 3 too**: week 7
-is a calibration week (record the top set of 7 after six weeks of tempo and
-paused work), weeks 8 and 9 build roughly 5 and 10 per cent on it.
+Scaled options are exercise-level (`library-overrides`), two per exercise
+as the sheet gives them; an exercise with no scale in the sheet has none
+("no need for a regression", Chris). Week 1 keeps the member-facing
+anchor-capture line (record top working weights).
 
-**Bench progression** (A): tempo (30X1) in micro 1, paused in micro 2, straight
-bench in micro 3. **Chin/pull-up progression** (A): EMOM volume in micro 1
-(rig staggered, half on the minute, half on the 30), full-rest strength sets in
-micro 2, top-set triples with back-offs in micro 3; week 9 runs back-offs only
-so the deadhang challenge measures grip, not leftovers.
-
-**Jumps** (A2): depth jumps in micro 1 (new members jump-and-stick from the
-floor), weighted squat jumps in micro 2, broad-to-vertical jumps in micro 3
-(single leg depth jumps are the advanced option, per the sheet's alternative).
-
-**Accessories**: swap each micro, ascending volume inside it (week 1 base,
-weeks 2 and 3 roughly plus two reps; unilateral and calf work varies), RPE
-climbing 7 to 8. **Week 9 Day A tapers**: accessories drop to two sets so the
-final wave and the challenge get what is left. **Farmers carries fill the Day
-B micro 3 accessory slot** (weeks 7 to 9, suitcase carry as the scale), added
-2026-09-01 on Chris's approval: it fills the sheet's blank C3 and closes the
-block's carry-pattern gap in one move.
-
-**Warm-ups** (written 2026-09-01, replacing the "coach's circuit"
-placeholder): Day A runs bike/row build, world's greatest stretch, air squats
-with jump-and-stick landings, band pull-aparts; Day B runs ski/row build,
-glute bridges, unloaded RDL reaches, dead bugs. Both close with 2 to 3
-builder sets on the day's first lift. **The front squat option is
-RPE-primary**, roughly 7.5 to 10 per cent down on the back squat number,
-never the back squat's percentage wave. **Anchor capture**: week 1 sessions
-tell members to record their top working weights (testing happens in the two
-primer weeks, so percentages are computable); week 7 Day A tells them to
-record the bench calibration top set that weeks 8 and 9 build on.
+**Open, for Chris:** microcycles 2 and 3 (weeks 4 to 9), the intensity wave
+inside micro 1 if weeks 2 and 3 should differ from week 1, and a TrainHeroic
+library match for the thirteen free-text exercises (they push as named
+skips): Calf Stretch in Rack w/Toe Lift, Hip CARS, DB or Plate Drag Through,
+Weighted DB Single Leg Calf Raises, Banded Lat Activation, Hanging Scap
+Retracts, Medball Thoracic Opener, Push Up to Downward Dog, Prone Angels,
+Tricep Push Ups, DB Rear Delt Fly, Adductor Rock Backs, Glute Bridge
+w/Rotation.
 
 There is **no deload inside the nine weeks** (the standalone Deload/Skills week
 was removed by the club). Flagged as a fatigue watch-point; the primer weeks

@@ -255,140 +255,126 @@
                 "id": "str2-hyp-w1",
                 "sessions": [
                   {
-                    "id": "str2-hyp-w1a",
-                    "focus": "full-a",
-                    "intent": "Squat + upper focus. Micro 1 of 3 (9/7/5 wave one), week 1: main lifts 3x9 at 65%.",
+                    "id": "str2-hyp-w1l",
+                    "focus": "lower",
+                    "intent": "Lower body. Micro 1 of 3, week 1.",
                     "kind": "series",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w1a-WU",
+                        "id": "str2-hyp-w1l-WU",
                         "kind": "series",
                         "label": "WU",
-                        "minutes": 5,
+                        "minutes": 8,
                         "slots": [
                           {
-                            "id": "str2-hyp-w1a-wu1",
+                            "id": "str2-hyp-w1l-wu0",
                             "exerciseId": null,
-                            "name": "Bike or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
+                            "name": "Calf Stretch in Rack w/Toe Lift",
+                            "sets": "1-2",
+                            "reps": "30sec"
                           },
                           {
-                            "id": "str2-hyp-w1a-wu2",
+                            "id": "str2-hyp-w1l-wu1",
                             "exerciseId": null,
-                            "name": "World's Greatest Stretch",
-                            "sets": "1",
-                            "reps": "5",
-                            "note": "each side, slow"
+                            "name": "Hip CARS",
+                            "sets": "1-2",
+                            "reps": "5ea"
                           },
                           {
-                            "id": "str2-hyp-w1a-wu3",
-                            "exerciseId": null,
-                            "name": "Air Squat + Jump-and-Stick",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "then 5 jump-and-stick landings, quiet feet"
+                            "id": "str2-hyp-w1l-wu2",
+                            "exerciseId": 1172,
+                            "name": "Goblet Squat",
+                            "sets": "1-2",
+                            "reps": "10"
                           },
                           {
-                            "id": "str2-hyp-w1a-wu4",
-                            "exerciseId": null,
-                            "name": "Band Pull-Apart",
-                            "sets": "1",
-                            "reps": "15"
+                            "id": "str2-hyp-w1l-wu3",
+                            "exerciseId": 597514,
+                            "name": "Squat Jumps",
+                            "sets": "1-2",
+                            "reps": "30sec"
                           }
-                        ],
-                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
+                        ]
                       },
                       {
-                        "id": "str2-hyp-w1a-A",
+                        "id": "str2-hyp-w1l-A",
                         "kind": "series",
                         "label": "A",
-                        "minutes": 15,
+                        "minutes": 20,
                         "slots": [
                           {
-                            "id": "str2-hyp-w1a-a0",
+                            "id": "str2-hyp-w1l-a0",
                             "exerciseId": 688272,
-                            "name": "Barbell Back Squat",
+                            "name": "Barbell Back Squats",
                             "sets": "3",
                             "reps": "9",
-                            "rpe": "7",
-                            "note": "Front squat option: same reps, RPE-primary, roughly 7.5 to 10 per cent down on the back squat number. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
-                            "intensity": "65%"
+                            "intensity": "70%"
                           },
                           {
-                            "id": "str2-hyp-w1a-a1",
+                            "id": "str2-hyp-w1l-a1",
+                            "exerciseId": null,
+                            "name": "DB or Plate Drag Through",
+                            "sets": "3",
+                            "reps": "8ea"
+                          },
+                          {
+                            "id": "str2-hyp-w1l-a2",
                             "exerciseId": 440,
                             "name": "Depth Jump",
                             "sets": "3",
-                            "reps": "3",
-                            "note": "Step down, stick the landing for 2 seconds. Height over reps. New members jump-and-stick from the floor instead of the box."
+                            "reps": "5"
                           }
                         ]
                       },
                       {
-                        "id": "str2-hyp-w1a-B",
+                        "id": "str2-hyp-w1l-B",
                         "kind": "series",
                         "label": "B",
-                        "minutes": 12,
+                        "minutes": 15,
                         "slots": [
                           {
-                            "id": "str2-hyp-w1a-b2",
-                            "exerciseId": 686395,
-                            "name": "Tempo Barbell Bench Press",
+                            "id": "str2-hyp-w1l-b0",
+                            "exerciseId": 8137642,
+                            "name": "Barbell Jefferson Split Squat (FFE)",
                             "sets": "3",
-                            "reps": "9",
-                            "rpe": "7",
-                            "tempo": "30X1",
-                            "note": "3 second lower."
-                          },
-                          {
-                            "id": "str2-hyp-w1a-b3",
-                            "exerciseId": 240,
-                            "name": "Weighted Chin Ups",
-                            "sets": "10",
-                            "reps": "2",
-                            "note": "EMOM 10 minutes: 2 reps at the top of each minute. Add load only if every rep is crisp. Stagger the rig: half start on the minute, half on the 30."
-                          }
-                        ]
-                      },
-                      {
-                        "id": "str2-hyp-w1a-C",
-                        "kind": "series",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w1a-c4",
-                            "exerciseId": 187,
-                            "name": "Inverted Row",
-                            "sets": "3",
-                            "reps": "10",
+                            "reps": "8ea",
                             "rpe": "7"
                           },
                           {
-                            "id": "str2-hyp-w1a-c5",
-                            "exerciseId": 183,
-                            "name": "DB Bicep Curls",
+                            "id": "str2-hyp-w1l-b1",
+                            "exerciseId": 2263920,
+                            "name": "Single Leg Hamstring Bridge (Off Box)",
                             "sets": "3",
-                            "reps": "10",
-                            "rpe": "7",
-                            "note": "Superset with tricep push ups."
+                            "reps": "10ea"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "str2-hyp-w1l-C",
+                        "kind": "series",
+                        "label": "C",
+                        "minutes": 12,
+                        "slots": [
+                          {
+                            "id": "str2-hyp-w1l-c0",
+                            "exerciseId": 7784461,
+                            "name": "Cyclist Squat Finisher (1 &1/4)",
+                            "sets": "3",
+                            "reps": "10+"
                           },
                           {
-                            "id": "str2-hyp-w1a-c6",
-                            "exerciseId": 252,
-                            "name": "Diamond Push-Up",
+                            "id": "str2-hyp-w1l-c1",
+                            "exerciseId": null,
+                            "name": "Weighted DB Single Leg Calf Raises",
                             "sets": "3",
-                            "reps": "10",
-                            "rpe": "7",
-                            "note": "Superset. Elbows tight to the ribs."
+                            "reps": "8ea"
                           },
                           {
-                            "id": "str2-hyp-w1a-c7",
-                            "exerciseId": 8211172,
-                            "name": "Hollow Hold",
+                            "id": "str2-hyp-w1l-c2",
+                            "exerciseId": 7149355,
+                            "name": "Reverse Copenhagen Plank",
                             "sets": "3",
-                            "rpe": "7",
-                            "note": "20 to 30 seconds. Table top hold is the easier option."
+                            "reps": "30sec ea"
                           }
                         ]
                       }
@@ -396,134 +382,242 @@
                     "appDescription": "Week 1 is discovery: find a weight that fits the reps and RPE, and record your top working weights. They anchor the rest of the block."
                   },
                   {
-                    "id": "str2-hyp-w1b",
-                    "focus": "full-b",
-                    "intent": "RDL + lower focus. Micro 1 of 3 (9/7/5 wave one), week 1: main lifts 3x9 at 65%.",
+                    "id": "str2-hyp-w1u",
+                    "focus": "upper",
+                    "intent": "Upper body. Micro 1 of 3, week 1.",
                     "kind": "series",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w1b-WU",
+                        "id": "str2-hyp-w1u-WU",
                         "kind": "series",
                         "label": "WU",
-                        "minutes": 5,
+                        "minutes": 8,
                         "slots": [
                           {
-                            "id": "str2-hyp-w1b-wu1",
+                            "id": "str2-hyp-w1u-wu0",
                             "exerciseId": null,
-                            "name": "Ski or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
+                            "name": "Banded Lat Activation",
+                            "sets": "1-2",
+                            "reps": "10ea"
                           },
                           {
-                            "id": "str2-hyp-w1b-wu2",
+                            "id": "str2-hyp-w1u-wu1",
                             "exerciseId": null,
-                            "name": "Glute Bridge",
-                            "sets": "1",
-                            "reps": "12",
-                            "note": "2 second squeeze at the top"
+                            "name": "Hanging Scap Retracts",
+                            "sets": "1-2",
+                            "reps": "10"
                           },
                           {
-                            "id": "str2-hyp-w1b-wu3",
+                            "id": "str2-hyp-w1u-wu2",
                             "exerciseId": null,
-                            "name": "Unloaded RDL to Reach",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "empty bar or PVC, slow hinge, feel the hamstrings"
+                            "name": "Medball Thoracic Opener",
+                            "sets": "1-2",
+                            "reps": "10"
                           },
                           {
-                            "id": "str2-hyp-w1b-wu4",
+                            "id": "str2-hyp-w1u-wu3",
                             "exerciseId": null,
-                            "name": "Dead Bug",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "each side, slow exhale"
+                            "name": "Push Up to Downward Dog",
+                            "sets": "1-2",
+                            "reps": "5"
                           }
-                        ],
-                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
+                        ]
                       },
                       {
-                        "id": "str2-hyp-w1b-A",
+                        "id": "str2-hyp-w1u-A",
                         "kind": "series",
                         "label": "A",
+                        "minutes": 20,
+                        "slots": [
+                          {
+                            "id": "str2-hyp-w1u-a0",
+                            "exerciseId": 240,
+                            "name": "Weighted Chin Up",
+                            "sets": "4",
+                            "reps": "5",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "str2-hyp-w1u-a1",
+                            "exerciseId": null,
+                            "name": "Prone Angels",
+                            "sets": "3",
+                            "reps": "15"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "str2-hyp-w1u-B",
+                        "kind": "series",
+                        "label": "B",
                         "minutes": 15,
                         "slots": [
                           {
-                            "id": "str2-hyp-w1b-a0",
-                            "exerciseId": 132,
-                            "name": "Romanian Deadlift",
+                            "id": "str2-hyp-w1u-b0",
+                            "exerciseId": 686395,
+                            "name": "Tempo Barbell Bench Press",
                             "sets": "3",
-                            "reps": "9",
-                            "rpe": "7",
-                            "note": "Set the anchor: the heaviest 9 you own with a flat back. Record it. Ramp to the working load in 2 to 3 builder sets first."
+                            "reps": "6",
+                            "intensity": "",
+                            "tempo": "30X1",
+                            "rpe": "2RIR"
                           },
                           {
-                            "id": "str2-hyp-w1b-a1",
-                            "exerciseId": null,
-                            "name": "DB or Plate Drag Through",
+                            "id": "str2-hyp-w1u-b1",
+                            "exerciseId": 8211110,
+                            "name": "KB Gorilla Row / Single Arm DB Row",
                             "sets": "3",
-                            "reps": "10",
-                            "rpe": "7",
-                            "note": "Plank position, drag the DB under and across."
+                            "reps": "8ea"
                           }
                         ]
                       },
                       {
-                        "id": "str2-hyp-w1b-B",
+                        "id": "str2-hyp-w1u-C",
                         "kind": "series",
-                        "label": "B",
+                        "label": "C",
                         "minutes": 12,
                         "slots": [
                           {
-                            "id": "str2-hyp-w1b-b2",
-                            "exerciseId": 8137642,
-                            "name": "Barbell FFE Jefferson Split Squat",
+                            "id": "str2-hyp-w1u-c0",
+                            "exerciseId": null,
+                            "name": "Tricep Push Ups",
                             "sets": "3",
-                            "reps": "8",
-                            "rpe": "7",
-                            "note": "Each side. Rear foot elevated."
+                            "reps": "1RIR"
                           },
                           {
-                            "id": "str2-hyp-w1b-b3",
-                            "exerciseId": 2263920,
-                            "name": "Single Leg Hamstring Bridge",
+                            "id": "str2-hyp-w1u-c1",
+                            "exerciseId": null,
+                            "name": "DB Rear Delt Fly",
                             "sets": "3",
-                            "reps": "10",
-                            "rpe": "7",
-                            "note": "Each side, shoulders on the bench."
+                            "reps": "12-15"
+                          },
+                          {
+                            "id": "str2-hyp-w1u-c2",
+                            "exerciseId": 5947834,
+                            "name": "Oblique Crunch",
+                            "sets": "3",
+                            "reps": "8ea"
+                          }
+                        ]
+                      }
+                    ],
+                    "appDescription": "Week 1 is discovery: find a weight that fits the reps and RPE, and record your top working weights. They anchor the rest of the block."
+                  },
+                  {
+                    "id": "str2-hyp-w1f",
+                    "focus": "full",
+                    "intent": "Full body. Micro 1 of 3, week 1.",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "str2-hyp-w1f-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 8,
+                        "slots": [
+                          {
+                            "id": "str2-hyp-w1f-wu0",
+                            "exerciseId": 7372167,
+                            "name": "Quadruped Glute Stretch",
+                            "sets": "1-2",
+                            "reps": "30sec ea"
+                          },
+                          {
+                            "id": "str2-hyp-w1f-wu1",
+                            "exerciseId": null,
+                            "name": "Adductor Rock Backs",
+                            "sets": "1-2",
+                            "reps": "10 x 3 sec"
+                          },
+                          {
+                            "id": "str2-hyp-w1f-wu2",
+                            "exerciseId": null,
+                            "name": "Glute Bridge w/Rotation",
+                            "sets": "1-2",
+                            "reps": "8ea"
+                          },
+                          {
+                            "id": "str2-hyp-w1f-wu3",
+                            "exerciseId": 7872827,
+                            "name": "Single Leg Arabesque",
+                            "sets": "1-2",
+                            "reps": "8ea"
                           }
                         ]
                       },
                       {
-                        "id": "str2-hyp-w1b-C",
+                        "id": "str2-hyp-w1f-A",
                         "kind": "series",
-                        "label": "C",
-                        "minutes": 10,
+                        "label": "A",
+                        "minutes": 20,
                         "slots": [
                           {
-                            "id": "str2-hyp-w1b-c4",
-                            "exerciseId": 33625,
-                            "name": "Half-Kneeling DB Shoulder Press",
+                            "id": "str2-hyp-w1f-a0",
+                            "exerciseId": 597556,
+                            "name": "Barbell RDL (E3OM)",
                             "sets": "3",
-                            "reps": "8",
-                            "rpe": "7",
-                            "note": "Each side."
+                            "reps": "9",
+                            "intensity": "70%"
                           },
                           {
-                            "id": "str2-hyp-w1b-c5",
-                            "exerciseId": 290,
-                            "name": "Powell raise",
+                            "id": "str2-hyp-w1f-a1",
+                            "exerciseId": 651035,
+                            "name": "Cossack Squat",
                             "sets": "3",
-                            "reps": "10",
-                            "rpe": "7",
-                            "note": "Rear delt focus. Light, strict, slow lower."
+                            "reps": "8ea"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "str2-hyp-w1f-B",
+                        "kind": "series",
+                        "label": "B",
+                        "minutes": 15,
+                        "slots": [
+                          {
+                            "id": "str2-hyp-w1f-b0",
+                            "exerciseId": 54656,
+                            "name": "Barbell Z-Press",
+                            "sets": "3",
+                            "reps": "6-8",
+                            "rpe": "2RIR"
                           },
                           {
-                            "id": "str2-hyp-w1b-c6",
-                            "exerciseId": null,
-                            "name": "Weighted DB Single Leg Calf Raises",
+                            "id": "str2-hyp-w1f-b1",
+                            "exerciseId": 222,
+                            "name": "Inverted Rows - Feet Elevated",
                             "sets": "3",
-                            "reps": "12",
-                            "rpe": "7",
-                            "note": "Each side. Full pause at the bottom."
+                            "reps": "8-15",
+                            "rpe": "1RIR"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "str2-hyp-w1f-C",
+                        "kind": "series",
+                        "label": "C",
+                        "minutes": 12,
+                        "slots": [
+                          {
+                            "id": "str2-hyp-w1f-c0",
+                            "exerciseId": 200,
+                            "name": "Barbell Bicep Curls",
+                            "sets": "3",
+                            "reps": "20"
+                          },
+                          {
+                            "id": "str2-hyp-w1f-c1",
+                            "exerciseId": 2529795,
+                            "name": "DB Skullcrushers",
+                            "sets": "3",
+                            "reps": "10-12"
+                          },
+                          {
+                            "id": "str2-hyp-w1f-c2",
+                            "exerciseId": 8043375,
+                            "name": "Double Leg Lowers",
+                            "sets": "3",
+                            "reps": "10"
                           }
                         ]
                       }
@@ -536,274 +630,393 @@
                 "id": "str2-hyp-w2",
                 "sessions": [
                   {
-                    "id": "str2-hyp-w2a",
-                    "focus": "full-a",
-                    "intent": "Squat + upper focus. Micro 1 of 3 (9/7/5 wave one), week 2: main lifts 3x7 at 70%.",
+                    "id": "str2-hyp-w2l",
+                    "focus": "lower",
+                    "intent": "Lower body. Micro 1 of 3, week 2 (same prescription as week 1 until adjusted).",
                     "kind": "series",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w2a-WU",
+                        "id": "str2-hyp-w2l-WU",
                         "kind": "series",
                         "label": "WU",
-                        "minutes": 5,
+                        "minutes": 8,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2a-wu1",
+                            "id": "str2-hyp-w2l-wu0",
                             "exerciseId": null,
-                            "name": "Bike or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
-                          },
-                          {
-                            "id": "str2-hyp-w2a-wu2",
-                            "exerciseId": null,
-                            "name": "World's Greatest Stretch",
+                            "name": "Calf Stretch in Rack w/Toe Lift",
                             "sets": "1",
-                            "reps": "5",
-                            "note": "each side, slow"
+                            "reps": "30sec",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
-                            "id": "str2-hyp-w2a-wu3",
+                            "id": "str2-hyp-w2l-wu1",
                             "exerciseId": null,
-                            "name": "Air Squat + Jump-and-Stick",
+                            "name": "Hip CARS",
+                            "sets": "1",
+                            "reps": "5ea",
+                            "intensity": "",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "str2-hyp-w2l-wu2",
+                            "exerciseId": 1172,
+                            "name": "Goblet Squat",
                             "sets": "1",
                             "reps": "10",
-                            "note": "then 5 jump-and-stick landings, quiet feet"
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
-                            "id": "str2-hyp-w2a-wu4",
-                            "exerciseId": null,
-                            "name": "Band Pull-Apart",
+                            "id": "str2-hyp-w2l-wu3",
+                            "exerciseId": 597514,
+                            "name": "Squat Jumps",
                             "sets": "1",
-                            "reps": "15"
+                            "reps": "30sec",
+                            "intensity": "",
+                            "rpe": ""
                           }
-                        ],
-                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
+                        ]
                       },
                       {
-                        "id": "str2-hyp-w2a-A",
+                        "id": "str2-hyp-w2l-A",
                         "kind": "series",
                         "label": "A",
-                        "minutes": 15,
+                        "minutes": 20,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2a-a0",
+                            "id": "str2-hyp-w2l-a0",
                             "exerciseId": 688272,
-                            "name": "Barbell Back Squat",
+                            "name": "Barbell Back Squats",
                             "sets": "3",
                             "reps": "7",
-                            "rpe": "7.5",
-                            "note": "Front squat option: same reps, RPE-primary, roughly 7.5 to 10 per cent down on the back squat number. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
-                            "intensity": "70%"
+                            "intensity": "75%"
                           },
                           {
-                            "id": "str2-hyp-w2a-a1",
+                            "id": "str2-hyp-w2l-a1",
+                            "exerciseId": null,
+                            "name": "DB or Plate Drag Through",
+                            "sets": "3",
+                            "reps": "8ea"
+                          },
+                          {
+                            "id": "str2-hyp-w2l-a2",
                             "exerciseId": 440,
                             "name": "Depth Jump",
                             "sets": "3",
-                            "reps": "3",
-                            "note": "Step down, stick the landing for 2 seconds. Height over reps. New members jump-and-stick from the floor instead of the box."
+                            "reps": "5"
                           }
                         ]
                       },
                       {
-                        "id": "str2-hyp-w2a-B",
+                        "id": "str2-hyp-w2l-B",
                         "kind": "series",
                         "label": "B",
+                        "minutes": 15,
+                        "slots": [
+                          {
+                            "id": "str2-hyp-w2l-b0",
+                            "exerciseId": 8137642,
+                            "name": "Barbell Jefferson Split Squat (FFE)",
+                            "sets": "3",
+                            "reps": "10ea",
+                            "rpe": "7"
+                          },
+                          {
+                            "id": "str2-hyp-w2l-b1",
+                            "exerciseId": 2263920,
+                            "name": "Single Leg Hamstring Bridge (Off Box)",
+                            "sets": "3",
+                            "reps": "12ea"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "str2-hyp-w2l-C",
+                        "kind": "series",
+                        "label": "C",
                         "minutes": 12,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2a-b2",
-                            "exerciseId": 686395,
-                            "name": "Tempo Barbell Bench Press",
+                            "id": "str2-hyp-w2l-c0",
+                            "exerciseId": 7784461,
+                            "name": "Cyclist Squat Finisher (1 &1/4)",
                             "sets": "3",
-                            "reps": "7",
-                            "rpe": "7.5",
-                            "tempo": "30X1",
-                            "note": "3 second lower."
+                            "reps": "10+"
                           },
                           {
-                            "id": "str2-hyp-w2a-b3",
-                            "exerciseId": 240,
-                            "name": "Weighted Chin Ups",
-                            "sets": "10",
-                            "reps": "3",
-                            "note": "EMOM 10 minutes: 3 reps each minute, 30 total. Stagger the rig: half start on the minute, half on the 30."
-                          }
-                        ]
-                      },
-                      {
-                        "id": "str2-hyp-w2a-C",
-                        "kind": "series",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w2a-c4",
-                            "exerciseId": 187,
-                            "name": "Inverted Row",
+                            "id": "str2-hyp-w2l-c1",
+                            "exerciseId": null,
+                            "name": "Weighted DB Single Leg Calf Raises",
                             "sets": "3",
-                            "reps": "12",
-                            "rpe": "7.5"
+                            "reps": "10ea"
                           },
                           {
-                            "id": "str2-hyp-w2a-c5",
-                            "exerciseId": 183,
-                            "name": "DB Bicep Curls",
+                            "id": "str2-hyp-w2l-c2",
+                            "exerciseId": 7149355,
+                            "name": "Reverse Copenhagen Plank",
                             "sets": "3",
-                            "reps": "12",
-                            "rpe": "7.5",
-                            "note": "Superset with tricep push ups."
-                          },
-                          {
-                            "id": "str2-hyp-w2a-c6",
-                            "exerciseId": 252,
-                            "name": "Diamond Push-Up",
-                            "sets": "3",
-                            "reps": "12",
-                            "rpe": "7.5",
-                            "note": "Superset. Elbows tight to the ribs."
-                          },
-                          {
-                            "id": "str2-hyp-w2a-c7",
-                            "exerciseId": 8211172,
-                            "name": "Hollow Hold",
-                            "sets": "3",
-                            "rpe": "7.5",
-                            "note": "20 to 30 seconds. Table top hold is the easier option."
+                            "reps": "35sec ea"
                           }
                         ]
                       }
                     ]
                   },
                   {
-                    "id": "str2-hyp-w2b",
-                    "focus": "full-b",
-                    "intent": "RDL + lower focus. Micro 1 of 3 (9/7/5 wave one), week 2: main lifts 3x7 at 70%.",
+                    "id": "str2-hyp-w2u",
+                    "focus": "upper",
+                    "intent": "Upper body. Micro 1 of 3, week 2 (same prescription as week 1 until adjusted).",
                     "kind": "series",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w2b-WU",
+                        "id": "str2-hyp-w2u-WU",
                         "kind": "series",
                         "label": "WU",
-                        "minutes": 5,
+                        "minutes": 8,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2b-wu1",
+                            "id": "str2-hyp-w2u-wu0",
                             "exerciseId": null,
-                            "name": "Ski or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
-                          },
-                          {
-                            "id": "str2-hyp-w2b-wu2",
-                            "exerciseId": null,
-                            "name": "Glute Bridge",
+                            "name": "Banded Lat Activation",
                             "sets": "1",
-                            "reps": "12",
-                            "note": "2 second squeeze at the top"
+                            "reps": "10ea",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
-                            "id": "str2-hyp-w2b-wu3",
+                            "id": "str2-hyp-w2u-wu1",
                             "exerciseId": null,
-                            "name": "Unloaded RDL to Reach",
+                            "name": "Hanging Scap Retracts",
                             "sets": "1",
                             "reps": "10",
-                            "note": "empty bar or PVC, slow hinge, feel the hamstrings"
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
-                            "id": "str2-hyp-w2b-wu4",
+                            "id": "str2-hyp-w2u-wu2",
                             "exerciseId": null,
-                            "name": "Dead Bug",
+                            "name": "Medball Thoracic Opener",
                             "sets": "1",
                             "reps": "10",
-                            "note": "each side, slow exhale"
+                            "intensity": "",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "str2-hyp-w2u-wu3",
+                            "exerciseId": null,
+                            "name": "Push Up to Downward Dog",
+                            "sets": "1",
+                            "reps": "5",
+                            "intensity": "",
+                            "rpe": ""
                           }
-                        ],
-                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
+                        ]
                       },
                       {
-                        "id": "str2-hyp-w2b-A",
+                        "id": "str2-hyp-w2u-A",
                         "kind": "series",
                         "label": "A",
+                        "minutes": 20,
+                        "slots": [
+                          {
+                            "id": "str2-hyp-w2u-a0",
+                            "exerciseId": 240,
+                            "name": "Weighted Chin Up",
+                            "sets": "5",
+                            "reps": "5",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "str2-hyp-w2u-a1",
+                            "exerciseId": null,
+                            "name": "Prone Angels",
+                            "sets": "3",
+                            "reps": "15",
+                            "intensity": "",
+                            "rpe": ""
+                          }
+                        ]
+                      },
+                      {
+                        "id": "str2-hyp-w2u-B",
+                        "kind": "series",
+                        "label": "B",
                         "minutes": 15,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2b-a0",
-                            "exerciseId": 132,
-                            "name": "Romanian Deadlift",
+                            "id": "str2-hyp-w2u-b0",
+                            "exerciseId": 686395,
+                            "name": "Tempo Barbell Bench Press",
                             "sets": "3",
-                            "reps": "7",
-                            "rpe": "7.5",
-                            "note": "Same bar speed as last week, a touch heavier. Ramp to the working load in 2 to 3 builder sets first."
+                            "reps": "6",
+                            "intensity": "",
+                            "tempo": "30X1",
+                            "rpe": "1RIR"
                           },
                           {
-                            "id": "str2-hyp-w2b-a1",
-                            "exerciseId": null,
-                            "name": "DB or Plate Drag Through",
+                            "id": "str2-hyp-w2u-b1",
+                            "exerciseId": 8211110,
+                            "name": "KB Gorilla Row / Single Arm DB Row",
                             "sets": "3",
-                            "reps": "12",
-                            "rpe": "7.5",
-                            "note": "Plank position, drag the DB under and across."
+                            "reps": "10ea"
                           }
                         ]
                       },
                       {
-                        "id": "str2-hyp-w2b-B",
+                        "id": "str2-hyp-w2u-C",
                         "kind": "series",
-                        "label": "B",
+                        "label": "C",
                         "minutes": 12,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2b-b2",
-                            "exerciseId": 8137642,
-                            "name": "Barbell FFE Jefferson Split Squat",
+                            "id": "str2-hyp-w2u-c0",
+                            "exerciseId": null,
+                            "name": "Tricep Push Ups",
                             "sets": "3",
-                            "reps": "8",
-                            "rpe": "7.5",
-                            "note": "Each side. Rear foot elevated."
+                            "reps": "1RIR"
                           },
                           {
-                            "id": "str2-hyp-w2b-b3",
-                            "exerciseId": 2263920,
-                            "name": "Single Leg Hamstring Bridge",
+                            "id": "str2-hyp-w2u-c1",
+                            "exerciseId": null,
+                            "name": "DB Rear Delt Fly",
                             "sets": "3",
-                            "reps": "12",
-                            "rpe": "7.5",
-                            "note": "Each side, shoulders on the bench."
+                            "reps": "15"
+                          },
+                          {
+                            "id": "str2-hyp-w2u-c2",
+                            "exerciseId": 5947834,
+                            "name": "Oblique Crunch",
+                            "sets": "3",
+                            "reps": "9ea"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "str2-hyp-w2f",
+                    "focus": "full",
+                    "intent": "Full body. Micro 1 of 3, week 2 (same prescription as week 1 until adjusted).",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "str2-hyp-w2f-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 8,
+                        "slots": [
+                          {
+                            "id": "str2-hyp-w2f-wu0",
+                            "exerciseId": 7372167,
+                            "name": "Quadruped Glute Stretch",
+                            "sets": "1-2",
+                            "reps": "30sec ea",
+                            "intensity": "",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "str2-hyp-w2f-wu1",
+                            "exerciseId": null,
+                            "name": "Adductor Rock Backs",
+                            "sets": "1-2",
+                            "reps": "10 x 3 sec",
+                            "intensity": "",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "str2-hyp-w2f-wu2",
+                            "exerciseId": null,
+                            "name": "Glute Bridge w/Rotation",
+                            "sets": "1-2",
+                            "reps": "8ea",
+                            "intensity": "",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "str2-hyp-w2f-wu3",
+                            "exerciseId": 7872827,
+                            "name": "Single Leg Arabesque",
+                            "sets": "1-2",
+                            "reps": "8ea",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
                       {
-                        "id": "str2-hyp-w2b-C",
+                        "id": "str2-hyp-w2f-A",
                         "kind": "series",
-                        "label": "C",
-                        "minutes": 10,
+                        "label": "A",
+                        "minutes": 20,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2b-c4",
-                            "exerciseId": 33625,
-                            "name": "Half-Kneeling DB Shoulder Press",
+                            "id": "str2-hyp-w2f-a0",
+                            "exerciseId": 597556,
+                            "name": "Barbell RDL (E3OM)",
                             "sets": "3",
-                            "reps": "10",
-                            "rpe": "7.5",
-                            "note": "Each side."
+                            "reps": "7",
+                            "intensity": "75%"
                           },
                           {
-                            "id": "str2-hyp-w2b-c5",
-                            "exerciseId": 290,
-                            "name": "Powell raise",
+                            "id": "str2-hyp-w2f-a1",
+                            "exerciseId": 651035,
+                            "name": "Cossack Squat",
                             "sets": "3",
-                            "reps": "12",
-                            "rpe": "7.5",
-                            "note": "Rear delt focus. Light, strict, slow lower."
+                            "reps": "10ea"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "str2-hyp-w2f-B",
+                        "kind": "series",
+                        "label": "B",
+                        "minutes": 15,
+                        "slots": [
+                          {
+                            "id": "str2-hyp-w2f-b0",
+                            "exerciseId": 54656,
+                            "name": "Barbell Z-Press",
+                            "sets": "3",
+                            "reps": "8-10",
+                            "rpe": "1RIR"
                           },
                           {
-                            "id": "str2-hyp-w2b-c6",
-                            "exerciseId": null,
-                            "name": "Weighted DB Single Leg Calf Raises",
+                            "id": "str2-hyp-w2f-b1",
+                            "exerciseId": 222,
+                            "name": "Inverted Rows - Feet Elevated",
                             "sets": "3",
-                            "reps": "15",
-                            "rpe": "7.5",
-                            "note": "Each side. Full pause at the bottom."
+                            "reps": "8-15",
+                            "rpe": "1RIR"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "str2-hyp-w2f-C",
+                        "kind": "series",
+                        "label": "C",
+                        "minutes": 12,
+                        "slots": [
+                          {
+                            "id": "str2-hyp-w2f-c0",
+                            "exerciseId": 200,
+                            "name": "Barbell Bicep Curls",
+                            "sets": "3",
+                            "reps": "20"
+                          },
+                          {
+                            "id": "str2-hyp-w2f-c1",
+                            "exerciseId": 2529795,
+                            "name": "DB Skullcrushers",
+                            "sets": "3",
+                            "reps": "12-15"
+                          },
+                          {
+                            "id": "str2-hyp-w2f-c2",
+                            "exerciseId": 8043375,
+                            "name": "Double Leg Lowers",
+                            "sets": "3",
+                            "reps": "11"
                           }
                         ]
                       }
@@ -815,297 +1028,393 @@
                 "id": "str2-hyp-w3",
                 "sessions": [
                   {
-                    "id": "str2-hyp-w3a",
-                    "focus": "full-a",
-                    "intent": "Squat + upper focus. Micro 1 of 3 (9/7/5 wave one), week 3: main lifts 3x5 at 75%. Challenge week: Push Up Challenge: Sally.",
+                    "id": "str2-hyp-w3l",
+                    "focus": "lower",
+                    "intent": "Lower body. Micro 1 of 3, week 3 (same prescription as week 1 until adjusted).",
                     "kind": "series",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w3a-WU",
+                        "id": "str2-hyp-w3l-WU",
                         "kind": "series",
                         "label": "WU",
-                        "minutes": 5,
+                        "minutes": 8,
                         "slots": [
                           {
-                            "id": "str2-hyp-w3a-wu1",
+                            "id": "str2-hyp-w3l-wu0",
                             "exerciseId": null,
-                            "name": "Bike or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
-                          },
-                          {
-                            "id": "str2-hyp-w3a-wu2",
-                            "exerciseId": null,
-                            "name": "World's Greatest Stretch",
+                            "name": "Calf Stretch in Rack w/Toe Lift",
                             "sets": "1",
-                            "reps": "5",
-                            "note": "each side, slow"
+                            "reps": "30sec",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
-                            "id": "str2-hyp-w3a-wu3",
+                            "id": "str2-hyp-w3l-wu1",
                             "exerciseId": null,
-                            "name": "Air Squat + Jump-and-Stick",
+                            "name": "Hip CARS",
+                            "sets": "1",
+                            "reps": "5ea",
+                            "intensity": "",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "str2-hyp-w3l-wu2",
+                            "exerciseId": 1172,
+                            "name": "Goblet Squat",
                             "sets": "1",
                             "reps": "10",
-                            "note": "then 5 jump-and-stick landings, quiet feet"
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
-                            "id": "str2-hyp-w3a-wu4",
-                            "exerciseId": null,
-                            "name": "Band Pull-Apart",
+                            "id": "str2-hyp-w3l-wu3",
+                            "exerciseId": 597514,
+                            "name": "Squat Jumps",
                             "sets": "1",
-                            "reps": "15"
+                            "reps": "30sec",
+                            "intensity": "",
+                            "rpe": ""
                           }
-                        ],
-                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
+                        ]
                       },
                       {
-                        "id": "str2-hyp-w3a-A",
+                        "id": "str2-hyp-w3l-A",
                         "kind": "series",
                         "label": "A",
-                        "minutes": 15,
+                        "minutes": 20,
                         "slots": [
                           {
-                            "id": "str2-hyp-w3a-a0",
+                            "id": "str2-hyp-w3l-a0",
                             "exerciseId": 688272,
-                            "name": "Barbell Back Squat",
+                            "name": "Barbell Back Squats",
                             "sets": "3",
                             "reps": "5",
-                            "rpe": "8",
-                            "note": "Front squat option: same reps, RPE-primary, roughly 7.5 to 10 per cent down on the back squat number. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
-                            "intensity": "75%"
+                            "intensity": "80%"
                           },
                           {
-                            "id": "str2-hyp-w3a-a1",
+                            "id": "str2-hyp-w3l-a1",
+                            "exerciseId": null,
+                            "name": "DB or Plate Drag Through",
+                            "sets": "3",
+                            "reps": "8ea"
+                          },
+                          {
+                            "id": "str2-hyp-w3l-a2",
                             "exerciseId": 440,
                             "name": "Depth Jump",
                             "sets": "3",
-                            "reps": "3",
-                            "note": "Step down, stick the landing for 2 seconds. Height over reps. New members jump-and-stick from the floor instead of the box."
+                            "reps": "5"
                           }
                         ]
                       },
                       {
-                        "id": "str2-hyp-w3a-B",
+                        "id": "str2-hyp-w3l-B",
                         "kind": "series",
                         "label": "B",
+                        "minutes": 15,
+                        "slots": [
+                          {
+                            "id": "str2-hyp-w3l-b0",
+                            "exerciseId": 8137642,
+                            "name": "Barbell Jefferson Split Squat (FFE)",
+                            "sets": "3",
+                            "reps": "12ea",
+                            "rpe": "7"
+                          },
+                          {
+                            "id": "str2-hyp-w3l-b1",
+                            "exerciseId": 2263920,
+                            "name": "Single Leg Hamstring Bridge (Off Box)",
+                            "sets": "3",
+                            "reps": "15ea"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "str2-hyp-w3l-C",
+                        "kind": "series",
+                        "label": "C",
                         "minutes": 12,
                         "slots": [
                           {
-                            "id": "str2-hyp-w3a-b2",
-                            "exerciseId": 686395,
-                            "name": "Tempo Barbell Bench Press",
+                            "id": "str2-hyp-w3l-c0",
+                            "exerciseId": 7784461,
+                            "name": "Cyclist Squat Finisher (1 &1/4)",
                             "sets": "3",
-                            "reps": "5",
-                            "rpe": "8",
-                            "tempo": "30X1",
-                            "note": "3 second lower."
+                            "reps": "10+"
                           },
                           {
-                            "id": "str2-hyp-w3a-b3",
-                            "exerciseId": 240,
-                            "name": "Weighted Chin Ups",
-                            "sets": "10",
-                            "reps": "3",
-                            "note": "EMOM 10 minutes. Small load jump on last week if all 30 were crisp. Stagger the rig: half start on the minute, half on the 30."
-                          }
-                        ]
-                      },
-                      {
-                        "id": "str2-hyp-w3a-C",
-                        "kind": "series",
-                        "label": "C",
-                        "minutes": 10,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w3a-c4",
-                            "exerciseId": 187,
-                            "name": "Inverted Row",
+                            "id": "str2-hyp-w3l-c1",
+                            "exerciseId": null,
+                            "name": "Weighted DB Single Leg Calf Raises",
                             "sets": "3",
-                            "reps": "12",
-                            "rpe": "8"
+                            "reps": "12ea"
                           },
                           {
-                            "id": "str2-hyp-w3a-c5",
-                            "exerciseId": 183,
-                            "name": "DB Bicep Curls",
+                            "id": "str2-hyp-w3l-c2",
+                            "exerciseId": 7149355,
+                            "name": "Reverse Copenhagen Plank",
                             "sets": "3",
-                            "reps": "12",
-                            "rpe": "8",
-                            "note": "Superset with tricep push ups."
-                          },
-                          {
-                            "id": "str2-hyp-w3a-c6",
-                            "exerciseId": 252,
-                            "name": "Diamond Push-Up",
-                            "sets": "3",
-                            "reps": "12",
-                            "rpe": "8",
-                            "note": "Superset. Elbows tight to the ribs."
-                          },
-                          {
-                            "id": "str2-hyp-w3a-c7",
-                            "exerciseId": 8211172,
-                            "name": "Hollow Hold",
-                            "sets": "3",
-                            "rpe": "8",
-                            "note": "20 to 30 seconds. Table top hold is the easier option."
-                          }
-                        ]
-                      },
-                      {
-                        "id": "str2-hyp-w3a-CH",
-                        "kind": "circuit",
-                        "label": "Challenge",
-                        "minutes": 8,
-                        "pieces": [
-                          {
-                            "id": "str2-hyp-w3a-ch1",
-                            "heading": "Push Up Challenge: Sally",
-                            "lines": [
-                              {
-                                "text": "Push ups to 'Flower' by Moby"
-                              },
-                              {
-                                "text": "Down on \"bring Sally down\", hold, up on \"bring Sally up\""
-                              },
-                              {
-                                "text": "3 minutes 27 seconds. Go as far as you can."
-                              }
-                            ]
+                            "reps": "40sec ea"
                           }
                         ]
                       }
                     ]
                   },
                   {
-                    "id": "str2-hyp-w3b",
-                    "focus": "full-b",
-                    "intent": "RDL + lower focus. Micro 1 of 3 (9/7/5 wave one), week 3: main lifts 3x5 at 75%.",
+                    "id": "str2-hyp-w3u",
+                    "focus": "upper",
+                    "intent": "Upper body. Micro 1 of 3, week 3 (same prescription as week 1 until adjusted).",
                     "kind": "series",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w3b-WU",
+                        "id": "str2-hyp-w3u-WU",
                         "kind": "series",
                         "label": "WU",
-                        "minutes": 5,
+                        "minutes": 8,
                         "slots": [
                           {
-                            "id": "str2-hyp-w3b-wu1",
+                            "id": "str2-hyp-w3u-wu0",
                             "exerciseId": null,
-                            "name": "Ski or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
-                          },
-                          {
-                            "id": "str2-hyp-w3b-wu2",
-                            "exerciseId": null,
-                            "name": "Glute Bridge",
+                            "name": "Banded Lat Activation",
                             "sets": "1",
-                            "reps": "12",
-                            "note": "2 second squeeze at the top"
+                            "reps": "10ea",
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
-                            "id": "str2-hyp-w3b-wu3",
+                            "id": "str2-hyp-w3u-wu1",
                             "exerciseId": null,
-                            "name": "Unloaded RDL to Reach",
+                            "name": "Hanging Scap Retracts",
                             "sets": "1",
                             "reps": "10",
-                            "note": "empty bar or PVC, slow hinge, feel the hamstrings"
+                            "intensity": "",
+                            "rpe": ""
                           },
                           {
-                            "id": "str2-hyp-w3b-wu4",
+                            "id": "str2-hyp-w3u-wu2",
                             "exerciseId": null,
-                            "name": "Dead Bug",
+                            "name": "Medball Thoracic Opener",
                             "sets": "1",
                             "reps": "10",
-                            "note": "each side, slow exhale"
+                            "intensity": "",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "str2-hyp-w3u-wu3",
+                            "exerciseId": null,
+                            "name": "Push Up to Downward Dog",
+                            "sets": "1",
+                            "reps": "5",
+                            "intensity": "",
+                            "rpe": ""
                           }
-                        ],
-                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
+                        ]
                       },
                       {
-                        "id": "str2-hyp-w3b-A",
+                        "id": "str2-hyp-w3u-A",
                         "kind": "series",
                         "label": "A",
+                        "minutes": 20,
+                        "slots": [
+                          {
+                            "id": "str2-hyp-w3u-a0",
+                            "exerciseId": 240,
+                            "name": "Weighted Chin Up",
+                            "sets": "6",
+                            "reps": "5",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "str2-hyp-w3u-a1",
+                            "exerciseId": null,
+                            "name": "Prone Angels",
+                            "sets": "3",
+                            "reps": "15",
+                            "intensity": "",
+                            "rpe": ""
+                          }
+                        ]
+                      },
+                      {
+                        "id": "str2-hyp-w3u-B",
+                        "kind": "series",
+                        "label": "B",
                         "minutes": 15,
                         "slots": [
                           {
-                            "id": "str2-hyp-w3b-a0",
-                            "exerciseId": 132,
-                            "name": "Romanian Deadlift",
-                            "sets": "3",
-                            "reps": "5",
-                            "rpe": "8",
-                            "note": "Heaviest RDL week of wave 1. If the back rounds, the load is wrong. Ramp to the working load in 2 to 3 builder sets first."
+                            "id": "str2-hyp-w3u-b0",
+                            "exerciseId": 686395,
+                            "name": "Tempo Barbell Bench Press",
+                            "sets": "4",
+                            "reps": "6",
+                            "intensity": "",
+                            "tempo": "30X1",
+                            "rpe": "1RIR"
                           },
                           {
-                            "id": "str2-hyp-w3b-a1",
-                            "exerciseId": null,
-                            "name": "DB or Plate Drag Through",
+                            "id": "str2-hyp-w3u-b1",
+                            "exerciseId": 8211110,
+                            "name": "KB Gorilla Row / Single Arm DB Row",
                             "sets": "3",
-                            "reps": "12",
-                            "rpe": "8",
-                            "note": "Plank position, drag the DB under and across."
+                            "reps": "12ea"
                           }
                         ]
                       },
                       {
-                        "id": "str2-hyp-w3b-B",
+                        "id": "str2-hyp-w3u-C",
                         "kind": "series",
-                        "label": "B",
+                        "label": "C",
                         "minutes": 12,
                         "slots": [
                           {
-                            "id": "str2-hyp-w3b-b2",
-                            "exerciseId": 8137642,
-                            "name": "Barbell FFE Jefferson Split Squat",
+                            "id": "str2-hyp-w3u-c0",
+                            "exerciseId": null,
+                            "name": "Tricep Push Ups",
                             "sets": "3",
-                            "reps": "10",
-                            "rpe": "8",
-                            "note": "Each side. Rear foot elevated."
+                            "reps": "1RIR"
                           },
                           {
-                            "id": "str2-hyp-w3b-b3",
-                            "exerciseId": 2263920,
-                            "name": "Single Leg Hamstring Bridge",
+                            "id": "str2-hyp-w3u-c1",
+                            "exerciseId": null,
+                            "name": "DB Rear Delt Fly",
                             "sets": "3",
-                            "reps": "12",
-                            "rpe": "8",
-                            "note": "Each side, shoulders on the bench."
+                            "reps": "15-20"
+                          },
+                          {
+                            "id": "str2-hyp-w3u-c2",
+                            "exerciseId": 5947834,
+                            "name": "Oblique Crunch",
+                            "sets": "3",
+                            "reps": "10ea"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "str2-hyp-w3f",
+                    "focus": "full",
+                    "intent": "Full body. Micro 1 of 3, week 3 (same prescription as week 1 until adjusted).",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "str2-hyp-w3f-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 8,
+                        "slots": [
+                          {
+                            "id": "str2-hyp-w3f-wu0",
+                            "exerciseId": 7372167,
+                            "name": "Quadruped Glute Stretch",
+                            "sets": "1-2",
+                            "reps": "30sec ea",
+                            "intensity": "",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "str2-hyp-w3f-wu1",
+                            "exerciseId": null,
+                            "name": "Adductor Rock Backs",
+                            "sets": "1-2",
+                            "reps": "10 x 3 sec",
+                            "intensity": "",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "str2-hyp-w3f-wu2",
+                            "exerciseId": null,
+                            "name": "Glute Bridge w/Rotation",
+                            "sets": "1-2",
+                            "reps": "8ea",
+                            "intensity": "",
+                            "rpe": ""
+                          },
+                          {
+                            "id": "str2-hyp-w3f-wu3",
+                            "exerciseId": 7872827,
+                            "name": "Single Leg Arabesque",
+                            "sets": "1-2",
+                            "reps": "8ea",
+                            "intensity": "",
+                            "rpe": ""
                           }
                         ]
                       },
                       {
-                        "id": "str2-hyp-w3b-C",
+                        "id": "str2-hyp-w3f-A",
                         "kind": "series",
-                        "label": "C",
-                        "minutes": 10,
+                        "label": "A",
+                        "minutes": 20,
                         "slots": [
                           {
-                            "id": "str2-hyp-w3b-c4",
-                            "exerciseId": 33625,
-                            "name": "Half-Kneeling DB Shoulder Press",
+                            "id": "str2-hyp-w3f-a0",
+                            "exerciseId": 597556,
+                            "name": "Barbell RDL (E3OM)",
                             "sets": "3",
-                            "reps": "10",
-                            "rpe": "8",
-                            "note": "Each side."
+                            "reps": "5",
+                            "intensity": "80%"
                           },
                           {
-                            "id": "str2-hyp-w3b-c5",
-                            "exerciseId": 290,
-                            "name": "Powell raise",
+                            "id": "str2-hyp-w3f-a1",
+                            "exerciseId": 651035,
+                            "name": "Cossack Squat",
                             "sets": "3",
-                            "reps": "12",
-                            "rpe": "8",
-                            "note": "Rear delt focus. Light, strict, slow lower."
+                            "reps": "12ea"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "str2-hyp-w3f-B",
+                        "kind": "series",
+                        "label": "B",
+                        "minutes": 15,
+                        "slots": [
+                          {
+                            "id": "str2-hyp-w3f-b0",
+                            "exerciseId": 54656,
+                            "name": "Barbell Z-Press",
+                            "sets": "3",
+                            "reps": "10-12",
+                            "rpe": "1RIR"
                           },
                           {
-                            "id": "str2-hyp-w3b-c6",
-                            "exerciseId": null,
-                            "name": "Weighted DB Single Leg Calf Raises",
+                            "id": "str2-hyp-w3f-b1",
+                            "exerciseId": 222,
+                            "name": "Inverted Rows - Feet Elevated",
                             "sets": "3",
-                            "reps": "15",
-                            "rpe": "8",
-                            "note": "Each side. Full pause at the bottom."
+                            "reps": "8-15",
+                            "rpe": "1RIR"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "str2-hyp-w3f-C",
+                        "kind": "series",
+                        "label": "C",
+                        "minutes": 12,
+                        "slots": [
+                          {
+                            "id": "str2-hyp-w3f-c0",
+                            "exerciseId": 200,
+                            "name": "Barbell Bicep Curls",
+                            "sets": "3",
+                            "reps": "20"
+                          },
+                          {
+                            "id": "str2-hyp-w3f-c1",
+                            "exerciseId": 2529795,
+                            "name": "DB Skullcrushers",
+                            "sets": "3",
+                            "reps": "15"
+                          },
+                          {
+                            "id": "str2-hyp-w3f-c2",
+                            "exerciseId": 8043375,
+                            "name": "Double Leg Lowers",
+                            "sets": "3",
+                            "reps": "12"
                           }
                         ]
                       }
@@ -1117,277 +1426,110 @@
                 "id": "str2-hyp-w4",
                 "sessions": [
                   {
-                    "id": "str2-hyp-w4a",
-                    "focus": "full-a",
-                    "intent": "Squat + upper focus. Micro 2 of 3 (9/7/5 wave two), week 1: main lifts 3x9 at 67.5%.",
+                    "id": "str2-hyp-w4l",
+                    "focus": "lower",
+                    "intent": "Lower body. Micro 2 of 3, week 1. Not written yet.",
                     "kind": "series",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w4a-WU",
+                        "id": "str2-hyp-w4l-WU",
                         "kind": "series",
                         "label": "WU",
-                        "minutes": 5,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w4a-wu1",
-                            "exerciseId": null,
-                            "name": "Bike or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
-                          },
-                          {
-                            "id": "str2-hyp-w4a-wu2",
-                            "exerciseId": null,
-                            "name": "World's Greatest Stretch",
-                            "sets": "1",
-                            "reps": "5",
-                            "note": "each side, slow"
-                          },
-                          {
-                            "id": "str2-hyp-w4a-wu3",
-                            "exerciseId": null,
-                            "name": "Air Squat + Jump-and-Stick",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "then 5 jump-and-stick landings, quiet feet"
-                          },
-                          {
-                            "id": "str2-hyp-w4a-wu4",
-                            "exerciseId": null,
-                            "name": "Band Pull-Apart",
-                            "sets": "1",
-                            "reps": "15"
-                          }
-                        ],
-                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
+                        "minutes": 8,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w4a-A",
+                        "id": "str2-hyp-w4l-A",
                         "kind": "series",
                         "label": "A",
-                        "minutes": 15,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w4a-a0",
-                            "exerciseId": 688272,
-                            "name": "Barbell Back Squat",
-                            "sets": "3",
-                            "reps": "9",
-                            "rpe": "7.5",
-                            "note": "Front squat option: same reps, RPE-primary, roughly 7.5 to 10 per cent down on the back squat number. Second wave: same reps as weeks 1 to 3, a touch heavier. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
-                            "intensity": "67.5%"
-                          },
-                          {
-                            "id": "str2-hyp-w4a-a1",
-                            "exerciseId": null,
-                            "name": "Weighted Squat Jump",
-                            "sets": "3",
-                            "reps": "4",
-                            "note": "Light DBs or vest, then finish each set with one max bodyweight jump."
-                          }
-                        ]
+                        "minutes": 20,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w4a-B",
+                        "id": "str2-hyp-w4l-B",
                         "kind": "series",
                         "label": "B",
-                        "minutes": 12,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w4a-b2",
-                            "exerciseId": 1634536,
-                            "name": "Paused Bench Press",
-                            "sets": "3",
-                            "reps": "9",
-                            "rpe": "7.5",
-                            "note": "2 second pause on the chest."
-                          },
-                          {
-                            "id": "str2-hyp-w4a-b3",
-                            "exerciseId": 687828,
-                            "name": "Weighted Pull Ups",
-                            "sets": "4",
-                            "reps": "5",
-                            "rpe": "8",
-                            "note": "Strength focus: full rest, 2 to 3 minutes between sets."
-                          }
-                        ]
+                        "minutes": 15,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w4a-C",
+                        "id": "str2-hyp-w4l-C",
                         "kind": "series",
                         "label": "C",
-                        "minutes": 10,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w4a-c4",
-                            "exerciseId": 8211162,
-                            "name": "Single Arm DB Row",
-                            "sets": "3",
-                            "reps": "10",
-                            "rpe": "7",
-                            "note": "Each side."
-                          },
-                          {
-                            "id": "str2-hyp-w4a-c5",
-                            "exerciseId": 184,
-                            "name": "Bench Dips",
-                            "sets": "3",
-                            "reps": "10",
-                            "rpe": "7",
-                            "note": "Superset with barbell curls. Add a plate on the lap to load."
-                          },
-                          {
-                            "id": "str2-hyp-w4a-c6",
-                            "exerciseId": 200,
-                            "name": "Barbell Bicep Curl",
-                            "sets": "3",
-                            "reps": "8",
-                            "rpe": "7",
-                            "note": "Superset."
-                          },
-                          {
-                            "id": "str2-hyp-w4a-c7",
-                            "exerciseId": 8043375,
-                            "name": "Double Leg Lowers off Bench",
-                            "sets": "3",
-                            "reps": "10",
-                            "rpe": "7",
-                            "note": "Lower back stays pressed into the bench."
-                          }
-                        ]
+                        "minutes": 12,
+                        "slots": []
                       }
                     ]
                   },
                   {
-                    "id": "str2-hyp-w4b",
-                    "focus": "full-b",
-                    "intent": "RDL + lower focus. Micro 2 of 3 (9/7/5 wave two), week 1: main lifts 3x9 at 67.5%.",
+                    "id": "str2-hyp-w4u",
+                    "focus": "upper",
+                    "intent": "Upper body. Micro 2 of 3, week 1. Not written yet.",
                     "kind": "series",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w4b-WU",
+                        "id": "str2-hyp-w4u-WU",
                         "kind": "series",
                         "label": "WU",
-                        "minutes": 5,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w4b-wu1",
-                            "exerciseId": null,
-                            "name": "Ski or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
-                          },
-                          {
-                            "id": "str2-hyp-w4b-wu2",
-                            "exerciseId": null,
-                            "name": "Glute Bridge",
-                            "sets": "1",
-                            "reps": "12",
-                            "note": "2 second squeeze at the top"
-                          },
-                          {
-                            "id": "str2-hyp-w4b-wu3",
-                            "exerciseId": null,
-                            "name": "Unloaded RDL to Reach",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "empty bar or PVC, slow hinge, feel the hamstrings"
-                          },
-                          {
-                            "id": "str2-hyp-w4b-wu4",
-                            "exerciseId": null,
-                            "name": "Dead Bug",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "each side, slow exhale"
-                          }
-                        ],
-                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
+                        "minutes": 8,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w4b-A",
+                        "id": "str2-hyp-w4u-A",
                         "kind": "series",
                         "label": "A",
-                        "minutes": 15,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w4b-a0",
-                            "exerciseId": 132,
-                            "name": "Romanian Deadlift",
-                            "sets": "3",
-                            "reps": "9",
-                            "rpe": "7.5",
-                            "note": "Wave 2: start around your wave 1 week 2 load. Ramp to the working load in 2 to 3 builder sets first."
-                          },
-                          {
-                            "id": "str2-hyp-w4b-a1",
-                            "exerciseId": 1031083,
-                            "name": "Copenhagen Plank",
-                            "sets": "3",
-                            "rpe": "7",
-                            "note": "20 to 30 seconds each side."
-                          }
-                        ]
+                        "minutes": 20,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w4b-B",
+                        "id": "str2-hyp-w4u-B",
                         "kind": "series",
                         "label": "B",
-                        "minutes": 12,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w4b-b2",
-                            "exerciseId": 5947811,
-                            "name": "DB Bulgarian Split Squat",
-                            "sets": "3",
-                            "reps": "8",
-                            "rpe": "7",
-                            "note": "Each side."
-                          },
-                          {
-                            "id": "str2-hyp-w4b-b3",
-                            "exerciseId": 1241496,
-                            "name": "Weighted Single Leg Hip Thrust",
-                            "sets": "3",
-                            "reps": "8",
-                            "rpe": "7",
-                            "note": "Each side, DB on the hip."
-                          }
-                        ]
+                        "minutes": 15,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w4b-C",
+                        "id": "str2-hyp-w4u-C",
                         "kind": "series",
                         "label": "C",
-                        "minutes": 10,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w4b-c4",
-                            "exerciseId": 5947807,
-                            "name": "Kneeling Landmine Press",
-                            "sets": "3",
-                            "reps": "8",
-                            "rpe": "7",
-                            "note": "Each side. Half-kneeling or standing."
-                          },
-                          {
-                            "id": "str2-hyp-w4b-c5",
-                            "exerciseId": null,
-                            "name": "DB Front + Lateral Raise",
-                            "sets": "3",
-                            "reps": "10",
-                            "rpe": "7",
-                            "note": "Alternate one front raise, one lateral raise. Reps are total."
-                          },
-                          {
-                            "id": "str2-hyp-w4b-c6",
-                            "exerciseId": 2225369,
-                            "name": "FFE Split Squat Calf Raise",
-                            "sets": "3",
-                            "reps": "12",
-                            "rpe": "7",
-                            "note": "Calf raise in a split stance, rear heel working. Each side."
-                          }
-                        ]
+                        "minutes": 12,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "str2-hyp-w4f",
+                    "focus": "full",
+                    "intent": "Full body. Micro 2 of 3, week 1. Not written yet.",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "str2-hyp-w4f-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 8,
+                        "slots": []
+                      },
+                      {
+                        "id": "str2-hyp-w4f-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 20,
+                        "slots": []
+                      },
+                      {
+                        "id": "str2-hyp-w4f-B",
+                        "kind": "series",
+                        "label": "B",
+                        "minutes": 15,
+                        "slots": []
+                      },
+                      {
+                        "id": "str2-hyp-w4f-C",
+                        "kind": "series",
+                        "label": "C",
+                        "minutes": 12,
+                        "slots": []
                       }
                     ]
                   }
@@ -1397,277 +1539,110 @@
                 "id": "str2-hyp-w5",
                 "sessions": [
                   {
-                    "id": "str2-hyp-w5a",
-                    "focus": "full-a",
-                    "intent": "Squat + upper focus. Micro 2 of 3 (9/7/5 wave two), week 2: main lifts 3x7 at 72.5%.",
+                    "id": "str2-hyp-w5l",
+                    "focus": "lower",
+                    "intent": "Lower body. Micro 2 of 3, week 2. Not written yet.",
                     "kind": "series",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w5a-WU",
+                        "id": "str2-hyp-w5l-WU",
                         "kind": "series",
                         "label": "WU",
-                        "minutes": 5,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w5a-wu1",
-                            "exerciseId": null,
-                            "name": "Bike or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
-                          },
-                          {
-                            "id": "str2-hyp-w5a-wu2",
-                            "exerciseId": null,
-                            "name": "World's Greatest Stretch",
-                            "sets": "1",
-                            "reps": "5",
-                            "note": "each side, slow"
-                          },
-                          {
-                            "id": "str2-hyp-w5a-wu3",
-                            "exerciseId": null,
-                            "name": "Air Squat + Jump-and-Stick",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "then 5 jump-and-stick landings, quiet feet"
-                          },
-                          {
-                            "id": "str2-hyp-w5a-wu4",
-                            "exerciseId": null,
-                            "name": "Band Pull-Apart",
-                            "sets": "1",
-                            "reps": "15"
-                          }
-                        ],
-                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
+                        "minutes": 8,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w5a-A",
+                        "id": "str2-hyp-w5l-A",
                         "kind": "series",
                         "label": "A",
-                        "minutes": 15,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w5a-a0",
-                            "exerciseId": 688272,
-                            "name": "Barbell Back Squat",
-                            "sets": "3",
-                            "reps": "7",
-                            "rpe": "8",
-                            "note": "Front squat option: same reps, RPE-primary, roughly 7.5 to 10 per cent down on the back squat number. Second wave: same reps as weeks 1 to 3, a touch heavier. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
-                            "intensity": "72.5%"
-                          },
-                          {
-                            "id": "str2-hyp-w5a-a1",
-                            "exerciseId": null,
-                            "name": "Weighted Squat Jump",
-                            "sets": "3",
-                            "reps": "4",
-                            "note": "Light DBs or vest, then finish each set with one max bodyweight jump."
-                          }
-                        ]
+                        "minutes": 20,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w5a-B",
+                        "id": "str2-hyp-w5l-B",
                         "kind": "series",
                         "label": "B",
-                        "minutes": 12,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w5a-b2",
-                            "exerciseId": 1634536,
-                            "name": "Paused Bench Press",
-                            "sets": "3",
-                            "reps": "7",
-                            "rpe": "8",
-                            "note": "2 second pause on the chest."
-                          },
-                          {
-                            "id": "str2-hyp-w5a-b3",
-                            "exerciseId": 687828,
-                            "name": "Weighted Pull Ups",
-                            "sets": "4",
-                            "reps": "4",
-                            "rpe": "8.5",
-                            "note": "Full rest. Heavier than last week."
-                          }
-                        ]
+                        "minutes": 15,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w5a-C",
+                        "id": "str2-hyp-w5l-C",
                         "kind": "series",
                         "label": "C",
-                        "minutes": 10,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w5a-c4",
-                            "exerciseId": 8211162,
-                            "name": "Single Arm DB Row",
-                            "sets": "3",
-                            "reps": "12",
-                            "rpe": "7.5",
-                            "note": "Each side."
-                          },
-                          {
-                            "id": "str2-hyp-w5a-c5",
-                            "exerciseId": 184,
-                            "name": "Bench Dips",
-                            "sets": "3",
-                            "reps": "12",
-                            "rpe": "7.5",
-                            "note": "Superset with barbell curls. Add a plate on the lap to load."
-                          },
-                          {
-                            "id": "str2-hyp-w5a-c6",
-                            "exerciseId": 200,
-                            "name": "Barbell Bicep Curl",
-                            "sets": "3",
-                            "reps": "10",
-                            "rpe": "7.5",
-                            "note": "Superset."
-                          },
-                          {
-                            "id": "str2-hyp-w5a-c7",
-                            "exerciseId": 8043375,
-                            "name": "Double Leg Lowers off Bench",
-                            "sets": "3",
-                            "reps": "12",
-                            "rpe": "7.5",
-                            "note": "Lower back stays pressed into the bench."
-                          }
-                        ]
+                        "minutes": 12,
+                        "slots": []
                       }
                     ]
                   },
                   {
-                    "id": "str2-hyp-w5b",
-                    "focus": "full-b",
-                    "intent": "RDL + lower focus. Micro 2 of 3 (9/7/5 wave two), week 2: main lifts 3x7 at 72.5%.",
+                    "id": "str2-hyp-w5u",
+                    "focus": "upper",
+                    "intent": "Upper body. Micro 2 of 3, week 2. Not written yet.",
                     "kind": "series",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w5b-WU",
+                        "id": "str2-hyp-w5u-WU",
                         "kind": "series",
                         "label": "WU",
-                        "minutes": 5,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w5b-wu1",
-                            "exerciseId": null,
-                            "name": "Ski or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
-                          },
-                          {
-                            "id": "str2-hyp-w5b-wu2",
-                            "exerciseId": null,
-                            "name": "Glute Bridge",
-                            "sets": "1",
-                            "reps": "12",
-                            "note": "2 second squeeze at the top"
-                          },
-                          {
-                            "id": "str2-hyp-w5b-wu3",
-                            "exerciseId": null,
-                            "name": "Unloaded RDL to Reach",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "empty bar or PVC, slow hinge, feel the hamstrings"
-                          },
-                          {
-                            "id": "str2-hyp-w5b-wu4",
-                            "exerciseId": null,
-                            "name": "Dead Bug",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "each side, slow exhale"
-                          }
-                        ],
-                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
+                        "minutes": 8,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w5b-A",
+                        "id": "str2-hyp-w5u-A",
                         "kind": "series",
                         "label": "A",
-                        "minutes": 15,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w5b-a0",
-                            "exerciseId": 132,
-                            "name": "Romanian Deadlift",
-                            "sets": "3",
-                            "reps": "7",
-                            "rpe": "8",
-                            "note": "A touch heavier than last week. Ramp to the working load in 2 to 3 builder sets first."
-                          },
-                          {
-                            "id": "str2-hyp-w5b-a1",
-                            "exerciseId": 1031083,
-                            "name": "Copenhagen Plank",
-                            "sets": "3",
-                            "rpe": "7.5",
-                            "note": "20 to 30 seconds each side."
-                          }
-                        ]
+                        "minutes": 20,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w5b-B",
+                        "id": "str2-hyp-w5u-B",
                         "kind": "series",
                         "label": "B",
-                        "minutes": 12,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w5b-b2",
-                            "exerciseId": 5947811,
-                            "name": "DB Bulgarian Split Squat",
-                            "sets": "3",
-                            "reps": "10",
-                            "rpe": "7.5",
-                            "note": "Each side."
-                          },
-                          {
-                            "id": "str2-hyp-w5b-b3",
-                            "exerciseId": 1241496,
-                            "name": "Weighted Single Leg Hip Thrust",
-                            "sets": "3",
-                            "reps": "10",
-                            "rpe": "7.5",
-                            "note": "Each side, DB on the hip."
-                          }
-                        ]
+                        "minutes": 15,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w5b-C",
+                        "id": "str2-hyp-w5u-C",
                         "kind": "series",
                         "label": "C",
-                        "minutes": 10,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w5b-c4",
-                            "exerciseId": 5947807,
-                            "name": "Kneeling Landmine Press",
-                            "sets": "3",
-                            "reps": "10",
-                            "rpe": "7.5",
-                            "note": "Each side. Half-kneeling or standing."
-                          },
-                          {
-                            "id": "str2-hyp-w5b-c5",
-                            "exerciseId": null,
-                            "name": "DB Front + Lateral Raise",
-                            "sets": "3",
-                            "reps": "12",
-                            "rpe": "7.5",
-                            "note": "Alternate one front raise, one lateral raise. Reps are total."
-                          },
-                          {
-                            "id": "str2-hyp-w5b-c6",
-                            "exerciseId": 2225369,
-                            "name": "FFE Split Squat Calf Raise",
-                            "sets": "3",
-                            "reps": "15",
-                            "rpe": "7.5",
-                            "note": "Calf raise in a split stance, rear heel working. Each side."
-                          }
-                        ]
+                        "minutes": 12,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "str2-hyp-w5f",
+                    "focus": "full",
+                    "intent": "Full body. Micro 2 of 3, week 2. Not written yet.",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "str2-hyp-w5f-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 8,
+                        "slots": []
+                      },
+                      {
+                        "id": "str2-hyp-w5f-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 20,
+                        "slots": []
+                      },
+                      {
+                        "id": "str2-hyp-w5f-B",
+                        "kind": "series",
+                        "label": "B",
+                        "minutes": 15,
+                        "slots": []
+                      },
+                      {
+                        "id": "str2-hyp-w5f-C",
+                        "kind": "series",
+                        "label": "C",
+                        "minutes": 12,
+                        "slots": []
                       }
                     ]
                   }
@@ -1677,300 +1652,110 @@
                 "id": "str2-hyp-w6",
                 "sessions": [
                   {
-                    "id": "str2-hyp-w6a",
-                    "focus": "full-a",
-                    "intent": "Squat + upper focus. Micro 2 of 3 (9/7/5 wave two), week 3: main lifts 3x5 at 77.5%. Challenge week: Mechanical Drop Set Plank Challenge.",
+                    "id": "str2-hyp-w6l",
+                    "focus": "lower",
+                    "intent": "Lower body. Micro 2 of 3, week 3. Not written yet.",
                     "kind": "series",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w6a-WU",
+                        "id": "str2-hyp-w6l-WU",
                         "kind": "series",
                         "label": "WU",
-                        "minutes": 5,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w6a-wu1",
-                            "exerciseId": null,
-                            "name": "Bike or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
-                          },
-                          {
-                            "id": "str2-hyp-w6a-wu2",
-                            "exerciseId": null,
-                            "name": "World's Greatest Stretch",
-                            "sets": "1",
-                            "reps": "5",
-                            "note": "each side, slow"
-                          },
-                          {
-                            "id": "str2-hyp-w6a-wu3",
-                            "exerciseId": null,
-                            "name": "Air Squat + Jump-and-Stick",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "then 5 jump-and-stick landings, quiet feet"
-                          },
-                          {
-                            "id": "str2-hyp-w6a-wu4",
-                            "exerciseId": null,
-                            "name": "Band Pull-Apart",
-                            "sets": "1",
-                            "reps": "15"
-                          }
-                        ],
-                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
+                        "minutes": 8,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w6a-A",
+                        "id": "str2-hyp-w6l-A",
                         "kind": "series",
                         "label": "A",
-                        "minutes": 15,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w6a-a0",
-                            "exerciseId": 688272,
-                            "name": "Barbell Back Squat",
-                            "sets": "3",
-                            "reps": "5",
-                            "rpe": "8.5",
-                            "note": "Front squat option: same reps, RPE-primary, roughly 7.5 to 10 per cent down on the back squat number. Second wave: same reps as weeks 1 to 3, a touch heavier. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
-                            "intensity": "77.5%"
-                          },
-                          {
-                            "id": "str2-hyp-w6a-a1",
-                            "exerciseId": null,
-                            "name": "Weighted Squat Jump",
-                            "sets": "3",
-                            "reps": "4",
-                            "note": "Light DBs or vest, then finish each set with one max bodyweight jump."
-                          }
-                        ]
+                        "minutes": 20,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w6a-B",
+                        "id": "str2-hyp-w6l-B",
                         "kind": "series",
                         "label": "B",
-                        "minutes": 12,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w6a-b2",
-                            "exerciseId": 1634536,
-                            "name": "Paused Bench Press",
-                            "sets": "3",
-                            "reps": "5",
-                            "rpe": "8.5",
-                            "note": "2 second pause on the chest."
-                          },
-                          {
-                            "id": "str2-hyp-w6a-b3",
-                            "exerciseId": 687828,
-                            "name": "Weighted Pull Ups",
-                            "sets": "4",
-                            "reps": "3",
-                            "rpe": "8.5",
-                            "note": "Full rest. Heavier again if positions hold."
-                          }
-                        ]
+                        "minutes": 15,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w6a-C",
+                        "id": "str2-hyp-w6l-C",
                         "kind": "series",
                         "label": "C",
-                        "minutes": 10,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w6a-c4",
-                            "exerciseId": 8211162,
-                            "name": "Single Arm DB Row",
-                            "sets": "3",
-                            "reps": "12",
-                            "rpe": "8",
-                            "note": "Each side."
-                          },
-                          {
-                            "id": "str2-hyp-w6a-c5",
-                            "exerciseId": 184,
-                            "name": "Bench Dips",
-                            "sets": "3",
-                            "reps": "12",
-                            "rpe": "8",
-                            "note": "Superset with barbell curls. Add a plate on the lap to load."
-                          },
-                          {
-                            "id": "str2-hyp-w6a-c6",
-                            "exerciseId": 200,
-                            "name": "Barbell Bicep Curl",
-                            "sets": "3",
-                            "reps": "10",
-                            "rpe": "8",
-                            "note": "Superset."
-                          },
-                          {
-                            "id": "str2-hyp-w6a-c7",
-                            "exerciseId": 8043375,
-                            "name": "Double Leg Lowers off Bench",
-                            "sets": "3",
-                            "reps": "12",
-                            "rpe": "8",
-                            "note": "Lower back stays pressed into the bench."
-                          }
-                        ]
-                      },
-                      {
-                        "id": "str2-hyp-w6a-CH",
-                        "kind": "circuit",
-                        "label": "Challenge",
-                        "minutes": 8,
-                        "pieces": [
-                          {
-                            "id": "str2-hyp-w6a-ch1",
-                            "heading": "Mechanical Drop Set Plank Challenge",
-                            "lines": [
-                              {
-                                "text": "Max time: RKC plank"
-                              },
-                              {
-                                "text": "then a standard front plank"
-                              },
-                              {
-                                "text": "then knees down, until the whole room is done."
-                              }
-                            ]
-                          }
-                        ]
+                        "minutes": 12,
+                        "slots": []
                       }
                     ]
                   },
                   {
-                    "id": "str2-hyp-w6b",
-                    "focus": "full-b",
-                    "intent": "RDL + lower focus. Micro 2 of 3 (9/7/5 wave two), week 3: main lifts 3x5 at 77.5%.",
+                    "id": "str2-hyp-w6u",
+                    "focus": "upper",
+                    "intent": "Upper body. Micro 2 of 3, week 3. Not written yet.",
                     "kind": "series",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w6b-WU",
+                        "id": "str2-hyp-w6u-WU",
                         "kind": "series",
                         "label": "WU",
-                        "minutes": 5,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w6b-wu1",
-                            "exerciseId": null,
-                            "name": "Ski or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
-                          },
-                          {
-                            "id": "str2-hyp-w6b-wu2",
-                            "exerciseId": null,
-                            "name": "Glute Bridge",
-                            "sets": "1",
-                            "reps": "12",
-                            "note": "2 second squeeze at the top"
-                          },
-                          {
-                            "id": "str2-hyp-w6b-wu3",
-                            "exerciseId": null,
-                            "name": "Unloaded RDL to Reach",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "empty bar or PVC, slow hinge, feel the hamstrings"
-                          },
-                          {
-                            "id": "str2-hyp-w6b-wu4",
-                            "exerciseId": null,
-                            "name": "Dead Bug",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "each side, slow exhale"
-                          }
-                        ],
-                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
+                        "minutes": 8,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w6b-A",
+                        "id": "str2-hyp-w6u-A",
                         "kind": "series",
                         "label": "A",
-                        "minutes": 15,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w6b-a0",
-                            "exerciseId": 132,
-                            "name": "Romanian Deadlift",
-                            "sets": "3",
-                            "reps": "5",
-                            "rpe": "8.5",
-                            "note": "Heaviest RDL of the block so far. Ramp to the working load in 2 to 3 builder sets first."
-                          },
-                          {
-                            "id": "str2-hyp-w6b-a1",
-                            "exerciseId": 1031083,
-                            "name": "Copenhagen Plank",
-                            "sets": "3",
-                            "rpe": "8",
-                            "note": "20 to 30 seconds each side."
-                          }
-                        ]
+                        "minutes": 20,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w6b-B",
+                        "id": "str2-hyp-w6u-B",
                         "kind": "series",
                         "label": "B",
-                        "minutes": 12,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w6b-b2",
-                            "exerciseId": 5947811,
-                            "name": "DB Bulgarian Split Squat",
-                            "sets": "3",
-                            "reps": "10",
-                            "rpe": "8",
-                            "note": "Each side."
-                          },
-                          {
-                            "id": "str2-hyp-w6b-b3",
-                            "exerciseId": 1241496,
-                            "name": "Weighted Single Leg Hip Thrust",
-                            "sets": "3",
-                            "reps": "10",
-                            "rpe": "8",
-                            "note": "Each side, DB on the hip."
-                          }
-                        ]
+                        "minutes": 15,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w6b-C",
+                        "id": "str2-hyp-w6u-C",
                         "kind": "series",
                         "label": "C",
-                        "minutes": 10,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w6b-c4",
-                            "exerciseId": 5947807,
-                            "name": "Kneeling Landmine Press",
-                            "sets": "3",
-                            "reps": "10",
-                            "rpe": "8",
-                            "note": "Each side. Half-kneeling or standing."
-                          },
-                          {
-                            "id": "str2-hyp-w6b-c5",
-                            "exerciseId": null,
-                            "name": "DB Front + Lateral Raise",
-                            "sets": "3",
-                            "reps": "12",
-                            "rpe": "8",
-                            "note": "Alternate one front raise, one lateral raise. Reps are total."
-                          },
-                          {
-                            "id": "str2-hyp-w6b-c6",
-                            "exerciseId": 2225369,
-                            "name": "FFE Split Squat Calf Raise",
-                            "sets": "3",
-                            "reps": "15",
-                            "rpe": "8",
-                            "note": "Calf raise in a split stance, rear heel working. Each side."
-                          }
-                        ]
+                        "minutes": 12,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "str2-hyp-w6f",
+                    "focus": "full",
+                    "intent": "Full body. Micro 2 of 3, week 3. Not written yet.",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "str2-hyp-w6f-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 8,
+                        "slots": []
+                      },
+                      {
+                        "id": "str2-hyp-w6f-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 20,
+                        "slots": []
+                      },
+                      {
+                        "id": "str2-hyp-w6f-B",
+                        "kind": "series",
+                        "label": "B",
+                        "minutes": 15,
+                        "slots": []
+                      },
+                      {
+                        "id": "str2-hyp-w6f-C",
+                        "kind": "series",
+                        "label": "C",
+                        "minutes": 12,
+                        "slots": []
                       }
                     ]
                   }
@@ -1980,266 +1765,110 @@
                 "id": "str2-hyp-w7",
                 "sessions": [
                   {
-                    "id": "str2-hyp-w7a",
-                    "focus": "full-a",
-                    "intent": "Squat + upper focus. Micro 3 of 3 (7/5/3 final wave), week 1: main lifts 3x7 at 75%.",
+                    "id": "str2-hyp-w7l",
+                    "focus": "lower",
+                    "intent": "Lower body. Micro 3 of 3, week 1. Not written yet.",
                     "kind": "series",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w7a-WU",
+                        "id": "str2-hyp-w7l-WU",
                         "kind": "series",
                         "label": "WU",
-                        "minutes": 5,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w7a-wu1",
-                            "exerciseId": null,
-                            "name": "Bike or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
-                          },
-                          {
-                            "id": "str2-hyp-w7a-wu2",
-                            "exerciseId": null,
-                            "name": "World's Greatest Stretch",
-                            "sets": "1",
-                            "reps": "5",
-                            "note": "each side, slow"
-                          },
-                          {
-                            "id": "str2-hyp-w7a-wu3",
-                            "exerciseId": null,
-                            "name": "Air Squat + Jump-and-Stick",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "then 5 jump-and-stick landings, quiet feet"
-                          },
-                          {
-                            "id": "str2-hyp-w7a-wu4",
-                            "exerciseId": null,
-                            "name": "Band Pull-Apart",
-                            "sets": "1",
-                            "reps": "15"
-                          }
-                        ],
-                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
+                        "minutes": 8,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w7a-A",
+                        "id": "str2-hyp-w7l-A",
                         "kind": "series",
                         "label": "A",
-                        "minutes": 15,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w7a-a0",
-                            "exerciseId": 688272,
-                            "name": "Barbell Back Squat",
-                            "sets": "3",
-                            "reps": "7",
-                            "rpe": "8",
-                            "note": "Front squat option: same reps, RPE-primary, roughly 7.5 to 10 per cent down on the back squat number. Final wave 7/5/3: heaviest of the block. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
-                            "intensity": "75%"
-                          },
-                          {
-                            "id": "str2-hyp-w7a-a1",
-                            "exerciseId": 7430055,
-                            "name": "Broad Jump to Vertical Jump",
-                            "sets": "3",
-                            "reps": "3",
-                            "note": "Stick both landings. Experienced jumpers may use single leg depth jumps off a low box instead."
-                          }
-                        ]
+                        "minutes": 20,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w7a-B",
+                        "id": "str2-hyp-w7l-B",
                         "kind": "series",
                         "label": "B",
-                        "minutes": 12,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w7a-b2",
-                            "exerciseId": 686395,
-                            "name": "Barbell Bench Press",
-                            "sets": "3",
-                            "reps": "7",
-                            "rpe": "8",
-                            "note": "Calibration: work to a hard but crisp top set of 7 and record it. This is your bench anchor for weeks 8 and 9."
-                          },
-                          {
-                            "id": "str2-hyp-w7a-b3",
-                            "exerciseId": 687828,
-                            "name": "Weighted Pull Ups",
-                            "sets": "4",
-                            "reps": "3",
-                            "rpe": "8.5",
-                            "note": "Work to a top triple, then 3 back-off triples at minus 10 per cent."
-                          }
-                        ]
+                        "minutes": 15,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w7a-C",
+                        "id": "str2-hyp-w7l-C",
                         "kind": "series",
                         "label": "C",
-                        "minutes": 10,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w7a-c4",
-                            "exerciseId": 76843,
-                            "name": "Barbell Row",
-                            "sets": "3",
-                            "reps": "8",
-                            "rpe": "7.5"
-                          },
-                          {
-                            "id": "str2-hyp-w7a-c5",
-                            "exerciseId": 8211170,
-                            "name": "Pike Push Up",
-                            "sets": "3",
-                            "reps": "8",
-                            "rpe": "7",
-                            "note": "Superset. Second arm movement still to be named on the plan."
-                          },
-                          {
-                            "id": "str2-hyp-w7a-c6",
-                            "exerciseId": 10133,
-                            "name": "Hanging Knee Raise",
-                            "sets": "3",
-                            "reps": "8",
-                            "rpe": "7",
-                            "note": "From the rig, not a barbell in the rack. Lying leg lowers off the bench if the rig is full."
-                          }
-                        ]
+                        "minutes": 12,
+                        "slots": []
                       }
-                    ],
-                    "appDescription": "Bench calibration this week: record your top set of 7. Weeks 8 and 9 build on that number."
+                    ]
                   },
                   {
-                    "id": "str2-hyp-w7b",
-                    "focus": "full-b",
-                    "intent": "RDL + lower focus. Micro 3 of 3 (7/5/3 final wave), week 1: main lifts 3x7 at 75%.",
+                    "id": "str2-hyp-w7u",
+                    "focus": "upper",
+                    "intent": "Upper body. Micro 3 of 3, week 1. Not written yet.",
                     "kind": "series",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w7b-WU",
+                        "id": "str2-hyp-w7u-WU",
                         "kind": "series",
                         "label": "WU",
-                        "minutes": 5,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w7b-wu1",
-                            "exerciseId": null,
-                            "name": "Ski or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
-                          },
-                          {
-                            "id": "str2-hyp-w7b-wu2",
-                            "exerciseId": null,
-                            "name": "Glute Bridge",
-                            "sets": "1",
-                            "reps": "12",
-                            "note": "2 second squeeze at the top"
-                          },
-                          {
-                            "id": "str2-hyp-w7b-wu3",
-                            "exerciseId": null,
-                            "name": "Unloaded RDL to Reach",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "empty bar or PVC, slow hinge, feel the hamstrings"
-                          },
-                          {
-                            "id": "str2-hyp-w7b-wu4",
-                            "exerciseId": null,
-                            "name": "Dead Bug",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "each side, slow exhale"
-                          }
-                        ],
-                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
+                        "minutes": 8,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w7b-A",
+                        "id": "str2-hyp-w7u-A",
                         "kind": "series",
                         "label": "A",
-                        "minutes": 15,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w7b-a0",
-                            "exerciseId": 132,
-                            "name": "Romanian Deadlift",
-                            "sets": "3",
-                            "reps": "7",
-                            "rpe": "8",
-                            "note": "Final wave entry: back off to around your wave 1 sevens. Ramp to the working load in 2 to 3 builder sets first."
-                          },
-                          {
-                            "id": "str2-hyp-w7b-a1",
-                            "exerciseId": 7149355,
-                            "name": "Reverse Copenhagen Plank",
-                            "sets": "3",
-                            "rpe": "7",
-                            "note": "15 to 25 seconds each side."
-                          }
-                        ]
+                        "minutes": 20,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w7b-B",
+                        "id": "str2-hyp-w7u-B",
                         "kind": "series",
                         "label": "B",
-                        "minutes": 12,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w7b-b2",
-                            "exerciseId": 5947846,
-                            "name": "DB Deficit Curtsey Lunge",
-                            "sets": "3",
-                            "reps": "8",
-                            "rpe": "7",
-                            "note": "Each side, front foot on a small plate."
-                          },
-                          {
-                            "id": "str2-hyp-w7b-b3",
-                            "exerciseId": 51434,
-                            "name": "Barbell Hip Thrust",
-                            "sets": "3",
-                            "reps": "10",
-                            "rpe": "7.5",
-                            "note": "Pause 1 second at the top."
-                          }
-                        ]
+                        "minutes": 15,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w7b-C",
+                        "id": "str2-hyp-w7u-C",
                         "kind": "series",
                         "label": "C",
-                        "minutes": 10,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w7b-c4",
-                            "exerciseId": 54656,
-                            "name": "Z-Press",
-                            "sets": "3",
-                            "reps": "6",
-                            "rpe": "7.5"
-                          },
-                          {
-                            "id": "str2-hyp-w7b-c5",
-                            "exerciseId": 2101246,
-                            "name": "DB Y-Raise",
-                            "sets": "3",
-                            "reps": "10",
-                            "rpe": "7",
-                            "note": "Lower trap focus. Light, chest on an incline bench."
-                          },
-                          {
-                            "id": "str2-hyp-w7b-c-carry",
-                            "exerciseId": null,
-                            "name": "Farmers Carry",
-                            "sets": "3",
-                            "rpe": "7-8",
-                            "note": "40m per set, heavy but posture stays tall; suitcase carry (one side at a time) as the scale"
-                          }
-                        ]
+                        "minutes": 12,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "str2-hyp-w7f",
+                    "focus": "full",
+                    "intent": "Full body. Micro 3 of 3, week 1. Not written yet.",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "str2-hyp-w7f-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 8,
+                        "slots": []
+                      },
+                      {
+                        "id": "str2-hyp-w7f-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 20,
+                        "slots": []
+                      },
+                      {
+                        "id": "str2-hyp-w7f-B",
+                        "kind": "series",
+                        "label": "B",
+                        "minutes": 15,
+                        "slots": []
+                      },
+                      {
+                        "id": "str2-hyp-w7f-C",
+                        "kind": "series",
+                        "label": "C",
+                        "minutes": 12,
+                        "slots": []
                       }
                     ]
                   }
@@ -2249,265 +1878,110 @@
                 "id": "str2-hyp-w8",
                 "sessions": [
                   {
-                    "id": "str2-hyp-w8a",
-                    "focus": "full-a",
-                    "intent": "Squat + upper focus. Micro 3 of 3 (7/5/3 final wave), week 2: main lifts 3x5 at 80%.",
+                    "id": "str2-hyp-w8l",
+                    "focus": "lower",
+                    "intent": "Lower body. Micro 3 of 3, week 2. Not written yet.",
                     "kind": "series",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w8a-WU",
+                        "id": "str2-hyp-w8l-WU",
                         "kind": "series",
                         "label": "WU",
-                        "minutes": 5,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w8a-wu1",
-                            "exerciseId": null,
-                            "name": "Bike or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
-                          },
-                          {
-                            "id": "str2-hyp-w8a-wu2",
-                            "exerciseId": null,
-                            "name": "World's Greatest Stretch",
-                            "sets": "1",
-                            "reps": "5",
-                            "note": "each side, slow"
-                          },
-                          {
-                            "id": "str2-hyp-w8a-wu3",
-                            "exerciseId": null,
-                            "name": "Air Squat + Jump-and-Stick",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "then 5 jump-and-stick landings, quiet feet"
-                          },
-                          {
-                            "id": "str2-hyp-w8a-wu4",
-                            "exerciseId": null,
-                            "name": "Band Pull-Apart",
-                            "sets": "1",
-                            "reps": "15"
-                          }
-                        ],
-                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
+                        "minutes": 8,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w8a-A",
+                        "id": "str2-hyp-w8l-A",
                         "kind": "series",
                         "label": "A",
-                        "minutes": 15,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w8a-a0",
-                            "exerciseId": 688272,
-                            "name": "Barbell Back Squat",
-                            "sets": "3",
-                            "reps": "5",
-                            "rpe": "8.5",
-                            "note": "Front squat option: same reps, RPE-primary, roughly 7.5 to 10 per cent down on the back squat number. Final wave 7/5/3: heaviest of the block. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
-                            "intensity": "80%"
-                          },
-                          {
-                            "id": "str2-hyp-w8a-a1",
-                            "exerciseId": 7430055,
-                            "name": "Broad Jump to Vertical Jump",
-                            "sets": "3",
-                            "reps": "3",
-                            "note": "Stick both landings. Experienced jumpers may use single leg depth jumps off a low box instead."
-                          }
-                        ]
+                        "minutes": 20,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w8a-B",
+                        "id": "str2-hyp-w8l-B",
                         "kind": "series",
                         "label": "B",
-                        "minutes": 12,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w8a-b2",
-                            "exerciseId": 686395,
-                            "name": "Barbell Bench Press",
-                            "sets": "3",
-                            "reps": "5",
-                            "rpe": "8.5",
-                            "note": "Roughly 5 per cent above your week 7 top set."
-                          },
-                          {
-                            "id": "str2-hyp-w8a-b3",
-                            "exerciseId": 687828,
-                            "name": "Weighted Pull Ups",
-                            "sets": "4",
-                            "reps": "3",
-                            "rpe": "9",
-                            "note": "Top triple heavier than last week, then back-offs."
-                          }
-                        ]
+                        "minutes": 15,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w8a-C",
+                        "id": "str2-hyp-w8l-C",
                         "kind": "series",
                         "label": "C",
-                        "minutes": 10,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w8a-c4",
-                            "exerciseId": 76843,
-                            "name": "Barbell Row",
-                            "sets": "3",
-                            "reps": "8",
-                            "rpe": "8"
-                          },
-                          {
-                            "id": "str2-hyp-w8a-c5",
-                            "exerciseId": 8211170,
-                            "name": "Pike Push Up",
-                            "sets": "3",
-                            "reps": "10",
-                            "rpe": "7.5",
-                            "note": "Superset. Second arm movement still to be named on the plan."
-                          },
-                          {
-                            "id": "str2-hyp-w8a-c6",
-                            "exerciseId": 10133,
-                            "name": "Hanging Knee Raise",
-                            "sets": "3",
-                            "reps": "10",
-                            "rpe": "7.5",
-                            "note": "From the rig, not a barbell in the rack. Lying leg lowers off the bench if the rig is full."
-                          }
-                        ]
+                        "minutes": 12,
+                        "slots": []
                       }
                     ]
                   },
                   {
-                    "id": "str2-hyp-w8b",
-                    "focus": "full-b",
-                    "intent": "RDL + lower focus. Micro 3 of 3 (7/5/3 final wave), week 2: main lifts 3x5 at 80%.",
+                    "id": "str2-hyp-w8u",
+                    "focus": "upper",
+                    "intent": "Upper body. Micro 3 of 3, week 2. Not written yet.",
                     "kind": "series",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w8b-WU",
+                        "id": "str2-hyp-w8u-WU",
                         "kind": "series",
                         "label": "WU",
-                        "minutes": 5,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w8b-wu1",
-                            "exerciseId": null,
-                            "name": "Ski or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
-                          },
-                          {
-                            "id": "str2-hyp-w8b-wu2",
-                            "exerciseId": null,
-                            "name": "Glute Bridge",
-                            "sets": "1",
-                            "reps": "12",
-                            "note": "2 second squeeze at the top"
-                          },
-                          {
-                            "id": "str2-hyp-w8b-wu3",
-                            "exerciseId": null,
-                            "name": "Unloaded RDL to Reach",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "empty bar or PVC, slow hinge, feel the hamstrings"
-                          },
-                          {
-                            "id": "str2-hyp-w8b-wu4",
-                            "exerciseId": null,
-                            "name": "Dead Bug",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "each side, slow exhale"
-                          }
-                        ],
-                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
+                        "minutes": 8,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w8b-A",
+                        "id": "str2-hyp-w8u-A",
                         "kind": "series",
                         "label": "A",
-                        "minutes": 15,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w8b-a0",
-                            "exerciseId": 132,
-                            "name": "Romanian Deadlift",
-                            "sets": "3",
-                            "reps": "5",
-                            "rpe": "8.5",
-                            "note": "Heavier than week 7. Ramp to the working load in 2 to 3 builder sets first."
-                          },
-                          {
-                            "id": "str2-hyp-w8b-a1",
-                            "exerciseId": 7149355,
-                            "name": "Reverse Copenhagen Plank",
-                            "sets": "3",
-                            "rpe": "7.5",
-                            "note": "15 to 25 seconds each side."
-                          }
-                        ]
+                        "minutes": 20,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w8b-B",
+                        "id": "str2-hyp-w8u-B",
                         "kind": "series",
                         "label": "B",
-                        "minutes": 12,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w8b-b2",
-                            "exerciseId": 5947846,
-                            "name": "DB Deficit Curtsey Lunge",
-                            "sets": "3",
-                            "reps": "8",
-                            "rpe": "7.5",
-                            "note": "Each side, front foot on a small plate."
-                          },
-                          {
-                            "id": "str2-hyp-w8b-b3",
-                            "exerciseId": 51434,
-                            "name": "Barbell Hip Thrust",
-                            "sets": "3",
-                            "reps": "8",
-                            "rpe": "8",
-                            "note": "Heavier. Pause at the top."
-                          }
-                        ]
+                        "minutes": 15,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w8b-C",
+                        "id": "str2-hyp-w8u-C",
                         "kind": "series",
                         "label": "C",
-                        "minutes": 10,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w8b-c4",
-                            "exerciseId": 54656,
-                            "name": "Z-Press",
-                            "sets": "3",
-                            "reps": "6",
-                            "rpe": "8"
-                          },
-                          {
-                            "id": "str2-hyp-w8b-c5",
-                            "exerciseId": 2101246,
-                            "name": "DB Y-Raise",
-                            "sets": "3",
-                            "reps": "12",
-                            "rpe": "7.5",
-                            "note": "Lower trap focus. Light, chest on an incline bench."
-                          },
-                          {
-                            "id": "str2-hyp-w8b-c-carry",
-                            "exerciseId": null,
-                            "name": "Farmers Carry",
-                            "sets": "3",
-                            "rpe": "7-8",
-                            "note": "40m per set, heavy but posture stays tall; suitcase carry (one side at a time) as the scale"
-                          }
-                        ]
+                        "minutes": 12,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "str2-hyp-w8f",
+                    "focus": "full",
+                    "intent": "Full body. Micro 3 of 3, week 2. Not written yet.",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "str2-hyp-w8f-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 8,
+                        "slots": []
+                      },
+                      {
+                        "id": "str2-hyp-w8f-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 20,
+                        "slots": []
+                      },
+                      {
+                        "id": "str2-hyp-w8f-B",
+                        "kind": "series",
+                        "label": "B",
+                        "minutes": 15,
+                        "slots": []
+                      },
+                      {
+                        "id": "str2-hyp-w8f-C",
+                        "kind": "series",
+                        "label": "C",
+                        "minutes": 12,
+                        "slots": []
                       }
                     ]
                   }
@@ -2517,286 +1991,110 @@
                 "id": "str2-hyp-w9",
                 "sessions": [
                   {
-                    "id": "str2-hyp-w9a",
-                    "focus": "full-a",
-                    "intent": "Squat + upper focus. Micro 3 of 3 (7/5/3 final wave), week 3: main lifts 3x3 at 85%. Challenge week: Deadhang Challenge.",
+                    "id": "str2-hyp-w9l",
+                    "focus": "lower",
+                    "intent": "Lower body. Micro 3 of 3, week 3. Not written yet.",
                     "kind": "series",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w9a-WU",
+                        "id": "str2-hyp-w9l-WU",
                         "kind": "series",
                         "label": "WU",
-                        "minutes": 5,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w9a-wu1",
-                            "exerciseId": null,
-                            "name": "Bike or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
-                          },
-                          {
-                            "id": "str2-hyp-w9a-wu2",
-                            "exerciseId": null,
-                            "name": "World's Greatest Stretch",
-                            "sets": "1",
-                            "reps": "5",
-                            "note": "each side, slow"
-                          },
-                          {
-                            "id": "str2-hyp-w9a-wu3",
-                            "exerciseId": null,
-                            "name": "Air Squat + Jump-and-Stick",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "then 5 jump-and-stick landings, quiet feet"
-                          },
-                          {
-                            "id": "str2-hyp-w9a-wu4",
-                            "exerciseId": null,
-                            "name": "Band Pull-Apart",
-                            "sets": "1",
-                            "reps": "15"
-                          }
-                        ],
-                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
+                        "minutes": 8,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w9a-A",
+                        "id": "str2-hyp-w9l-A",
                         "kind": "series",
                         "label": "A",
-                        "minutes": 15,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w9a-a0",
-                            "exerciseId": 688272,
-                            "name": "Barbell Back Squat",
-                            "sets": "3",
-                            "reps": "3",
-                            "rpe": "9",
-                            "note": "Front squat option: same reps, RPE-primary, roughly 7.5 to 10 per cent down on the back squat number. Final wave 7/5/3: heaviest of the block. Ramp to the working load in 2 to 3 builder sets first. The RPE is the do-not-exceed line: load off the percentage, back off if the RPE says so.",
-                            "intensity": "85%"
-                          },
-                          {
-                            "id": "str2-hyp-w9a-a1",
-                            "exerciseId": 7430055,
-                            "name": "Broad Jump to Vertical Jump",
-                            "sets": "3",
-                            "reps": "3",
-                            "note": "Stick both landings. Experienced jumpers may use single leg depth jumps off a low box instead."
-                          }
-                        ]
+                        "minutes": 20,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w9a-B",
+                        "id": "str2-hyp-w9l-B",
                         "kind": "series",
                         "label": "B",
-                        "minutes": 12,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w9a-b2",
-                            "exerciseId": 686395,
-                            "name": "Barbell Bench Press",
-                            "sets": "3",
-                            "reps": "3",
-                            "rpe": "9",
-                            "note": "Roughly 10 per cent above your week 7 top set. The RPE cap is the law."
-                          },
-                          {
-                            "id": "str2-hyp-w9a-b3",
-                            "exerciseId": 687828,
-                            "name": "Weighted Pull Ups",
-                            "sets": "4",
-                            "reps": "3",
-                            "rpe": "9",
-                            "note": "Back-off triples only at minus 10 per cent, no max attempt: the deadhang challenge is the grip test today."
-                          }
-                        ]
+                        "minutes": 15,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w9a-C",
+                        "id": "str2-hyp-w9l-C",
                         "kind": "series",
                         "label": "C",
-                        "minutes": 10,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w9a-c4",
-                            "exerciseId": 76843,
-                            "name": "Barbell Row",
-                            "sets": "2",
-                            "reps": "6",
-                            "rpe": "8",
-                            "note": "Taper week: two sets. Save it for the wave and the challenge."
-                          },
-                          {
-                            "id": "str2-hyp-w9a-c5",
-                            "exerciseId": 8211170,
-                            "name": "Pike Push Up",
-                            "sets": "2",
-                            "reps": "10",
-                            "rpe": "8",
-                            "note": "Taper week: two sets. Superset partner still to be named on the plan."
-                          },
-                          {
-                            "id": "str2-hyp-w9a-c6",
-                            "exerciseId": 10133,
-                            "name": "Hanging Knee Raise",
-                            "sets": "2",
-                            "reps": "10",
-                            "rpe": "8",
-                            "note": "From the rig. Taper week: two sets."
-                          }
-                        ]
-                      },
-                      {
-                        "id": "str2-hyp-w9a-CH",
-                        "kind": "circuit",
-                        "label": "Challenge",
-                        "minutes": 8,
-                        "pieces": [
-                          {
-                            "id": "str2-hyp-w9a-ch1",
-                            "heading": "Deadhang Challenge",
-                            "lines": [
-                              {
-                                "text": "One attempt. Max hang from the bar."
-                              },
-                              {
-                                "text": "Chalk up. Longest hang wins."
-                              }
-                            ]
-                          }
-                        ]
+                        "minutes": 12,
+                        "slots": []
                       }
                     ]
                   },
                   {
-                    "id": "str2-hyp-w9b",
-                    "focus": "full-b",
-                    "intent": "RDL + lower focus. Micro 3 of 3 (7/5/3 final wave), week 3: main lifts 3x3 at 85%.",
+                    "id": "str2-hyp-w9u",
+                    "focus": "upper",
+                    "intent": "Upper body. Micro 3 of 3, week 3. Not written yet.",
                     "kind": "series",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w9b-WU",
+                        "id": "str2-hyp-w9u-WU",
                         "kind": "series",
                         "label": "WU",
-                        "minutes": 5,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w9b-wu1",
-                            "exerciseId": null,
-                            "name": "Ski or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
-                          },
-                          {
-                            "id": "str2-hyp-w9b-wu2",
-                            "exerciseId": null,
-                            "name": "Glute Bridge",
-                            "sets": "1",
-                            "reps": "12",
-                            "note": "2 second squeeze at the top"
-                          },
-                          {
-                            "id": "str2-hyp-w9b-wu3",
-                            "exerciseId": null,
-                            "name": "Unloaded RDL to Reach",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "empty bar or PVC, slow hinge, feel the hamstrings"
-                          },
-                          {
-                            "id": "str2-hyp-w9b-wu4",
-                            "exerciseId": null,
-                            "name": "Dead Bug",
-                            "sets": "1",
-                            "reps": "10",
-                            "note": "each side, slow exhale"
-                          }
-                        ],
-                        "note": "Then 2 to 3 builder sets on the day's first lift before the working sets."
+                        "minutes": 8,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w9b-A",
+                        "id": "str2-hyp-w9u-A",
                         "kind": "series",
                         "label": "A",
-                        "minutes": 15,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w9b-a0",
-                            "exerciseId": 132,
-                            "name": "Romanian Deadlift",
-                            "sets": "3",
-                            "reps": "3",
-                            "rpe": "9",
-                            "note": "Heaviest triple of the block. The RPE cap is the law here, not a target. Ramp to the working load in 2 to 3 builder sets first."
-                          },
-                          {
-                            "id": "str2-hyp-w9b-a1",
-                            "exerciseId": 7149355,
-                            "name": "Reverse Copenhagen Plank",
-                            "sets": "3",
-                            "rpe": "8",
-                            "note": "15 to 25 seconds each side."
-                          }
-                        ]
+                        "minutes": 20,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w9b-B",
+                        "id": "str2-hyp-w9u-B",
                         "kind": "series",
                         "label": "B",
-                        "minutes": 12,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w9b-b2",
-                            "exerciseId": 5947846,
-                            "name": "DB Deficit Curtsey Lunge",
-                            "sets": "3",
-                            "reps": "10",
-                            "rpe": "8",
-                            "note": "Each side, front foot on a small plate."
-                          },
-                          {
-                            "id": "str2-hyp-w9b-b3",
-                            "exerciseId": 51434,
-                            "name": "Barbell Hip Thrust",
-                            "sets": "3",
-                            "reps": "6",
-                            "rpe": "8.5",
-                            "note": "Heaviest of the block."
-                          }
-                        ]
+                        "minutes": 15,
+                        "slots": []
                       },
                       {
-                        "id": "str2-hyp-w9b-C",
+                        "id": "str2-hyp-w9u-C",
                         "kind": "series",
                         "label": "C",
-                        "minutes": 10,
-                        "slots": [
-                          {
-                            "id": "str2-hyp-w9b-c4",
-                            "exerciseId": 54656,
-                            "name": "Z-Press",
-                            "sets": "3",
-                            "reps": "5",
-                            "rpe": "8.5"
-                          },
-                          {
-                            "id": "str2-hyp-w9b-c5",
-                            "exerciseId": 2101246,
-                            "name": "DB Y-Raise",
-                            "sets": "3",
-                            "reps": "12",
-                            "rpe": "8",
-                            "note": "Lower trap focus. Light, chest on an incline bench."
-                          },
-                          {
-                            "id": "str2-hyp-w9b-c-carry",
-                            "exerciseId": null,
-                            "name": "Farmers Carry",
-                            "sets": "3",
-                            "rpe": "7-8",
-                            "note": "40m per set, heavy but posture stays tall; suitcase carry (one side at a time) as the scale"
-                          }
-                        ]
+                        "minutes": 12,
+                        "slots": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "str2-hyp-w9f",
+                    "focus": "full",
+                    "intent": "Full body. Micro 3 of 3, week 3. Not written yet.",
+                    "kind": "series",
+                    "timedBlocks": [
+                      {
+                        "id": "str2-hyp-w9f-WU",
+                        "kind": "series",
+                        "label": "WU",
+                        "minutes": 8,
+                        "slots": []
+                      },
+                      {
+                        "id": "str2-hyp-w9f-A",
+                        "kind": "series",
+                        "label": "A",
+                        "minutes": 20,
+                        "slots": []
+                      },
+                      {
+                        "id": "str2-hyp-w9f-B",
+                        "kind": "series",
+                        "label": "B",
+                        "minutes": 15,
+                        "slots": []
+                      },
+                      {
+                        "id": "str2-hyp-w9f-C",
+                        "kind": "series",
+                        "label": "C",
+                        "minutes": 12,
+                        "slots": []
                       }
                     ]
                   }
@@ -7708,8 +7006,8 @@
       }
     ]
   },
-  "rev": 169,
-  "updatedAt": "2026-09-01T10:11:01.761Z",
+  "rev": 273,
+  "updatedAt": "2026-09-10T03:12:21.712Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }
