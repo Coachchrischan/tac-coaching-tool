@@ -199,7 +199,9 @@
           "name": "Single Leg Hamstring Bridge"
         },
         {
-          "name": "Double Leg Hamstring Bridge"
+          "name": "Double Leg Hamstring Bridge",
+          "sets": "3",
+          "reps": "15"
         }
       ],
       "2529795": [
@@ -238,10 +240,14 @@
       ],
       "8137642": [
         {
-          "name": "DB FFE Split Squat"
+          "name": "DB FFE Split Squat",
+          "sets": "",
+          "reps": ""
         },
         {
-          "name": "DB Split Squat"
+          "name": "DB Split Squat",
+          "sets": "",
+          "reps": ""
         }
       ],
       "8211110": [
@@ -284,8 +290,8 @@
     "cues": {},
     "customExercises": []
   },
-  "rev": 45,
-  "updatedAt": "2026-09-10T03:13:57.907Z",
+  "rev": 50,
+  "updatedAt": "2026-09-10T03:14:11.152Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }
