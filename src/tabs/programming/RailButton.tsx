@@ -45,6 +45,17 @@ export function OverviewIcon() {
   );
 }
 
+/** Microcycle text pack: a page of text lines on a dark tile. */
+export function PackIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="1.5" y="1.5" width="21" height="21" rx="5.5" fill="#1B1B1B" />
+      <rect x="6" y="4.5" width="12" height="15" rx="1.4" fill="#F5F3EB" />
+      <path d="M8.5 8h7M8.5 10.6h7M8.5 13.2h7M8.5 15.8h4" stroke="#DEC5AE" strokeWidth="1.3" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 /** TV output: a screen on a dark tile, matching the other two rail marks. */
 export function TvIcon() {
   return (

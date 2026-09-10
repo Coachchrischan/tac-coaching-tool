@@ -23,6 +23,7 @@ import WeekView from './WeekView';
 import RailButton, {
   LayoutIcon,
   OverviewIcon,
+  PackIcon,
   SheetsIcon,
   TrainHeroicIcon,
   TvIcon,
@@ -1140,6 +1141,16 @@ export default function ProgrammingTab() {
           onClick={() => navigate('/overview')}
         >
           <OverviewIcon />
+        </RailButton>
+        <RailButton
+          label={`Text pack for the designer: ${(stream.cadence ?? 'phases') === 'phases' ? `micro ${Math.floor(wi / blockLen) + 1}` : 'this container'}, every board written out (PDF)`}
+          onClick={() =>
+            navigate(
+              `/pack/${blocks[bi].id}?from=${Math.floor(wi / blockLen) * blockLen + 1}&to=${Math.min(blocks[bi].weeks.length, Math.floor(wi / blockLen) * blockLen + blockLen)}`,
+            )
+          }
+        >
+          <PackIcon />
         </RailButton>
         <RailButton label="Export for Sheets" onClick={() => downloadProgramCsv(doc)}>
           <SheetsIcon />

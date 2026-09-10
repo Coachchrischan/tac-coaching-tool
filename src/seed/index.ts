@@ -117,10 +117,10 @@ const FOCUSES: SessionFocus[] = ['lower', 'upper', 'full'];
 // Every session starts with a Warm Up (WU) series plus A, B, C series.
 export function defaultSeries(prefix: string): TimedBlock[] {
   return [
-    { id: `${prefix}-WU`, label: 'WU', minutes: 5, slots: [] },
-    { id: `${prefix}-A`, label: 'A', minutes: 15, slots: [] },
-    { id: `${prefix}-B`, label: 'B', minutes: 12, slots: [] },
-    { id: `${prefix}-C`, label: 'C', minutes: 10, slots: [] },
+    { id: `${prefix}-WU`, label: 'WU', minutes: 8, slots: [] },
+    { id: `${prefix}-A`, label: 'A', minutes: 20, slots: [] },
+    { id: `${prefix}-B`, label: 'B', minutes: 15, slots: [] },
+    { id: `${prefix}-C`, label: 'C', minutes: 12, slots: [] },
   ];
 }
 

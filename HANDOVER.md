@@ -476,9 +476,65 @@ the sequence; all five steps shipped, one commit each, live-verified:
 ProgrammingTab thinning (control bar / Edit panel, if ever needed), and
 everything in the round-2 file's "later, with Chris" list.
 
+## Phase 2 reloaded: three-day split, microcycle 1 (2026-09-10)
+
+Chris rewrote the club sheet (tab "Phase 1 - Upper / Lower / Full Body") as a
+three-day split with fresh warm-ups and scaled options, and asked for Phase 2
+to hold it. That reopens the 2026-08-31 A/B decision, on his call. Done in
+one pass, `scripts/oneoff-2026-09-10-three-day-micro1.mjs`, through the store
+API (program rev 170 to 171, library-overrides 40 to 41):
+
+- **Archived first**: `archive/strength-full-body-ab-2026-09.json` holds the
+  live A/B block (rev 170, including Chris's same-morning warm-up edit) and
+  the five scale keys it used. Restorable.
+- **Loaded**: weeks 1 to 3 as Lower (Tue) / Upper (Thu) / Full Body (Fri), 102
+  slots, the week 1 prescription repeated across the three weeks (his choice);
+  weeks 4 to 9 are empty sessions with an intent saying so. Same block id
+  (`str2-hyp`), theme, annual link and 3-week block length, so the annual
+  lane, dates and Movement Check window are untouched.
+- **Scales**: the sheet's two per exercise replace the exercise-level scales
+  for the 20 exercises it lists; entries whose name matched kept their
+  prescription detail (box squat, goblet squat, shoulder taps). No scale in
+  the sheet means none in the tool. Eight compounds gained movement-pattern
+  tags for Movement Check.
+- **Catalog**: `lower`/`upper`/`full` carry the push titles now ("Lower Body",
+  "Upper Body", "Full Body"); `full-a`/`full-b` keep their class types for the
+  Primer weeks and the archive but no longer push. Days still resolve from the
+  live timetable, so Friday's `fbs` class is fed and the unfed-class warning
+  clears. Test updated; 72 green, strict clean.
+- **Not touched**: the Primer (still A/B, off-app) and Phase 3 (empty). The
+  Schedule class type names still read "Full Body Strength A/B"; rename them
+  in Schedule if the club has.
+- **Flags for Chris**: the sheet numbers Upper as Day 1, the timetable runs
+  Lower on Tuesday (fix the timetable if the club swapped); Tempo Bench carries
+  the 30X1 he ratified for the A/B micro 1 because the sheet names it tempo but
+  gives none; thirteen warm-up/accessory names have no TrainHeroic library
+  match and push as named skips (list in PROGRAMMING-PLAN.md).
+- **Text pack for the designer (same day)**: `/pack/:blockId?from=&to=`
+  (`src/tabs/pack/PackPage.tsx`, rail button on Programming) writes a block
+  window out as one A4 page per session with every line the TV board renders
+  (title, intent, warm-up strip, A/B/C columns with minutes and part notes,
+  numbered exercises with the board's prescription line, slot notes, cues,
+  scales, coach note, member app description, footer blurb). Real text, not a
+  raster: print it with the browser (Ctrl+P, Save as PDF) or headless Chrome
+  (`chrome --headless=new --no-pdf-header-footer --virtual-time-budget=15000
+  --print-to-pdf=out.pdf "http://localhost:8127/pack/str2-hyp?from=1&to=3"`).
+  First output: `TAC/programming/TAC-Strength-Phase2-Micro1-board-text-2026-09-10.pdf`
+  (10 pages, Mulish and Fraunces embedded). It reads the live documents, so
+  regenerate after editing.
+- **Same pack as Word + plain text**: `npm run pack:docx -- <blockId> <from> <to> [out.docx]`
+  (`scripts/pack-docx.mjs`, reads the live store; `scripts/ts-resolve.mjs` lets it
+  import `src/lib/blurb.ts` straight from source so the footer blurb matches the
+  board). Writes the .docx and a .txt beside it. First outputs sit beside the
+  PDF in `TAC/programming/`. Timings changed the same day on Chris's call:
+  every strength session is 5 min brief (said in the blurb, not modelled), then
+  WU 8 / A 20 / B 15 / C 12 minutes; `defaultSeries` seeds new sessions that way.
+- **Still open**: micro 2 and 3, the intensity wave inside micro 1, pushing
+  week 1 drafts before 14 Sept, Gym Floor fixtures, the round-2 coaching queue.
+
 **Decisions already made, do not reopen without me:** ESD and Game Day are month to month, not
 periodised (**Hyrox was, and is now four-week blocks**, changed 2026-08-28 on Chris's call).
 TrainHeroic stays drafts only. The week email opens a Gmail compose window and never sends.
-Hyrox runs two days a week, not three. **Strength is the two-day Full Body A/B split from
-14 Sept, Friday strength is on hold, and the Deload/Skills week is removed** (club decisions,
-2026-08-31).
+Hyrox runs two days a week, not three. **Strength is the three-day Lower / Upper / Full Body
+split from 14 Sept (Chris, 2026-09-10, replacing the 2026-08-31 two-day A/B), Friday strength is
+back on, and the Deload/Skills week is removed** (club decision, 2026-08-31).
