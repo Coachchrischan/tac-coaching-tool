@@ -267,12 +267,6 @@
                         "minutes": 5,
                         "slots": [
                           {
-                            "id": "str2-hyp-w1a-wu1",
-                            "exerciseId": null,
-                            "name": "Bike or Row",
-                            "note": "2 minutes easy, building every 30 seconds"
-                          },
-                          {
                             "id": "str2-hyp-w1a-wu2",
                             "exerciseId": null,
                             "name": "World's Greatest Stretch",
@@ -7708,8 +7702,8 @@
       }
     ]
   },
-  "rev": 169,
-  "updatedAt": "2026-09-01T10:11:01.761Z",
+  "rev": 170,
+  "updatedAt": "2026-09-10T01:57:02.679Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }
