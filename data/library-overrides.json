@@ -147,10 +147,14 @@
       ],
       "440": [
         {
-          "name": "Counter Movement Jump"
+          "name": "Counter Movement Jump",
+          "sets": "3",
+          "reps": "5"
         },
         {
-          "name": "Single Leg Tall to Short"
+          "name": "Single Leg Tall to Short",
+          "sets": "3",
+          "reps": "5"
         }
       ],
       "54656": [
@@ -253,7 +257,9 @@
           "rpe": "8"
         },
         {
-          "name": "Tall Plank"
+          "name": "Tall Plank",
+          "sets": "3",
+          "reps": "45sec"
         }
       ],
       "name:weighted db single leg calf raises": [
@@ -278,8 +284,8 @@
     "cues": {},
     "customExercises": []
   },
-  "rev": 41,
-  "updatedAt": "2026-09-10T02:45:23.600Z",
+  "rev": 45,
+  "updatedAt": "2026-09-10T03:13:57.907Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }
