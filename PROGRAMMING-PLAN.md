@@ -47,8 +47,35 @@ its design in case the club returns to it.
 
 ## Phase 2: Strength-Hypertrophy, 9 weeks (14 Sept), as restored
 
-Phase 2 now holds weeks 1 to 9 of the August Lower/Upper/Full block (its week
-10 is not used: the phase is nine weeks). **Week 1 is Chris's sheet exactly**:
+**Weeks 1 to 3 are the club's finished first microcycle, imported from
+TrainHeroic on 2026-09-13** (`npm run import-club-program -- --from
+2026-09-14 --weeks 1-3`; raw snapshot in `archive/th-club-program/`). The
+finished product is authored on the club's own TrainHeroic account ("Teneriffe
+Athletic Club Strength", program 5109902), not on Chris's, and differs from the
+sheet below in three ways worth knowing:
+
+- **Day order.** The club published **Upper as Day 1 (Tuesday)**, **Lower as
+  Day 2 (Thursday)** and Full Body as Day 3 (Saturday). The tool's timetable
+  and focus catalog still run Lower on the Tuesday class and Upper on the
+  Thursday class, so the imported sessions are named "Upper - W1D1" and
+  "Lower - W1D2" but sit on the tool's Thursday and Tuesday. Not changed in
+  the tool: whether the Tue/Thu class names swap is the club's call.
+- **Main lifts.** Squat and RDL run 3x9 at 70%, 3x7 at 75%, then **4x5 at 80%**
+  (a fourth set in week 3), E3OM in pairs. Chin-ups build volume, 4/5/6 x 5,
+  E2OM with partners on odd and even minutes. Bench is tempo 4.1.1, 3x6, with
+  RIR tightening 2 / 1 / 0 across the micro.
+- **Accessories** climb reps or time each week (Jefferson 8/10/12, hamstring
+  bridge 10/12/12-15, Copenhagen 30/35/40 sec, curls and skullcrushers
+  12/15/15-20). Week 3 Upper ends on the **mechanical drop set plank
+  challenge** (leaderboard, prize).
+
+The TrainHeroic cues live in the exercise library as coach cues (32 added,
+none overwritten); the per-week RIR, holds and tempo sit on the slots. Weeks 4
+to 9 will be imported the same way as the club publishes them.
+
+Before the import, Phase 2 held weeks 1 to 9 of the August Lower/Upper/Full
+block (its week 10 is not used: the phase is nine weeks), and weeks 4 to 9
+still do. **Week 1 of that sheet was**:
 Lower runs Back Squat (E3OM) 3x9 at 70%, Drag Through, jumps, Jefferson
 Split Squat (FFE) 3x8 at RPE 7, Single Leg Hamstring Bridge, Cyclist Squat
 finisher, single leg calf raises and Lateral Hip Thrust; Upper runs Weighted

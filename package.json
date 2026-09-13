@@ -10,7 +10,8 @@
     "refresh-library": "node scripts/refresh-library.mjs",
     "preview": "vite preview",
     "test": "vitest run",
-    "check": "tsc -p tsconfig.app.json --noEmit && vitest run"
+    "check": "tsc -p tsconfig.app.json --noEmit && vitest run",
+    "import-club-program": "node scripts/import-club-program.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
