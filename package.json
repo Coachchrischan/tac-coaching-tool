@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "check": "tsc -p tsconfig.app.json --noEmit && vitest run",
-    "import-club-program": "node scripts/import-club-program.mjs"
+    "import-club-program": "node scripts/import-club-program.mjs",
+    "capture-tv": "node scripts/capture-tv.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

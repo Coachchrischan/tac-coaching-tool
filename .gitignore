@@ -31,3 +31,4 @@ data/*.json.corrupt-*
 *.njsproj
 *.sln
 *.sw?
+exports/

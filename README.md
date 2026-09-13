@@ -52,3 +52,11 @@ npm run import-club-program -- --from 2026-09-14 --weeks 1-3 [--phase str2-hyp] 
 ## Designer pack
 
 `/designer-pack?stream=&container=&window=` (rail button on Programming) builds one A4-landscape PDF plus a JSON twin for one block of one stream: a cover with the legend, then every written session with every field it carries, each marked **ON THE WALL** (the current board prints it) or **COACH ONLY** (never on the wall), scaled options under each movement, and the current board rendered after each session for reference. The labelling is computed in `src/lib/designerPack.ts` from the same rules `TvBoard` renders by, and is unit-tested. Files are named `TAC-designer-pack-<stream>-<phase>-block<N>.pdf/.json`. Made for the marketing agency redesigning the wall boards; nothing in it is published to members.
+
+## Capturing TV boards to files (no browser UI)
+
+```
+npm run capture-tv -- --out exports/tv/<date> <sessionId> [<sessionId> ...]
+```
+
+Drives headless Chrome over the DevTools protocol against the running dev server (8127): each `/tv/:sessionId` page is opened at 1920x1080 (the board is 1:1 there), the on-screen controls and fit notice are hidden, and the frame is saved as `tac-tv-<sessionId>.png`. Same 1080p frame as the page's Export PNG. Session ids are the document ids (for example `str2-luf-w1-upper`). `exports/` is gitignored.
