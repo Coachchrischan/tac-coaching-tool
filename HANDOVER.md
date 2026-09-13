@@ -115,6 +115,11 @@ Community, Planning, Ethos.
   `src/tabs/tv/TvBoard.tsx` and re-rasterised, so only the backdrop photos limit sharpness.
 - **TV board** (`/tv/:sessionId`): 1920x1080 landscape, TAC-branded, renders both formats, with
   per-class member photos as backdrops. Export PNG / PDF.
+- **TrainHeroic import (2026-09-13):** the club's finished microcycles are authored on the
+  club's own TrainHeroic account, not mine. `npm run import-club-program -- --from <Monday>
+  --weeks a-b` pulls them into a phase (read-only on the TrainHeroic side; see README).
+  Weeks 1 to 3 of Phase 2 are imported; the club runs Upper on Tuesday and Lower on
+  Thursday, the reverse of the tool's timetable (flagged in `PROGRAMMING-PLAN.md`).
 - **TrainHeroic push:** `POST /api/team-push` via `src/server/teamPushPlugin.ts`, using
   `trainheroic-mcp`'s client and token. **Only Strength** maps to a team ("TAC Strength Class",
   TrainHeroic program id **5071078**). The six stale drafts were deleted on 2026-08-20 and

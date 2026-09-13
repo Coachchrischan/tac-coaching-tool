@@ -363,287 +363,339 @@
                 "id": "str2-hyp-w1",
                 "sessions": [
                   {
+                    "id": "str2-luf-w1-lower",
                     "focus": "lower",
+                    "name": "Lower - W1D2",
                     "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-luf-w1-lower-WU",
+                        "kind": "series",
                         "label": "WU",
                         "minutes": 5,
                         "slots": [
                           {
                             "id": "str2-luf-w1-lower-WU-s1",
                             "exerciseId": null,
-                            "name": "Hip 90/90s",
-                            "sets": "1",
-                            "reps": "16"
+                            "name": "Calf Stretch + Toe Lift in Rack",
+                            "sets": "2",
+                            "reps": "3ea",
+                            "note": "10 sec stretch, 10 sec toes pulled back"
                           },
                           {
                             "id": "str2-luf-w1-lower-WU-s2",
                             "exerciseId": null,
-                            "name": "Calf Stretch in Rack w/Toe Lift",
-                            "sets": "1",
-                            "reps": "30sec ea"
+                            "name": "Quadruped Hip CARS",
+                            "sets": "2",
+                            "reps": "3ea",
+                            "note": "each direction"
                           },
                           {
                             "id": "str2-luf-w1-lower-WU-s3",
-                            "exerciseId": 8147275,
-                            "name": "Russian Baby Maker",
-                            "sets": "1",
-                            "reps": "10"
+                            "exerciseId": 1172,
+                            "name": "DB Goblet Squat",
+                            "sets": "2",
+                            "reps": "8",
+                            "note": "20 to 30% of working weight"
                           },
                           {
                             "id": "str2-luf-w1-lower-WU-s4",
-                            "exerciseId": null,
-                            "name": "Squat Rotations",
-                            "reps": "10ea",
-                            "sets": "1"
+                            "exerciseId": 597514,
+                            "name": "Squat Jumps",
+                            "sets": "2",
+                            "reps": "30sec"
                           }
                         ],
-                        "kind": "series"
+                        "note": "2 to 3 rounds in the warm-up time cap"
                       },
                       {
                         "id": "str2-luf-w1-lower-A",
+                        "kind": "series",
                         "label": "A",
                         "minutes": 20,
                         "slots": [
                           {
                             "id": "str2-luf-w1-lower-A-s1",
                             "exerciseId": 688272,
-                            "name": "Barbell Back Squats (E3OM)",
+                            "name": "Barbell Back Squat",
                             "sets": "3",
                             "reps": "9",
                             "intensity": "70%",
-                            "tempo": "2.1.1"
+                            "note": "9/7/5 wave, working sets only"
                           },
                           {
                             "id": "str2-luf-w1-lower-A-s2",
-                            "exerciseId": null,
-                            "name": "DB or Plate Drag Through",
+                            "exerciseId": 440,
+                            "name": "Depth Jump",
                             "sets": "3",
-                            "reps": "10ea",
-                            "rpe": "8"
-                          },
-                          {
-                            "id": "str2-luf-w1-lower-A-s3",
-                            "exerciseId": 5526,
-                            "name": "Squat Jump",
-                            "sets": "3",
-                            "reps": "5"
+                            "reps": "5",
+                            "note": "off a box or bench"
                           }
                         ],
-                        "kind": "series"
+                        "note": "E3OM (Every 3 minutes on the minute) - Start each working set at 3 minutes. This should give sufficient time for each partner to do both of their exercises"
                       },
                       {
                         "id": "str2-luf-w1-lower-B",
+                        "kind": "series",
                         "label": "B",
                         "minutes": 15,
                         "slots": [
                           {
                             "id": "str2-luf-w1-lower-B-s1",
                             "exerciseId": 8137642,
-                            "name": "Barbell Jefferson Split Squat (FFE)",
+                            "name": "Barbell FFE Jefferson Split Squat",
                             "sets": "3",
                             "reps": "8ea",
-                            "rpe": "7"
+                            "tempo": "2.2.2",
+                            "note": "2 RIR"
                           },
                           {
                             "id": "str2-luf-w1-lower-B-s2",
                             "exerciseId": 2263920,
-                            "name": "Single Leg Hamstring Bridge",
+                            "name": "Single Leg Hamstring Bridge (Off Bench)",
                             "sets": "3",
                             "reps": "10ea"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       },
                       {
                         "id": "str2-luf-w1-lower-C",
+                        "kind": "series",
                         "label": "C",
                         "minutes": 10,
                         "slots": [
                           {
                             "id": "str2-luf-w1-lower-C-s1",
                             "exerciseId": 7784461,
-                            "name": "Cyclist Squat Finisher (1 &1/4)",
+                            "name": "DB Cyclist Squats (1 & 1/4)",
                             "sets": "3",
-                            "reps": "10+"
+                            "reps": "10",
+                            "note": "heels elevated"
                           },
                           {
                             "id": "str2-luf-w1-lower-C-s2",
-                            "exerciseId": null,
-                            "name": "Weighted DB Single Leg Calf Raises",
+                            "exerciseId": 7149355,
+                            "name": "Reverse Copenhagen Plank",
                             "sets": "3",
-                            "reps": "12ea"
+                            "reps": "30sec ea"
                           },
                           {
                             "id": "str2-luf-w1-lower-C-s3",
-                            "exerciseId": 7648107,
-                            "name": "Lateral Hip Thrust",
+                            "exerciseId": null,
+                            "name": "Single Leg Calf Raises (Weighted)",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "8ea"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       }
                     ],
-                    "id": "str2-luf-w1-lower"
+                    "intent": "Barbell Back Squat 3x9 at 70%. first week of the 3-week micro: set the anchor weights.",
+                    "appDescription": "Hello everyone! Welcome to Day 2 of Teneriffe Athletic Club x TrainHeroic! This will be the app we will use to track our weights and workouts, while also allowing you to complete the workout by yourself if you ever can't make a class. \n\nIf you have any questions please come and ask anytime during the class, we will be more than happy to assist.\n\nKey Points:\n1. Please enter your weights and reps for each exercise. This is how we track your weekly progress.\n2. There are suggested swaps for exercises\n3. Some compounds are based on percentage so please enter in your 1 or 3 rep maxes you did in the past 2 weeks for these. It will then workout your training max \n4. Reps in reserve (RIR) is commonly used. This is how many reps you have left before you hit failure. I will make a video to further explain the use of RIR for training intensity.seperate video for you all on training intensity \n5. Ask questions! Please make use of as coaches\n6. Please make sure you book into the class! Thankyou"
                   },
                   {
+                    "id": "str2-luf-w1-upper",
                     "focus": "upper",
+                    "name": "Upper - W1D1",
                     "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-luf-w1-upper-WU",
+                        "kind": "series",
                         "label": "WU",
                         "minutes": 5,
                         "slots": [
                           {
                             "id": "str2-luf-w1-upper-WU-s1",
-                            "exerciseId": 4440,
-                            "name": "DB Pullover",
-                            "sets": "1",
-                            "reps": "10"
+                            "exerciseId": null,
+                            "name": "Banded Lat Activation",
+                            "sets": "2",
+                            "reps": "6",
+                            "note": "5 sec hold"
                           },
                           {
                             "id": "str2-luf-w1-upper-WU-s2",
-                            "exerciseId": null,
+                            "exerciseId": 1187285,
                             "name": "Hanging Scap Retracts",
-                            "sets": "1",
+                            "sets": "2",
+                            "reps": "10",
+                            "note": "1 sec hold"
+                          },
+                          {
+                            "id": "str2-luf-w1-upper-WU-s3",
+                            "exerciseId": null,
+                            "name": "Medball Thoracic Opener",
+                            "sets": "2",
+                            "reps": "10",
+                            "load": "5 kg"
+                          },
+                          {
+                            "id": "str2-luf-w1-upper-WU-s4",
+                            "exerciseId": null,
+                            "name": "Push Up To Downward Dog",
+                            "sets": "2",
                             "reps": "10"
                           }
                         ],
-                        "kind": "series"
+                        "note": "2 to 3 rounds in the warm-up time cap"
                       },
                       {
                         "id": "str2-luf-w1-upper-A",
+                        "kind": "series",
                         "label": "A",
                         "minutes": 15,
                         "slots": [
                           {
                             "id": "str2-luf-w1-upper-A-s1",
                             "exerciseId": 240,
-                            "name": "Weighted Chin Up (E3OM)",
-                            "sets": "3",
+                            "name": "Weighted Chin Up",
+                            "sets": "4",
                             "reps": "5",
-                            "rpe": "7"
+                            "note": "2 RIR"
                           },
                           {
                             "id": "str2-luf-w1-upper-A-s2",
-                            "exerciseId": null,
-                            "name": "Prone Angels",
+                            "exerciseId": 2276649,
+                            "name": "Prone Weighted Angels",
                             "sets": "3",
-                            "reps": "12"
+                            "reps": "10-15",
+                            "note": "3x15 clean = go up next week"
                           }
                         ],
-                        "kind": "series"
+                        "note": "E2OM (Every 2 Minutes on the minute) / One partner will go on the odd minutes and one will go on the even minutes. Once you finished a set of chin ups then please complete one set of Prone Weighted Angels during your rest time."
                       },
                       {
                         "id": "str2-luf-w1-upper-B",
+                        "kind": "series",
                         "label": "B",
                         "minutes": 12,
                         "slots": [
                           {
                             "id": "str2-luf-w1-upper-B-s1",
                             "exerciseId": 686395,
-                            "name": "Barbell Bench Press",
+                            "name": "Tempo Barbell Bench Press",
                             "sets": "3",
-                            "reps": "7",
-                            "intensity": "75%"
+                            "reps": "6",
+                            "tempo": "4.1.1",
+                            "note": "2 RIR"
                           },
                           {
                             "id": "str2-luf-w1-upper-B-s2",
                             "exerciseId": 8211110,
-                            "name": "KB Gorilla Row / Single Arm DB Row",
+                            "name": "KB Gorilla Row",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "8",
+                            "note": "alternating arms"
                           }
                         ],
-                        "kind": "series"
+                        "note": "E3OM - Each round should roughly start on the 3 minutes by the time you have done both exercises."
                       },
                       {
                         "id": "str2-luf-w1-upper-C",
+                        "kind": "series",
                         "label": "C",
                         "minutes": 10,
                         "slots": [
                           {
                             "id": "str2-luf-w1-upper-C-s1",
-                            "exerciseId": 8211164,
-                            "name": "Push Ups",
+                            "exerciseId": null,
+                            "name": "Tricep Push Up",
                             "sets": "3",
-                            "reps": "1RIR"
+                            "reps": "10-15",
+                            "note": "1 RIR, over 15 = plate on back"
                           },
                           {
                             "id": "str2-luf-w1-upper-C-s2",
-                            "exerciseId": null,
+                            "exerciseId": 51428,
                             "name": "DB Rear Delt Fly",
                             "sets": "3",
-                            "reps": "15"
+                            "reps": "10-12",
+                            "note": "1 RIR"
                           },
                           {
                             "id": "str2-luf-w1-upper-C-s3",
                             "exerciseId": 5947834,
                             "name": "Oblique Crunch",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "8ea"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       }
                     ],
-                    "id": "str2-luf-w1-upper"
+                    "intent": "Weighted Chin Up 4x5 at 2 RIR. first week of the 3-week micro: set the anchor weights.",
+                    "appDescription": "Hello everyone! Welcome to Teneriffe Athletic Club x TrainHeroic! This will be the app we will use to track our weights and workouts, while also allowing you to complete the workout by yourself if you ever can't make a class. \n\nIf you have any questions please come and ask anytime during the class, we will be more than happy to assist.\n\nKey Points:\n1. Please enter your weights and reps for each exercise. This is how we track your weekly progress.\n2. There are suggested swaps for exercises\n3. Some compounds are based on percentage so please enter in your 1 or 3 rep maxes you did in the past 2 weeks for these. It will then workout your training max \n4. Reps in reserve (RIR) is commonly used. This is how many reps you have left before you hit failure. I will make a video to further explain the use of RIR for training intensity.seperate video for you all on training intensity \n5. Ask questions! Please make use of as coaches\n6. Please make sure you book into the class! Thankyou"
                   },
                   {
+                    "id": "str2-luf-w1-full",
                     "focus": "full",
+                    "name": "Full Body - W1D3",
                     "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-luf-w1-full-WU",
+                        "kind": "series",
                         "label": "WU",
                         "minutes": 5,
                         "slots": [
                           {
                             "id": "str2-luf-w1-full-WU-s1",
-                            "exerciseId": null,
-                            "name": "Glute Stretch",
-                            "sets": "1",
+                            "exerciseId": 7372167,
+                            "name": "Quadruped Glute Stretch",
+                            "sets": "2",
                             "reps": "30sec ea"
                           },
                           {
                             "id": "str2-luf-w1-full-WU-s2",
-                            "exerciseId": null,
+                            "exerciseId": 7372169,
+                            "name": "Adductor Rock Back Stretch",
+                            "sets": "2",
+                            "reps": "10ea",
+                            "note": "3 sec hold"
+                          },
+                          {
+                            "id": "str2-luf-w1-full-WU-s3",
+                            "exerciseId": 7804461,
                             "name": "Glute Bridge w/Rotation",
-                            "sets": "1",
+                            "sets": "2",
+                            "reps": "10ea"
+                          },
+                          {
+                            "id": "str2-luf-w1-full-WU-s4",
+                            "exerciseId": 7872827,
+                            "name": "Single Leg Arabesque",
+                            "sets": "2",
                             "reps": "10ea"
                           }
                         ],
-                        "kind": "series"
+                        "note": "2 to 3 rounds in the warm-up time cap"
                       },
                       {
                         "id": "str2-luf-w1-full-A",
+                        "kind": "series",
                         "label": "A",
                         "minutes": 15,
                         "slots": [
                           {
                             "id": "str2-luf-w1-full-A-s1",
                             "exerciseId": 597556,
-                            "name": "Barbell RDL (E3OM)",
+                            "name": "Barbell RDL",
                             "sets": "3",
-                            "reps": "5",
-                            "intensity": "80%"
+                            "reps": "9",
+                            "intensity": "70%",
+                            "note": "2 RIR, 9/7/5 wave, working sets only"
                           },
                           {
                             "id": "str2-luf-w1-full-A-s2",
-                            "exerciseId": null,
-                            "name": "DB Step Back / Cossack Squat / Curtsey Lunge / Step Up Etc",
+                            "exerciseId": 651035,
+                            "name": "Cossack Squat",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "8ea",
+                            "note": "2 RIR"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       },
                       {
                         "id": "str2-luf-w1-full-B",
+                        "kind": "series",
                         "label": "B",
                         "minutes": 12,
                         "slots": [
@@ -653,36 +705,36 @@
                             "name": "Barbell Z-Press",
                             "sets": "3",
                             "reps": "8",
-                            "rpe": "7"
+                            "note": "2 RIR"
                           },
                           {
                             "id": "str2-luf-w1-full-B-s2",
-                            "exerciseId": 187,
-                            "name": "Inverted Rows",
+                            "exerciseId": 222,
+                            "name": "Inverted Rows (Feet Elevated)",
                             "sets": "3",
                             "reps": "10"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       },
                       {
                         "id": "str2-luf-w1-full-C",
+                        "kind": "series",
                         "label": "C",
                         "minutes": 10,
                         "slots": [
                           {
                             "id": "str2-luf-w1-full-C-s1",
-                            "exerciseId": 5947692,
-                            "name": "Banded Bicep Curls",
+                            "exerciseId": 200,
+                            "name": "Barbell Bicep Curl",
                             "sets": "3",
-                            "reps": "20"
+                            "reps": "12"
                           },
                           {
                             "id": "str2-luf-w1-full-C-s2",
                             "exerciseId": 2529795,
-                            "name": "DB Skullcrushers",
+                            "name": "DB Skullcrusher",
                             "sets": "3",
-                            "reps": "15"
+                            "reps": "12"
                           },
                           {
                             "id": "str2-luf-w1-full-C-s3",
@@ -691,11 +743,11 @@
                             "sets": "3",
                             "reps": "10"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       }
                     ],
-                    "id": "str2-luf-w1-full"
+                    "intent": "Barbell RDL 3x9 at 70%. first week of the 3-week micro: set the anchor weights.",
+                    "appDescription": "Hello everyone! Welcome to Day 3 of Teneriffe Athletic Club x TrainHeroic! This will be the app we will use to track our weights and workouts, while also allowing you to complete the workout by yourself if you ever can't make a class. \n\nIf you have any questions please come and ask anytime during the class, we will be more than happy to assist.\n\nKey Points:\n1. Please enter your weights and reps for each exercise. This is how we track your weekly progress.\n2. There are suggested swaps for exercises\n3. Some compounds are based on percentage so please enter in your 1 or 3 rep maxes you did in the past 2 weeks for these. It will then workout your training max \n4. Reps in reserve (RIR) is commonly used. This is how many reps you have left before you hit failure. I will make a video to further explain the use of RIR for training intensity.seperate video for you all on training intensity \n5. Ask questions! Please make use of as coaches\n6. Please make sure you book into the class! Thankyou"
                   }
                 ]
               },
@@ -703,319 +755,390 @@
                 "id": "str2-hyp-w2",
                 "sessions": [
                   {
+                    "id": "str2-luf-w2-lower",
                     "focus": "lower",
+                    "name": "Lower - W2D2",
                     "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-luf-w2-lower-WU",
+                        "kind": "series",
                         "label": "WU",
                         "minutes": 5,
                         "slots": [
                           {
                             "id": "str2-luf-w2-lower-WU-s1",
                             "exerciseId": null,
-                            "name": "Hip 90/90s",
-                            "sets": "1",
-                            "reps": "16",
-                            "intensity": "",
-                            "rpe": ""
+                            "name": "Calf Stretch + Toe Lift in Rack",
+                            "sets": "2",
+                            "reps": "3ea",
+                            "note": "10 sec stretch, 10 sec toes pulled back"
                           },
                           {
                             "id": "str2-luf-w2-lower-WU-s2",
                             "exerciseId": null,
-                            "name": "Calf Stretch in Rack w/Toe Lift",
-                            "sets": "1",
-                            "reps": "30sec ea",
-                            "intensity": "",
-                            "rpe": ""
+                            "name": "Quadruped Hip CARS",
+                            "sets": "2",
+                            "reps": "3ea",
+                            "note": "each direction"
                           },
                           {
                             "id": "str2-luf-w2-lower-WU-s3",
-                            "exerciseId": 8147275,
-                            "name": "Russian Baby Maker",
-                            "sets": "1",
-                            "reps": "10",
-                            "intensity": "",
-                            "rpe": ""
+                            "exerciseId": 1172,
+                            "name": "DB Goblet Squat",
+                            "sets": "2",
+                            "reps": "8",
+                            "note": "20 to 30% of working weight"
                           },
                           {
                             "id": "str2-luf-w2-lower-WU-s4",
-                            "exerciseId": null,
-                            "name": "Squat Rotations",
-                            "sets": "1",
-                            "reps": "10ea",
-                            "intensity": "",
-                            "rpe": ""
+                            "exerciseId": 597514,
+                            "name": "Squat Jumps",
+                            "sets": "2",
+                            "reps": "30sec"
                           }
                         ],
-                        "kind": "series"
+                        "note": "2 to 3 rounds in the warm-up time cap"
                       },
                       {
                         "id": "str2-luf-w2-lower-A",
+                        "kind": "series",
                         "label": "A",
                         "minutes": 15,
                         "slots": [
                           {
                             "id": "str2-luf-w2-lower-A-s1",
                             "exerciseId": 688272,
-                            "name": "Barbell Back Squats (E3OM)",
+                            "name": "Barbell Back Squat",
                             "sets": "3",
                             "reps": "7",
                             "intensity": "75%",
-                            "rpe": ""
+                            "note": "9/7/5 wave, working sets only"
                           },
                           {
                             "id": "str2-luf-w2-lower-A-s2",
-                            "exerciseId": null,
-                            "name": "DB or Plate Drag Through",
-                            "sets": "3",
-                            "reps": "10ea",
-                            "intensity": "",
-                            "rpe": ""
-                          },
-                          {
-                            "id": "str2-luf-w2-lower-A-s3",
                             "exerciseId": 440,
                             "name": "Depth Jump",
                             "sets": "3",
                             "reps": "5",
-                            "intensity": "",
-                            "rpe": ""
+                            "note": "off a box or bench"
                           }
                         ],
-                        "kind": "series"
+                        "note": "E3OM (Every 3 minutes on the minute) - Start each working set at 3 minutes. This should give sufficient time for each partner to do both of their exercises"
                       },
                       {
                         "id": "str2-luf-w2-lower-B",
+                        "kind": "series",
                         "label": "B",
                         "minutes": 12,
                         "slots": [
                           {
                             "id": "str2-luf-w2-lower-B-s1",
                             "exerciseId": 8137642,
-                            "name": "Barbell Jefferson Split Squat (FFE)",
+                            "name": "Barbell FFE Jefferson Split Squat",
                             "sets": "3",
                             "reps": "10ea",
-                            "intensity": "",
-                            "rpe": "7"
+                            "tempo": "2.2.2",
+                            "note": "1 RIR"
                           },
                           {
                             "id": "str2-luf-w2-lower-B-s2",
                             "exerciseId": 2263920,
-                            "name": "Single Leg Hamstring Bridge",
+                            "name": "Single Leg Hamstring Bridge (Off Bench)",
                             "sets": "3",
-                            "reps": "12ea",
-                            "intensity": "",
-                            "rpe": ""
+                            "reps": "12ea"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       },
                       {
                         "id": "str2-luf-w2-lower-C",
+                        "kind": "series",
                         "label": "C",
                         "minutes": 10,
                         "slots": [
                           {
                             "id": "str2-luf-w2-lower-C-s1",
                             "exerciseId": 7784461,
-                            "name": "Cyclist Squat Finisher (1 &1/4)",
+                            "name": "DB Cyclist Squats (1 & 1/4)",
                             "sets": "3",
-                            "reps": "10+",
-                            "intensity": "",
-                            "rpe": ""
+                            "reps": "10",
+                            "note": "heels elevated"
                           },
                           {
                             "id": "str2-luf-w2-lower-C-s2",
-                            "exerciseId": null,
-                            "name": "Weighted DB Single Leg Calf Raises",
+                            "exerciseId": 7149355,
+                            "name": "Reverse Copenhagen Plank",
                             "sets": "3",
-                            "reps": "10ea",
-                            "intensity": "",
-                            "rpe": ""
+                            "reps": "35sec ea"
                           },
                           {
                             "id": "str2-luf-w2-lower-C-s3",
-                            "exerciseId": 7648107,
-                            "name": "Lateral Hip Thrust",
+                            "exerciseId": null,
+                            "name": "Single Leg Calf Raises (Weighted)",
                             "sets": "3",
-                            "reps": "10ea",
-                            "intensity": "",
-                            "rpe": ""
+                            "reps": "10ea"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       }
                     ],
-                    "id": "str2-luf-w2-lower"
+                    "intent": "Barbell Back Squat 3x7 at 75%. second week of the micro: same movements, more load or reps.",
+                    "appDescription": "Hello everyone! Welcome to week 2 of this training block! \n\nIf you have any questions please come and ask anytime during the class, we will be more than happy to assist.\n\nKey Points:\n1. Please enter your weights and reps for each exercise. This is how we track your weekly progress.\n2. There are suggested swaps for exercises\n3. Some compounds are based on percentage so please enter in your 1 or 3 rep maxes you did in the past 2 weeks for these. It will then workout your training max \n4. Reps in reserve (RIR) is commonly used. This is how many reps you have left before you hit failure. I will make a video to further explain the use of RIR for training intensity.seperate video for you all on training intensity \n5. Ask questions! Please make use of as coaches\n6. Please make sure you book into the class! Thankyou"
                   },
                   {
+                    "id": "str2-luf-w2-upper",
                     "focus": "upper",
+                    "name": "Upper - W2D1",
                     "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-luf-w2-upper-WU",
+                        "kind": "series",
                         "label": "WU",
                         "minutes": 5,
                         "slots": [
                           {
                             "id": "str2-luf-w2-upper-WU-s1",
-                            "exerciseId": 4440,
-                            "name": "DB Pullover"
+                            "exerciseId": null,
+                            "name": "Banded Lat Activation",
+                            "sets": "2",
+                            "reps": "6",
+                            "note": "5 sec hold"
                           },
                           {
                             "id": "str2-luf-w2-upper-WU-s2",
+                            "exerciseId": 1187285,
+                            "name": "Hanging Scap Retracts",
+                            "sets": "2",
+                            "reps": "10",
+                            "note": "1 sec hold"
+                          },
+                          {
+                            "id": "str2-luf-w2-upper-WU-s3",
                             "exerciseId": null,
-                            "name": "Hanging Scap Retracts"
+                            "name": "Medball Thoracic Opener",
+                            "sets": "2",
+                            "reps": "10",
+                            "load": "5 kg"
+                          },
+                          {
+                            "id": "str2-luf-w2-upper-WU-s4",
+                            "exerciseId": null,
+                            "name": "Push Up To Downward Dog",
+                            "sets": "2",
+                            "reps": "10"
                           }
                         ],
-                        "kind": "series"
+                        "note": "2 to 3 rounds in the warm-up time cap"
                       },
                       {
                         "id": "str2-luf-w2-upper-A",
+                        "kind": "series",
                         "label": "A",
                         "minutes": 15,
                         "slots": [
                           {
                             "id": "str2-luf-w2-upper-A-s1",
                             "exerciseId": 240,
-                            "name": "Weighted Chin Up (E3OM)"
+                            "name": "Weighted Chin Up",
+                            "sets": "5",
+                            "reps": "5",
+                            "note": "1 RIR"
                           },
                           {
                             "id": "str2-luf-w2-upper-A-s2",
-                            "exerciseId": null,
-                            "name": "Prone Angels"
+                            "exerciseId": 2276649,
+                            "name": "Prone Weighted Angels",
+                            "sets": "3",
+                            "reps": "10-15",
+                            "note": "3x15 clean = go up next week"
                           }
                         ],
-                        "kind": "series"
+                        "note": "E2OM (Every 2 Minutes on the minute) / One partner will go on the odd minutes and one will go on the even minutes. Once you finished a set of chin ups then please complete one set of Prone Weighted Angels during your rest time."
                       },
                       {
                         "id": "str2-luf-w2-upper-B",
+                        "kind": "series",
                         "label": "B",
                         "minutes": 12,
                         "slots": [
                           {
                             "id": "str2-luf-w2-upper-B-s1",
                             "exerciseId": 686395,
-                            "name": "Barbell Bench Press"
+                            "name": "Tempo Barbell Bench Press",
+                            "sets": "3",
+                            "reps": "6",
+                            "tempo": "4.1.1",
+                            "note": "1 RIR"
                           },
                           {
                             "id": "str2-luf-w2-upper-B-s2",
                             "exerciseId": 8211110,
-                            "name": "KB Gorilla Row / Single Arm DB Row"
+                            "name": "KB Gorilla Row",
+                            "sets": "3",
+                            "reps": "10",
+                            "note": "alternating arms"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       },
                       {
                         "id": "str2-luf-w2-upper-C",
+                        "kind": "series",
                         "label": "C",
                         "minutes": 10,
                         "slots": [
                           {
                             "id": "str2-luf-w2-upper-C-s1",
-                            "exerciseId": 8211164,
-                            "name": "Push Ups"
+                            "exerciseId": null,
+                            "name": "Tricep Push Up",
+                            "sets": "3",
+                            "reps": "10-15",
+                            "note": "1 RIR, over 15 = plate on back"
                           },
                           {
                             "id": "str2-luf-w2-upper-C-s2",
-                            "exerciseId": null,
-                            "name": "DB Rear Delt Fly"
+                            "exerciseId": 51428,
+                            "name": "DB Rear Delt Fly",
+                            "sets": "3",
+                            "reps": "12-15",
+                            "note": "1 RIR"
                           },
                           {
                             "id": "str2-luf-w2-upper-C-s3",
                             "exerciseId": 5947834,
-                            "name": "Oblique Crunch"
+                            "name": "Oblique Crunch",
+                            "sets": "3",
+                            "reps": "9ea"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       }
                     ],
-                    "id": "str2-luf-w2-upper"
+                    "intent": "Weighted Chin Up 5x5 at 1 RIR. second week of the micro: same movements, more load or reps.",
+                    "appDescription": "Hello everyone! Welcome to week 2 of this training block! \n\nIf you have any questions please come and ask anytime during the class, we will be more than happy to assist.\n\nKey Points:\n1. Please enter your weights and reps for each exercise. This is how we track your weekly progress.\n2. There are suggested swaps for exercises\n3. Some compounds are based on percentage so please enter in your 1 or 3 rep maxes you did in the past 2 weeks for these. It will then workout your training max \n4. Reps in reserve (RIR) is commonly used. This is how many reps you have left before you hit failure. I will make a video to further explain the use of RIR for training intensity.seperate video for you all on training intensity \n5. Ask questions! Please make use of as coaches\n6. Please make sure you book into the class! Thankyou"
                   },
                   {
+                    "id": "str2-luf-w2-full",
                     "focus": "full",
+                    "name": "Full Body - W2D3",
                     "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-luf-w2-full-WU",
+                        "kind": "series",
                         "label": "WU",
                         "minutes": 5,
                         "slots": [
                           {
                             "id": "str2-luf-w2-full-WU-s1",
-                            "exerciseId": null,
-                            "name": "Glute Stretch"
+                            "exerciseId": 7372167,
+                            "name": "Quadruped Glute Stretch",
+                            "sets": "2",
+                            "reps": "30sec ea"
                           },
                           {
                             "id": "str2-luf-w2-full-WU-s2",
-                            "exerciseId": null,
-                            "name": "Glute Bridge w/Rotation"
+                            "exerciseId": 7372169,
+                            "name": "Adductor Rock Back Stretch",
+                            "sets": "2",
+                            "reps": "10ea",
+                            "note": "3 sec hold"
+                          },
+                          {
+                            "id": "str2-luf-w2-full-WU-s3",
+                            "exerciseId": 7804461,
+                            "name": "Glute Bridge w/Rotation",
+                            "sets": "2",
+                            "reps": "10ea"
+                          },
+                          {
+                            "id": "str2-luf-w2-full-WU-s4",
+                            "exerciseId": 7872827,
+                            "name": "Single Leg Arabesque",
+                            "sets": "2",
+                            "reps": "10ea"
                           }
                         ],
-                        "kind": "series"
+                        "note": "2 to 3 rounds in the warm-up time cap"
                       },
                       {
                         "id": "str2-luf-w2-full-A",
+                        "kind": "series",
                         "label": "A",
                         "minutes": 15,
                         "slots": [
                           {
                             "id": "str2-luf-w2-full-A-s1",
                             "exerciseId": 597556,
-                            "name": "Barbell RDL (E3OM)"
+                            "name": "Barbell RDL",
+                            "sets": "3",
+                            "reps": "7",
+                            "intensity": "75%",
+                            "note": "2 RIR, 9/7/5 wave, working sets only"
                           },
                           {
                             "id": "str2-luf-w2-full-A-s2",
-                            "exerciseId": null,
-                            "name": "DB Step Back / Cossack Squat / Curtsey Lunge / Step Up Etc"
+                            "exerciseId": 651035,
+                            "name": "Cossack Squat",
+                            "sets": "3",
+                            "reps": "10ea",
+                            "note": "2 RIR"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       },
                       {
                         "id": "str2-luf-w2-full-B",
+                        "kind": "series",
                         "label": "B",
                         "minutes": 12,
                         "slots": [
                           {
                             "id": "str2-luf-w2-full-B-s1",
                             "exerciseId": 54656,
-                            "name": "Barbell Z-Press"
+                            "name": "Barbell Z-Press",
+                            "sets": "3",
+                            "reps": "8",
+                            "note": "2 RIR"
                           },
                           {
                             "id": "str2-luf-w2-full-B-s2",
-                            "exerciseId": 187,
-                            "name": "Inverted Rows"
+                            "exerciseId": 222,
+                            "name": "Inverted Rows (Feet Elevated)",
+                            "sets": "3",
+                            "reps": "12"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       },
                       {
                         "id": "str2-luf-w2-full-C",
+                        "kind": "series",
                         "label": "C",
                         "minutes": 10,
                         "slots": [
                           {
                             "id": "str2-luf-w2-full-C-s1",
-                            "exerciseId": 5947692,
-                            "name": "Banded Bicep Curls"
+                            "exerciseId": 200,
+                            "name": "Barbell Bicep Curl",
+                            "sets": "3",
+                            "reps": "15"
                           },
                           {
                             "id": "str2-luf-w2-full-C-s2",
                             "exerciseId": 2529795,
-                            "name": "DB Skullcrushers"
+                            "name": "DB Skullcrusher",
+                            "sets": "3",
+                            "reps": "15"
                           },
                           {
                             "id": "str2-luf-w2-full-C-s3",
                             "exerciseId": 8043375,
-                            "name": "Double Leg Lowers"
+                            "name": "Double Leg Lowers",
+                            "sets": "3",
+                            "reps": "11"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       }
                     ],
-                    "id": "str2-luf-w2-full"
+                    "intent": "Barbell RDL 3x7 at 75%. second week of the micro: same movements, more load or reps.",
+                    "appDescription": "Hello everyone! Welcome to week 2 of this training block! \n\nIf you have any questions please come and ask anytime during the class, we will be more than happy to assist.\n\nKey Points:\n1. Please enter your weights and reps for each exercise. This is how we track your weekly progress.\n2. There are suggested swaps for exercises\n3. Some compounds are based on percentage so please enter in your 1 or 3 rep maxes you did in the past 2 weeks for these. It will then workout your training max \n4. Reps in reserve (RIR) is commonly used. This is how many reps you have left before you hit failure. I will make a video to further explain the use of RIR for training intensity.seperate video for you all on training intensity \n5. Ask questions! Please make use of as coaches\n6. Please make sure you book into the class! Thankyou"
                   }
                 ]
               },
@@ -1023,319 +1146,399 @@
                 "id": "str2-hyp-w3",
                 "sessions": [
                   {
+                    "id": "str2-luf-w3-lower",
                     "focus": "lower",
+                    "name": "Lower - W3D2",
                     "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-luf-w3-lower-WU",
+                        "kind": "series",
                         "label": "WU",
                         "minutes": 5,
                         "slots": [
                           {
                             "id": "str2-luf-w3-lower-WU-s1",
                             "exerciseId": null,
-                            "name": "Hip 90/90s",
-                            "sets": "1",
-                            "reps": "16",
-                            "intensity": "",
-                            "rpe": ""
+                            "name": "Calf Stretch + Toe Lift in Rack",
+                            "sets": "2",
+                            "reps": "3ea",
+                            "note": "10 sec stretch, 10 sec toes pulled back"
                           },
                           {
                             "id": "str2-luf-w3-lower-WU-s2",
                             "exerciseId": null,
-                            "name": "Calf Stretch in Rack w/Toe Lift",
-                            "sets": "1",
-                            "reps": "30sec ea",
-                            "intensity": "",
-                            "rpe": ""
+                            "name": "Quadruped Hip CARS",
+                            "sets": "2",
+                            "reps": "3ea",
+                            "note": "each direction"
                           },
                           {
                             "id": "str2-luf-w3-lower-WU-s3",
-                            "exerciseId": 8147275,
-                            "name": "Russian Baby Maker",
-                            "sets": "1",
-                            "reps": "10",
-                            "intensity": "",
-                            "rpe": ""
+                            "exerciseId": 1172,
+                            "name": "DB Goblet Squat",
+                            "sets": "2",
+                            "reps": "8",
+                            "note": "20 to 30% of working weight"
                           },
                           {
                             "id": "str2-luf-w3-lower-WU-s4",
-                            "exerciseId": null,
-                            "name": "Squat Rotations",
-                            "sets": "1",
-                            "reps": "10ea",
-                            "intensity": "",
-                            "rpe": ""
+                            "exerciseId": 597514,
+                            "name": "Squat Jumps",
+                            "sets": "2",
+                            "reps": "30sec"
                           }
                         ],
-                        "kind": "series"
+                        "note": "2 to 3 rounds in the warm-up time cap"
                       },
                       {
                         "id": "str2-luf-w3-lower-A",
+                        "kind": "series",
                         "label": "A",
                         "minutes": 15,
                         "slots": [
                           {
                             "id": "str2-luf-w3-lower-A-s1",
                             "exerciseId": 688272,
-                            "name": "Barbell Back Squats (E3OM)",
-                            "sets": "3",
+                            "name": "Barbell Back Squat",
+                            "sets": "4",
                             "reps": "5",
                             "intensity": "80%",
-                            "rpe": ""
+                            "note": "9/7/5 wave, working sets only"
                           },
                           {
                             "id": "str2-luf-w3-lower-A-s2",
-                            "exerciseId": null,
-                            "name": "DB or Plate Drag Through",
-                            "sets": "3",
-                            "reps": "10ea",
-                            "intensity": "",
-                            "rpe": ""
-                          },
-                          {
-                            "id": "str2-luf-w3-lower-A-s3",
                             "exerciseId": 440,
                             "name": "Depth Jump",
                             "sets": "3",
                             "reps": "5",
-                            "intensity": "",
-                            "rpe": ""
+                            "note": "off a box or bench"
                           }
                         ],
-                        "kind": "series"
+                        "note": "E3OM (Every 3 minutes on the minute) - Start each working set at 3 minutes. This should give sufficient time for each partner to do both of their exercises"
                       },
                       {
                         "id": "str2-luf-w3-lower-B",
+                        "kind": "series",
                         "label": "B",
                         "minutes": 12,
                         "slots": [
                           {
                             "id": "str2-luf-w3-lower-B-s1",
                             "exerciseId": 8137642,
-                            "name": "Barbell Jefferson Split Squat (FFE)",
+                            "name": "Barbell FFE Jefferson Split Squat",
                             "sets": "3",
                             "reps": "12ea",
-                            "intensity": "",
-                            "rpe": "7"
+                            "tempo": "2.2.2",
+                            "note": "1 RIR"
                           },
                           {
                             "id": "str2-luf-w3-lower-B-s2",
                             "exerciseId": 2263920,
-                            "name": "Single Leg Hamstring Bridge",
+                            "name": "Single Leg Hamstring Bridge (Off Bench)",
                             "sets": "3",
-                            "reps": "15ea",
-                            "intensity": "",
-                            "rpe": ""
+                            "reps": "12-15ea"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       },
                       {
                         "id": "str2-luf-w3-lower-C",
+                        "kind": "series",
                         "label": "C",
                         "minutes": 10,
                         "slots": [
                           {
                             "id": "str2-luf-w3-lower-C-s1",
                             "exerciseId": 7784461,
-                            "name": "Cyclist Squat Finisher (1 &1/4)",
+                            "name": "DB Cyclist Squats (1 & 1/4)",
                             "sets": "3",
-                            "reps": "10+",
-                            "intensity": "",
-                            "rpe": ""
+                            "reps": "10",
+                            "note": "heels elevated"
                           },
                           {
                             "id": "str2-luf-w3-lower-C-s2",
-                            "exerciseId": null,
-                            "name": "Weighted DB Single Leg Calf Raises",
+                            "exerciseId": 7149355,
+                            "name": "Reverse Copenhagen Plank",
                             "sets": "3",
-                            "reps": "8ea",
-                            "intensity": "",
-                            "rpe": ""
+                            "reps": "40sec ea"
                           },
                           {
                             "id": "str2-luf-w3-lower-C-s3",
-                            "exerciseId": 7648107,
-                            "name": "Lateral Hip Thrust",
+                            "exerciseId": null,
+                            "name": "Single Leg Calf Raises (Weighted)",
                             "sets": "3",
-                            "reps": "10ea",
-                            "intensity": "",
-                            "rpe": ""
+                            "reps": "12ea"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       }
                     ],
-                    "id": "str2-luf-w3-lower"
+                    "intent": "Barbell Back Squat 4x5 at 80%. last week of the micro: heaviest week, then the challenge.",
+                    "appDescription": "Hello everyone! Welcome to week 3 of this training block! \n\nIf you have any questions please come and ask anytime during the class, we will be more than happy to assist.\n\nKey Points:\n1. Please enter your weights and reps for each exercise. This is how we track your weekly progress.\n2. There are suggested swaps for exercises\n3. Some compounds are based on percentage so please enter in your 1 or 3 rep maxes you did in the past 2 weeks for these. It will then workout your training max \n4. Reps in reserve (RIR) is commonly used. This is how many reps you have left before you hit failure. I will make a video to further explain the use of RIR for training intensity.seperate video for you all on training intensity \n5. Ask questions! Please make use of as coaches\n6. Please make sure you book into the class! Thankyou"
                   },
                   {
+                    "id": "str2-luf-w3-upper",
                     "focus": "upper",
+                    "name": "Upper - W3D1",
                     "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-luf-w3-upper-WU",
+                        "kind": "series",
                         "label": "WU",
                         "minutes": 5,
                         "slots": [
                           {
                             "id": "str2-luf-w3-upper-WU-s1",
-                            "exerciseId": 4440,
-                            "name": "DB Pullover"
+                            "exerciseId": null,
+                            "name": "Banded Lat Activation",
+                            "sets": "2",
+                            "reps": "6",
+                            "note": "5 sec hold"
                           },
                           {
                             "id": "str2-luf-w3-upper-WU-s2",
+                            "exerciseId": 1187285,
+                            "name": "Hanging Scap Retracts",
+                            "sets": "2",
+                            "reps": "10",
+                            "note": "1 sec hold"
+                          },
+                          {
+                            "id": "str2-luf-w3-upper-WU-s3",
                             "exerciseId": null,
-                            "name": "Hanging Scap Retracts"
+                            "name": "Medball Thoracic Opener",
+                            "sets": "2",
+                            "reps": "10",
+                            "load": "5 kg"
+                          },
+                          {
+                            "id": "str2-luf-w3-upper-WU-s4",
+                            "exerciseId": null,
+                            "name": "Push Up To Downward Dog",
+                            "sets": "2",
+                            "reps": "10"
                           }
                         ],
-                        "kind": "series"
+                        "note": "2 to 3 rounds in the warm-up time cap"
                       },
                       {
                         "id": "str2-luf-w3-upper-A",
+                        "kind": "series",
                         "label": "A",
                         "minutes": 15,
                         "slots": [
                           {
                             "id": "str2-luf-w3-upper-A-s1",
                             "exerciseId": 240,
-                            "name": "Weighted Chin Up (E3OM)"
+                            "name": "Weighted Chin Up",
+                            "sets": "6",
+                            "reps": "5",
+                            "note": "1 RIR"
                           },
                           {
                             "id": "str2-luf-w3-upper-A-s2",
-                            "exerciseId": null,
-                            "name": "Prone Angels"
+                            "exerciseId": 2276649,
+                            "name": "Prone Weighted Angels",
+                            "sets": "3",
+                            "reps": "10-15",
+                            "note": "3x15 clean = go up next week"
                           }
                         ],
-                        "kind": "series"
+                        "note": "E2OM (Every 2 Minutes on the minute) / One partner will go on the odd minutes and one will go on the even minutes. Once you finished a set of chin ups then please complete one set of Prone Weighted Angels during your rest time."
                       },
                       {
                         "id": "str2-luf-w3-upper-B",
+                        "kind": "series",
                         "label": "B",
                         "minutes": 12,
                         "slots": [
                           {
                             "id": "str2-luf-w3-upper-B-s1",
                             "exerciseId": 686395,
-                            "name": "Barbell Bench Press"
+                            "name": "Tempo Barbell Bench Press",
+                            "sets": "3",
+                            "reps": "6",
+                            "tempo": "4.1.1",
+                            "note": "0 RIR"
                           },
                           {
                             "id": "str2-luf-w3-upper-B-s2",
                             "exerciseId": 8211110,
-                            "name": "KB Gorilla Row / Single Arm DB Row"
+                            "name": "KB Gorilla Row",
+                            "sets": "3",
+                            "reps": "12",
+                            "note": "alternating arms"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       },
                       {
                         "id": "str2-luf-w3-upper-C",
+                        "kind": "series",
                         "label": "C",
                         "minutes": 10,
                         "slots": [
                           {
                             "id": "str2-luf-w3-upper-C-s1",
-                            "exerciseId": 8211164,
-                            "name": "Push Ups"
+                            "exerciseId": null,
+                            "name": "Tricep Push Up",
+                            "sets": "3",
+                            "reps": "10-15",
+                            "note": "1 RIR, over 15 = plate on back"
                           },
                           {
                             "id": "str2-luf-w3-upper-C-s2",
-                            "exerciseId": null,
-                            "name": "DB Rear Delt Fly"
-                          },
-                          {
-                            "id": "str2-luf-w3-upper-C-s3",
-                            "exerciseId": 5947834,
-                            "name": "Oblique Crunch"
+                            "exerciseId": 51428,
+                            "name": "DB Rear Delt Fly",
+                            "sets": "3",
+                            "reps": "15",
+                            "note": "1 RIR"
                           }
-                        ],
-                        "kind": "series"
+                        ]
+                      },
+                      {
+                        "id": "str2-luf-w3-upper-D",
+                        "kind": "series",
+                        "label": "D",
+                        "minutes": 5,
+                        "slots": [
+                          {
+                            "id": "str2-luf-w3-upper-D-s1",
+                            "exerciseId": 8043298,
+                            "name": "Mechanical Drop Set Plank Challenge",
+                            "sets": "1",
+                            "reps": "max hold",
+                            "note": "max time, leaderboard"
+                          }
+                        ]
                       }
                     ],
-                    "id": "str2-luf-w3-upper"
+                    "intent": "Weighted Chin Up 6x5 at 1 RIR. last week of the micro: heaviest week, then the challenge.",
+                    "appDescription": "Hello everyone! Welcome to week 3 of this training block! \n\nIf you have any questions please come and ask anytime during the class, we will be more than happy to assist.\n\nKey Points:\n1. Please enter your weights and reps for each exercise. This is how we track your weekly progress.\n2. There are suggested swaps for exercises\n3. Some compounds are based on percentage so please enter in your 1 or 3 rep maxes you did in the past 2 weeks for these. It will then workout your training max \n4. Reps in reserve (RIR) is commonly used. This is how many reps you have left before you hit failure. I will make a video to further explain the use of RIR for training intensity.seperate video for you all on training intensity \n5. Ask questions! Please make use of as coaches\n6. Please make sure you book into the class! Thankyou"
                   },
                   {
+                    "id": "str2-luf-w3-full",
                     "focus": "full",
+                    "name": "Full Body - W3D3",
                     "kind": "series",
                     "timedBlocks": [
                       {
                         "id": "str2-luf-w3-full-WU",
+                        "kind": "series",
                         "label": "WU",
                         "minutes": 5,
                         "slots": [
                           {
                             "id": "str2-luf-w3-full-WU-s1",
-                            "exerciseId": null,
-                            "name": "Glute Stretch"
+                            "exerciseId": 7372167,
+                            "name": "Quadruped Glute Stretch",
+                            "sets": "2",
+                            "reps": "30sec ea"
                           },
                           {
                             "id": "str2-luf-w3-full-WU-s2",
-                            "exerciseId": null,
-                            "name": "Glute Bridge w/Rotation"
+                            "exerciseId": 7372169,
+                            "name": "Adductor Rock Back Stretch",
+                            "sets": "2",
+                            "reps": "10ea",
+                            "note": "3 sec hold"
+                          },
+                          {
+                            "id": "str2-luf-w3-full-WU-s3",
+                            "exerciseId": 7804461,
+                            "name": "Glute Bridge w/Rotation",
+                            "sets": "2",
+                            "reps": "10ea"
+                          },
+                          {
+                            "id": "str2-luf-w3-full-WU-s4",
+                            "exerciseId": 7872827,
+                            "name": "Single Leg Arabesque",
+                            "sets": "2",
+                            "reps": "10ea"
                           }
                         ],
-                        "kind": "series"
+                        "note": "2 to 3 rounds in the warm-up time cap"
                       },
                       {
                         "id": "str2-luf-w3-full-A",
+                        "kind": "series",
                         "label": "A",
                         "minutes": 15,
                         "slots": [
                           {
                             "id": "str2-luf-w3-full-A-s1",
                             "exerciseId": 597556,
-                            "name": "Barbell RDL (E3OM)"
+                            "name": "Barbell RDL",
+                            "sets": "4",
+                            "reps": "5",
+                            "intensity": "80%",
+                            "note": "2 RIR, 9/7/5 wave, working sets only"
                           },
                           {
                             "id": "str2-luf-w3-full-A-s2",
-                            "exerciseId": null,
-                            "name": "DB Step Back / Cossack Squat / Curtsey Lunge / Step Up Etc"
+                            "exerciseId": 651035,
+                            "name": "Cossack Squat",
+                            "sets": "3",
+                            "reps": "12ea",
+                            "note": "2 RIR"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       },
                       {
                         "id": "str2-luf-w3-full-B",
+                        "kind": "series",
                         "label": "B",
                         "minutes": 12,
                         "slots": [
                           {
                             "id": "str2-luf-w3-full-B-s1",
                             "exerciseId": 54656,
-                            "name": "Barbell Z-Press"
+                            "name": "Barbell Z-Press",
+                            "sets": "3",
+                            "reps": "8",
+                            "note": "2 RIR"
                           },
                           {
                             "id": "str2-luf-w3-full-B-s2",
-                            "exerciseId": 187,
-                            "name": "Inverted Rows"
+                            "exerciseId": 222,
+                            "name": "Inverted Rows (Feet Elevated)",
+                            "sets": "3",
+                            "reps": "12-15"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       },
                       {
                         "id": "str2-luf-w3-full-C",
+                        "kind": "series",
                         "label": "C",
                         "minutes": 10,
                         "slots": [
                           {
                             "id": "str2-luf-w3-full-C-s1",
-                            "exerciseId": 5947692,
-                            "name": "Banded Bicep Curls"
+                            "exerciseId": 200,
+                            "name": "Barbell Bicep Curl",
+                            "sets": "3",
+                            "reps": "15-20"
                           },
                           {
                             "id": "str2-luf-w3-full-C-s2",
                             "exerciseId": 2529795,
-                            "name": "DB Skullcrushers"
+                            "name": "DB Skullcrusher",
+                            "sets": "3",
+                            "reps": "15-20"
                           },
                           {
                             "id": "str2-luf-w3-full-C-s3",
                             "exerciseId": 8043375,
-                            "name": "Double Leg Lowers"
+                            "name": "Double Leg Lowers",
+                            "sets": "3",
+                            "reps": "12"
                           }
-                        ],
-                        "kind": "series"
+                        ]
                       }
                     ],
-                    "id": "str2-luf-w3-full"
+                    "intent": "Barbell RDL 4x5 at 80%. last week of the micro: heaviest week, then the challenge.",
+                    "appDescription": "Hello everyone! Welcome to week 3 of this training block! \n\nIf you have any questions please come and ask anytime during the class, we will be more than happy to assist.\n\nKey Points:\n1. Please enter your weights and reps for each exercise. This is how we track your weekly progress.\n2. There are suggested swaps for exercises\n3. Some compounds are based on percentage so please enter in your 1 or 3 rep maxes you did in the past 2 weeks for these. It will then workout your training max \n4. Reps in reserve (RIR) is commonly used. This is how many reps you have left before you hit failure. I will make a video to further explain the use of RIR for training intensity.seperate video for you all on training intensity \n5. Ask questions! Please make use of as coaches\n6. Please make sure you book into the class! Thankyou"
                   }
                 ]
               },
@@ -8050,8 +8253,8 @@
       }
     ]
   },
-  "rev": 171,
-  "updatedAt": "2026-09-07T05:52:28.516Z",
+  "rev": 172,
+  "updatedAt": "2026-09-13T06:58:06.854Z",
   "machine": "DESKTOP-28NQR37",
   "schemaVersion": 2
 }
