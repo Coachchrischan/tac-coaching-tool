@@ -432,7 +432,7 @@
                             "note": "off a box or bench"
                           }
                         ],
-                        "note": "E3OM (Every 3 minutes on the minute) - Start each working set at 3 minutes. This should give sufficient time for each partner to do both of their exercises"
+                        "note": "E3OM: start each working set on the 3 minutes, time for both partners to do both exercises."
                       },
                       {
                         "id": "str2-luf-w1-lower-B",
@@ -489,7 +489,7 @@
                         ]
                       }
                     ],
-                    "intent": "Barbell Back Squat 3x9 at 70%. first week of the 3-week micro: set the anchor weights.",
+                    "intent": "Barbell Back Squat 3x9 at 70%. First week of the 3-week micro: set the anchor weights.",
                     "appDescription": "Hello everyone! Welcome to Day 2 of Teneriffe Athletic Club x TrainHeroic! This will be the app we will use to track our weights and workouts, while also allowing you to complete the workout by yourself if you ever can't make a class. \n\nIf you have any questions please come and ask anytime during the class, we will be more than happy to assist.\n\nKey Points:\n1. Please enter your weights and reps for each exercise. This is how we track your weekly progress.\n2. There are suggested swaps for exercises\n3. Some compounds are based on percentage so please enter in your 1 or 3 rep maxes you did in the past 2 weeks for these. It will then workout your training max \n4. Reps in reserve (RIR) is commonly used. This is how many reps you have left before you hit failure. I will make a video to further explain the use of RIR for training intensity.seperate video for you all on training intensity \n5. Ask questions! Please make use of as coaches\n6. Please make sure you book into the class! Thankyou"
                   },
                   {
@@ -561,7 +561,7 @@
                             "note": "3x15 clean = go up next week"
                           }
                         ],
-                        "note": "E2OM (Every 2 Minutes on the minute) / One partner will go on the odd minutes and one will go on the even minutes. Once you finished a set of chin ups then please complete one set of Prone Weighted Angels during your rest time."
+                        "note": "E2OM in pairs, one on the odd minutes, one on the even. After each chin-up set, do your Prone Angels in the rest."
                       },
                       {
                         "id": "str2-luf-w1-upper-B",
@@ -587,7 +587,7 @@
                             "note": "alternating arms"
                           }
                         ],
-                        "note": "E3OM - Each round should roughly start on the 3 minutes by the time you have done both exercises."
+                        "note": "E3OM: each round starts on the 3 minutes once both exercises are done."
                       },
                       {
                         "id": "str2-luf-w1-upper-C",
@@ -621,7 +621,7 @@
                         ]
                       }
                     ],
-                    "intent": "Weighted Chin Up 4x5 at 2 RIR. first week of the 3-week micro: set the anchor weights.",
+                    "intent": "Weighted Chin Up 4x5 at 2 RIR. First week of the 3-week micro: set the anchor weights.",
                     "appDescription": "Hello everyone! Welcome to Teneriffe Athletic Club x TrainHeroic! This will be the app we will use to track our weights and workouts, while also allowing you to complete the workout by yourself if you ever can't make a class. \n\nIf you have any questions please come and ask anytime during the class, we will be more than happy to assist.\n\nKey Points:\n1. Please enter your weights and reps for each exercise. This is how we track your weekly progress.\n2. There are suggested swaps for exercises\n3. Some compounds are based on percentage so please enter in your 1 or 3 rep maxes you did in the past 2 weeks for these. It will then workout your training max \n4. Reps in reserve (RIR) is commonly used. This is how many reps you have left before you hit failure. I will make a video to further explain the use of RIR for training intensity.seperate video for you all on training intensity \n5. Ask questions! Please make use of as coaches\n6. Please make sure you book into the class! Thankyou"
                   },
                   {
@@ -746,7 +746,7 @@
                         ]
                       }
                     ],
-                    "intent": "Barbell RDL 3x9 at 70%. first week of the 3-week micro: set the anchor weights.",
+                    "intent": "Barbell RDL 3x9 at 70%. First week of the 3-week micro: set the anchor weights.",
                     "appDescription": "Hello everyone! Welcome to Day 3 of Teneriffe Athletic Club x TrainHeroic! This will be the app we will use to track our weights and workouts, while also allowing you to complete the workout by yourself if you ever can't make a class. \n\nIf you have any questions please come and ask anytime during the class, we will be more than happy to assist.\n\nKey Points:\n1. Please enter your weights and reps for each exercise. This is how we track your weekly progress.\n2. There are suggested swaps for exercises\n3. Some compounds are based on percentage so please enter in your 1 or 3 rep maxes you did in the past 2 weeks for these. It will then workout your training max \n4. Reps in reserve (RIR) is commonly used. This is how many reps you have left before you hit failure. I will make a video to further explain the use of RIR for training intensity.seperate video for you all on training intensity \n5. Ask questions! Please make use of as coaches\n6. Please make sure you book into the class! Thankyou"
                   }
                 ]
@@ -824,7 +824,7 @@
                             "note": "off a box or bench"
                           }
                         ],
-                        "note": "E3OM (Every 3 minutes on the minute) - Start each working set at 3 minutes. This should give sufficient time for each partner to do both of their exercises"
+                        "note": "E3OM: start each working set on the 3 minutes, time for both partners to do both exercises."
                       },
                       {
                         "id": "str2-luf-w2-lower-B",
@@ -881,7 +881,7 @@
                         ]
                       }
                     ],
-                    "intent": "Barbell Back Squat 3x7 at 75%. second week of the micro: same movements, more load or reps.",
+                    "intent": "Barbell Back Squat 3x7 at 75%. Second week of the micro: same movements, more load or reps.",
                     "appDescription": "Hello everyone! Welcome to week 2 of this training block! \n\nIf you have any questions please come and ask anytime during the class, we will be more than happy to assist.\n\nKey Points:\n1. Please enter your weights and reps for each exercise. This is how we track your weekly progress.\n2. There are suggested swaps for exercises\n3. Some compounds are based on percentage so please enter in your 1 or 3 rep maxes you did in the past 2 weeks for these. It will then workout your training max \n4. Reps in reserve (RIR) is commonly used. This is how many reps you have left before you hit failure. I will make a video to further explain the use of RIR for training intensity.seperate video for you all on training intensity \n5. Ask questions! Please make use of as coaches\n6. Please make sure you book into the class! Thankyou"
                   },
                   {
@@ -953,7 +953,7 @@
                             "note": "3x15 clean = go up next week"
                           }
                         ],
-                        "note": "E2OM (Every 2 Minutes on the minute) / One partner will go on the odd minutes and one will go on the even minutes. Once you finished a set of chin ups then please complete one set of Prone Weighted Angels during your rest time."
+                        "note": "E2OM in pairs, one on the odd minutes, one on the even. After each chin-up set, do your Prone Angels in the rest."
                       },
                       {
                         "id": "str2-luf-w2-upper-B",
@@ -1012,7 +1012,7 @@
                         ]
                       }
                     ],
-                    "intent": "Weighted Chin Up 5x5 at 1 RIR. second week of the micro: same movements, more load or reps.",
+                    "intent": "Weighted Chin Up 5x5 at 1 RIR. Second week of the micro: same movements, more load or reps.",
                     "appDescription": "Hello everyone! Welcome to week 2 of this training block! \n\nIf you have any questions please come and ask anytime during the class, we will be more than happy to assist.\n\nKey Points:\n1. Please enter your weights and reps for each exercise. This is how we track your weekly progress.\n2. There are suggested swaps for exercises\n3. Some compounds are based on percentage so please enter in your 1 or 3 rep maxes you did in the past 2 weeks for these. It will then workout your training max \n4. Reps in reserve (RIR) is commonly used. This is how many reps you have left before you hit failure. I will make a video to further explain the use of RIR for training intensity.seperate video for you all on training intensity \n5. Ask questions! Please make use of as coaches\n6. Please make sure you book into the class! Thankyou"
                   },
                   {
@@ -1137,7 +1137,7 @@
                         ]
                       }
                     ],
-                    "intent": "Barbell RDL 3x7 at 75%. second week of the micro: same movements, more load or reps.",
+                    "intent": "Barbell RDL 3x7 at 75%. Second week of the micro: same movements, more load or reps.",
                     "appDescription": "Hello everyone! Welcome to week 2 of this training block! \n\nIf you have any questions please come and ask anytime during the class, we will be more than happy to assist.\n\nKey Points:\n1. Please enter your weights and reps for each exercise. This is how we track your weekly progress.\n2. There are suggested swaps for exercises\n3. Some compounds are based on percentage so please enter in your 1 or 3 rep maxes you did in the past 2 weeks for these. It will then workout your training max \n4. Reps in reserve (RIR) is commonly used. This is how many reps you have left before you hit failure. I will make a video to further explain the use of RIR for training intensity.seperate video for you all on training intensity \n5. Ask questions! Please make use of as coaches\n6. Please make sure you book into the class! Thankyou"
                   }
                 ]
@@ -1215,7 +1215,7 @@
                             "note": "off a box or bench"
                           }
                         ],
-                        "note": "E3OM (Every 3 minutes on the minute) - Start each working set at 3 minutes. This should give sufficient time for each partner to do both of their exercises"
+                        "note": "E3OM: start each working set on the 3 minutes, time for both partners to do both exercises."
                       },
                       {
                         "id": "str2-luf-w3-lower-B",
@@ -1272,7 +1272,7 @@
                         ]
                       }
                     ],
-                    "intent": "Barbell Back Squat 4x5 at 80%. last week of the micro: heaviest week, then the challenge.",
+                    "intent": "Barbell Back Squat 4x5 at 80%. Last week of the micro: heaviest week, then the challenge.",
                     "appDescription": "Hello everyone! Welcome to week 3 of this training block! \n\nIf you have any questions please come and ask anytime during the class, we will be more than happy to assist.\n\nKey Points:\n1. Please enter your weights and reps for each exercise. This is how we track your weekly progress.\n2. There are suggested swaps for exercises\n3. Some compounds are based on percentage so please enter in your 1 or 3 rep maxes you did in the past 2 weeks for these. It will then workout your training max \n4. Reps in reserve (RIR) is commonly used. This is how many reps you have left before you hit failure. I will make a video to further explain the use of RIR for training intensity.seperate video for you all on training intensity \n5. Ask questions! Please make use of as coaches\n6. Please make sure you book into the class! Thankyou"
                   },
                   {
@@ -1344,7 +1344,7 @@
                             "note": "3x15 clean = go up next week"
                           }
                         ],
-                        "note": "E2OM (Every 2 Minutes on the minute) / One partner will go on the odd minutes and one will go on the even minutes. Once you finished a set of chin ups then please complete one set of Prone Weighted Angels during your rest time."
+                        "note": "E2OM in pairs, one on the odd minutes, one on the even. After each chin-up set, do your Prone Angels in the rest."
                       },
                       {
                         "id": "str2-luf-w3-upper-B",
@@ -1412,7 +1412,7 @@
                         ]
                       }
                     ],
-                    "intent": "Weighted Chin Up 6x5 at 1 RIR. last week of the micro: heaviest week, then the challenge.",
+                    "intent": "Weighted Chin Up 6x5 at 1 RIR. Last week of the micro: heaviest week, then the challenge.",
                     "appDescription": "Hello everyone! Welcome to week 3 of this training block! \n\nIf you have any questions please come and ask anytime during the class, we will be more than happy to assist.\n\nKey Points:\n1. Please enter your weights and reps for each exercise. This is how we track your weekly progress.\n2. There are suggested swaps for exercises\n3. Some compounds are based on percentage so please enter in your 1 or 3 rep maxes you did in the past 2 weeks for these. It will then workout your training max \n4. Reps in reserve (RIR) is commonly used. This is how many reps you have left before you hit failure. I will make a video to further explain the use of RIR for training intensity.seperate video for you all on training intensity \n5. Ask questions! Please make use of as coaches\n6. Please make sure you book into the class! Thankyou"
                   },
                   {
@@ -1537,7 +1537,7 @@
                         ]
                       }
                     ],
-                    "intent": "Barbell RDL 4x5 at 80%. last week of the micro: heaviest week, then the challenge.",
+                    "intent": "Barbell RDL 4x5 at 80%. Last week of the micro: heaviest week, then the challenge.",
                     "appDescription": "Hello everyone! Welcome to week 3 of this training block! \n\nIf you have any questions please come and ask anytime during the class, we will be more than happy to assist.\n\nKey Points:\n1. Please enter your weights and reps for each exercise. This is how we track your weekly progress.\n2. There are suggested swaps for exercises\n3. Some compounds are based on percentage so please enter in your 1 or 3 rep maxes you did in the past 2 weeks for these. It will then workout your training max \n4. Reps in reserve (RIR) is commonly used. This is how many reps you have left before you hit failure. I will make a video to further explain the use of RIR for training intensity.seperate video for you all on training intensity \n5. Ask questions! Please make use of as coaches\n6. Please make sure you book into the class! Thankyou"
                   }
                 ]
@@ -8253,8 +8253,8 @@
       }
     ]
   },
-  "rev": 172,
-  "updatedAt": "2026-09-13T06:58:06.854Z",
+  "rev": 175,
+  "updatedAt": "2026-09-13T18:57:02.402Z",
   "machine": "DESKTOP-28NQR37",
   "schemaVersion": 2
 }

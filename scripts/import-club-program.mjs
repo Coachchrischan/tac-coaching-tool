@@ -34,6 +34,8 @@
 //   --from   Monday the phase starts on (week 1 of the phase)
 //   --weeks  phase week numbers to import, e.g. 1-3 or 4-6
 //   --dry    fetch, map and report, write nothing
+//   --refresh-cues  also overwrite an existing cue for the imported exercises
+//                   (default: an existing cue is kept and reported)
 //
 // It is a SYNC from TrainHeroic: re-running overwrites the target weeks in the
 // tool with what is live. Edits made in the tool after an import are lost for
@@ -194,6 +196,62 @@ const SLOT_TAG = {
 
 const WARMUP_BOILERPLATE = /The warm up will typically be 2-3 rounds of these exercises based on a (warm up )?time cap\. Complete as many rounds as you can in the given warm up time\s*/i;
 
+// The library cue is ONE key cue per exercise: it goes on the wall beside
+// every slot and into the blurb, so the club's full TrainHeroic instruction
+// (kept verbatim in the archive snapshot) is condensed here in their words.
+// An exercise not in this table falls back to its first sentence.
+const KEY_CUE = {
+  'Hanging Scap Retracts': 'Bring your armpits to the floor, elbows straight, hold a second at the top',
+  'Medball Thoracic Opener': 'Ball close to your hips, reach back towards the floor, breathe into your chest',
+  'Push Up To Downward Dog': 'Push up, then push the floor away and make your spine long',
+  'Weighted Chin Up': 'A weight you get 5 with reps to spare; one more set each week',
+  'Prone Weighted Angels': 'Biggest circle you can; light plates are enough',
+  'Tempo Barbell Bench Press': '4 second lowering, reach your chest to the bar',
+  'KB Gorilla Row': 'Push firmly into one bell, row the other, lead with the elbow',
+  'Tricep Push Up': 'Elbows tight; above 15 reps, add a plate on your back',
+  'DB Rear Delt Fly': 'Bent over, lead with your elbows not your hands',
+  'Oblique Crunch': 'Prescribed reps each side, exhale as you crunch',
+  'Calf Stretch + Toe Lift in Rack': '10 sec deep stretch with the heel close to the rack, then 10 sec pulling the toes up',
+  'Quadruped Hip CARS': 'Move from the hip, not the lower back; the biggest circle you can',
+  'DB Goblet Squat': 'Slow and controlled, about 20 to 30% of your working weight',
+  'Squat Jumps': 'Smooth, not max effort; get the joints moving',
+  'Barbell Back Squat': '9/7/5 wave in 3-week cycles; warm-up sets do not count. Front squat is the swap',
+  'Depth Jump': 'Off a box or bench, with or without arms',
+  'Barbell FFE Jefferson Split Squat': 'Vertical torso, 2.2.2 tempo; it should feel hard',
+  'Single Leg Hamstring Bridge (Off Bench)': 'Pull the heel back towards you to extend the hip; torso in line with the leg at the top',
+  'DB Cyclist Squats (1 & 1/4)': 'Heels up on a plate, upright torso; swap it if you feel your knees',
+  'Reverse Copenhagen Plank': 'Dead straight line; if 30 sec is easy, plate between the thighs',
+  'Single Leg Calf Raises (Weighted)': 'Toes on a plate, full range; the bottom is the important part',
+  'Adductor Rock Back Stretch': 'Roll the foot to the outside, tailbone to the roof',
+  'Glute Bridge w/Rotation': 'Prescribed reps each side',
+  'Single Leg Arabesque': 'Soft knee; torso and back leg move as one see-saw',
+  'Barbell RDL': 'Same 9/7/5 wave as the squat; unsure on weight, leave 2 in reserve',
+  'Cossack Squat': 'Shift onto the working leg; sit back into the hip and drive the knee forward',
+  'Barbell Z-Press': 'Sit on a plate if the hips are tight; DB Z-press is the swap',
+  'Inverted Rows (Feet Elevated)': 'Glutes on, elbows to the floor, sternum to the bar',
+  'Barbell Bicep Curl': 'High rep finisher, close to failure is fine',
+  'DB Skullcrusher': 'Small muscle group, go close to failure',
+  'Double Leg Lowers': 'Belly button to the floor, knees bent, arc back up; off a bench if easy',
+  'Mechanical Drop Set Plank Challenge': 'Longest time wins; leaderboard and a prize',
+};
+const REFRESH_CUES = args.includes('--refresh-cues');
+
+// Block instructions go on the wall under the series heading, so the club's
+// paragraph is condensed to the one line the room needs. Keyed by the first
+// words of the TrainHeroic instruction; anything unmatched is used as written.
+const BLOCK_NOTE = [
+  [/^E2OM \(Every 2 Minutes on the minute\)/i, 'E2OM in pairs, one on the odd minutes, one on the even. After each chin-up set, do your Prone Angels in the rest.'],
+  [/^E3OM \(Every 3 minutes on the minute\) - Start each working set/i, 'E3OM: start each working set on the 3 minutes, time for both partners to do both exercises.'],
+  [/^E3OM - Each round should roughly start on the 3 minutes/i, 'E3OM: each round starts on the 3 minutes once both exercises are done.'],
+];
+function blockNoteFor(instruction) {
+  const raw = (instruction || '').trim();
+  if (!raw) return '';
+  const hit = BLOCK_NOTE.find(([re]) => re.test(raw));
+  if (hit) return hit[1];
+  return raw.replace(/\s*\n+\s*/g, ' / ').replace(/( \/ )+/g, ' / ').replace(/^ \/ | \/ $/g, '').trim();
+}
+
 function paramValues(e, n) {
   const vals = [];
   for (let i = 1; i <= 10; i++) {
@@ -258,7 +316,7 @@ function mapSession(th, existing, sid, focus) {
     const label = LABELS[bi];
     const tbId = `${sid}-${label}`;
     const tb = { id: tbId, kind: 'series', label, minutes: minutesByLabel[label] ?? DEFAULT_MINUTES[label] ?? 5, slots: [] };
-    const note = (b.instruction || '').replace(/\s*\n+\s*/g, ' / ').replace(/( \/ )+/g, ' / ').replace(/^ \/ | \/ $/g, '').trim();
+    const note = blockNoteFor(b.instruction);
     if (note) tb.note = note;
     if (label === 'WU' && !tb.note) tb.note = '2 to 3 rounds in the warm-up time cap';
     tb.slots = b.workoutSetExercises.map((e, i) => mapSlot(e, tbId, i));
@@ -284,12 +342,17 @@ function intentFor(th) {
   const microWeek = ((wk - 1) % 3) + 1;
   const lead = `${main.title} ${p1.length}x${p1[0]}${pct}${rir && !pct ? ` at ${rir[1]} RIR` : ''}`;
   const tail =
-    microWeek === 1 ? 'first week of the 3-week micro: set the anchor weights' : microWeek === 2 ? 'second week of the micro: same movements, more load or reps' : 'last week of the micro: heaviest week, then the challenge';
+    microWeek === 1 ? 'First week of the 3-week micro: set the anchor weights' : microWeek === 2 ? 'Second week of the micro: same movements, more load or reps' : 'Last week of the micro: heaviest week, then the challenge';
   return `${lead}. ${tail}.`;
 }
 
 function cueFor(e) {
-  return (e.instruction || '').replace(WARMUP_BOILERPLATE, '').replace(/\n{2,}/g, '\n').trim();
+  const name = e.title.trim();
+  if (KEY_CUE[name]) return KEY_CUE[name];
+  const full = (e.instruction || '').replace(WARMUP_BOILERPLATE, '').replace(/\s+/g, ' ').trim();
+  if (!full) return '';
+  const first = full.split(/(?<=[.!?])\s+/)[0];
+  return first.length > 120 ? `${first.slice(0, 117).trimEnd()}...` : first;
 }
 
 // ---------- run ----------
@@ -338,9 +401,9 @@ const newWeeks = phase.weeks.map((week, wi) => {
         const key = keyFor(slot);
         const cue = cueFor(e);
         if (!cue) continue;
-        if (lib.cues[key] && lib.cues[key] !== cue) {
+        if (lib.cues[key] && lib.cues[key] !== cue && !REFRESH_CUES) {
           if (!cueConflicts.some((c) => c.key === key)) cueConflicts.push({ key, name: slot.name, existing: lib.cues[key] });
-        } else if (!lib.cues[key] && !cuesToAdd[key]) {
+        } else if (lib.cues[key] !== cue && !cuesToAdd[key]) {
           cuesToAdd[key] = cue; // first week's wording wins; later weeks differ only by RIR
         }
       }
