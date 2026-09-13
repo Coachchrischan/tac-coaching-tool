@@ -1,17 +1,14 @@
 # TAC Programming Plan: 2026/27 macrocycle (plan of record)
 
 > Handed over by Chris 2026-08-14 after the annual-plan review, **revised by the
-> club 2026-08-31** (a two-day Full Body A/B split from 14 September, the
-> standalone Deload/Skills week removed, the closing strength block shortened
-> to five weeks), then **reverted by the club 2026-09-07, before the A/B block
-> started**: strength is the **Lower / Upper / Full Body three-day split**
-> again, with Full Body on the **Saturday 6am** class instead of Friday. The
-> 3 / 9 / 5 phase structure stands. Phase numbers here match the tool exactly
-> (the Primer is Phase 1). The Annual Plan tab mirrors this; the Programming
-> tab builds each block from it. The A/B programming written for the nine
-> weeks is kept in `archive/strength-full-body-ab-2026-09.json`, restorable;
-> the August Lower/Upper/Full block it replaced was restored from
-> `archive/strength-lower-upper-full-2026-08.json` and is what Phase 2 holds.
+> club 2026-08-31** and **again by Chris 2026-09-10** (back to the three-day
+> Lower / Upper / Full Body split, microcycle 1 loaded from the club sheet;
+> see "The delivery format" below). The 2026-08-31 revision: the strength delivery became a two-day Full Body A/B split
+> starting 14 September, the standalone Deload/Skills week was removed, and the
+> closing strength block shortened to five weeks. Phase numbers here match the
+> tool exactly (the Primer is Phase 1). The Annual Plan tab mirrors this; the
+> Programming tab builds each block from it. The superseded Lower/Upper/Full
+> programming is kept in `archive/strength-lower-upper-full-2026-08.json`.
 > Australian English, no em dashes.
 
 ## Calendar window
@@ -25,121 +22,63 @@
 | # | Phase | Weeks | Dates (week beginning) |
 |---|-------|-------|------------------------|
 | 1 | Primer (intro week + 2-week primer, run off-app, emailed) | 3 | 24 Aug - 7 Sept 2026 |
-| 2 | Strength-Hypertrophy (Lower / Upper / Full Body) | 9 | 14 Sept - 9 Nov 2026 |
+| 2 | Strength-Hypertrophy (Lower / Upper / Full Body, micro 1 written) | 9 | 14 Sept - 9 Nov 2026 |
 | 3 | Strength | 5 | 16 Nov - 14 Dec 2026 |
 | - | Christmas gap | 2 | 21 Dec - 28 Dec 2026 |
 | 4 | Unilateral muscle-endurance | 4 | 4 Jan - 25 Jan 2027 |
 | 5 | Hypertrophy (aesthetic focus) | 12 | 1 Feb - 19 Apr 2027 |
 | 6 | Back into the strength-hypertrophy to strength cycle | - | from 26 Apr 2027 |
 
-## The delivery format (reverted 2026-09-07)
+## The delivery format (changed again 2026-09-10)
 
-Strength is the **Lower / Upper / Full Body three-day split**:
+Strength is back to the **three-day split** on Chris's call of 2026-09-10,
+loaded from the club sheet (tab "Phase 1 - Upper / Lower / Full Body"):
 
-- **Day 1, Lower** (Tuesday class): squat day.
-- **Day 2, Upper** (Thursday class): chin-up and bench day.
-- **Day 3, Full Body** (**Saturday 6am** class, moved from Friday): RDL day.
+- **Lower** (Tuesday class, `lbs`).
+- **Upper** (Thursday class, `ubs`).
+- **Full Body** (Friday class, `fbs`). Friday strength is back on.
 
-The two-day Full Body A/B split the club chose on 2026-08-31 was reverted a
-week before it started. Its nine written weeks are archived, not lost
-(`archive/strength-full-body-ab-2026-09.json`), and the section below records
-its design in case the club returns to it.
+Which weekday each day lands on comes from the live timetable in Schedule,
+not the sheet's Day 1/2/3 numbering (the sheet numbers Upper as Day 1; the
+timetable runs Lower on Tuesday). If the club swaps the days, change the
+timetable and everything follows.
 
-## Phase 2: Strength-Hypertrophy, 9 weeks (14 Sept), as restored
+The two-day Full Body A/B split the club chose on 2026-08-31 (nine fully
+written weeks with the 9/7/5 waves, tempo/paused/straight bench, EMOM to
+top-set chins, the three challenges) is **archived, not lost**:
+`archive/strength-full-body-ab-2026-09.json` holds the block at the rev it
+was replaced, plus the scales it used. The write-up of that plan lives in
+the git history of this file (the commit before 2026-09-10) and in
+`HANDOVER.md`.
 
-**Weeks 1 to 3 are the club's finished first microcycle, imported from
-TrainHeroic on 2026-09-13** (`npm run import-club-program -- --from
-2026-09-14 --weeks 1-3`; raw snapshot in `archive/th-club-program/`). The
-finished product is authored on the club's own TrainHeroic account ("Teneriffe
-Athletic Club Strength", program 5109902), not on Chris's, and differs from the
-sheet below in three ways worth knowing:
+## Phase 2: Strength-Hypertrophy, 9 weeks (14 Sept)
 
-- **Day order.** The club published **Upper as Day 1 (Tuesday)**, **Lower as
-  Day 2 (Thursday)** and Full Body as Day 3 (Saturday). The tool's timetable
-  and focus catalog still run Lower on the Tuesday class and Upper on the
-  Thursday class, so the imported sessions are named "Upper - W1D1" and
-  "Lower - W1D2" but sit on the tool's Thursday and Tuesday. Not changed in
-  the tool: whether the Tue/Thu class names swap is the club's call.
-- **Main lifts.** Squat and RDL run 3x9 at 70%, 3x7 at 75%, then **4x5 at 80%**
-  (a fourth set in week 3), E3OM in pairs. Chin-ups build volume, 4/5/6 x 5,
-  E2OM with partners on odd and even minutes. Bench is tempo 4.1.1, 3x6, with
-  RIR tightening 2 / 1 / 0 across the micro.
-- **Accessories** climb reps or time each week (Jefferson 8/10/12, hamstring
-  bridge 10/12/12-15, Copenhagen 30/35/40 sec, curls and skullcrushers
-  12/15/15-20). Week 3 Upper ends on the **mechanical drop set plank
-  challenge** (leaderboard, prize).
+Three 3-week microcycles. **Only microcycle 1 is written** (weeks 1 to 3):
+the sheet holds micro 1's exercises, scales and warm-ups with a week 1
+prescription, repeated as written across weeks 1 to 3 on Chris's call. Weeks
+4 to 9 are empty in the tool; Chris fills the next microcycles in when ready.
 
-The TrainHeroic cues live in the exercise library as coach cues (32 added,
-none overwritten); the per-week RIR, holds and tempo sit on the slots. Weeks 4
-to 9 will be imported the same way as the club publishes them.
+**Microcycle 1 (weeks 1 to 3), as loaded:**
 
-Before the import, Phase 2 held weeks 1 to 9 of the August Lower/Upper/Full
-block (its week 10 is not used: the phase is nine weeks), and weeks 4 to 9
-still do. **Week 1 of that sheet was**:
-Lower runs Back Squat (E3OM) 3x9 at 70%, Drag Through, jumps, Jefferson
-Split Squat (FFE) 3x8 at RPE 7, Single Leg Hamstring Bridge, Cyclist Squat
-finisher, single leg calf raises and Lateral Hip Thrust; Upper runs Weighted
-Chin Up (E3OM) 3x5 at RPE 7, Prone Angels, Bench 3x7 at 75%, Gorilla Row,
-push-ups to 1 RIR, Rear Delt Fly, Oblique Crunch; Full Body runs RDL (E3OM)
-3x5 at 80%, a unilateral lower option, Z-Press 3x8 at RPE 7, Inverted Rows,
-Banded Bicep Curls, Skullcrushers, Double Leg Lowers. Lower weeks 2 to 4
-carry the 9/7/5 wave as written in August (3x7 at 75%, 3x5 at 80%, then 3x9
-at 73%); **Upper and Full Body weeks 2 to 9, and Lower weeks 5 to 9, hold
-exercise names only** and still need their prescriptions written. That is
-coaching time, not build time.
+| Day | WU | A | B | C |
+|-----|----|---|---|---|
+| Lower (Tue) | Calf stretch in rack w/toe lift, Hip CARS, Goblet squat, Squat jumps | Back squat 3x9 @ 70%; DB/plate drag through 3x10ea; Depth jump 3x5 | Jefferson split squat (FFE) 3x8ea RPE 7; SL hamstring bridge (off box) 3x10ea | Cyclist squat finisher 3x10+; Weighted SL calf raise 3x12ea; Reverse Copenhagen plank 3x10ea |
+| Upper (Thu) | Banded lat activation 1x10, Hanging scap retracts, Medball thoracic opener 1x10, Push up to downward dog | Weighted chin up 3x5 RPE 7; Prone angels 3x12 | Tempo bench 3x7 @ 75% (30X1, carried from the A/B micro 1); Gorilla row / SA DB row 3x10ea | Tricep push ups 3 x 1RIR; DB rear delt fly 3x15; Oblique crunch 3x10ea |
+| Full Body (Fri) | Quadruped glute stretch 1x30sec ea, Adductor rock backs, Glute bridge w/rotation, SL arabesque 1x10ea | RDL (E3OM) 3x5 @ 80%; Cossack squat 3x10ea | Z-press 3x8 RPE 7; Feet-elevated inverted row 3x10 | BB bicep curls 3x20; DB skullcrushers 3x15; Double leg lowers 3x10 |
 
-## The A/B design (2026-08-31 to 2026-09-07, archived)
+Scaled options are exercise-level (`library-overrides`), two per exercise
+as the sheet gives them; an exercise with no scale in the sheet has none
+("no need for a regression", Chris). Week 1 keeps the member-facing
+anchor-capture line (record top working weights).
 
-Three 3-week microcycles. The compounds stay the same all phase and wave;
-accessories interchange at each microcycle boundary; **week 3 of each
-microcycle ends on a challenge** (Day A: Sally push-up challenge, mechanical
-drop set plank, deadhang).
-
-**Main lifts** (Back/Front Squat on A, Romanian Deadlift on B; bench family on
-A follows the same reps):
-
-| Micro | Weeks | Wave | Squat loading |
-|-------|-------|------|---------------|
-| 1 | 1-3 | 9 / 7 / 5 | 65% / 70% / 75%, RPE 7 to 8 |
-| 2 | 4-6 | 9 / 7 / 5 | 67.5% / 72.5% / 77.5%, RPE 7.5 to 8.5 |
-| 3 | 7-9 | 7 / 5 / 3 | 75% / 80% / 85%, RPE 8 to 9 |
-
-Anchoring rules (roundtable-reviewed 2026-08-31): the squat keeps percentages
-with the **RPE as the do-not-exceed line**, and every main lift ramps to its
-working load in 2 to 3 builder sets. The **RDL runs RPE-primary** (no member
-has a testable RDL max): the rep wave is identical, anchored to the heaviest
-crisp 9 recorded in week 1. The **bench is RPE-primary in micro 3 too**: week 7
-is a calibration week (record the top set of 7 after six weeks of tempo and
-paused work), weeks 8 and 9 build roughly 5 and 10 per cent on it.
-
-**Bench progression** (A): tempo (30X1) in micro 1, paused in micro 2, straight
-bench in micro 3. **Chin/pull-up progression** (A): EMOM volume in micro 1
-(rig staggered, half on the minute, half on the 30), full-rest strength sets in
-micro 2, top-set triples with back-offs in micro 3; week 9 runs back-offs only
-so the deadhang challenge measures grip, not leftovers.
-
-**Jumps** (A2): depth jumps in micro 1 (new members jump-and-stick from the
-floor), weighted squat jumps in micro 2, broad-to-vertical jumps in micro 3
-(single leg depth jumps are the advanced option, per the sheet's alternative).
-
-**Accessories**: swap each micro, ascending volume inside it (week 1 base,
-weeks 2 and 3 roughly plus two reps; unilateral and calf work varies), RPE
-climbing 7 to 8. **Week 9 Day A tapers**: accessories drop to two sets so the
-final wave and the challenge get what is left. **Farmers carries fill the Day
-B micro 3 accessory slot** (weeks 7 to 9, suitcase carry as the scale), added
-2026-09-01 on Chris's approval: it fills the sheet's blank C3 and closes the
-block's carry-pattern gap in one move.
-
-**Warm-ups** (written 2026-09-01, replacing the "coach's circuit"
-placeholder): Day A runs bike/row build, world's greatest stretch, air squats
-with jump-and-stick landings, band pull-aparts; Day B runs ski/row build,
-glute bridges, unloaded RDL reaches, dead bugs. Both close with 2 to 3
-builder sets on the day's first lift. **The front squat option is
-RPE-primary**, roughly 7.5 to 10 per cent down on the back squat number,
-never the back squat's percentage wave. **Anchor capture**: week 1 sessions
-tell members to record their top working weights (testing happens in the two
-primer weeks, so percentages are computable); week 7 Day A tells them to
-record the bench calibration top set that weeks 8 and 9 build on.
+**Open, for Chris:** microcycles 2 and 3 (weeks 4 to 9), the intensity wave
+inside micro 1 if weeks 2 and 3 should differ from week 1, and a TrainHeroic
+library match for the thirteen free-text exercises (they push as named
+skips): Calf Stretch in Rack w/Toe Lift, Hip CARS, DB or Plate Drag Through,
+Weighted DB Single Leg Calf Raises, Banded Lat Activation, Hanging Scap
+Retracts, Medball Thoracic Opener, Push Up to Downward Dog, Prone Angels,
+Tricep Push Ups, DB Rear Delt Fly, Adductor Rock Backs, Glute Bridge
+w/Rotation.
 
 There is **no deload inside the nine weeks** (the standalone Deload/Skills week
 was removed by the club). Flagged as a fatigue watch-point; the primer weeks

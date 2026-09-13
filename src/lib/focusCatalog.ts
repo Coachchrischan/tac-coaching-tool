@@ -43,16 +43,16 @@ export interface StreamDef {
 }
 
 const FOCUS_DEFS: FocusDef[] = [
-  // Strength. Lower / Upper / Full Body is the live split again (the club
-  // reverted on 2026-09-07, before the A/B block started): Lower on the
-  // Tuesday class, Upper on the Thursday class, Full Body on the Saturday
-  // 6am class (it was Friday under the old plan). Only these three carry a
-  // push title. The A/B focuses stay valid for the archived
-  // September rebuild (`archive/strength-full-body-ab-2026-09.json`) and
-  // are not pushed.
-  { focus: 'lower', label: 'Lower', classTypeId: 'lbs', pushTitle: 'Day 1 - Lower' },
-  { focus: 'upper', label: 'Upper', classTypeId: 'ubs', pushTitle: 'Day 2 - Upper' },
-  { focus: 'full', label: 'Full Body', classTypeId: 'fbs', pushTitle: 'Day 3 - Full Body' },
+  // Strength. The live split is the three-day Lower / Upper / Full Body
+  // (Chris's call, 2026-09-10, loaded from the club sheet; it replaces the
+  // two-day A/B the club chose on 2026-08-31, which is archived in
+  // archive/strength-full-body-ab-2026-09.json). Friday strength is back on:
+  // 'full' feeds the fbs class. Which weekday each focus lands on comes from
+  // the live timetable (lbs Tuesday, ubs Thursday, fbs Friday), never from the
+  // sheet's day numbering. A/B stay valid for the Primer weeks and the archive.
+  { focus: 'lower', label: 'Lower', classTypeId: 'lbs', pushTitle: 'Lower Body' },
+  { focus: 'upper', label: 'Upper', classTypeId: 'ubs', pushTitle: 'Upper Body' },
+  { focus: 'full', label: 'Full Body', classTypeId: 'fbs', pushTitle: 'Full Body' },
   { focus: 'full-a', label: 'Full Body A', classTypeId: 'lbs' },
   { focus: 'full-b', label: 'Full Body B', classTypeId: 'ubs' },
   // ESD.

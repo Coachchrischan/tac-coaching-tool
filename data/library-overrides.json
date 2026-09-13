@@ -8,6 +8,9 @@
       "187": [
         "h-pull"
       ],
+      "222": [
+        "h-pull"
+      ],
       "240": [
         "v-pull"
       ],
@@ -15,6 +18,9 @@
         "squat"
       ],
       "445": [
+        "squat"
+      ],
+      "1172": [
         "squat"
       ],
       "10133": [
@@ -31,6 +37,15 @@
       ],
       "76843": [
         "h-pull"
+      ],
+      "597514": [
+        "squat"
+      ],
+      "597556": [
+        "hinge"
+      ],
+      "651035": [
+        "lunge"
       ],
       "686395": [
         "h-push"
@@ -59,17 +74,26 @@
       "5947811": [
         "lunge"
       ],
+      "5947834": [
+        "core-rotation"
+      ],
       "5947846": [
         "lunge"
       ],
       "7149355": [
         "core-rotation"
       ],
+      "7784461": [
+        "squat"
+      ],
       "8043375": [
         "core-rotation"
       ],
       "8137642": [
         "lunge"
+      ],
+      "8211110": [
+        "h-pull"
       ],
       "8211162": [
         "h-pull"
@@ -97,12 +121,61 @@
       ]
     },
     "scales": {
-      "440": [
+      "200": [
         {
-          "name": "Squat Jump "
+          "name": "DB Bicep Curl"
         },
         {
-          "name": "Landing Mechanics "
+          "name": "Banded Bicep Curl"
+        }
+      ],
+      "222": [
+        {
+          "name": "Inverted Rows"
+        },
+        {
+          "name": "Banded Row"
+        }
+      ],
+      "240": [
+        {
+          "name": "Chin Up"
+        },
+        {
+          "name": "Chin Up Negative"
+        }
+      ],
+      "440": [
+        {
+          "name": "Counter Movement Jump",
+          "sets": "3",
+          "reps": "5"
+        },
+        {
+          "name": "Single Leg Tall to Short",
+          "sets": "3",
+          "reps": "5"
+        }
+      ],
+      "54656": [
+        {
+          "name": "DB Z-Press"
+        }
+      ],
+      "597556": [
+        {
+          "name": "DB RDL"
+        },
+        {
+          "name": "Single Leg Arabesque"
+        }
+      ],
+      "686395": [
+        {
+          "name": "Barbell Floor Press"
+        },
+        {
+          "name": "DB Floor Press"
         }
       ],
       "688272": [
@@ -123,18 +196,63 @@
       ],
       "2263920": [
         {
-          "name": "Double Leg Hamstring Bridge"
+          "name": "Single Leg Hamstring Bridge"
         },
         {
-          "name": "Hamstring Bridge HOLD"
+          "name": "Double Leg Hamstring Bridge",
+          "sets": "3",
+          "reps": "15"
+        }
+      ],
+      "2529795": [
+        {
+          "name": "Overhead DB Tricep Extension"
+        }
+      ],
+      "5947834": [
+        {
+          "name": "Table Top Hold"
+        }
+      ],
+      "7149355": [
+        {
+          "name": "Side Plank"
+        },
+        {
+          "name": "Knee Side Plank"
+        }
+      ],
+      "7784461": [
+        {
+          "name": "Single Leg Wall Sit"
+        },
+        {
+          "name": "Wall Sit"
+        }
+      ],
+      "8043375": [
+        {
+          "name": "Deadbug Taps"
+        },
+        {
+          "name": "Deadbug Hold"
         }
       ],
       "8137642": [
         {
-          "name": "FFE DB Split Squat "
+          "name": "DB FFE Split Squat",
+          "sets": "",
+          "reps": ""
         },
         {
-          "name": "Split Squat "
+          "name": "DB Split Squat",
+          "sets": "",
+          "reps": ""
+        }
+      ],
+      "8211110": [
+        {
+          "name": "Banded Row"
         }
       ],
       "name:db or plate drag through": [
@@ -145,51 +263,35 @@
           "rpe": "8"
         },
         {
-          "name": "Front Support Hold",
-          "rpe": "8",
+          "name": "Tall Plank",
           "sets": "3",
           "reps": "45sec"
         }
+      ],
+      "name:weighted db single leg calf raises": [
+        {
+          "name": "Single Leg Calf Raises"
+        },
+        {
+          "name": "Double Leg Calf Raises"
+        }
+      ],
+      "name:tricep push ups": [
+        {
+          "name": "Knee Push Ups"
+        }
+      ],
+      "name:db rear delt fly": [
+        {
+          "name": "Band Pull Aparts"
+        }
       ]
     },
-    "cues": {
-      "200": "High rep finisher, close to failure is fine",
-      "222": "Glutes on, elbows to the floor, sternum to the bar",
-      "240": "A weight you get 5 with reps to spare; one more set each week",
-      "440": "Off a box or bench, with or without arms",
-      "1172": "Slow and controlled, about 20 to 30% of your working weight",
-      "51428": "Bent over, lead with your elbows not your hands",
-      "54656": "Sit on a plate if the hips are tight; DB Z-press is the swap",
-      "597514": "Smooth, not max effort; get the joints moving",
-      "597556": "Same 9/7/5 wave as the squat; unsure on weight, leave 2 in reserve",
-      "651035": "Shift onto the working leg; sit back into the hip and drive the knee forward",
-      "686395": "4 second lowering, reach your chest to the bar",
-      "688272": "9/7/5 wave in 3-week cycles; warm-up sets do not count. Front squat is the swap",
-      "1187285": "Bring your armpits to the floor, elbows straight, hold a second at the top",
-      "2263920": "Pull the heel back towards you to extend the hip; torso in line with the leg at the top",
-      "2276649": "Biggest circle you can; light plates are enough",
-      "2529795": "Small muscle group, go close to failure",
-      "5947834": "Prescribed reps each side, exhale as you crunch",
-      "7149355": "Dead straight line; if 30 sec is easy, plate between the thighs",
-      "7372169": "Roll the foot to the outside, tailbone to the roof",
-      "7784461": "Heels up on a plate, upright torso; swap it if you feel your knees",
-      "7804461": "Prescribed reps each side",
-      "7872827": "Soft knee; torso and back leg move as one see-saw",
-      "8043298": "Longest time wins; leaderboard and a prize",
-      "8043375": "Belly button to the floor, knees bent, arc back up; off a bench if easy",
-      "8137642": "Vertical torso, 2.2.2 tempo; it should feel hard",
-      "8211110": "Push firmly into one bell, row the other, lead with the elbow",
-      "name:calf stretch + toe lift in rack": "10 sec deep stretch with the heel close to the rack, then 10 sec pulling the toes up",
-      "name:quadruped hip cars": "Move from the hip, not the lower back; the biggest circle you can",
-      "name:single leg calf raises (weighted)": "Toes on a plate, full range; the bottom is the important part",
-      "name:medball thoracic opener": "Ball close to your hips, reach back towards the floor, breathe into your chest",
-      "name:push up to downward dog": "Push up, then push the floor away and make your spine long",
-      "name:tricep push up": "Elbows tight; above 15 reps, add a plate on your back"
-    },
+    "cues": {},
     "customExercises": []
   },
-  "rev": 43,
-  "updatedAt": "2026-09-13T18:57:02.446Z",
-  "machine": "DESKTOP-28NQR37",
+  "rev": 50,
+  "updatedAt": "2026-09-10T03:14:11.152Z",
+  "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }
