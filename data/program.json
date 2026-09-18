@@ -732,6 +732,7 @@
                             "name": "Barbell Back Squat",
                             "sets": "3",
                             "reps": "7",
+                            "intensity": "75%",
                             "rpe": "1RIR",
                             "note": "Back Squats will follow a 9/7/5 wave loading progression in 3 week cycles. Week one 9s, week two 7s, week three 5s. Each wave we will add more weight on from what we did last time · Please complete any neccessary warm up sets. Only working sets count as actual sets · If you are unsure about % please try to do 3x7 with 1RIR. This means you should have one rep left in the tank."
                           },
@@ -1014,6 +1015,7 @@
                             "name": "Barbell RDL",
                             "sets": "3",
                             "reps": "7",
+                            "intensity": "75%",
                             "rpe": "2RIR",
                             "note": "E3OM (Every 3 minutes on the minute) · Following the same progression as Back Squats - a 9/7/5 wave loading progression in 3 week cycles. Week one 9s, week two 7s, week three 5s. Each wave we will add more weight on from what we did last time · If you are unsure on your weight then please choose a weight where you will have 2RIR (2 reps in reserve)."
                           },
@@ -7125,8 +7127,8 @@
       }
     ]
   },
-  "rev": 286,
-  "updatedAt": "2026-09-18T06:09:45.558Z",
+  "rev": 287,
+  "updatedAt": "2026-09-18T06:09:56.231Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }
