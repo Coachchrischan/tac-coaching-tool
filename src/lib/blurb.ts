@@ -6,6 +6,7 @@ import type { LibraryExercise } from './library';
 import { patternsFor } from './library';
 import { cueFor, taggedPatterns } from './prescription';
 import { seriesBlocks } from './programStreams';
+import { FOCUS_DAY_TITLE as FOCUS_TITLE } from './focusCatalog.js';
 
 const PATTERN_PHRASE: Record<Pattern, string> = {
   squat: 'squatting',
@@ -31,19 +32,6 @@ const PATTERN_CUE: Record<Pattern, string> = {
   'core-rotation': 'move slow, own the position, breathe without losing the brace',
 };
 
-const FOCUS_TITLE: Record<Session['focus'], string> = {
-  lower: 'Lower body day',
-  upper: 'Upper body day',
-  full: 'Full body day',
-  'full-a': 'Full Body A',
-  'full-b': 'Full Body B',
-  esd: 'ESD day',
-  hyrox: 'Hyrox day',
-  'rox-strong': 'ROX Strong day',
-  'rox-engine': 'ROX Engine day',
-  'rox-race': 'ROX Race day',
-  gameday: 'Game Day',
-};
 
 // A circuit carries free-text movement lines and no library ids, so there are
 // no patterns to weigh and no cues to look up. Name the day and its pieces

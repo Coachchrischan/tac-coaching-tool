@@ -23,8 +23,11 @@ describe('focus catalog derivations', () => {
   });
 
   it('the three-day split maps Lower, Upper and Full Body to the three strength classes', () => {
-    expect(FOCUS_CLASS_TYPE['lower']).toBe('lbs');
-    expect(FOCUS_CLASS_TYPE['upper']).toBe('ubs');
+    // The club runs Upper on Tuesday and Lower on Thursday, so upper takes
+    // the Tuesday class (lbs) and lower the Thursday one (ubs). Checked
+    // against the TrainHeroic calendar on 2026-09-18.
+    expect(FOCUS_CLASS_TYPE['upper']).toBe('lbs');
+    expect(FOCUS_CLASS_TYPE['lower']).toBe('ubs');
     expect(FOCUS_CLASS_TYPE['full']).toBe('fbs');
     // The archived A/B focuses keep their class types so the Primer weeks and
     // the archive still resolve.
@@ -38,10 +41,10 @@ describe('focus catalog derivations', () => {
     expect(FOCUS_DAY_PICK['rox-engine']).toBeNull();
   });
 
-  it('only Strength pushes, Lower then Upper then Full Body, with the ratified titles', () => {
+  it('only Strength pushes, Upper then Lower then Full Body, with the ratified titles', () => {
     expect(pushPlanFor('strength')).toEqual([
-      { focus: 'lower', title: 'Lower Body' },
       { focus: 'upper', title: 'Upper Body' },
+      { focus: 'lower', title: 'Lower Body' },
       { focus: 'full', title: 'Full Body' },
     ]);
     expect(pushPlanFor('esd')).toEqual([]);

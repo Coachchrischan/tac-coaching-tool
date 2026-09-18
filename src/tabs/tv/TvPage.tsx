@@ -1,5 +1,5 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { toSvg } from 'html-to-image';
 import { jsPDF } from 'jspdf';
 import { useDoc } from '../../lib/useDoc';
@@ -8,7 +8,9 @@ import { generateBlurb } from '../../lib/blurb';
 import { mergedLibrary } from '../../lib/library';
 import type { ExerciseSlot, ProgramDoc, SeriesBlock, Session, TimedBlock } from '../../types/documents';
 import { circuitParts, seriesBlocks, streamsOf } from '../../lib/programStreams';
-import { cueFor as cueForRef, effectiveScales, scaleSummary } from '../../lib/prescription';
+import { effectiveScales, slotDetail } from '../../lib/prescription';
+import { useFitScale } from '../../lib/useFitScale';
+import { FOCUS_BOARD_TITLE as FOCUS_TITLE } from '../../lib/focusCatalog';
 
 const W = 1920;
 const H = 1080;
@@ -34,19 +36,6 @@ const CREAM = '#F5F3EB';
 const SAND = '#DEC5AE';
 const CHARCOAL = '#201d1d';
 
-const FOCUS_TITLE: Record<Session['focus'], string> = {
-  lower: 'LOWER BODY',
-  upper: 'UPPER BODY',
-  full: 'FULL BODY',
-  'full-a': 'FULL BODY A',
-  'full-b': 'FULL BODY B',
-  esd: 'ESD',
-  hyrox: 'HYROX',
-  'rox-strong': 'ROX STRONG',
-  'rox-engine': 'ROX ENGINE',
-  'rox-race': 'ROX RACE',
-  gameday: 'GAME DAY',
-};
 
 function slideTitle(session: Session): string {
   return (session.name ?? FOCUS_TITLE[session.focus]).toUpperCase();
@@ -77,29 +66,21 @@ function findSession(doc: ProgramDoc, sessionId: string) {
   return null;
 }
 
-function slotDetail(slot: ExerciseSlot): string {
-  // A sets count with no reps ("1") is coach bookkeeping, not a prescription;
-  // leave it off the screen.
-  return [
-    slot.sets && slot.reps ? `${slot.sets} × ${slot.reps}` : slot.reps,
-    slot.load,
-    slot.intensity ? `@ ${slot.intensity}` : undefined,
-    slot.rpe ? `RPE ${slot.rpe}` : undefined,
-    slot.tempo ? `${slot.tempo} tempo` : undefined,
-  ]
-    .filter(Boolean)
-    .join('   |   ');
-}
-
 const isWarmup = (b: TimedBlock) => b.label.trim().toUpperCase() === 'WU';
 
 export default function TvPage() {
   const { sessionId } = useParams();
+  const [searchParams] = useSearchParams();
+  // ?bare=1 strips the coach-facing chrome so a headless capture of this URL
+  // is the board and nothing else. The week pack builder uses it.
+  const bare = searchParams.get('bare') === '1';
   const navigate = useNavigate();
   const program = useDoc('program');
   const lib = useDoc('library-overrides');
   const { library } = useLibrary();
   const slideRef = useRef<HTMLDivElement>(null);
+  // Fit-to-window for the preview only; the export is always full size.
+  const scale = useFitScale(W, H);
   const [exporting, setExporting] = useState(false);
   // The board is a fixed 1920x1080 slide, so a long session used to run past
   // the bottom edge and simply disappear: the class did what was on the wall
@@ -200,8 +181,6 @@ export default function TvPage() {
     ? { width: '42%', objectPosition: '50% 32%', filter: 'brightness(1.05)' }
     : { width: '66%', objectPosition: '50% 62%', filter: 'brightness(1.3)' };
 
-  // Free text included: cues are keyed like scales (id, or name for free text).
-  const cueFor = (slot: ExerciseSlot) => cueForRef(overrides, slot);
   const scalesFor = (slot: ExerciseSlot) =>
     effectiveScales(overrides, slot).filter((s) => s.name.trim());
 
@@ -248,8 +227,6 @@ export default function TvPage() {
     }
   }
 
-  const scale = `min(calc(100vw / ${W}), calc(100vh / ${H}))`;
-
   // Lay the work area out larger than its box, then scale it back, so the type
   // shrinks and the board keeps its full width.
   const fitStyle = {
@@ -260,10 +237,10 @@ export default function TvPage() {
   } as const;
 
   return (
-    <div className="flex min-h-screen items-center justify-center overflow-hidden bg-black">
+    <div className="relative h-screen w-screen overflow-hidden bg-black">
       {/* Outside the slide on purpose: this is for the coach at the laptop,
           and it must never reach the wall or the exported image. */}
-      {fitState !== 'ok' && (
+      {!bare && fitState !== 'ok' && (
         <div
           className={`fixed top-4 left-4 z-10 max-w-md rounded-md px-3 py-2 text-sm font-semibold shadow-lg ${
             fitState === 'cut' ? 'bg-red-500 text-white' : 'bg-amber-400 text-amber-950'
@@ -285,12 +262,13 @@ export default function TvPage() {
           )}
         </div>
       )}
-      {hiddenParts.length > 0 && (
+      {!bare && hiddenParts.length > 0 && (
         <div className="fixed bottom-4 left-4 z-10 max-w-md rounded-md bg-white/10 px-3 py-1.5 text-xs text-white/70 backdrop-blur">
           Off the wall (still in the email and PDF): {hiddenParts.join(', ')}
         </div>
       )}
       {/* control bar */}
+      {!bare && (
       <div className="fixed top-4 right-4 z-10 flex gap-2">
         <button
           type="button"
@@ -324,12 +302,18 @@ export default function TvPage() {
           Close
         </button>
       </div>
+      )}
 
       {/* 1920x1080 slide, scaled to fit the viewport */}
       <div
         ref={slideRef}
-        className="relative shrink-0 origin-center overflow-hidden"
-        style={{ width: W, height: H, transform: `scale(${scale})`, backgroundColor: CHARCOAL }}
+        className="absolute top-1/2 left-1/2 overflow-hidden"
+        style={{
+          width: W,
+          height: H,
+          transform: `translate(-50%, -50%) scale(${scale})`,
+          backgroundColor: CHARCOAL,
+        }}
       >
         {/* club photo anchored right, fading under the content like the wall boards */}
         <img
@@ -450,6 +434,18 @@ export default function TvPage() {
                         {piece.heading || '·'}
                       </p>
                     </div>
+                    {/* How the piece is run. A conditioning part is half
+                        instruction ("one machine each, off at every 3:00
+                        beep"), and without it the wall lists movements and
+                        never says what to do with them. */}
+                    {piece.note && (
+                      <p
+                        className="border-b border-white/10 px-6 py-3 text-[21px] leading-snug font-semibold"
+                        style={{ color: SAND }}
+                      >
+                        {piece.note}
+                      </p>
+                    )}
                     <ul data-fit-measure className="flex-1 space-y-3 overflow-hidden px-6 py-5">
                       {piece.lines
                         .filter((l) => l.text.trim())
@@ -526,9 +522,6 @@ export default function TvPage() {
                         {slotDetail(slot)}
                       </p>
                     )}
-                    {cueFor(slot) && (
-                      <p className="mt-0.5 text-[18px] text-white/55 italic">{cueFor(slot)}</p>
-                    )}
                   </div>
                 ))}
               </div>
@@ -586,20 +579,20 @@ export default function TvPage() {
                             {slotDetail(slot)}
                           </p>
                         )}
-                        {/* Which minute of the EMOM, whose choice the machine
-                            is, the scaling for this slot. It is written per
-                            slot, so it belongs beside the slot. */}
-                        {slot.note && (
-                          <p className="mt-1 text-[19px] leading-snug" style={{ color: 'rgba(222,197,174,0.75)' }}>
-                            {slot.note}
-                          </p>
-                        )}
-                        {cueFor(slot) && (
-                          <p className="mt-1 text-[20px] leading-snug text-white/60 italic">{cueFor(slot)}</p>
-                        )}
+                        {/* The wall says the exercise, the prescription and
+                            the scale, and nothing else (Chris, 2026-09-18).
+                            The per-exercise note and the coach's cue are a
+                            paragraph each once they come from TrainHeroic, and
+                            they buried the board. They stay on the coaching
+                            card and in the text pack, which is where a coach
+                            reads them. */}
                         {scalesFor(slot).map((s, si) => (
                           <p key={si} className="mt-0.5 text-[19px] leading-snug text-white/45">
-                            Scale: {scaleSummary(s)}
+                            {si === 0 ? (s.harder ? 'Suggested swap: ' : 'Scale: ') : ''}
+                            {s.name}
+                            {si > 0 && s.harder && !scalesFor(slot)[0].harder
+                              ? ' (suggested swap)'
+                              : ''}
                           </p>
                         ))}
                       </div>

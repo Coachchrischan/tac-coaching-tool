@@ -25,9 +25,34 @@ import {
   BorderStyle,
 } from 'docx';
 
+import { FOCUS_CLASS_TYPE, FOCUS_DAY_PICK, FOCUS_LABEL } from '../src/lib/focusCatalog.ts';
+import { DAY_NAMES } from '../src/lib/classDays.ts';
+import { trainingWeekMonday } from '../src/lib/trainingWeeks.ts';
+import { sessionLines } from '../src/lib/sessionText.ts';
+
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const BASE = 'http://localhost:8127/api/store';
-const [blockId = 'str2-hyp', fromArg = '1', toArg = '', outArg = ''] = process.argv.slice(2);
+const argv = process.argv.slice(2);
+// One session out of a week, by focus: `--focus full` writes the Saturday Full
+// Body only. Without it every session in the week range is written.
+const focusArg = (() => {
+  const i = argv.findIndex((a) => a === '--focus' || a.startsWith('--focus='));
+  if (i < 0) return null;
+  const inline = argv[i].includes('=');
+  const v = inline ? argv[i].split('=')[1] : argv[i + 1];
+  argv.splice(i, inline ? 1 : 2);
+  return v ?? null;
+})();
+// Board text only: the words the wall shows and nothing else. No session
+// intent, no per-exercise notes or cues, no coach note, app description or
+// footer blurb. This is what goes to the designer.
+const boardOnly = (() => {
+  const i = argv.indexOf('--board');
+  if (i < 0) return false;
+  argv.splice(i, 1);
+  return true;
+})();
+const [blockId = 'str2-hyp', fromArg = '1', toArg = '', outArg = ''] = argv;
 
 async function load(id) {
   const res = await fetch(`${BASE}/${id}`);
@@ -35,67 +60,7 @@ async function load(id) {
   return (await res.json()).data;
 }
 
-// ---------- the same helpers the page uses (kept in step by hand) ----------
-const FOCUS_LABEL = {
-  lower: 'Lower', upper: 'Upper', full: 'Full Body', 'full-a': 'Full Body A', 'full-b': 'Full Body B',
-  esd: 'ESD', hyrox: 'Hyrox', 'rox-strong': 'ROX Strong', 'rox-engine': 'ROX Engine', 'rox-race': 'ROX Race', gameday: 'Game Day',
-};
-const FOCUS_CLASS = {
-  lower: 'lbs', upper: 'ubs', full: 'fbs', 'full-a': 'lbs', 'full-b': 'ubs', esd: 'esd',
-  'rox-strong': 'hyrox', 'rox-engine': 'hyrox', 'rox-race': 'hyrox', hyrox: 'hyrox', gameday: 'gameday',
-};
-const DAY_PICK = { 'rox-strong': 0, 'rox-race': 1, 'rox-engine': null };
-const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-function slotDetail(slot) {
-  return [
-    slot.sets && slot.reps ? `${slot.sets} × ${slot.reps}` : slot.reps,
-    slot.load,
-    slot.intensity ? `@ ${slot.intensity}` : undefined,
-    slot.rpe ? `RPE ${slot.rpe}` : undefined,
-    slot.tempo ? `${slot.tempo} tempo` : undefined,
-  ].filter(Boolean).join('   |   ');
-}
-function scaleKey(ref) {
-  if (ref.exerciseId !== null && ref.exerciseId !== undefined) return String(ref.exerciseId);
-  const n = (ref.name ?? '').trim().toLowerCase();
-  return n ? `name:${n}` : null;
-}
-function scalesFor(overrides, slot) {
-  if (slot.scales !== undefined) return slot.scales.filter((s) => s.name?.trim());
-  const key = scaleKey(slot);
-  return (key ? overrides.scales[key] ?? [] : []).map((s) => (typeof s === 'string' ? { name: s } : s)).filter((s) => s.name?.trim());
-}
-function scaleSummary(o) {
-  const detail = [
-    o.sets && o.reps ? `${o.sets} x ${o.reps}` : o.reps,
-    o.load ? `${o.load}kg` : null,
-    o.intensity ? `@ ${o.intensity}` : null,
-    o.rpe ? `RPE ${o.rpe}` : null,
-    o.tempo ? `${o.tempo} tempo` : null,
-  ].filter(Boolean).join('  ');
-  return detail ? `${o.name}  ${detail}` : o.name;
-}
-function cueFor(overrides, slot) {
-  const key = scaleKey(slot);
-  return key ? overrides.cues[key] : undefined;
-}
-/** Training-week Monday, stepping over club breaks (mirrors trainingWeeks.ts). */
-function weekMonday(startDate, index, breaks) {
-  const d = new Date(`${startDate}T00:00:00`);
-  let left = index;
-  while (true) {
-    const iso = d.toISOString().slice(0, 10);
-    const br = breaks.find((b) => b.start === localIso(d));
-    if (br) { d.setDate(d.getDate() + 7 * br.weeks); continue; }
-    if (left === 0) return new Date(d);
-    left--; d.setDate(d.getDate() + 7);
-    void iso;
-  }
-}
-function localIso(d) {
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-}
 const fmt = (d) => d.toLocaleDateString('en-AU', { day: 'numeric', month: 'long' });
 const fmtY = (d) => d.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
 
@@ -145,74 +110,63 @@ const windowTitle =
     : `Weeks ${from} to ${to}`;
 const live = schedule.scenarios.find((s) => s.id === schedule.liveScenarioId);
 function dayFor(focus, monday) {
-  const ct = FOCUS_CLASS[focus];
+  const ct = FOCUS_CLASS_TYPE[focus];
   const days = [...new Set((live?.blocks ?? []).filter((b) => b.classTypeId === ct).map((b) => b.day))].sort((a, b) => a - b);
-  const pick = focus in DAY_PICK ? DAY_PICK[focus] : 0;
+  const pick = focus in FOCUS_DAY_PICK ? FOCUS_DAY_PICK[focus] : 0;
   const idx = pick === null ? null : days[pick] ?? null;
   if (idx === null) return null;
   const d = new Date(monday); d.setDate(d.getDate() + idx);
-  return { name: DAYS[idx], date: d };
+  return { name: DAY_NAMES[idx], date: d };
 }
 
 // ---------- build: a flat list of {style, text} lines, then docx + txt ----------
 const lines = [];
 const L = (style, text) => lines.push({ style, text });
 
-const weeks = block.weeks.slice(from - 1, to).map((week, i) => ({ week, wi: from - 1 + i, monday: weekMonday(annual.startDate, before + from - 1 + i, breaks) }));
+const weeks = block.weeks.slice(from - 1, to).map((week, i) => ({ week, wi: from - 1 + i, monday: trainingWeekMonday(annual.startDate, before + from - 1 + i, breaks) }));
 const first = weeks[0].monday;
 const last = new Date(weeks[weeks.length - 1].monday); last.setDate(last.getDate() + 6);
 
 L('title', `${stream.name} ${phaseTitle} · ${windowTitle}`);
 if (block.theme) L('subtitle', block.theme);
 L('meta', `${fmtY(first)} to ${fmtY(last)} · ${weeks.length} weeks`);
+if (!boardOnly) {
 if (phase?.focus) L('body', phase.focus);
 L('body', 'One section per session, in the order the classes run. Each carries every line the wall board shows: title, session intent, warm-up, each series with its minutes and how it is run, the numbered exercises with the prescription exactly as the board prints it, per-exercise notes, coaching cues and scaled options, then the coach note, the member app description and the footer blurb.');
 L('body', `Teneriffe Athletic Club · 76 Commercial Road, Teneriffe · prepared ${fmtY(new Date())} · board text for design`);
+}
 
 for (const { week, wi, monday } of weeks) {
   for (const session of week.sessions) {
+    if (focusArg && session.focus !== focusArg) continue;
     const title = (session.name ?? FOCUS_LABEL[session.focus]).toUpperCase();
     const day = dayFor(session.focus, monday);
     L('pagebreak', '');
-    L('h1', `Week ${wi + 1} · ${title}`);
-    L('meta', `${stream.name} · ${phaseTitle}${block.theme ? ` · ${block.theme}` : ''} · Week ${wi + 1} of ${block.weeks.length}${day ? ` · ${day.name} ${fmt(day.date)}` : ''}`);
-    if (session.intent) { L('label', 'Session intent'); L('quote', session.intent); }
-    const tbs = session.kind === 'circuit' ? [] : session.timedBlocks;
-    const series = tbs.filter((b) => b.kind !== 'circuit');
-    const parts = tbs.filter((b) => b.kind === 'circuit');
-    const filled = (b) => b.slots.filter((s) => s.name);
-    const written = series.some((b) => filled(b).length) || parts.length || (session.kind === 'circuit' && session.circuit.length);
-    if (!written) L('body', 'Not written yet.');
-    for (const b of series) {
-      if (!filled(b).length) continue;
-      const isWu = b.label.trim().toUpperCase() === 'WU';
-      L('h2', `${isWu ? 'WARM UP' : `${b.label.toUpperCase()} SERIES`} · ${b.minutes} min${isWu ? ' · with coach' : ''}${b.hideFromBoard ? ' · off the wall' : ''}`);
-      if (b.note) L('note', b.note);
-      filled(b).forEach((slot, i) => {
-        L('exercise', `${isWu ? '' : `${b.label.toUpperCase()}${i + 1}  `}${slot.name}`);
-        const d = slotDetail(slot); if (d) L('detail', d);
-        if (slot.note) L('sub', `Note: ${slot.note}`);
-        const cue = cueFor(overrides, slot); if (cue) L('sub', `Cue: ${cue}`);
-        const sc = scalesFor(overrides, slot); if (sc.length) L('sub', `Scale: ${sc.map(scaleSummary).join(' · ')}`);
-      });
+    L('h1', boardOnly && day ? `${day.name} · ${title}` : `Week ${wi + 1} · ${title}`);
+    L('meta', boardOnly
+      ? `${phaseTitle} · Week ${wi + 1} of ${block.weeks.length}${day ? ` · ${day.name} ${fmtY(day.date)}` : ''}`
+      : `${stream.name} · ${phaseTitle}${block.theme ? ` · ${block.theme}` : ''} · Week ${wi + 1} of ${block.weeks.length}${day ? ` · ${day.name} ${fmt(day.date)}` : ''}`);
+    if (session.intent && !boardOnly) { L('label', 'Session intent'); L('quote', session.intent); }
+    // What the session says is decided once, in src/lib/sessionText.ts. This
+    // file only chooses how it is drawn. The intent is handled above, as a
+    // pull quote, so it is asked for separately.
+    const blurb = boardOnly
+      ? ''
+      : session.blurbOverride ??
+        (generateBlurb && session.kind !== 'circuit' ? generateBlurb(session, merged, overrides) : '');
+    const body = sessionLines(session, overrides, {
+      boardOnly,
+      upperHeadings: false,
+      blankLines: false,
+      includeIntent: false,
+      blurb,
+    });
+    if (!body.length) L('body', 'Not written yet.');
+    const STYLE = { heading: 'h2', note: 'note', exercise: 'exercise', detail: 'detail', sub: 'sub', label: 'label', body: 'body' };
+    for (const line of body) {
+      if (line.style === 'blank') continue;
+      L(STYLE[line.style] ?? 'body', line.text);
     }
-    const circuits = [
-      ...parts.map((p) => ({ label: p.label, minutes: p.minutes, note: p.note, pieces: p.pieces, hidden: p.hideFromBoard })),
-      ...(session.kind === 'circuit' ? [{ label: title, pieces: session.circuit }] : []),
-    ];
-    for (const part of circuits) {
-      L('h2', `${part.label.toUpperCase()}${part.minutes !== undefined ? ` · ${part.minutes} min` : ''}${part.hidden ? ' · off the wall' : ''}`);
-      if (part.note) L('note', part.note);
-      for (const piece of part.pieces) {
-        if (piece.heading?.trim()) L('exercise', piece.heading + (piece.hideFromBoard ? ' (off the wall)' : ''));
-        for (const line of piece.lines.filter((l) => l.text?.trim())) L('detail', line.load ? `${line.text}   ${line.load}` : line.text);
-        if (piece.restAfter?.trim()) L('sub', piece.restAfter);
-      }
-    }
-    if (session.note) { L('label', 'Coach note (on the wall)'); L('body', session.note); }
-    if (session.appDescription) { L('label', 'Member app description'); L('body', session.appDescription); }
-    const blurb = session.blurbOverride ?? (generateBlurb && session.kind !== 'circuit' ? generateBlurb(session, merged, overrides) : '');
-    if (blurb) { L('label', 'Footer blurb'); L('body', blurb); }
   }
 }
 
