@@ -448,7 +448,7 @@
                         "slots": [
                           {
                             "id": "th-upper-2026-09-15-1-0",
-                            "exerciseId": null,
+                            "exerciseId": 240,
                             "name": "Weighted Chin Up",
                             "sets": "4",
                             "reps": "5",
@@ -457,7 +457,7 @@
                           },
                           {
                             "id": "th-upper-2026-09-15-1-1",
-                            "exerciseId": null,
+                            "exerciseId": 2276649,
                             "name": "Prone Weighted Angels",
                             "sets": "3",
                             "reps": "10-15",
@@ -877,7 +877,7 @@
                           },
                           {
                             "id": "th-upper-2026-09-22-1-1",
-                            "exerciseId": null,
+                            "exerciseId": 2276649,
                             "name": "Prone Weighted Angels",
                             "sets": "3",
                             "reps": "10-15",
@@ -7127,8 +7127,8 @@
       }
     ]
   },
-  "rev": 287,
-  "updatedAt": "2026-09-18T06:09:56.231Z",
+  "rev": 289,
+  "updatedAt": "2026-09-18T06:23:26.776Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }
