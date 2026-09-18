@@ -665,7 +665,7 @@
                           },
                           {
                             "id": "th-w2-lower-WU-3",
-                            "exerciseId": null,
+                            "exerciseId": 597514,
                             "name": "Squat Jumps",
                             "sets": "2",
                             "reps": "30sec"
@@ -680,7 +680,7 @@
                         "slots": [
                           {
                             "id": "th-w2-lower-A-0",
-                            "exerciseId": null,
+                            "exerciseId": 688272,
                             "name": "Barbell Back Squat",
                             "sets": "3",
                             "reps": "7",
@@ -688,7 +688,7 @@
                           },
                           {
                             "id": "th-w2-lower-A-1",
-                            "exerciseId": null,
+                            "exerciseId": 440,
                             "name": "Depth Jump",
                             "sets": "3",
                             "reps": "5"
@@ -703,14 +703,14 @@
                         "slots": [
                           {
                             "id": "th-w2-lower-B-0",
-                            "exerciseId": null,
+                            "exerciseId": 8137642,
                             "name": "Barbell FFE Jefferson Split Squat",
                             "sets": "3",
                             "reps": "10"
                           },
                           {
                             "id": "th-w2-lower-B-1",
-                            "exerciseId": null,
+                            "exerciseId": 2263920,
                             "name": "Single Leg Hamstring Bridge (Off Bench)",
                             "sets": "3",
                             "reps": "12"
@@ -725,14 +725,14 @@
                         "slots": [
                           {
                             "id": "th-w2-lower-C-0",
-                            "exerciseId": null,
+                            "exerciseId": 7784461,
                             "name": "DB Cyclist Squats (1 & 1/4)",
                             "sets": "3",
                             "reps": "10"
                           },
                           {
                             "id": "th-w2-lower-C-1",
-                            "exerciseId": null,
+                            "exerciseId": 7149355,
                             "name": "Reverse Copenhagen Plank",
                             "sets": "3",
                             "reps": "35sec"
@@ -742,7 +742,15 @@
                             "exerciseId": null,
                             "name": "Single Leg Calf Raises (Weighted)",
                             "sets": "3",
-                            "reps": "10"
+                            "reps": "10",
+                            "scales": [
+                              {
+                                "name": "Single Leg Calf Raises"
+                              },
+                              {
+                                "name": "Double Leg Calf Raises"
+                              }
+                            ]
                           }
                         ]
                       }
@@ -801,7 +809,7 @@
                         "slots": [
                           {
                             "id": "th-w2-upper-A-0",
-                            "exerciseId": null,
+                            "exerciseId": 8004473,
                             "name": "Chin Up Negative",
                             "sets": "4",
                             "reps": "6",
@@ -809,7 +817,7 @@
                           },
                           {
                             "id": "th-w2-upper-A-1",
-                            "exerciseId": null,
+                            "exerciseId": 2276649,
                             "name": "Prone Weighted Angels",
                             "sets": "3",
                             "reps": "10-15"
@@ -824,14 +832,14 @@
                         "slots": [
                           {
                             "id": "th-w2-upper-B-0",
-                            "exerciseId": null,
+                            "exerciseId": 686395,
                             "name": "Tempo Barbell Bench Press",
                             "sets": "3",
                             "reps": "6"
                           },
                           {
                             "id": "th-w2-upper-B-1",
-                            "exerciseId": null,
+                            "exerciseId": 8211110,
                             "name": "KB Gorilla Row",
                             "sets": "3",
                             "reps": "10"
@@ -849,7 +857,12 @@
                             "exerciseId": null,
                             "name": "Tricep Push Up",
                             "sets": "3",
-                            "reps": "10-15"
+                            "reps": "10-15",
+                            "scales": [
+                              {
+                                "name": "Knee Push Ups"
+                              }
+                            ]
                           },
                           {
                             "id": "th-w2-upper-C-1",
@@ -860,7 +873,7 @@
                           },
                           {
                             "id": "th-w2-upper-C-2",
-                            "exerciseId": null,
+                            "exerciseId": 5947834,
                             "name": "Oblique Crunch",
                             "sets": "3",
                             "reps": "9"
@@ -883,7 +896,7 @@
                         "slots": [
                           {
                             "id": "th-w2-full-WU-0",
-                            "exerciseId": null,
+                            "exerciseId": 7372167,
                             "name": "Quadruped Glute Stretch",
                             "sets": "2",
                             "reps": "30sec"
@@ -920,7 +933,7 @@
                         "slots": [
                           {
                             "id": "th-w2-full-A-0",
-                            "exerciseId": null,
+                            "exerciseId": 597556,
                             "name": "Barbell RDL",
                             "sets": "3",
                             "reps": "7",
@@ -928,7 +941,7 @@
                           },
                           {
                             "id": "th-w2-full-A-1",
-                            "exerciseId": null,
+                            "exerciseId": 651035,
                             "name": "Cossack Squat",
                             "sets": "3",
                             "reps": "10"
@@ -943,14 +956,14 @@
                         "slots": [
                           {
                             "id": "th-w2-full-B-0",
-                            "exerciseId": null,
+                            "exerciseId": 54656,
                             "name": "Barbell Z-Press",
                             "sets": "3",
                             "reps": "8"
                           },
                           {
                             "id": "th-w2-full-B-1",
-                            "exerciseId": null,
+                            "exerciseId": 222,
                             "name": "Inverted Rows (Feet Elevated)",
                             "sets": "3",
                             "reps": "12"
@@ -965,21 +978,21 @@
                         "slots": [
                           {
                             "id": "th-w2-full-C-0",
-                            "exerciseId": null,
+                            "exerciseId": 200,
                             "name": "Barbell Bicep Curl",
                             "sets": "3",
                             "reps": "15"
                           },
                           {
                             "id": "th-w2-full-C-1",
-                            "exerciseId": null,
+                            "exerciseId": 2529795,
                             "name": "DB Skullcrusher",
                             "sets": "3",
                             "reps": "15"
                           },
                           {
                             "id": "th-w2-full-C-2",
-                            "exerciseId": null,
+                            "exerciseId": 8043375,
                             "name": "Double Leg Lowers",
                             "sets": "3",
                             "reps": "11"
@@ -7026,8 +7039,8 @@
       }
     ]
   },
-  "rev": 276,
-  "updatedAt": "2026-09-18T05:41:15.106Z",
+  "rev": 278,
+  "updatedAt": "2026-09-18T05:46:16.316Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }
