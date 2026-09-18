@@ -633,124 +633,128 @@
                     "id": "str2-hyp-w2l",
                     "focus": "lower",
                     "kind": "series",
-                    "intent": "Lower - W2D2. Teneriffe Athletic Club Strength, week 2, 2026-09-24. Read from TrainHeroic.",
+                    "intent": "Lower - W2D2. Teneriffe Athletic Club Strength, 2026-09-24. Pulled from TrainHeroic.",
                     "timedBlocks": [
                       {
-                        "id": "th-w2-lower-WU",
+                        "id": "th-lower-2026-09-24-0",
                         "kind": "series",
                         "label": "WU",
                         "minutes": 8,
                         "slots": [
                           {
-                            "id": "th-w2-lower-WU-0",
+                            "id": "th-lower-2026-09-24-0-0",
                             "exerciseId": null,
                             "name": "Calf Stretch + Toe Lift in Rack",
                             "sets": "2",
                             "reps": "3",
-                            "tempo": "10s"
+                            "note": "The warm up will typically be 2-3 rounds of these exercises based on a time cap. Complete as many rounds as you can in the given warm up time · This is a contract / relax exercise - Spend 10seconds in as deep of a stretch as possible with your heel nice and close to the rack. The next 10 seconds will be spent pulling your toes back towards you"
                           },
                           {
-                            "id": "th-w2-lower-WU-1",
+                            "id": "th-lower-2026-09-24-0-1",
                             "exerciseId": null,
                             "name": "Quadruped Hip CARS",
                             "sets": "2",
-                            "reps": "3"
+                            "reps": "3",
+                            "note": "Trying to move just from your hip and not your lower back. Go through the biggest amount of range of motion you can through your hips · 3 reps in each direction per side"
                           },
                           {
-                            "id": "th-w2-lower-WU-2",
+                            "id": "th-lower-2026-09-24-0-2",
                             "exerciseId": null,
                             "name": "DB Goblet Squat",
                             "sets": "2",
-                            "reps": "8"
+                            "reps": "8",
+                            "note": "Slow and controlled. Choose a weight that is roughly 20-30% of what your working weight will be on your main sets"
                           },
                           {
-                            "id": "th-w2-lower-WU-3",
+                            "id": "th-lower-2026-09-24-0-3",
                             "exerciseId": 597514,
                             "name": "Squat Jumps",
                             "sets": "2",
-                            "reps": "30sec"
+                            "reps": "30sec",
+                            "note": "Doesn't have to be max effort but intended to get the joints moving dynamically. Try to be nice and smooth through these for the prescribed time"
                           }
                         ]
                       },
                       {
-                        "id": "th-w2-lower-A",
+                        "id": "th-lower-2026-09-24-1",
                         "kind": "series",
                         "label": "A",
                         "minutes": 20,
                         "slots": [
                           {
-                            "id": "th-w2-lower-A-0",
+                            "id": "th-lower-2026-09-24-1-0",
                             "exerciseId": 688272,
                             "name": "Barbell Back Squat",
                             "sets": "3",
                             "reps": "7",
-                            "intensity": "75%"
+                            "rpe": "1RIR",
+                            "note": "Back Squats will follow a 9/7/5 wave loading progression in 3 week cycles. Week one 9s, week two 7s, week three 5s. Each wave we will add more weight on from what we did last time · Please complete any neccessary warm up sets. Only working sets count as actual sets · If you are unsure about % please try to do 3x7 with 1RIR. This means you should have one rep left in the tank."
                           },
                           {
-                            "id": "th-w2-lower-A-1",
+                            "id": "th-lower-2026-09-24-1-1",
                             "exerciseId": 440,
                             "name": "Depth Jump",
                             "sets": "3",
-                            "reps": "5"
+                            "reps": "5",
+                            "note": "Jumping off a box or bench. This can be done with or without arms."
                           }
                         ]
                       },
                       {
-                        "id": "th-w2-lower-B",
+                        "id": "th-lower-2026-09-24-2",
                         "kind": "series",
                         "label": "B",
                         "minutes": 15,
                         "slots": [
                           {
-                            "id": "th-w2-lower-B-0",
+                            "id": "th-lower-2026-09-24-2-0",
                             "exerciseId": 8137642,
                             "name": "Barbell FFE Jefferson Split Squat",
                             "sets": "3",
-                            "reps": "10"
+                            "reps": "10",
+                            "rpe": "1RIR",
+                            "tempo": "2.2.2",
+                            "note": "1RIR (1 rep in reserve). This should still feel very challenging if you have a good awareness of how hard you can push yourself. · Keep a vertical torso · Tempo 2.2.2"
                           },
                           {
-                            "id": "th-w2-lower-B-1",
-                            "exerciseId": 2263920,
+                            "id": "th-lower-2026-09-24-2-1",
+                            "exerciseId": null,
                             "name": "Single Leg Hamstring Bridge (Off Bench)",
                             "sets": "3",
-                            "reps": "12"
+                            "reps": "12",
+                            "note": "Add weight if the prescribed rep range is too easy · Key cues are to think about pulling your heel back towards you as the way to extend your hip. Your aiming to have your torso inline with your leg at the top. · Think about exhaling as you come up and inhaling as you lower with control on the way back down"
                           }
                         ]
                       },
                       {
-                        "id": "th-w2-lower-C",
+                        "id": "th-lower-2026-09-24-3",
                         "kind": "series",
                         "label": "C",
                         "minutes": 12,
                         "slots": [
                           {
-                            "id": "th-w2-lower-C-0",
-                            "exerciseId": 7784461,
+                            "id": "th-lower-2026-09-24-3-0",
+                            "exerciseId": null,
                             "name": "DB Cyclist Squats (1 & 1/4)",
                             "sets": "3",
-                            "reps": "10"
+                            "reps": "10",
+                            "note": "Quad finisher to end the session. · Ideally set this up with a plate next to the end of the platform so you can get enough heel elevation - this will help bias more quads as you will be able to keep an upright torso. · If you feel your knees on this please complete one of the suggested swaps. · Try to increase weight when appropriate"
                           },
                           {
-                            "id": "th-w2-lower-C-1",
+                            "id": "th-lower-2026-09-24-3-1",
                             "exerciseId": 7149355,
                             "name": "Reverse Copenhagen Plank",
                             "sets": "3",
-                            "reps": "35sec"
+                            "reps": "35sec",
+                            "note": "Do the prescribed time on both side. Try to keep in a dead straight line. If the 30seconds is quite easy, please add a weight plate between your thighs. · Time will increase each week"
                           },
                           {
-                            "id": "th-w2-lower-C-2",
+                            "id": "th-lower-2026-09-24-3-2",
                             "exerciseId": null,
                             "name": "Single Leg Calf Raises (Weighted)",
                             "sets": "3",
                             "reps": "10",
-                            "scales": [
-                              {
-                                "name": "Single Leg Calf Raises"
-                              },
-                              {
-                                "name": "Double Leg Calf Raises"
-                              }
-                            ]
+                            "note": "Choose a weight that is challenging to get 10 reps. Please elevate your feet on a plate and go through the full range of motion. · The bottom range of motion is the most important"
                           }
                         ]
                       }
@@ -760,104 +764,113 @@
                     "id": "str2-hyp-w2u",
                     "focus": "upper",
                     "kind": "series",
-                    "intent": "Upper - W2D1. Teneriffe Athletic Club Strength, week 2, 2026-09-22. Read from TrainHeroic.",
+                    "intent": "Upper - W2D1. Teneriffe Athletic Club Strength, 2026-09-22. Pulled from TrainHeroic.",
                     "timedBlocks": [
                       {
-                        "id": "th-w2-upper-WU",
+                        "id": "th-upper-2026-09-22-0",
                         "kind": "series",
                         "label": "WU",
                         "minutes": 8,
                         "slots": [
                           {
-                            "id": "th-w2-upper-WU-0",
+                            "id": "th-upper-2026-09-22-0-0",
                             "exerciseId": null,
                             "name": "Banded Lat Activation",
                             "sets": "2",
                             "reps": "6",
-                            "tempo": "5s"
+                            "note": "The warm up will typically be 2-3 rounds of these exercises based on a warm up time cap. Complete as many rounds as you can in the given warm up time"
                           },
                           {
-                            "id": "th-w2-upper-WU-1",
+                            "id": "th-upper-2026-09-22-0-1",
                             "exerciseId": null,
                             "name": "Hanging Scap Retracts",
                             "sets": "2",
                             "reps": "10",
-                            "tempo": "1s"
+                            "note": "Really think about bringing your arm pit towards the ground. Hold for a second on each rep · Your elbows should stay straight"
                           },
                           {
-                            "id": "th-w2-upper-WU-2",
+                            "id": "th-upper-2026-09-22-0-2",
                             "exerciseId": null,
                             "name": "Medball Thoracic Opener",
                             "sets": "2",
                             "reps": "10",
-                            "load": "5"
+                            "load": "5",
+                            "note": "Set the medball as close to your hips as possible. Hold the plate in both hands and reach back towards the ground. Actively think about inhaling to your chest as you reach back. · Feel free to use a lighter weight or dumbbells if the 5kg plate feels too hard. Each rep should get progressively easier and you should be able to reach closer and closer to the ground."
                           },
                           {
-                            "id": "th-w2-upper-WU-3",
+                            "id": "th-upper-2026-09-22-0-3",
                             "exerciseId": null,
                             "name": "Push Up To Downward Dog",
                             "sets": "2",
-                            "reps": "10"
+                            "reps": "10",
+                            "note": "Push up first and then think about pushing the floor away and making your spine as long as possible"
                           }
                         ]
                       },
                       {
-                        "id": "th-w2-upper-A",
+                        "id": "th-upper-2026-09-22-1",
                         "kind": "series",
                         "label": "A",
                         "minutes": 20,
                         "slots": [
                           {
-                            "id": "th-w2-upper-A-0",
+                            "id": "th-upper-2026-09-22-1-0",
                             "exerciseId": 8004473,
                             "name": "Chin Up Negative",
                             "sets": "4",
                             "reps": "6",
-                            "tempo": "5s"
+                            "note": "For the people doing weighted please complete 4x6 @ the same weight you did last week. · For the people doing bodyweight, please try to add 1 rep per set. · For the people doing negatives - Please try to add 1 rep per set."
                           },
                           {
-                            "id": "th-w2-upper-A-1",
-                            "exerciseId": 2276649,
+                            "id": "th-upper-2026-09-22-1-1",
+                            "exerciseId": null,
                             "name": "Prone Weighted Angels",
                             "sets": "3",
-                            "reps": "10-15"
+                            "reps": "10-15",
+                            "note": "Think about making the biggest circumference. · If you can do 3 sets of 15 at a weight - go up next week and start back at 10 reps. · You typically won't need a very heavy weight for this. Make use of the variety of different size plates TAC has to offer."
                           }
                         ]
                       },
                       {
-                        "id": "th-w2-upper-B",
+                        "id": "th-upper-2026-09-22-2",
                         "kind": "series",
                         "label": "B",
                         "minutes": 15,
                         "slots": [
                           {
-                            "id": "th-w2-upper-B-0",
+                            "id": "th-upper-2026-09-22-2-0",
                             "exerciseId": 686395,
                             "name": "Tempo Barbell Bench Press",
                             "sets": "3",
-                            "reps": "6"
+                            "reps": "6",
+                            "rpe": "1RIR",
+                            "tempo": "4.1.1",
+                            "note": "Tempo 4.1.1 (4second negatives) · Reach your chest towards the bar as you come down · 1RIR (1 rep in reserve) · Reps stay the same each week - try to increase weight slightly each week"
                           },
                           {
-                            "id": "th-w2-upper-B-1",
+                            "id": "th-upper-2026-09-22-2-1",
                             "exerciseId": 8211110,
                             "name": "KB Gorilla Row",
                             "sets": "3",
-                            "reps": "10"
+                            "reps": "10",
+                            "note": "Alternating arms - Push firmly into one kettlebell and row with the opposite. Think about leading with your elbow. · If the specific KB weights don't quite match your strength level, then please complete a single arm DB row in the suggested swaps. · This should feel challenging by the last rep"
                           }
                         ]
                       },
                       {
-                        "id": "th-w2-upper-C",
+                        "id": "th-upper-2026-09-22-3",
                         "kind": "series",
                         "label": "C",
                         "minutes": 12,
                         "slots": [
                           {
-                            "id": "th-w2-upper-C-0",
+                            "id": "th-upper-2026-09-22-3-0",
                             "exerciseId": null,
                             "name": "Tricep Push Up",
                             "sets": "3",
                             "reps": "10-15",
+                            "rpe": "1RIR",
+                            "note": "1RIR (One rep in reserve) · If you get above 15 please add a plate to your back",
                             "scales": [
                               {
                                 "name": "Knee Push Ups"
@@ -865,18 +878,26 @@
                             ]
                           },
                           {
-                            "id": "th-w2-upper-C-1",
+                            "id": "th-upper-2026-09-22-3-1",
                             "exerciseId": null,
                             "name": "DB Rear Delt Fly",
                             "sets": "3",
-                            "reps": "12-15"
+                            "reps": "12-15",
+                            "rpe": "1RIR",
+                            "note": "1RIR (One rep in reserve) · Bentover - Lead with your elbows not your hands",
+                            "scales": [
+                              {
+                                "name": "Band Pull Aparts"
+                              }
+                            ]
                           },
                           {
-                            "id": "th-w2-upper-C-2",
+                            "id": "th-upper-2026-09-22-3-2",
                             "exerciseId": 5947834,
                             "name": "Oblique Crunch",
                             "sets": "3",
-                            "reps": "9"
+                            "reps": "9",
+                            "note": "Do the prescribed reps on each side. Exhale as you crunch"
                           }
                         ]
                       }
@@ -886,116 +907,128 @@
                     "id": "str2-hyp-w2f",
                     "focus": "full",
                     "kind": "series",
-                    "intent": "Full Body - W2D3. Teneriffe Athletic Club Strength, week 2, 2026-09-26. Read from TrainHeroic.",
+                    "intent": "Full Body - W2D3. Teneriffe Athletic Club Strength, 2026-09-26. Pulled from TrainHeroic.",
                     "timedBlocks": [
                       {
-                        "id": "th-w2-full-WU",
+                        "id": "th-full-2026-09-26-0",
                         "kind": "series",
                         "label": "WU",
                         "minutes": 8,
                         "slots": [
                           {
-                            "id": "th-w2-full-WU-0",
+                            "id": "th-full-2026-09-26-0-0",
                             "exerciseId": 7372167,
                             "name": "Quadruped Glute Stretch",
                             "sets": "2",
-                            "reps": "30sec"
+                            "reps": "30sec",
+                            "note": "The warm up will typically be 2-3 rounds of these exercises based on a time cap. Complete as many rounds as you can in the given warm up time"
                           },
                           {
-                            "id": "th-w2-full-WU-1",
+                            "id": "th-full-2026-09-26-0-1",
                             "exerciseId": null,
                             "name": "Adductor Rock Back Stretch",
                             "sets": "2",
                             "reps": "10",
-                            "tempo": "3s"
+                            "note": "Roll your foot to the outside and try to maintain anterior tilt throughout (tailbone facing the roof)."
                           },
                           {
-                            "id": "th-w2-full-WU-2",
+                            "id": "th-full-2026-09-26-0-2",
                             "exerciseId": null,
                             "name": "Glute Bridge w/Rotation",
                             "sets": "2",
-                            "reps": "10"
+                            "reps": "10",
+                            "note": "Do the prescribed reps on each side"
                           },
                           {
-                            "id": "th-w2-full-WU-3",
+                            "id": "th-full-2026-09-26-0-3",
                             "exerciseId": null,
                             "name": "Single Leg Arabesque",
                             "sets": "2",
-                            "reps": "10"
+                            "reps": "10",
+                            "note": "Do the prescribed reps on each side. · Slight bend in your knee. Imagine you are a see saw and your torso and back leg moves as one."
                           }
                         ]
                       },
                       {
-                        "id": "th-w2-full-A",
+                        "id": "th-full-2026-09-26-1",
                         "kind": "series",
                         "label": "A",
                         "minutes": 20,
                         "slots": [
                           {
-                            "id": "th-w2-full-A-0",
+                            "id": "th-full-2026-09-26-1-0",
                             "exerciseId": 597556,
                             "name": "Barbell RDL",
                             "sets": "3",
                             "reps": "7",
-                            "intensity": "75%"
+                            "rpe": "2RIR",
+                            "note": "E3OM (Every 3 minutes on the minute) · Following the same progression as Back Squats - a 9/7/5 wave loading progression in 3 week cycles. Week one 9s, week two 7s, week three 5s. Each wave we will add more weight on from what we did last time · If you are unsure on your weight then please choose a weight where you will have 2RIR (2 reps in reserve)."
                           },
                           {
-                            "id": "th-w2-full-A-1",
+                            "id": "th-full-2026-09-26-1-1",
                             "exerciseId": 651035,
                             "name": "Cossack Squat",
                             "sets": "3",
-                            "reps": "10"
+                            "reps": "10",
+                            "rpe": "2RIR",
+                            "note": "Do the presribed reps on each side. · Think about shifting your weight onto your working leg. It's equally important to both draw back into your hip and drive your knee forward. · Choose a weight where you have 2RIR (2 reps in reserve)"
                           }
                         ]
                       },
                       {
-                        "id": "th-w2-full-B",
+                        "id": "th-full-2026-09-26-2",
                         "kind": "series",
                         "label": "B",
                         "minutes": 15,
                         "slots": [
                           {
-                            "id": "th-w2-full-B-0",
+                            "id": "th-full-2026-09-26-2-0",
                             "exerciseId": 54656,
                             "name": "Barbell Z-Press",
                             "sets": "3",
-                            "reps": "8"
+                            "reps": "8",
+                            "rpe": "2RIR",
+                            "note": "Choose a weight that leaves you with 2RIR when you get to 8 reps (2 reps in reserve) · If you lack the mobility for this - please sit on a 20 or 25kg plate. If you lack the upper body mobility - please do a DB Z-Press which is in the suggested swaps."
                           },
                           {
-                            "id": "th-w2-full-B-1",
-                            "exerciseId": 222,
+                            "id": "th-full-2026-09-26-2-1",
+                            "exerciseId": null,
                             "name": "Inverted Rows (Feet Elevated)",
                             "sets": "3",
-                            "reps": "12"
+                            "reps": "12",
+                            "note": "Glutes/hips stay engaged. Drive your elbows to the ground and aim to hit your sternum on the bar"
                           }
                         ]
                       },
                       {
-                        "id": "th-w2-full-C",
+                        "id": "th-full-2026-09-26-3",
                         "kind": "series",
                         "label": "C",
                         "minutes": 12,
                         "slots": [
                           {
-                            "id": "th-w2-full-C-0",
+                            "id": "th-full-2026-09-26-3-0",
                             "exerciseId": 200,
                             "name": "Barbell Bicep Curl",
                             "sets": "3",
-                            "reps": "15"
+                            "reps": "15",
+                            "note": "High rep finisher - Choose a weight you can just get 15 reps with · Isolation exercises you don't need to typically worry about reps in reserve. Since they are such small muscle groups you can typically go really close to failure"
                           },
                           {
-                            "id": "th-w2-full-C-1",
+                            "id": "th-full-2026-09-26-3-1",
                             "exerciseId": 2529795,
                             "name": "DB Skullcrusher",
                             "sets": "3",
-                            "reps": "15"
+                            "reps": "15",
+                            "note": "Isolation exercises you don't need to typically worry about reps in reserve. Since they are such small muscle groups you can typically go really close to failure"
                           },
                           {
-                            "id": "th-w2-full-C-2",
+                            "id": "th-full-2026-09-26-3-2",
                             "exerciseId": 8043375,
                             "name": "Double Leg Lowers",
                             "sets": "3",
-                            "reps": "11"
+                            "reps": "11",
+                            "note": "Draw belly button to the ground, keep knees bent and think about an arcing motion on the way back up · Do this off a bench or box if this is too easy"
                           }
                         ]
                       }
@@ -7039,8 +7072,8 @@
       }
     ]
   },
-  "rev": 278,
-  "updatedAt": "2026-09-18T05:46:16.316Z",
+  "rev": 280,
+  "updatedAt": "2026-09-18T05:53:14.938Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }
