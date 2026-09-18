@@ -718,7 +718,7 @@
                           },
                           {
                             "id": "th-lower-2026-09-24-2-1",
-                            "exerciseId": null,
+                            "exerciseId": 2263920,
                             "name": "Single Leg Hamstring Bridge (Off Bench)",
                             "sets": "3",
                             "reps": "12",
@@ -734,7 +734,7 @@
                         "slots": [
                           {
                             "id": "th-lower-2026-09-24-3-0",
-                            "exerciseId": null,
+                            "exerciseId": 7784461,
                             "name": "DB Cyclist Squats (1 & 1/4)",
                             "sets": "3",
                             "reps": "10",
@@ -754,7 +754,15 @@
                             "name": "Single Leg Calf Raises (Weighted)",
                             "sets": "3",
                             "reps": "10",
-                            "note": "Choose a weight that is challenging to get 10 reps. Please elevate your feet on a plate and go through the full range of motion. · The bottom range of motion is the most important"
+                            "note": "Choose a weight that is challenging to get 10 reps. Please elevate your feet on a plate and go through the full range of motion. · The bottom range of motion is the most important",
+                            "scales": [
+                              {
+                                "name": "Single Leg Calf Raises"
+                              },
+                              {
+                                "name": "Double Leg Calf Raises"
+                              }
+                            ]
                           }
                         ]
                       }
@@ -992,7 +1000,7 @@
                           },
                           {
                             "id": "th-full-2026-09-26-2-1",
-                            "exerciseId": null,
+                            "exerciseId": 222,
                             "name": "Inverted Rows (Feet Elevated)",
                             "sets": "3",
                             "reps": "12",
@@ -7072,8 +7080,8 @@
       }
     ]
   },
-  "rev": 280,
-  "updatedAt": "2026-09-18T05:53:14.938Z",
+  "rev": 281,
+  "updatedAt": "2026-09-18T05:53:32.353Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }
