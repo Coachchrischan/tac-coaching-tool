@@ -2491,7 +2491,7 @@
       },
       {
         "id": "esd",
-        "name": "ESD",
+        "name": "Conditioning",
         "blocks": [
           {
             "id": "esd-aug-2026",
@@ -2843,6 +2843,47 @@
                             "text": "Calf and soleus, adductor, lat"
                           }
                         ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "paste-1",
+                    "focus": "cond-mon",
+                    "kind": "circuit",
+                    "circuit": [
+                      {
+                        "id": "paste-1-p1",
+                        "heading": "WARM UP · 8 MIN · WITH COACH",
+                        "lines": [
+                          {
+                            "text": "Rower easy",
+                            "load": "3 min"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "paste-1-p2",
+                        "heading": "PART 1 · 18 MIN CAP · CHOOSE A METRE TARGET",
+                        "note": "One machine each: rowers 1-8, skis 1-8. Chip at your target, off at every 3:00 beep.",
+                        "lines": [
+                          {
+                            "text": "Rower",
+                            "load": "Base 2,300m · Build 2,700m · Push 3,100m"
+                          },
+                          {
+                            "text": "Renegade Row",
+                            "load": "Base 6ea · Build 8ea · Push 10ea · Scale: DB Bent Over Row standing"
+                          }
+                        ]
+                      }
+                    ],
+                    "intent": "Threshold. Two parts, erg target then stations.",
+                    "note": "Watch the metres. Anyone well ahead at 9:00 is above threshold.",
+                    "coachSections": [
+                      {
+                        "id": "paste-1-c1",
+                        "heading": "ROTATION",
+                        "text": "16: one machine each. 12: groups of 4."
                       }
                     ]
                   }
@@ -6844,7 +6885,20 @@
                     "id": "gameday-b1w5s1",
                     "focus": "gameday",
                     "kind": "circuit",
-                    "circuit": []
+                    "circuit": [
+                      {
+                        "id": "paste-2-p1",
+                        "heading": "PART 1 · 34 MIN · TRIOS",
+                        "note": "Each trio works to its own goal. No class total.",
+                        "lines": [
+                          {
+                            "text": "DB Snatch",
+                            "load": "Base 20 · Build 30 · Push 40"
+                          }
+                        ]
+                      }
+                    ],
+                    "intent": "Community. Cumulative trio target."
                   }
                 ]
               },
@@ -7006,8 +7060,8 @@
       }
     ]
   },
-  "rev": 273,
-  "updatedAt": "2026-09-10T03:12:21.712Z",
+  "rev": 275,
+  "updatedAt": "2026-09-18T04:43:32.720Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }
