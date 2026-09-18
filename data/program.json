@@ -312,6 +312,7 @@
                             "name": "Barbell Back Squat",
                             "sets": "3",
                             "reps": "9",
+                            "intensity": "70%",
                             "note": "Back Squats will follow a 9/7/5 wave loading progression in 3 week cycles. Week one 9s, week two 7s, week three 5s. Each wave we will add more weight on from what we did last time · Please complete any neccessary warm up sets. Only working sets count as actual sets · If you prefer Front Squats they will be a suggested swap below."
                           },
                           {
@@ -594,9 +595,9 @@
                             "name": "Barbell RDL",
                             "sets": "3",
                             "reps": "9",
+                            "intensity": "70%",
                             "rpe": "2RIR",
-                            "note": "E3OM (Every 3 minutes on the minute) · Following the same progression as Back Squats - a 9/7/5 wave loading progression in 3 week cycles. Week one 9s, week two 7s, week three 5s. Each wave we will add more weight on from what we did last time · If you are unsure on your weight then please choose a weight where you will have 2RIR (2 reps in reserve).",
-                            "intensity": "70%"
+                            "note": "E3OM (Every 3 minutes on the minute) · Following the same progression as Back Squats - a 9/7/5 wave loading progression in 3 week cycles. Week one 9s, week two 7s, week three 5s. Each wave we will add more weight on from what we did last time · If you are unsure on your weight then please choose a weight where you will have 2RIR (2 reps in reserve)."
                           },
                           {
                             "id": "th-full-2026-09-19-1-1",
@@ -7124,8 +7125,8 @@
       }
     ]
   },
-  "rev": 285,
-  "updatedAt": "2026-09-18T06:07:35.116Z",
+  "rev": 286,
+  "updatedAt": "2026-09-18T06:09:45.558Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }
