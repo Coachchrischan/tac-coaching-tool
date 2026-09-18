@@ -632,77 +632,63 @@
                   {
                     "id": "str2-hyp-w2l",
                     "focus": "lower",
-                    "intent": "Lower body. Micro 1 of 3, week 2 (same prescription as week 1 until adjusted).",
                     "kind": "series",
+                    "intent": "Lower - W2D2. Teneriffe Athletic Club Strength, week 2, 2026-09-24. Read from TrainHeroic.",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w2l-WU",
+                        "id": "th-w2-lower-WU",
                         "kind": "series",
                         "label": "WU",
                         "minutes": 8,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2l-wu0",
+                            "id": "th-w2-lower-WU-0",
                             "exerciseId": null,
-                            "name": "Calf Stretch in Rack w/Toe Lift",
-                            "sets": "1",
-                            "reps": "30sec",
-                            "intensity": "",
-                            "rpe": ""
+                            "name": "Calf Stretch + Toe Lift in Rack",
+                            "sets": "2",
+                            "reps": "3",
+                            "tempo": "10s"
                           },
                           {
-                            "id": "str2-hyp-w2l-wu1",
+                            "id": "th-w2-lower-WU-1",
                             "exerciseId": null,
-                            "name": "Hip CARS",
-                            "sets": "1",
-                            "reps": "5ea",
-                            "intensity": "",
-                            "rpe": ""
+                            "name": "Quadruped Hip CARS",
+                            "sets": "2",
+                            "reps": "3"
                           },
                           {
-                            "id": "str2-hyp-w2l-wu2",
-                            "exerciseId": 1172,
-                            "name": "Goblet Squat",
-                            "sets": "1",
-                            "reps": "10",
-                            "intensity": "",
-                            "rpe": ""
+                            "id": "th-w2-lower-WU-2",
+                            "exerciseId": null,
+                            "name": "DB Goblet Squat",
+                            "sets": "2",
+                            "reps": "8"
                           },
                           {
-                            "id": "str2-hyp-w2l-wu3",
-                            "exerciseId": 597514,
+                            "id": "th-w2-lower-WU-3",
+                            "exerciseId": null,
                             "name": "Squat Jumps",
-                            "sets": "1",
-                            "reps": "30sec",
-                            "intensity": "",
-                            "rpe": ""
+                            "sets": "2",
+                            "reps": "30sec"
                           }
                         ]
                       },
                       {
-                        "id": "str2-hyp-w2l-A",
+                        "id": "th-w2-lower-A",
                         "kind": "series",
                         "label": "A",
                         "minutes": 20,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2l-a0",
-                            "exerciseId": 688272,
-                            "name": "Barbell Back Squats",
+                            "id": "th-w2-lower-A-0",
+                            "exerciseId": null,
+                            "name": "Barbell Back Squat",
                             "sets": "3",
                             "reps": "7",
                             "intensity": "75%"
                           },
                           {
-                            "id": "str2-hyp-w2l-a1",
+                            "id": "th-w2-lower-A-1",
                             "exerciseId": null,
-                            "name": "DB or Plate Drag Through",
-                            "sets": "3",
-                            "reps": "8ea"
-                          },
-                          {
-                            "id": "str2-hyp-w2l-a2",
-                            "exerciseId": 440,
                             "name": "Depth Jump",
                             "sets": "3",
                             "reps": "5"
@@ -710,54 +696,53 @@
                         ]
                       },
                       {
-                        "id": "str2-hyp-w2l-B",
+                        "id": "th-w2-lower-B",
                         "kind": "series",
                         "label": "B",
                         "minutes": 15,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2l-b0",
-                            "exerciseId": 8137642,
-                            "name": "Barbell Jefferson Split Squat (FFE)",
+                            "id": "th-w2-lower-B-0",
+                            "exerciseId": null,
+                            "name": "Barbell FFE Jefferson Split Squat",
                             "sets": "3",
-                            "reps": "10ea",
-                            "rpe": "7"
+                            "reps": "10"
                           },
                           {
-                            "id": "str2-hyp-w2l-b1",
-                            "exerciseId": 2263920,
-                            "name": "Single Leg Hamstring Bridge (Off Box)",
+                            "id": "th-w2-lower-B-1",
+                            "exerciseId": null,
+                            "name": "Single Leg Hamstring Bridge (Off Bench)",
                             "sets": "3",
-                            "reps": "12ea"
+                            "reps": "12"
                           }
                         ]
                       },
                       {
-                        "id": "str2-hyp-w2l-C",
+                        "id": "th-w2-lower-C",
                         "kind": "series",
                         "label": "C",
                         "minutes": 12,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2l-c0",
-                            "exerciseId": 7784461,
-                            "name": "Cyclist Squat Finisher (1 &1/4)",
-                            "sets": "3",
-                            "reps": "10+"
-                          },
-                          {
-                            "id": "str2-hyp-w2l-c1",
+                            "id": "th-w2-lower-C-0",
                             "exerciseId": null,
-                            "name": "Weighted DB Single Leg Calf Raises",
+                            "name": "DB Cyclist Squats (1 & 1/4)",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "10"
                           },
                           {
-                            "id": "str2-hyp-w2l-c2",
-                            "exerciseId": 7149355,
+                            "id": "th-w2-lower-C-1",
+                            "exerciseId": null,
                             "name": "Reverse Copenhagen Plank",
                             "sets": "3",
-                            "reps": "35sec ea"
+                            "reps": "35sec"
+                          },
+                          {
+                            "id": "th-w2-lower-C-2",
+                            "exerciseId": null,
+                            "name": "Single Leg Calf Raises (Weighted)",
+                            "sets": "3",
+                            "reps": "10"
                           }
                         ]
                       }
@@ -766,129 +751,119 @@
                   {
                     "id": "str2-hyp-w2u",
                     "focus": "upper",
-                    "intent": "Upper body. Micro 1 of 3, week 2 (same prescription as week 1 until adjusted).",
                     "kind": "series",
+                    "intent": "Upper - W2D1. Teneriffe Athletic Club Strength, week 2, 2026-09-22. Read from TrainHeroic.",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w2u-WU",
+                        "id": "th-w2-upper-WU",
                         "kind": "series",
                         "label": "WU",
                         "minutes": 8,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2u-wu0",
+                            "id": "th-w2-upper-WU-0",
                             "exerciseId": null,
                             "name": "Banded Lat Activation",
-                            "sets": "1",
-                            "reps": "10ea",
-                            "intensity": "",
-                            "rpe": ""
+                            "sets": "2",
+                            "reps": "6",
+                            "tempo": "5s"
                           },
                           {
-                            "id": "str2-hyp-w2u-wu1",
+                            "id": "th-w2-upper-WU-1",
                             "exerciseId": null,
                             "name": "Hanging Scap Retracts",
-                            "sets": "1",
+                            "sets": "2",
                             "reps": "10",
-                            "intensity": "",
-                            "rpe": ""
+                            "tempo": "1s"
                           },
                           {
-                            "id": "str2-hyp-w2u-wu2",
+                            "id": "th-w2-upper-WU-2",
                             "exerciseId": null,
                             "name": "Medball Thoracic Opener",
-                            "sets": "1",
+                            "sets": "2",
                             "reps": "10",
-                            "intensity": "",
-                            "rpe": ""
+                            "load": "5"
                           },
                           {
-                            "id": "str2-hyp-w2u-wu3",
+                            "id": "th-w2-upper-WU-3",
                             "exerciseId": null,
-                            "name": "Push Up to Downward Dog",
-                            "sets": "1",
-                            "reps": "5",
-                            "intensity": "",
-                            "rpe": ""
+                            "name": "Push Up To Downward Dog",
+                            "sets": "2",
+                            "reps": "10"
                           }
                         ]
                       },
                       {
-                        "id": "str2-hyp-w2u-A",
+                        "id": "th-w2-upper-A",
                         "kind": "series",
                         "label": "A",
                         "minutes": 20,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2u-a0",
-                            "exerciseId": 240,
-                            "name": "Weighted Chin Up",
-                            "sets": "5",
-                            "reps": "5",
-                            "rpe": ""
+                            "id": "th-w2-upper-A-0",
+                            "exerciseId": null,
+                            "name": "Chin Up Negative",
+                            "sets": "4",
+                            "reps": "6",
+                            "tempo": "5s"
                           },
                           {
-                            "id": "str2-hyp-w2u-a1",
+                            "id": "th-w2-upper-A-1",
                             "exerciseId": null,
-                            "name": "Prone Angels",
+                            "name": "Prone Weighted Angels",
                             "sets": "3",
-                            "reps": "15",
-                            "intensity": "",
-                            "rpe": ""
+                            "reps": "10-15"
                           }
                         ]
                       },
                       {
-                        "id": "str2-hyp-w2u-B",
+                        "id": "th-w2-upper-B",
                         "kind": "series",
                         "label": "B",
                         "minutes": 15,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2u-b0",
-                            "exerciseId": 686395,
+                            "id": "th-w2-upper-B-0",
+                            "exerciseId": null,
                             "name": "Tempo Barbell Bench Press",
                             "sets": "3",
-                            "reps": "6",
-                            "intensity": "",
-                            "tempo": "30X1",
-                            "rpe": "1RIR"
+                            "reps": "6"
                           },
                           {
-                            "id": "str2-hyp-w2u-b1",
-                            "exerciseId": 8211110,
-                            "name": "KB Gorilla Row / Single Arm DB Row",
+                            "id": "th-w2-upper-B-1",
+                            "exerciseId": null,
+                            "name": "KB Gorilla Row",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "10"
                           }
                         ]
                       },
                       {
-                        "id": "str2-hyp-w2u-C",
+                        "id": "th-w2-upper-C",
                         "kind": "series",
                         "label": "C",
                         "minutes": 12,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2u-c0",
+                            "id": "th-w2-upper-C-0",
                             "exerciseId": null,
-                            "name": "Tricep Push Ups",
+                            "name": "Tricep Push Up",
                             "sets": "3",
-                            "reps": "1RIR"
+                            "reps": "10-15"
                           },
                           {
-                            "id": "str2-hyp-w2u-c1",
+                            "id": "th-w2-upper-C-1",
                             "exerciseId": null,
                             "name": "DB Rear Delt Fly",
                             "sets": "3",
-                            "reps": "15"
+                            "reps": "12-15"
                           },
                           {
-                            "id": "str2-hyp-w2u-c2",
-                            "exerciseId": 5947834,
+                            "id": "th-w2-upper-C-2",
+                            "exerciseId": null,
                             "name": "Oblique Crunch",
                             "sets": "3",
-                            "reps": "9ea"
+                            "reps": "9"
                           }
                         ]
                       }
@@ -897,123 +872,114 @@
                   {
                     "id": "str2-hyp-w2f",
                     "focus": "full",
-                    "intent": "Full body. Micro 1 of 3, week 2 (same prescription as week 1 until adjusted).",
                     "kind": "series",
+                    "intent": "Full Body - W2D3. Teneriffe Athletic Club Strength, week 2, 2026-09-26. Read from TrainHeroic.",
                     "timedBlocks": [
                       {
-                        "id": "str2-hyp-w2f-WU",
+                        "id": "th-w2-full-WU",
                         "kind": "series",
                         "label": "WU",
                         "minutes": 8,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2f-wu0",
-                            "exerciseId": 7372167,
-                            "name": "Quadruped Glute Stretch",
-                            "sets": "1-2",
-                            "reps": "30sec ea",
-                            "intensity": "",
-                            "rpe": ""
-                          },
-                          {
-                            "id": "str2-hyp-w2f-wu1",
+                            "id": "th-w2-full-WU-0",
                             "exerciseId": null,
-                            "name": "Adductor Rock Backs",
-                            "sets": "1-2",
-                            "reps": "10 x 3 sec",
-                            "intensity": "",
-                            "rpe": ""
+                            "name": "Quadruped Glute Stretch",
+                            "sets": "2",
+                            "reps": "30sec"
                           },
                           {
-                            "id": "str2-hyp-w2f-wu2",
+                            "id": "th-w2-full-WU-1",
+                            "exerciseId": null,
+                            "name": "Adductor Rock Back Stretch",
+                            "sets": "2",
+                            "reps": "10",
+                            "tempo": "3s"
+                          },
+                          {
+                            "id": "th-w2-full-WU-2",
                             "exerciseId": null,
                             "name": "Glute Bridge w/Rotation",
-                            "sets": "1-2",
-                            "reps": "8ea",
-                            "intensity": "",
-                            "rpe": ""
+                            "sets": "2",
+                            "reps": "10"
                           },
                           {
-                            "id": "str2-hyp-w2f-wu3",
-                            "exerciseId": 7872827,
+                            "id": "th-w2-full-WU-3",
+                            "exerciseId": null,
                             "name": "Single Leg Arabesque",
-                            "sets": "1-2",
-                            "reps": "8ea",
-                            "intensity": "",
-                            "rpe": ""
+                            "sets": "2",
+                            "reps": "10"
                           }
                         ]
                       },
                       {
-                        "id": "str2-hyp-w2f-A",
+                        "id": "th-w2-full-A",
                         "kind": "series",
                         "label": "A",
                         "minutes": 20,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2f-a0",
-                            "exerciseId": 597556,
-                            "name": "Barbell RDL (E3OM)",
+                            "id": "th-w2-full-A-0",
+                            "exerciseId": null,
+                            "name": "Barbell RDL",
                             "sets": "3",
                             "reps": "7",
                             "intensity": "75%"
                           },
                           {
-                            "id": "str2-hyp-w2f-a1",
-                            "exerciseId": 651035,
+                            "id": "th-w2-full-A-1",
+                            "exerciseId": null,
                             "name": "Cossack Squat",
                             "sets": "3",
-                            "reps": "10ea"
+                            "reps": "10"
                           }
                         ]
                       },
                       {
-                        "id": "str2-hyp-w2f-B",
+                        "id": "th-w2-full-B",
                         "kind": "series",
                         "label": "B",
                         "minutes": 15,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2f-b0",
-                            "exerciseId": 54656,
+                            "id": "th-w2-full-B-0",
+                            "exerciseId": null,
                             "name": "Barbell Z-Press",
                             "sets": "3",
-                            "reps": "8-10",
-                            "rpe": "1RIR"
+                            "reps": "8"
                           },
                           {
-                            "id": "str2-hyp-w2f-b1",
-                            "exerciseId": 222,
-                            "name": "Inverted Rows - Feet Elevated",
+                            "id": "th-w2-full-B-1",
+                            "exerciseId": null,
+                            "name": "Inverted Rows (Feet Elevated)",
                             "sets": "3",
-                            "reps": "8-15",
-                            "rpe": "1RIR"
+                            "reps": "12"
                           }
                         ]
                       },
                       {
-                        "id": "str2-hyp-w2f-C",
+                        "id": "th-w2-full-C",
                         "kind": "series",
                         "label": "C",
                         "minutes": 12,
                         "slots": [
                           {
-                            "id": "str2-hyp-w2f-c0",
-                            "exerciseId": 200,
-                            "name": "Barbell Bicep Curls",
+                            "id": "th-w2-full-C-0",
+                            "exerciseId": null,
+                            "name": "Barbell Bicep Curl",
                             "sets": "3",
-                            "reps": "20"
+                            "reps": "15"
                           },
                           {
-                            "id": "str2-hyp-w2f-c1",
-                            "exerciseId": 2529795,
-                            "name": "DB Skullcrushers",
+                            "id": "th-w2-full-C-1",
+                            "exerciseId": null,
+                            "name": "DB Skullcrusher",
                             "sets": "3",
-                            "reps": "12-15"
+                            "reps": "15"
                           },
                           {
-                            "id": "str2-hyp-w2f-c2",
-                            "exerciseId": 8043375,
+                            "id": "th-w2-full-C-2",
+                            "exerciseId": null,
                             "name": "Double Leg Lowers",
                             "sets": "3",
                             "reps": "11"
@@ -7060,8 +7026,8 @@
       }
     ]
   },
-  "rev": 275,
-  "updatedAt": "2026-09-18T04:43:32.720Z",
+  "rev": 276,
+  "updatedAt": "2026-09-18T05:41:15.106Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }
