@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<title>Removing an Athlete from TrainHeroic</title>
+<style>
+  @font-face { font-family: 'Fraunces'; font-weight: 600 700; src: url(assets/Fraunces-Bold.woff2) format('woff2'); }
+  @font-face { font-family: 'Mulish'; font-weight: 200 900; src: url(assets/Mulish.woff2) format('woff2'); }
+  @page { size: A4; margin: 0; }
+  :root {
+    --cream: #f5f3eb; --card: #fdfcf9; --ink: #292626; --ink-soft: #5a5a52; --line: #d8d5c9;
+    --pine: #003030; --pine-2: #1c4a42; --pine-50: #e5ebe7; --sand: #dec5ae; --sand-dk: #c5a683; --sand-50: #f2e9de;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--cream); color: var(--ink); font-family: 'Mulish', sans-serif;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { width: 210mm; min-height: 297mm; padding: 0 16mm 14mm; position: relative; page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+
+  header.hero { background: var(--pine); color: var(--cream); margin: 0 -16mm 7mm; padding: 11mm 16mm 9mm; display: flex; gap: 8mm; align-items: center; }
+  header.hero img { width: 22mm; height: auto; }
+  .kicker { font-weight: 800; font-size: 8.5pt; letter-spacing: .18em; text-transform: uppercase; color: var(--sand); margin: 0 0 2.5mm; }
+  h1 { font-family: 'Fraunces', serif; font-weight: 700; font-size: 27pt; line-height: 1.05; margin: 0; }
+  .lede { margin: 3mm 0 0; font-size: 10.5pt; color: #dfe6e2; max-width: 125mm; line-height: 1.45; }
+
+  .running { display: flex; justify-content: space-between; align-items: center; padding: 8mm 0 4mm; margin-bottom: 5mm;
+    border-bottom: 1.5px solid var(--line); font-size: 8.5pt; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--pine-2); }
+  .running span:last-child { color: var(--ink-soft); }
+
+  .glance { display: flex; flex-wrap: wrap; gap: 2mm 2mm; margin: 0 0 7mm; padding: 0; list-style: none; font-size: 9pt; }
+  .glance li { background: var(--card); border: 1px solid var(--line); border-radius: 99px; padding: 1.3mm 3.2mm; font-weight: 700; color: var(--pine); }
+  .glance li b { color: var(--sand-dk); margin-right: 1.2mm; }
+
+  .step { display: grid; grid-template-columns: 11mm 1fr; gap: 0 4.5mm; margin-bottom: 5.5mm; break-inside: avoid; }
+  .num { width: 11mm; height: 11mm; border-radius: 50%; background: var(--pine); color: var(--sand);
+    font-family: 'Fraunces', serif; font-weight: 700; font-size: 15pt; display: grid; place-items: center; }
+  h2 { font-family: 'Fraunces', serif; font-weight: 700; font-size: 15pt; margin: 1.2mm 0 1.5mm; color: var(--pine); }
+  p { margin: 0 0 3mm; font-size: 10.5pt; line-height: 1.5; }
+  .shot { grid-column: 2; background: var(--card); border: 1px solid var(--line); border-radius: 3mm; padding: 2mm; }
+  .shot img { display: block; width: 100%; border-radius: 1.8mm; }
+  .shot.narrow { width: 58%; }
+  .shot.pair { display: grid; grid-template-columns: 1.1fr 1fr; gap: 2mm; align-items: center; }
+  .shot.mid { width: 84%; }
+  .shot.small { width: 68%; }
+  .key { display: inline-grid; place-items: center; width: 5.2mm; height: 5.2mm; border-radius: 50%; background: var(--pine);
+    color: var(--sand); font-weight: 800; font-size: 8pt; vertical-align: 0.2mm; margin-right: .6mm; }
+
+  .note { font-size: 9.5pt; color: var(--ink-soft); background: var(--sand-50); border-left: 3px solid var(--sand-dk); padding: 2.2mm 3.5mm; border-radius: 0 2mm 2mm 0; margin: 0 0 3mm; }
+  .choice { grid-column: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 3.5mm; margin-top: 3.5mm; }
+  .opt { background: var(--card); border: 1px solid var(--line); border-radius: 3mm; padding: 3.5mm 4mm; }
+  .opt.rec { border: 1.5px solid var(--pine-2); background: var(--pine-50); }
+  .opt h3 { font-size: 10.5pt; font-weight: 800; margin: 0 0 1.5mm; color: var(--pine); display: flex; align-items: center; gap: 1.5mm; }
+  .opt p { font-size: 9.5pt; margin: 0; }
+  .tag { margin-left: auto; font-size: 7pt; letter-spacing: .1em; text-transform: uppercase; background: var(--pine); color: var(--sand); padding: .8mm 2mm; border-radius: 99px; }
+
+  .done { background: var(--pine); color: var(--cream); border-radius: 3mm; padding: 5mm 6mm; margin-top: 2mm; break-inside: avoid; }
+  .done h2 { color: var(--sand); margin: 0 0 1.5mm; font-size: 13pt; }
+  .done p { margin: 0; font-size: 10pt; color: #dfe6e2; }
+  footer { position: absolute; left: 16mm; right: 16mm; bottom: 8mm; display: flex; justify-content: space-between;
+    font-size: 8pt; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 2.5mm; }
+</style>
+</head>
+<body>
+
+<section class="page">
+  <header class="hero">
+    <img src="assets/tac-icon-white.png" alt="TAC">
+    <div>
+      <p class="kicker">Coach onboarding &nbsp;/&nbsp; TrainHeroic</p>
+      <h1>Removing an athlete from TrainHeroic</h1>
+      <p class="lede">Use this when a member leaves or pauses. It takes about a minute, and every step is shown below with the button to click circled.</p>
+    </div>
+  </header>
+
+  <ul class="glance">
+    <li><b>1</b>Log In</li><li><b>2</b>Sign in</li><li><b>3</b>Teams</li><li><b>4</b>Three dots</li>
+    <li><b>5</b>View Athletes</li><li><b>6</b>Tick, then Archive or Remove</li><li><b>7</b>OK</li>
+  </ul>
+
+  <div class="step">
+    <div class="num">1</div>
+    <div>
+      <h2>Open TrainHeroic</h2>
+      <p>Go to <b>trainheroic.com</b> and click <b>Log In</b> in the top right corner.</p>
+    </div>
+    <div class="shot mid"><img src="img/01-login-button.png" alt=""></div>
+  </div>
+
+  <div class="step">
+    <div class="num">2</div>
+    <div>
+      <h2>Sign in with the TAC team account</h2>
+      <p><span class="key">1</span>The team email and password are saved on the gym computer, so they should fill in by themselves. <span class="key">2</span>Click <b>Log In</b>.</p>
+      <p class="note">The password is deliberately not written in this guide. If it doesn't fill in, ask Chris.</p>
+    </div>
+    <div class="shot small"><img src="img/02-login-form.png" alt=""></div>
+  </div>
+  <footer><span>Teneriffe Athletic Club</span><span>Page 1 of 3</span></footer>
+</section>
+
+<section class="page">
+  <div class="running"><span>Removing an athlete from TrainHeroic</span><span>Steps 3 to 5</span></div>
+
+  <div class="step">
+    <div class="num">3</div>
+    <div>
+      <h2>Go to Teams</h2>
+      <p>You'll land on the <b>Coach Home</b> dashboard. Click <b>Teams</b> in the black sidebar on the left.</p>
+    </div>
+    <div class="shot mid"><img src="img/03-teams-menu.png" alt=""></div>
+  </div>
+
+  <div class="step">
+    <div class="num">4</div>
+    <div>
+      <h2>Open the team menu</h2>
+      <p>On <b>My Teams</b>, find <b>Teneriffe Athletic Club Strength</b> and click the <b>three dots</b> at the far right of the row.</p>
+    </div>
+    <div class="shot mid"><img src="img/04-team-row-menu.png" alt=""></div>
+  </div>
+
+  <div class="step">
+    <div class="num">5</div>
+    <div>
+      <h2>Click View Athletes</h2>
+      <p>From the menu that pops up, choose <b>View Athletes</b>.</p>
+    </div>
+    <div class="shot narrow"><img src="img/05-view-athletes.png" alt=""></div>
+  </div>
+  <footer><span>Teneriffe Athletic Club</span><span>Page 2 of 3</span></footer>
+</section>
+
+<section class="page">
+  <div class="running"><span>Removing an athlete from TrainHeroic</span><span>Steps 6 and 7</span></div>
+
+  <div class="step">
+    <div class="num">6</div>
+    <div>
+      <h2>Tick the athlete, then Archive or Remove</h2>
+      <p><span class="key">1</span>Tick the checkbox to the left of the athlete's name. The list is sorted by surname, or use the magnifying glass to search.
+        Then choose <span class="key">A</span><b>Remove From Teams</b> or <span class="key">B</span><b>Archive</b> at the top.</p>
+    </div>
+    <div class="shot pair"><img src="img/06a-tick-athlete.png" alt=""><img src="img/06b-archive-or-remove.png" alt=""></div>
+    <div class="choice">
+      <div class="opt rec">
+        <h3><span class="key">B</span>Archive <span class="tag">Usually best</span></h3>
+        <p>We're <b>not charged</b> for archived athletes, and it's much easier to bring them back if they rejoin.</p>
+      </div>
+      <div class="opt">
+        <h3><span class="key">A</span>Remove From Teams</h3>
+        <p>Takes them off <b>all</b> of their teams. They stay in the athlete list, showing 0 Teams.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="num">7</div>
+    <div>
+      <h2>Confirm</h2>
+      <p>A popup asks you to confirm. Click <b>OK</b>.</p>
+    </div>
+    <div class="shot narrow"><img src="img/07-confirm-ok.png" alt=""></div>
+  </div>
+
+  <div class="done">
+    <h2>That's it</h2>
+    <p>Check the athlete now shows <b>0 Teams</b>, or no longer appears in the <b>Active</b> list if you archived them.</p>
+  </div>
+  <footer><span>Teneriffe Athletic Club</span><span>Page 3 of 3</span></footer>
+</section>
+
+</body>
+</html>
