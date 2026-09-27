@@ -51,6 +51,7 @@
   .opt.rec { border: 1.5px solid var(--pine-2); background: var(--pine-50); }
   .opt h3 { font-size: 10.5pt; font-weight: 800; margin: 0 0 1.5mm; color: var(--pine); display: flex; align-items: center; gap: 1.5mm; }
   .opt p { font-size: 9.5pt; margin: 0; }
+  .opt p.when { margin-bottom: 2mm; padding-bottom: 2mm; border-bottom: 1px solid var(--line); color: var(--ink); }
   .tag { margin-left: auto; font-size: 7pt; letter-spacing: .1em; text-transform: uppercase; background: var(--pine); color: var(--sand); padding: .8mm 2mm; border-radius: 99px; }
 
   .done { background: var(--pine); color: var(--cream); border-radius: 3mm; padding: 5mm 6mm; margin-top: 2mm; break-inside: avoid; }
@@ -66,7 +67,7 @@
   <header class="hero">
     <img src="assets/tac-icon-white.png" alt="TAC">
     <div>
-      <p class="kicker">Coach onboarding &nbsp;/&nbsp; TrainHeroic</p>
+      <p class="kicker">TrainHeroic</p>
       <h1>Removing an athlete from TrainHeroic</h1>
       <p class="lede">Use this when a member leaves or pauses. It takes about a minute, and every step is shown below with the button to click circled.</p>
     </div>
@@ -138,16 +139,18 @@
     <div>
       <h2>Tick the athlete, then Archive or Remove</h2>
       <p><span class="key">1</span>Tick the checkbox to the left of the athlete's name. The list is sorted by surname, or use the magnifying glass to search.
-        Then choose <span class="key">A</span><b>Remove From Teams</b> or <span class="key">B</span><b>Archive</b> at the top.</p>
+        Then choose <span class="key">A</span><b>Remove From Teams</b> or <span class="key">B</span><b>Archive</b> at the top. Not sure which? Use the boxes below.</p>
     </div>
     <div class="shot pair"><img src="img/06a-tick-athlete.png" alt=""><img src="img/06b-archive-or-remove.png" alt=""></div>
     <div class="choice">
       <div class="opt rec">
-        <h3><span class="key">B</span>Archive <span class="tag">Usually best</span></h3>
-        <p>We're <b>not charged</b> for archived athletes, and it's much easier to bring them back if they rejoin.</p>
+        <h3><span class="key">B</span>Archive <span class="tag">Easiest</span></h3>
+        <p class="when">Use when they're <b>still a gym member</b> but won't be using TrainHeroic for now, e.g. they're pausing or switching to classes only.</p>
+        <p>We're <b>not charged</b> for archived athletes, and it's easy to bring them back later.</p>
       </div>
       <div class="opt">
         <h3><span class="key">A</span>Remove From Teams</h3>
+        <p class="when">Use when they've <b>left the gym</b> and won't be using TrainHeroic again.</p>
         <p>Takes them off <b>all</b> of their teams. They stay in the athlete list, showing 0 Teams.</p>
       </div>
     </div>
