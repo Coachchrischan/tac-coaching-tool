@@ -1,0 +1,34 @@
+date,day,time,class,staff,room,cap,booked,checked_in,no_show,cancelled,waitlisted
+2026-09-28,Mon,05:00,Conditioning,Dana Coles,Group Fitness Room,16,14,11,3,1,0
+2026-09-28,Mon,06:00,Conditioning,Dana Coles,Group Fitness Room,16,13,12,1,3,0
+2026-09-28,Mon,07:00,Conditioning,Dana Coles,Group Fitness Room,16,8,8,0,1,0
+2026-09-28,Mon,12:00,Conditioning,Dana Coles,Group Fitness Room,16,5,4,1,1,0
+2026-09-28,Mon,17:15,Hyrox,Harry Crawford,Group Fitness Room,16,11,10,1,1,0
+2026-09-28,Mon,18:15,Hyrox,Harry Crawford,Group Fitness Room,16,4,3,1,1,0
+2026-09-29,Tue,05:00,Run Club,Katie Dall,Run Club,50,2,2,0,1,0
+2026-09-29,Tue,05:00,Upper Body Strength,Ji Wallace,Gym Floor,20,17,12,5,3,0
+2026-09-29,Tue,06:00,Upper Body Strength,Ji Wallace,Gym Floor,20,19,16,3,6,4
+2026-09-29,Tue,07:00,Upper Body Strength,Ji Wallace,Gym Floor,20,19,15,4,3,0
+2026-09-29,Tue,12:00,Upper Body Strength,Ji Wallace,Gym Floor,20,14,14,0,0,0
+2026-09-29,Tue,17:00,Flow Yoga,Stephanie Chung,Group Fitness Room,12,11,11,0,3,0
+2026-09-29,Tue,18:00,Yin Yoga,Stephanie Chung,Group Fitness Room,12,8,6,2,2,0
+2026-09-30,Wed,05:00,Conditioning,Dana Coles,Group Fitness Room,16,15,13,2,1,0
+2026-09-30,Wed,05:00,Run Club,Katie Dall,Run Club,50,1,1,0,1,0
+2026-09-30,Wed,06:00,Conditioning,Dana Coles,Group Fitness Room,16,11,11,0,3,0
+2026-09-30,Wed,07:00,Conditioning,Dana Coles,Group Fitness Room,16,11,10,1,2,0
+2026-09-30,Wed,12:00,Conditioning,Dana Coles,Group Fitness Room,16,5,5,0,0,0
+2026-09-30,Wed,17:15,Hyrox,Harry Crawford,Group Fitness Room,16,11,10,1,2,0
+2026-09-30,Wed,18:15,Hyrox,Harry Crawford,Group Fitness Room,16,1,1,0,1,0
+2026-10-01,Thu,05:00,Lower Body Strength,Ji Wallace,Gym Floor,20,18,17,1,3,0
+2026-10-01,Thu,06:00,Lower Body Strength,Ji Wallace,Gym Floor,20,20,19,1,1,2
+2026-10-01,Thu,07:00,Lower Body Strength,Ji Wallace,Gym Floor,20,12,10,2,4,0
+2026-10-01,Thu,12:00,Lower Body Strength,Ji Wallace,Gym Floor,20,7,6,1,1,0
+2026-10-01,Thu,17:00,StretchFit,Anthony Lett,Group Fitness Room,20,8,8,0,0,0
+2026-10-01,Thu,18:00,StretchFit,Anthony Lett,Group Fitness Room,20,2,1,1,4,0
+2026-10-02,Fri,05:00,Conditioning,Dana Coles,Group Fitness Room,16,14,13,1,1,0
+2026-10-02,Fri,06:00,Conditioning,Dana Coles,Group Fitness Room,16,16,15,1,2,1
+2026-10-02,Fri,07:00,Conditioning,Dana Coles,Group Fitness Room,16,7,7,0,1,0
+2026-10-02,Fri,12:00,Conditioning,Dana Coles,Group Fitness Room,16,2,2,0,1,0
+2026-10-02,Fri,17:15,Hyrox,Harry Crawford,Group Fitness Room,16,15,11,4,1,0
+2026-10-03,Sat,06:00,Full Body Strength,Ji Wallace,Functional Training Zone,20,18,17,1,6,0
+2026-10-03,Sat,07:30,Game Day,Ji Wallace,Group Fitness Room,20,4,3,1,0,0

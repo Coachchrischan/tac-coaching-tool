@@ -1,0 +1,31 @@
+date,day,time,class,staff,room,cap,booked,checked_in,no_show,cancelled,waitlisted
+2026-08-31,Mon,05:00,Conditioning,Dana Coles,Group Fitness Room,25,7,5,2,1,0
+2026-08-31,Mon,06:00,Conditioning,Dana Coles,Group Fitness Room,25,6,4,2,3,0
+2026-08-31,Mon,07:00,Conditioning,Dana Coles,Group Fitness Room,25,5,3,2,2,0
+2026-08-31,Mon,12:00,Conditioning,Dana Coles,Group Fitness Room,25,5,4,1,3,0
+2026-08-31,Mon,17:15,Hyrox,Ji Wallace,Group Fitness Room,20,12,10,2,0,0
+2026-08-31,Mon,18:15,Hyrox,Ji Wallace,Group Fitness Room,20,4,3,1,1,0
+2026-09-01,Tue,05:00,Lower Body Strength,Ji Wallace,Gym Floor,30,8,7,1,1,0
+2026-09-01,Tue,05:00,Run Club,Katie Dall,Run Club,50,1,0,1,0,0
+2026-09-01,Tue,06:00,Lower Body Strength,Ji Wallace,Gym Floor,30,23,18,5,2,0
+2026-09-01,Tue,12:00,Lower Body Strength,Ji Wallace,Gym Floor,30,11,8,3,0,0
+2026-09-01,Tue,17:00,Flow Yoga,Stephanie Chung,Group Fitness Room,12,7,7,0,1,0
+2026-09-01,Tue,18:00,Yin Yoga,Stephanie Chung,Group Fitness Room,12,9,4,5,0,0
+2026-09-02,Wed,05:00,Conditioning,Dana Coles,Group Fitness Room,25,10,4,6,0,0
+2026-09-02,Wed,05:00,Run Club,Katie Dall,Run Club,50,1,0,1,0,0
+2026-09-02,Wed,06:00,Conditioning,Dana Coles,Group Fitness Room,25,7,5,2,2,0
+2026-09-02,Wed,07:00,Conditioning,Dana Coles,Group Fitness Room,25,6,6,0,2,0
+2026-09-02,Wed,12:00,Conditioning,Dana Coles,Group Fitness Room,25,6,5,1,0,0
+2026-09-02,Wed,17:15,Hyrox,Ji Wallace,Group Fitness Room,20,14,11,3,2,0
+2026-09-02,Wed,18:15,Hyrox,Ji Wallace,Group Fitness Room,20,3,3,0,1,0
+2026-09-03,Thu,05:00,Upper Body Strength,Ji Wallace,Gym Floor,30,16,10,6,1,0
+2026-09-03,Thu,06:00,Upper Body Strength,Ji Wallace,Gym Floor,30,22,17,5,3,0
+2026-09-03,Thu,12:00,Upper Body Strength,Ji Wallace,Gym Floor,30,11,8,3,0,0
+2026-09-03,Thu,17:00,StretchFit,Anthony Lett,Group Fitness Room,20,10,8,2,4,0
+2026-09-03,Thu,18:00,StretchFit,Anthony Lett,Group Fitness Room,20,8,6,2,2,0
+2026-09-04,Fri,05:00,Conditioning,Dana Coles,Group Fitness Room,25,9,6,3,0,0
+2026-09-04,Fri,06:00,Conditioning,Dana Coles,Group Fitness Room,25,10,9,1,4,0
+2026-09-04,Fri,07:00,Conditioning,Dana Coles,Group Fitness Room,25,2,1,1,1,0
+2026-09-04,Fri,12:00,Conditioning,Dana Coles,Group Fitness Room,25,6,6,0,1,0
+2026-09-04,Fri,17:15,Hyrox,Ji Wallace,Group Fitness Room,20,12,8,4,1,0
+2026-09-05,Sat,07:30,Game Day,Ji Wallace,Group Fitness Room,27,4,4,0,0,0
