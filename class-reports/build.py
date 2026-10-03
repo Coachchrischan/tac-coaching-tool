@@ -36,8 +36,8 @@ RAMP = [(15, "#0f5446", "#fff"), (11, "#1f7f6b", "#fff"), (8, "#5fa896", "#fff")
 TEXT = f"font-size:14px;line-height:1.55;color:{INK};margin:0 0 10px"
 H2 = f"font-size:18px;color:{INK};margin:30px 0 6px"
 SUB = f"font-size:12px;color:{INK2};margin:0 0 10px"
-TH = f"font-size:11px;color:{INK2};text-transform:uppercase;padding:0 10px 6px;text-align:right;white-space:nowrap"
-TD = f"font-size:13px;padding:6px 10px;border-bottom:1px solid {LINE};text-align:right;white-space:nowrap"
+TH = f"font-size:11px;color:{INK2};text-align:right"
+TD = "text-align:right"
 
 
 # ---------- data ----------
@@ -105,9 +105,9 @@ def bar(segs, maxv, width, h=14):
     for v, c in segs:
         w = max(1, round(v / maxv * width)) if maxv else 1
         used += w
-        cells += f'<td width="{w}" height="{h}" bgcolor="{c}" style="font-size:0;line-height:0">&nbsp;</td>'
+        cells += f'<td width="{w}" height="{h}" bgcolor="{c}"></td>'
     if width - used > 0:
-        cells += f'<td width="{width - used}" style="font-size:0;line-height:0">&nbsp;</td>'
+        cells += f'<td width="{width - used}"></td>'
     return f'<table cellpadding="0" cellspacing="0" border="0" width="{width}"><tr>{cells}</tr></table>'
 
 
@@ -129,7 +129,7 @@ def kpis(this, last):
         (f'{this["per"]:.1f}', "check-ins per class", delta(this["per"], last and last["per"], "dec") + " on last week"),
         (pct(this["rate"]), f'no-show rate ({this["ns"]} people)',
          delta(this["rate"], last and last["rate"], "pct", True) + " on last week"),
-        (str(this["wait"]), "people waitlisted", delta(this["wait"], last and last["wait"]) + " on last week"),
+        (str(this["wait"]), "people waitlisted", f'<span style="color:{INK2}">{last["wait"] if last else "&ndash;"} last week</span>'),
     ]
     cells = "".join(
         f'<td width="25%" style="background:{PANEL};padding:12px;vertical-align:top;border:4px solid #fff">'
@@ -141,7 +141,7 @@ def kpis(this, last):
 
 def week_table(weeks, W, width):
     mx = max(W[w]["booked"] for w in weeks)
-    head = (f'<tr><th style="{TH};text-align:left;padding-left:0">Week of</th><th style="{TH}">Classes</th>'
+    head = (f'<tr><th style="{TH};text-align:left">Week of</th><th style="{TH}">Classes</th>'
             f'<th style="{TH};text-align:left">{swatch(TEAL)} Checked in {swatch(ORANGE)} No-show</th>'
             f'<th style="{TH}">Per class</th><th style="{TH}">No-show</th><th style="{TH}">Waitlist</th></tr>')
     body = ""
@@ -152,13 +152,13 @@ def week_table(weeks, W, width):
                      f'padding:6px 0 2px;border-top:1px dashed {MUTED}">New programming starts {fmt_d(w)}</td></tr>')
         latest = i == len(weeks) - 1
         wt = "font-weight:bold;" if latest else ""
-        body += (f'<tr><td style="{TD};text-align:left;padding-left:0;{wt}">{fmt_d(w)}</td>'
+        body += (f'<tr><td style="{TD};text-align:left;{wt}">{fmt_d(w)}</td>'
                  f'<td style="{TD}">{t["n"]}</td>'
                  f'<td style="{TD};text-align:left">{bar([(t["in"], TEAL), (t["ns"], ORANGE)], mx, width)}'
                  f'<span style="font-size:12px"><b>{t["in"]}</b> + {t["ns"]}</span></td>'
                  f'<td style="{TD};{wt}">{t["per"]:.1f}</td><td style="{TD};{wt}">{pct(t["rate"])}</td>'
                  f'<td style="{TD}">{t["wait"] or "&ndash;"}</td></tr>')
-    return f'<table cellpadding="0" cellspacing="0" border="0">{head}{body}</table>'
+    return f'<table cellpadding="5" cellspacing="0" border="0" style="font-size:13px">{head}{body}</table>'
 
 
 def month_of(wk):
@@ -169,13 +169,13 @@ def month_of(wk):
 
 def month_table(rows, last_day):
     months = sorted({month_of(r["wk"]) for r in rows})
-    head = (f'<tr><th style="{TH};text-align:left;padding-left:0">Month</th><th style="{TH}">Weeks</th>'
+    head = (f'<tr><th style="{TH};text-align:left">Month</th><th style="{TH}">Weeks</th>'
             f'<th style="{TH}">Classes</th><th style="{TH}">Check-ins</th><th style="{TH}">Per week</th>'
             f'<th style="{TH}">Per class</th><th style="{TH}">No-show</th><th style="{TH}">Waitlist</th></tr>')
 
     def row(label, t, n, shade=""):
         bg = f";background:{PANEL}" if shade else ""
-        return (f'<tr><td style="{TD};text-align:left;padding-left:0{bg}">{label}</td><td style="{TD}{bg}">{n}</td>'
+        return (f'<tr><td style="{TD};text-align:left{bg}">{label}</td><td style="{TD}{bg}">{n}</td>'
                 f'<td style="{TD}{bg}">{t["n"]}</td><td style="{TD}{bg}">{t["in"]}</td>'
                 f'<td style="{TD}{bg}"><b>{t["in"] / n:.0f}</b></td><td style="{TD}{bg}"><b>{t["per"]:.1f}</b></td>'
                 f'<td style="{TD}{bg}">{pct(t["rate"])}</td><td style="{TD}{bg}">{t["wait"] or "&ndash;"}</td></tr>')
@@ -195,14 +195,14 @@ def month_table(rows, last_day):
         if rs:
             body += row(label, totals(rs), len({r["wk"] for r in rs}), shade=True)
     note = (f'<p style="{SUB}">Each week counts towards the month its Thursday falls in, so months are made of whole weeks.</p>')
-    return f'{note}<table cellpadding="0" cellspacing="0" border="0">{head}{body}</table>'
+    return f'{note}<table cellpadding="5" cellspacing="0" border="0" style="font-size:13px">{head}{body}</table>'
 
 
-def coach_table(rows, this_wk, last_wk, width):
+def coach_table(rows, this_wk, last_wk, width, show_bars=True):
     staff = sorted({r["staff"] for r in rows if r["wk"] == this_wk},
                    key=lambda s: -totals([r for r in rows if r["staff"] == s and r["wk"] == this_wk])["per"])
-    head = (f'<tr><th style="{TH};text-align:left;padding-left:0">Coach</th>'
-            f'<th style="{TH};text-align:left">{swatch(MUTED)} Before {fmt_d(PROGRAM_START)} {swatch(TEAL)} This week</th>'
+    head = (f'<tr><th style="{TH};text-align:left">Coach</th>'
+            + (f'<th style="{TH};text-align:left">{swatch(MUTED)} Before {fmt_d(PROGRAM_START)} {swatch(TEAL)} This week</th>' if show_bars else '') +
             f'<th style="{TH}">Before</th><th style="{TH}">Last week</th><th style="{TH}">This week</th>'
             f'<th style="{TH}">No-show</th></tr>')
     body = ""
@@ -216,15 +216,15 @@ def coach_table(rows, this_wk, last_wk, width):
         classes = ", ".join(sorted({r["family"] for r in mine if r["wk"] == this_wk}))
         bars = (bar([(b or 0, MUTED)], 20, width, 8) + '<div style="height:3px;font-size:0;line-height:0">&nbsp;</div>'
                 + bar([(t["per"], TEAL)], 20, width, 11))
-        body += (f'<tr><td style="{TD};text-align:left;padding-left:0"><b>{html.escape(s)}</b><br>'
+        body += (f'<tr><td style="{TD};text-align:left"><b>{html.escape(s)}</b><br>'
                  f'<span style="font-size:11px;color:{INK2}">{html.escape(classes)}</span></td>'
-                 f'<td style="{TD};text-align:left">{bars}</td>'
-                 f'<td style="{TD};color:{INK2}">{"&ndash;" if b is None else f"{b:.1f}"}</td>'
+                 + (f'<td style="{TD};text-align:left">{bars}</td>' if show_bars else '')
+                 + f'<td style="{TD};color:{INK2}">{"&ndash;" if b is None else f"{b:.1f}"}</td>'
                  f'<td style="{TD};color:{INK2}">{"&ndash;" if l is None else f"{l:.1f}"}</td>'
                  f'<td style="{TD}"><b>{t["per"]:.1f}</b><br><span style="font-size:11px">'
                  f'{delta(t["per"], l, "dec") if l is not None else ""}</span></td>'
                  f'<td style="{TD}">{pct(t["rate"])}</td></tr>')
-    return f'<table cellpadding="0" cellspacing="0" border="0">{head}{body}</table>'
+    return f'<table cellpadding="5" cellspacing="0" border="0" style="font-size:13px">{head}{body}</table>'
 
 
 def slots(rows):
@@ -265,19 +265,19 @@ def class_grid(rows, weeks):
         for s in rs:
             d, mins, fam = s["slot"]
             vals = [s["by"][w]["checked_in"] for w in weeks if w in s["by"]]
-            body += f'<tr><td nowrap><b>{d} {t12(mins)} {html.escape(fam)}</b> <span style="color:{INK2}">{html.escape(s["staff"].split()[0])}</span></td>'
+            body += f'<tr align="center"><td nowrap align="left"><b>{d} {t12(mins)} {html.escape(fam)}</b> <span style="color:{INK2}">{html.escape(s["staff"].split()[0])}</span></td>'
             for w in weeks:
                 if w in s["by"]:
                     v = s["by"][w]["checked_in"]
                     bg, fg = heat(v)
-                    body += f'<td align="center" bgcolor="{bg}" style="color:{fg}"><b>{v}</b></td>'
+                    body += f'<td bgcolor="{bg}">{v}</td>' if fg == INK else f'<td bgcolor="{bg}" style="color:#fff">{v}</td>'
                 else:
-                    body += f'<td align="center" style="color:{MUTED}">&ndash;</td>'
-            body += f'<td align="center"><b>{sum(vals) / len(vals):.1f}</b></td></tr>'
+                    body += f'<td style="color:{MUTED}">&ndash;</td>'
+            body += f'<td>{sum(vals) / len(vals):.1f}</td></tr>'
     legend = " &nbsp;".join(f"{swatch(bg)} {lab}" for (_, bg, _), lab in
                             zip(RAMP[::-1], ["0-1", "2-4", "5-7", "8-10", "11-14", "15+"]))
     return (f'<p style="{SUB}">Check-ins per session, grouped by class type in timetable order. {legend}</p>'
-            f'<table cellpadding="4" cellspacing="2" border="0" style="font-size:12px">{head}{body}</table>')
+            f'<table cellpadding="4" cellspacing="2" border="0" style="font-size:12px;font-weight:bold">{head}{body}</table>')
 
 
 def no_show_list(rows, wk):
@@ -286,12 +286,12 @@ def no_show_list(rows, wk):
     if not rs:
         return f'<p style="{TEXT}">No no-shows this week.</p>'
     items = "".join(
-        f'<tr><td style="{TD};text-align:left;padding-left:0"><b>{r["day"]} {t12(r["mins"])}</b> {html.escape(r["class"])}</td>'
+        f'<tr><td style="{TD};text-align:left"><b>{r["day"]} {t12(r["mins"])}</b> {html.escape(r["class"])}</td>'
         f'<td style="{TD};text-align:left;color:{INK2}">{html.escape(r["staff"])}</td>'
         f'<td style="{TD}"><b>{r["no_show"]}</b> of {r["booked"]}</td>'
         f'<td style="{TD};{"color:" + BAD + ";font-weight:bold" if r["no_show"] / r["booked"] >= HIGH_NO_SHOW else ""}">'
         f'{pct(r["no_show"] / r["booked"])}</td></tr>' for r in rs)
-    return f'<table cellpadding="0" cellspacing="0" border="0">{items}</table>'
+    return f'<table cellpadding="5" cellspacing="0" border="0" style="font-size:13px">{items}</table>'
 
 
 def flags(rows, weeks):
@@ -351,7 +351,7 @@ def build():
             f'<h3 style="{H2}">Monthly review</h3>',
             month_table(rows, last_day),
             f'<h3 style="{H2}">Coach tracker: check-ins per class</h3>',
-            coach_table(rows, this_wk, last_wk, 160 if email else 260),
+            coach_table(rows, this_wk, last_wk, 260, show_bars=not email),
             f'<h3 style="{H2}">No-shows this week</h3>',
             no_show_list(rows, this_wk),
             f'<h3 style="{H2}">Every class, week by week</h3>',
