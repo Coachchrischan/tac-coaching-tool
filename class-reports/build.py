@@ -7,6 +7,11 @@ Writes:
                          so it renders in Gmail and Outlook)
   out/summary.txt        a few plain-text lines for the email's text part
 
+Public holidays come from holidays.csv (Queensland, Brisbane). Weeks with a
+holiday, the Christmas break or fewer classes than usual are labelled, shown
+with a full-week equivalent (check-ins per class x the usual number of
+classes), and holiday sessions are left out of the classes-to-watch flags.
+
 Usage: python3 class-reports/build.py
 """
 import csv
@@ -22,6 +27,8 @@ PROGRAM_START = date(2026, 9, 14)   # new programming, smaller caps, check-in re
 LOW, WATCH = 5, 6                   # average check-ins per class
 HIGH_NO_SHOW = 0.30                 # per class slot, over the flag window
 FLAG_WEEKS = 4
+HOLIDAYS_FILE = HERE / "holidays.csv"
+CHRISTMAS_BREAK = ((12, 22), (1, 5))  # (month, day) range treated as the Christmas period
 
 GROUPS = [("Strength", ["Upper Body Strength", "Lower Body Strength", "Full Body Strength"]),
           ("Conditioning", ["Conditioning"]), ("Hyrox", ["Hyrox"]),
@@ -36,8 +43,8 @@ RAMP = [(15, "#0f5446", "#fff"), (11, "#1f7f6b", "#fff"), (8, "#5fa896", "#fff")
 TEXT = f"font-size:14px;line-height:1.55;color:{INK};margin:0 0 10px"
 H2 = f"font-size:18px;color:{INK};margin:30px 0 6px"
 SUB = f"font-size:12px;color:{INK2};margin:0 0 10px"
-TH = f"font-size:11px;color:{INK2};text-align:right"
-TD = "text-align:right"
+TH = f"font-size:11px;color:{INK2};text-align:right;white-space:nowrap"
+TD = "text-align:right;white-space:nowrap"
 
 
 # ---------- data ----------
@@ -56,6 +63,51 @@ def load():
             r["slot"] = (r["day"], r["mins"], r["family"])
             rows.append(r)
     return rows
+
+
+def load_holidays():
+    if not HOLIDAYS_FILE.exists():
+        return {}
+    return {date.fromisoformat(r["date"]): r["name"] for r in csv.DictReader(HOLIDAYS_FILE.open())}
+
+
+HOLIDAYS = load_holidays()
+
+
+def in_christmas_break(d):
+    (m1, d1), (m2, d2) = CHRISTMAS_BREAK
+    return (d.month, d.day) >= (m1, d1) or (d.month, d.day) <= (m2, d2)
+
+
+def week_events(wk):
+    """Holidays and the Christmas break falling in the Monday-to-Sunday week."""
+    days = [wk + timedelta(days=i) for i in range(7)]
+    out = [f"{HOLIDAYS[d]} ({d.strftime('%a')} {fmt_d(d)})" for d in days if d in HOLIDAYS]
+    if any(in_christmas_break(d) for d in days):
+        out.append("Christmas period")
+    return out
+
+
+def usual_classes(weeks, W, before):
+    """Median class count of up to four earlier weeks without holidays."""
+    clean = [W[w]["n"] for w in weeks if w < before and not week_events(w)][-4:]
+    if not clean:
+        return None
+    clean.sort()
+    return clean[len(clean) // 2]
+
+
+def adjust(W, weeks):
+    """Attach labels and a full-week equivalent to weeks that were short."""
+    for w in weeks:
+        t = W[w]
+        usual = usual_classes(weeks, W, w)
+        notes = week_events(w)
+        if usual and t["n"] < usual:
+            notes.append(f"{t['n']} classes instead of the usual {usual}")
+        t["notes"] = notes
+        t["short"] = bool(notes)
+        t["full"] = round(t["per"] * usual) if usual and t["short"] else t["in"]
 
 
 def totals(rs):
@@ -94,7 +146,7 @@ def delta(now, before, kind="num", lower_is_better=False):
         txt = f"{'+' if diff >= 0 else '-'}{abs(diff):.1f}"
     else:
         txt = f"{'+' if diff >= 0 else '-'}{abs(round(diff))}"
-    if abs(diff) < 1e-9:
+    if abs(diff) < 1e-9 or txt.lstrip("+-").split()[0] in ("0", "0.0"):
         return f'<span style="color:{INK2}">no change</span>'
     good = (diff < 0) if lower_is_better else (diff > 0)
     return f'<span style="color:{GOOD if good else BAD};font-weight:bold">{txt}</span>'
@@ -124,8 +176,15 @@ def heat(v):
 # ---------- sections ----------
 
 def kpis(this, last):
+    if this["short"] or (last and last["short"]):
+        lf = last and last["full"]
+        first = (str(this["in"]), "check-ins this week",
+                 f'<span style="color:{INK2}">about {this["full"]} on a full week</span><br>'
+                 + delta(this["full"], lf) + " on last week, full-week basis")
+    else:
+        first = (str(this["in"]), "check-ins this week", delta(this["in"], last and last["in"]) + " on last week")
     tiles = [
-        (str(this["in"]), "check-ins this week", delta(this["in"], last and last["in"]) + " on last week"),
+        first,
         (f'{this["per"]:.1f}', "check-ins per class", delta(this["per"], last and last["per"], "dec") + " on last week"),
         (pct(this["rate"]), f'no-show rate ({this["ns"]} people)',
          delta(this["rate"], last and last["rate"], "pct", True) + " on last week"),
@@ -154,8 +213,11 @@ def week_table(weeks, W, width):
         wt = "font-weight:bold;" if latest else ""
         body += (f'<tr><td style="{TD};text-align:left;{wt}">{fmt_d(w)}</td>'
                  f'<td style="{TD}">{t["n"]}</td>'
-                 f'<td style="{TD};text-align:left">{bar([(t["in"], TEAL), (t["ns"], ORANGE)], mx, width)}'
-                 f'<span style="font-size:12px"><b>{t["in"]}</b> + {t["ns"]}</span></td>'
+                 f'<td style="{TD};text-align:left;white-space:normal">{bar([(t["in"], TEAL), (t["ns"], ORANGE)], mx, width)}'
+                 f'<span style="font-size:12px"><b>{t["in"]}</b> + {t["ns"]}</span>'
+                 + (f'<br><span style="font-size:11px;color:{WARN}">{html.escape("; ".join(t["notes"]))}. '
+                    f'About {t["full"]} on a full week.</span>' if t["short"] else "")
+                 + '</td>'
                  f'<td style="{TD};{wt}">{t["per"]:.1f}</td><td style="{TD};{wt}">{pct(t["rate"])}</td>'
                  f'<td style="{TD}">{t["wait"] or "&ndash;"}</td></tr>')
     return f'<table cellpadding="5" cellspacing="0" border="0" style="font-size:13px">{head}{body}</table>'
@@ -194,7 +256,10 @@ def month_table(rows, last_day):
         rs = [r for r in rows if keep(r)]
         if rs:
             body += row(label, totals(rs), len({r["wk"] for r in rs}), shade=True)
-    note = (f'<p style="{SUB}">Each week counts towards the month its Thursday falls in, so months are made of whole weeks.</p>')
+    short = [w for w in sorted({r["wk"] for r in rows}) if week_events(w)]
+    note = (f'<p style="{SUB}">Each week counts towards the month its Thursday falls in, so months are made of whole weeks.'
+            + (f' Weeks with a public holiday or the Christmas break: {", ".join(fmt_d(w) for w in short)}.' if short else "")
+            + '</p>')
     return f'{note}<table cellpadding="5" cellspacing="0" border="0" style="font-size:13px">{head}{body}</table>'
 
 
@@ -296,7 +361,7 @@ def no_show_list(rows, wk):
 
 def flags(rows, weeks):
     win = weeks[-FLAG_WEEKS:]
-    S = slots([r for r in rows if r["wk"] in win])
+    S = slots([r for r in rows if r["wk"] in win and r["d"] not in HOLIDAYS and not in_christmas_break(r["d"])])
     low, watch, ns = [], [], []
     for _, rs in ordered_slots(S):
         for s in rs:
@@ -312,7 +377,8 @@ def flags(rows, weeks):
             nos = sum(x["no_show"] for x in s["by"].values())
             if booked >= 8 and nos / booked >= HIGH_NO_SHOW:
                 ns.append(f"{name}: {nos} of {booked} ({pct(nos / booked)})")
-    out = f'<p style="{SUB}">Last {len(win)} weeks, check-ins oldest to newest.</p>'
+    out = (f'<p style="{SUB}">Last {len(win)} weeks, check-ins oldest to newest. '
+           f'Sessions on public holidays and over Christmas are left out.</p>')
     for title, colour, items in ((f"Low numbers (averaging under {LOW})", BAD, low),
                                  (f"Watch list (averaging {LOW} to {WATCH})", WARN, watch),
                                  (f"High no-shows ({pct(HIGH_NO_SHOW)} or more of bookings)", BAD, ns)):
@@ -333,6 +399,7 @@ def build():
     rows = load()
     weeks = sorted({r["wk"] for r in rows})
     W = {w: totals([r for r in rows if r["wk"] == w]) for w in weeks}
+    adjust(W, weeks)
     this_wk = weeks[-1]
     last_wk = weeks[-2] if len(weeks) > 1 else None
     last_day = max(r["d"] for r in rows)
@@ -344,6 +411,9 @@ def build():
         parts = [
             f'<p style="{TEXT}">Week of <b>{fmt_d(this_wk)} to {fmt_d(this_wk + timedelta(days=6))}</b>. '
             f'{len(weeks)} weeks of data, programming started {fmt_d(PROGRAM_START)}.</p>',
+            (f'<p style="font-size:13px;color:{WARN};background:#fbf0d9;padding:8px 12px;margin:0 0 8px">'
+             f'<b>Short week:</b> {html.escape("; ".join(this["notes"]))}. Compare check-ins per class, '
+             f'or the full-week equivalent of about {this["full"]} check-ins.</p>' if this["short"] else ""),
             kpis(this, last),
             f'<h3 style="{H2}">Week to week</h3>',
             f'<p style="{SUB}">Is it working? Check-ins and no-shows per week, with check-ins per class and no-show rate.</p>',
@@ -392,6 +462,12 @@ h1{{font-family:Fraunces,Georgia,serif;font-size:34px;margin:0 0 4px}}
     base = totals([r for r in rows if r["d"] < PROGRAM_START])
     if base["n"]:
         lines.append(f"Before programming: {base['per']:.1f} check-ins per class, no-show rate {pct(base['rate'])}.")
+    if this["short"]:
+        lines.append(f"Short week: {'; '.join(this['notes'])}. Full-week equivalent about {this['full']} check-ins.")
+    upcoming = {(this_wk + timedelta(days=7 * k)).year for k in range(0, 60)}
+    missing = sorted(y for y in upcoming if not any(d.year == y for d in HOLIDAYS))
+    if missing:
+        lines.append(f"WARNING: holidays.csv has no Queensland public holidays for {', '.join(map(str, missing))}. Add them.")
     (OUT / "summary.txt").write_text("\n".join(lines) + "\n")
     print("\n".join(lines))
     print(f"wrote {OUT / 'dashboard.html'}, {OUT / 'weekly-email.html'} ({len(email_html):,} chars)")

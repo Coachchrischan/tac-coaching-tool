@@ -33,3 +33,14 @@ stops the run with a message naming the row; add the name to the list and
 re-run. Class groupings for the week-by-week grid are in `GROUPS` in
 `build.py`. Thresholds for the flags (`LOW`, `WATCH`, `HIGH_NO_SHOW`) and the
 programming start date are at the top of `build.py`.
+
+## Public holidays and the Christmas break
+
+`holidays.csv` lists Queensland (Brisbane) public holidays. Any week with one,
+or with days in the Christmas break (22 Dec to 5 Jan, set in `build.py`), or
+with fewer classes than usual is labelled as a short week. The report then
+shows a full-week equivalent (check-ins per class times the usual number of
+classes) and compares on that basis, and sessions on those days are left out
+of the classes-to-watch flags. `build.py` prints a warning in `summary.txt`
+when the coming year has no holidays listed; add them from
+qld.gov.au/recreation/travel/holidays/public before the year starts.
