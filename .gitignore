@@ -31,3 +31,6 @@ data/*.json.corrupt-*
 *.njsproj
 *.sln
 *.sw?
+
+# The club's TrainHeroic session token. Never committed.
+tac-trainheroic.json

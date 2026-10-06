@@ -3,10 +3,12 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { storagePlugin } from './src/server/storagePlugin.js';
 import { teamPushPlugin } from './src/server/teamPushPlugin.js';
+import { weekPackPlugin } from './src/server/weekPackPlugin.js';
+import { thPullPlugin } from './src/server/thPullPlugin.js';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), storagePlugin(), teamPushPlugin()],
+  plugins: [react(), tailwindcss(), storagePlugin(), teamPushPlugin(), weekPackPlugin(), thPullPlugin()],
   server: {
     port: 8127,
     strictPort: true,

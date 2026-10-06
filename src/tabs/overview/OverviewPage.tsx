@@ -1,4 +1,5 @@
 import { useMemo, useRef, useState } from 'react';
+import { sessionWritten } from '../../lib/prescription';
 import { useNavigate } from 'react-router-dom';
 import { toSvg } from 'html-to-image';
 import { jsPDF } from 'jspdf';
@@ -22,14 +23,6 @@ const CREAM = '#F5F3EB';
 const SAND = '#DEC5AE';
 const CHARCOAL = '#201d1d';
 const PINE = '#003030';
-
-/** Does a session hold anything a coach could run? */
-function sessionWritten(s: Session): boolean {
-  if (s.kind === 'circuit') return s.circuit.some((c) => c.heading.trim() || c.lines.some((l) => l.text.trim()));
-  return s.timedBlocks.some((tb) =>
-    tb.kind === 'circuit' ? tb.pieces.some((p) => p.heading.trim() || p.lines.some((l) => l.text.trim())) : tb.slots.some((sl) => sl.name),
-  );
-}
 
 function blockWritten(b: ProgramBlock): number {
   return b.weeks.reduce((n, w) => n + w.sessions.filter(sessionWritten).length, 0);

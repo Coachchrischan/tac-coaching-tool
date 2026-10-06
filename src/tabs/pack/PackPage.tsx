@@ -5,10 +5,10 @@ import { useLibrary } from '../../lib/useLibrary';
 import { FOCUS_LABEL, circuitParts, seriesBlocks, streamsOf } from '../../lib/programStreams';
 import { mergedLibrary } from '../../lib/library';
 import { generateBlurb } from '../../lib/blurb';
-import { cueFor, effectiveScales, scaleSummary } from '../../lib/prescription';
+import { cueFor, effectiveScales, sessionWritten, slotDetail } from '../../lib/prescription';
 import { resolveWeekDays } from '../../lib/classDays';
 import { isoDate, todayIso, trainingWeekMonday } from '../../lib/trainingWeeks';
-import type { CircuitBlock, ExerciseSlot, Session, SessionFocus } from '../../types/documents';
+import type { CircuitBlock, ExerciseSlot, SessionFocus } from '../../types/documents';
 
 // The microcycle text pack: every session of a block window, written out in
 // full as real, selectable text, one A4 page per session. Made for the
@@ -29,31 +29,9 @@ const SAND = '#DEC5AE';
 const CHARCOAL = '#201d1d';
 const PINE = '#003030';
 
-/** Same line the TV board prints under an exercise. */
-function slotDetail(slot: ExerciseSlot): string {
-  return [
-    slot.sets && slot.reps ? `${slot.sets} × ${slot.reps}` : slot.reps,
-    slot.load,
-    slot.intensity ? `@ ${slot.intensity}` : undefined,
-    slot.rpe ? `RPE ${slot.rpe}` : undefined,
-    slot.tempo ? `${slot.tempo} tempo` : undefined,
-  ]
-    .filter(Boolean)
-    .join('   |   ');
-}
-
 const isWarmup = (label: string) => label.trim().toUpperCase() === 'WU';
 const fmt = (d: Date) => d.toLocaleDateString('en-AU', { day: 'numeric', month: 'long' });
 const fmtY = (d: Date) => d.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
-
-function sessionWritten(s: Session): boolean {
-  if (s.kind === 'circuit') return s.circuit.some((c) => c.heading.trim() || c.lines.some((l) => l.text.trim()));
-  return s.timedBlocks.some((tb) =>
-    tb.kind === 'circuit'
-      ? tb.pieces.some((p) => p.heading.trim() || p.lines.some((l) => l.text.trim()))
-      : tb.slots.some((sl) => sl.name),
-  );
-}
 
 export default function PackPage() {
   const { blockId } = useParams();
@@ -342,7 +320,7 @@ export default function PackPage() {
                               {scalesFor(slot).length > 0 && (
                                 <p className="mt-0.5 text-[10.5px] leading-snug" style={{ color: 'rgba(32,29,29,0.6)' }}>
                                   <span className="font-semibold">Scale: </span>
-                                  {scalesFor(slot).map(scaleSummary).join(' · ')}
+                                  {scalesFor(slot).map((s) => s.name).join(' · ')}
                                 </p>
                               )}
                             </div>

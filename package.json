@@ -11,7 +11,11 @@
     "preview": "vite preview",
     "test": "vitest run",
     "check": "tsc -p tsconfig.app.json --noEmit && vitest run",
-    "pack:docx": "node --import ./scripts/ts-resolve.mjs scripts/pack-docx.mjs"
+    "pack:docx": "node --import ./scripts/ts-resolve.mjs scripts/pack-docx.mjs",
+    "week-pack": "node --import ./scripts/ts-resolve.mjs scripts/build-week-pack.mjs",
+    "set-token": "node scripts/set-tac-token.mjs",
+    "pull-week": "node scripts/pull-week-into-tool.mjs",
+    "week-folder": "node scripts/week-folder.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

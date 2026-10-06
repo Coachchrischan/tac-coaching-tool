@@ -100,6 +100,13 @@ export type SessionFocus =
   | 'full-a'
   | 'full-b'
   | 'esd'
+  // Conditioning runs three days a week from 2026-09-18 (Chris's call): the
+  // same 'esd' class type on Monday, Wednesday and Friday, each with its own
+  // theme. They are separate focuses because a week holds all three at once,
+  // and the class type alone cannot tell them apart.
+  | 'cond-mon'
+  | 'cond-wed'
+  | 'cond-fri'
   | 'hyrox'
   | 'rox-strong'
   | 'rox-engine'
@@ -186,6 +193,13 @@ export interface CircuitLine {
 export interface CircuitBlock {
   id: string;
   heading: string;
+  /**
+   * How the piece is run, under the heading and above the movements: "One
+   * machine each, chip at your target, off at every 3:00 beep". A series part
+   * has always had this; a circuit piece needed it once the conditioning
+   * sessions arrived, because their parts are half instruction.
+   */
+  note?: string;
   lines: CircuitLine[];
   restAfter?: string;
   /** Hidden from the TV board only; see TimedBlockCommon.hideFromBoard. */
@@ -209,6 +223,13 @@ interface SessionCommon {
    * from the blurb (one line of sell), so it is kept as its own field.
    */
   appDescription?: string;
+  /**
+   * Coach-only sections that are not the workout and never reach the wall:
+   * the rotation at 16 / 12 / 8, the room set-up, a covering coach's version.
+   * The conditioning pack carries these under every session and a coach needs
+   * them on the card, so they are kept in order rather than dropped on import.
+   */
+  coachSections?: { id: string; heading: string; text: string }[];
 }
 
 /** Strength: series (WU/A/B/C) of exercise slots with sets, reps and load. */
@@ -317,6 +338,13 @@ export interface CustomExercise {
 /** A scaled option: what to do instead, and how much of it. */
 export interface ScaledOption {
   name: string;
+  /**
+   * This option is HARDER than the movement it sits under, not a regression.
+   * A weighted chin up is a progression on a chin up negative, so the board
+   * calls it a suggested swap rather than a scale. Set where the swap is
+   * known to go up (see HARDER_SWAPS in thSwaps.ts); absent means a scale.
+   */
+  harder?: boolean;
   /**
    * TrainHeroic library id, set when the scale was picked from the library
    * rather than typed. It is what hangs the demo video off a scale, the same

@@ -110,6 +110,22 @@ Community, Planning, Ethos.
   Coach addresses live on `ScheduleDoc.coaches[].email`, edited in Schedule's settings drawer.
 - **TV board** (`/tv/:sessionId`): 1920x1080 landscape, TAC-branded, renders both formats, with
   per-class member photos as backdrops. Export PNG / PDF.
+- **How-to boards** (`/board/:boardId`, `src/tabs/tv/HowToBoard.tsx`, 2026-09-15): the same
+  1920x1080 shell carrying an instruction sequence instead of a workout, for the wall and for
+  the club's designer. First board is `trainheroic`: two pathways (have the app / do not have
+  the app) split down the middle with a circled OR, converging on one full-width access-code
+  band. Content is the `BOARDS` record at the top of the file, so a second board is a data
+  entry. `?code=ABC123` fills the code in (it is not in the repo, so it prints a placeholder
+  without it); `?bare=1` strips the buttons and warnings for a headless capture. Everything the
+  designer must supply is drawn as a labelled placeholder: the two app screenshots, the store
+  badges, the code. Exports live in `TAC/boards/` (see its README for the Chrome commands).
+- **Board fit fixed the same day.** Both boards previewed with
+  `transform: scale(min(calc(100vw / 1920), ...))`, which is invalid: a length where
+  `scale()` needs a number, so the browser dropped the declaration and the board rendered at
+  full size. It also centred inside its own 1080px layout box rather than the window, because a
+  transform does not change layout. `src/lib/useFitScale.ts` measures the window instead, and
+  both boards are now absolutely centred. Exports never used it, so nothing about the PNG, PDF
+  or the wall changes; only the preview does.
 - **TrainHeroic push:** `POST /api/team-push` via `src/server/teamPushPlugin.ts`, using
   `trainheroic-mcp`'s client and token. **Only Strength** maps to a team ("TAC Strength Class",
   TrainHeroic program id **5071078**). The six stale drafts were deleted on 2026-08-20 and
@@ -531,6 +547,70 @@ API (program rev 170 to 171, library-overrides 40 to 41):
   WU 8 / A 20 / B 15 / C 12 minutes; `defaultSeries` seeds new sessions that way.
 - **Still open**: micro 2 and 3, the intensity wave inside micro 1, pushing
   week 1 drafts before 14 Sept, Gym Floor fixtures, the round-2 coaching queue.
+
+## The Week Pack tab (2026-09-18)
+
+The week became four streams across six days and no screen showed it whole, so there is a new
+tab, **Week Pack** (`/week`, `src/tabs/weekpack/WeekPackTab.tsx`), and the club's week is now
+declared in one place:
+
+| Mon | Tue | Wed | Thu | Fri | Sat |
+|---|---|---|---|---|---|
+| Monday Conditioning | Lower | Wednesday Conditioning | Upper | Friday Conditioning | Game Day |
+
+- **Timetable changed to match** (Chris's call, 2026-09-18): Wednesday conditioning added to the
+  live scenario (mirroring Monday's four ESD times), **Friday strength removed**. Strength is
+  Tuesday and Thursday. The Full Body ('full') session in Phase 2 therefore has no class day; it
+  is still written and still in the document, and the tool says so rather than hiding it.
+- **Three conditioning focuses**, `cond-mon` / `cond-wed` / `cond-fri`, all on the `esd` class
+  type. They carry a **fixed weekday** (`FocusDef.weekday`), which beats `dayPick`: three classes
+  of one class type in one week cannot be told apart by an index into the sorted days, and the
+  timetable already carries a stray Tuesday ESD that broke that guess. The ESD stream is now
+  named **Conditioning**.
+- **Paste a microcycle in.** The tab has a paste box that reads the conditioning pack Chris
+  exports from `TAC/programming/` (`src/lib/conditioningPaste.ts`, tested against the real
+  micro 1 file: 12 sessions, parts, Base/Build/Push lanes, scales, rotation). Indentation is the
+  structure: column 0 a section, 2 a movement or the instruction, 6 the lanes. SESSION INTENT,
+  COACH NOTE, MEMBER APP DESCRIPTION and FOOTER BLURB land on the session; ROTATION and SET-UP
+  become **coach sections** (new `SessionCommon.coachSections`), which never reach the wall but
+  are on the coaching card. Pack week 1 lands on the week on screen, week 2 on the next.
+  Importing again replaces; it does not double up.
+- **`CircuitBlock.note`** is new: a conditioning part is half instruction, and the board used to
+  list the movements without saying it was an E3MOM off the erg.
+- **The folder.** "Build the pack" (or `npm run week-pack -- 2026-09-21 --name "Week 2 Class
+  Programming"`) writes one folder into `TAC/programming/weeks/`: the week as a text file,
+  `boards/` a 1920x1080 PNG per class, `cards/` an A4 PDF per class, and a README naming
+  anything not written. Boards and cards are rendered by driving the app's own
+  `/tv/:id?bare=1` and `/card/:id?bare=1` routes in headless Chrome, so there is one definition
+  of a board. `scripts/build-week-pack.mjs` is the real thing; `src/server/weekPackPlugin.ts`
+  only lets the tab press it. `?bare=1` now works on the TV board too.
+- **The coaching card** is new (`/card/:sessionId`, `src/tabs/card/CardPage.tsx`): one A4 page,
+  the brief, the work compact, then the coach-only half (coach note, rotation, set-up, member
+  description). Print keeps the type as text.
+- **Focus tables are finally all derived.** Adding the conditioning focuses made the type checker
+  find three more hand-keyed tables (the blurb's day names, the Phase view's labels, the TV
+  board's headline). They now come from `FOCUS_DAY_TITLE` / `FOCUS_LABEL` / `FOCUS_BOARD_TITLE`
+  in the catalog. Nothing hand-keys a focus any more.
+
+**The TrainHeroic pull (built 2026-09-18, waiting on a token).** "Pull from TrainHeroic" on the
+Week Pack tab reads the team calendar for the week's strength days and shows what is there beside
+what the tool holds, line by line, with the differences picked out. A second click writes it in.
+
+- `src/lib/thPull.ts` is the **exact inverse of the push**, and is tested as one:
+  `thPull.test.ts` runs every slot through the REAL push mapping (`mapReps`, `buildCue`, the
+  payload `buildExercisePayload` sends) into TrainHeroic's stored shape and back, and asserts it
+  returns unchanged. 13 cases, including each-side reps, seconds holds, "10+", rep ranges, RIR,
+  kg loads and the coach note. If either side is edited alone, the test goes red. Two things do
+  not survive and both are asserted: the library id (a team calendar does not carry one) and RIR
+  spacing ("1RIR" comes back "1 RIR", then stays).
+- `src/server/thPullPlugin.ts` (`POST /api/th-pull { monday }`) is **read only by design**. It
+  maps and diffs and hands the result back; the tab writes through the store like any other edit,
+  so a pull cannot bypass the rev check, the history snapshots or the backup. Applying keeps the
+  intent, coach note and member app description, which TrainHeroic does not hold, and replaces
+  only the work.
+- **Blocked on the token.** Verified end to end on 2026-09-18 as far as TrainHeroic: the button
+  reaches the API and gets a 401, and the tab says so in plain words. The session token expires
+  every few days. Refresh it and the pull is live; the mapping itself is proven by the round trip.
 
 **Decisions already made, do not reopen without me:** ESD and Game Day are month to month, not
 periodised (**Hyrox was, and is now four-week blocks**, changed 2026-08-28 on Chris's call).
