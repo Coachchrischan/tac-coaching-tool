@@ -7,23 +7,6 @@
         "name": "Strength",
         "blocks": [
           {
-            "id": "str2-lead",
-            "theme": "Before the phase",
-            "annualPhaseId": "ap-2026-hyp9",
-            "blockLength": 3,
-            "weeks": [
-              {
-                "sessions": []
-              },
-              {
-                "sessions": []
-              },
-              {
-                "sessions": []
-              }
-            ]
-          },
-          {
             "id": "str2-hyp",
             "theme": "Strength-Hypertrophy",
             "annualPhaseId": "ap-2026-hyp9",
@@ -1595,7 +1578,8 @@
           }
         ],
         "format": "strength",
-        "cadence": "phases"
+        "cadence": "phases",
+        "startsWeek": 3
       },
       {
         "id": "esd",
@@ -1705,8 +1689,8 @@
       }
     ]
   },
-  "rev": 300,
-  "updatedAt": "2026-09-18T07:01:21.321Z",
+  "rev": 301,
+  "updatedAt": "2026-10-07T00:08:24.891Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }
