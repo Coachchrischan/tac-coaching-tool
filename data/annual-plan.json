@@ -242,15 +242,15 @@
         "tentative": true
       },
       {
-        "id": "ws-deadlift-2026-11",
+        "id": "ws-deadlift-2026-12",
         "name": "Deadlift workshop",
-        "date": "2026-11-30",
+        "date": "2026-12-07",
         "streamId": "strength"
       }
     ]
   },
-  "rev": 13,
-  "updatedAt": "2026-10-07T00:31:02.828Z",
+  "rev": 15,
+  "updatedAt": "2026-10-07T00:44:09.736Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }
