@@ -32,7 +32,7 @@
           },
           {
             "id": "2aed6a9c-77ce-4471-9e5c-35075b6ebc50",
-            "name": "Unilateral muscle-endurance",
+            "name": "Muscle endurance",
             "focus": "W1 unilateral testing (newcomer influx). Single-limb work, tempo, time under tension, asymmetric holds. Higher-rep muscle endurance, addressing imbalances.",
             "weeks": 4,
             "microcycles": [
@@ -249,8 +249,8 @@
       }
     ]
   },
-  "rev": 15,
-  "updatedAt": "2026-10-07T00:44:09.736Z",
+  "rev": 16,
+  "updatedAt": "2026-10-07T00:54:05.765Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }
