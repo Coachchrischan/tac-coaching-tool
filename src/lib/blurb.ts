@@ -112,15 +112,13 @@ export function generateBlurb(
     }
   }
 
-  // Structure line from the timed blocks. A strength class opens with a
-  // 5 minute coach brief before the warm-up (Chris, 2026-09-10); it is not a
-  // timed block in the data, so it is said here rather than modelled.
+  // Structure line from the timed blocks.
   const withMinutes = session.timedBlocks.filter((b) => b.minutes > 0);
   if (withMinutes.length > 0) {
-    const parts = withMinutes.map((b) =>
-      b.label.trim().toUpperCase() === 'WU' ? `${b.minutes} min warm-up` : `${b.minutes} min ${b.label} series`,
+    const parts = withMinutes.map((b) => `${b.minutes} min ${b.label} series`);
+    sentences.push(
+      `${withMinutes.length} timed ${withMinutes.length === 1 ? 'block' : 'blocks'}: ${parts.join(', ')}.`,
     );
-    sentences.push(`5 min brief, then ${parts.join(', ')}.`);
   }
 
   return sentences.join(' ');
