@@ -350,4 +350,5 @@ export const seeds: Record<DocId, () => unknown> = {
   layouts: seedLayouts,
   equipment: seedEquipment,
   'push-log': () => ({ entries: [] }),
+  meetings: () => ({ meetings: [] }),
 };

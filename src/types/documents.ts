@@ -12,7 +12,8 @@ export type DocId =
   | 'planning'
   | 'layouts'
   | 'equipment'
-  | 'push-log';
+  | 'push-log'
+  | 'meetings';
 
 export interface DocEnvelope<T> {
   data: T;
@@ -450,6 +451,18 @@ export interface AttendanceEntry {
    * reach the owners (2026-09-01 roundtable).
    */
   seeded?: boolean;
+  /**
+   * Weekly entries only: check-ins per session, from the weekly Class Summary
+   * report. When present, count is their sum and per-class averages use the
+   * sessions that actually ran rather than the timetable.
+   */
+  slots?: AttendanceSlot[];
+}
+
+export interface AttendanceSlot {
+  label: string; // e.g. 'Mon 5:15pm'
+  coach?: string;
+  count: number;
 }
 
 export interface AttendanceDoc {
@@ -556,6 +569,65 @@ export interface PushLogDoc {
   entries: PushLogEntry[];
 }
 
+// ---------------------------------------------------------------------------
+// Coach meetings: one OKR check-in per class per meeting. Each new meeting for
+// a class carries the previous one's objectives and open actions forward, so
+// the run of meetings is the record and last time's notes sit beside this
+// time's. Attendance is never copied in: it is read live from the attendance
+// doc for the eight weeks before the meeting date.
+// ---------------------------------------------------------------------------
+
+export interface MeetingKeyResult {
+  id: string;
+  text: string;
+  /** Baseline when the KR was set. */
+  start: number | null;
+  target: number | null;
+  current: number | null;
+  /** 1-10: how sure the coaches are of hitting the target this period. */
+  confidence: number | null;
+  /** When set, current is filled from attendance instead of typed in. */
+  auto?: 'avg-week' | 'avg-session';
+}
+
+export interface MeetingObjective {
+  id: string;
+  text: string;
+  /** A MEETING_SECTIONS id, so objectives sit with the topic they belong to. */
+  sectionId: string;
+  keyResults: MeetingKeyResult[];
+}
+
+export interface MeetingAction {
+  id: string;
+  text: string;
+  owner: string;
+  due?: string; // ISO yyyy-mm-dd
+  done: boolean;
+  /** Date of the meeting it was first raised in, kept when carried forward. */
+  raised: string;
+}
+
+export interface Meeting {
+  id: string;
+  classTypeId: string;
+  date: string; // ISO yyyy-mm-dd
+  /** OKR period this meeting sits in, e.g. 'Q4 2026'. */
+  period: string;
+  attendees: string;
+  /** Notes keyed by MEETING_SECTIONS id. */
+  notes: Record<string, string>;
+  objectives: MeetingObjective[];
+  actions: MeetingAction[];
+  decisions: string;
+  /** Unsorted capture: type freely, then sort lines into sections. */
+  dump: string;
+}
+
+export interface MeetingsDoc {
+  meetings: Meeting[];
+}
+
 // Maps DocId to its document type, used by the store for typing.
 export interface DocTypes {
   schedule: ScheduleDoc;
@@ -569,4 +641,5 @@ export interface DocTypes {
   layouts: LayoutsDoc;
   equipment: EquipmentDoc;
   'push-log': PushLogDoc;
+  meetings: MeetingsDoc;
 }

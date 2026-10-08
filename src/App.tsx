@@ -19,6 +19,7 @@ import OverviewPage from './tabs/overview/OverviewPage';
 import PackPage from './tabs/pack/PackPage';
 import HowToBoard from './tabs/tv/HowToBoard';
 import CardPage from './tabs/card/CardPage';
+import MeetingsTab from './tabs/meetings/MeetingsTab';
 
 export default function App() {
   // The boundary is keyed by route so a crash in one tab never blanks the
@@ -71,8 +72,10 @@ export default function App() {
         element={
           <div className="min-h-screen">
             <TabNav />
-            <SystemBanners />
-            <main className="mx-auto max-w-[1440px] px-6 py-6">
+            <div className="print:hidden">
+              <SystemBanners />
+            </div>
+            <main className="mx-auto max-w-[1440px] px-6 py-6 print:p-0">
               <ErrorBoundary key={pathname}>
                 <Routes>
                   <Route path="/" element={<HomeTab />} />
@@ -85,6 +88,7 @@ export default function App() {
                   <Route path="/movement" element={<MovementCheckTab />} />
                   <Route path="/community" element={<CommunityTab />} />
                   <Route path="/planning" element={<PlanningTab />} />
+                  <Route path="/meetings" element={<MeetingsTab />} />
                   <Route path="/layouts" element={<LayoutsTab />} />
                   <Route path="/equipment" element={<EquipmentTab />} />
                   <Route path="*" element={<Navigate to="/" replace />} />

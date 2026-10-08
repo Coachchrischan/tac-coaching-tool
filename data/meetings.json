@@ -1,0 +1,103 @@
+{
+  "data": {
+    "meetings": [
+      {
+        "id": "mtg-hyrox-2026-10-08",
+        "classTypeId": "hyrox",
+        "date": "2026-10-08",
+        "period": "Q4 2026",
+        "attendees": "Chris Chan, Harry Crawford, Jordan",
+        "dump": "",
+        "decisions": "",
+        "actions": [],
+        "objectives": [
+          {
+            "id": "obj-hyrox-full",
+            "text": "Make HYROX the go-to race-prep class in Teneriffe",
+            "sectionId": "attendance",
+            "keyResults": [
+              {
+                "id": "kr-hyrox-per-class",
+                "text": "Check-ins per class",
+                "start": 6,
+                "target": 9,
+                "current": null,
+                "confidence": null,
+                "auto": "avg-session"
+              },
+              {
+                "id": "kr-hyrox-615",
+                "text": "Mon and Wed 6:15pm average 5+ (or are merged)",
+                "start": 2.4,
+                "target": 5,
+                "current": 2.4,
+                "confidence": null
+              },
+              {
+                "id": "kr-hyrox-noshow",
+                "text": "No-show rate under 10%",
+                "start": 17,
+                "target": 10,
+                "current": 17,
+                "confidence": null
+              }
+            ]
+          },
+          {
+            "id": "obj-hyrox-race",
+            "text": "Get a TAC crew race-ready for HYROX Melbourne (9 to 13 Dec)",
+            "sectionId": "events",
+            "keyResults": [
+              {
+                "id": "kr-hyrox-entries",
+                "text": "TAC members entered in Melbourne",
+                "start": 0,
+                "target": null,
+                "current": 0,
+                "confidence": null
+              },
+              {
+                "id": "kr-hyrox-sims",
+                "text": "Race simulation days run before Melbourne",
+                "start": 0,
+                "target": 2,
+                "current": 0,
+                "confidence": null
+              }
+            ]
+          },
+          {
+            "id": "obj-hyrox-content",
+            "text": "Show what HYROX at TAC looks like, every week",
+            "sectionId": "marketing",
+            "keyResults": [
+              {
+                "id": "kr-hyrox-posts",
+                "text": "HYROX posts or reels a week",
+                "start": 0,
+                "target": 2,
+                "current": 0,
+                "confidence": null
+              }
+            ]
+          }
+        ],
+        "notes": {
+          "wins": "",
+          "vision": "Harry: where do you want HYROX at TAC to be by mid 2027?\nJordan: same question.\nPersonal coaching goals for each of you (hours, certs, racing yourselves)?",
+          "support": "What are you finding difficult?\nWhat do you need help with, from me or the club?",
+          "attendance": "Data, 5 weeks (31 Aug to 28 Sep), 5 classes a week:\n- Strong: Wed 5:15pm 9.2, Fri 5:15pm 9.0, Mon 5:15pm 7.2 a class\n- Weak: Mon 6:15pm and Wed 6:15pm, 2.4 a class each\n- Harry's check-ins per class: 4.6 before 14 Sep, 7.2 then 7.0 the last two weeks\n- No-shows 17% (week of 28 Sep). Mon 6:15pm 5 of 14 bookings over 4 weeks (36%), Fri 5:15pm 4 of 15 that week\nTo decide: keep, move or merge the 6:15pm classes?",
+          "programming": "Does Jordan already run a HYROX program members can follow?\nIf yes: how do members get it, and can we link it from class?\nIf no: build one off the Block 01 tracks (race format Monday, stations Friday) in TrainHeroic?",
+          "marketing": "Content and marketing plan for October to December: what goes out, how often, who films it.",
+          "events": "On the calendar: HYROX Melbourne 9 to 13 Dec 2026, Auckland 4 to 7 Feb 2027.\nIdeas: race sim day, doubles/relay social, open workout for non-members.",
+          "admin": "Every member checked in, every class (only prompted since 14 Sep, so earlier weeks undercount).\nNo-shows: who follows up, and when?",
+          "equipment": "Enough sleds, ski ergs, rowers and wall balls for a full class?\nAssistant coach for the 5:15pm classes when 10+ turn up?"
+        }
+      }
+    ]
+  },
+  "rev": 2,
+  "updatedAt": "2026-10-08T21:15:37.254Z",
+  "machine": "vm",
+  "schemaVersion": 2
+}

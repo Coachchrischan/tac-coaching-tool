@@ -57,6 +57,7 @@ const DOC_IDS = new Set<string>([
   'layouts',
   'equipment',
   'push-log',
+  'meetings',
 ]);
 
 // Programming churns ~10 snapshots per 25 minutes of editing (measured), so a

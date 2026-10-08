@@ -13,6 +13,7 @@ const PRIMARY = [
   { to: '/schedule', label: 'Schedule' },
   { to: '/layouts', label: 'Layouts' },
   { to: '/planning', label: 'Planning' },
+  { to: '/meetings', label: 'Meetings' },
 ];
 
 const CLUB = [
@@ -50,7 +51,7 @@ export default function TabNav() {
   }, [clubOpen]);
 
   return (
-    <header className="border-b border-ink-200 bg-white">
+    <header className="border-b border-ink-200 bg-white print:hidden">
       <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-x-5 px-6">
         <div className="py-3.5">
           <span className="font-display text-[16px] tracking-tight text-ink-950">

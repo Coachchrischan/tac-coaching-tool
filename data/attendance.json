@@ -2,765 +2,1188 @@
   "data": {
     "entries": [
       {
-        "id": "2026-06-01:esd",
-        "period": "2026-06-01",
-        "classTypeId": "esd",
-        "count": 64,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-08:esd",
-        "period": "2026-06-08",
-        "classTypeId": "esd",
-        "count": 65,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-15:esd",
-        "period": "2026-06-15",
-        "classTypeId": "esd",
-        "count": 66,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-22:esd",
-        "period": "2026-06-22",
-        "classTypeId": "esd",
-        "count": 67,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-29:esd",
-        "period": "2026-06-29",
-        "classTypeId": "esd",
-        "count": 49,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-06:esd",
-        "period": "2026-07-06",
-        "classTypeId": "esd",
-        "count": 49,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-13:esd",
-        "period": "2026-07-13",
-        "classTypeId": "esd",
-        "count": 69,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-20:esd",
-        "period": "2026-07-20",
-        "classTypeId": "esd",
-        "count": 70,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-27:esd",
-        "period": "2026-07-27",
-        "classTypeId": "esd",
-        "count": 71,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-03:esd",
-        "period": "2026-08-03",
-        "classTypeId": "esd",
-        "count": 72,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-10:esd",
-        "period": "2026-08-10",
-        "classTypeId": "esd",
-        "count": 73,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-17:esd",
-        "period": "2026-08-17",
-        "classTypeId": "esd",
-        "count": 74,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-01:hyrox",
-        "period": "2026-06-01",
-        "classTypeId": "hyrox",
-        "count": 38,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-08:hyrox",
-        "period": "2026-06-08",
-        "classTypeId": "hyrox",
-        "count": 39,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-15:hyrox",
-        "period": "2026-06-15",
-        "classTypeId": "hyrox",
-        "count": 39,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-22:hyrox",
-        "period": "2026-06-22",
-        "classTypeId": "hyrox",
-        "count": 40,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-29:hyrox",
-        "period": "2026-06-29",
-        "classTypeId": "hyrox",
-        "count": 29,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-06:hyrox",
-        "period": "2026-07-06",
-        "classTypeId": "hyrox",
-        "count": 30,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-13:hyrox",
-        "period": "2026-07-13",
-        "classTypeId": "hyrox",
-        "count": 42,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-20:hyrox",
-        "period": "2026-07-20",
-        "classTypeId": "hyrox",
-        "count": 43,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-27:hyrox",
-        "period": "2026-07-27",
-        "classTypeId": "hyrox",
-        "count": 44,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-03:hyrox",
-        "period": "2026-08-03",
-        "classTypeId": "hyrox",
-        "count": 45,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-10:hyrox",
-        "period": "2026-08-10",
-        "classTypeId": "hyrox",
-        "count": 44,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-17:hyrox",
-        "period": "2026-08-17",
-        "classTypeId": "hyrox",
-        "count": 45,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-01:lbs",
-        "period": "2026-06-01",
-        "classTypeId": "lbs",
-        "count": 32,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-08:lbs",
-        "period": "2026-06-08",
-        "classTypeId": "lbs",
-        "count": 32,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-15:lbs",
-        "period": "2026-06-15",
-        "classTypeId": "lbs",
-        "count": 32,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-22:lbs",
-        "period": "2026-06-22",
+        "id": "2026-08-31:lbs",
+        "period": "2026-08-31",
         "classTypeId": "lbs",
         "count": 33,
-        "seeded": true
+        "slots": [
+          {
+            "label": "Tue 5am",
+            "coach": "Ji",
+            "count": 7
+          },
+          {
+            "label": "Tue 6am",
+            "coach": "Ji",
+            "count": 18
+          },
+          {
+            "label": "Tue 12pm",
+            "coach": "Ji",
+            "count": 8
+          }
+        ]
       },
       {
-        "id": "2026-06-29:lbs",
-        "period": "2026-06-29",
-        "classTypeId": "lbs",
-        "count": 24,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-06:lbs",
-        "period": "2026-07-06",
-        "classTypeId": "lbs",
-        "count": 24,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-13:lbs",
-        "period": "2026-07-13",
-        "classTypeId": "lbs",
-        "count": 34,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-20:lbs",
-        "period": "2026-07-20",
-        "classTypeId": "lbs",
-        "count": 34,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-27:lbs",
-        "period": "2026-07-27",
-        "classTypeId": "lbs",
-        "count": 34,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-03:lbs",
-        "period": "2026-08-03",
+        "id": "2026-09-07:lbs",
+        "period": "2026-09-07",
         "classTypeId": "lbs",
         "count": 35,
-        "seeded": true
+        "slots": [
+          {
+            "label": "Tue 5am",
+            "coach": "Ji",
+            "count": 10
+          },
+          {
+            "label": "Tue 6am",
+            "coach": "Ji",
+            "count": 18
+          },
+          {
+            "label": "Tue 12pm",
+            "coach": "Ji",
+            "count": 7
+          }
+        ]
       },
       {
-        "id": "2026-08-10:lbs",
-        "period": "2026-08-10",
+        "id": "2026-09-14:lbs",
+        "period": "2026-09-14",
         "classTypeId": "lbs",
-        "count": 37,
-        "seeded": true
+        "count": 46,
+        "slots": [
+          {
+            "label": "Tue 5am",
+            "coach": "Ji",
+            "count": 12
+          },
+          {
+            "label": "Tue 6am",
+            "coach": "Ji",
+            "count": 18
+          },
+          {
+            "label": "Tue 7am",
+            "coach": "Ji",
+            "count": 10
+          },
+          {
+            "label": "Tue 12pm",
+            "coach": "Ji",
+            "count": 6
+          }
+        ]
       },
       {
-        "id": "2026-08-17:lbs",
-        "period": "2026-08-17",
+        "id": "2026-09-21:lbs",
+        "period": "2026-09-21",
         "classTypeId": "lbs",
-        "count": 38,
-        "seeded": true
+        "count": 51,
+        "slots": [
+          {
+            "label": "Tue 5am",
+            "coach": "Ji",
+            "count": 14
+          },
+          {
+            "label": "Tue 6am",
+            "coach": "Ji",
+            "count": 14
+          },
+          {
+            "label": "Tue 7am",
+            "coach": "Ji",
+            "count": 15
+          },
+          {
+            "label": "Tue 12pm",
+            "coach": "Ji",
+            "count": 8
+          }
+        ]
       },
       {
-        "id": "2026-06-01:ubs",
-        "period": "2026-06-01",
-        "classTypeId": "ubs",
-        "count": 30,
-        "seeded": true
+        "id": "2026-09-28:lbs",
+        "period": "2026-09-28",
+        "classTypeId": "lbs",
+        "count": 57,
+        "slots": [
+          {
+            "label": "Tue 5am",
+            "coach": "Ji",
+            "count": 12
+          },
+          {
+            "label": "Tue 6am",
+            "coach": "Ji",
+            "count": 16
+          },
+          {
+            "label": "Tue 7am",
+            "coach": "Ji",
+            "count": 15
+          },
+          {
+            "label": "Tue 12pm",
+            "coach": "Ji",
+            "count": 14
+          }
+        ]
       },
       {
-        "id": "2026-06-08:ubs",
-        "period": "2026-06-08",
+        "id": "2026-08-31:ubs",
+        "period": "2026-08-31",
         "classTypeId": "ubs",
-        "count": 31,
-        "seeded": true
+        "count": 35,
+        "slots": [
+          {
+            "label": "Thu 5am",
+            "coach": "Ji",
+            "count": 10
+          },
+          {
+            "label": "Thu 6am",
+            "coach": "Ji",
+            "count": 17
+          },
+          {
+            "label": "Thu 12pm",
+            "coach": "Ji",
+            "count": 8
+          }
+        ]
       },
       {
-        "id": "2026-06-15:ubs",
-        "period": "2026-06-15",
+        "id": "2026-09-07:ubs",
+        "period": "2026-09-07",
         "classTypeId": "ubs",
-        "count": 31,
-        "seeded": true
+        "count": 26,
+        "slots": [
+          {
+            "label": "Thu 5am",
+            "coach": "Ji",
+            "count": 11
+          },
+          {
+            "label": "Thu 6am",
+            "coach": "Ji",
+            "count": 14
+          },
+          {
+            "label": "Thu 12pm",
+            "coach": "Ji",
+            "count": 1
+          }
+        ]
       },
       {
-        "id": "2026-06-22:ubs",
-        "period": "2026-06-22",
+        "id": "2026-09-14:ubs",
+        "period": "2026-09-14",
         "classTypeId": "ubs",
-        "count": 31,
-        "seeded": true
+        "count": 51,
+        "slots": [
+          {
+            "label": "Thu 5am",
+            "coach": "Ji",
+            "count": 15
+          },
+          {
+            "label": "Thu 6am",
+            "coach": "Ji",
+            "count": 15
+          },
+          {
+            "label": "Thu 7am",
+            "coach": "Ji",
+            "count": 12
+          },
+          {
+            "label": "Thu 12pm",
+            "coach": "Ji",
+            "count": 9
+          }
+        ]
       },
       {
-        "id": "2026-06-29:ubs",
-        "period": "2026-06-29",
+        "id": "2026-09-21:ubs",
+        "period": "2026-09-21",
         "classTypeId": "ubs",
+        "count": 44,
+        "slots": [
+          {
+            "label": "Thu 5am",
+            "coach": "Ji",
+            "count": 13
+          },
+          {
+            "label": "Thu 6am",
+            "coach": "Ji",
+            "count": 18
+          },
+          {
+            "label": "Thu 7am",
+            "coach": "Ji",
+            "count": 8
+          },
+          {
+            "label": "Thu 12pm",
+            "coach": "Ji",
+            "count": 5
+          }
+        ]
+      },
+      {
+        "id": "2026-09-28:ubs",
+        "period": "2026-09-28",
+        "classTypeId": "ubs",
+        "count": 52,
+        "slots": [
+          {
+            "label": "Thu 5am",
+            "coach": "Ji",
+            "count": 17
+          },
+          {
+            "label": "Thu 6am",
+            "coach": "Ji",
+            "count": 19
+          },
+          {
+            "label": "Thu 7am",
+            "coach": "Ji",
+            "count": 10
+          },
+          {
+            "label": "Thu 12pm",
+            "coach": "Ji",
+            "count": 6
+          }
+        ]
+      },
+      {
+        "id": "2026-09-14:fbs",
+        "period": "2026-09-14",
+        "classTypeId": "fbs",
+        "count": 15,
+        "slots": [
+          {
+            "label": "Sat 6am",
+            "coach": "Ji",
+            "count": 15
+          }
+        ]
+      },
+      {
+        "id": "2026-09-21:fbs",
+        "period": "2026-09-21",
+        "classTypeId": "fbs",
+        "count": 17,
+        "slots": [
+          {
+            "label": "Sat 6am",
+            "coach": "Ji",
+            "count": 17
+          }
+        ]
+      },
+      {
+        "id": "2026-09-28:fbs",
+        "period": "2026-09-28",
+        "classTypeId": "fbs",
+        "count": 17,
+        "slots": [
+          {
+            "label": "Sat 6am",
+            "coach": "Ji",
+            "count": 17
+          }
+        ]
+      },
+      {
+        "id": "2026-08-31:esd",
+        "period": "2026-08-31",
+        "classTypeId": "esd",
+        "count": 58,
+        "slots": [
+          {
+            "label": "Mon 5am",
+            "coach": "Dana",
+            "count": 5
+          },
+          {
+            "label": "Mon 6am",
+            "coach": "Dana",
+            "count": 4
+          },
+          {
+            "label": "Mon 7am",
+            "coach": "Dana",
+            "count": 3
+          },
+          {
+            "label": "Mon 12pm",
+            "coach": "Dana",
+            "count": 4
+          },
+          {
+            "label": "Wed 5am",
+            "coach": "Dana",
+            "count": 4
+          },
+          {
+            "label": "Wed 6am",
+            "coach": "Dana",
+            "count": 5
+          },
+          {
+            "label": "Wed 7am",
+            "coach": "Dana",
+            "count": 6
+          },
+          {
+            "label": "Wed 12pm",
+            "coach": "Dana",
+            "count": 5
+          },
+          {
+            "label": "Fri 5am",
+            "coach": "Dana",
+            "count": 6
+          },
+          {
+            "label": "Fri 6am",
+            "coach": "Dana",
+            "count": 9
+          },
+          {
+            "label": "Fri 7am",
+            "coach": "Dana",
+            "count": 1
+          },
+          {
+            "label": "Fri 12pm",
+            "coach": "Dana",
+            "count": 6
+          }
+        ]
+      },
+      {
+        "id": "2026-09-07:esd",
+        "period": "2026-09-07",
+        "classTypeId": "esd",
+        "count": 65,
+        "slots": [
+          {
+            "label": "Mon 5am",
+            "coach": "Dana",
+            "count": 10
+          },
+          {
+            "label": "Mon 6am",
+            "coach": "Dana",
+            "count": 7
+          },
+          {
+            "label": "Mon 7am",
+            "coach": "Dana",
+            "count": 6
+          },
+          {
+            "label": "Mon 12pm",
+            "coach": "Dana",
+            "count": 4
+          },
+          {
+            "label": "Wed 5am",
+            "coach": "Dana",
+            "count": 5
+          },
+          {
+            "label": "Wed 6am",
+            "coach": "Dana",
+            "count": 10
+          },
+          {
+            "label": "Wed 7am",
+            "coach": "Dana",
+            "count": 3
+          },
+          {
+            "label": "Wed 12pm",
+            "coach": "Dana",
+            "count": 6
+          },
+          {
+            "label": "Fri 5am",
+            "coach": "Dana",
+            "count": 5
+          },
+          {
+            "label": "Fri 6am",
+            "coach": "Dana",
+            "count": 5
+          },
+          {
+            "label": "Fri 7am",
+            "coach": "Dana",
+            "count": 4
+          },
+          {
+            "label": "Fri 12pm",
+            "coach": "Dana",
+            "count": 0
+          }
+        ]
+      },
+      {
+        "id": "2026-09-14:esd",
+        "period": "2026-09-14",
+        "classTypeId": "esd",
+        "count": 80,
+        "slots": [
+          {
+            "label": "Mon 5am",
+            "coach": "Dana",
+            "count": 7
+          },
+          {
+            "label": "Mon 6am",
+            "coach": "Dana",
+            "count": 6
+          },
+          {
+            "label": "Mon 7am",
+            "coach": "Dana",
+            "count": 9
+          },
+          {
+            "label": "Mon 12pm",
+            "coach": "Dana",
+            "count": 4
+          },
+          {
+            "label": "Wed 5am",
+            "coach": "Dana",
+            "count": 6
+          },
+          {
+            "label": "Wed 6am",
+            "coach": "Dana",
+            "count": 11
+          },
+          {
+            "label": "Wed 7am",
+            "coach": "Dana",
+            "count": 5
+          },
+          {
+            "label": "Wed 12pm",
+            "coach": "Dana",
+            "count": 3
+          },
+          {
+            "label": "Fri 5am",
+            "coach": "Dana",
+            "count": 8
+          },
+          {
+            "label": "Fri 6am",
+            "coach": "Dana",
+            "count": 8
+          },
+          {
+            "label": "Fri 7am",
+            "coach": "Dana",
+            "count": 9
+          },
+          {
+            "label": "Fri 12pm",
+            "coach": "Dana",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "id": "2026-09-21:esd",
+        "period": "2026-09-21",
+        "classTypeId": "esd",
+        "count": 91,
+        "slots": [
+          {
+            "label": "Mon 5am",
+            "coach": "Dana",
+            "count": 12
+          },
+          {
+            "label": "Mon 6am",
+            "coach": "Dana",
+            "count": 4
+          },
+          {
+            "label": "Mon 7am",
+            "coach": "Dana",
+            "count": 8
+          },
+          {
+            "label": "Mon 12pm",
+            "coach": "Dana",
+            "count": 5
+          },
+          {
+            "label": "Wed 5am",
+            "coach": "Dana",
+            "count": 7
+          },
+          {
+            "label": "Wed 6am",
+            "coach": "Dana",
+            "count": 11
+          },
+          {
+            "label": "Wed 7am",
+            "coach": "Dana",
+            "count": 8
+          },
+          {
+            "label": "Wed 12pm",
+            "coach": "Dana",
+            "count": 4
+          },
+          {
+            "label": "Fri 5am",
+            "coach": "Dana",
+            "count": 11
+          },
+          {
+            "label": "Fri 6am",
+            "coach": "Dana",
+            "count": 9
+          },
+          {
+            "label": "Fri 7am",
+            "coach": "Dana",
+            "count": 6
+          },
+          {
+            "label": "Fri 12pm",
+            "coach": "Dana",
+            "count": 6
+          }
+        ]
+      },
+      {
+        "id": "2026-09-28:esd",
+        "period": "2026-09-28",
+        "classTypeId": "esd",
+        "count": 111,
+        "slots": [
+          {
+            "label": "Mon 5am",
+            "coach": "Dana",
+            "count": 11
+          },
+          {
+            "label": "Mon 6am",
+            "coach": "Dana",
+            "count": 12
+          },
+          {
+            "label": "Mon 7am",
+            "coach": "Dana",
+            "count": 8
+          },
+          {
+            "label": "Mon 12pm",
+            "coach": "Dana",
+            "count": 4
+          },
+          {
+            "label": "Wed 5am",
+            "coach": "Dana",
+            "count": 13
+          },
+          {
+            "label": "Wed 6am",
+            "coach": "Dana",
+            "count": 11
+          },
+          {
+            "label": "Wed 7am",
+            "coach": "Dana",
+            "count": 10
+          },
+          {
+            "label": "Wed 12pm",
+            "coach": "Dana",
+            "count": 5
+          },
+          {
+            "label": "Fri 5am",
+            "coach": "Dana",
+            "count": 13
+          },
+          {
+            "label": "Fri 6am",
+            "coach": "Dana",
+            "count": 15
+          },
+          {
+            "label": "Fri 7am",
+            "coach": "Dana",
+            "count": 7
+          },
+          {
+            "label": "Fri 12pm",
+            "coach": "Dana",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "id": "2026-08-31:hyrox",
+        "period": "2026-08-31",
+        "classTypeId": "hyrox",
+        "count": 35,
+        "slots": [
+          {
+            "label": "Mon 5:15pm",
+            "coach": "Harry",
+            "count": 10
+          },
+          {
+            "label": "Mon 6:15pm",
+            "coach": "Harry",
+            "count": 3
+          },
+          {
+            "label": "Wed 5:15pm",
+            "coach": "Harry",
+            "count": 11
+          },
+          {
+            "label": "Wed 6:15pm",
+            "coach": "Harry",
+            "count": 3
+          },
+          {
+            "label": "Fri 5:15pm",
+            "coach": "Harry",
+            "count": 8
+          }
+        ]
+      },
+      {
+        "id": "2026-09-07:hyrox",
+        "period": "2026-09-07",
+        "classTypeId": "hyrox",
         "count": 23,
-        "seeded": true
+        "slots": [
+          {
+            "label": "Mon 5:15pm",
+            "coach": "Harry",
+            "count": 3
+          },
+          {
+            "label": "Mon 6:15pm",
+            "coach": "Harry",
+            "count": 1
+          },
+          {
+            "label": "Wed 5:15pm",
+            "coach": "Harry",
+            "count": 8
+          },
+          {
+            "label": "Wed 6:15pm",
+            "coach": "Harry",
+            "count": 3
+          },
+          {
+            "label": "Fri 5:15pm",
+            "coach": "Harry",
+            "count": 8
+          }
+        ]
       },
       {
-        "id": "2026-07-06:ubs",
-        "period": "2026-07-06",
-        "classTypeId": "ubs",
-        "count": 23,
-        "seeded": true
+        "id": "2026-09-14:hyrox",
+        "period": "2026-09-14",
+        "classTypeId": "hyrox",
+        "count": 22,
+        "slots": [
+          {
+            "label": "Mon 5:15pm",
+            "coach": "Harry",
+            "count": 4
+          },
+          {
+            "label": "Mon 6:15pm",
+            "coach": "Harry",
+            "count": 0
+          },
+          {
+            "label": "Wed 5:15pm",
+            "coach": "Harry",
+            "count": 9
+          },
+          {
+            "label": "Wed 6:15pm",
+            "coach": "Harry",
+            "count": 0
+          },
+          {
+            "label": "Fri 5:15pm",
+            "coach": "Harry",
+            "count": 9
+          }
+        ]
       },
       {
-        "id": "2026-07-13:ubs",
-        "period": "2026-07-13",
-        "classTypeId": "ubs",
-        "count": 32,
-        "seeded": true
+        "id": "2026-09-21:hyrox",
+        "period": "2026-09-21",
+        "classTypeId": "hyrox",
+        "count": 36,
+        "slots": [
+          {
+            "label": "Mon 5:15pm",
+            "coach": "Harry",
+            "count": 9
+          },
+          {
+            "label": "Mon 6:15pm",
+            "coach": "Harry",
+            "count": 5
+          },
+          {
+            "label": "Wed 5:15pm",
+            "coach": "Harry",
+            "count": 8
+          },
+          {
+            "label": "Wed 6:15pm",
+            "coach": "Harry",
+            "count": 5
+          },
+          {
+            "label": "Fri 5:15pm",
+            "coach": "Harry",
+            "count": 9
+          }
+        ]
       },
       {
-        "id": "2026-07-20:ubs",
-        "period": "2026-07-20",
-        "classTypeId": "ubs",
-        "count": 32,
-        "seeded": true
+        "id": "2026-09-28:hyrox",
+        "period": "2026-09-28",
+        "classTypeId": "hyrox",
+        "count": 35,
+        "slots": [
+          {
+            "label": "Mon 5:15pm",
+            "coach": "Harry",
+            "count": 10
+          },
+          {
+            "label": "Mon 6:15pm",
+            "coach": "Harry",
+            "count": 3
+          },
+          {
+            "label": "Wed 5:15pm",
+            "coach": "Harry",
+            "count": 10
+          },
+          {
+            "label": "Wed 6:15pm",
+            "coach": "Harry",
+            "count": 1
+          },
+          {
+            "label": "Fri 5:15pm",
+            "coach": "Harry",
+            "count": 11
+          }
+        ]
       },
       {
-        "id": "2026-07-27:ubs",
-        "period": "2026-07-27",
-        "classTypeId": "ubs",
-        "count": 33,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-03:ubs",
-        "period": "2026-08-03",
-        "classTypeId": "ubs",
-        "count": 33,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-10:ubs",
-        "period": "2026-08-10",
-        "classTypeId": "ubs",
-        "count": 34,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-17:ubs",
-        "period": "2026-08-17",
-        "classTypeId": "ubs",
-        "count": 34,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-01:stretch",
-        "period": "2026-06-01",
-        "classTypeId": "stretch",
-        "count": 19,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-08:stretch",
-        "period": "2026-06-08",
-        "classTypeId": "stretch",
-        "count": 19,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-15:stretch",
-        "period": "2026-06-15",
-        "classTypeId": "stretch",
-        "count": 19,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-22:stretch",
-        "period": "2026-06-22",
-        "classTypeId": "stretch",
-        "count": 19,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-29:stretch",
-        "period": "2026-06-29",
-        "classTypeId": "stretch",
-        "count": 14,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-06:stretch",
-        "period": "2026-07-06",
-        "classTypeId": "stretch",
-        "count": 14,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-13:stretch",
-        "period": "2026-07-13",
-        "classTypeId": "stretch",
-        "count": 19,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-20:stretch",
-        "period": "2026-07-20",
-        "classTypeId": "stretch",
-        "count": 19,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-27:stretch",
-        "period": "2026-07-27",
-        "classTypeId": "stretch",
-        "count": 20,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-03:stretch",
-        "period": "2026-08-03",
-        "classTypeId": "stretch",
-        "count": 20,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-10:stretch",
-        "period": "2026-08-10",
-        "classTypeId": "stretch",
-        "count": 21,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-17:stretch",
-        "period": "2026-08-17",
-        "classTypeId": "stretch",
-        "count": 21,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-01:gameday",
-        "period": "2026-06-01",
-        "classTypeId": "gameday",
-        "count": 16,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-08:gameday",
-        "period": "2026-06-08",
-        "classTypeId": "gameday",
-        "count": 17,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-15:gameday",
-        "period": "2026-06-15",
-        "classTypeId": "gameday",
-        "count": 17,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-22:gameday",
-        "period": "2026-06-22",
-        "classTypeId": "gameday",
-        "count": 17,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-29:gameday",
-        "period": "2026-06-29",
-        "classTypeId": "gameday",
-        "count": 12,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-06:gameday",
-        "period": "2026-07-06",
-        "classTypeId": "gameday",
-        "count": 13,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-13:gameday",
-        "period": "2026-07-13",
-        "classTypeId": "gameday",
-        "count": 18,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-20:gameday",
-        "period": "2026-07-20",
-        "classTypeId": "gameday",
-        "count": 18,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-27:gameday",
-        "period": "2026-07-27",
-        "classTypeId": "gameday",
-        "count": 18,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-03:gameday",
-        "period": "2026-08-03",
-        "classTypeId": "gameday",
-        "count": 19,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-10:gameday",
-        "period": "2026-08-10",
-        "classTypeId": "gameday",
-        "count": 18,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-17:gameday",
-        "period": "2026-08-17",
-        "classTypeId": "gameday",
-        "count": 19,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-01:run",
-        "period": "2026-06-01",
-        "classTypeId": "run",
-        "count": 13,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-08:run",
-        "period": "2026-06-08",
-        "classTypeId": "run",
-        "count": 13,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-15:run",
-        "period": "2026-06-15",
-        "classTypeId": "run",
-        "count": 13,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-22:run",
-        "period": "2026-06-22",
-        "classTypeId": "run",
-        "count": 13,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-29:run",
-        "period": "2026-06-29",
-        "classTypeId": "run",
-        "count": 10,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-06:run",
-        "period": "2026-07-06",
-        "classTypeId": "run",
-        "count": 10,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-13:run",
-        "period": "2026-07-13",
-        "classTypeId": "run",
-        "count": 14,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-20:run",
-        "period": "2026-07-20",
-        "classTypeId": "run",
-        "count": 14,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-27:run",
-        "period": "2026-07-27",
-        "classTypeId": "run",
-        "count": 14,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-03:run",
-        "period": "2026-08-03",
-        "classTypeId": "run",
-        "count": 14,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-10:run",
-        "period": "2026-08-10",
-        "classTypeId": "run",
-        "count": 14,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-17:run",
-        "period": "2026-08-17",
-        "classTypeId": "run",
-        "count": 14,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-01:flow",
-        "period": "2026-06-01",
+        "id": "2026-08-31:flow",
+        "period": "2026-08-31",
         "classTypeId": "flow",
-        "count": 12,
-        "seeded": true
+        "count": 7,
+        "slots": [
+          {
+            "label": "Tue 5pm",
+            "coach": "Stephanie",
+            "count": 7
+          }
+        ]
       },
       {
-        "id": "2026-06-08:flow",
-        "period": "2026-06-08",
-        "classTypeId": "flow",
-        "count": 12,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-15:flow",
-        "period": "2026-06-15",
-        "classTypeId": "flow",
-        "count": 12,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-22:flow",
-        "period": "2026-06-22",
-        "classTypeId": "flow",
-        "count": 12,
-        "seeded": true
-      },
-      {
-        "id": "2026-06-29:flow",
-        "period": "2026-06-29",
+        "id": "2026-09-07:flow",
+        "period": "2026-09-07",
         "classTypeId": "flow",
         "count": 9,
-        "seeded": true
+        "slots": [
+          {
+            "label": "Tue 5pm",
+            "coach": "Stephanie",
+            "count": 9
+          }
+        ]
       },
       {
-        "id": "2026-07-06:flow",
-        "period": "2026-07-06",
+        "id": "2026-09-14:flow",
+        "period": "2026-09-14",
         "classTypeId": "flow",
-        "count": 9,
-        "seeded": true
+        "count": 10,
+        "slots": [
+          {
+            "label": "Tue 5pm",
+            "coach": "Stephanie",
+            "count": 10
+          }
+        ]
       },
       {
-        "id": "2026-07-13:flow",
-        "period": "2026-07-13",
+        "id": "2026-09-21:flow",
+        "period": "2026-09-21",
         "classTypeId": "flow",
-        "count": 12,
-        "seeded": true
+        "count": 8,
+        "slots": [
+          {
+            "label": "Tue 5pm",
+            "coach": "Stephanie",
+            "count": 8
+          }
+        ]
       },
       {
-        "id": "2026-07-20:flow",
-        "period": "2026-07-20",
-        "classTypeId": "flow",
-        "count": 12,
-        "seeded": true
-      },
-      {
-        "id": "2026-07-27:flow",
-        "period": "2026-07-27",
-        "classTypeId": "flow",
-        "count": 12,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-03:flow",
-        "period": "2026-08-03",
-        "classTypeId": "flow",
-        "count": 12,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-10:flow",
-        "period": "2026-08-10",
+        "id": "2026-09-28:flow",
+        "period": "2026-09-28",
         "classTypeId": "flow",
         "count": 11,
-        "seeded": true
+        "slots": [
+          {
+            "label": "Tue 5pm",
+            "coach": "Stephanie",
+            "count": 11
+          }
+        ]
       },
       {
-        "id": "2026-08-17:flow",
-        "period": "2026-08-17",
-        "classTypeId": "flow",
+        "id": "2026-08-31:yin",
+        "period": "2026-08-31",
+        "classTypeId": "yin",
+        "count": 4,
+        "slots": [
+          {
+            "label": "Tue 6pm",
+            "coach": "Stephanie",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "id": "2026-09-07:yin",
+        "period": "2026-09-07",
+        "classTypeId": "yin",
+        "count": 4,
+        "slots": [
+          {
+            "label": "Tue 6pm",
+            "coach": "Stephanie",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "id": "2026-09-14:yin",
+        "period": "2026-09-14",
+        "classTypeId": "yin",
+        "count": 5,
+        "slots": [
+          {
+            "label": "Tue 6pm",
+            "coach": "Stephanie",
+            "count": 5
+          }
+        ]
+      },
+      {
+        "id": "2026-09-21:yin",
+        "period": "2026-09-21",
+        "classTypeId": "yin",
+        "count": 7,
+        "slots": [
+          {
+            "label": "Tue 6pm",
+            "coach": "Stephanie",
+            "count": 7
+          }
+        ]
+      },
+      {
+        "id": "2026-09-28:yin",
+        "period": "2026-09-28",
+        "classTypeId": "yin",
+        "count": 6,
+        "slots": [
+          {
+            "label": "Tue 6pm",
+            "coach": "Stephanie",
+            "count": 6
+          }
+        ]
+      },
+      {
+        "id": "2026-08-31:stretch",
+        "period": "2026-08-31",
+        "classTypeId": "stretch",
+        "count": 14,
+        "slots": [
+          {
+            "label": "Thu 5pm",
+            "coach": "Anthony",
+            "count": 8
+          },
+          {
+            "label": "Thu 6pm",
+            "coach": "Anthony",
+            "count": 6
+          }
+        ]
+      },
+      {
+        "id": "2026-09-07:stretch",
+        "period": "2026-09-07",
+        "classTypeId": "stretch",
+        "count": 12,
+        "slots": [
+          {
+            "label": "Thu 5pm",
+            "coach": "Anthony",
+            "count": 8
+          },
+          {
+            "label": "Thu 6pm",
+            "coach": "Anthony",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "id": "2026-09-14:stretch",
+        "period": "2026-09-14",
+        "classTypeId": "stretch",
+        "count": 15,
+        "slots": [
+          {
+            "label": "Thu 5pm",
+            "coach": "Anthony",
+            "count": 10
+          },
+          {
+            "label": "Thu 6pm",
+            "coach": "Anthony",
+            "count": 5
+          }
+        ]
+      },
+      {
+        "id": "2026-09-21:stretch",
+        "period": "2026-09-21",
+        "classTypeId": "stretch",
         "count": 11,
-        "seeded": true
+        "slots": [
+          {
+            "label": "Thu 5pm",
+            "coach": "Anthony",
+            "count": 6
+          },
+          {
+            "label": "Thu 6pm",
+            "coach": "Anthony",
+            "count": 5
+          }
+        ]
       },
       {
-        "id": "2026-06-01:yin",
-        "period": "2026-06-01",
-        "classTypeId": "yin",
+        "id": "2026-09-28:stretch",
+        "period": "2026-09-28",
+        "classTypeId": "stretch",
         "count": 9,
-        "seeded": true
+        "slots": [
+          {
+            "label": "Thu 5pm",
+            "coach": "Anthony",
+            "count": 8
+          },
+          {
+            "label": "Thu 6pm",
+            "coach": "Anthony",
+            "count": 1
+          }
+        ]
       },
       {
-        "id": "2026-06-08:yin",
-        "period": "2026-06-08",
-        "classTypeId": "yin",
-        "count": 9,
-        "seeded": true
+        "id": "2026-08-31:gameday",
+        "period": "2026-08-31",
+        "classTypeId": "gameday",
+        "count": 4,
+        "slots": [
+          {
+            "label": "Sat 7:30am",
+            "coach": "Ji",
+            "count": 4
+          }
+        ]
       },
       {
-        "id": "2026-06-15:yin",
-        "period": "2026-06-15",
-        "classTypeId": "yin",
-        "count": 9,
-        "seeded": true
+        "id": "2026-09-07:gameday",
+        "period": "2026-09-07",
+        "classTypeId": "gameday",
+        "count": 4,
+        "slots": [
+          {
+            "label": "Sat 7:30am",
+            "coach": "Ji",
+            "count": 4
+          }
+        ]
       },
       {
-        "id": "2026-06-22:yin",
-        "period": "2026-06-22",
-        "classTypeId": "yin",
-        "count": 9,
-        "seeded": true
+        "id": "2026-09-14:gameday",
+        "period": "2026-09-14",
+        "classTypeId": "gameday",
+        "count": 6,
+        "slots": [
+          {
+            "label": "Sat 7:30am",
+            "coach": "Ji",
+            "count": 6
+          }
+        ]
       },
       {
-        "id": "2026-06-29:yin",
-        "period": "2026-06-29",
-        "classTypeId": "yin",
+        "id": "2026-09-21:gameday",
+        "period": "2026-09-21",
+        "classTypeId": "gameday",
         "count": 7,
-        "seeded": true
+        "slots": [
+          {
+            "label": "Sat 7:30am",
+            "coach": "Ji",
+            "count": 7
+          }
+        ]
       },
       {
-        "id": "2026-07-06:yin",
-        "period": "2026-07-06",
-        "classTypeId": "yin",
-        "count": 7,
-        "seeded": true
+        "id": "2026-09-28:gameday",
+        "period": "2026-09-28",
+        "classTypeId": "gameday",
+        "count": 3,
+        "slots": [
+          {
+            "label": "Sat 7:30am",
+            "coach": "Ji",
+            "count": 3
+          }
+        ]
       },
       {
-        "id": "2026-07-13:yin",
-        "period": "2026-07-13",
-        "classTypeId": "yin",
-        "count": 9,
-        "seeded": true
+        "id": "2026-08-31:run",
+        "period": "2026-08-31",
+        "classTypeId": "run",
+        "count": 0,
+        "slots": [
+          {
+            "label": "Tue 5am",
+            "coach": "Katie",
+            "count": 0
+          },
+          {
+            "label": "Wed 5am",
+            "coach": "Katie",
+            "count": 0
+          }
+        ]
       },
       {
-        "id": "2026-07-20:yin",
-        "period": "2026-07-20",
-        "classTypeId": "yin",
-        "count": 9,
-        "seeded": true
+        "id": "2026-09-07:run",
+        "period": "2026-09-07",
+        "classTypeId": "run",
+        "count": 1,
+        "slots": [
+          {
+            "label": "Tue 5am",
+            "coach": "Katie",
+            "count": 1
+          },
+          {
+            "label": "Wed 5am",
+            "coach": "Katie",
+            "count": 0
+          }
+        ]
       },
       {
-        "id": "2026-07-27:yin",
-        "period": "2026-07-27",
-        "classTypeId": "yin",
-        "count": 9,
-        "seeded": true
+        "id": "2026-09-14:run",
+        "period": "2026-09-14",
+        "classTypeId": "run",
+        "count": 1,
+        "slots": [
+          {
+            "label": "Tue 5am",
+            "coach": "Katie",
+            "count": 1
+          },
+          {
+            "label": "Wed 5am",
+            "coach": "Katie",
+            "count": 0
+          }
+        ]
       },
       {
-        "id": "2026-08-03:yin",
-        "period": "2026-08-03",
-        "classTypeId": "yin",
-        "count": 9,
-        "seeded": true
+        "id": "2026-09-21:run",
+        "period": "2026-09-21",
+        "classTypeId": "run",
+        "count": 2,
+        "slots": [
+          {
+            "label": "Tue 5am",
+            "coach": "Katie",
+            "count": 2
+          },
+          {
+            "label": "Wed 5am",
+            "coach": "Katie",
+            "count": 0
+          }
+        ]
       },
       {
-        "id": "2026-08-10:yin",
-        "period": "2026-08-10",
-        "classTypeId": "yin",
-        "count": 9,
-        "seeded": true
-      },
-      {
-        "id": "2026-08-17:yin",
-        "period": "2026-08-17",
-        "classTypeId": "yin",
-        "count": 9,
-        "seeded": true
+        "id": "2026-09-28:run",
+        "period": "2026-09-28",
+        "classTypeId": "run",
+        "count": 3,
+        "slots": [
+          {
+            "label": "Tue 5am",
+            "coach": "Katie",
+            "count": 2
+          },
+          {
+            "label": "Wed 5am",
+            "coach": "Katie",
+            "count": 1
+          }
+        ]
       }
     ]
   },
-  "rev": 8,
-  "updatedAt": "2026-09-01T21:31:02.069Z",
-  "machine": "DESKTOP-T7OQ0UN",
+  "rev": 9,
+  "updatedAt": "2026-10-08T21:15:14.344Z",
+  "machine": "vm",
   "schemaVersion": 2
 }

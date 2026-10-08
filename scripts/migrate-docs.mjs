@@ -120,7 +120,7 @@ function migrateSession(s, format) {
 }
 
 // ---- stamp everything else ----
-for (const name of ['schedule', 'annual-plan', 'attendance', 'home', 'community', 'planning', 'layouts', 'equipment', 'push-log']) {
+for (const name of ['schedule', 'annual-plan', 'attendance', 'home', 'community', 'planning', 'layouts', 'equipment', 'push-log', 'meetings']) {
   if (!existsSync(join(root, 'data', `${name}.json`))) continue;
   const env = load(name);
   if (env.schemaVersion === SCHEMA_VERSION) continue;
