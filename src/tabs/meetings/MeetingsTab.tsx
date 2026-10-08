@@ -176,6 +176,20 @@ export default function MeetingsTab() {
         <div className="flex-1" />
         {meeting && (
           <>
+            {['dirty', 'saving'].includes(meetingsDoc.saveState) ? (
+              <span className="rounded-md bg-accent-600/60 px-3 py-1.5 text-sm font-semibold text-white">
+                Saving…
+              </span>
+            ) : (
+              <a
+                href={`/api/meeting-docx/${encodeURIComponent(meeting.id)}`}
+                download
+                title="Download this meeting as an editable Word document"
+                className="rounded-md bg-accent-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-accent-700"
+              >
+                Word doc
+              </a>
+            )}
             <button
               type="button"
               onClick={() => window.print()}

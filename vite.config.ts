@@ -5,10 +5,11 @@ import { storagePlugin } from './src/server/storagePlugin.js';
 import { teamPushPlugin } from './src/server/teamPushPlugin.js';
 import { weekPackPlugin } from './src/server/weekPackPlugin.js';
 import { thPullPlugin } from './src/server/thPullPlugin.js';
+import { meetingDocxPlugin } from './src/server/meetingDocxPlugin.js';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), storagePlugin(), teamPushPlugin(), weekPackPlugin(), thPullPlugin()],
+  plugins: [react(), tailwindcss(), storagePlugin(), teamPushPlugin(), weekPackPlugin(), thPullPlugin(), meetingDocxPlugin()],
   server: {
     port: 8127,
     strictPort: true,
