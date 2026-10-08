@@ -10,10 +10,11 @@ const BASE = process.env.TAC_STORE ?? 'http://localhost:8127/api/store';
 const DATE = '2026-10-08';
 
 const env = await (await fetch(`${BASE}/meetings`)).json();
-if (env.data.meetings.some((m) => m.classTypeId === 'hyrox' && m.date === DATE)) {
-  console.log('The HYROX meeting for 8 Oct is already there. Nothing to do.');
-  process.exit(0);
-}
+// Re-running replaces the drafted fields of an existing 8 Oct meeting (the
+// draft was corrected on the day: Jordan coaches Wednesday and writes the
+// program, Harry coaches Monday and Friday). Typed notes are kept where the
+// draft has nothing for that topic.
+const existing = env.data.meetings.find((m) => m.classTypeId === 'hyrox' && m.date === DATE);
 
 const kr = (id, text, start, target, extra = {}) => ({
   id, text, start, target, current: start, confidence: null, ...extra,
@@ -24,7 +25,7 @@ const meeting = {
   classTypeId: 'hyrox',
   date: DATE,
   period: 'Q4 2026',
-  attendees: 'Chris Chan, Harry Crawford, Jordan',
+  attendees: 'Chris Chan, Harry Crawford (Mon, Fri), Jordan Lambert (Wed, programming)',
   dump: '',
   decisions: '',
   actions: [],
@@ -58,17 +59,18 @@ const meeting = {
   notes: {
     wins: '',
     vision:
-      'Harry: where do you want HYROX at TAC to be by mid 2027?\nJordan: same question.\nPersonal coaching goals for each of you (hours, certs, racing yourselves)?',
+      'Harry and Jordan: where do you each want HYROX at TAC to be by mid 2027?\nPersonal coaching goals for each of you (hours, certs, racing yourselves)?\nHow do the two of you split the class and the programming going forward?',
     support: 'What are you finding difficult?\nWhat do you need help with, from me or the club?',
     attendance:
       'Data, 5 weeks (31 Aug to 28 Sep), 5 classes a week:\n' +
-      '- Strong: Wed 5:15pm 9.2, Fri 5:15pm 9.0, Mon 5:15pm 7.2 a class\n' +
-      '- Weak: Mon 6:15pm and Wed 6:15pm, 2.4 a class each\n' +
-      "- Harry's check-ins per class: 4.6 before 14 Sep, 7.2 then 7.0 the last two weeks\n" +
+      '- Harry (Mon, Fri): Mon 5:15pm 7.2, Mon 6:15pm 2.4, Fri 5:15pm 9.0 a class (6.1 overall)\n' +
+      '- Jordan (Wed): Wed 5:15pm 9.2, Wed 6:15pm 2.4 a class (5.8 overall)\n' +
+      '- The 5:15pm classes carry it; both 6:15pm classes average 2.4\n' +
+      '- Whole class: 6.0 a class over the 5 weeks, 7.0 the week of 28 Sep\n' +
       '- No-shows 17% (week of 28 Sep). Mon 6:15pm 5 of 14 bookings over 4 weeks (36%), Fri 5:15pm 4 of 15 that week\n' +
       'To decide: keep, move or merge the 6:15pm classes?',
     programming:
-      'Does Jordan already run a HYROX program members can follow?\nIf yes: how do members get it, and can we link it from class?\nIf no: build one off the Block 01 tracks (race format Monday, stations Friday) in TrainHeroic?',
+      'Jordan writes the HYROX program. What is the plan for the rest of the block, and up to Melbourne?\nIs there a version members can follow outside class (race prep plan)? If yes, how do they get it; if no, do we build one in TrainHeroic?\nHow does Harry get the sessions in time to coach Monday and Friday?',
     marketing: 'Content and marketing plan for October to December: what goes out, how often, who films it.',
     events:
       'On the calendar: HYROX Melbourne 9 to 13 Dec 2026, Auckland 4 to 7 Feb 2027.\nIdeas: race sim day, doubles/relay social, open workout for non-members.',
@@ -78,14 +80,26 @@ const meeting = {
   },
 };
 
+const merged = existing
+  ? {
+      ...existing,
+      attendees: meeting.attendees,
+      notes: { ...existing.notes, ...Object.fromEntries(Object.entries(meeting.notes).filter(([, v]) => v)) },
+    }
+  : meeting;
 const res = await fetch(`${BASE}/meetings`, {
   method: 'PUT',
   headers: { 'content-type': 'application/json' },
   body: JSON.stringify({
-    data: { ...env.data, meetings: [...env.data.meetings, meeting] },
+    data: {
+      ...env.data,
+      meetings: existing
+        ? env.data.meetings.map((m) => (m.id === existing.id ? merged : m))
+        : [...env.data.meetings, meeting],
+    },
     baseRev: env.rev,
     baseUpdatedAt: env.updatedAt,
   }),
 });
 if (!res.ok) throw new Error(`save failed: ${res.status} ${await res.text()}`);
-console.log('HYROX meeting for 8 Oct 2026 created.');
+console.log(existing ? 'HYROX meeting for 8 Oct 2026 updated.' : 'HYROX meeting for 8 Oct 2026 created.');

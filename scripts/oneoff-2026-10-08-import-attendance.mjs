@@ -10,7 +10,10 @@
 // started on 14 Sep). Notes from the report worth keeping in mind:
 //  - check-ins were not prompted before 14 Sep, so earlier weeks undercount;
 //  - class caps dropped on 14 Sep (Conditioning 25 to 16, gym floor 30 to 20);
-//  - Run Club check-ins were not recorded consistently.
+//  - Run Club is left out: members do not book it, check-ins are not taken,
+//    and it is not included in class reports (Alanah, 1 Oct).
+//  - HYROX: Jordan writes the program and coaches Wednesday; Harry coaches
+//    Monday and Friday (the report files every HYROX class under Harry).
 //
 // Every version is snapshotted by the store, so this is reversible from the
 // document history.
@@ -50,8 +53,8 @@ const REPORT = {
   hyrox: [
     ['Mon 5:15pm', 'Harry', [10, 3, 4, 9, 10]],
     ['Mon 6:15pm', 'Harry', [3, 1, 0, 5, 3]],
-    ['Wed 5:15pm', 'Harry', [11, 8, 9, 8, 10]],
-    ['Wed 6:15pm', 'Harry', [3, 3, 0, 5, 1]],
+    ['Wed 5:15pm', 'Jordan', [11, 8, 9, 8, 10]],
+    ['Wed 6:15pm', 'Jordan', [3, 3, 0, 5, 1]],
     ['Fri 5:15pm', 'Harry', [8, 8, 9, 9, 11]],
   ],
   flow: [['Tue 5pm', 'Stephanie', [7, 9, 10, 8, 11]]],
@@ -61,10 +64,6 @@ const REPORT = {
     ['Thu 6pm', 'Anthony', [6, 4, 5, 5, 1]],
   ],
   gameday: [['Sat 7:30am', 'Ji', [4, 4, 6, 7, 3]]],
-  run: [
-    ['Tue 5am', 'Katie', [0, 1, 1, 2, 2]],
-    ['Wed 5am', 'Katie', [0, 0, 0, 0, 1]],
-  ],
 };
 
 const imported = [];
@@ -79,8 +78,8 @@ for (const [classTypeId, rows] of Object.entries(REPORT)) {
   });
 }
 
-// The report's week totals, as a check the transcription is right.
-const EXPECT = { '2026-08-31': 190, '2026-09-07': 179, '2026-09-14': 251, '2026-09-21': 274, '2026-09-28': 304 };
+// The report's week totals less Run Club, as a check the transcription is right.
+const EXPECT = { '2026-08-31': 190, '2026-09-07': 178, '2026-09-14': 250, '2026-09-21': 272, '2026-09-28': 301 };
 for (const [week, total] of Object.entries(EXPECT)) {
   const got = imported.filter((e) => e.period === week).reduce((s, e) => s + e.count, 0);
   if (got !== total) throw new Error(`${week}: ${got} check-ins, report says ${total}`);
@@ -88,7 +87,9 @@ for (const [week, total] of Object.entries(EXPECT)) {
 
 const env = await (await fetch(`${BASE}/attendance`)).json();
 const ids = new Set(imported.map((e) => e.id));
-const kept = env.data.entries.filter((e) => !e.seeded && !ids.has(e.id));
+const kept = env.data.entries.filter(
+  (e) => !e.seeded && !ids.has(e.id) && e.classTypeId !== 'run',
+);
 const dropped = env.data.entries.filter((e) => e.seeded).length;
 const res = await fetch(`${BASE}/attendance`, {
   method: 'PUT',

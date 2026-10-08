@@ -658,12 +658,12 @@
           },
           {
             "label": "Wed 5:15pm",
-            "coach": "Harry",
+            "coach": "Jordan",
             "count": 11
           },
           {
             "label": "Wed 6:15pm",
-            "coach": "Harry",
+            "coach": "Jordan",
             "count": 3
           },
           {
@@ -691,12 +691,12 @@
           },
           {
             "label": "Wed 5:15pm",
-            "coach": "Harry",
+            "coach": "Jordan",
             "count": 8
           },
           {
             "label": "Wed 6:15pm",
-            "coach": "Harry",
+            "coach": "Jordan",
             "count": 3
           },
           {
@@ -724,12 +724,12 @@
           },
           {
             "label": "Wed 5:15pm",
-            "coach": "Harry",
+            "coach": "Jordan",
             "count": 9
           },
           {
             "label": "Wed 6:15pm",
-            "coach": "Harry",
+            "coach": "Jordan",
             "count": 0
           },
           {
@@ -757,12 +757,12 @@
           },
           {
             "label": "Wed 5:15pm",
-            "coach": "Harry",
+            "coach": "Jordan",
             "count": 8
           },
           {
             "label": "Wed 6:15pm",
-            "coach": "Harry",
+            "coach": "Jordan",
             "count": 5
           },
           {
@@ -790,12 +790,12 @@
           },
           {
             "label": "Wed 5:15pm",
-            "coach": "Harry",
+            "coach": "Jordan",
             "count": 10
           },
           {
             "label": "Wed 6:15pm",
-            "coach": "Harry",
+            "coach": "Jordan",
             "count": 1
           },
           {
@@ -1089,101 +1089,11 @@
             "count": 3
           }
         ]
-      },
-      {
-        "id": "2026-08-31:run",
-        "period": "2026-08-31",
-        "classTypeId": "run",
-        "count": 0,
-        "slots": [
-          {
-            "label": "Tue 5am",
-            "coach": "Katie",
-            "count": 0
-          },
-          {
-            "label": "Wed 5am",
-            "coach": "Katie",
-            "count": 0
-          }
-        ]
-      },
-      {
-        "id": "2026-09-07:run",
-        "period": "2026-09-07",
-        "classTypeId": "run",
-        "count": 1,
-        "slots": [
-          {
-            "label": "Tue 5am",
-            "coach": "Katie",
-            "count": 1
-          },
-          {
-            "label": "Wed 5am",
-            "coach": "Katie",
-            "count": 0
-          }
-        ]
-      },
-      {
-        "id": "2026-09-14:run",
-        "period": "2026-09-14",
-        "classTypeId": "run",
-        "count": 1,
-        "slots": [
-          {
-            "label": "Tue 5am",
-            "coach": "Katie",
-            "count": 1
-          },
-          {
-            "label": "Wed 5am",
-            "coach": "Katie",
-            "count": 0
-          }
-        ]
-      },
-      {
-        "id": "2026-09-21:run",
-        "period": "2026-09-21",
-        "classTypeId": "run",
-        "count": 2,
-        "slots": [
-          {
-            "label": "Tue 5am",
-            "coach": "Katie",
-            "count": 2
-          },
-          {
-            "label": "Wed 5am",
-            "coach": "Katie",
-            "count": 0
-          }
-        ]
-      },
-      {
-        "id": "2026-09-28:run",
-        "period": "2026-09-28",
-        "classTypeId": "run",
-        "count": 3,
-        "slots": [
-          {
-            "label": "Tue 5am",
-            "coach": "Katie",
-            "count": 2
-          },
-          {
-            "label": "Wed 5am",
-            "coach": "Katie",
-            "count": 1
-          }
-        ]
       }
     ]
   },
-  "rev": 9,
-  "updatedAt": "2026-10-08T21:15:14.344Z",
+  "rev": 10,
+  "updatedAt": "2026-10-08T21:22:49.858Z",
   "machine": "vm",
   "schemaVersion": 2
 }

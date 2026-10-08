@@ -525,7 +525,9 @@ export default function HomeTab() {
               </>
             )}
               <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 border-t border-ink-100 pt-2.5">
-                {schedule.data.classTypes.map((ct) => (
+                {schedule.data.classTypes
+                  .filter((ct) => attendance.data!.entries.some((e) => e.classTypeId === ct.id))
+                  .map((ct) => (
                   <button
                     key={ct.id}
                     type="button"
