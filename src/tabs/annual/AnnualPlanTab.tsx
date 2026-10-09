@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDoc } from '../../lib/useDoc';
 import SaveBadge from '../../components/SaveBadge';
 import type { AnnualPhase, AnnualStream, BreakWindow, RaceEvent } from '../../types/documents';
@@ -25,7 +26,8 @@ function fmtShort(d: Date): string {
  */
 function phaseStarts(stream: AnnualStream, blocked: Set<number>): number[] {
   const starts: number[] = [];
-  let trained = 0;
+  // A stream can start later than the plan does; see AnnualStream.startsWeek.
+  let trained = stream.startsWeek ?? 0;
   for (const p of stream.phases) {
     starts.push(trainingWeekOffset(trained, blocked));
     trained += p.weeks;
@@ -194,6 +196,7 @@ function RaceMarkers({ races, startDate }: { races: RaceEvent[]; startDate: stri
 
 export default function AnnualPlanTab() {
   const { data, saveState, update, reloadTheirs, keepMine, retry } = useDoc('annual-plan');
+  const navigate = useNavigate();
   const [filter, setFilter] = useState<'all' | AnnualStream['id']>('all');
   const [selected, setSelected] = useState<{ streamId: string; phaseId: string } | null>(null);
 
@@ -329,6 +332,16 @@ export default function AnnualPlanTab() {
               </button>
             ))}
           </div>
+          {/* The members' view of the year: one screen, one colour per
+              block, an arrow on today. Opens on whichever stream is
+              filtered, so the button shows what is on screen. */}
+          <button
+            type="button"
+            onClick={() => navigate(`/showcase?stream=${filter === 'all' ? 'strength' : filter}`)}
+            className="rounded-md bg-accent-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-accent-700"
+          >
+            View for members
+          </button>
           <SaveBadge state={saveState} onReloadTheirs={reloadTheirs} onKeepMine={keepMine} onRetry={retry} />
         </div>
       </div>
@@ -510,6 +523,21 @@ export default function AnnualPlanTab() {
                             Delete
                           </button>
                         </div>
+                        {/* What the class is told. The Focus field above is
+                            the planning note and reads like one, so the
+                            members’ year view takes this instead. */}
+                        <label className="w-full text-[11px] font-medium text-ink-500">
+                          Description for members
+                          <textarea
+                            rows={2}
+                            className={`${field} mt-0.5 block w-full`}
+                            placeholder="How you would explain this block to someone in the class"
+                            value={p.memberDescription ?? ''}
+                            onChange={(e) =>
+                              patchPhase(stream.id, p.id, { memberDescription: e.target.value || undefined })
+                            }
+                          />
+                        </label>
                         <label className="w-full text-[11px] font-medium text-ink-500">
                           Notes
                           <input

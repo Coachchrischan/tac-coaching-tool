@@ -88,7 +88,8 @@ try {
 }
 let stream, block, bi, before = 0;
 outer: for (const s of program.streams) {
-  before = 0;
+  // A stream can start later than the plan does; see ProgramStream.startsWeek.
+  before = s.startsWeek ?? 0;
   for (let i = 0; i < s.blocks.length; i++) {
     if (s.blocks[i].id === blockId) { stream = s; block = s.blocks[i]; bi = i; break outer; }
     before += s.blocks[i].weeks.length;

@@ -26,7 +26,8 @@ export interface BreakSpec {
 /** Every week of a stream with the Monday it falls on. */
 export function streamWeeks(stream: ProgramStream, startDate: string, breaks: BreakSpec[]): WeekRef[] {
   const out: WeekRef[] = [];
-  let streamIndex = 0;
+  // A stream can start later than the plan does; see ProgramStream.startsWeek.
+  let streamIndex = stream.startsWeek ?? 0;
   stream.blocks.forEach((block, blockIndex) => {
     block.weeks.forEach((_, weekIndex) => {
       out.push({

@@ -96,8 +96,10 @@ function weekIndexFor(mondayIso) {
   const phase = doc.streams
     .find((s) => s.id === 'strength')
     .blocks.find((b) => b.id === 'str2-hyp');
-  let before = 0;
-  for (const b of doc.streams.find((s) => s.id === 'strength').blocks) {
+  const strength = doc.streams.find((s) => s.id === 'strength');
+  // A stream can start later than the plan does; see ProgramStream.startsWeek.
+  let before = strength.startsWeek ?? 0;
+  for (const b of strength.blocks) {
     if (b.id === 'str2-hyp') break;
     before += b.weeks.length;
   }

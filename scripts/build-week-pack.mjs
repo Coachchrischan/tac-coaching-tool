@@ -140,7 +140,8 @@ for (const entry of WEEK) {
   if (!stream) { missing.push(`${label}: no ${entry.streamId} stream`); continue; }
 
   // Where this Monday sits in the stream.
-  let ref = null, before = 0;
+  // A stream can start later than the plan does; see ProgramStream.startsWeek.
+  let ref = null, before = stream.startsWeek ?? 0;
   for (let bi = 0; bi < stream.blocks.length && !ref; bi++) {
     for (let wi = 0; wi < stream.blocks[bi].weeks.length; wi++) {
       if (isoDate(trainingWeekMonday(annual.startDate, before + wi, breaks)) === mondayArg) {

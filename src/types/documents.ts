@@ -281,6 +281,17 @@ export interface ProgramBlock {
 export interface ProgramStream {
   id: string; // 'strength' | 'esd' | 'hyrox' | 'gameday', extensible
   name: string;
+  /**
+   * Training weeks between the plan's start and this stream's first week.
+   *
+   * Not every stream starts in the same week. Strength began three weeks into
+   * the year while conditioning was already running, and that gap used to be
+   * held by an empty "Primer" phase, which meant the members' view showed a
+   * block that was never a block and deleting it silently moved every strength
+   * date three weeks earlier. The gap is stated here instead. Defaults to 0.
+   */
+  startsWeek?: number;
+
   format?: 'strength' | 'circuit'; // how its sessions are written; default strength
   /**
    * How the stream is organised in time. Strength runs the periodised phases of
@@ -396,6 +407,23 @@ export interface AnnualPhase {
   name: string; // e.g. "Foundation", "Race prep", "Deload + retest"
   focus: string; // the training intent of the phase
   weeks: number;
+  /**
+   * The microcycles inside the phase, as their week counts in order: [3, 2] is
+   * a three-week wave then a two-week one. They must sum to `weeks`.
+   *
+   * A phase is not always an even split. The strength block that closes 2026
+   * runs 3 then 2; the 2027 one runs 4, 4 then 2. The old `blockLength` on the
+   * programming block could only say "every wave is N weeks", so the uneven
+   * ones had nowhere to live and the showcase could not draw them.
+   */
+  microcycles?: number[];
+  /**
+   * The block explained to a member, in their words, for the year view the
+   * class is shown. `focus` is the planning note and reads like one ("loaded
+   * from the club sheet 2026-09-10"), which is no use on a wall. Falls back to
+   * `focus` when it is empty, so a new phase is never blank.
+   */
+  memberDescription?: string;
   notes?: string;
 }
 
@@ -403,6 +431,17 @@ export interface AnnualStream {
   id: 'strength' | 'esd' | 'hyrox';
   name: string;
   colour: string;
+  /**
+   * Training weeks between the plan's start and this stream's first week.
+   *
+   * Not every stream starts in the same week. Strength began three weeks into
+   * the year while conditioning was already running, and that gap used to be
+   * held by an empty "Primer" phase, which meant the members' view showed a
+   * block that was never a block and deleting it silently moved every strength
+   * date three weeks earlier. The gap is stated here instead. Defaults to 0.
+   */
+  startsWeek?: number;
+
   phases: AnnualPhase[];
 }
 
@@ -427,10 +466,27 @@ export interface BreakWindow {
   weeks: number;
 }
 
+/**
+ * A one-off session inside a block: a handstand workshop, a deadlift
+ * workshop. Not a phase and not a race, so it is neither of those: it is a
+ * date on a lane with a name, drawn as a flag under the bar.
+ */
+export interface WorkshopMarker {
+  id: string;
+  name: string;
+  /** ISO yyyy-mm-dd, the Monday of the week it runs. */
+  date: string;
+  streamId: AnnualStream['id'];
+  /** Pencilled in rather than booked; the stem is drawn dashed. */
+  tentative?: boolean;
+}
+
 export interface AnnualPlanDoc {
   startDate: string; // ISO yyyy-mm-dd, a Monday; anchors every computed date
   streams: AnnualStream[];
   races?: RaceEvent[];
+  /** One-off sessions inside a block (workshops), drawn on their stream. */
+  workshops?: WorkshopMarker[];
   /** Club-wide shutdowns. Phase lengths are TRAINING weeks; these sit between. */
   breaks?: BreakWindow[];
 }

@@ -8,54 +8,75 @@
         "colour": "#003030",
         "phases": [
           {
-            "id": "ap-2026-primer",
-            "name": "Primer",
-            "focus": "Intro week + 2-week primer. Run off-app: programming emailed to coaches.",
-            "weeks": 3
-          },
-          {
             "id": "ap-2026-hyp9",
-            "name": "Strength-Hypertrophy",
+            "name": "Strength-Hypertrophy (cycle 1)",
             "focus": "Three-day Lower / Upper / Full Body split (Tue / Thu / Fri), loaded from the club sheet 2026-09-10. Three 3-week microcycles; micro 1 written (week 1 prescription repeated across weeks 1 to 3), micros 2 and 3 to be written.",
-            "weeks": 9
+            "weeks": 9,
+            "microcycles": [
+              3,
+              3,
+              3
+            ],
+            "memberDescription": "The block we are in. Three days a week, split into lower body, upper body and full body. The focus is pull up volume and pull up strength, back squats and Romanian deadlifts, with accessory work around them to cover everything else. Reps stay moderate and you leave a couple in the tank on every set. Each three-week wave repeats the same movements, so you can watch your own numbers move rather than guess."
           },
           {
             "id": "ap-2026-str5",
-            "name": "Strength",
+            "name": "Strength (cycle 1)",
             "focus": "Closes the year into Christmas. Structure TBC.",
-            "weeks": 5
+            "weeks": 5,
+            "microcycles": [
+              3,
+              2
+            ],
+            "memberDescription": "Into the lower rep ranges. The same lifts, heavier: lower-rep pull ups, back squat and deadlift work, with more rest between sets so you can actually express the strength the last few months have built. Three weeks of work, then a two-week wave to finish and test the big lifts before Christmas."
           },
           {
             "id": "2aed6a9c-77ce-4471-9e5c-35075b6ebc50",
-            "name": "Unilateral muscle-endurance",
+            "name": "Muscle endurance",
             "focus": "W1 unilateral testing (newcomer influx). Single-limb work, tempo, time under tension, asymmetric holds. Higher-rep muscle endurance, addressing imbalances.",
-            "weeks": 4
+            "weeks": 4,
+            "microcycles": [
+              4
+            ],
+            "memberDescription": "Setting the foundation for the year. Most people have had time away from the gym over Christmas, and straight back into heavy strength is the wrong way to come back, so this is the right time for endurance work. One limb at a time: single-leg and single-arm work, slow tempos and long holds, with some unusual exercises you will not have done before. Higher reps, lighter loads, and the block where you find the side that has quietly been doing less. A good place to start if you are new."
           },
           {
             "id": "16f693f4-5f62-4860-ac99-c968a899edac",
             "name": "Hypertrophy",
             "focus": "Aesthetic-based goals focus. Main strength movements retained as anchors.",
-            "weeks": 12
-          },
-          {
-            "id": "ap-2027-primer",
-            "name": "Primer (cycle 2)",
-            "focus": "Intro week + primer, mirroring the year-one entry.",
-            "weeks": 3
+            "weeks": 12,
+            "microcycles": [
+              4,
+              4,
+              4
+            ],
+            "memberDescription": "Building muscle. More sets, more reps, more time under tension, with the big lifts kept in as anchors so strength does not go backwards. Three four-week waves, each adding a little more work than the last."
           },
           {
             "id": "ap-2027-hyp9",
             "name": "Strength-Hypertrophy (cycle 2)",
             "focus": "Full Body A/B split. Three 3-week micros: 9/7/5, 9/7/5 heavier, 7/5/3. Week 3 of each micro ends on a challenge.",
-            "weeks": 9
+            "weeks": 10,
+            "microcycles": [
+              4,
+              4,
+              2
+            ],
+            "memberDescription": "The second time around, on the same lower body, upper body and full body split. Back to heavier work: reps step down through each wave, nine to seven to five, with a little more on the bar each time. The last week of every wave finishes on a challenge."
           },
           {
             "id": "ap-2027-str5",
             "name": "Strength (cycle 2)",
             "focus": "Structure TBC, mirroring Phase 3.",
-            "weeks": 5
+            "weeks": 8,
+            "microcycles": [
+              4,
+              4
+            ],
+            "memberDescription": "The strongest block of the year. Fewer reps, heavier bars, longer rests, and plenty of practice at the lifts themselves. Two four-week waves to finish the year on your best numbers."
           }
-        ]
+        ],
+        "startsWeek": 3
       },
       {
         "id": "esd",
@@ -211,10 +232,25 @@
         "start": "2026-12-21",
         "weeks": 2
       }
+    ],
+    "workshops": [
+      {
+        "id": "ws-handstand-2026-11",
+        "name": "Handstand workshop",
+        "date": "2026-11-02",
+        "streamId": "strength",
+        "tentative": true
+      },
+      {
+        "id": "ws-deadlift-2026-12",
+        "name": "Deadlift workshop",
+        "date": "2026-12-07",
+        "streamId": "strength"
+      }
     ]
   },
-  "rev": 10,
-  "updatedAt": "2026-09-10T03:04:25.392Z",
+  "rev": 17,
+  "updatedAt": "2026-10-07T00:59:19.256Z",
   "machine": "DESKTOP-T7OQ0UN",
   "schemaVersion": 2
 }

@@ -16,6 +16,7 @@ import LayoutsTab from './tabs/layouts/LayoutsTab';
 import EquipmentTab from './tabs/equipment/EquipmentTab';
 import TvPage from './tabs/tv/TvPage';
 import OverviewPage from './tabs/overview/OverviewPage';
+import ShowcasePage from './tabs/showcase/ShowcasePage';
 import PackPage from './tabs/pack/PackPage';
 import HowToBoard from './tabs/tv/HowToBoard';
 import CardPage from './tabs/card/CardPage';
@@ -31,6 +32,14 @@ export default function App() {
         element={
           <ErrorBoundary key={pathname}>
             <TvPage />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path="/showcase"
+        element={
+          <ErrorBoundary key={pathname}>
+            <ShowcasePage />
           </ErrorBoundary>
         }
       />
