@@ -176,11 +176,15 @@ def heat(v):
 # ---------- sections ----------
 
 def kpis(this, last):
-    if this["short"] or (last and last["short"]):
+    if this["short"]:
         lf = last and last["full"]
         first = (str(this["in"]), "check-ins this week",
                  f'<span style="color:{INK2}">about {this["full"]} on a full week</span><br>'
                  + delta(this["full"], lf) + " on last week, full-week basis")
+    elif last and last["short"]:
+        first = (str(this["in"]), "check-ins this week",
+                 delta(this["in"], last["full"]) + " on last week<br>"
+                 f'<span style="color:{INK2}">last week was about {last["full"]} on a full-week basis</span>')
     else:
         first = (str(this["in"]), "check-ins this week", delta(this["in"], last and last["in"]) + " on last week")
     tiles = [
@@ -264,6 +268,7 @@ def month_table(rows, last_day):
 
 
 def coach_table(rows, this_wk, last_wk, width, show_bars=True):
+    weeks_seen = {r["wk"] for r in rows}
     staff = sorted({r["staff"] for r in rows if r["wk"] == this_wk},
                    key=lambda s: -totals([r for r in rows if r["staff"] == s and r["wk"] == this_wk])["per"])
     head = (f'<tr><th style="{TH};text-align:left">Coach</th>'
@@ -279,6 +284,8 @@ def coach_table(rows, this_wk, last_wk, width, show_bars=True):
         l = totals(lw)["per"] if lw else None
         t = totals([r for r in mine if r["wk"] == this_wk])
         classes = ", ".join(sorted({r["family"] for r in mine if r["wk"] == this_wk}))
+        if len({r["wk"] for r in mine}) == 1 and len(weeks_seen) > 1:
+            classes += " (cover)"
         bars = (bar([(b or 0, MUTED)], 20, width, 8) + '<div style="height:3px;font-size:0;line-height:0">&nbsp;</div>'
                 + bar([(t["per"], TEAL)], 20, width, 11))
         body += (f'<tr><td style="{TD};text-align:left"><b>{html.escape(s)}</b><br>'
@@ -297,7 +304,11 @@ def slots(rows):
     for r in rows:
         s = S.setdefault(r["slot"], {"slot": r["slot"], "by": {}, "staff": r["staff"], "cap": r["cap"]})
         s["by"][r["wk"]] = r
-        s["staff"], s["cap"] = r["staff"], r["cap"]
+        s["cap"] = r["cap"]
+        s.setdefault("coaches", []).append(r["staff"])
+    for s in S.values():
+        # label each slot with its regular coach, so a one-off cover does not rename it
+        s["staff"] = max(set(s["coaches"]), key=lambda c: (s["coaches"].count(c), c == s["coaches"][-1]))
     return S
 
 
@@ -442,7 +453,7 @@ def build():
     page = f"""<title>TAC Class Attendance</title>
 <style>
 :root{{color-scheme:light}}
-body{{background:#fdfcf9;color:{INK};font-family:Mulish,Arial,Helvetica,sans-serif;padding:0 16px}}
+body{{margin:0;background:#fdfcf9;color:{INK};font-family:Mulish,Arial,Helvetica,sans-serif;font-size:14px;padding:0 16px}}
 .wrap{{max-width:1040px;margin:0 auto;padding-block:28px 64px}}
 .scroll{{overflow-x:auto}}
 h1{{font-family:Fraunces,Georgia,serif;font-size:34px;margin:0 0 4px}}
