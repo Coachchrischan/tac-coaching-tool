@@ -267,25 +267,30 @@ def month_table(rows, last_day):
     return f'{note}<table cellpadding="5" cellspacing="0" border="0" style="font-size:13px">{head}{body}</table>'
 
 
+def regular_coach(rows):
+    """Each slot's regular coach: the one who taught it most often."""
+    return {k: s["staff"] for k, s in slots(rows).items()}
+
+
 def coach_table(rows, this_wk, last_wk, width, show_bars=True):
-    weeks_seen = {r["wk"] for r in rows}
-    staff = sorted({r["staff"] for r in rows if r["wk"] == this_wk},
-                   key=lambda s: -totals([r for r in rows if r["staff"] == s and r["wk"] == this_wk])["per"])
+    reg = regular_coach(rows)
+    for r in rows:
+        r["coach"] = reg[r["slot"]]
+    staff = sorted({r["coach"] for r in rows if r["wk"] == this_wk},
+                   key=lambda s: -totals([r for r in rows if r["coach"] == s and r["wk"] == this_wk])["per"])
     head = (f'<tr><th style="{TH};text-align:left">Coach</th>'
             + (f'<th style="{TH};text-align:left">{swatch(MUTED)} Before {fmt_d(PROGRAM_START)} {swatch(TEAL)} This week</th>' if show_bars else '') +
             f'<th style="{TH}">Before</th><th style="{TH}">Last week</th><th style="{TH}">This week</th>'
             f'<th style="{TH}">No-show</th></tr>')
     body = ""
     for s in staff:
-        mine = [r for r in rows if r["staff"] == s]
+        mine = [r for r in rows if r["coach"] == s]
         before = [r for r in mine if r["d"] < PROGRAM_START]
         b = totals(before)["per"] if before else None
         lw = [r for r in mine if r["wk"] == last_wk]
         l = totals(lw)["per"] if lw else None
         t = totals([r for r in mine if r["wk"] == this_wk])
         classes = ", ".join(sorted({r["family"] for r in mine if r["wk"] == this_wk}))
-        if len({r["wk"] for r in mine}) == 1 and len(weeks_seen) > 1:
-            classes += " (cover)"
         bars = (bar([(b or 0, MUTED)], 20, width, 8) + '<div style="height:3px;font-size:0;line-height:0">&nbsp;</div>'
                 + bar([(t["per"], TEAL)], 20, width, 11))
         body += (f'<tr><td style="{TD};text-align:left"><b>{html.escape(s)}</b><br>'
@@ -296,7 +301,22 @@ def coach_table(rows, this_wk, last_wk, width, show_bars=True):
                  f'<td style="{TD}"><b>{t["per"]:.1f}</b><br><span style="font-size:11px">'
                  f'{delta(t["per"], l, "dec") if l is not None else ""}</span></td>'
                  f'<td style="{TD}">{pct(t["rate"])}</td></tr>')
-    return f'<table cellpadding="5" cellspacing="0" border="0" style="font-size:13px">{head}{body}</table>'
+    covers = {}
+    for r in rows:
+        if r["wk"] == this_wk and r["staff"] != r["coach"]:
+            covers.setdefault(r["staff"], []).append(r)
+    note = ""
+    if covers:
+        parts = []
+        for who, rs in covers.items():
+            fam = sorted({r["family"] for r in rs})
+            for f_ in fam:
+                times = " and ".join(t12(m) for m in sorted({r["mins"] for r in rs if r["family"] == f_}))
+                days = sorted({r["day"] for r in rs if r["family"] == f_}, key=DAYS.index)
+                parts.append(f'{"/".join(days)} {times} {f_} ({who})')
+        note = (f'<p style="font-size:12px;color:{INK2};margin:8px 0 0">Classes are credited to the regular coach for '
+                f'each time slot. Covers this week: {html.escape(", ".join(parts))}.</p>')
+    return f'<table cellpadding="5" cellspacing="0" border="0" style="font-size:13px">{head}{body}</table>{note}'
 
 
 def slots(rows):
@@ -367,7 +387,12 @@ def no_show_list(rows, wk):
         f'<td style="{TD}"><b>{r["no_show"]}</b> of {r["booked"]}</td>'
         f'<td style="{TD};{"color:" + BAD + ";font-weight:bold" if r["no_show"] / r["booked"] >= HIGH_NO_SHOW else ""}">'
         f'{pct(r["no_show"] / r["booked"])}</td></tr>' for r in rs)
-    return f'<table cellpadding="5" cellspacing="0" border="0" style="font-size:13px">{items}</table>'
+    rc = [r for r in rows if r["wk"] == wk and r["class"] == "Run Club"]
+    note = ""
+    if rc and sum(r["no_show"] for r in rc) and not sum(r["checked_in"] for r in rc):
+        note = (f'<p style="font-size:12px;color:{INK2};margin:8px 0 0">Run Club shows {sum(r["no_show"] for r in rc)} '
+                f'no-shows and no check-ins, which looks like attendance was not marked rather than members missing the run.</p>')
+    return f'<table cellpadding="5" cellspacing="0" border="0" style="font-size:13px">{items}</table>{note}'
 
 
 def flags(rows, weeks):
@@ -377,19 +402,21 @@ def flags(rows, weeks):
     for _, rs in ordered_slots(S):
         for s in rs:
             v = [x["checked_in"] for x in s["by"].values()]
-            avg = sum(v) / len(v)
+            kept = sorted(v)[1:] if len(v) >= 3 else v   # one bad week does not flag a class on its own
+            avg = sum(kept) / len(kept)
             name = f'{s["slot"][0]} {t12(s["slot"][1])} {s["slot"][2]} ({s["staff"].split()[0]})'
             seq = " &middot; ".join(str(s["by"][w]["checked_in"]) if w in s["by"] else "&ndash;" for w in win)
-            if avg < LOW and sum(1 for x in v if x < LOW) >= len(v) / 2:
+            if avg < LOW:
                 low.append(f"{name}: {seq}")
-            elif avg < WATCH:
+            elif avg <= WATCH:
                 watch.append(f"{name}: {seq}")
             booked = sum(x["booked"] for x in s["by"].values())
             nos = sum(x["no_show"] for x in s["by"].values())
             if booked >= 8 and nos / booked >= HIGH_NO_SHOW:
                 ns.append(f"{name}: {nos} of {booked} ({pct(nos / booked)})")
-    out = (f'<p style="{SUB}">Last {len(win)} weeks, check-ins oldest to newest. '
-           f'Sessions on public holidays and over Christmas are left out.</p>')
+    out = (f'<p style="{SUB}">Last {len(win)} weeks ({fmt_d(win[0])} to {fmt_d(win[-1])}), check-ins oldest to newest. '
+           f'Sessions on public holidays and over Christmas are left out. Each class is averaged with its lowest '
+           f'session set aside, so one bad week does not flag it on its own.</p>')
     for title, colour, items in ((f"Low numbers (averaging under {LOW})", BAD, low),
                                  (f"Watch list (averaging {LOW} to {WATCH})", WARN, watch),
                                  (f"High no-shows ({pct(HIGH_NO_SHOW)} or more of bookings)", BAD, ns)):
@@ -404,6 +431,32 @@ NOTES = [
     "Upper and Lower Body Strength swap days between blocks, so they share one Strength row per time slot.",
     "Run Club check-ins were not being recorded consistently, so its numbers understate attendance.",
 ]
+
+
+def data_block(rows, weeks, W):
+    import json
+    S = slots(rows)
+    grid = []
+    for g, rs in ordered_slots(S):
+        for s in rs:
+            d, mins, fam = s["slot"]
+            grid.append({"group": g, "name": f"{d} {t12(mins)} {fam}", "coach": s["staff"].split()[0],
+                         "vals": [s["by"][w]["checked_in"] if w in s["by"] else None for w in weeks]})
+    weekly = []
+    for w in weeks:
+        t = W[w]
+        y, m = month_of(w)
+        item = {"c": t["n"], "ci": t["in"], "ns": t["ns"], "wl": t["wait"] or None,
+                "month": date(y, m, 1).strftime("%B %Y")}
+        if t["short"]:
+            item["hol"] = "; ".join(t["notes"]) + "."
+        weekly.append(item)
+    per_class = {fmt_d(w): [{"slot": f'{r["day"]} {t12(r["mins"])} {r["family"]}', "cls": r["class"],
+                             "staff": r["staff"], "checked": r["checked_in"], "noshow": r["no_show"],
+                             "booked": r["booked"], "waitlisted": r["waitlisted"]}
+                            for r in rows if r["wk"] == w] for w in weeks}
+    data = {"weeks": [fmt_d(w) for w in weeks], "weekly": weekly, "grid": grid, "per_class": per_class}
+    return f'<script type="application/json" id="attendance-data">{json.dumps(data)}</script>'
 
 
 def build():
@@ -462,6 +515,7 @@ h1{{font-family:Fraunces,Georgia,serif;font-size:34px;margin:0 0 4px}}
 <div class="wrap"><p style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:bold;color:{INK2};margin:0">Teneriffe Athletic Club &middot; group classes</p>
 <h1>Class attendance</h1><div class="scroll">{body(False)}</div>
 <p style="font-size:12px;color:{INK2};margin-top:24px">Updated from the weekly Class Summary report. Data to {fmt_d(last_day)} {last_day.year}.</p></div>"""
+    page += "\n" + data_block(rows, weeks, W)
     (OUT / "dashboard.html").write_text(page)
 
     lines = [
