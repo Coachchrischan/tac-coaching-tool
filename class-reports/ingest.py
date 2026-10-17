@@ -35,7 +35,7 @@ CLASSES = ["Upper Body Strength", "Lower Body Strength", "Full Body Strength",
            "Conditioning", "Game Day", "Flow Yoga", "Yin Yoga", "StretchFit",
            "Hyrox", "Run Club"]
 STAFF = ["Ji Wallace", "Dana Coles", "Stephanie Chung", "Anthony Lett",
-         "Harry Crawford", "Katie Dall"]
+         "Harry Crawford", "Katie Dall", "Chris Chan", "Jordan Lambert"]
 ROOMS = ["Functional Training Zone", "Group Fitness Room", "Gym Floor", "Run Club"]
 
 
