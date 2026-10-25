@@ -22,15 +22,17 @@ describe('focus catalog derivations', () => {
     }
   });
 
-  it('Lower / Upper / Full Body map to the three strength classes, and the archived A/B still resolve', () => {
-    expect(FOCUS_CLASS_TYPE['lower']).toBe('lbs');
-    expect(FOCUS_CLASS_TYPE['upper']).toBe('ubs');
+  it('the three-day split maps Lower, Upper and Full Body to the three strength classes', () => {
+    // The club runs Upper on Tuesday and Lower on Thursday, so upper takes
+    // the Tuesday class (lbs) and lower the Thursday one (ubs). Checked
+    // against the TrainHeroic calendar on 2026-09-18.
+    expect(FOCUS_CLASS_TYPE['upper']).toBe('lbs');
+    expect(FOCUS_CLASS_TYPE['lower']).toBe('ubs');
     expect(FOCUS_CLASS_TYPE['full']).toBe('fbs');
+    // The archived A/B focuses keep their class types so the Primer weeks and
+    // the archive still resolve.
     expect(FOCUS_CLASS_TYPE['full-a']).toBe('lbs');
     expect(FOCUS_CLASS_TYPE['full-b']).toBe('ubs');
-    // Only the live 'full' focus points at the Full Body class.
-    const toFbs = Object.entries(FOCUS_CLASS_TYPE).filter(([, ct]) => ct === 'fbs');
-    expect(toFbs).toEqual([['full', 'fbs']]);
   });
 
   it('the Hyrox tracks split the two class days and ROX Engine stays parked', () => {
@@ -39,11 +41,11 @@ describe('focus catalog derivations', () => {
     expect(FOCUS_DAY_PICK['rox-engine']).toBeNull();
   });
 
-  it('only Strength pushes, Lower then Upper then Full Body, and the archived A/B never push', () => {
+  it('only Strength pushes, Upper then Lower then Full Body, with the ratified titles', () => {
     expect(pushPlanFor('strength')).toEqual([
-      { focus: 'lower', title: 'Day 1 - Lower' },
-      { focus: 'upper', title: 'Day 2 - Upper' },
-      { focus: 'full', title: 'Day 3 - Full Body' },
+      { focus: 'upper', title: 'Upper Body' },
+      { focus: 'lower', title: 'Lower Body' },
+      { focus: 'full', title: 'Full Body' },
     ]);
     expect(pushPlanFor('esd')).toEqual([]);
     expect(pushPlanFor('hyrox')).toEqual([]);

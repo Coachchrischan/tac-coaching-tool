@@ -35,28 +35,6 @@ npm run refresh-library
 
 The script reads `../../trainheroic-mcp/.exercise-cache.json` (no session token needed), keeps real exercises only, normalises tags and guesses movement patterns. Coach-entered data (pattern tags, scaled options, cues, custom exercises) lives in the `library-overrides` store document and is never touched by a refresh.
 
-## Importing the club's finished programming from TrainHeroic
-
-The club authors the finished Strength microcycles on its own TrainHeroic account ("Teneriffe Athletic Club Strength", program 5109902). Chris's coach account is an athlete on that team, so his token can read those sessions (read-only) and this script maps them into the Programming tab:
-
-```
-npm run import-club-program -- --from 2026-09-14 --weeks 1-3 [--phase str2-hyp] [--dry]
-```
-
-`--from` is the Monday the phase starts on, `--weeks` the phase week numbers to import. It needs the dev server on 8127 (writes go through the store API) and a live token in `../../trainheroic-mcp/config.json`. It replaces the three sessions of each target week (names, sets, reps, %, tempo, short notes, block notes, intent, the TrainHeroic session text as `appDescription`), adds a coach cue per exercise where none exists (never overwrites one), and saves the fetched sessions verbatim to `archive/th-club-program/`. Re-running is a sync from TrainHeroic: tool-side edits to those weeks are replaced. Exercise ids are mapped by name to Chris's library in the script's `LIBRARY_ID` table; add a row when the club introduces an exercise.
-
 ## TV output
 
-`/tv/:sessionId` renders a 1920x1080 display of one session for the gym TVs, exportable as PNG and PDF from the Programming tab. The board is authored at 1080p and the export size picker re-rasterises it at 1440p or 4K (the backdrop photos in `public/tv/` are the only limit; text stays sharp). The board itself is `src/tabs/tv/TvBoard.tsx`; the rules every reader shares (slide size, titles, the one-line prescription) live in `boardRules.ts`.
-
-## Designer pack
-
-`/designer-pack?stream=&container=&window=` (rail button on Programming) builds one A4-landscape PDF plus a JSON twin for one block of one stream: a cover with the legend, then every written session with every field it carries, each marked **ON THE WALL** (the current board prints it) or **COACH ONLY** (never on the wall), scaled options under each movement, and the current board rendered after each session for reference. The labelling is computed in `src/lib/designerPack.ts` from the same rules `TvBoard` renders by, and is unit-tested. Files are named `TAC-designer-pack-<stream>-<phase>-block<N>.pdf/.json`. Made for the marketing agency redesigning the wall boards; nothing in it is published to members.
-
-## Capturing TV boards to files (no browser UI)
-
-```
-npm run capture-tv -- --out exports/tv/<date> <sessionId> [<sessionId> ...]
-```
-
-Drives headless Chrome over the DevTools protocol against the running dev server (8127): each `/tv/:sessionId` page is opened at 1920x1080 (the board is 1:1 there), the on-screen controls and fit notice are hidden, and the frame is saved as `tac-tv-<sessionId>.png`. Same 1080p frame as the page's Export PNG. Session ids are the document ids (for example `str2-luf-w1-upper`). `exports/` is gitignored.
+`/tv/:sessionId` renders a 1920x1080 display of one session for the gym TVs, exportable as PNG and PDF from the Programming tab.

@@ -8,6 +8,7 @@ import HomeTab from './tabs/home/HomeTab';
 import AttendanceTab from './tabs/attendance/AttendanceTab';
 import EthosTab from './tabs/ethos/EthosTab';
 import ProgrammingTab from './tabs/programming/ProgrammingTab';
+import WeekPackTab from './tabs/weekpack/WeekPackTab';
 import MovementCheckTab from './tabs/movement/MovementCheckTab';
 import CommunityTab from './tabs/community/CommunityTab';
 import PlanningTab from './tabs/planning/PlanningTab';
@@ -15,7 +16,10 @@ import LayoutsTab from './tabs/layouts/LayoutsTab';
 import EquipmentTab from './tabs/equipment/EquipmentTab';
 import TvPage from './tabs/tv/TvPage';
 import OverviewPage from './tabs/overview/OverviewPage';
-import DesignerPackPage from './tabs/designer/DesignerPackPage';
+import ShowcasePage from './tabs/showcase/ShowcasePage';
+import PackPage from './tabs/pack/PackPage';
+import HowToBoard from './tabs/tv/HowToBoard';
+import CardPage from './tabs/card/CardPage';
 
 export default function App() {
   // The boundary is keyed by route so a crash in one tab never blanks the
@@ -32,6 +36,14 @@ export default function App() {
         }
       />
       <Route
+        path="/showcase"
+        element={
+          <ErrorBoundary key={pathname}>
+            <ShowcasePage />
+          </ErrorBoundary>
+        }
+      />
+      <Route
         path="/overview"
         element={
           <ErrorBoundary key={pathname}>
@@ -40,10 +52,26 @@ export default function App() {
         }
       />
       <Route
-        path="/designer-pack"
+        path="/pack/:blockId"
         element={
           <ErrorBoundary key={pathname}>
-            <DesignerPackPage />
+            <PackPage />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path="/board/:boardId"
+        element={
+          <ErrorBoundary key={pathname}>
+            <HowToBoard />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path="/card/:sessionId"
+        element={
+          <ErrorBoundary key={pathname}>
+            <CardPage />
           </ErrorBoundary>
         }
       />
@@ -61,6 +89,7 @@ export default function App() {
                   <Route path="/ethos" element={<EthosTab />} />
                   <Route path="/schedule" element={<ScheduleTab />} />
                   <Route path="/programming" element={<ProgrammingTab />} />
+                  <Route path="/week" element={<WeekPackTab />} />
                   <Route path="/annual" element={<AnnualPlanTab />} />
                   <Route path="/movement" element={<MovementCheckTab />} />
                   <Route path="/community" element={<CommunityTab />} />

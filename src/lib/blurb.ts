@@ -6,6 +6,7 @@ import type { LibraryExercise } from './library';
 import { patternsFor } from './library';
 import { cueFor, taggedPatterns } from './prescription';
 import { seriesBlocks } from './programStreams';
+import { FOCUS_DAY_TITLE as FOCUS_TITLE } from './focusCatalog.js';
 
 const PATTERN_PHRASE: Record<Pattern, string> = {
   squat: 'squatting',
@@ -31,19 +32,6 @@ const PATTERN_CUE: Record<Pattern, string> = {
   'core-rotation': 'move slow, own the position, breathe without losing the brace',
 };
 
-const FOCUS_TITLE: Record<Session['focus'], string> = {
-  lower: 'Lower body day',
-  upper: 'Upper body day',
-  full: 'Full body day',
-  'full-a': 'Full Body A',
-  'full-b': 'Full Body B',
-  esd: 'ESD day',
-  hyrox: 'Hyrox day',
-  'rox-strong': 'ROX Strong day',
-  'rox-engine': 'ROX Engine day',
-  'rox-race': 'ROX Race day',
-  gameday: 'Game Day',
-};
 
 // A circuit carries free-text movement lines and no library ids, so there are
 // no patterns to weigh and no cues to look up. Name the day and its pieces
@@ -112,13 +100,15 @@ export function generateBlurb(
     }
   }
 
-  // Structure line from the timed blocks.
+  // Structure line from the timed blocks. A strength class opens with a
+  // 5 minute coach brief before the warm-up (Chris, 2026-09-10); it is not a
+  // timed block in the data, so it is said here rather than modelled.
   const withMinutes = session.timedBlocks.filter((b) => b.minutes > 0);
   if (withMinutes.length > 0) {
-    const parts = withMinutes.map((b) => `${b.minutes} min ${b.label} series`);
-    sentences.push(
-      `${withMinutes.length} timed ${withMinutes.length === 1 ? 'block' : 'blocks'}: ${parts.join(', ')}.`,
+    const parts = withMinutes.map((b) =>
+      b.label.trim().toUpperCase() === 'WU' ? `${b.minutes} min warm-up` : `${b.minutes} min ${b.label} series`,
     );
+    sentences.push(`5 min brief, then ${parts.join(', ')}.`);
   }
 
   return sentences.join(' ');

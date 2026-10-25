@@ -105,21 +105,27 @@ Community, Planning, Ethos.
   round trip). `MonthGrid` has an unused `embedded` mode from the earlier side-by-side
   layout. `buildBlockRows` keys rows by id AND name, so bench variants sharing the bench id
   stay separate rows.
-- **Left rail:** TV output, Block overview, **Designer pack** (`/designer-pack`: one PDF + JSON
-  per block of one stream for the marketing agency's board redesign, every field marked ON THE
-  WALL or COACH ONLY by the same rules `TvBoard` renders by, `src/lib/designerPack.ts`, tested),
-  Export for Sheets, Push to TrainHeroic (drafts), Build floor layout,
+- **Left rail:** TV output, Export for Sheets, Push to TrainHeroic (drafts), Build floor layout,
   **Email the week** (opens a Gmail compose window with the week written out; it never sends).
   Coach addresses live on `ScheduleDoc.coaches[].email`, edited in Schedule's settings drawer.
-  The TV page has an export-size picker (1080p, 1440p, 4K); the board is authored at 1080p in
-  `src/tabs/tv/TvBoard.tsx` and re-rasterised, so only the backdrop photos limit sharpness.
 - **TV board** (`/tv/:sessionId`): 1920x1080 landscape, TAC-branded, renders both formats, with
   per-class member photos as backdrops. Export PNG / PDF.
-- **TrainHeroic import (2026-09-13):** the club's finished microcycles are authored on the
-  club's own TrainHeroic account, not mine. `npm run import-club-program -- --from <Monday>
-  --weeks a-b` pulls them into a phase (read-only on the TrainHeroic side; see README).
-  Weeks 1 to 3 of Phase 2 are imported; the club runs Upper on Tuesday and Lower on
-  Thursday, the reverse of the tool's timetable (flagged in `PROGRAMMING-PLAN.md`).
+- **How-to boards** (`/board/:boardId`, `src/tabs/tv/HowToBoard.tsx`, 2026-09-15): the same
+  1920x1080 shell carrying an instruction sequence instead of a workout, for the wall and for
+  the club's designer. First board is `trainheroic`: two pathways (have the app / do not have
+  the app) split down the middle with a circled OR, converging on one full-width access-code
+  band. Content is the `BOARDS` record at the top of the file, so a second board is a data
+  entry. `?code=ABC123` fills the code in (it is not in the repo, so it prints a placeholder
+  without it); `?bare=1` strips the buttons and warnings for a headless capture. Everything the
+  designer must supply is drawn as a labelled placeholder: the two app screenshots, the store
+  badges, the code. Exports live in `TAC/boards/` (see its README for the Chrome commands).
+- **Board fit fixed the same day.** Both boards previewed with
+  `transform: scale(min(calc(100vw / 1920), ...))`, which is invalid: a length where
+  `scale()` needs a number, so the browser dropped the declaration and the board rendered at
+  full size. It also centred inside its own 1080px layout box rather than the window, because a
+  transform does not change layout. `src/lib/useFitScale.ts` measures the window instead, and
+  both boards are now absolutely centred. Exports never used it, so nothing about the PNG, PDF
+  or the wall changes; only the preview does.
 - **TrainHeroic push:** `POST /api/team-push` via `src/server/teamPushPlugin.ts`, using
   `trainheroic-mcp`'s client and token. **Only Strength** maps to a team ("TAC Strength Class",
   TrainHeroic program id **5071078**). The six stale drafts were deleted on 2026-08-20 and
@@ -326,32 +332,7 @@ Hyrox no longer looks like ESD and Game Day. Chris handed over a HYROX Block 01 
   is cut even at the 42% floor and says so in red; `Anchor` fits at 60% and says so in amber.
   That is the format being richer than a 1920x1080 board, not a layout bug.
 
-## Back to Lower / Upper / Full Body, Saturday Full Body (2026-09-07)
-
-The club reverted the A/B decision a week before the block started. Done on
-2026-09-07 through `scripts/oneoff-2026-09-07-lower-upper-full.mjs` (store
-API, re-runnable):
-
-- **Programming**: the A/B strength stream is archived to
-  `archive/strength-full-body-ab-2026-09.json` (restorable). Phase 2 holds
-  weeks 1 to 9 of the August Lower/Upper/Full block from
-  `archive/strength-lower-upper-full-2026-08.json`, re-id'd `str2-luf-w{n}-{focus}`;
-  week 1 is Chris's sheet. Phases 1 and 3 are empty Lower/Upper/Full
-  skeletons (primer intents kept). Phase ids, themes, annualPhaseIds and
-  week ids are unchanged.
-- **Timetable** (live "Suggested Format"): the three coachless Friday Full Body
-  classes became one **Saturday 06:00** Full Body class (gym floor, no coach
-  set yet); the Tue/Thu class types are named Lower / Upper Body Strength
-  again (ids still `lbs`/`ubs`).
-- **Focus catalogue**: `lower` / `upper` / `full` carry the push titles
-  (Day 1 - Lower, Day 2 - Upper, Day 3 - Full Body) and lead the stream;
-  `full-a` / `full-b` stay valid for the archive and are not pushed. The
-  push, email, Home and TV all derive from it, so Full Body now lands on
-  Saturday everywhere.
-- **Still to write**: Upper and Full Body weeks 2 to 9 and Lower weeks 5 to 9
-  have exercise names only (as the August block was left).
-
-## The Strength rebuild: Full Body A/B (changed 2026-08-31, reverted 2026-09-07)
+## The Strength rebuild: Full Body A/B (changed 2026-08-31)
 
 The club changed Phase 1 on 2026-08-31 and Chris had the tool rebuilt the same day, presenting
 that night. `PROGRAMMING-PLAN.md` carries the revised plan of record; `BANKED-2026-08-31.md`
@@ -511,9 +492,129 @@ the sequence; all five steps shipped, one commit each, live-verified:
 ProgrammingTab thinning (control bar / Edit panel, if ever needed), and
 everything in the round-2 file's "later, with Chris" list.
 
+## Phase 2 reloaded: three-day split, microcycle 1 (2026-09-10)
+
+Chris rewrote the club sheet (tab "Phase 1 - Upper / Lower / Full Body") as a
+three-day split with fresh warm-ups and scaled options, and asked for Phase 2
+to hold it. That reopens the 2026-08-31 A/B decision, on his call. Done in
+one pass, `scripts/oneoff-2026-09-10-three-day-micro1.mjs`, through the store
+API (program rev 170 to 171, library-overrides 40 to 41):
+
+- **Archived first**: `archive/strength-full-body-ab-2026-09.json` holds the
+  live A/B block (rev 170, including Chris's same-morning warm-up edit) and
+  the five scale keys it used. Restorable.
+- **Loaded**: weeks 1 to 3 as Lower (Tue) / Upper (Thu) / Full Body (Fri), 102
+  slots, the week 1 prescription repeated across the three weeks (his choice);
+  weeks 4 to 9 are empty sessions with an intent saying so. Same block id
+  (`str2-hyp`), theme, annual link and 3-week block length, so the annual
+  lane, dates and Movement Check window are untouched.
+- **Scales**: the sheet's two per exercise replace the exercise-level scales
+  for the 20 exercises it lists; entries whose name matched kept their
+  prescription detail (box squat, goblet squat, shoulder taps). No scale in
+  the sheet means none in the tool. Eight compounds gained movement-pattern
+  tags for Movement Check.
+- **Catalog**: `lower`/`upper`/`full` carry the push titles now ("Lower Body",
+  "Upper Body", "Full Body"); `full-a`/`full-b` keep their class types for the
+  Primer weeks and the archive but no longer push. Days still resolve from the
+  live timetable, so Friday's `fbs` class is fed and the unfed-class warning
+  clears. Test updated; 72 green, strict clean.
+- **Not touched**: the Primer (still A/B, off-app) and Phase 3 (empty). The
+  Schedule class type names still read "Full Body Strength A/B"; rename them
+  in Schedule if the club has.
+- **Flags for Chris**: the sheet numbers Upper as Day 1, the timetable runs
+  Lower on Tuesday (fix the timetable if the club swapped); Tempo Bench carries
+  the 30X1 he ratified for the A/B micro 1 because the sheet names it tempo but
+  gives none; thirteen warm-up/accessory names have no TrainHeroic library
+  match and push as named skips (list in PROGRAMMING-PLAN.md).
+- **Text pack for the designer (same day)**: `/pack/:blockId?from=&to=`
+  (`src/tabs/pack/PackPage.tsx`, rail button on Programming) writes a block
+  window out as one A4 page per session with every line the TV board renders
+  (title, intent, warm-up strip, A/B/C columns with minutes and part notes,
+  numbered exercises with the board's prescription line, slot notes, cues,
+  scales, coach note, member app description, footer blurb). Real text, not a
+  raster: print it with the browser (Ctrl+P, Save as PDF) or headless Chrome
+  (`chrome --headless=new --no-pdf-header-footer --virtual-time-budget=15000
+  --print-to-pdf=out.pdf "http://localhost:8127/pack/str2-hyp?from=1&to=3"`).
+  First output: `TAC/programming/TAC-Strength-Phase2-Micro1-board-text-2026-09-10.pdf`
+  (10 pages, Mulish and Fraunces embedded). It reads the live documents, so
+  regenerate after editing.
+- **Same pack as Word + plain text**: `npm run pack:docx -- <blockId> <from> <to> [out.docx]`
+  (`scripts/pack-docx.mjs`, reads the live store; `scripts/ts-resolve.mjs` lets it
+  import `src/lib/blurb.ts` straight from source so the footer blurb matches the
+  board). Writes the .docx and a .txt beside it. First outputs sit beside the
+  PDF in `TAC/programming/`. Timings changed the same day on Chris's call:
+  every strength session is 5 min brief (said in the blurb, not modelled), then
+  WU 8 / A 20 / B 15 / C 12 minutes; `defaultSeries` seeds new sessions that way.
+- **Still open**: micro 2 and 3, the intensity wave inside micro 1, pushing
+  week 1 drafts before 14 Sept, Gym Floor fixtures, the round-2 coaching queue.
+
+## The Week Pack tab (2026-09-18)
+
+The week became four streams across six days and no screen showed it whole, so there is a new
+tab, **Week Pack** (`/week`, `src/tabs/weekpack/WeekPackTab.tsx`), and the club's week is now
+declared in one place:
+
+| Mon | Tue | Wed | Thu | Fri | Sat |
+|---|---|---|---|---|---|
+| Monday Conditioning | Lower | Wednesday Conditioning | Upper | Friday Conditioning | Game Day |
+
+- **Timetable changed to match** (Chris's call, 2026-09-18): Wednesday conditioning added to the
+  live scenario (mirroring Monday's four ESD times), **Friday strength removed**. Strength is
+  Tuesday and Thursday. The Full Body ('full') session in Phase 2 therefore has no class day; it
+  is still written and still in the document, and the tool says so rather than hiding it.
+- **Three conditioning focuses**, `cond-mon` / `cond-wed` / `cond-fri`, all on the `esd` class
+  type. They carry a **fixed weekday** (`FocusDef.weekday`), which beats `dayPick`: three classes
+  of one class type in one week cannot be told apart by an index into the sorted days, and the
+  timetable already carries a stray Tuesday ESD that broke that guess. The ESD stream is now
+  named **Conditioning**.
+- **Paste a microcycle in.** The tab has a paste box that reads the conditioning pack Chris
+  exports from `TAC/programming/` (`src/lib/conditioningPaste.ts`, tested against the real
+  micro 1 file: 12 sessions, parts, Base/Build/Push lanes, scales, rotation). Indentation is the
+  structure: column 0 a section, 2 a movement or the instruction, 6 the lanes. SESSION INTENT,
+  COACH NOTE, MEMBER APP DESCRIPTION and FOOTER BLURB land on the session; ROTATION and SET-UP
+  become **coach sections** (new `SessionCommon.coachSections`), which never reach the wall but
+  are on the coaching card. Pack week 1 lands on the week on screen, week 2 on the next.
+  Importing again replaces; it does not double up.
+- **`CircuitBlock.note`** is new: a conditioning part is half instruction, and the board used to
+  list the movements without saying it was an E3MOM off the erg.
+- **The folder.** "Build the pack" (or `npm run week-pack -- 2026-09-21 --name "Week 2 Class
+  Programming"`) writes one folder into `TAC/programming/weeks/`: the week as a text file,
+  `boards/` a 1920x1080 PNG per class, `cards/` an A4 PDF per class, and a README naming
+  anything not written. Boards and cards are rendered by driving the app's own
+  `/tv/:id?bare=1` and `/card/:id?bare=1` routes in headless Chrome, so there is one definition
+  of a board. `scripts/build-week-pack.mjs` is the real thing; `src/server/weekPackPlugin.ts`
+  only lets the tab press it. `?bare=1` now works on the TV board too.
+- **The coaching card** is new (`/card/:sessionId`, `src/tabs/card/CardPage.tsx`): one A4 page,
+  the brief, the work compact, then the coach-only half (coach note, rotation, set-up, member
+  description). Print keeps the type as text.
+- **Focus tables are finally all derived.** Adding the conditioning focuses made the type checker
+  find three more hand-keyed tables (the blurb's day names, the Phase view's labels, the TV
+  board's headline). They now come from `FOCUS_DAY_TITLE` / `FOCUS_LABEL` / `FOCUS_BOARD_TITLE`
+  in the catalog. Nothing hand-keys a focus any more.
+
+**The TrainHeroic pull (built 2026-09-18, waiting on a token).** "Pull from TrainHeroic" on the
+Week Pack tab reads the team calendar for the week's strength days and shows what is there beside
+what the tool holds, line by line, with the differences picked out. A second click writes it in.
+
+- `src/lib/thPull.ts` is the **exact inverse of the push**, and is tested as one:
+  `thPull.test.ts` runs every slot through the REAL push mapping (`mapReps`, `buildCue`, the
+  payload `buildExercisePayload` sends) into TrainHeroic's stored shape and back, and asserts it
+  returns unchanged. 13 cases, including each-side reps, seconds holds, "10+", rep ranges, RIR,
+  kg loads and the coach note. If either side is edited alone, the test goes red. Two things do
+  not survive and both are asserted: the library id (a team calendar does not carry one) and RIR
+  spacing ("1RIR" comes back "1 RIR", then stays).
+- `src/server/thPullPlugin.ts` (`POST /api/th-pull { monday }`) is **read only by design**. It
+  maps and diffs and hands the result back; the tab writes through the store like any other edit,
+  so a pull cannot bypass the rev check, the history snapshots or the backup. Applying keeps the
+  intent, coach note and member app description, which TrainHeroic does not hold, and replaces
+  only the work.
+- **Blocked on the token.** Verified end to end on 2026-09-18 as far as TrainHeroic: the button
+  reaches the API and gets a 401, and the tab says so in plain words. The session token expires
+  every few days. Refresh it and the pull is live; the mapping itself is proven by the round trip.
+
 **Decisions already made, do not reopen without me:** ESD and Game Day are month to month, not
 periodised (**Hyrox was, and is now four-week blocks**, changed 2026-08-28 on Chris's call).
 TrainHeroic stays drafts only. The week email opens a Gmail compose window and never sends.
-Hyrox runs two days a week, not three. **Strength is the two-day Full Body A/B split from
-14 Sept, Friday strength is on hold, and the Deload/Skills week is removed** (club decisions,
-2026-08-31).
+Hyrox runs two days a week, not three. **Strength is the three-day Lower / Upper / Full Body
+split from 14 Sept (Chris, 2026-09-10, replacing the 2026-08-31 two-day A/B), Friday strength is
+back on, and the Deload/Skills week is removed** (club decision, 2026-08-31).

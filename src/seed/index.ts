@@ -25,8 +25,8 @@ import type {
 // supporting hues; red reserved for Hyrox as on the club timetable.
 const CT = {
   esd: { id: 'esd', name: 'ESD', colour: '#003030' },
-  lbs: { id: 'lbs', name: 'Lower Body Strength', colour: '#5A5A52' },
-  ubs: { id: 'ubs', name: 'Upper Body Strength', colour: '#6E7B74' },
+  lbs: { id: 'lbs', name: 'Full Body Strength A', colour: '#5A5A52' },
+  ubs: { id: 'ubs', name: 'Full Body Strength B', colour: '#6E7B74' },
   run: { id: 'run', name: 'Run Club', colour: '#8A7B66' },
   hyrox: { id: 'hyrox', name: 'Hyrox Training', colour: '#C64545' },
   flow: { id: 'flow', name: 'Flow Yoga', colour: '#7C6FA0' },
@@ -117,10 +117,10 @@ const FOCUSES: SessionFocus[] = ['lower', 'upper', 'full'];
 // Every session starts with a Warm Up (WU) series plus A, B, C series.
 export function defaultSeries(prefix: string): TimedBlock[] {
   return [
-    { id: `${prefix}-WU`, label: 'WU', minutes: 5, slots: [] },
-    { id: `${prefix}-A`, label: 'A', minutes: 15, slots: [] },
-    { id: `${prefix}-B`, label: 'B', minutes: 12, slots: [] },
-    { id: `${prefix}-C`, label: 'C', minutes: 10, slots: [] },
+    { id: `${prefix}-WU`, label: 'WU', minutes: 8, slots: [] },
+    { id: `${prefix}-A`, label: 'A', minutes: 20, slots: [] },
+    { id: `${prefix}-B`, label: 'B', minutes: 15, slots: [] },
+    { id: `${prefix}-C`, label: 'C', minutes: 12, slots: [] },
   ];
 }
 

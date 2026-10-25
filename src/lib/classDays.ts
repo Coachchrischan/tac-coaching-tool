@@ -24,9 +24,9 @@ export const DAY_NAMES = [
 
 // The focus-to-class mapping and day picks live in ONE place, the focus
 // catalog; re-exported here so existing import sites keep working.
-import { FOCUS_CLASS_TYPE, FOCUS_DAY_PICK } from './focusCatalog.js';
+import { FOCUS_CLASS_TYPE, FOCUS_DAY_PICK, FOCUS_WEEKDAY } from './focusCatalog.js';
 
-export { FOCUS_CLASS_TYPE, FOCUS_DAY_PICK };
+export { FOCUS_CLASS_TYPE, FOCUS_DAY_PICK, FOCUS_WEEKDAY };
 
 export interface ResolvedDay {
   focus: SessionFocus;
@@ -70,8 +70,17 @@ export function resolveWeekDays(
     const classDays = [
       ...new Set((scenario?.blocks ?? []).filter((b) => b.classTypeId === classTypeId).map((b) => b.day)),
     ].sort((a, b) => a - b);
-    const pick = focus in FOCUS_DAY_PICK ? FOCUS_DAY_PICK[focus] : 0;
-    const dayIndex = pick === null || pick === undefined ? null : (classDays[pick] ?? null);
+    // A fixed weekday wins: three conditioning classes share one class type
+    // in a single week, and an index into the sorted days cannot tell them
+    // apart once any other class of that type exists.
+    const fixed = FOCUS_WEEKDAY[focus];
+    let dayIndex: number | null;
+    if (fixed !== undefined) {
+      dayIndex = classDays.includes(fixed) ? fixed : null;
+    } else {
+      const pick = focus in FOCUS_DAY_PICK ? FOCUS_DAY_PICK[focus] : 0;
+      dayIndex = pick === null || pick === undefined ? null : (classDays[pick] ?? null);
+    }
     return {
       focus,
       dayIndex,

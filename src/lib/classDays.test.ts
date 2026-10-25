@@ -41,6 +41,28 @@ function makeSchedule(overrides?: Partial<ScheduleDoc>): ScheduleDoc {
 
 const MONDAY = '2026-09-14';
 
+/** Conditioning: three classes of ONE class type in one week, plus the stray
+ *  Tuesday ESD the real timetable carries. Index-based picking cannot tell
+ *  these apart, which is why the focuses name their weekday. */
+function conditioningSchedule(): ScheduleDoc {
+  return makeSchedule({
+    scenarios: [
+      {
+        id: 'live',
+        name: 'Current format',
+        blocks: [
+          { id: 'c1', day: 0, startMin: 300, durationMin: 60, classTypeId: 'esd', coachId: null, roomId: null },
+          { id: 'c2', day: 1, startMin: 300, durationMin: 60, classTypeId: 'esd', coachId: null, roomId: null },
+          { id: 'c3', day: 2, startMin: 300, durationMin: 60, classTypeId: 'esd', coachId: null, roomId: null },
+          { id: 'c4', day: 4, startMin: 300, durationMin: 60, classTypeId: 'esd', coachId: null, roomId: null },
+        ],
+      },
+    ],
+    activeScenarioId: 'live',
+    liveScenarioId: 'live',
+  });
+}
+
 describe('resolveWeekDays', () => {
   it('reads the LIVE scenario, never the viewed sketch', () => {
     const week = resolveWeekDays(makeSchedule(), MONDAY, ['full-a']);
@@ -91,5 +113,24 @@ describe('resolveWeekDays', () => {
   it('date arithmetic stays on the calendar across a month boundary', () => {
     const week = resolveWeekDays(makeSchedule(), '2026-08-31', ['full-b']);
     expect(week.days[0].date).toBe('2026-09-03');
+  });
+
+  it('conditioning resolves by its named weekday, not by the order of the classes', () => {
+    const week = resolveWeekDays(conditioningSchedule(), MONDAY, ['cond-mon', 'cond-wed', 'cond-fri']);
+    expect(week.days.map((d) => d.dayName)).toEqual(['Monday', 'Wednesday', 'Friday']);
+    // The stray Tuesday ESD must not capture Wednesday's session.
+    expect(week.days.map((d) => d.date)).toEqual(['2026-09-14', '2026-09-16', '2026-09-18']);
+    expect(week.missing).toEqual([]);
+  });
+
+  it('a conditioning day with no class that weekday is named, not guessed onto another day', () => {
+    const doc = conditioningSchedule();
+    doc.scenarios[0].blocks = doc.scenarios[0].blocks.filter((b) => b.day !== 2);
+    const week = resolveWeekDays(doc, MONDAY, ['cond-mon', 'cond-wed', 'cond-fri']);
+    expect(week.days[1].dayIndex).toBeNull();
+    expect(week.missing).toEqual(['cond-wed']);
+    // The others are untouched.
+    expect(week.days[0].dayName).toBe('Monday');
+    expect(week.days[2].dayName).toBe('Friday');
   });
 });

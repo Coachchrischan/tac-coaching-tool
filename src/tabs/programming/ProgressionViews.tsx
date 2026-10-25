@@ -1,4 +1,5 @@
 import type { ExerciseSlot, Session } from '../../types/documents';
+import { FOCUS_LABEL } from '../../lib/focusCatalog';
 
 // Shared helpers for progression displays and the CSV export. The editable
 // Month/Block and Phase grids themselves live in EditableGrid.tsx.
@@ -16,19 +17,6 @@ export function slotSummary(slot: ExerciseSlot): string {
     .join(' · ');
 }
 
-const FOCUS_LABEL: Record<Session['focus'], string> = {
-  lower: 'Lower',
-  upper: 'Upper',
-  full: 'Full Body',
-  'full-a': 'Full Body A',
-  'full-b': 'Full Body B',
-  esd: 'ESD',
-  hyrox: 'Hyrox',
-  'rox-strong': 'ROX Strong',
-  'rox-engine': 'ROX Engine',
-  'rox-race': 'ROX Race',
-  gameday: 'Game Day',
-};
 
 export function sessionLabel(s: Session): string {
   return s.name || FOCUS_LABEL[s.focus];

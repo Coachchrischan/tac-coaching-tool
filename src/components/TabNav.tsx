@@ -9,6 +9,7 @@ const PRIMARY = [
   { to: '/', label: 'Home' },
   { to: '/annual', label: 'Annual Plan' },
   { to: '/programming', label: 'Programming' },
+  { to: '/week', label: 'Week Pack' },
   { to: '/schedule', label: 'Schedule' },
   { to: '/layouts', label: 'Layouts' },
   { to: '/planning', label: 'Planning' },

@@ -11,7 +11,13 @@
  * and anything that is not a number ("BW", "as last week") is left exactly as
  * the coach wrote it.
  */
-import type { LibraryOverridesDoc, Pattern, ScaledOption } from '../types/documents';
+import type {
+  ExerciseSlot,
+  LibraryOverridesDoc,
+  Pattern,
+  ScaledOption,
+  Session,
+} from '../types/documents';
 
 /** What identifies an exercise for the purpose of hanging scales off it. */
 export interface ScaleRef {
@@ -107,4 +113,45 @@ export function normaliseIntensity(raw: string | undefined): string {
   const v = (raw ?? '').trim();
   if (!v || v.endsWith('%')) return v;
   return /^\d+(\.\d+)?(\s*[-–]\s*\d+(\.\d+)?)?$/.test(v) ? `${v}%` : v;
+}
+
+/**
+ * The prescription line printed under an exercise, everywhere it is printed:
+ * the wall board, the coaching card, the text pack, the Word document.
+ *
+ * This lived in five files at once (the three pages plus two scripts), which
+ * is exactly the kind of duplication that lets the board and the card disagree
+ * about the same session. One definition now.
+ *
+ * A sets count with no reps ("1") is coach bookkeeping rather than a
+ * prescription, so it is left off. A bare RPE number gets the "RPE " prefix;
+ * anything else Chris writes in that column ("2RIR") is printed as he wrote it.
+ */
+export function slotDetail(slot: ExerciseSlot): string {
+  return [
+    slot.sets && slot.reps ? `${slot.sets} × ${slot.reps}` : slot.reps,
+    slot.load,
+    slot.intensity ? `@ ${slot.intensity}` : undefined,
+    slot.rpe ? (Number.isFinite(Number(slot.rpe)) ? `RPE ${slot.rpe}` : slot.rpe) : undefined,
+    slot.tempo ? `${slot.tempo} tempo` : undefined,
+  ]
+    .filter(Boolean)
+    .join('   |   ');
+}
+
+/**
+ * Is there anything in this session yet? A session exists in the plan from the
+ * day the block is laid out, so "written" means a coach has actually put a
+ * movement or a line in it.
+ */
+export function sessionWritten(s: Session | undefined): boolean {
+  if (!s) return false;
+  if (s.kind === 'circuit') {
+    return s.circuit.some((c) => c.heading.trim() || c.lines.some((l) => l.text.trim()));
+  }
+  return s.timedBlocks.some((tb) =>
+    tb.kind === 'circuit'
+      ? tb.pieces.some((p) => p.heading.trim() || p.lines.some((l) => l.text.trim()))
+      : tb.slots.some((sl) => sl.name),
+  );
 }
