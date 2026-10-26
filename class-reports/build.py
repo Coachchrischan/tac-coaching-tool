@@ -29,11 +29,15 @@ HIGH_NO_SHOW = 0.30                 # per class slot, over the flag window
 FLAG_WEEKS = 4
 HOLIDAYS_FILE = HERE / "holidays.csv"
 CHRISTMAS_BREAK = ((12, 22), (1, 5))  # (month, day) range treated as the Christmas period
+# Classes left out of every report. Run Club meets outside the gym, so members
+# never check in and its numbers only show up as no-shows. The raw weekly
+# files still keep these rows.
+EXCLUDE_CLASSES = {"Run Club"}
 
 GROUPS = [("Strength", ["Upper Body Strength", "Lower Body Strength", "Full Body Strength"]),
           ("Conditioning", ["Conditioning"]), ("Hyrox", ["Hyrox"]),
           ("Yoga", ["Flow Yoga", "Yin Yoga"]), ("StretchFit", ["StretchFit"]),
-          ("Game Day", ["Game Day"]), ("Run Club", ["Run Club"])]
+          ("Game Day", ["Game Day"])]
 DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 INK, INK2, MUTED, LINE, PANEL = "#292626", "#5a5a52", "#bbb8ac", "#e4e1d6", "#f5f3eb"
@@ -53,6 +57,8 @@ def load():
     rows = []
     for f in sorted(WEEKS.glob("*.csv")):
         for r in csv.DictReader(f.open()):
+            if r["class"] in EXCLUDE_CLASSES:
+                continue
             for k in ("cap", "booked", "checked_in", "no_show", "cancelled", "waitlisted"):
                 r[k] = int(r[k])
             r["d"] = date.fromisoformat(r["date"])
@@ -387,12 +393,7 @@ def no_show_list(rows, wk):
         f'<td style="{TD}"><b>{r["no_show"]}</b> of {r["booked"]}</td>'
         f'<td style="{TD};{"color:" + BAD + ";font-weight:bold" if r["no_show"] / r["booked"] >= HIGH_NO_SHOW else ""}">'
         f'{pct(r["no_show"] / r["booked"])}</td></tr>' for r in rs)
-    rc = [r for r in rows if r["wk"] == wk and r["class"] == "Run Club"]
-    note = ""
-    if rc and sum(r["no_show"] for r in rc) and not sum(r["checked_in"] for r in rc):
-        note = (f'<p style="font-size:12px;color:{INK2};margin:8px 0 0">Run Club shows {sum(r["no_show"] for r in rc)} '
-                f'no-shows and no check-ins, which looks like attendance was not marked rather than members missing the run.</p>')
-    return f'<table cellpadding="5" cellspacing="0" border="0" style="font-size:13px">{items}</table>{note}'
+    return f'<table cellpadding="5" cellspacing="0" border="0" style="font-size:13px">{items}</table>'
 
 
 def flags(rows, weeks):
@@ -429,7 +430,7 @@ NOTES = [
     "Class caps were reduced on 14 Sep (Conditioning 25 to 16, gym floor 30 to 20), so head count per class is a fairer comparison than fill %.",
     "From 14 Sep members are reminded to check in. Before that no one was prompting check-ins, so the earlier weeks undercount who actually trained.",
     "Upper and Lower Body Strength swap days between blocks, so they share one Strength row per time slot.",
-    "Run Club check-ins were not being recorded consistently, so its numbers understate attendance.",
+    "Run Club is left out of all figures: it meets outside the gym, so members do not check in.",
 ]
 
 

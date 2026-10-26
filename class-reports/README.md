@@ -34,6 +34,12 @@ re-run. Class groupings for the week-by-week grid are in `GROUPS` in
 `build.py`. Thresholds for the flags (`LOW`, `WATCH`, `HIGH_NO_SHOW`) and the
 programming start date are at the top of `build.py`.
 
+## Classes left out
+
+`EXCLUDE_CLASSES` at the top of `build.py` lists classes the reports ignore.
+Run Club is there because it meets outside the gym and members never check
+in. The weekly CSVs still hold every row, so a class can be added back later.
+
 ## Public holidays and the Christmas break
 
 `holidays.csv` lists Queensland (Brisbane) public holidays. Any week with one,
