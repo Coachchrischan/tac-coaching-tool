@@ -33,6 +33,9 @@ CHRISTMAS_BREAK = ((12, 22), (1, 5))  # (month, day) range treated as the Christ
 # never check in and its numbers only show up as no-shows. The raw weekly
 # files still keep these rows.
 EXCLUDE_CLASSES = {"Run Club"}
+# One-off workshops and events: kept out of the regular class figures and
+# listed separately in the week they happen.
+EVENT_CLASSES = {"Handstand Workshop"}
 
 GROUPS = [("Strength", ["Upper Body Strength", "Lower Body Strength", "Full Body Strength"]),
           ("Conditioning", ["Conditioning"]), ("Hyrox", ["Hyrox"]),
@@ -53,11 +56,31 @@ TD = "text-align:right;white-space:nowrap"
 
 # ---------- data ----------
 
+EVENTS_SEEN = []
+
+
+def events_note(wk):
+    """One line on any workshop or event that ran in the week."""
+    rs = [r for r in EVENTS_SEEN if date.fromisoformat(r["date"]) - timedelta(days=date.fromisoformat(r["date"]).weekday()) == wk]
+    if not rs:
+        return ""
+    parts = []
+    for r in sorted(rs, key=lambda r: (r["date"], r["time"])):
+        h, m = map(int, r["time"].split(":"))
+        parts.append(f'{r["day"]} {t12(h * 60 + m)} {html.escape(r["class"])}: {r["checked_in"]} checked in, '
+                     f'{r["no_show"]} no-show, {r["waitlisted"]} waitlisted (cap {r["cap"]})')
+    return (f'<p style="font-size:13px;color:{INK};background:{PANEL};padding:8px 12px;margin:0 0 8px">'
+            f'<b>Workshops and events this week</b> (not counted in the class figures):<br>' + "<br>".join(parts) + '</p>')
+
+
 def load():
     rows = []
     for f in sorted(WEEKS.glob("*.csv")):
         for r in csv.DictReader(f.open()):
             if r["class"] in EXCLUDE_CLASSES:
+                continue
+            if r["class"] in EVENT_CLASSES:
+                EVENTS_SEEN.append(r)
                 continue
             for k in ("cap", "booked", "checked_in", "no_show", "cancelled", "waitlisted"):
                 r[k] = int(r[k])
@@ -479,6 +502,7 @@ def build():
             (f'<p style="font-size:13px;color:{WARN};background:#fbf0d9;padding:8px 12px;margin:0 0 8px">'
              f'<b>Short week:</b> {html.escape("; ".join(this["notes"]))}. Compare check-ins per class, '
              f'or the full-week equivalent of about {this["full"]} check-ins.</p>' if this["short"] else ""),
+            events_note(this_wk),
             kpis(this, last),
             f'<h3 style="{H2}">Week to week</h3>',
             f'<p style="{SUB}">Is it working? Check-ins and no-shows per week, with check-ins per class and no-show rate.</p>',

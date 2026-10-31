@@ -33,7 +33,9 @@ FIELDS = ["date", "day", "time", "class", "staff", "room", "cap", "booked",
 # clear error if it meets one it does not know.
 CLASSES = ["Upper Body Strength", "Lower Body Strength", "Full Body Strength",
            "Conditioning", "Game Day", "Flow Yoga", "Yin Yoga", "StretchFit",
-           "Hyrox", "Run Club"]
+           "Hyrox", "Run Club", "Handstand Workshop"]
+# One-off workshops and events. The booking report can leave their coach blank.
+EVENTS = {"Handstand Workshop"}
 STAFF = ["Ji Wallace", "Dana Coles", "Stephanie Chung", "Anthony Lett",
          "Harry Crawford", "Katie Dall", "Chris Chan", "Jordan Lambert"]
 ROOMS = ["Functional Training Zone", "Group Fitness Room", "Gym Floor", "Run Club"]
@@ -77,6 +79,14 @@ ROW = re.compile(
     r"(?P<dow>[A-Z][a-z]+day)\s+(?P<dm>\d{1,2} [A-Z][a-z]{2})(?: (?P<y>\d{4}))?\s+(?P<rest>.*)$")
 
 
+def event_staff(words: str, line: str) -> str:
+    """Coach for a row; workshops and events may have none listed."""
+    cls = pick(words, CLASSES, "classes", line)
+    if cls in EVENTS and not any(all(w in words.split() for w in n.split()) for n in STAFF):
+        return "Not listed"
+    return pick(words, STAFF, "staff", line)
+
+
 def pick(words: str, names: list[str], what: str, line: str) -> str:
     norm = " ".join(words.split())
     hits = [n for n in names if all(w in norm.split() for w in n.split())]
@@ -106,7 +116,7 @@ def from_pdf(data: bytes) -> list[dict]:
         out.append({
             "date": d.isoformat(), "day": d.strftime("%a"), "time": hhmm(m["time"]),
             "class": pick(words, CLASSES, "classes", line),
-            "staff": pick(words, STAFF, "staff", line),
+            "staff": event_staff(words, line),
             "room": pick(room_words, ROOMS, "rooms", line),
             "cap": int(m["cap"]), "booked": int(m["booked"]), "checked_in": int(m["inn"]),
             "no_show": int(m["ns"]), "cancelled": int(m["canc"]), "waitlisted": int(m["wait"]),

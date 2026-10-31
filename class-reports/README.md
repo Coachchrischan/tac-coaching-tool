@@ -16,7 +16,7 @@ report, which emails to chris@coachchrischan.com.au every Sunday morning
 ## Weekly run
 
 ```sh
-pip install -r class-reports/requirements.txt
+python3 -m pip install -r class-reports/requirements.txt
 python3 class-reports/ingest.py <report.pdf | report.csv | gmail-raw.json>
 python3 class-reports/build.py
 ```
