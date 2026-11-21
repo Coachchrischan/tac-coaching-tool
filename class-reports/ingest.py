@@ -33,11 +33,13 @@ FIELDS = ["date", "day", "time", "class", "staff", "room", "cap", "booked",
 # clear error if it meets one it does not know.
 CLASSES = ["Upper Body Strength", "Lower Body Strength", "Full Body Strength",
            "Conditioning", "Game Day", "Flow Yoga", "Yin Yoga", "StretchFit",
-           "Hyrox", "Run Club", "Handstand Workshop"]
+           "Hyrox", "Run Club", "Handstand Workshop",
+           "Hyrox Workshop", "Hyrox Sim Sub60", "Hyrox Sim Sub75", "Hyrox Sim Sub90", "Hyrox Sim Sub105", "Hyrox Sim Sub120"]
 # One-off workshops and events. The booking report can leave their coach blank.
-EVENTS = {"Handstand Workshop"}
+EVENTS = {"Handstand Workshop", "Hyrox Workshop", "Hyrox Sim Sub60", "Hyrox Sim Sub75", "Hyrox Sim Sub90", "Hyrox Sim Sub105", "Hyrox Sim Sub120"}
 STAFF = ["Ji Wallace", "Dana Coles", "Stephanie Chung", "Anthony Lett",
-         "Harry Crawford", "Katie Dall", "Chris Chan", "Jordan Lambert"]
+         "Harry Crawford", "Katie Dall", "Chris Chan", "Jordan Lambert", "Katie O'Brien",
+         "Madi Pearson", "Alanah Kennedy", "Mike Towner"]
 ROOMS = ["Functional Training Zone", "Group Fitness Room", "Gym Floor", "Run Club"]
 
 
@@ -162,9 +164,22 @@ def main(paths: list[str]) -> None:
         by_week.setdefault(monday(date.fromisoformat(r["date"])).isoformat(), []).append(r)
     WEEKS.mkdir(parents=True, exist_ok=True)
     for wk, rs in sorted(by_week.items()):
-        rs.sort(key=lambda r: (r["date"], r["time"], r["class"]))
         target = WEEKS / f"{wk}.csv"
         status = "replaced" if target.exists() else "added"
+        if target.exists():
+            # A report can straddle two weeks (GymMaster runs Sunday to
+            # Saturday), so only replace the dates this report covers and keep
+            # the rest of the week as it was.
+            dates = {r["date"] for r in rs}
+            with target.open(newline="") as f:
+                kept = [r for r in csv.DictReader(f) if r["date"] not in dates]
+            if kept:
+                status = "updated"
+            for r in kept:
+                for k in ("cap", "booked", "checked_in", "no_show", "cancelled", "waitlisted"):
+                    r[k] = int(r[k])
+            rs = kept + rs
+        rs.sort(key=lambda r: (r["date"], r["time"], r["class"]))
         with target.open("w", newline="") as f:
             w = csv.DictWriter(f, fieldnames=FIELDS)
             w.writeheader()

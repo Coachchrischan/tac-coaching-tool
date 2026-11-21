@@ -1,3 +1,4 @@
-Week of 9 Nov: 297 check-ins over 31 classes (9.6 per class), 29 no-shows (9%), 38 waitlisted.
-Last week: 320 check-ins (10.3 per class), no-show rate 11%.
+Week of 16 Nov: 304 check-ins over 31 classes (9.8 per class), 25 no-shows (8%), 55 waitlisted.
+Last week: 297 check-ins (9.6 per class), no-show rate 9%.
 Before programming: 6.6 check-ins per class, no-show rate 23%.
+WARNING: holidays.csv has no Queensland public holidays for 2028. Add them.

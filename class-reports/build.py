@@ -35,7 +35,7 @@ CHRISTMAS_BREAK = ((12, 22), (1, 5))  # (month, day) range treated as the Christ
 EXCLUDE_CLASSES = {"Run Club"}
 # One-off workshops and events: kept out of the regular class figures and
 # listed separately in the week they happen.
-EVENT_CLASSES = {"Handstand Workshop"}
+EVENT_CLASSES = {"Handstand Workshop", "Hyrox Workshop", "Hyrox Sim Sub60", "Hyrox Sim Sub75", "Hyrox Sim Sub90", "Hyrox Sim Sub105", "Hyrox Sim Sub120"}
 
 GROUPS = [("Strength", ["Upper Body Strength", "Lower Body Strength", "Full Body Strength"]),
           ("Conditioning", ["Conditioning"]), ("Hyrox", ["Hyrox"]),

@@ -32,3 +32,9 @@ date,day,time,class,staff,room,cap,booked,checked_in,no_show,cancelled,waitliste
 2026-11-13,Fri,17:15,Hyrox,Harry Crawford,Group Fitness Room,16,15,14,1,2,0
 2026-11-14,Sat,06:00,Full Body Strength,Ji Wallace,Functional Training Zone,20,18,13,5,7,1
 2026-11-14,Sat,07:30,Game Day,Ji Wallace,Group Fitness Room,20,4,4,0,4,0
+2026-11-15,Sun,08:00,Hyrox Workshop,Jordan Lambert,Group Fitness Room,42,11,11,0,6,0
+2026-11-15,Sun,09:00,Hyrox Sim Sub60,Jordan Lambert,Group Fitness Room,6,2,2,0,4,0
+2026-11-15,Sun,09:15,Hyrox Sim Sub75,Jordan Lambert,Group Fitness Room,9,4,4,0,4,0
+2026-11-15,Sun,09:45,Hyrox Sim Sub90,Jordan Lambert,Group Fitness Room,9,4,3,1,3,0
+2026-11-15,Sun,10:15,Hyrox Sim Sub105,Jordan Lambert,Group Fitness Room,9,3,2,1,3,0
+2026-11-15,Sun,10:45,Hyrox Sim Sub120,Jordan Lambert,Group Fitness Room,9,5,5,0,4,0
